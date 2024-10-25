@@ -1,0 +1,52 @@
+name: core_ui
+description: "A design system for geiger toolbox"
+version: 0.0.1
+homepage: "cyber-geiger.com"
+
+environment:
+  sdk: 3.5.3
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  freezed_annotation: 2.4.4
+  json_annotation: 4.9.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 4.0.0
+  build_runner: 2.4.13
+  freezed: 2.5.7
+  json_serializable: 6.8.0
+  flutter_gen_runner: ^5.8.0
+
+flutter_gen:
+  assets:
+    outputs:
+      package_parameter_enabled: true 
+      directory_path_enabled: true
+    integrations:
+      flutter_svg: true
+
+flutter:
+
+ 
+  # assets:
+  #   - assets/a_dot_burr.jpeg
+  
+
+  # To add custom fonts to your package, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: ttNorms
+      fonts:
+        - asset: packages/core_ui/fonts/TT-Norms-Fonts/TTNorms-Regular.otf
+        - asset: packages/core_ui/fonts/TT-Norms-Fonts/TTNorms-Bold.otf
+  uses-material-design: true
+  

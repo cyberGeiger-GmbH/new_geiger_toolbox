@@ -14,7 +14,7 @@ rules:
       - ci
       - docs
       - feat
-      - fix
+      - fix 
       - refactor
       - revert
       - style
