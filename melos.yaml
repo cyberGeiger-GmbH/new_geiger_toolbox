@@ -1,0 +1,37 @@
+name: new_geiger_toolbox
+
+packages:
+  #instructs melos to consider all subdirectories within the apps folder as packages
+  - apps/**
+  #instructs melos to consider all subdirectories under the packages folder as packages
+  - packages/**
+  - packages/**/example
+
+# ignore:
+#   # e.g. ignore example apps
+#   - 'packages/**/example'
+
+scripts:
+  analyze:
+    run: melos exec --flutter -- flutter analyze .
+    description: Run `Flutter analyze` in all the packages.
+
+  test:selective_test:
+    run: melos exec --dir-exists="test" --fail-fast -- flutter test --no-pub --coverage
+    description: Run Flutter tests for a specific package in this project.
+    packageFilters:
+      flutter: true
+      dirExists: test
+
+  test:
+    run: melos run test:selective_test --no-select
+    description: Run all Flutter tests n this project.
+  
+  format:
+    run: melos exec -- flutter format . --set-exit-if-changed
+    description: Run `flutter format .` in all packages
+  
+  gen_coverage: melos exec -- "\$MELOS_ROOT_PATH/combine_coverage.sh"
+
+
+  
