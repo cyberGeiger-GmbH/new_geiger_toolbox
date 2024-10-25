@@ -25,6 +25,7 @@ rules:
     - - cli
       - config
       - format
+      - release
       - lint
       - core_ui
       - conversation_client
