@@ -1,19 +1,21 @@
 library core_ui;
 
-import 'package:core_ui/foundation/app_typo.dart';
+import 'package:core_ui/foundation/app_text.dart';
 import 'package:flutter/material.dart';
 
 class AppTextsTheme extends ThemeExtension<AppTextsTheme> {
-  final AppTypo appText;
+  final AppText _appText;
 
-  const AppTextsTheme._({required this.appText});
+  const AppTextsTheme._(this._appText);
 
-  factory AppTextsTheme.main() => AppTextsTheme._(appText: AppTypo.regular());
-  factory AppTextsTheme.small() => AppTextsTheme._(appText: AppTypo.small());
+  factory AppTextsTheme.regular() => AppTextsTheme._(AppText.regular());
+  factory AppTextsTheme.big() => AppTextsTheme._(AppText.big());
+
+  AppText get appText => _appText;
 
   @override
   ThemeExtension<AppTextsTheme> copyWith() {
-    return AppTextsTheme._(appText: appText);
+    return AppTextsTheme._(appText);
   }
 
   @override

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: Theme.of(context).copyWith(
-        extensions: [AppColorsTheme.light(), AppTextsTheme.main()],
+        extensions: [AppColorsTheme.light(), AppTextsTheme.regular()],
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -95,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).appTexts.appText.bigTitle.copyWith(
-                  color: Theme.of(context).appColors.appColors.background),
+              style: Theme.of(context).appTexts.appText.displayLarge.copyWith(
+                  color: Theme.of(context).appColors.appColor.primary),
             ),
           ],
         ),
