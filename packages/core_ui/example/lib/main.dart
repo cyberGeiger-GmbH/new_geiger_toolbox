@@ -14,7 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: Theme.of(context).copyWith(
-        extensions: [AppColorsTheme.light(), AppTextsTheme.regular()],
+        extensions: [
+          AppColorsTheme.light(),
+          AppTextsTheme.regular(),
+          AppDimensionsTheme.regular(View.of(context)),
+        ],
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -113,4 +117,5 @@ class _MyHomePageState extends State<MyHomePage> {
 extension ThemeDataExtended on ThemeData {
   AppColorsTheme get appColors => extension<AppColorsTheme>()!;
   AppTextsTheme get appTexts => extension<AppTextsTheme>()!;
+  AppDimensionsTheme get appDimensions => extension<AppDimensionsTheme>()!;
 }
