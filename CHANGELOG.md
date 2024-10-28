@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-10-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`core_ui` - `v0.0.1+2`](#core_ui---v0012)
+
+---
+
+#### `core_ui` - `v0.0.1+2`
+
+ - **REFACTOR**: core_ui add to a new folder.
+ - **FIX**(core_ui): add add responsive app dimension.
+ - **FIX**(core_ui): add big text style.
+ - **FIX**(core_ui): add colors for light and dark theme.
+
+
 ## 2024-10-25
 
 ### Changes

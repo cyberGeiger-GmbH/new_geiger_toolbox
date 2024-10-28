@@ -1,6 +1,6 @@
 name: core_ui
 description: "A design system for geiger toolbox"
-version: 0.0.1+1
+version: 0.0.1+2
 homepage: "cyber-geiger.com"
 
 environment:
