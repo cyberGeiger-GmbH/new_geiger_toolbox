@@ -99,12 +99,16 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
-              style: Theme.of(context).appTexts.appText.displaySmall,
+              style: Theme.of(context).appTexts.appTextStyle.displaySmall,
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).appTexts.appText.displayLarge.copyWith(
-                  color: Theme.of(context).appColors.appColor.primary),
+              style: Theme.of(context)
+                  .appTexts
+                  .appTextStyle
+                  .displayLarge
+                  .copyWith(
+                      color: Theme.of(context).appColors.appColor.primary),
             ),
             Text(
               Theme.of(context).appIcons.appIcon.character.search,
@@ -112,6 +116,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
             ),
             Theme.of(context).appImages.imagesData.name,
+            CenteredTextButton.primary(
+                label: "primary button", onTap: () {}, context: context),
+            // CenteredTextButton.primary(
+            //     label: "disabled primary button",
+            //     isEnabled: false,
+            //     onTap: () {},
+            //     context: context),
+            CenteredTextButton.secondary(
+                label: "secondary button", onTap: () {}, context: context),
+            CenteredTextButton.tertiary(
+                label: "tertiary button", onTap: () {}, context: context),
+            // CenteredTextButton.secondary(
+            //     label: "disabled secondary button",
+            //     isEnabled: false,
+            //     onTap: () {},
+            //     context: context),
           ],
         ),
       ),
@@ -122,12 +142,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-}
-
-extension ThemeDataExtended on ThemeData {
-  AppColorsTheme get appColors => extension<AppColorsTheme>()!;
-  AppTextsTheme get appTexts => extension<AppTextsTheme>()!;
-  AppDimensionsTheme get appDimensions => extension<AppDimensionsTheme>()!;
-  AppIconsTheme get appIcons => extension<AppIconsTheme>()!;
-  AppImagesTheme get appImages => extension<AppImagesTheme>()!;
 }

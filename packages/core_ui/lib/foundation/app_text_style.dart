@@ -4,13 +4,13 @@ import 'package:core_ui/gen/fonts.gen.dart';
 import 'package:core_ui/tokens/typography.dart' as typo;
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'app_text.freezed.dart';
+part 'app_text_style.freezed.dart';
 
 @freezed
-class AppText with _$AppText {
-  const AppText._();
+class AppTextStyle with _$AppTextStyle {
+  const AppTextStyle._();
 
-  const factory AppText(
+  const factory AppTextStyle(
       {required TextStyle displayLarge,
       required TextStyle displayMedium,
       required TextStyle displaySmall,
@@ -25,9 +25,9 @@ class AppText with _$AppText {
       required TextStyle labelSmall,
       required TextStyle bodyLarge,
       required TextStyle bodyMedium,
-      required TextStyle bodySmall}) = $AppText;
+      required TextStyle bodySmall}) = _AppTextStyle;
 
-  factory AppText.regular() => const AppText(
+  factory AppTextStyle.regular() => const AppTextStyle(
         bodySmall: TextStyle(
             fontFamily: FontFamily.ttNorms,
             package: 'core_ui',
@@ -120,7 +120,7 @@ class AppText with _$AppText {
             decoration: TextDecoration.none),
       );
 
-  factory AppText.big() => const AppText(
+  factory AppTextStyle.big() => const AppTextStyle(
         bodySmall: TextStyle(
             fontFamily: FontFamily.ttNorms,
             package: 'core_ui',

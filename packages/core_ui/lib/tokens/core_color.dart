@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class CoreColor {
   CoreColor._();
+
+  //todo at an inactive color
 //colors for light theme
   //primary color variant
   static const Color primary = Color(0xFF276A49);

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'app_text.dart';
+part of 'app_text_style.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$AppText {
+mixin _$AppTextStyle {
   TextStyle get displayLarge => throw _privateConstructorUsedError;
   TextStyle get displayMedium => throw _privateConstructorUsedError;
   TextStyle get displaySmall => throw _privateConstructorUsedError;
@@ -32,16 +32,18 @@ mixin _$AppText {
   TextStyle get bodyMedium => throw _privateConstructorUsedError;
   TextStyle get bodySmall => throw _privateConstructorUsedError;
 
-  /// Create a copy of AppText
+  /// Create a copy of AppTextStyle
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppTextCopyWith<AppText> get copyWith => throw _privateConstructorUsedError;
+  $AppTextStyleCopyWith<AppTextStyle> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AppTextCopyWith<$Res> {
-  factory $AppTextCopyWith(AppText value, $Res Function(AppText) then) =
-      _$AppTextCopyWithImpl<$Res, AppText>;
+abstract class $AppTextStyleCopyWith<$Res> {
+  factory $AppTextStyleCopyWith(
+          AppTextStyle value, $Res Function(AppTextStyle) then) =
+      _$AppTextStyleCopyWithImpl<$Res, AppTextStyle>;
   @useResult
   $Res call(
       {TextStyle displayLarge,
@@ -62,16 +64,16 @@ abstract class $AppTextCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AppTextCopyWithImpl<$Res, $Val extends AppText>
-    implements $AppTextCopyWith<$Res> {
-  _$AppTextCopyWithImpl(this._value, this._then);
+class _$AppTextStyleCopyWithImpl<$Res, $Val extends AppTextStyle>
+    implements $AppTextStyleCopyWith<$Res> {
+  _$AppTextStyleCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AppText
+  /// Create a copy of AppTextStyle
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -158,10 +160,11 @@ class _$AppTextCopyWithImpl<$Res, $Val extends AppText>
 }
 
 /// @nodoc
-abstract class _$$$AppTextImplCopyWith<$Res> implements $AppTextCopyWith<$Res> {
-  factory _$$$AppTextImplCopyWith(
-          _$$AppTextImpl value, $Res Function(_$$AppTextImpl) then) =
-      __$$$AppTextImplCopyWithImpl<$Res>;
+abstract class _$$AppTextStyleImplCopyWith<$Res>
+    implements $AppTextStyleCopyWith<$Res> {
+  factory _$$AppTextStyleImplCopyWith(
+          _$AppTextStyleImpl value, $Res Function(_$AppTextStyleImpl) then) =
+      __$$AppTextStyleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -183,14 +186,14 @@ abstract class _$$$AppTextImplCopyWith<$Res> implements $AppTextCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$$AppTextImplCopyWithImpl<$Res>
-    extends _$AppTextCopyWithImpl<$Res, _$$AppTextImpl>
-    implements _$$$AppTextImplCopyWith<$Res> {
-  __$$$AppTextImplCopyWithImpl(
-      _$$AppTextImpl _value, $Res Function(_$$AppTextImpl) _then)
+class __$$AppTextStyleImplCopyWithImpl<$Res>
+    extends _$AppTextStyleCopyWithImpl<$Res, _$AppTextStyleImpl>
+    implements _$$AppTextStyleImplCopyWith<$Res> {
+  __$$AppTextStyleImplCopyWithImpl(
+      _$AppTextStyleImpl _value, $Res Function(_$AppTextStyleImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AppText
+  /// Create a copy of AppTextStyle
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -211,7 +214,7 @@ class __$$$AppTextImplCopyWithImpl<$Res>
     Object? bodyMedium = null,
     Object? bodySmall = null,
   }) {
-    return _then(_$$AppTextImpl(
+    return _then(_$AppTextStyleImpl(
       displayLarge: null == displayLarge
           ? _value.displayLarge
           : displayLarge // ignore: cast_nullable_to_non_nullable
@@ -278,8 +281,8 @@ class __$$$AppTextImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$$AppTextImpl extends $AppText {
-  const _$$AppTextImpl(
+class _$AppTextStyleImpl extends _AppTextStyle {
+  const _$AppTextStyleImpl(
       {required this.displayLarge,
       required this.displayMedium,
       required this.displaySmall,
@@ -330,14 +333,14 @@ class _$$AppTextImpl extends $AppText {
 
   @override
   String toString() {
-    return 'AppText(displayLarge: $displayLarge, displayMedium: $displayMedium, displaySmall: $displaySmall, headlineLarge: $headlineLarge, headlineMedium: $headlineMedium, headlineSmall: $headlineSmall, titleLarge: $titleLarge, titleMedium: $titleMedium, titleSmall: $titleSmall, labelLarge: $labelLarge, labelMedium: $labelMedium, labelSmall: $labelSmall, bodyLarge: $bodyLarge, bodyMedium: $bodyMedium, bodySmall: $bodySmall)';
+    return 'AppTextStyle(displayLarge: $displayLarge, displayMedium: $displayMedium, displaySmall: $displaySmall, headlineLarge: $headlineLarge, headlineMedium: $headlineMedium, headlineSmall: $headlineSmall, titleLarge: $titleLarge, titleMedium: $titleMedium, titleSmall: $titleSmall, labelLarge: $labelLarge, labelMedium: $labelMedium, labelSmall: $labelSmall, bodyLarge: $bodyLarge, bodyMedium: $bodyMedium, bodySmall: $bodySmall)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$$AppTextImpl &&
+            other is _$AppTextStyleImpl &&
             (identical(other.displayLarge, displayLarge) ||
                 other.displayLarge == displayLarge) &&
             (identical(other.displayMedium, displayMedium) ||
@@ -389,17 +392,17 @@ class _$$AppTextImpl extends $AppText {
       bodyMedium,
       bodySmall);
 
-  /// Create a copy of AppText
+  /// Create a copy of AppTextStyle
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$$AppTextImplCopyWith<_$$AppTextImpl> get copyWith =>
-      __$$$AppTextImplCopyWithImpl<_$$AppTextImpl>(this, _$identity);
+  _$$AppTextStyleImplCopyWith<_$AppTextStyleImpl> get copyWith =>
+      __$$AppTextStyleImplCopyWithImpl<_$AppTextStyleImpl>(this, _$identity);
 }
 
-abstract class $AppText extends AppText {
-  const factory $AppText(
+abstract class _AppTextStyle extends AppTextStyle {
+  const factory _AppTextStyle(
       {required final TextStyle displayLarge,
       required final TextStyle displayMedium,
       required final TextStyle displaySmall,
@@ -414,8 +417,8 @@ abstract class $AppText extends AppText {
       required final TextStyle labelSmall,
       required final TextStyle bodyLarge,
       required final TextStyle bodyMedium,
-      required final TextStyle bodySmall}) = _$$AppTextImpl;
-  const $AppText._() : super._();
+      required final TextStyle bodySmall}) = _$AppTextStyleImpl;
+  const _AppTextStyle._() : super._();
 
   @override
   TextStyle get displayLarge;
@@ -448,10 +451,10 @@ abstract class $AppText extends AppText {
   @override
   TextStyle get bodySmall;
 
-  /// Create a copy of AppText
+  /// Create a copy of AppTextStyle
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$$AppTextImplCopyWith<_$$AppTextImpl> get copyWith =>
+  _$$AppTextStyleImplCopyWith<_$AppTextStyleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

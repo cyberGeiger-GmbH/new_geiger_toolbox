@@ -1,17 +1,17 @@
 library core_ui;
 
-import 'package:core_ui/foundation/app_text.dart';
+import 'package:core_ui/foundation/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppTextsTheme extends ThemeExtension<AppTextsTheme> {
-  final AppText _appText;
+  final AppTextStyle _appText;
 
   const AppTextsTheme._(this._appText);
 
-  factory AppTextsTheme.regular() => AppTextsTheme._(AppText.regular());
-  factory AppTextsTheme.big() => AppTextsTheme._(AppText.big());
+  factory AppTextsTheme.regular() => AppTextsTheme._(AppTextStyle.regular());
+  factory AppTextsTheme.big() => AppTextsTheme._(AppTextStyle.big());
 
-  AppText get appText => _appText;
+  AppTextStyle get appTextStyle => _appText;
 
   @override
   ThemeExtension<AppTextsTheme> copyWith() {
@@ -25,5 +25,5 @@ class AppTextsTheme extends ThemeExtension<AppTextsTheme> {
   }
 
   @override
-  String toString() => 'AppTextTheme(appTypo:$appText)';
+  String toString() => 'AppTextTheme(appTypo:$appTextStyle)';
 }
