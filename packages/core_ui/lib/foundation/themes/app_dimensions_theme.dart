@@ -1,6 +1,5 @@
 library core_ui;
 
-import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';

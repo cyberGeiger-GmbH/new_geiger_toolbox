@@ -10,6 +10,11 @@
 class FontFamily {
   FontFamily._();
 
+  static const String package = 'core_ui';
+
+  /// Font family: geiger_icons
+  static const String geigerIcons = 'packages/$package/geiger_icons';
+
   /// Font family: ttNorms
-  static const String ttNorms = 'ttNorms';
+  static const String ttNorms = 'packages/$package/ttNorms';
 }

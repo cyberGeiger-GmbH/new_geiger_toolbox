@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/foundation/themes/app_images_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,8 @@ class MyApp extends StatelessWidget {
         extensions: [
           AppColorsTheme.light(),
           AppTextsTheme.regular(),
+          AppIconsTheme.regular(),
+          AppImagesTheme.geigerLogo(),
           AppDimensionsTheme.regular(View.of(context)),
         ],
       ),
@@ -94,14 +97,21 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'You have pushed the button this many times:',
+              style: Theme.of(context).appTexts.appText.displaySmall,
             ),
             Text(
               '$_counter',
               style: Theme.of(context).appTexts.appText.displayLarge.copyWith(
                   color: Theme.of(context).appColors.appColor.primary),
             ),
+            Text(
+              Theme.of(context).appIcons.appIcon.character.search,
+              style: TextStyle(
+                  fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
+            ),
+            Theme.of(context).appImages.imagesData.name,
           ],
         ),
       ),
@@ -118,4 +128,6 @@ extension ThemeDataExtended on ThemeData {
   AppColorsTheme get appColors => extension<AppColorsTheme>()!;
   AppTextsTheme get appTexts => extension<AppTextsTheme>()!;
   AppDimensionsTheme get appDimensions => extension<AppDimensionsTheme>()!;
+  AppIconsTheme get appIcons => extension<AppIconsTheme>()!;
+  AppImagesTheme get appImages => extension<AppImagesTheme>()!;
 }

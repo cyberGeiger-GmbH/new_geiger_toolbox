@@ -15,7 +15,7 @@ class AppTextsTheme extends ThemeExtension<AppTextsTheme> {
 
   @override
   ThemeExtension<AppTextsTheme> copyWith() {
-    return AppTextsTheme._(appText);
+    return AppTextsTheme._(_appText);
   }
 
   @override
