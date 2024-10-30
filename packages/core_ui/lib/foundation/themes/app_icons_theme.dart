@@ -8,7 +8,7 @@ class AppIconsTheme extends ThemeExtension<AppIconsTheme> {
 
   const AppIconsTheme._(this.appIcon);
 
-  factory AppIconsTheme.regular() => AppIconsTheme._(AppIconData.regular());
+  factory AppIconsTheme.main() => AppIconsTheme._(AppIconData.regular());
 
   @override
   ThemeExtension<AppIconsTheme> copyWith() {

@@ -5,7 +5,7 @@ import 'package:core_ui/molecules/app_text.dart';
 import 'package:flutter/material.dart';
 
 class AppTextButton extends StatelessWidget {
-  const AppTextButton(
+  const AppTextButton._(
       {super.key,
       required this.label,
       required this.color,
@@ -19,7 +19,8 @@ class AppTextButton extends StatelessWidget {
           bool isEnabled = true,
           required VoidCallback onTap,
           required BuildContext context}) =>
-      AppTextButton(
+      AppTextButton._(
+          key: key,
           label: label,
           color: appColor(context).primary,
           disabledColor: appColor(context).surface,
@@ -32,7 +33,8 @@ class AppTextButton extends StatelessWidget {
           bool isEnabled = true,
           required VoidCallback onTap,
           required BuildContext context}) =>
-      AppTextButton(
+      AppTextButton._(
+          key: key,
           label: label,
           color: appColor(context).secondary,
           disabledColor: appColor(context).surface,
@@ -46,7 +48,7 @@ class AppTextButton extends StatelessWidget {
   final bool isEnabled;
 
   static AppTextStyle appText(BuildContext context) {
-    return Theme.of(context).appTexts.appTextStyle;
+    return Theme.of(context).appTextStyles.appTextStyle;
   }
 
   static AppColors appColor(BuildContext context) {
@@ -56,8 +58,9 @@ class AppTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      key: key,
       onPressed: onTap,
-      child: AppText.labelBigEmphasis(
+      child: AppText.labelLarge(
         text: label,
         context: context,
         color: isEnabled ? color : disabledColor,

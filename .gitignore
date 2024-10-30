@@ -32,4 +32,6 @@ packages/.DS_Store
 # Avoid commiting melos generated files
 .idea/
 pubspec_overrides.yaml
+# don't check in golden failure output
+**/failures/*.png
 

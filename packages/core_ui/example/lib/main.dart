@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       theme: Theme.of(context).copyWith(
         extensions: [
           AppColorsTheme.light(),
-          AppTextsTheme.regular(),
-          AppIconsTheme.regular(),
-          AppImagesTheme.geigerLogo(),
+          AppTextStyleTheme.main(),
+          AppIconsTheme.main(),
+          AppImagesTheme.main(),
           AppDimensionsTheme.regular(View.of(context)),
         ],
       ),
@@ -78,33 +78,18 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: SingleChildScrollView(
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
-              style: Theme.of(context).appTexts.appTextStyle.displaySmall,
+              style: Theme.of(context).appTextStyles.appTextStyle.displaySmall,
             ),
             Text(
               '$_counter',
               style: Theme.of(context)
-                  .appTexts
+                  .appTextStyles
                   .appTextStyle
                   .displayLarge
                   .copyWith(
@@ -116,17 +101,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
             ),
             Theme.of(context).appImages.imagesData.name,
-            CenteredTextButton.primary(
-                label: "primary button", onTap: () {}, context: context),
+
+            DesignSystemHelper.getColors(),
+            DesignSystemHelper.getTexts(),
+            DesignSystemHelper.getAppButtons(),
+            // CenteredTextButton.primary(
+            //     label: "primary button", onTap: () {}, context: context),
             // CenteredTextButton.primary(
             //     label: "disabled primary button",
             //     isEnabled: false,
             //     onTap: () {},
             //     context: context),
-            CenteredTextButton.secondary(
-                label: "secondary button", onTap: () {}, context: context),
-            CenteredTextButton.tertiary(
-                label: "tertiary button", onTap: () {}, context: context),
+            // CenteredTextButton.secondary(
+            //     label: "secondary button", onTap: () {}, context: context),
+            // CenteredTextButton.tertiary(
+            //     label: "tertiary button", onTap: () {}, context: context),
             // CenteredTextButton.secondary(
             //     label: "disabled secondary button",
             //     isEnabled: false,

@@ -12,7 +12,7 @@ class AppText extends StatelessWidget {
       required this.textAlign,
       required this.textOverflow});
 
-  factory AppText.labelBigEmphasis(
+  factory AppText.displayLarge(
           {Key? key,
           required String text,
           required BuildContext context,
@@ -22,15 +22,225 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: appTexts(context).labelLarge,
-          color: color ?? appColors(context).primary,
+          textStyle: _appTexts(context).displayLarge,
+          color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
 
-  static AppTextStyle appTexts(BuildContext context) =>
-      Theme.of(context).appTexts.appTextStyle;
+  factory AppText.displayMedium(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).displayMedium,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
 
-  static AppColors appColors(BuildContext context) =>
+  factory AppText.displaySmall(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).displaySmall,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.headlineLarge(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).headlineLarge,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.headlineMedium(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).headlineMedium,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.headlineSmall(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).headlineSmall,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.titleLarge(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).titleLarge,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.titleMedium(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).titleMedium,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.titleSmall(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).titleSmall,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.labelLarge(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).labelLarge,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.labelMedium(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).labelMedium,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.labelSmall(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).labelSmall,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.bodyLarge(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).bodyLarge,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.bodyMedium(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).bodyMedium,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  factory AppText.bodySmall(
+          {Key? key,
+          required String text,
+          required BuildContext context,
+          Color? color,
+          TextAlign? textAlign,
+          TextOverflow? textOverflow}) =>
+      AppText._(
+          key: key,
+          text: text,
+          textStyle: _appTexts(context).bodySmall,
+          color: color ?? _appColors(context).onPrimary,
+          textAlign: textAlign ?? TextAlign.start,
+          textOverflow: textOverflow);
+
+  static AppTextStyle _appTexts(BuildContext context) =>
+      Theme.of(context).appTextStyles.appTextStyle;
+
+  static AppColors _appColors(BuildContext context) =>
       Theme.of(context).appColors.appColor;
 
   final String text;

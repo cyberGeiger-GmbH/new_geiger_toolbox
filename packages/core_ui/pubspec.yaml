@@ -22,15 +22,20 @@ dev_dependencies:
   freezed: 2.5.7
   json_serializable: 6.8.0
   flutter_gen_runner: 5.8.0
+  golden_toolkit: ^0.15.0
 
+#for auto generating referece class for assets
 flutter_gen:
   assets:
     outputs:
       package_parameter_enabled: true
     integrations:
   fonts:
+    exclude:
+      - assets/fonts/Roboto-Regular.ttf
     outputs:
       package_parameter_enabled: true
+  
 
 flutter:
   assets:
@@ -44,5 +49,9 @@ flutter:
     - family: geiger_icons
       fonts:
         - asset: assets/fonts/geiger_icons/geiger_icons.ttf
+    #used for Golden Image tests
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
   uses-material-design: true
   

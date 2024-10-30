@@ -6,7 +6,7 @@ class AppImagesTheme extends ThemeExtension<AppImagesTheme> {
 
   const AppImagesTheme._({required this.imagesData});
 
-  factory AppImagesTheme.geigerLogo() =>
+  factory AppImagesTheme.main() =>
       AppImagesTheme._(imagesData: AppImagesData.geigerLogo());
 
   @override

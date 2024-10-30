@@ -12,6 +12,9 @@ class FontFamily {
 
   static const String package = 'core_ui';
 
+  /// Font family: Roboto
+  static const String roboto = 'packages/$package/Roboto';
+
   /// Font family: geiger_icons
   static const String geigerIcons = 'packages/$package/geiger_icons';
 

@@ -74,7 +74,7 @@ class CenteredTextButton extends StatelessWidget {
   }
 
   static AppTextStyle appText(BuildContext context) {
-    return Theme.of(context).appTexts.appTextStyle;
+    return Theme.of(context).appTextStyles.appTextStyle;
   }
 
   final String label;
@@ -90,7 +90,7 @@ class CenteredTextButton extends StatelessWidget {
       key: key,
       onPressed: onTap,
       style: ElevatedButton.styleFrom(backgroundColor: background),
-      child: AppText.labelBigEmphasis(
+      child: AppText.labelLarge(
         text: label,
         color: textColor,
         context: context,
