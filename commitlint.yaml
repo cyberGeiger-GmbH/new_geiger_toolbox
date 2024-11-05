@@ -28,7 +28,7 @@ rules:
       - release
       - lint
       - core_ui
-      - conversation_client
+      - conversational_agent_client
 # Whether commitlint uses the default ignore
 defaultIgnores: true
 # Pattern that matches commit message if commitlint should ignore the given message.
