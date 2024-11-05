@@ -1,3 +1,11 @@
+## 0.0.1+3
+
+ - **FIX**(core_ui): added category card.
+ - **FIX**(core_ui): remove unnecessary comment.
+ - **FIX**(core_ui): add a designSystem helper, add test.
+ - **FIX**(core_ui): added some design molecules.
+ - **FIX**(core_ui): fix assets issues, added imageTheme.
+
 ## 0.0.1+2
 
  - **REFACTOR**: core_ui add to a new folder.
