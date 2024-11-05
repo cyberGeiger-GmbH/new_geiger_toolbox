@@ -35,6 +35,7 @@ mixin _$AppColors {
   Color get onError => throw _privateConstructorUsedError;
   Color get errorContainer => throw _privateConstructorUsedError;
   Color get onErrorContainer => throw _privateConstructorUsedError;
+  Color get scaffoldBackgroundColor => throw _privateConstructorUsedError;
 
   /// Create a copy of AppColors
   /// with the given fields replaced by the non-null parameter values.
@@ -67,7 +68,8 @@ abstract class $AppColorsCopyWith<$Res> {
       Color error,
       Color onError,
       Color errorContainer,
-      Color onErrorContainer});
+      Color onErrorContainer,
+      Color scaffoldBackgroundColor});
 }
 
 /// @nodoc
@@ -104,6 +106,7 @@ class _$AppColorsCopyWithImpl<$Res, $Val extends AppColors>
     Object? onError = null,
     Object? errorContainer = null,
     Object? onErrorContainer = null,
+    Object? scaffoldBackgroundColor = null,
   }) {
     return _then(_value.copyWith(
       brightness: null == brightness
@@ -182,6 +185,10 @@ class _$AppColorsCopyWithImpl<$Res, $Val extends AppColors>
           ? _value.onErrorContainer
           : onErrorContainer // ignore: cast_nullable_to_non_nullable
               as Color,
+      scaffoldBackgroundColor: null == scaffoldBackgroundColor
+          ? _value.scaffoldBackgroundColor
+          : scaffoldBackgroundColor // ignore: cast_nullable_to_non_nullable
+              as Color,
     ) as $Val);
   }
 }
@@ -213,7 +220,8 @@ abstract class _$$AppColorsImplCopyWith<$Res>
       Color error,
       Color onError,
       Color errorContainer,
-      Color onErrorContainer});
+      Color onErrorContainer,
+      Color scaffoldBackgroundColor});
 }
 
 /// @nodoc
@@ -248,6 +256,7 @@ class __$$AppColorsImplCopyWithImpl<$Res>
     Object? onError = null,
     Object? errorContainer = null,
     Object? onErrorContainer = null,
+    Object? scaffoldBackgroundColor = null,
   }) {
     return _then(_$AppColorsImpl(
       brightness: null == brightness
@@ -326,6 +335,10 @@ class __$$AppColorsImplCopyWithImpl<$Res>
           ? _value.onErrorContainer
           : onErrorContainer // ignore: cast_nullable_to_non_nullable
               as Color,
+      scaffoldBackgroundColor: null == scaffoldBackgroundColor
+          ? _value.scaffoldBackgroundColor
+          : scaffoldBackgroundColor // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -352,7 +365,8 @@ class _$AppColorsImpl implements _AppColors {
       required this.error,
       required this.onError,
       required this.errorContainer,
-      required this.onErrorContainer});
+      required this.onErrorContainer,
+      required this.scaffoldBackgroundColor});
 
   @override
   final Brightness brightness;
@@ -392,10 +406,12 @@ class _$AppColorsImpl implements _AppColors {
   final Color errorContainer;
   @override
   final Color onErrorContainer;
+  @override
+  final Color scaffoldBackgroundColor;
 
   @override
   String toString() {
-    return 'AppColors(brightness: $brightness, primary: $primary, onPrimary: $onPrimary, primaryContainer: $primaryContainer, onPrimaryContainer: $onPrimaryContainer, secondary: $secondary, onSecondary: $onSecondary, secondaryContainer: $secondaryContainer, onSecondaryContainer: $onSecondaryContainer, tertiary: $tertiary, onTertiary: $onTertiary, tertiaryContainer: $tertiaryContainer, onTertiaryContainer: $onTertiaryContainer, surface: $surface, onSurface: $onSurface, error: $error, onError: $onError, errorContainer: $errorContainer, onErrorContainer: $onErrorContainer)';
+    return 'AppColors(brightness: $brightness, primary: $primary, onPrimary: $onPrimary, primaryContainer: $primaryContainer, onPrimaryContainer: $onPrimaryContainer, secondary: $secondary, onSecondary: $onSecondary, secondaryContainer: $secondaryContainer, onSecondaryContainer: $onSecondaryContainer, tertiary: $tertiary, onTertiary: $onTertiary, tertiaryContainer: $tertiaryContainer, onTertiaryContainer: $onTertiaryContainer, surface: $surface, onSurface: $onSurface, error: $error, onError: $onError, errorContainer: $errorContainer, onErrorContainer: $onErrorContainer, scaffoldBackgroundColor: $scaffoldBackgroundColor)';
   }
 
   @override
@@ -436,7 +452,10 @@ class _$AppColorsImpl implements _AppColors {
             (identical(other.errorContainer, errorContainer) ||
                 other.errorContainer == errorContainer) &&
             (identical(other.onErrorContainer, onErrorContainer) ||
-                other.onErrorContainer == onErrorContainer));
+                other.onErrorContainer == onErrorContainer) &&
+            (identical(
+                    other.scaffoldBackgroundColor, scaffoldBackgroundColor) ||
+                other.scaffoldBackgroundColor == scaffoldBackgroundColor));
   }
 
   @override
@@ -460,7 +479,8 @@ class _$AppColorsImpl implements _AppColors {
         error,
         onError,
         errorContainer,
-        onErrorContainer
+        onErrorContainer,
+        scaffoldBackgroundColor
       ]);
 
   /// Create a copy of AppColors
@@ -492,7 +512,8 @@ abstract class _AppColors implements AppColors {
       required final Color error,
       required final Color onError,
       required final Color errorContainer,
-      required final Color onErrorContainer}) = _$AppColorsImpl;
+      required final Color onErrorContainer,
+      required final Color scaffoldBackgroundColor}) = _$AppColorsImpl;
 
   @override
   Brightness get brightness;
@@ -532,6 +553,8 @@ abstract class _AppColors implements AppColors {
   Color get errorContainer;
   @override
   Color get onErrorContainer;
+  @override
+  Color get scaffoldBackgroundColor;
 
   /// Create a copy of AppColors
   /// with the given fields replaced by the non-null parameter values.

@@ -28,7 +28,8 @@ class AppColors with _$AppColors {
       required Color error,
       required Color onError,
       required Color errorContainer,
-      required Color onErrorContainer}) = _AppColors;
+      required Color onErrorContainer,
+      required Color scaffoldBackgroundColor}) = _AppColors;
 
   factory AppColors.light() => const AppColors(
       brightness: Brightness.light,
@@ -49,7 +50,8 @@ class AppColors with _$AppColors {
       error: CoreColor.error,
       onError: CoreColor.onError,
       errorContainer: CoreColor.errorContainer,
-      onErrorContainer: CoreColor.onErrorContainer);
+      onErrorContainer: CoreColor.onErrorContainer,
+      scaffoldBackgroundColor: CoreColor.surface);
 
   factory AppColors.dark() => const AppColors(
       brightness: Brightness.dark,
@@ -70,5 +72,6 @@ class AppColors with _$AppColors {
       error: CoreColor.error,
       onError: CoreColor.onError,
       errorContainer: CoreColor.errorContainer,
-      onErrorContainer: CoreColor.onErrorContainer);
+      onErrorContainer: CoreColor.onErrorContainer,
+      scaffoldBackgroundColor: CoreColor.surfaceDark);
 }

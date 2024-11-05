@@ -9,4 +9,7 @@ class AppImagesData with _$AppImagesData {
 
   factory AppImagesData.geigerLogo() =>
       AppImagesData(name: Assets.images.geigerLogo.image());
+
+  factory AppImagesData.logoIcon() => AppImagesData(
+      name: Assets.images.geigerLogo.image(height: 40, width: 40));
 }

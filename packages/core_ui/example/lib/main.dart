@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Toolbox Styling',
       theme: Theme.of(context).copyWith(
         extensions: [
           AppColorsTheme.light(),
@@ -31,15 +31,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -49,48 +40,42 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final appTheme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      backgroundColor: appTheme.appColors.appColor.scaffoldBackgroundColor,
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-              style: Theme.of(context).appTextStyles.appTextStyle.displaySmall,
-            ),
-
+          children: [
             Text(
               Theme.of(context).appIcons.appIcon.character.search,
               style: TextStyle(
                   fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
             ),
             Theme.of(context).appImages.imagesData.name,
-
             DesignSystemHelper.getColors(),
             DesignSystemHelper.getTexts(),
             DesignSystemHelper.getAppButtons(),
-            // CenteredTextButton.primary(
-            //     label: "primary button", onTap: () {}, context: context),
-            // CenteredTextButton.primary(
-            //     label: "disabled primary button",
-            //     isEnabled: false,
-            //     onTap: () {},
-            //     context: context),
-            // CenteredTextButton.secondary(
-            //     label: "secondary button", onTap: () {}, context: context),
-            // CenteredTextButton.tertiary(
-            //     label: "tertiary button", onTap: () {}, context: context),
-            // CenteredTextButton.secondary(
-            //     label: "disabled secondary button",
-            //     isEnabled: false,
-            //     onTap: () {},
-            //     context: context),
+            DesignSystemHelper.getCategoriesCard()
           ],
         ),
+
+        // CenteredTextButton.primary(
+        //     label: "primary button", onTap: () {}, context: context),
+        // CenteredTextButton.primary(
+        //     label: "disabled primary button",
+        //     isEnabled: false,
+        //     onTap: () {},
+        //     context: context),
+        // CenteredTextButton.secondary(
+        //     label: "secondary button", onTap: () {}, context: context),
+        // CenteredTextButton.tertiary(
+        //     label: "tertiary button", onTap: () {}, context: context),
+        // CenteredTextButton.secondary(
+        //     label: "disabled secondary button",
+        //     isEnabled: false,
+        //     onTap: () {},
+        //     context: context),
       ),
     );
   }

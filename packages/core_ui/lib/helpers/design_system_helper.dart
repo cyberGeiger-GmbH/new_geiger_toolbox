@@ -155,4 +155,31 @@ class DesignSystemHelper {
       );
     });
   }
+
+  static Widget getCategoriesCard() {
+    return GoldenTestWrapper(getChild: (context) {
+      return Wrap(
+        children: [
+          CategoryCard.elevated(
+            label: "Elevated Category Card",
+            context: context,
+            ontap: () {
+              debugPrint("on pressed");
+            },
+          ),
+          CategoryCard.outlined(
+            label: "Outlined Category Card",
+            context: context,
+            ontap: () {},
+            icon: Icons.book,
+          )
+        ]
+            .map((card) => Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: card,
+                ))
+            .toList(),
+      );
+    });
+  }
 }
