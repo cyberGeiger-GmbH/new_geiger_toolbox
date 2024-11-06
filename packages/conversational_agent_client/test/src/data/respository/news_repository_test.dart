@@ -1,37 +1,42 @@
 import 'package:conversational_agent_client/src/data/respository/news_repository.dart';
-import 'package:conversational_agent_client/src/data/respository/profile.dart';
+import 'package:conversational_agent_client/src/domain/profile.dart';
 import 'package:conversational_agent_client/src/utilities/providers/dio_client_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late Dio client;
-  ProviderContainer getContainer(Dio client) {
-    final container = ProviderContainer(
-      overrides: [
-        dioProvider.overrideWithValue(client),
-      ],
-    );
+  //todo mock client
+  //late Dio client;
+  ProviderContainer getContainer({Dio? client}) {
+    final container = client != null
+        ? ProviderContainer(
+            overrides: [
+              dioProvider.overrideWithValue(client),
+            ],
+          )
+        : ProviderContainer();
     addTearDown(container.dispose);
     return container;
   }
 
-  setUp(() {
-    client = Dio();
-  });
+  // setUp(() {
+  //   client = Dio();
+  // });
 
   group("new repository....", () {
-    test('news repository  passing profile ', () async {
-      final container = getContainer(client);
+    test('news repository using default client passing profile ', () async {
+      final container = getContainer();
       final newsRepo = container.read(newsRepositoryProvider);
       final profile = Profile(platform: "ios", smeCategory: "hair saloon");
       final data = await newsRepo.fetchNews(profile: profile);
       print("data with profile =$profile => $data");
     });
 
-    test('news repository  passing profile ', () async {
-      final container = getContainer(client);
+    test(
+        'news repository using default client passing without profile passing profile ',
+        () async {
+      final container = getContainer();
       final newsRepo = container.read(newsRepositoryProvider);
 
       final data = await newsRepo.fetchNews();

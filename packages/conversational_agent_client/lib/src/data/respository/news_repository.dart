@@ -1,11 +1,12 @@
 library conversational_agent_client;
 
 import 'dart:convert';
-import 'package:conversational_agent_client/src/data/respository/profile.dart';
+import 'package:conversational_agent_client/src/domain/profile.dart';
 import 'package:conversational_agent_client/src/domain/news.dart';
-import 'package:conversational_agent_client/src/domain/news_object.dart';
+
 import 'package:conversational_agent_client/src/utilities/constants/base.dart';
-import 'package:conversational_agent_client/src/utilities/constants/status_codes.dart';
+
+import 'package:conversational_agent_client/src/utilities/extensions/response_extension.dart';
 import 'package:conversational_agent_client/src/utilities/log.dart';
 import 'package:conversational_agent_client/src/utilities/providers/dio_client_provider.dart';
 import 'package:dio/dio.dart';
@@ -25,7 +26,7 @@ class NewsRepository {
     try {
       final Uri uri = Uri.https(
         Base.url,
-        Base.path,
+        Base.newsPath,
       );
 
       final Response response = await dio.getUri(uri,
@@ -41,15 +42,7 @@ class NewsRepository {
   }
 }
 
-extension DataParser<T> on Response {
-  List<News> newsParse() {
-    final StatusCode? code = StatusCodes.getStatus(statusCode!);
-    if (code != null && code == StatusCode.success) {
-      return NewsObject.fromJson(data).news;
-    }
-    return [];
-  }
-}
+
 
 @riverpod
 NewsRepository newsRepository(Ref ref) {
