@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-11-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`conversational_agent_client` - `v1.0.1`](#conversational_agent_client---v101)
+
+---
+
+#### `conversational_agent_client` - `v1.0.1`
+
+ - **FIX**(conversational_agent_client): added news repository, test and example.
+
+
 ## 2024-11-05
 
 ### Changes
