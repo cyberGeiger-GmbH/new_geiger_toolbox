@@ -35,3 +35,4 @@ pubspec_overrides.yaml
 # don't check in golden failure output
 **/failures/*.png
 
+*.iml

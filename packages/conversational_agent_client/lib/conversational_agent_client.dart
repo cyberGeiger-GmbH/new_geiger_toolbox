@@ -3,6 +3,4 @@
 /// More dartdocs go here.
 library;
 
-export 'src/conversational_agent_client_base.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/data/respository/news_repository.dart';
