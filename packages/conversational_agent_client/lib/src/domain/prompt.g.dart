@@ -7,14 +7,14 @@ part of 'prompt.dart';
 // **************************************************************************
 
 _$PromptImpl _$$PromptImplFromJson(Map<String, dynamic> json) => _$PromptImpl(
-      userId: UserID.fromJson(json['userId'] as Map<String, dynamic>),
+      userID: UserID.fromJson(json['userID'] as Map<String, dynamic>),
       userMessage: json['userMessage'] as String,
       assistantName: json['assistantName'] as String? ?? "toolboxMicroskill",
     );
 
 Map<String, dynamic> _$$PromptImplToJson(_$PromptImpl instance) =>
     <String, dynamic>{
-      'userId': instance.userId,
+      'userID': instance.userID,
       'userMessage': instance.userMessage,
       'assistantName': instance.assistantName,
     };

@@ -32,7 +32,7 @@ class NewsRepository {
       final Response response = await dio.getUri(uri,
           data: profile != null ? json.encode(profile) : null,
           options: Options(headers: Base.headers));
-      final data = response.newsParse();
+      final data = response.newsParser();
 
       return data;
     } catch (e, s) {
@@ -41,8 +41,6 @@ class NewsRepository {
     }
   }
 }
-
-
 
 @riverpod
 NewsRepository newsRepository(Ref ref) {

@@ -20,7 +20,7 @@ Prompt _$PromptFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Prompt {
-  UserID get userId => throw _privateConstructorUsedError;
+  UserID get userID => throw _privateConstructorUsedError;
   String get userMessage => throw _privateConstructorUsedError;
   String? get assistantName => throw _privateConstructorUsedError;
 
@@ -38,9 +38,9 @@ abstract class $PromptCopyWith<$Res> {
   factory $PromptCopyWith(Prompt value, $Res Function(Prompt) then) =
       _$PromptCopyWithImpl<$Res, Prompt>;
   @useResult
-  $Res call({UserID userId, String userMessage, String? assistantName});
+  $Res call({UserID userID, String userMessage, String? assistantName});
 
-  $UserIDCopyWith<$Res> get userId;
+  $UserIDCopyWith<$Res> get userID;
 }
 
 /// @nodoc
@@ -58,14 +58,14 @@ class _$PromptCopyWithImpl<$Res, $Val extends Prompt>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
+    Object? userID = null,
     Object? userMessage = null,
     Object? assistantName = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      userID: null == userID
+          ? _value.userID
+          : userID // ignore: cast_nullable_to_non_nullable
               as UserID,
       userMessage: null == userMessage
           ? _value.userMessage
@@ -82,9 +82,9 @@ class _$PromptCopyWithImpl<$Res, $Val extends Prompt>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UserIDCopyWith<$Res> get userId {
-    return $UserIDCopyWith<$Res>(_value.userId, (value) {
-      return _then(_value.copyWith(userId: value) as $Val);
+  $UserIDCopyWith<$Res> get userID {
+    return $UserIDCopyWith<$Res>(_value.userID, (value) {
+      return _then(_value.copyWith(userID: value) as $Val);
     });
   }
 }
@@ -96,10 +96,10 @@ abstract class _$$PromptImplCopyWith<$Res> implements $PromptCopyWith<$Res> {
       __$$PromptImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserID userId, String userMessage, String? assistantName});
+  $Res call({UserID userID, String userMessage, String? assistantName});
 
   @override
-  $UserIDCopyWith<$Res> get userId;
+  $UserIDCopyWith<$Res> get userID;
 }
 
 /// @nodoc
@@ -115,14 +115,14 @@ class __$$PromptImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
+    Object? userID = null,
     Object? userMessage = null,
     Object? assistantName = freezed,
   }) {
     return _then(_$PromptImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      userID: null == userID
+          ? _value.userID
+          : userID // ignore: cast_nullable_to_non_nullable
               as UserID,
       userMessage: null == userMessage
           ? _value.userMessage
@@ -140,7 +140,7 @@ class __$$PromptImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PromptImpl implements _Prompt {
   const _$PromptImpl(
-      {required this.userId,
+      {required this.userID,
       required this.userMessage,
       this.assistantName = "toolboxMicroskill"});
 
@@ -148,7 +148,7 @@ class _$PromptImpl implements _Prompt {
       _$$PromptImplFromJson(json);
 
   @override
-  final UserID userId;
+  final UserID userID;
   @override
   final String userMessage;
   @override
@@ -157,7 +157,7 @@ class _$PromptImpl implements _Prompt {
 
   @override
   String toString() {
-    return 'Prompt(userId: $userId, userMessage: $userMessage, assistantName: $assistantName)';
+    return 'Prompt(userID: $userID, userMessage: $userMessage, assistantName: $assistantName)';
   }
 
   @override
@@ -165,7 +165,7 @@ class _$PromptImpl implements _Prompt {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PromptImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userID, userID) || other.userID == userID) &&
             (identical(other.userMessage, userMessage) ||
                 other.userMessage == userMessage) &&
             (identical(other.assistantName, assistantName) ||
@@ -175,7 +175,7 @@ class _$PromptImpl implements _Prompt {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userId, userMessage, assistantName);
+      Object.hash(runtimeType, userID, userMessage, assistantName);
 
   /// Create a copy of Prompt
   /// with the given fields replaced by the non-null parameter values.
@@ -195,14 +195,14 @@ class _$PromptImpl implements _Prompt {
 
 abstract class _Prompt implements Prompt {
   const factory _Prompt(
-      {required final UserID userId,
+      {required final UserID userID,
       required final String userMessage,
       final String? assistantName}) = _$PromptImpl;
 
   factory _Prompt.fromJson(Map<String, dynamic> json) = _$PromptImpl.fromJson;
 
   @override
-  UserID get userId;
+  UserID get userID;
   @override
   String get userMessage;
   @override

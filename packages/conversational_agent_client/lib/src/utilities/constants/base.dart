@@ -5,6 +5,7 @@ class Base {
 
   static const String newsPath = "/news";
   static const String createThreadPath = "/createThreadForID";
+  static const String chatPath = "/";
 
   static const origin = {"origin": "toolbox"};
   static const headers = {"Content-Type": "application/json"};

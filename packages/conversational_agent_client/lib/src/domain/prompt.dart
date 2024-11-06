@@ -7,7 +7,7 @@ part 'prompt.g.dart';
 @freezed
 class Prompt with _$Prompt {
   const factory Prompt(
-      {required final UserID userId,
+      {required final UserID userID,
       required final String userMessage,
       @Default("toolboxMicroskill") String? assistantName}) = _Prompt;
 

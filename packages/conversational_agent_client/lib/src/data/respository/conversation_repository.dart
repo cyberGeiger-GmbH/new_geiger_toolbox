@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:conversational_agent_client/src/domain/message.dart';
+import 'package:conversational_agent_client/src/domain/prompt.dart';
 import 'package:conversational_agent_client/src/domain/user_id.dart';
 import 'package:conversational_agent_client/src/utilities/constants/base.dart';
 import 'package:conversational_agent_client/src/utilities/extensions/response_extension.dart';
@@ -31,7 +35,7 @@ class ConversationRepository {
         options: Options(headers: Base.headers),
       );
 
-      final UserID? userId = response.userIdParse();
+      final UserID? userId = response.userIdParser();
       return userId;
     } catch (e, s) {
       _log.e("err => $e, stack => $s");
@@ -42,6 +46,26 @@ class ConversationRepository {
   ///start conversational
   ///send [Prompt] as body using a Post request
   ///return [Message]
+  Future<Message?> chatWithCA({required Prompt prompt}) async {
+    final client = ref.read(dioProvider);
+    try {
+      final Uri uri = Uri.https(
+        Base.url,
+        Base.chatPath,
+      );
+      final Response response = await client.postUri(
+        uri,
+        data: json.encode(prompt),
+        options: Options(headers: Base.headers),
+      );
+
+      final Message? message = response.messageParser();
+      return message;
+    } catch (e, s) {
+      _log.e("err => $e, stack => $s");
+      return null;
+    }
+  }
 
   ///retrieve [List<Message>] previous conversation thread using Get request
   ///send [UserID] as queryParma
