@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-11-07
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`conversational_agent_client` - `v1.1.0`](#conversational_agent_client---v110)
+
+---
+
+#### `conversational_agent_client` - `v1.1.0`
+
+ - **REFACTOR**(conversational_agent_client): add createUserID.
+ - **FIX**(conversational_agent_client): add chat method.
+ - **FEAT**(conversational_agent_client): add calls to create userId, message and history.
+
+
 ## 2024-11-06
 
 ### Changes
