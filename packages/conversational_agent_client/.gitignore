@@ -8,3 +8,6 @@ pubspec.lock
 
 #Avoid coverage
 coverage/
+#Avoid custom_lint log
+custom_lint.log
+
