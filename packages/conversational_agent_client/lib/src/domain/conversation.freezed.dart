@@ -23,7 +23,7 @@ mixin _$Conversation {
   String get id => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  int get createdAt => throw _privateConstructorUsedError;
   List<Content> get content => throw _privateConstructorUsedError;
 
   /// Serializes this Conversation to a JSON map.
@@ -45,7 +45,7 @@ abstract class $ConversationCopyWith<$Res> {
   $Res call(
       {String id,
       String role,
-      @JsonKey(name: "created_at") DateTime createdAt,
+      @JsonKey(name: "created_at") int createdAt,
       List<Content> content});
 }
 
@@ -81,7 +81,7 @@ class _$ConversationCopyWithImpl<$Res, $Val extends Conversation>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as int,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -101,7 +101,7 @@ abstract class _$$ConversationImplCopyWith<$Res>
   $Res call(
       {String id,
       String role,
-      @JsonKey(name: "created_at") DateTime createdAt,
+      @JsonKey(name: "created_at") int createdAt,
       List<Content> content});
 }
 
@@ -135,7 +135,7 @@ class __$$ConversationImplCopyWithImpl<$Res>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as int,
       content: null == content
           ? _value._content
           : content // ignore: cast_nullable_to_non_nullable
@@ -163,7 +163,7 @@ class _$ConversationImpl implements _Conversation {
   final String role;
   @override
   @JsonKey(name: "created_at")
-  final DateTime createdAt;
+  final int createdAt;
   final List<Content> _content;
   @override
   List<Content> get content {
@@ -214,7 +214,7 @@ abstract class _Conversation implements Conversation {
   const factory _Conversation(
       {required final String id,
       required final String role,
-      @JsonKey(name: "created_at") required final DateTime createdAt,
+      @JsonKey(name: "created_at") required final int createdAt,
       required final List<Content> content}) = _$ConversationImpl;
 
   factory _Conversation.fromJson(Map<String, dynamic> json) =
@@ -226,7 +226,7 @@ abstract class _Conversation implements Conversation {
   String get role;
   @override
   @JsonKey(name: "created_at")
-  DateTime get createdAt;
+  int get createdAt;
   @override
   List<Content> get content;
 

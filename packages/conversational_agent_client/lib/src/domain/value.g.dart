@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'text.dart';
+part of 'value.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TextImpl _$$TextImplFromJson(Map<String, dynamic> json) => _$TextImpl(
-      value: Value.fromJson(json['value'] as Map<String, dynamic>),
+_$ValueImpl _$$ValueImplFromJson(Map<String, dynamic> json) => _$ValueImpl(
+      message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$TextImplToJson(_$TextImpl instance) =>
+Map<String, dynamic> _$$ValueImplToJson(_$ValueImpl instance) =>
     <String, dynamic>{
-      'value': instance.value,
+      'message': instance.message,
     };

@@ -20,7 +20,7 @@ Text _$TextFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Text {
-  String get value => throw _privateConstructorUsedError;
+  Value get value => throw _privateConstructorUsedError;
 
   /// Serializes this Text to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,9 @@ abstract class $TextCopyWith<$Res> {
   factory $TextCopyWith(Text value, $Res Function(Text) then) =
       _$TextCopyWithImpl<$Res, Text>;
   @useResult
-  $Res call({String value});
+  $Res call({Value value});
+
+  $ValueCopyWith<$Res> get value;
 }
 
 /// @nodoc
@@ -60,8 +62,18 @@ class _$TextCopyWithImpl<$Res, $Val extends Text>
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Value,
     ) as $Val);
+  }
+
+  /// Create a copy of Text
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ValueCopyWith<$Res> get value {
+    return $ValueCopyWith<$Res>(_value.value, (value) {
+      return _then(_value.copyWith(value: value) as $Val);
+    });
   }
 }
 
@@ -72,7 +84,10 @@ abstract class _$$TextImplCopyWith<$Res> implements $TextCopyWith<$Res> {
       __$$TextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String value});
+  $Res call({Value value});
+
+  @override
+  $ValueCopyWith<$Res> get value;
 }
 
 /// @nodoc
@@ -93,7 +108,7 @@ class __$$TextImplCopyWithImpl<$Res>
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Value,
     ));
   }
 }
@@ -107,7 +122,7 @@ class _$TextImpl implements _Text {
       _$$TextImplFromJson(json);
 
   @override
-  final String value;
+  final Value value;
 
   @override
   String toString() {
@@ -143,12 +158,12 @@ class _$TextImpl implements _Text {
 }
 
 abstract class _Text implements Text {
-  const factory _Text({required final String value}) = _$TextImpl;
+  const factory _Text({required final Value value}) = _$TextImpl;
 
   factory _Text.fromJson(Map<String, dynamic> json) = _$TextImpl.fromJson;
 
   @override
-  String get value;
+  Value get value;
 
   /// Create a copy of Text
   /// with the given fields replaced by the non-null parameter values.

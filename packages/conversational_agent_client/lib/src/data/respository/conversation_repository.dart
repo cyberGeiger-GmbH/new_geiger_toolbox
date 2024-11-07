@@ -1,5 +1,8 @@
+library conversational_agent_client;
+
 import 'dart:convert';
 
+import 'package:conversational_agent_client/src/domain/conversation.dart';
 import 'package:conversational_agent_client/src/domain/message.dart';
 import 'package:conversational_agent_client/src/domain/prompt.dart';
 import 'package:conversational_agent_client/src/domain/user_id.dart';
@@ -43,6 +46,13 @@ class ConversationRepository {
     }
   }
 
+  ///get userID
+  ///[UserID] as parameter
+  ///if not found return new [UserID]
+  // Future<UserID> getUserId({required UserID userid}) async {
+
+  // }
+
   ///start conversational
   ///send [Prompt] as body using a Post request
   ///return [Message]
@@ -70,6 +80,31 @@ class ConversationRepository {
   ///retrieve [List<Message>] previous conversation thread using Get request
   ///send [UserID] as queryParma
   /// return null if [UserNotFound] is found
+  Future<List<Message>?> getChatHistory({required UserID userId}) async {
+    Set<Message> messages = {};
+
+    try {
+      final client = ref.read(dioProvider);
+
+      // get user, create one when null
+      final Uri uri = Uri.https(Base.url, Base.chatHistory, userId.toJson());
+      final Response response = await client.getUri(uri);
+      final List<Conversation> conversations = response.conversationParser();
+//remap
+      for (var data in conversations) {
+        final Message message = Message(
+            message: data.content[0].text.value.message,
+            role: data.role == Role.user.value ? Role.user : Role.assistant,
+            id: data.id,
+            createdAt: DateTime(data.createdAt));
+        messages.add(message);
+      }
+      return messages.toList();
+    } catch (e, s) {
+      _log.e("err => $e, stack => $s");
+      return null;
+    }
+  }
 }
 
 @riverpod

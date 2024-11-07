@@ -21,6 +21,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Message {
   String get message => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  Role? get role => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this Message to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +40,11 @@ abstract class $MessageCopyWith<$Res> {
   factory $MessageCopyWith(Message value, $Res Function(Message) then) =
       _$MessageCopyWithImpl<$Res, Message>;
   @useResult
-  $Res call({String message});
+  $Res call(
+      {String message,
+      String? id,
+      Role? role,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
@@ -55,12 +63,27 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
   @override
   $Res call({
     Object? message = null,
+    Object? id = freezed,
+    Object? role = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -72,7 +95,11 @@ abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
       __$$MessageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message});
+  $Res call(
+      {String message,
+      String? id,
+      Role? role,
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
@@ -89,12 +116,27 @@ class __$$MessageImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? id = freezed,
+    Object? role = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_$MessageImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -102,17 +144,28 @@ class __$$MessageImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MessageImpl implements _Message {
-  const _$MessageImpl({required this.message});
+  const _$MessageImpl(
+      {required this.message,
+      this.id,
+      this.role,
+      @JsonKey(name: 'created_at') this.createdAt});
 
   factory _$MessageImpl.fromJson(Map<String, dynamic> json) =>
       _$$MessageImplFromJson(json);
 
   @override
   final String message;
+  @override
+  final String? id;
+  @override
+  final Role? role;
+  @override
+  @JsonKey(name: 'created_at')
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Message(message: $message)';
+    return 'Message(message: $message, id: $id, role: $role, createdAt: $createdAt)';
   }
 
   @override
@@ -120,12 +173,16 @@ class _$MessageImpl implements _Message {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MessageImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, id, role, createdAt);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
@@ -144,12 +201,23 @@ class _$MessageImpl implements _Message {
 }
 
 abstract class _Message implements Message {
-  const factory _Message({required final String message}) = _$MessageImpl;
+  const factory _Message(
+      {required final String message,
+      final String? id,
+      final Role? role,
+      @JsonKey(name: 'created_at') final DateTime? createdAt}) = _$MessageImpl;
 
   factory _Message.fromJson(Map<String, dynamic> json) = _$MessageImpl.fromJson;
 
   @override
   String get message;
+  @override
+  String? get id;
+  @override
+  Role? get role;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.

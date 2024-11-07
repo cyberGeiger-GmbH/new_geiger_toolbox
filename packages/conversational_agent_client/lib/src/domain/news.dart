@@ -19,8 +19,4 @@ class News with _$News {
       required List<Vulnerable> vulnerable}) = _News;
 
   factory News.fromJson(Map<String, Object?> json) => _$NewsFromJson(json);
-
-  static List<News> getNews(List<dynamic> json) {
-    return json.map<News>((data) => data.fromJson(data)).toList();
-  }
 }

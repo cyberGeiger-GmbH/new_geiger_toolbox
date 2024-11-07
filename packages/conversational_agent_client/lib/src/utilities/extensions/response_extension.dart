@@ -1,3 +1,4 @@
+import 'package:conversational_agent_client/src/domain/conversation.dart';
 import 'package:conversational_agent_client/src/domain/message.dart';
 import 'package:conversational_agent_client/src/domain/news.dart';
 import 'package:conversational_agent_client/src/domain/news_object.dart';
@@ -27,9 +28,20 @@ extension DataParser<T> on Response {
     if (code != null && code == StatusCode.success) {
       //todo check if data is has error message
       //ErrorMessage(status, type)
-      print("response => $data");
       return Message.fromJson(data);
     }
     return null;
+  }
+
+  List<Conversation> conversationParser() {
+    final StatusCode? code = StatusCodes.getStatus(statusCode!);
+    if (code != null && code == StatusCode.success) {
+      //todo check if data is has error message
+
+      final conversations = Conversation.getConversations(data);
+
+      return conversations;
+    }
+    return [];
   }
 }

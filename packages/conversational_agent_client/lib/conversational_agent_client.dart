@@ -4,3 +4,4 @@
 library;
 
 export 'src/data/respository/news_repository.dart';
+export 'src/data/respository/conversation_repository.dart';
