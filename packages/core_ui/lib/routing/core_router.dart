@@ -1,3 +1,4 @@
+import 'package:core_ui/env/env.dart';
 import 'package:core_ui/organisms/core_scaffold_with_navigation.dart';
 import 'package:core_ui/pages/calendar.dart';
 import 'package:core_ui/pages/chat.dart';
@@ -8,7 +9,6 @@ import 'package:core_ui/pages/home.dart';
 import 'package:core_ui/pages/settings.dart';
 import 'package:core_ui/pages/terms_and_conditions.dart';
 import 'package:core_ui/pages/not_found.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -139,8 +139,8 @@ class CoreRouter {
             child: TermsAndConditions(),
           ),
         ),
-         ///todo replace kDebugMode with environmental variable for design system: 
-        if (kDebugMode)
+
+        if (Env.type.contains("designSystem"))
           GoRoute(
             path: CoreAppRouter.designSystem.path,
             name: CoreAppRouter.designSystem.name,

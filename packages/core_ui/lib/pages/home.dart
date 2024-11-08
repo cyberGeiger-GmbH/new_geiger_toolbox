@@ -1,6 +1,7 @@
+import 'package:core_ui/env/env.dart';
 import 'package:core_ui/molecules/centered_text_button.dart';
 import 'package:core_ui/routing/core_router.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,13 +11,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("environment type =>  ${Env.type}");
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text("home"),
-        ///todo replace kDebugMode with environmental variable for design system: 
-    
-        if (kDebugMode)
+        if (Env.type.contains("designSystem"))
           CenteredTextButton.tertiary(
             label: "view design system",
             onTap: () {

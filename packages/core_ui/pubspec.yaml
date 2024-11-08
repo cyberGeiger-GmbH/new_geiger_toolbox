@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  envied: ^0.5.4+1
   flutter:
     sdk: flutter
   freezed_annotation: 2.4.4
@@ -24,6 +25,7 @@ dev_dependencies:
   json_serializable: 6.8.0
   flutter_gen_runner: 5.8.0
   golden_toolkit: 0.15.0
+  envied_generator: 0.5.4+1
 
 #for auto generating referece class for assets
 flutter_gen:
