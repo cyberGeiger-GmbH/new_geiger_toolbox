@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final router = CoreRouter();
+    return MaterialApp.router(
       title: 'Toolbox Styling',
       theme: Theme.of(context).copyWith(
         extensions: [
@@ -20,63 +21,9 @@ class MyApp extends StatelessWidget {
           AppTextStyleTheme.main(),
           AppIconsTheme.main(),
           AppImagesTheme.main(),
-          AppDimensionsTheme.regular(View.of(context)),
         ],
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    final appTheme = Theme.of(context);
-    return Scaffold(
-      backgroundColor: appTheme.appColors.appColor.scaffoldBackgroundColor,
-      appBar: const CustomAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              Theme.of(context).appIcons.appIcon.character.search,
-              style: TextStyle(
-                  fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
-            ),
-            Theme.of(context).appImages.imagesData.name,
-            DesignSystemHelper.getColors(),
-            DesignSystemHelper.getTexts(),
-            DesignSystemHelper.getAppButtons(),
-            DesignSystemHelper.getCategoriesCard()
-          ],
-        ),
-
-        // CenteredTextButton.primary(
-        //     label: "primary button", onTap: () {}, context: context),
-        // CenteredTextButton.primary(
-        //     label: "disabled primary button",
-        //     isEnabled: false,
-        //     onTap: () {},
-        //     context: context),
-        // CenteredTextButton.secondary(
-        //     label: "secondary button", onTap: () {}, context: context),
-        // CenteredTextButton.tertiary(
-        //     label: "tertiary button", onTap: () {}, context: context),
-        // CenteredTextButton.secondary(
-        //     label: "disabled secondary button",
-        //     isEnabled: false,
-        //     onTap: () {},
-        //     context: context),
-      ),
+      routerConfig: router.goRouter,
     );
   }
 }

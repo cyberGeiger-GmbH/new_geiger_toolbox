@@ -12,7 +12,6 @@ class GoldenTestWrapper extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         extensions: [
-          AppDimensionsTheme.regular(View.of(context)),
           AppColorsTheme.light(),
           AppTextStyleTheme.main(),
           AppImagesTheme.main(),
