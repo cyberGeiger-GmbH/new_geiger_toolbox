@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-11-08
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`core_ui` - `v0.0.2`](#core_ui---v002)
+
+---
+
+#### `core_ui` - `v0.0.2`
+
+ - **REFACTOR**(core_ui): add environment type.
+ - **FIX**(core_ui): add navigation skeleton.
+ - **FEAT**(core_ui): add pages and responsives navigations,.
+
+
 ## 2024-11-07
 
 ### Changes

@@ -1,3 +1,9 @@
+## 0.0.2
+
+ - **REFACTOR**(core_ui): add environment type.
+ - **FIX**(core_ui): add navigation skeleton.
+ - **FEAT**(core_ui): add pages and responsives navigations,.
+
 ## 0.0.1+3
 
  - **FIX**(core_ui): added category card.
