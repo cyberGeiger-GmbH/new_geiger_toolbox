@@ -1,7 +1,5 @@
 import 'package:core_ui/molecules/centered_text_button.dart';
-import 'package:core_ui/routing/core_router.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({super.key});
@@ -18,7 +16,7 @@ class TermsAndConditions extends StatelessWidget {
           CenteredTextButton.tertiary(
             label: "Home",
             onTap: () {
-              context.goNamed(CoreAppRouter.home.name);
+             //todo
             },
             context: context,
           ),

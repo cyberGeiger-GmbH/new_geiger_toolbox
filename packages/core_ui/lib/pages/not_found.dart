@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class NotFound extends StatelessWidget {
   const NotFound({super.key});
@@ -15,18 +14,11 @@ class NotFound extends StatelessWidget {
             const Text("Page Not Found"),
             CenteredTextButton.primary(
               context: context,
-              label: 'go back',
+              label: 'return to /',
               onTap: () {
-                context.goNamed(CoreAppRouter.home.name);
+               //todo
               },
             ),
-            CenteredTextButton.primary(
-              context: context,
-              label: 'Terms and Conditions',
-              onTap: () {
-                context.goNamed(CoreAppRouter.termsAndCondation.name);
-              },
-            )
           ],
         ),
       ),

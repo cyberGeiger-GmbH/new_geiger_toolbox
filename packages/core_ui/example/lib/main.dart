@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/foundation/themes/app_images_theme.dart';
+import 'package:core_ui/pages/design_system.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,8 +13,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final router = CoreRouter();
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Toolbox Styling',
       theme: Theme.of(context).copyWith(
         extensions: [
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           AppImagesTheme.main(),
         ],
       ),
-      routerConfig: router.goRouter,
+      home: const DesignSystem(),
     );
   }
 }
