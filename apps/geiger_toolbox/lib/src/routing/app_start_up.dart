@@ -1,7 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/utils/providers/hive_data_store.dart';
+import 'package:geiger_toolbox/src/utils/providers/hive_data_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_start_up.g.dart';

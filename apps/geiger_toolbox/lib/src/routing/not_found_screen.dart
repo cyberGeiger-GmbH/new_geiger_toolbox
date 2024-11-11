@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:geiger_toolbox/routing/app_routing.dart';
+import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
 class NotFoundScreen extends StatelessWidget {

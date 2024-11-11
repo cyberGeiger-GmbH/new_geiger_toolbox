@@ -3,9 +3,9 @@ import 'package:core_ui/molecules/centered_text_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/routing/app_start_up.dart';
-import 'package:geiger_toolbox/routing/navigation/scaffold_with_navigation.dart';
-import 'package:geiger_toolbox/routing/not_found_screen.dart';
+import 'package:geiger_toolbox/src/routing/app_start_up.dart';
+import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
+import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
