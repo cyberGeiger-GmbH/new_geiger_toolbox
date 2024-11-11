@@ -64,11 +64,11 @@ class AppRouting {
         return null;
       },
       routes: [
-         //for ui without bottom navigation
+        //for ui without bottom navigation
         GoRoute(
           path: AppRouter.termsAndCondation.path,
           name: AppRouter.termsAndCondation.name,
-          pageBuilder: (context, state) => const MaterialPage(
+          pageBuilder: (context, state) => const NoTransitionPage(
             child: TermsAndConditions(),
           ),
         ),
@@ -163,7 +163,6 @@ class AppRouting {
             ),
           ],
         ),
-       
       ],
     );
   }

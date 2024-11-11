@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/providers/hive_data_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -63,7 +64,7 @@ class AppStartUpErrorWidget extends StatelessWidget {
             ErrorMessage(errorMessage: message),
             Spacing.gapH16,
             CenteredTextButton.secondary(
-              label: "Retry".hardCoded,
+              label: "Retry".hardcoded,
               context: context,
               onTap: onRetry,
             ),

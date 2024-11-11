@@ -9,9 +9,11 @@ import '../tokens/spacing.dart';
 ///[onTap] to return to home screen
 ///
 class EmptyPlaceholder extends StatelessWidget {
-  const EmptyPlaceholder({super.key, required this.message, this.onTap});
+  const EmptyPlaceholder(
+      {super.key, required this.message, required this.label, this.onTap});
   final String message;
   final VoidCallback? onTap;
+  final String label;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +28,7 @@ class EmptyPlaceholder extends StatelessWidget {
             ),
             Spacing.gapH32,
             CenteredTextButton.primary(
-                label: "Go Home".hardCoded, onTap: onTap, context: context)
+                label: label, onTap: onTap, context: context)
           ],
         ),
       ),

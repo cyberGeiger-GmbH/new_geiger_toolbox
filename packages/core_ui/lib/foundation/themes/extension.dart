@@ -30,8 +30,3 @@ extension MediaQueryExtended on BoxConstraints {
     return maxWidth >= BreakPoints.largeScreen;
   }
 }
-
-// to know which string needs to be translated
-extension HardCode on String {
-  String get hardCoded => this;
-}

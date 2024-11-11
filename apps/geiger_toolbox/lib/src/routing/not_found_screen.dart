@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,7 +12,8 @@ class NotFoundScreen extends StatelessWidget {
     return Scaffold(
         appBar: const CustomAppBar(),
         body: EmptyPlaceholder(
-          message: "404 - Page not found!".hardCoded,
+          label: "Go to home".hardcoded,
+          message: "404 - Page not found!".hardcoded,
           onTap: () {
             context.goNamed(AppRouter.home.name);
           },
