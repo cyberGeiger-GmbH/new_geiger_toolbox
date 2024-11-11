@@ -1,3 +1,10 @@
+## 0.1.0
+
+> Note: This release has breaking changes.
+
+ - **REFACTOR**(core_ui): remove navigation logic.
+ - **BREAKING** **REFACTOR**(core_ui,geiger_toolbox): remove unnecessary files.
+
 ## 0.0.2
 
  - **REFACTOR**(core_ui): add environment type.

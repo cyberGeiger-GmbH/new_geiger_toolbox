@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-11-11
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`core_ui` - `v0.1.0`](#core_ui---v010)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `core_ui` - `v0.1.0`
+
+ - **REFACTOR**(core_ui): remove navigation logic.
+ - **BREAKING** **REFACTOR**(core_ui,geiger_toolbox): remove unnecessary files.
+
+
 ## 2024-11-08
 
 ### Changes
