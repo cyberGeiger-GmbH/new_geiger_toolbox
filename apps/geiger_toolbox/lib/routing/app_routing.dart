@@ -1,13 +1,20 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/centered_text_button.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/routing/app_start_up.dart';
+import 'package:geiger_toolbox/routing/navigation/scaffold_with_navigation.dart';
+import 'package:geiger_toolbox/routing/not_found_screen.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../features/threat_assessment/presentation/home.dart';
-import 'navigations/scaffold_with_navigation.dart';
+part 'app_routing.g.dart';
 
 enum AppRouter {
+  appStartUp(name: "appStartUp", path: "/app-starup"),
   home(path: "/", name: "home"),
   detailThreat(path: "/threat/:id", name: "detailThreat"),
   community(path: "/communtiy", name: "community"),
@@ -39,13 +46,43 @@ class AppRouting {
   static final GlobalKey<NavigatorState> _shellSettingNavKey =
       GlobalKey<NavigatorState>(debugLabel: "shellSetting");
 
-  static GoRouter get goRouter {
+  static GoRouter goRouter(Ref ref) {
+    //rebuild GoRouter when app startup state changes
+
+    final appStartUpState = ref.watch(appStartUpProvider);
+
     return GoRouter(
       navigatorKey: _rootNavKey,
       initialLocation: AppRouter.home.path,
       debugLogDiagnostics: true,
-      errorBuilder: (context, state) => const NotFound(),
+      errorBuilder: (context, state) => const NotFoundScreen(),
+      redirect: (context, state) {
+        // if the app is still initialing, show the /startup route
+        if (appStartUpState.isLoading || appStartUpState.hasError) {
+          return AppRouter.appStartUp.path;
+        }
+        return null;
+      },
       routes: [
+         //for ui without bottom navigation
+        GoRoute(
+          path: AppRouter.termsAndCondation.path,
+          name: AppRouter.termsAndCondation.name,
+          pageBuilder: (context, state) => const MaterialPage(
+            child: TermsAndConditions(),
+          ),
+        ),
+        GoRoute(
+          path: AppRouter.appStartUp.path,
+          name: AppRouter.appStartUp.name,
+          pageBuilder: (context, state) => NoTransitionPage(
+            child: AppStartUpWidget(
+              //* this is a placeholder
+              //* the loaded route will be managed by GoRouter on state change
+              onLoaded: (_) => const SizedBox.shrink(),
+            ),
+          ),
+        ),
         //for ui with bottom navigation
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) =>
@@ -126,17 +163,16 @@ class AppRouting {
             ),
           ],
         ),
-        //for ui without bottom navigation
-        GoRoute(
-          path: AppRouter.termsAndCondation.path,
-          name: AppRouter.termsAndCondation.name,
-          pageBuilder: (context, state) => const MaterialPage(
-            child: TermsAndConditions(),
-          ),
-        ),
+       
       ],
     );
   }
+}
+
+@riverpod
+GoRouter goRouter(Ref ref) {
+  //rebuild
+  return AppRouting.goRouter(ref);
 }
 
 //todo: move to their respective domain
@@ -216,31 +252,6 @@ class TermsAndConditions extends StatelessWidget {
             context: context,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class NotFound extends StatelessWidget {
-  const NotFound({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Page Not Found"),
-            CenteredTextButton.primary(
-              context: context,
-              label: 'return to /',
-              onTap: () {
-                //todo
-              },
-            ),
-          ],
-        ),
       ),
     );
   }

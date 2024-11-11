@@ -1,3 +1,4 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).appColors.appColor;
     return Scaffold(
+      appBar: const CustomAppBar(),
       body: body,
       bottomNavigationBar: NavigationBar(
         backgroundColor: appColor.surface,

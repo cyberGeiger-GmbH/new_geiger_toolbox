@@ -5,6 +5,7 @@ part 'hive_data_store.g.dart';
 
 class HiveDataStore {
   Future<void> initHive() async {
+    // await Future.delayed(const Duration(seconds: 10));
     await Hive.initFlutter();
     //todo: register all adapters
     // Hive
@@ -22,5 +23,6 @@ HiveDataStore hiveDataStore(Ref ref) => HiveDataStore();
 Future<void> initHive(Ref ref) async {
   // ignore: avoid_manual_providers_as_generated_provider_dependency
   final HiveDataStore hiveDataStore = ref.watch(hiveDataStoreProvider);
+
   return hiveDataStore.initHive();
 }
