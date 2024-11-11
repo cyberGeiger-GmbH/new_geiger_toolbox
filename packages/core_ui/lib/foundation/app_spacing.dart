@@ -17,11 +17,11 @@ class AppSpacing with _$AppSpacing {
       required double large}) = _AppSpacing;
 
   factory AppSpacing.reqular() => const AppSpacing(
-      xsmall: Spacing.xs,
-      small: Spacing.sm,
-      medium: Spacing.md,
-      big: Spacing.xmd,
-      large: Spacing.lg);
+      xsmall: Spacing.p4,
+      small: Spacing.p8,
+      medium: Spacing.p16,
+      big: Spacing.p12,
+      large: Spacing.p22);
 
   AppEdgeInsetsSpacing get asInsets => AppEdgeInsetsSpacing(spacing: this);
 }

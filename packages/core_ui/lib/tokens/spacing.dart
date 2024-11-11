@@ -1,10 +1,28 @@
+import 'package:gap/gap.dart';
+
 class Spacing {
   //don't allow user to create an instance
   Spacing._();
-  static const double xs = 4;
-  static const double sm = 8;
-  static const double xmd = 12;
-  static const double md = 16;
-  static const double lg = 22;
-  static const double xlg = 32;
+  static const double p4 = 4.0;
+  static const double p8 = 8.0;
+  static const double p12 = 12.0;
+  static const double p16 = 16.0;
+  static const double p22 = 22.0;
+  static const double p32 = 32.0;
+
+  //const gap widths
+  static const gapW4 = Gap(Spacing.p4);
+  static const gapW8 = Gap(Spacing.p8);
+  static const gapW12 = Gap(Spacing.p12);
+  static const gapW16 = Gap(Spacing.p16);
+  static const gapW22 = Gap(Spacing.p22);
+  static const gapW32 = Gap(Spacing.p32);
+
+//const gap height
+  static const gapH4 = Gap(Spacing.p4);
+  static const gapH8 = Gap(Spacing.p8);
+  static const gapH12 = Gap(Spacing.p12);
+  static const gapH16 = Gap(Spacing.p16);
+  static const gapH22 = Gap(Spacing.p22);
+  static const gapH32 = Gap(Spacing.p32);
 }

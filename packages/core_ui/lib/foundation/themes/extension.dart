@@ -14,18 +14,24 @@ extension ThemeDataExtended on ThemeData {
 
 extension MediaQueryExtended on BoxConstraints {
   bool get isSmallDevice {
-    return maxWidth <= BreakPoints.sm && maxWidth <= BreakPoints.md;
+    return maxWidth <= BreakPoints.mobile && maxWidth <= BreakPoints.tablet;
   }
 
   bool get isTablet {
-    return maxWidth >= BreakPoints.md && maxWidth <= BreakPoints.lg;
+    return maxWidth >= BreakPoints.tablet && maxWidth <= BreakPoints.desktop;
   }
 
   bool get isDesktop {
-    return maxWidth >= BreakPoints.lg && maxWidth <= BreakPoints.xlg;
+    return maxWidth >= BreakPoints.desktop &&
+        maxWidth <= BreakPoints.largeScreen;
   }
 
   bool get isLargerDisplay {
-    return maxWidth >= BreakPoints.xlg;
+    return maxWidth >= BreakPoints.largeScreen;
   }
+}
+
+// to know which string needs to be translated
+extension HardCode on String {
+  String get hardCoded => this;
 }

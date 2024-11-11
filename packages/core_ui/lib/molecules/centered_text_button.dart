@@ -11,7 +11,7 @@ class CenteredTextButton extends StatelessWidget {
     required this.label,
     required this.isPrimary,
     required this.isEnabled,
-    required this.onTap,
+    this.onTap,
     required this.background,
     required this.textColor,
   });
@@ -20,7 +20,7 @@ class CenteredTextButton extends StatelessWidget {
       {Key? key,
       required String label,
       bool isEnabled = true,
-      required VoidCallback onTap,
+      VoidCallback? onTap,
       required BuildContext context}) {
     return CenteredTextButton._(
       key: key,
@@ -37,7 +37,7 @@ class CenteredTextButton extends StatelessWidget {
       {Key? key,
       required String label,
       bool isEnabled = true,
-      required VoidCallback onTap,
+      VoidCallback? onTap,
       required BuildContext context}) {
     return CenteredTextButton._(
       key: key,
@@ -55,7 +55,7 @@ class CenteredTextButton extends StatelessWidget {
       {Key? key,
       required String label,
       bool isEnabled = true,
-      required VoidCallback onTap,
+      VoidCallback? onTap,
       required BuildContext context}) {
     return CenteredTextButton._(
       key: key,
@@ -80,7 +80,7 @@ class CenteredTextButton extends StatelessWidget {
   final String label;
   final bool isPrimary;
   final bool isEnabled;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Color background;
   final Color textColor;
 
