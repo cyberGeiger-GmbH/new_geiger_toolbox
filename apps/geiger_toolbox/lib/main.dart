@@ -1,22 +1,36 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/utils/providers/router.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: GeigerApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class GeigerApp extends ConsumerWidget {
+  const GeigerApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final GoRouter router = ref.watch(goRouterProvider);
+
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        extensions: [
+          AppColorsTheme.light(),
+          AppTextStyleTheme.main(),
+          AppIconsTheme.main(),
+          AppImagesTheme.main(),
+        ],
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routerConfig: router,
     );
   }
 }

@@ -4,7 +4,7 @@ library core_ui;
 export './foundation/themes/app_colors_theme.dart';
 export 'foundation/themes/app_text_style_theme.dart';
 export './foundation/themes/app_icons_theme.dart';
-export '';
+export './foundation/themes/app_images_theme.dart';
 //icons
 
 //
@@ -20,9 +20,3 @@ export 'molecules/custom_app_bar.dart';
 export './molecules/category_card.dart';
 //extensions
 export './foundation/themes/extension.dart';
-
-//design system
-export './helpers/design_system_helper.dart';
-
-//routing
-export 'routing/core_router.dart';
