@@ -244,9 +244,9 @@ class TermsAndConditions extends StatelessWidget {
           const Center(
             child: Text("Terms and Condition Screent"),
           ),
-          CenteredTextButton.tertiary(
+          AppButton.tertiary(
             label: "Home",
-            onTap: () {
+            onPressed: () {
               //todo
             },
             context: context,

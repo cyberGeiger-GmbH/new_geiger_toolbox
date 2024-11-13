@@ -1,8 +1,7 @@
-import 'package:core_ui/foundation/themes/extension.dart';
-import 'package:core_ui/molecules/app_text.dart';
-import 'package:core_ui/molecules/centered_text_button.dart';
+import 'package:core_ui/molecules/buttons/app_button.dart';
 import 'package:flutter/material.dart';
 
+import '../molecules/texts/app_text.dart';
 import '../tokens/spacing.dart';
 
 ///placeholder widget for showing a message
@@ -27,8 +26,7 @@ class EmptyPlaceholder extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Spacing.gapH32,
-            CenteredTextButton.primary(
-                label: label, onTap: onTap, context: context)
+            AppButton.primary(label: label, onPressed: onTap, context: context)
           ],
         ),
       ),

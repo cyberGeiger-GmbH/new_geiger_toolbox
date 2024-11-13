@@ -1,5 +1,6 @@
-import 'package:core_ui/molecules/app_text.dart';
 import 'package:flutter/material.dart';
+
+import '../texts/app_text.dart';
 
 class CustomNavigationRailNavigation {
   const CustomNavigationRailNavigation._({required this.icon, required this.label});

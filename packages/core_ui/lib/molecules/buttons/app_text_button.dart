@@ -1,8 +1,9 @@
 import 'package:core_ui/foundation/app_colors.dart';
 import 'package:core_ui/foundation/app_text_style.dart';
 import 'package:core_ui/foundation/themes/extension.dart';
-import 'package:core_ui/molecules/app_text.dart';
 import 'package:flutter/material.dart';
+
+import '../texts/app_text.dart';
 
 class AppTextButton extends StatelessWidget {
   const AppTextButton._(

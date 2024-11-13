@@ -7,6 +7,8 @@ part 'app_radius.freezed.dart';
 
 @freezed
 class AppRadius with _$AppRadius {
+  //* Define a private constructor in other to have methods
+  // inside the class, freezed rules not mine
   const AppRadius._();
 
   const factory AppRadius(
@@ -14,7 +16,7 @@ class AppRadius with _$AppRadius {
       required Radius regular,
       required Radius big}) = _AppRadius;
 
-  factory AppRadius.regular() => const AppRadius(
+  factory AppRadius.main() => const AppRadius(
         small: Radius.circular(RadiusSize.sm),
         regular: Radius.circular(RadiusSize.md),
         big: Radius.circular(RadiusSize.lg),
@@ -23,9 +25,10 @@ class AppRadius with _$AppRadius {
   AppBorderRadius get asBorderRadius => AppBorderRadius(radius: this);
 }
 
-
 @freezed
 class AppBorderRadius with _$AppBorderRadius {
+  //* Define a private constructor in other to have methods
+  // inside the class, freezed rules not mine
   const AppBorderRadius._();
   const factory AppBorderRadius({required AppRadius radius}) = _AppBorderRadius;
 

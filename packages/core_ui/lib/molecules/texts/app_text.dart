@@ -22,7 +22,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).displayLarge,
+          textStyle: _appTextStyles(context).displayLarge,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -37,7 +37,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).displayMedium,
+          textStyle: _appTextStyles(context).displayMedium,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -52,7 +52,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).displaySmall,
+          textStyle: _appTextStyles(context).displaySmall,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -67,7 +67,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).headlineLarge,
+          textStyle: _appTextStyles(context).headlineLarge,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -82,7 +82,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).headlineMedium,
+          textStyle: _appTextStyles(context).headlineMedium,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -97,7 +97,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).headlineSmall,
+          textStyle: _appTextStyles(context).headlineSmall,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -112,7 +112,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).titleLarge,
+          textStyle: _appTextStyles(context).titleLarge,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -127,7 +127,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).titleMedium,
+          textStyle: _appTextStyles(context).titleMedium,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -142,7 +142,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).titleSmall,
+          textStyle: _appTextStyles(context).titleSmall,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -157,7 +157,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).labelLarge,
+          textStyle: _appTextStyles(context).labelLarge,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -172,7 +172,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).labelMedium,
+          textStyle: _appTextStyles(context).labelMedium,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -187,7 +187,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).labelSmall,
+          textStyle: _appTextStyles(context).labelSmall,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -202,7 +202,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).bodyLarge,
+          textStyle: _appTextStyles(context).bodyLarge,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -217,7 +217,7 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).bodyMedium,
+          textStyle: _appTextStyles(context).bodyMedium,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -232,12 +232,12 @@ class AppText extends StatelessWidget {
       AppText._(
           key: key,
           text: text,
-          textStyle: _appTexts(context).bodySmall,
+          textStyle: _appTextStyles(context).bodySmall,
           color: color ?? _appColors(context).onPrimary,
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
 
-  static AppTextStyle _appTexts(BuildContext context) =>
+  static AppTextStyle _appTextStyles(BuildContext context) =>
       Theme.of(context).appTextStyles.appTextStyle;
 
   static AppColors _appColors(BuildContext context) =>

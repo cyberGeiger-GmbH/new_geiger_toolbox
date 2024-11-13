@@ -12,14 +12,14 @@ export './foundation/themes/app_images_theme.dart';
 //icons
 
 ///export molecules
-export './molecules/custom_app_bar.dart';
-export './molecules/category_card.dart';
+export 'molecules/bars/custom_app_bar.dart';
+export 'molecules/buttons/tool_button.dart';
 export './molecules/avatar.dart';
-export './molecules/app_text.dart';
+export './molecules/texts/app_text.dart';
 
 //buttons
-export './molecules/app_text_button.dart';
-export './molecules/centered_text_button.dart';
+export 'molecules/buttons/app_text_button.dart';
+export 'molecules/buttons/app_button.dart';
 
 ///export organisms
 export "./organisms/empty_placeholder.dart";

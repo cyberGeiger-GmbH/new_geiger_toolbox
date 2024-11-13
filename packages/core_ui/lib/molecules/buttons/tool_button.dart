@@ -1,9 +1,10 @@
 import 'package:core_ui/foundation/themes/extension.dart';
-import 'package:core_ui/molecules/app_text.dart';
 import 'package:flutter/material.dart';
 
-class CategoryCard extends StatelessWidget {
-  const CategoryCard._({
+import '../texts/app_text.dart';
+
+class ToolButton extends StatelessWidget {
+  const ToolButton._({
     super.key,
     this.outlinedColor,
     this.ontap,
@@ -19,7 +20,7 @@ class CategoryCard extends StatelessWidget {
   final VoidCallback? ontap;
   // bool
 
-  factory CategoryCard.elevated(
+  factory ToolButton.elevated(
       {Key? key,
       required String label,
       required BuildContext context,
@@ -27,7 +28,7 @@ class CategoryCard extends StatelessWidget {
       IconData? icon}) {
     final appColors = Theme.of(context).appColors.appColor;
 
-    return CategoryCard._(
+    return ToolButton._(
       key: key,
       text: AppText.titleLarge(
         text: label,
@@ -40,7 +41,7 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  factory CategoryCard.outlined(
+  factory ToolButton.outlined(
       {Key? key,
       required String label,
       required BuildContext context,
@@ -48,7 +49,7 @@ class CategoryCard extends StatelessWidget {
       IconData? icon}) {
     final appColors = Theme.of(context).appColors.appColor;
 
-    return CategoryCard._(
+    return ToolButton._(
       key: key,
       text: AppText.titleLarge(
         text: label,

@@ -28,18 +28,12 @@
         },
      
         {
-            "name": "example (profile mode)",
+            "name": "core_ui (debug mode)",
             "cwd": "packages/core_ui/example",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "debug"
         },
-        {
-            "name": "example (release mode)",
-            "cwd": "packages/core_ui/example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
+       
     ]
 }

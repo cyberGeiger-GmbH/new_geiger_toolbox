@@ -1,6 +1,7 @@
 import 'package:core_ui/foundation/themes/extension.dart';
-import 'package:core_ui/molecules/app_text.dart';
 import 'package:flutter/material.dart';
+
+import '../molecules/texts/app_text.dart';
 
 /// Widget for showing error messages
 class ErrorMessage extends StatelessWidget {

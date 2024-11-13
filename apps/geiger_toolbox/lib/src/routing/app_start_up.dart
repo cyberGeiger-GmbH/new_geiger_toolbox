@@ -63,10 +63,10 @@ class AppStartUpErrorWidget extends StatelessWidget {
           children: [
             ErrorMessage(errorMessage: message),
             Spacing.gapH16,
-            CenteredTextButton.secondary(
+            AppButton.secondary(
               label: "Retry".hardcoded,
               context: context,
-              onTap: onRetry,
+              onPressed: onRetry,
             ),
           ],
         ),

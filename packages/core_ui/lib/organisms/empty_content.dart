@@ -1,5 +1,6 @@
-import 'package:core_ui/molecules/app_text.dart';
 import 'package:flutter/material.dart';
+
+import '../molecules/texts/app_text.dart';
 
 ///for showing empty content
 class EmptyContent extends StatelessWidget {

@@ -1,6 +1,7 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:core_ui/helpers/design_system_helper.dart';
-import 'package:core_ui/molecules/custom_app_bar.dart';
+import 'package:core_ui/molecules/bars/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class DesignSystem extends StatelessWidget {
@@ -13,19 +14,26 @@ class DesignSystem extends StatelessWidget {
       backgroundColor: appTheme.appColors.appColor.scaffoldBackgroundColor,
       appBar: const CustomAppBar(),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              Theme.of(context).appIcons.appIcon.character.search,
-              style: TextStyle(
-                  fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
-            ),
-            Theme.of(context).appImages.imagesData.name,
-            DesignSystemHelper.getColors(),
-            DesignSystemHelper.getTexts(),
-            DesignSystemHelper.getAppButtons(),
-            DesignSystemHelper.getCategoriesCard()
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                Theme.of(context).appIcons.appIcon.character.search,
+                style: TextStyle(
+                    fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
+              ),
+              Spacing.gapH8,
+              Theme.of(context).appImages.imagesData.name,
+              DesignSystemHelper.getColors(),
+              Spacing.gapH16,
+              DesignSystemHelper.getTexts(),
+              Spacing.gapH16,
+              DesignSystemHelper.getAppButtons(),
+              Spacing.gapH16,
+            ],
+          ),
         ),
       ),
     );

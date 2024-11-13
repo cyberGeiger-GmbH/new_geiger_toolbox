@@ -5,20 +5,20 @@ import 'package:core_ui/foundation/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppTextStyleTheme extends ThemeExtension<AppTextStyleTheme> {
-  final AppTextStyle _appText;
+  final AppTextStyle _appTextStyle;
 
-  const AppTextStyleTheme._(this._appText);
+  const AppTextStyleTheme._(this._appTextStyle);
 
   factory AppTextStyleTheme.main() =>
       AppTextStyleTheme._(AppTextStyle.regular());
 
   factory AppTextStyleTheme.big() => AppTextStyleTheme._(AppTextStyle.big());
 
-  AppTextStyle get appTextStyle => _appText;
+  AppTextStyle get appTextStyle => _appTextStyle;
 
   @override
   ThemeExtension<AppTextStyleTheme> copyWith() {
-    return AppTextStyleTheme._(_appText);
+    return AppTextStyleTheme._(_appTextStyle);
   }
 
   @override
@@ -30,5 +30,5 @@ class AppTextStyleTheme extends ThemeExtension<AppTextStyleTheme> {
  
 
   @override
-  String toString() => 'AppTextStyleTheme(_appText: $_appText)';
+  String toString() => 'AppTextStyleTheme(_appText: $_appTextStyle)';
 }

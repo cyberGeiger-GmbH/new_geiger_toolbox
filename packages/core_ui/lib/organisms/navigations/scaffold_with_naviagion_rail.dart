@@ -1,7 +1,7 @@
 import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../molecules/custom_navigation_rail_destination.dart';
+import '../../molecules/bars/custom_navigation_rail_destination.dart';
 
 class ScaffoldWithNaviagionRail extends StatelessWidget {
   const ScaffoldWithNaviagionRail(
