@@ -77,6 +77,7 @@ class AppRouting {
           name: AppRouter.appStartUp.name,
           pageBuilder: (context, state) => NoTransitionPage(
             child: AppStartUpWidget(
+              key: state.pageKey,
               //* this is a placeholder
               //* the loaded route will be managed by GoRouter on state change
               onLoaded: (_) => const SizedBox.shrink(),

@@ -6,11 +6,14 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("home"),
+        ElevatedButton(
+          onPressed: () {},
+          child: const Text("scann"),
+        ),
+        const Text("home"),
       ],
     );
   }
