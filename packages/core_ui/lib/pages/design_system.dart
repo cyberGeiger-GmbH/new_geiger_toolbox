@@ -1,7 +1,7 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/foundation/themes/extension.dart';
+
 import 'package:core_ui/helpers/design_system_helper.dart';
-import 'package:core_ui/molecules/bars/custom_app_bar.dart';
+
 import 'package:flutter/material.dart';
 
 class DesignSystem extends StatelessWidget {
