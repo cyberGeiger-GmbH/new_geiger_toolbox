@@ -12,8 +12,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final appColor = Theme.of(context).appColors.appColor;
 
     return AppBar(
-      title: AppImagesData.logoIcon().name,
-      actions: const [Icon(Icons.ac_unit)],
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: AppImagesData.logoIcon().name,
+      ),
+      actions: const [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Icon(Icons.person_outline),
+        )
+      ],
       backgroundColor: appColor.scaffoldBackgroundColor,
       surfaceTintColor: appColor.scaffoldBackgroundColor,
     );

@@ -162,16 +162,16 @@ class DesignSystemHelper {
             AppButton.activeNews(
                 onPressed: () {}, title: "Active News", context: context),
             ToolButton.elevated(
-              label: "Elevated Category Card",
+              label: "Elevated Tool Card",
               context: context,
               ontap: () {
                 debugPrint("on pressed");
               },
             ),
             ToolButton.outlined(
-              label: "Outlined Category Card",
+              label: "Outlined Tool Card",
               context: context,
-              ontap: () {},
+              onPressed: () {},
               icon: Icons.book,
             ),
           ]
