@@ -116,7 +116,6 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  //todo create activeNews variant
   factory AppButton.activeNews(
       {Key? key,
       required String title,
