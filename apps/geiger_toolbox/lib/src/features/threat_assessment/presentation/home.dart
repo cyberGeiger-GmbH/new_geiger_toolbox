@@ -1,4 +1,7 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets/news_feeds.dart';
 
 //home screen
 class Home extends StatelessWidget {
@@ -8,12 +11,18 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        ElevatedButton(
+        // Spacing.gapH32,
+        AppButton.scan(
+          label: 'Scan',
+          context: context,
           onPressed: () {},
-          child: const Text("scann"),
         ),
-        const Text("home"),
+        Spacing.gapH16,
+        const CarouselWithIndicatorDemo(),
+        Spacing.gapH16,
+        AppAssetsIcons.filledTonal()
       ],
     );
   }

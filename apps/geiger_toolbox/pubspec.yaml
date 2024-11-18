@@ -22,6 +22,7 @@ dependencies:
   hive_ce_flutter: 2.1.0
   logger: 2.4.0
   freezed_annotation: 2.4.4
+  carousel_slider_plus: 7.0.2
 
 dev_dependencies:
   flutter_test:

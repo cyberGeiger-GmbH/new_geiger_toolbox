@@ -245,7 +245,7 @@ class AppTextStyle with _$AppTextStyle {
 
 //label sizes
   static const double fontSizeXLl = typo.Typography.sizeM;
-  static const double fontSizeLl = typo.Typography.sizeSM;
+  static const double fontSizeLl = typo.Typography.sizeMS;
 
   static const double fontSizeXLm = typo.Typography.sizeMS;
   static const double fontSizeLm = typo.Typography.sizeS;
