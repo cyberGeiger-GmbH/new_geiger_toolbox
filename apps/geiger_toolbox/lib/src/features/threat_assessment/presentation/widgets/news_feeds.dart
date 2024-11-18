@@ -20,7 +20,15 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> imageSliders = data
-        .map((value) => AppButton.news(title: value, context: context))
+        .asMap()
+        .entries
+        .map(
+          (entry) => _current == entry.key
+              ? AppButton.activeNews(
+                  title: "${entry.value} - $_current", context: context)
+              : AppButton.news(
+                  title: "${entry.value} - $_current", context: context),
+        )
         .toList();
     return Column(children: [
       CarouselSlider(
@@ -29,28 +37,77 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
         options: CarouselOptions(
           autoPlay: true,
           enlargeCenterPage: true,
-          aspectRatio: 3.0,
+          height: 130,
+          aspectRatio: 4.0,
+          disableCenter: true,
           onPageChanged: (index, reason) {
+            //todo: current page should have active News
             setState(() => _current = index);
           },
         ),
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: data.asMap().entries.map((entry) {
-          return Container(
-            width: 12.0,
-            height: 12.0,
-            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: (Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black)
-                    .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-          );
-        }).toList(),
-      ),
+      Indicator(data: data, current: _current),
     ]);
+  }
+}
+
+class Indicator extends StatelessWidget {
+  const Indicator({
+    super.key,
+    required this.data,
+    required this.current,
+  });
+
+  final List<String> data;
+  final int current;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: data.asMap().entries.map((entry) {
+        return Dot(
+          current: current,
+          next: entry.key,
+        );
+      }).toList(),
+    );
+  }
+}
+
+class Dot extends StatelessWidget {
+  const Dot({
+    super.key,
+    required this.current,
+    required this.next,
+  });
+
+  final int current;
+  final int next;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: Spacing.p12,
+          height: Spacing.p12,
+          margin: const EdgeInsets.symmetric(
+              vertical: Spacing.p8, horizontal: Spacing.p4),
+          decoration: botBoDecoration(context),
+        ),
+      ],
+    );
+  }
+
+  BoxDecoration botBoDecoration(BuildContext context) {
+    return BoxDecoration(
+      shape: BoxShape.circle,
+      color: (Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black)
+          .withOpacity(current == next ? 0.9 : 0.4),
+    );
   }
 }
