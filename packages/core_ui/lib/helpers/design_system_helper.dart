@@ -1,6 +1,12 @@
-import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:core_ui/golden/golden_test_wrapper.dart';
+import 'package:core_ui/organisms/app_assets_icons.dart';
 import 'package:flutter/material.dart';
+
+import '../molecules/buttons/app_button.dart';
+import '../molecules/buttons/app_text_button.dart';
+import '../molecules/buttons/tool_button.dart';
+import '../molecules/texts/app_text.dart';
 
 class DesignSystemHelper {
   const DesignSystemHelper._();
@@ -174,6 +180,35 @@ class DesignSystemHelper {
                   padding: const EdgeInsets.all(8.0),
                   child: button,
                 ),
+              )
+              .toList(),
+        ),
+      );
+    });
+  }
+
+  static Widget getAppAssestIcons() {
+    return GoldenTestWrapper(getChild: (context) {
+      final color = Theme.of(context).appColors.appColor;
+      return Container(
+        color: Colors.black12,
+        child: Column(
+          children: [
+            AppAssetsIcons.defaultStyle(
+              color: color.primary,
+            ),
+            AppAssetsIcons.filled(
+              background: color.tertiary,
+            ),
+            AppAssetsIcons.filledTonal(
+              backgroundColor: color.tertiaryContainer,
+            ),
+            AppAssetsIcons.outlined(
+              color: color.primary,
+            ),
+          ]
+              .map(
+                (button) => button,
               )
               .toList(),
         ),

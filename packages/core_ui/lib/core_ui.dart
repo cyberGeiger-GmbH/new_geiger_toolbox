@@ -27,6 +27,7 @@ export './organisms/empty_content.dart';
 export './organisms/error_message.dart';
 export './organisms/responsive_center.dart';
 export './organisms/responsive_scrollable_card.dart';
+export './organisms/app_assets_icons.dart';
 
 //extensions
 export './foundation/themes/extension.dart';
