@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**(geiger_toolbox): add localstorage for offline functionality.
+
 ## 1.1.0
 
  - **REFACTOR**(conversational_agent_client): add createUserID.

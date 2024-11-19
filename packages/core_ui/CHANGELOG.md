@@ -1,3 +1,18 @@
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **REFACTOR**(core_ui): remove unnecessary parameter.
+ - **REFACTOR**(geiger_toolbox,core_ui): refactor to finalized the app start up logic.
+ - **FIX**(geiger_toolbox,core_ui): add first main interaction, refactor.
+ - **FIX**(core_ui): export reusable widget.
+ - **FEAT**(core_ui): add todo tile, list view builder.
+ - **FEAT**(core_ui): add protection list card with different variant and some refactoring.
+ - **FEAT**(core_ui): add asset icons.
+ - **FEAT**(geiger_toolbox,core_ui): add app startup logic and refactor core_ui.
+ - **FEAT**(core_ui): add reusable static widget.
+ - **BREAKING** **FEAT**(core_ui): add news button variant, built on ios.
+
 ## 0.1.0
 
 > Note: This release has breaking changes.

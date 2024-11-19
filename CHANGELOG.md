@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-11-19
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`core_ui` - `v2.0.0`](#core_ui---v200)
+
+Packages with other changes:
+
+ - [`conversational_agent_client` - `v1.2.0`](#conversational_agent_client---v120)
+
+---
+
+#### `core_ui` - `v2.0.0`
+
+ - **REFACTOR**(core_ui): remove unnecessary parameter.
+ - **REFACTOR**(geiger_toolbox,core_ui): refactor to finalized the app start up logic.
+ - **FIX**(geiger_toolbox,core_ui): add first main interaction, refactor.
+ - **FIX**(core_ui): export reusable widget.
+ - **FEAT**(core_ui): add todo tile, list view builder.
+ - **FEAT**(core_ui): add protection list card with different variant and some refactoring.
+ - **FEAT**(core_ui): add asset icons.
+ - **FEAT**(geiger_toolbox,core_ui): add app startup logic and refactor core_ui.
+ - **FEAT**(core_ui): add reusable static widget.
+ - **BREAKING** **FEAT**(core_ui): add news button variant, built on ios.
+
+#### `conversational_agent_client` - `v1.2.0`
+
+ - **FEAT**(geiger_toolbox): add localstorage for offline functionality.
+
+
 ## 2024-11-11
 
 ### Changes
