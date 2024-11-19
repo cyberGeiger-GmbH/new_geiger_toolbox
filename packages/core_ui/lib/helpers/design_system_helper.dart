@@ -1,6 +1,9 @@
 import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:core_ui/golden/golden_test_wrapper.dart';
-import 'package:core_ui/organisms/app_assets_icons.dart';
+import 'package:core_ui/molecules/cards/protection_tile.dart';
+import 'package:core_ui/molecules/cards/todo_tile.dart';
+import 'package:core_ui/organisms/list/app_assets_icons.dart';
+import 'package:core_ui/organisms/list/protection_tile_list.dart';
 import 'package:flutter/material.dart';
 
 import '../molecules/buttons/app_button.dart';
@@ -189,22 +192,19 @@ class DesignSystemHelper {
 
   static Widget getAppAssestIcons() {
     return GoldenTestWrapper(getChild: (context) {
-      final color = Theme.of(context).appColors.appColor;
       return Container(
         color: Colors.black12,
         child: Column(
           children: [
-            AppAssetsIcons.defaultStyle(
-              color: color.primary,
-            ),
+            AppAssetsIcons.defaultStyle(context: context),
             AppAssetsIcons.filled(
-              background: color.tertiary,
+              context: context,
             ),
             AppAssetsIcons.filledTonal(
-              backgroundColor: color.tertiaryContainer,
+              context: context,
             ),
             AppAssetsIcons.outlined(
-              color: color.primary,
+              context: context,
             ),
           ]
               .map(
@@ -212,6 +212,68 @@ class DesignSystemHelper {
               )
               .toList(),
         ),
+      );
+    });
+  }
+
+  static Widget getProtectionCard() {
+    return GoldenTestWrapper(getChild: (context) {
+      return Column(
+        children: [
+          ProtectionTile.plain(
+            title: "Plain Protection Content",
+            onPressed: () {},
+          ),
+          ProtectionTile.outlined(
+            context: context,
+            title: "Card Protection Content ",
+            onPressed: () {},
+          )
+        ]
+            .map(
+              (button) => button,
+            )
+            .toList(),
+      );
+    });
+  }
+
+  static Widget getProtectionCardList() {
+    return GoldenTestWrapper(getChild: (context) {
+      return const ProtectionTileList(data: [
+        "Two-Factor Authentication (2FA)",
+        "VPN and Secure Connections",
+        "Control Remote Access Software"
+      ]);
+    });
+  }
+
+  static Widget getTodoCard() {
+    return GoldenTestWrapper(getChild: (context) {
+      return Column(
+        children: [
+          TodoTile.plain(
+              title: "Swiss Crime Prevention (SKP)",
+              summary:
+                  "Provides informational materials and prevention campaigns on phone fraud",
+              done: true,
+              onChange: (value) {
+                debugPrint("checkbox pressed $value");
+              }),
+          TodoTile.outlined(
+              context: context,
+              title: "Swiss Crime Prevention (SKP)",
+              summary:
+                  "Provides informational materials and prevention campaigns on phone fraud",
+              done: true,
+              onChange: (value) {
+                debugPrint("checkbox pressed $value");
+              }),
+        ]
+            .map(
+              (button) => button,
+            )
+            .toList(),
       );
     });
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../molecules/buttons/app_icon_button.dart';
+import '../../molecules/buttons/app_icon_button.dart';
 
 class AppAssetsIcons extends StatelessWidget {
   const AppAssetsIcons({super.key, required this.children});
@@ -11,25 +11,33 @@ class AppAssetsIcons extends StatelessWidget {
       VoidCallback? todos,
       VoidCallback? devices,
       VoidCallback? wifi,
-      Color? color}) {
+      Color? color,
+      required BuildContext context}) {
     final icons = [
       AppIconButton.defaultStyle(
         iconData: Icons.desktop_mac,
         onPressed: desktop ?? () {},
-        color: color,
+        backgroundColor: color,
+        context: context,
       ),
       AppIconButton.defaultStyle(
         iconData: Icons.list,
         onPressed: todos ?? () {},
-        color: color,
+        backgroundColor: color,
+        context: context,
       ),
       AppIconButton.defaultStyle(
         iconData: Icons.devices,
         onPressed: devices ?? () {},
-        color: color,
+        backgroundColor: color,
+        context: context,
       ),
       AppIconButton.defaultStyle(
-          iconData: Icons.wifi, onPressed: wifi ?? () {}, color: color)
+        iconData: Icons.wifi,
+        onPressed: wifi ?? () {},
+        backgroundColor: color,
+        context: context,
+      )
     ];
     return AppAssetsIcons(children: icons);
   }
@@ -38,27 +46,32 @@ class AppAssetsIcons extends StatelessWidget {
       VoidCallback? todos,
       VoidCallback? devices,
       VoidCallback? wifi,
-      Color? background}) {
+      Color? background,
+      required BuildContext context}) {
     final icons = [
       AppIconButton.filled(
         iconData: Icons.desktop_mac,
         onPressed: desktop ?? () {},
-        color: background,
+        backgroundColor: background,
+        context: context,
       ),
       AppIconButton.filled(
         iconData: Icons.list,
         onPressed: todos ?? () {},
-        color: background,
+        backgroundColor: background,
+        context: context,
       ),
       AppIconButton.filled(
         iconData: Icons.devices,
         onPressed: devices ?? () {},
-        color: background,
+        backgroundColor: background,
+        context: context,
       ),
       AppIconButton.filled(
         iconData: Icons.wifi,
         onPressed: wifi ?? () {},
-        color: background,
+        backgroundColor: background,
+        context: context,
       )
     ];
     return AppAssetsIcons(children: icons);
@@ -69,25 +82,29 @@ class AppAssetsIcons extends StatelessWidget {
       VoidCallback? todos,
       VoidCallback? devices,
       VoidCallback? wifi,
-      Color? color}) {
+      Color? color,
+      required BuildContext context}) {
     final icons = [
       AppIconButton.outline(
-        iconData: Icons.desktop_mac,
-        onPressed: desktop ?? () {},
-        color: color,
-      ),
+          iconData: Icons.desktop_mac,
+          onPressed: desktop ?? () {},
+          backgroundColor: color,
+          context: context),
       AppIconButton.outline(
-        iconData: Icons.list,
-        onPressed: todos ?? () {},
-        color: color,
-      ),
+          iconData: Icons.list,
+          onPressed: todos ?? () {},
+          backgroundColor: color,
+          context: context),
       AppIconButton.outline(
-        iconData: Icons.devices,
-        onPressed: devices ?? () {},
-        color: color,
-      ),
+          iconData: Icons.devices,
+          onPressed: devices ?? () {},
+          backgroundColor: color,
+          context: context),
       AppIconButton.outline(
-          iconData: Icons.wifi, onPressed: wifi ?? () {}, color: color)
+          iconData: Icons.wifi,
+          onPressed: wifi ?? () {},
+          backgroundColor: color,
+          context: context)
     ];
     return AppAssetsIcons(children: icons);
   }
@@ -97,27 +114,32 @@ class AppAssetsIcons extends StatelessWidget {
       VoidCallback? todos,
       VoidCallback? devices,
       VoidCallback? wifi,
+      required BuildContext context,
       Color? backgroundColor}) {
     final icons = [
       AppIconButton.filledTonal(
         iconData: Icons.desktop_mac,
         onPressed: desktop ?? () {},
-        color: backgroundColor,
+        backgroudColor: backgroundColor,
+        context: context,
       ),
       AppIconButton.filledTonal(
         iconData: Icons.list,
         onPressed: todos ?? () {},
-        color: backgroundColor,
+        backgroudColor: backgroundColor,
+        context: context,
       ),
       AppIconButton.filledTonal(
         iconData: Icons.devices,
         onPressed: devices ?? () {},
-        color: backgroundColor,
+        backgroudColor: backgroundColor,
+        context: context,
       ),
       AppIconButton.filledTonal(
         iconData: Icons.wifi,
         onPressed: wifi ?? () {},
-        color: backgroundColor,
+        backgroudColor: backgroundColor,
+        context: context,
       )
     ];
     return AppAssetsIcons(children: icons);

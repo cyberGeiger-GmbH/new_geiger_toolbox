@@ -14,14 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Toolbox Styling',
-      theme: Theme.of(context).copyWith(
-        extensions: [
-          AppColorsTheme.light(),
-          AppTextStyleTheme.main(),
-          AppIconsTheme.main(),
-          AppImagesTheme.main(),
-        ],
-      ),
+      theme: ThemeData(extensions: [
+        AppColorsTheme.light(),
+        AppTextStyleTheme.main(),
+        AppIconsTheme.main(),
+        AppImagesTheme.main(),
+      ], useMaterial3: true),
       home: const DesignSystem(),
     );
   }

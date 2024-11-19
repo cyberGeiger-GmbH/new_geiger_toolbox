@@ -32,6 +32,12 @@ class DesignSystem extends StatelessWidget {
               Spacing.gapH16,
               DesignSystemHelper.getAppButtons(),
               Spacing.gapH16,
+              DesignSystemHelper.getProtectionCard(),
+              Spacing.gapH16,
+              DesignSystemHelper.getProtectionCardList(),
+              Spacing.gapH16,
+              DesignSystemHelper.getTodoCard(),
+              Spacing.gapH16,
               DesignSystemHelper.getAppAssestIcons()
             ],
           ),

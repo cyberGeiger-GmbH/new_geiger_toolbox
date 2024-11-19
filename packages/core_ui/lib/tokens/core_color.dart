@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CoreColor {
   CoreColor._();
 
+  //default color
+  static const Color defaultColor = Colors.black;
   //todo at an inactive color
 //colors for light theme
   //primary color variant

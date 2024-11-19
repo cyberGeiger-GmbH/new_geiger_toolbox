@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
         Spacing.gapH16,
         const CarouselWithIndicatorDemo(),
         Spacing.gapH16,
-        AppAssetsIcons.filledTonal()
+        AppAssetsIcons.filledTonal(context: context,)
       ],
     );
   }

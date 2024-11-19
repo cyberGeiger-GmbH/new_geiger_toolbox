@@ -1,3 +1,4 @@
+import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:flutter/material.dart';
 
 class AppIconButton extends StatelessWidget {
@@ -10,14 +11,21 @@ class AppIconButton extends StatelessWidget {
   factory AppIconButton.filled(
       {Key? key,
       required IconData iconData,
+      required BuildContext context,
       VoidCallback? onPressed,
-      Color? color}) {
+      Color? backgroundColor,
+      Color? iconColor}) {
+    final appColor = Theme.of(context).appColors.appColor;
     return AppIconButton(
       key: key,
       variant: IconButton.filled(
         onPressed: onPressed,
-        icon: Icon(iconData),
-        style: IconButton.styleFrom(backgroundColor: color),
+        icon: Icon(
+          iconData,
+          color: iconColor,
+        ),
+        style: IconButton.styleFrom(
+            backgroundColor: backgroundColor ?? appColor.tertiary),
       ),
     );
   }
@@ -25,14 +33,20 @@ class AppIconButton extends StatelessWidget {
   factory AppIconButton.outline(
       {Key? key,
       required IconData iconData,
+      required BuildContext context,
       VoidCallback? onPressed,
-      Color? color}) {
+      Color? backgroundColor,
+      Color? iconColor}) {
+    final appColor = Theme.of(context).appColors.appColor;
     return AppIconButton(
       key: key,
       variant: IconButton.outlined(
         onPressed: onPressed,
-        icon: Icon(iconData),
-        color: color,
+        icon: Icon(
+          iconData,
+          color: iconColor,
+        ),
+        color: backgroundColor ?? appColor.primary,
       ),
     );
   }
@@ -40,28 +54,41 @@ class AppIconButton extends StatelessWidget {
   factory AppIconButton.filledTonal(
       {Key? key,
       required IconData iconData,
+      required BuildContext context,
       VoidCallback? onPressed,
-      Color? color}) {
+      Color? backgroudColor,
+      Color? iconColor}) {
+    final appColor = Theme.of(context).appColors.appColor;
     return AppIconButton(
       key: key,
       variant: IconButton.filledTonal(
         onPressed: onPressed,
-        icon: Icon(iconData),
-        style: IconButton.styleFrom(backgroundColor: color),
+        icon: Icon(
+          iconData,
+          color: iconColor,
+        ),
+        style: IconButton.styleFrom(
+            backgroundColor: backgroudColor ?? appColor.tertiaryContainer),
       ),
     );
   }
   factory AppIconButton.defaultStyle(
       {Key? key,
       required IconData iconData,
+      required BuildContext context,
       VoidCallback? onPressed,
-      Color? color}) {
+      Color? backgroundColor,
+      Color? iconColor}) {
+    final appColor = Theme.of(context).appColors.appColor;
     return AppIconButton(
       key: key,
       variant: IconButton(
         onPressed: onPressed,
-        icon: Icon(iconData),
-        color: color,
+        icon: Icon(
+          iconData,
+          color: iconColor,
+        ),
+        color: backgroundColor ?? appColor.primary,
       ),
     );
   }
