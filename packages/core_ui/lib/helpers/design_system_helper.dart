@@ -4,6 +4,7 @@ import 'package:core_ui/molecules/cards/protection_tile.dart';
 import 'package:core_ui/molecules/cards/todo_tile.dart';
 import 'package:core_ui/organisms/list/app_assets_icons.dart';
 import 'package:core_ui/organisms/list/protection_tile_list.dart';
+import 'package:core_ui/organisms/list/todo_tile_list.dart';
 import 'package:flutter/material.dart';
 
 import '../molecules/buttons/app_button.dart';
@@ -216,7 +217,7 @@ class DesignSystemHelper {
     });
   }
 
-  static Widget getProtectionCard() {
+  static Widget getProtectionTileVariant() {
     return GoldenTestWrapper(getChild: (context) {
       return Column(
         children: [
@@ -238,7 +239,7 @@ class DesignSystemHelper {
     });
   }
 
-  static Widget getProtectionCardList() {
+  static Widget getTileList() {
     return GoldenTestWrapper(getChild: (context) {
       return const ProtectionTileList(data: [
         "Two-Factor Authentication (2FA)",
@@ -248,7 +249,7 @@ class DesignSystemHelper {
     });
   }
 
-  static Widget getTodoCard() {
+  static Widget getTodoTileVariants() {
     return GoldenTestWrapper(getChild: (context) {
       return Column(
         children: [
@@ -277,4 +278,25 @@ class DesignSystemHelper {
       );
     });
   }
+
+  static Widget getTodoCheckList() {
+    return GoldenTestWrapper(getChild: (context) {
+      final List<Todo> data = [
+        Todo(
+          title: "Swiss Crime Prevention (SKP)",
+          summary:
+              "Provides informational materials and prevention campaigns on phone fraud",
+        ),
+        Todo(
+            title: "Zurich Cantonal Police",
+            summary:
+                "Dedicated prevention pages with tips and information about phone fraud",
+            value: true)
+      ];
+      return TodoTileList(
+        data: data,
+      );
+    });
+  }
 }
+

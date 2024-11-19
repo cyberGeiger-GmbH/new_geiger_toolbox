@@ -1,5 +1,6 @@
-import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:core_ui/molecules/cards/protection_tile.dart';
+import 'package:core_ui/utils/list_view_builder.dart';
+
 import 'package:flutter/material.dart';
 
 class ProtectionTileList extends StatelessWidget {
@@ -7,24 +8,15 @@ class ProtectionTileList extends StatelessWidget {
   final List<String> data;
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
-
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: appColors.onTertiaryContainer),
-        borderRadius: BorderRadius.circular(8.0),
+    return ListViewBuilder.outlined(
+      context: context,
+      length: data.length,
+      itemBuilder: (context, index) => ProtectionTile.plain(
+        title: data[index],
+        onPressed: () {
+          debugPrint("use goRouter $index");
+        },
       ),
-      child: ListView.separated(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          itemBuilder: (context, index) => ProtectionTile.plain(
-                title: data[index],
-                onPressed: () {
-                  debugPrint("using gorouter $index");
-                },
-              ),
-          separatorBuilder: (_, __) => const Divider(),
-          itemCount: data.length),
     );
   }
 }
