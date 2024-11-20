@@ -25,7 +25,7 @@ void main() {
   // });
 
   group("new repository....", () {
-    test('news repository using default client passing profile ', () async {
+    test('news repository using default profile ', () async {
       final container = getContainer();
       final newsRepo = container.read(newsRepositoryProvider);
       final profile = Profile(
@@ -37,9 +37,7 @@ void main() {
       expect(data, isNotEmpty);
     });
 
-    test(
-        'news repository using default client passing without profile passing profile ',
-        () async {
+    test('news repository without profile ', () async {
       final container = getContainer();
       final newsRepo = container.read(newsRepositoryProvider);
 
@@ -47,4 +45,16 @@ void main() {
       expect(data, isEmpty);
     });
   });
+
+  //  test('news repository using wrong profile format ', () async {
+  //     final container = getContainer();
+  //     final newsRepo = container.read(newsRepositoryProvider);
+  //     final profile = Profile(
+  //         location: "Zurich",
+  //         digitalInfrastructure: DigitalInfrastructure(
+  //             infoAbout:  ["password", "teamView", "post finance"]));
+  //     final data = await newsRepo.fetchNews(profile: profile);
+  //     print("news object => $data");
+  //     expect(data, isNotEmpty);
+  //   });
 }

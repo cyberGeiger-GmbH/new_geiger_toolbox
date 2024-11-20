@@ -14,3 +14,8 @@ class UserNotFoundException extends AppException {
   UserNotFoundException() : super(code: 'user-not-found', message: "User profile has not be created");
 }
 
+
+class CachedNewsFeedException extends AppException {
+  CachedNewsFeedException () : super(code: 'fail-read-newsfeed-cache', message: "Fail to retrived cached news data");
+}
+

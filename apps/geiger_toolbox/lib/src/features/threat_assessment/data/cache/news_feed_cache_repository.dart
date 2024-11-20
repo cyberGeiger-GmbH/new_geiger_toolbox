@@ -1,10 +1,12 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/extensions/news_list_extensions.dart';
+import 'package:geiger_toolbox/src/extensions/news_list_extension.dart';
 
 import 'package:geiger_toolbox/src/persistence/sembast_data_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sembast/sembast_io.dart';
+
+import '../../../../exceptions/app_exception.dart';
 
 part 'news_feed_cache_repository.g.dart';
 
@@ -27,7 +29,7 @@ class NewsFeedCacheRepository {
     return store.record(newsObjectsKey).put(db, jsonNews);
   }
 
-  Stream<List<News>>? watchNewsFeed() {
+  Stream<List<News>> watchNewsFeed() {
     final dataStore = _sembastDataStore;
     final record = dataStore.store.record(newsObjectsKey);
     final db = dataStore.db;
@@ -37,7 +39,7 @@ class NewsFeedCacheRepository {
         return data;
       }
     });
-    return null;
+    throw CachedNewsFeedException();
   }
 
   SembastDataStore get _sembastDataStore {
@@ -45,7 +47,7 @@ class NewsFeedCacheRepository {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 NewsFeedCacheRepository newsFeedCacheRepository(Ref ref) {
   return NewsFeedCacheRepository(ref);
 }

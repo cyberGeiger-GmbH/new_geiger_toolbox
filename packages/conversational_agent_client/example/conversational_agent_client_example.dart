@@ -22,7 +22,7 @@ void main() async {
   //read the new repository class
   final newRepo = containerWithOverride.read(newsRepositoryProvider);
   //news object will be empty without  passing a profile
-  final List<News>? news = await newRepo.fetchNews();
+  final List<News> news = await newRepo.fetchNews();
 
   print('awesome: $news');
 }

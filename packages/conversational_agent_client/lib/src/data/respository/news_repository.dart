@@ -3,6 +3,7 @@ library conversational_agent_client;
 import 'dart:convert';
 import 'package:conversational_agent_client/src/domain/profile.dart';
 import 'package:conversational_agent_client/src/domain/news.dart';
+import 'package:conversational_agent_client/src/exception/remote_exceptions.dart';
 
 import 'package:conversational_agent_client/src/utilities/constants/base.dart';
 
@@ -13,6 +14,8 @@ import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+
+
 part 'news_repository.g.dart';
 
 class NewsRepository {
@@ -21,7 +24,7 @@ class NewsRepository {
 
   final _log = logger(className: "$NewsRepository");
 
-  Future<List<News>?> fetchNews({Profile? profile}) async {
+  Future<List<News>> fetchNews({Profile? profile}) async {
     final dio = ref.read(dioProvider);
     try {
       final Uri uri = Uri.https(
@@ -37,7 +40,7 @@ class NewsRepository {
       return data;
     } catch (e, s) {
       _log.e("failed to get => $e, stack => $s");
-      return null;
+      throw NewsFeedException();
     }
   }
 }

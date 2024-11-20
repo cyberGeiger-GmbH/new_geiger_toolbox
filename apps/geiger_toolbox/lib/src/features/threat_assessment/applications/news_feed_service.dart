@@ -15,13 +15,15 @@ class NewsFeedService {
 
   Future<void> cacheNews({Profile? profile}) async {
     final remoteRepo = ref.read(newsFeedRepositoryProvider);
+
+    //todo: read from sme profile repository
     final defaultProfile = Profile(
         location: "Zurich",
         digitalInfrastructure: DigitalInfrastructure(
             infoAbout: ["password", "teamView", "post finance"]));
     List<News>? data =
         await remoteRepo.fetchNewsUpdate(smeProfile: profile ?? defaultProfile);
-    if (data != null && data.isNotEmpty) {
+    if (data.isNotEmpty) {
       final cachedRepos = ref.read(newsFeedCacheRepositoryProvider);
       //cache news Feed
       await cachedRepos.cacheNewsFeed(data: data);
@@ -35,7 +37,7 @@ NewsFeedService newsFeedService(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
-Stream<List<News>>? watchtNewsFeed(Ref ref) {
+Stream<List<News>?> watchtNewsFeed(Ref ref) {
   final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
   return cachedRepos.watchNewsFeed();
 }
