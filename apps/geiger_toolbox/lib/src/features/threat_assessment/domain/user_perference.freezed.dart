@@ -16,9 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserPerference {
-  @HiveField(0)
   bool get termsAndConditions => throw _privateConstructorUsedError;
-  @HiveField(1)
   bool get initialScan => throw _privateConstructorUsedError;
 
   /// Create a copy of UserPerference
@@ -34,8 +32,7 @@ abstract class $UserPerferenceCopyWith<$Res> {
           UserPerference value, $Res Function(UserPerference) then) =
       _$UserPerferenceCopyWithImpl<$Res, UserPerference>;
   @useResult
-  $Res call(
-      {@HiveField(0) bool termsAndConditions, @HiveField(1) bool initialScan});
+  $Res call({bool termsAndConditions, bool initialScan});
 }
 
 /// @nodoc
@@ -77,8 +74,7 @@ abstract class _$$UserPerferenceImplCopyWith<$Res>
       __$$UserPerferenceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) bool termsAndConditions, @HiveField(1) bool initialScan});
+  $Res call({bool termsAndConditions, bool initialScan});
 }
 
 /// @nodoc
@@ -114,16 +110,13 @@ class __$$UserPerferenceImplCopyWithImpl<$Res>
 
 class _$UserPerferenceImpl implements _UserPerference {
   const _$UserPerferenceImpl(
-      {@HiveField(0) this.termsAndConditions = false,
-      @HiveField(1) this.initialScan = false});
+      {this.termsAndConditions = false, this.initialScan = false});
 
   @override
   @JsonKey()
-  @HiveField(0)
   final bool termsAndConditions;
   @override
   @JsonKey()
-  @HiveField(1)
   final bool initialScan;
 
   @override
@@ -157,14 +150,12 @@ class _$UserPerferenceImpl implements _UserPerference {
 
 abstract class _UserPerference implements UserPerference {
   const factory _UserPerference(
-      {@HiveField(0) final bool termsAndConditions,
-      @HiveField(1) final bool initialScan}) = _$UserPerferenceImpl;
+      {final bool termsAndConditions,
+      final bool initialScan}) = _$UserPerferenceImpl;
 
   @override
-  @HiveField(0)
   bool get termsAndConditions;
   @override
-  @HiveField(1)
   bool get initialScan;
 
   /// Create a copy of UserPerference

@@ -9,7 +9,7 @@ import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../features/threat_assessment/presentation/home.dart';
+import '../features/threat_assessment/presentation/home_screen.dart';
 part 'app_routing.g.dart';
 
 enum AppRouter {
@@ -95,7 +95,7 @@ class AppRouting {
                   path: AppRouter.home.path,
                   name: AppRouter.home.name,
                   pageBuilder: (context, state) => const NoTransitionPage(
-                    child: Home(),
+                    child: HomeScreen(),
                   ),
                   //nested route
                   routes: [

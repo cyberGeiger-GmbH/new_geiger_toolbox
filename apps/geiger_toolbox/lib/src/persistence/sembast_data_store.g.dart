@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_start_up.dart';
+part of 'sembast_data_store.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appStartUpHash() => r'1b9bbd36dfa89500ab0af2e3ddf2b011ca742540';
+String _$sembastDataStoreHash() => r'e27da1bc02f61b58003fde8c450c2de974e36829';
 
-/// See also [appStartUp].
-@ProviderFor(appStartUp)
-final appStartUpProvider = FutureProvider<void>.internal(
-  appStartUp,
-  name: r'appStartUpProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$appStartUpHash,
+/// See also [sembastDataStore].
+@ProviderFor(sembastDataStore)
+final sembastDataStoreProvider = FutureProvider<SembastDataStore>.internal(
+  sembastDataStore,
+  name: r'sembastDataStoreProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$sembastDataStoreHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AppStartUpRef = FutureProviderRef<void>;
+typedef SembastDataStoreRef = FutureProviderRef<SembastDataStore>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

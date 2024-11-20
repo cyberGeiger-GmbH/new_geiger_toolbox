@@ -2,8 +2,10 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
-import 'package:geiger_toolbox/src/utils/providers/hive_data_store.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../persistence/sembast_data_store.dart';
 
 part 'app_start_up.g.dart';
 
@@ -11,11 +13,11 @@ part 'app_start_up.g.dart';
 Future<void> appStartUp(Ref ref) async {
   ref.onDispose(() {
     //ensure we invalidate all the providers we depend on
-    ref.invalidate(initHiveProvider);
+    ref.invalidate(sembastDataStoreProvider);
   });
-  //all asynchronous app initialization c
+  //all asynchronous app initialization
   // ignore: avoid_manual_providers_as_generated_provider_dependency
-  await ref.watch(initHiveProvider.future);
+  await ref.watch(sembastDataStoreProvider.future);
 }
 
 class AppStartUpWidget extends ConsumerWidget {
