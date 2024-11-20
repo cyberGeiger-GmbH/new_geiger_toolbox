@@ -23,10 +23,14 @@ mixin _$News {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
-  String get date => throw _privateConstructorUsedError;
-  @JsonKey(name: "image_url")
+  @JsonKey(name: 'article_url')
+  String get articleUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image_url')
   String get imageUrl => throw _privateConstructorUsedError;
-  List<Vulnerable> get vulnerable => throw _privateConstructorUsedError;
+  @JsonKey(name: 'date_created')
+  String get dateCreated => throw _privateConstructorUsedError;
+  List<Recommendation> get recommendations =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this News to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,9 +50,10 @@ abstract class $NewsCopyWith<$Res> {
       {String id,
       String title,
       String summary,
-      String date,
-      @JsonKey(name: "image_url") String imageUrl,
-      List<Vulnerable> vulnerable});
+      @JsonKey(name: 'article_url') String articleUrl,
+      @JsonKey(name: 'image_url') String imageUrl,
+      @JsonKey(name: 'date_created') String dateCreated,
+      List<Recommendation> recommendations});
 }
 
 /// @nodoc
@@ -69,9 +74,10 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
     Object? id = null,
     Object? title = null,
     Object? summary = null,
-    Object? date = null,
+    Object? articleUrl = null,
     Object? imageUrl = null,
-    Object? vulnerable = null,
+    Object? dateCreated = null,
+    Object? recommendations = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -86,18 +92,22 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      articleUrl: null == articleUrl
+          ? _value.articleUrl
+          : articleUrl // ignore: cast_nullable_to_non_nullable
               as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      vulnerable: null == vulnerable
-          ? _value.vulnerable
-          : vulnerable // ignore: cast_nullable_to_non_nullable
-              as List<Vulnerable>,
+      dateCreated: null == dateCreated
+          ? _value.dateCreated
+          : dateCreated // ignore: cast_nullable_to_non_nullable
+              as String,
+      recommendations: null == recommendations
+          ? _value.recommendations
+          : recommendations // ignore: cast_nullable_to_non_nullable
+              as List<Recommendation>,
     ) as $Val);
   }
 }
@@ -113,9 +123,10 @@ abstract class _$$NewsImplCopyWith<$Res> implements $NewsCopyWith<$Res> {
       {String id,
       String title,
       String summary,
-      String date,
-      @JsonKey(name: "image_url") String imageUrl,
-      List<Vulnerable> vulnerable});
+      @JsonKey(name: 'article_url') String articleUrl,
+      @JsonKey(name: 'image_url') String imageUrl,
+      @JsonKey(name: 'date_created') String dateCreated,
+      List<Recommendation> recommendations});
 }
 
 /// @nodoc
@@ -133,9 +144,10 @@ class __$$NewsImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? summary = null,
-    Object? date = null,
+    Object? articleUrl = null,
     Object? imageUrl = null,
-    Object? vulnerable = null,
+    Object? dateCreated = null,
+    Object? recommendations = null,
   }) {
     return _then(_$NewsImpl(
       id: null == id
@@ -150,18 +162,22 @@ class __$$NewsImplCopyWithImpl<$Res>
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      articleUrl: null == articleUrl
+          ? _value.articleUrl
+          : articleUrl // ignore: cast_nullable_to_non_nullable
               as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      vulnerable: null == vulnerable
-          ? _value._vulnerable
-          : vulnerable // ignore: cast_nullable_to_non_nullable
-              as List<Vulnerable>,
+      dateCreated: null == dateCreated
+          ? _value.dateCreated
+          : dateCreated // ignore: cast_nullable_to_non_nullable
+              as String,
+      recommendations: null == recommendations
+          ? _value._recommendations
+          : recommendations // ignore: cast_nullable_to_non_nullable
+              as List<Recommendation>,
     ));
   }
 }
@@ -173,10 +189,11 @@ class _$NewsImpl extends _News {
       {required this.id,
       required this.title,
       required this.summary,
-      required this.date,
-      @JsonKey(name: "image_url") required this.imageUrl,
-      required final List<Vulnerable> vulnerable})
-      : _vulnerable = vulnerable,
+      @JsonKey(name: 'article_url') required this.articleUrl,
+      @JsonKey(name: 'image_url') required this.imageUrl,
+      @JsonKey(name: 'date_created') required this.dateCreated,
+      required final List<Recommendation> recommendations})
+      : _recommendations = recommendations,
         super._();
 
   factory _$NewsImpl.fromJson(Map<String, dynamic> json) =>
@@ -189,21 +206,25 @@ class _$NewsImpl extends _News {
   @override
   final String summary;
   @override
-  final String date;
+  @JsonKey(name: 'article_url')
+  final String articleUrl;
   @override
-  @JsonKey(name: "image_url")
+  @JsonKey(name: 'image_url')
   final String imageUrl;
-  final List<Vulnerable> _vulnerable;
   @override
-  List<Vulnerable> get vulnerable {
-    if (_vulnerable is EqualUnmodifiableListView) return _vulnerable;
+  @JsonKey(name: 'date_created')
+  final String dateCreated;
+  final List<Recommendation> _recommendations;
+  @override
+  List<Recommendation> get recommendations {
+    if (_recommendations is EqualUnmodifiableListView) return _recommendations;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_vulnerable);
+    return EqualUnmodifiableListView(_recommendations);
   }
 
   @override
   String toString() {
-    return 'News(id: $id, title: $title, summary: $summary, date: $date, imageUrl: $imageUrl, vulnerable: $vulnerable)';
+    return 'News(id: $id, title: $title, summary: $summary, articleUrl: $articleUrl, imageUrl: $imageUrl, dateCreated: $dateCreated, recommendations: $recommendations)';
   }
 
   @override
@@ -214,17 +235,27 @@ class _$NewsImpl extends _News {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.summary, summary) || other.summary == summary) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.articleUrl, articleUrl) ||
+                other.articleUrl == articleUrl) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
+            (identical(other.dateCreated, dateCreated) ||
+                other.dateCreated == dateCreated) &&
             const DeepCollectionEquality()
-                .equals(other._vulnerable, _vulnerable));
+                .equals(other._recommendations, _recommendations));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, summary, date,
-      imageUrl, const DeepCollectionEquality().hash(_vulnerable));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      summary,
+      articleUrl,
+      imageUrl,
+      dateCreated,
+      const DeepCollectionEquality().hash(_recommendations));
 
   /// Create a copy of News
   /// with the given fields replaced by the non-null parameter values.
@@ -247,9 +278,10 @@ abstract class _News extends News {
       {required final String id,
       required final String title,
       required final String summary,
-      required final String date,
-      @JsonKey(name: "image_url") required final String imageUrl,
-      required final List<Vulnerable> vulnerable}) = _$NewsImpl;
+      @JsonKey(name: 'article_url') required final String articleUrl,
+      @JsonKey(name: 'image_url') required final String imageUrl,
+      @JsonKey(name: 'date_created') required final String dateCreated,
+      required final List<Recommendation> recommendations}) = _$NewsImpl;
   _News._() : super._();
 
   factory _News.fromJson(Map<String, dynamic> json) = _$NewsImpl.fromJson;
@@ -261,12 +293,16 @@ abstract class _News extends News {
   @override
   String get summary;
   @override
-  String get date;
+  @JsonKey(name: 'article_url')
+  String get articleUrl;
   @override
-  @JsonKey(name: "image_url")
+  @JsonKey(name: 'image_url')
   String get imageUrl;
   @override
-  List<Vulnerable> get vulnerable;
+  @JsonKey(name: 'date_created')
+  String get dateCreated;
+  @override
+  List<Recommendation> get recommendations;
 
   /// Create a copy of News
   /// with the given fields replaced by the non-null parameter values.

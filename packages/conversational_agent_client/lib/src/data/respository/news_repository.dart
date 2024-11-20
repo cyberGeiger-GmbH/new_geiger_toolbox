@@ -30,7 +30,7 @@ class NewsRepository {
       );
 
       final Response response = await dio.getUri(uri,
-          data: profile != null ? json.encode(profile) : null,
+          data: profile != null ? json.encode(profile.toJson()) : null,
           options: Options(headers: Base.headers));
       final data = response.newsParser();
 

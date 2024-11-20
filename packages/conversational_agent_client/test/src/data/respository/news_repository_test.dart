@@ -28,9 +28,13 @@ void main() {
     test('news repository using default client passing profile ', () async {
       final container = getContainer();
       final newsRepo = container.read(newsRepositoryProvider);
-      final profile = Profile(platform: "ios", smeCategory: "small Ict assets");
+      final profile = Profile(
+          location: "Zurich",
+          digitalInfrastructure: DigitalInfrastructure(
+              infoAbout: ["password", "teamView", "post finance"]));
       final data = await newsRepo.fetchNews(profile: profile);
-      print("data with profile =$profile => news object => $data");
+      print("news object => $data");
+      expect(data, isNotEmpty);
     });
 
     test(
@@ -40,7 +44,7 @@ void main() {
       final newsRepo = container.read(newsRepositoryProvider);
 
       final data = await newsRepo.fetchNews();
-      print("data without profile => $data");
+      expect(data, isEmpty);
     });
   });
 }

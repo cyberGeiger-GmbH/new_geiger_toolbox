@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'vulnerable.dart';
+part of 'offering.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$VulnerableImpl _$$VulnerableImplFromJson(Map<String, dynamic> json) =>
-    _$VulnerableImpl(
+_$OfferingImpl _$$OfferingImplFromJson(Map<String, dynamic> json) =>
+    _$OfferingImpl(
       name: json['name'] as String,
-      effect: json['effect'] as String,
+      summary: json['summary'] as String,
     );
 
-Map<String, dynamic> _$$VulnerableImplToJson(_$VulnerableImpl instance) =>
+Map<String, dynamic> _$$OfferingImplToJson(_$OfferingImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'effect': instance.effect,
+      'summary': instance.summary,
     };

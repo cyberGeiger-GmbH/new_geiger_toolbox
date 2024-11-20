@@ -20,9 +20,10 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Profile {
-  String get platform => throw _privateConstructorUsedError;
-  String get smeCategory => throw _privateConstructorUsedError;
   String? get locale => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
+  DigitalInfrastructure get digitalInfrastructure =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this Profile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,12 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
-  $Res call({String platform, String smeCategory, String? locale});
+  $Res call(
+      {String? locale,
+      String location,
+      DigitalInfrastructure digitalInfrastructure});
+
+  $DigitalInfrastructureCopyWith<$Res> get digitalInfrastructure;
 }
 
 /// @nodoc
@@ -56,24 +62,35 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? platform = null,
-    Object? smeCategory = null,
     Object? locale = freezed,
+    Object? location = null,
+    Object? digitalInfrastructure = null,
   }) {
     return _then(_value.copyWith(
-      platform: null == platform
-          ? _value.platform
-          : platform // ignore: cast_nullable_to_non_nullable
-              as String,
-      smeCategory: null == smeCategory
-          ? _value.smeCategory
-          : smeCategory // ignore: cast_nullable_to_non_nullable
-              as String,
       locale: freezed == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      digitalInfrastructure: null == digitalInfrastructure
+          ? _value.digitalInfrastructure
+          : digitalInfrastructure // ignore: cast_nullable_to_non_nullable
+              as DigitalInfrastructure,
     ) as $Val);
+  }
+
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DigitalInfrastructureCopyWith<$Res> get digitalInfrastructure {
+    return $DigitalInfrastructureCopyWith<$Res>(_value.digitalInfrastructure,
+        (value) {
+      return _then(_value.copyWith(digitalInfrastructure: value) as $Val);
+    });
   }
 }
 
@@ -84,7 +101,13 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       __$$ProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String platform, String smeCategory, String? locale});
+  $Res call(
+      {String? locale,
+      String location,
+      DigitalInfrastructure digitalInfrastructure});
+
+  @override
+  $DigitalInfrastructureCopyWith<$Res> get digitalInfrastructure;
 }
 
 /// @nodoc
@@ -100,48 +123,49 @@ class __$$ProfileImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? platform = null,
-    Object? smeCategory = null,
     Object? locale = freezed,
+    Object? location = null,
+    Object? digitalInfrastructure = null,
   }) {
     return _then(_$ProfileImpl(
-      platform: null == platform
-          ? _value.platform
-          : platform // ignore: cast_nullable_to_non_nullable
-              as String,
-      smeCategory: null == smeCategory
-          ? _value.smeCategory
-          : smeCategory // ignore: cast_nullable_to_non_nullable
-              as String,
       locale: freezed == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      digitalInfrastructure: null == digitalInfrastructure
+          ? _value.digitalInfrastructure
+          : digitalInfrastructure // ignore: cast_nullable_to_non_nullable
+              as DigitalInfrastructure,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ProfileImpl extends _Profile {
+class _$ProfileImpl implements _Profile {
   const _$ProfileImpl(
-      {required this.platform, required this.smeCategory, this.locale = "en"})
-      : super._();
+      {this.locale = "en",
+      required this.location,
+      required this.digitalInfrastructure});
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileImplFromJson(json);
 
   @override
-  final String platform;
-  @override
-  final String smeCategory;
-  @override
   @JsonKey()
   final String? locale;
+  @override
+  final String location;
+  @override
+  final DigitalInfrastructure digitalInfrastructure;
 
   @override
   String toString() {
-    return 'Profile(platform: $platform, smeCategory: $smeCategory, locale: $locale)';
+    return 'Profile(locale: $locale, location: $location, digitalInfrastructure: $digitalInfrastructure)';
   }
 
   @override
@@ -149,16 +173,17 @@ class _$ProfileImpl extends _Profile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProfileImpl &&
-            (identical(other.platform, platform) ||
-                other.platform == platform) &&
-            (identical(other.smeCategory, smeCategory) ||
-                other.smeCategory == smeCategory) &&
-            (identical(other.locale, locale) || other.locale == locale));
+            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.digitalInfrastructure, digitalInfrastructure) ||
+                other.digitalInfrastructure == digitalInfrastructure));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, platform, smeCategory, locale);
+  int get hashCode =>
+      Object.hash(runtimeType, locale, location, digitalInfrastructure);
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
@@ -176,21 +201,21 @@ class _$ProfileImpl extends _Profile {
   }
 }
 
-abstract class _Profile extends Profile {
+abstract class _Profile implements Profile {
   const factory _Profile(
-      {required final String platform,
-      required final String smeCategory,
-      final String? locale}) = _$ProfileImpl;
-  const _Profile._() : super._();
+          {final String? locale,
+          required final String location,
+          required final DigitalInfrastructure digitalInfrastructure}) =
+      _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
   @override
-  String get platform;
-  @override
-  String get smeCategory;
-  @override
   String? get locale;
+  @override
+  String get location;
+  @override
+  DigitalInfrastructure get digitalInfrastructure;
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
@@ -198,4 +223,167 @@ abstract class _Profile extends Profile {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+DigitalInfrastructure _$DigitalInfrastructureFromJson(
+    Map<String, dynamic> json) {
+  return _DigitalInfrastructure.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DigitalInfrastructure {
+  List<String> get infoAbout => throw _privateConstructorUsedError;
+
+  /// Serializes this DigitalInfrastructure to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of DigitalInfrastructure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $DigitalInfrastructureCopyWith<DigitalInfrastructure> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DigitalInfrastructureCopyWith<$Res> {
+  factory $DigitalInfrastructureCopyWith(DigitalInfrastructure value,
+          $Res Function(DigitalInfrastructure) then) =
+      _$DigitalInfrastructureCopyWithImpl<$Res, DigitalInfrastructure>;
+  @useResult
+  $Res call({List<String> infoAbout});
+}
+
+/// @nodoc
+class _$DigitalInfrastructureCopyWithImpl<$Res,
+        $Val extends DigitalInfrastructure>
+    implements $DigitalInfrastructureCopyWith<$Res> {
+  _$DigitalInfrastructureCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DigitalInfrastructure
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? infoAbout = null,
+  }) {
+    return _then(_value.copyWith(
+      infoAbout: null == infoAbout
+          ? _value.infoAbout
+          : infoAbout // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DigitalInfrastructureImplCopyWith<$Res>
+    implements $DigitalInfrastructureCopyWith<$Res> {
+  factory _$$DigitalInfrastructureImplCopyWith(
+          _$DigitalInfrastructureImpl value,
+          $Res Function(_$DigitalInfrastructureImpl) then) =
+      __$$DigitalInfrastructureImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<String> infoAbout});
+}
+
+/// @nodoc
+class __$$DigitalInfrastructureImplCopyWithImpl<$Res>
+    extends _$DigitalInfrastructureCopyWithImpl<$Res,
+        _$DigitalInfrastructureImpl>
+    implements _$$DigitalInfrastructureImplCopyWith<$Res> {
+  __$$DigitalInfrastructureImplCopyWithImpl(_$DigitalInfrastructureImpl _value,
+      $Res Function(_$DigitalInfrastructureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DigitalInfrastructure
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? infoAbout = null,
+  }) {
+    return _then(_$DigitalInfrastructureImpl(
+      infoAbout: null == infoAbout
+          ? _value._infoAbout
+          : infoAbout // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DigitalInfrastructureImpl implements _DigitalInfrastructure {
+  const _$DigitalInfrastructureImpl({required final List<String> infoAbout})
+      : _infoAbout = infoAbout;
+
+  factory _$DigitalInfrastructureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DigitalInfrastructureImplFromJson(json);
+
+  final List<String> _infoAbout;
+  @override
+  List<String> get infoAbout {
+    if (_infoAbout is EqualUnmodifiableListView) return _infoAbout;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_infoAbout);
+  }
+
+  @override
+  String toString() {
+    return 'DigitalInfrastructure(infoAbout: $infoAbout)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DigitalInfrastructureImpl &&
+            const DeepCollectionEquality()
+                .equals(other._infoAbout, _infoAbout));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_infoAbout));
+
+  /// Create a copy of DigitalInfrastructure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DigitalInfrastructureImplCopyWith<_$DigitalInfrastructureImpl>
+      get copyWith => __$$DigitalInfrastructureImplCopyWithImpl<
+          _$DigitalInfrastructureImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DigitalInfrastructureImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DigitalInfrastructure implements DigitalInfrastructure {
+  const factory _DigitalInfrastructure(
+      {required final List<String> infoAbout}) = _$DigitalInfrastructureImpl;
+
+  factory _DigitalInfrastructure.fromJson(Map<String, dynamic> json) =
+      _$DigitalInfrastructureImpl.fromJson;
+
+  @override
+  List<String> get infoAbout;
+
+  /// Create a copy of DigitalInfrastructure
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DigitalInfrastructureImplCopyWith<_$DigitalInfrastructureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
