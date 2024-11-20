@@ -22,8 +22,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Icon(Icons.person_outline),
         )
       ],
-      backgroundColor: appColor.scaffoldBackgroundColor,
-      surfaceTintColor: appColor.scaffoldBackgroundColor,
+      backgroundColor: appColor.onSecondary,
+      //surfaceTintColor: appColor.error,
     );
   }
 

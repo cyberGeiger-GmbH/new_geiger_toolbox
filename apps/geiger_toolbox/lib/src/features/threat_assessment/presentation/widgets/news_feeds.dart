@@ -25,7 +25,12 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
         .map(
           (entry) => _current == entry.key
               ? AppButton.activeNews(
-                  title: "${entry.value} - $_current", context: context)
+                  title: "${entry.value} - $_current",
+                  context: context,
+                  onPressed: () {
+                    debugPrint("news item $_current");
+                  },
+                )
               : AppButton.news(
                   title: "${entry.value} - $_current", context: context),
         )
@@ -37,11 +42,11 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
         options: CarouselOptions(
           autoPlay: true,
           enlargeCenterPage: true,
-          height: 130,
-          aspectRatio: 4.0,
+          //height: 130,
+          aspectRatio: 3.0,
           disableCenter: true,
+          //auto callback
           onPageChanged: (index, reason) {
-            //todo: current page should have active News
             setState(() => _current = index);
           },
         ),

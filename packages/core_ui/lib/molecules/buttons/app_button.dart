@@ -126,8 +126,9 @@ class AppButton extends StatelessWidget {
       key: key,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-            borderRadius: AppRadius.main().asBorderRadius.regular,
-            side: BorderSide(color: _appColor(context).primary)),
+          borderRadius: AppRadius.main().asBorderRadius.regular,
+          side: BorderSide(color: _appColor(context).primary),
+        ),
         maximumSize: const Size(130, 100),
         minimumSize: const Size(130, 100),
         backgroundColor: color ?? _appColor(context).surface,

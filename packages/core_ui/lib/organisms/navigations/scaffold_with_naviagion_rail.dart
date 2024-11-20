@@ -17,6 +17,7 @@ class ScaffoldWithNaviagionRail extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).appColors.appColor;
     return Scaffold(
+      backgroundColor: appColor.surface,
       body: Row(
         children: [
           NavigationRail(

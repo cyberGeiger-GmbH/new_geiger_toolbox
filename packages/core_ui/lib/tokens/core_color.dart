@@ -26,7 +26,7 @@ class CoreColor {
   static const Color onTertiaryContainer = Color(0xFF001F27);
 
 //app backgroud color
-  static const Color surface = Color(0xfff6fbf4);
+  static const Color surface = Color(0xFFFFFFFF);
   static const onSurface = Color(0xff171d19);
 
 //error color variant

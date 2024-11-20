@@ -219,7 +219,7 @@ class AppText extends StatelessWidget {
           text: text,
           textStyle: _appTextStyles(context).bodyMedium,
           color: color ?? _appColors(context).onPrimary,
-          textAlign: textAlign ?? TextAlign.start,
+          textAlign: textAlign ?? TextAlign.center,
           textOverflow: textOverflow);
 
   factory AppText.bodySmall(

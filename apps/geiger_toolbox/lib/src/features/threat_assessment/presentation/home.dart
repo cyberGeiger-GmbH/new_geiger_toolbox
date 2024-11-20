@@ -9,11 +9,11 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).appColors.appColor;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Spacing.gapH32,
+        Spacing.gapH32,
         AppButton.scan(
           label: 'Scan',
           context: context,
@@ -22,7 +22,18 @@ class Home extends StatelessWidget {
         Spacing.gapH16,
         const CarouselWithIndicatorDemo(),
         Spacing.gapH16,
-        AppAssetsIcons.filledTonal(context: context,)
+        AppAssetsIcons.filledTonal(
+          context: context,
+        ),
+        Spacing.gapH16,
+        Padding(
+          padding: const EdgeInsets.all(Spacing.p12),
+          child: EmptyContent(
+            message:
+                "Press the Geiger Scan Botton to get your protection score",
+            color: appColors.defaultColor,
+          ),
+        )
       ],
     );
   }
