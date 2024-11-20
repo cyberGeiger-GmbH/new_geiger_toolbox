@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   core_ui: 2.0.0
-  conversational_agent_client: 1.2.0
+  conversational_agent_client: 1.2.1
   cupertino_icons: 1.0.8
   go_router: 14.4.1
   flutter_riverpod: 2.6.1

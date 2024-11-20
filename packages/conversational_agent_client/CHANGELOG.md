@@ -1,3 +1,7 @@
+## 1.2.1
+
+ - **REFACTOR**(conversational_agent_client): refactor news object.
+
 ## 1.2.0
 
  - **FEAT**(geiger_toolbox): add localstorage for offline functionality.

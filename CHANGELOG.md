@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-11-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`conversational_agent_client` - `v1.2.1`](#conversational_agent_client---v121)
+
+---
+
+#### `conversational_agent_client` - `v1.2.1`
+
+ - **REFACTOR**(conversational_agent_client): refactor news object.
+
+
 ## 2024-11-19
 
 ### Changes
