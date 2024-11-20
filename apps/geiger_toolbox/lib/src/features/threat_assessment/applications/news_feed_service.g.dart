@@ -23,11 +23,11 @@ final newsFeedServiceProvider = AutoDisposeProvider<NewsFeedService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NewsFeedServiceRef = AutoDisposeProviderRef<NewsFeedService>;
-String _$watchtNewsFeedHash() => r'7ac8b92fb35b33afc7c4c4a2ca0bcbac3809581f';
+String _$watchtNewsFeedHash() => r'13f457e13b0a7991f9100c6e13ca8230d133e737';
 
 /// See also [watchtNewsFeed].
 @ProviderFor(watchtNewsFeed)
-final watchtNewsFeedProvider = StreamProvider<List<News>?>.internal(
+final watchtNewsFeedProvider = StreamProvider<List<News>>.internal(
   watchtNewsFeed,
   name: r'watchtNewsFeedProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -39,6 +39,6 @@ final watchtNewsFeedProvider = StreamProvider<List<News>?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchtNewsFeedRef = StreamProviderRef<List<News>?>;
+typedef WatchtNewsFeedRef = StreamProviderRef<List<News>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

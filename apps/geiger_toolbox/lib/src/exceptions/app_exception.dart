@@ -19,3 +19,7 @@ class CachedNewsFeedException extends AppException {
   CachedNewsFeedException () : super(code: 'fail-read-newsfeed-cache', message: "Fail to retrived cached news data");
 }
 
+class CachedNewsFeedStoreException extends AppException {
+  CachedNewsFeedStoreException () : super(code: 'fail-cache-newsfeed', message: "Fail to cache news data");
+}
+
