@@ -109,7 +109,7 @@ class AppButton extends StatelessWidget {
       child: AppText.titleSmall(
         text: title,
         context: context,
-        color: color ?? _appColor(context).onSurface,
+        color: color ?? _appColor(context).defaultColor,
         textAlign: TextAlign.justify,
         textOverflow: TextOverflow.fade,
       ),
@@ -129,19 +129,19 @@ class AppButton extends StatelessWidget {
           borderRadius: AppRadius.main().asBorderRadius.regular,
           side: BorderSide(color: _appColor(context).primary),
         ),
-        maximumSize: const Size(130, 100),
-        minimumSize: const Size(130, 100),
+        maximumSize: const Size(100, 100),
+        minimumSize: const Size(90, 90),
         backgroundColor: color ?? _appColor(context).surface,
         padding: const EdgeInsets.symmetric(
             horizontal: Spacing.p12, vertical: Spacing.p12),
         overlayColor: _appColor(context).onSurface,
       ),
       onPressed: onPressed,
-      child: AppText.titleSmall(
+      child: AppText.titleMedium(
         text: title,
         context: context,
-        color: color ?? _appColor(context).onSurface,
-        textAlign: TextAlign.justify,
+        color: color ?? _appColor(context).defaultColor,
+        textAlign: TextAlign.center,
         textOverflow: TextOverflow.fade,
       ),
     );

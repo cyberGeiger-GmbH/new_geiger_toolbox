@@ -1,4 +1,5 @@
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
+import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,70 +21,34 @@ class _CarouselWithIndicatorState
   int _current = 0;
   final CarouselSliderController _controller = CarouselSliderController();
 
-  final List<String> data = ["nosa", "daniel", "mary", "ok"];
-
   @override
   Widget build(BuildContext context) {
     final newsFeedValue = ref.watch(watchtNewsFeedProvider);
 
-    // final List<Widget> imageSliders = data
-    //     .asMap()
-    //     .entries
-    //     .map(
-    //       (entry) => _current == entry.key
-    //           ? AppButton.activeNews(
-    //               title: "${entry.value} - $_current",
-    //               context: context,
-    //               onPressed: () {
-    //                 debugPrint("news item $_current");
-    //               },
-    //             )
-    //           : AppButton.news(
-    //               title: "${entry.value} - $_current", context: context),
-    //     )
-    //     .toList();
-
     return AsyncValueWidget(
-        value: newsFeedValue,
-        data: (news) => Column(
-              children: [
-                CarouselSlider(
-                  items: news.toWidgetList(
-                      context: context, currentIndex: _current),
-                  controller: _controller,
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    //height: 130,
-                    aspectRatio: 3.0,
-                    disableCenter: true,
-                    //auto callback
-                    onPageChanged: (index, reason) {
-                      setState(() => _current = index);
-                    },
-                  ),
-                ),
-                Indicator(data: data, current: _current),
-              ],
-            ));
-    // return Column(children: [
-    //   CarouselSlider(
-    //     items: imageSliders,
-    //     controller: _controller,
-    //     options: CarouselOptions(
-    //       autoPlay: true,
-    //       enlargeCenterPage: true,
-    //       //height: 130,
-    //       aspectRatio: 3.0,
-    //       disableCenter: true,
-    //       //auto callback
-    //       onPageChanged: (index, reason) {
-    //         setState(() => _current = index);
-    //       },
-    //     ),
-    //   ),
-    //   Indicator(data: data, current: _current),
-    // ]);
+      value: newsFeedValue,
+      data: (news) => Column(
+        children: [
+          CarouselSlider(
+            items: news.toWidgetList(context: context, currentIndex: _current),
+            controller: _controller,
+            options: CarouselOptions(
+              autoPlay: true,
+              enlargeCenterPage: true,
+              enlargeFactor: 0.3,
+              height: 120,
+              //aspectRatio: 4.0,
+              disableCenter: true,
+              //auto callback
+              onPageChanged: (index, reason) {
+                setState(() => _current = index);
+              },
+            ),
+          ),
+          Indicator(data: news, current: _current),
+        ],
+      ),
+    );
   }
 }
 
@@ -94,7 +59,7 @@ class Indicator extends StatelessWidget {
     required this.current,
   });
 
-  final List<String> data;
+  final List<News> data;
   final int current;
 
   @override
