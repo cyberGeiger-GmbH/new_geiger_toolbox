@@ -42,4 +42,3 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 }
-

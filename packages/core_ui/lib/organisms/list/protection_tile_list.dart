@@ -1,5 +1,5 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/molecules/cards/protection_tile.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class ProtectionTileListWithTitle extends StatelessWidget {
       {super.key, required this.title, required this.protectionTileList});
 
   final String title;
-  final ProtectionTileList protectionTileList;
+  final Widget protectionTileList;
 
   @override
   Widget build(BuildContext context) {

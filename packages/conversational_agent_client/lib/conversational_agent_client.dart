@@ -9,3 +9,5 @@ export 'src/data/respository/conversation_repository.dart';
 //domain
 export 'src/domain/news.dart';
 export 'src/domain/profile.dart';
+export 'src/domain/recommendation.dart';
+export 'src/domain/offering.dart';

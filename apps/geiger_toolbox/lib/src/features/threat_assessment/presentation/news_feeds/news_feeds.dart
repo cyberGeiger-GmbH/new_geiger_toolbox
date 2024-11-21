@@ -7,6 +7,7 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/home_screen_controller.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,8 +26,8 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final newsFeedValue = ref.watch(watchtNewsFeedProvider);
-
+    final newsFeedValue = ref.watch(watchNewsFeedsProvider);
+    final state = ref.watch(homeScreenControllerProvider);
     return AsyncValueWidget(
       value: newsFeedValue,
       data: (news) => Column(
@@ -35,14 +36,16 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
             items: news.toWidgetList(
                 context: context,
                 currentIndex: _current,
-                onPressed: () {
-                  final title = news[_current].title;
-                  context.goNamed(AppRouter.newsFeedDetails.name,
-                      pathParameters: {
-                        AppRouter.newsFeedDetails.name:
-                            title.replaceSpacesWithHyphen
-                      });
-                }),
+                onPressed: state.isLoading
+                    ? null
+                    : () {
+                        final title = news[_current].title;
+                        context.goNamed(AppRouter.newsFeedDetails.name,
+                            pathParameters: {
+                              AppRouter.newsFeedDetails.name:
+                                  title.replaceSpacesWithHyphen
+                            });
+                      }),
             controller: _controller,
             options: CarouselOptions(
               autoPlay: true,

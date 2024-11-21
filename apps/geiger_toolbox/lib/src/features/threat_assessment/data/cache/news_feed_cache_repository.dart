@@ -2,6 +2,7 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
+import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
 import 'package:geiger_toolbox/src/persistence/sembast_data_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -34,7 +35,7 @@ class NewsFeedCacheRepository {
     await store.record(newsObjectsKey).put(db, jsonNews);
   }
 
-  Stream<List<News>> watchNewsFeed() {
+  Stream<List<News>> watchNewsFeeds() {
     final dataStore = _sembastDataStore;
     final record = dataStore.store.record(newsObjectsKey);
     final db = dataStore.db;
@@ -47,6 +48,23 @@ class NewsFeedCacheRepository {
         return [];
       }
     });
+  }
+
+  Stream<News?> watchNewsFeed({required String newsTitle}) {
+    return watchNewsFeeds()
+        .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: newsTitle));
+  }
+
+  static News? _getNews(
+      {required List<News> newsfeeds, required String newsTitle}) {
+    try {
+      final result = newsfeeds.firstWhere((newsfeed) =>
+          newsfeed.title.replaceSpacesWithHyphen == newsTitle);
+
+      return result;
+    } catch (e) {
+      return null;
+    }
   }
 
   SembastDataStore get _sembastDataStore {
