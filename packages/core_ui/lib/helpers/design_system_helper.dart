@@ -11,7 +11,6 @@ import '../molecules/buttons/app_button.dart';
 import '../molecules/buttons/app_text_button.dart';
 import '../molecules/buttons/tool_button.dart';
 import '../molecules/texts/app_text.dart';
-import '../organisms/show_model.dart';
 
 class DesignSystemHelper {
   const DesignSystemHelper._();
@@ -254,27 +253,6 @@ class DesignSystemHelper {
     });
   }
 
-  static Widget getProtectionTileList() {
-    final data = [
-      "Two-Factor Authentication (2FA)",
-      "VPN and Secure Connections",
-      "Control Remote Access Software"
-    ];
-    return GoldenTestWrapper(getChild: (context) {
-      return ProtectionTileList(
-        protectionTile: data
-            .map((value) => ProtectionTile.plain(
-                  title: value,
-                  onPressed: () {
-                    showModal(context,
-                        title: value, takeAction: getTodoCheckListView());
-                  },
-                ))
-            .toList(),
-      );
-    });
-  }
-
   static Widget getTodoTileVariants() {
     return GoldenTestWrapper(getChild: (context) {
       return Column(
@@ -320,33 +298,6 @@ class DesignSystemHelper {
             value: true)
       ];
       return TodoTileListView(
-        todoTile: data
-            .map((value) => TodoTile.plain(
-                  summary: value.summary,
-                  title: value.title,
-                  done: value.value,
-                  onChange: (value) {},
-                ))
-            .toList(),
-      );
-    });
-  }
-
-  static Widget getTodoCheckList() {
-    return GoldenTestWrapper(getChild: (context) {
-      final List<Todo> data = [
-        Todo(
-          title: "Swiss Crime Prevention (SKP)",
-          summary:
-              "Provides informational materials and prevention campaigns on phone fraud",
-        ),
-        Todo(
-            title: "Zurich Cantonal Police",
-            summary:
-                "Dedicated prevention pages with tips and information about phone fraud",
-            value: true)
-      ];
-      return TodoTileList(
         todoTile: data
             .map((value) => TodoTile.plain(
                   summary: value.summary,

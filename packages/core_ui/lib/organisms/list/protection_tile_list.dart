@@ -35,10 +35,10 @@ class ProtectionTileList extends StatelessWidget {
 
 class ProtectionTileListWithTitle extends StatelessWidget {
   const ProtectionTileListWithTitle(
-      {super.key, required this.title, required this.widget});
+      {super.key, required this.title, required this.protectionTileList});
 
   final String title;
-  final Widget widget;
+  final ProtectionTileList protectionTileList;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class ProtectionTileListWithTitle extends StatelessWidget {
             style: appTextStyle.titleMedium.copyWith(
                 color: appColors.defaultColor, fontWeight: FontWeight.bold)),
         Spacing.gapH8,
-        widget
+        protectionTileList
       ],
     );
   }

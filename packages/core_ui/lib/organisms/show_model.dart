@@ -4,8 +4,10 @@ import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
+import 'list/todo_tile_list.dart';
+
 void showModal(BuildContext context,
-    {required String title, required Widget takeAction}) {
+    {required String title, required TodoTileList takeAction}) {
   WoltModalSheet.show(
     context: context,
     onModalDismissedWithBarrierTap: () {
