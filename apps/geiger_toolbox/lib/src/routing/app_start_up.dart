@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +16,8 @@ Future<void> appStartUp(Ref ref) async {
     //ensure we invalidate all the providers we depend on
     ref.invalidate(sembastDataStoreProvider);
   });
-  //all asynchronous app initialization
-  // ignore: avoid_manual_providers_as_generated_provider_dependency
+  //al asynchronous app initialization
+
   await ref.watch(sembastDataStoreProvider.future);
 }
 

@@ -1,5 +1,5 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 
@@ -37,18 +37,16 @@ class NewsFeedCacheRepository {
   Stream<List<News>> watchNewsFeed() {
     final dataStore = _sembastDataStore;
     final record = dataStore.store.record(newsObjectsKey);
-
     final db = dataStore.db;
 
-    record.onSnapshot(db).map((snapshot) {
-      debugPrint("cache data => $snapshot");
-
+    return record.onSnapshot(db).map((snapshot) {
       if (snapshot != null) {
         final List<News> data = News.fromJsonString(snapshot.value as String);
         return data;
+      } else {
+        return [];
       }
     });
-    throw CachedNewsFeedException();
   }
 
   SembastDataStore get _sembastDataStore {

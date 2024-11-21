@@ -13,12 +13,12 @@ class SembastDataStore {
   final Database db;
   final store = StoreRef.main();
 
-  static Future<Database> _createDatabase(String filenema) async {
+  static Future<Database> _createDatabase(String filename) async {
     if (!kIsWeb) {
       final appDocDir = await getApplicationDocumentsDirectory();
-      return databaseFactoryIo.openDatabase('${appDocDir.path}/$filenema');
+      return databaseFactoryIo.openDatabase('${appDocDir.path}/$filename');
     } else {
-      return databaseFactoryWeb.openDatabase(filenema);
+      return databaseFactoryWeb.openDatabase(filename);
     }
   }
 
@@ -34,6 +34,7 @@ class SembastDataStore {
 @Riverpod(keepAlive: true)
 Future<SembastDataStore> sembastDataStore(Ref ref) async {
   final store = await SembastDataStore.makeDefault();
+  //ondispose close the dipose the db
   ref.onDispose(store.dispose);
   return store;
 }
