@@ -1,4 +1,3 @@
-import 'package:core_ui/atoms/app_cached_network_image.dart';
 import 'package:core_ui/core_ui.dart';
 
 import 'package:core_ui/helpers/design_system_helper.dart';
@@ -56,7 +55,7 @@ class DesignSystem extends StatelessWidget {
             Spacing.gapH16,
             DesignSystemHelper.getTodoTileVariants(),
             Spacing.gapH16,
-            DesignSystemHelper.getTodoCheckList(),
+            DesignSystemHelper.getTodoCheckListView(),
             Spacing.gapH16,
             DesignSystemHelper.getAppAssestIcons(),
             Spacing.gapH16,

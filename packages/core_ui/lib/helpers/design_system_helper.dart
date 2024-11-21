@@ -241,21 +241,29 @@ class DesignSystemHelper {
 
   static Widget getTileListView() {
     return GoldenTestWrapper(getChild: (context) {
-      return const ProtectionTileListView(data: [
+      final data = [
         "Two-Factor Authentication (2FA)",
         "VPN and Secure Connections",
         "Control Remote Access Software"
-      ]);
+      ];
+      return ProtectionTileListView(
+        protectionTile:
+            data.map((value) => ProtectionTile.plain(title: value)).toList(),
+      );
     });
   }
 
   static Widget getTileList() {
+    final data = [
+      "Two-Factor Authentication (2FA)",
+      "VPN and Secure Connections",
+      "Control Remote Access Software"
+    ];
     return GoldenTestWrapper(getChild: (context) {
-      return const ProtectionTileList(data: [
-        "Two-Factor Authentication (2FA)",
-        "VPN and Secure Connections",
-        "Control Remote Access Software"
-      ]);
+      return ProtectionTileList(
+        protectionTile:
+            data.map((value) => ProtectionTile.plain(title: value)).toList(),
+      );
     });
   }
 
@@ -289,6 +297,33 @@ class DesignSystemHelper {
     });
   }
 
+  static Widget getTodoCheckListView() {
+    return GoldenTestWrapper(getChild: (context) {
+      final List<Todo> data = [
+        Todo(
+          title: "Swiss Crime Prevention (SKP)",
+          summary:
+              "Provides informational materials and prevention campaigns on phone fraud",
+        ),
+        Todo(
+            title: "Zurich Cantonal Police",
+            summary:
+                "Dedicated prevention pages with tips and information about phone fraud",
+            value: true)
+      ];
+      return TodoTileListView(
+        todoTile: data
+            .map((value) => TodoTile.plain(
+                  summary: value.summary,
+                  title: value.title,
+                  done: value.value,
+                  onChange: (value) {},
+                ))
+            .toList(),
+      );
+    });
+  }
+
   static Widget getTodoCheckList() {
     return GoldenTestWrapper(getChild: (context) {
       final List<Todo> data = [
@@ -304,8 +339,22 @@ class DesignSystemHelper {
             value: true)
       ];
       return TodoTileList(
-        data: data,
+        todoTile: data
+            .map((value) => TodoTile.plain(
+                  summary: value.summary,
+                  title: value.title,
+                  done: value.value,
+                  onChange: (value) {},
+                ))
+            .toList(),
       );
     });
   }
+}
+
+class Todo {
+  final String title;
+  final String summary;
+  final bool value;
+  Todo({required this.title, required this.summary, this.value = false});
 }

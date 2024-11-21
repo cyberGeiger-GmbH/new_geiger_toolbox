@@ -4,26 +4,21 @@ import 'package:core_ui/molecules/cards/protection_tile.dart';
 import 'package:flutter/material.dart';
 
 class ProtectionTileListView extends StatelessWidget {
-  const ProtectionTileListView({super.key, required this.data});
-  final List<String> data;
+  const ProtectionTileListView({super.key, required this.protectionTile});
+  final List<ProtectionTile> protectionTile;
   @override
   Widget build(BuildContext context) {
     return ListViewBuilder.outlined(
       context: context,
-      length: data.length,
-      itemBuilder: (context, index) => ProtectionTile.plain(
-        title: data[index],
-        onPressed: () {
-          debugPrint("use goRouter $index");
-        },
-      ),
+      length: protectionTile.length,
+      itemBuilder: (context, index) => protectionTile[index],
     );
   }
 }
 
 class ProtectionTileList extends StatelessWidget {
-  const ProtectionTileList({super.key, required this.data});
-  final List<String> data;
+  const ProtectionTileList({super.key, required this.protectionTile});
+  final List<ProtectionTile> protectionTile;
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).appColors.appColor;
@@ -31,10 +26,9 @@ class ProtectionTileList extends StatelessWidget {
       decoration: Utils.getDecoration(appColors),
       child: Column(
           children: ListTile.divideTiles(
-                  context: context,
-                  tiles:
-                      data.map((value) => ProtectionTile.plain(title: value)))
-              .toList()),
+        context: context,
+        tiles: protectionTile.map((widget) => widget),
+      ).toList()),
     );
   }
 }
