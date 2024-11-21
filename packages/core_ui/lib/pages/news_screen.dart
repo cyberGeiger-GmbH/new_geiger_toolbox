@@ -1,9 +1,7 @@
 import 'package:core_ui/atoms/app_cached_network_image.dart';
 import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:core_ui/molecules/bars/custom_app_bar.dart';
-import 'package:core_ui/molecules/buttons/app_button.dart';
 import 'package:core_ui/organisms/news_content.dart';
-import 'package:core_ui/organisms/todo_model.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/design_system_helper.dart';
@@ -35,15 +33,8 @@ class NewsScreen extends StatelessWidget {
           Spacing.gapH16,
           ProtectionTileListWithTitle(
             title: "How to protect me?",
-            widget: DesignSystemHelper.getTileList(),
+            widget: DesignSystemHelper.getProtectionTileList(),
           ),
-          AppButton.secondary(
-            label: "open modal",
-            context: context,
-            onPressed: () {
-              showModal(context);
-            },
-          )
         ],
       ),
     );

@@ -51,7 +51,7 @@ class DesignSystem extends StatelessWidget {
             Spacing.gapH16,
             DesignSystemHelper.getProtectionTileVariant(),
             Spacing.gapH16,
-            DesignSystemHelper.getTileListView(),
+            DesignSystemHelper.getProtectionTileListView(),
             Spacing.gapH16,
             DesignSystemHelper.getTodoTileVariants(),
             Spacing.gapH16,

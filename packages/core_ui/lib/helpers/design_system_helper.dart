@@ -11,6 +11,7 @@ import '../molecules/buttons/app_button.dart';
 import '../molecules/buttons/app_text_button.dart';
 import '../molecules/buttons/tool_button.dart';
 import '../molecules/texts/app_text.dart';
+import '../organisms/show_model.dart';
 
 class DesignSystemHelper {
   const DesignSystemHelper._();
@@ -239,7 +240,7 @@ class DesignSystemHelper {
     });
   }
 
-  static Widget getTileListView() {
+  static Widget getProtectionTileListView() {
     return GoldenTestWrapper(getChild: (context) {
       final data = [
         "Two-Factor Authentication (2FA)",
@@ -253,7 +254,7 @@ class DesignSystemHelper {
     });
   }
 
-  static Widget getTileList() {
+  static Widget getProtectionTileList() {
     final data = [
       "Two-Factor Authentication (2FA)",
       "VPN and Secure Connections",
@@ -261,8 +262,15 @@ class DesignSystemHelper {
     ];
     return GoldenTestWrapper(getChild: (context) {
       return ProtectionTileList(
-        protectionTile:
-            data.map((value) => ProtectionTile.plain(title: value)).toList(),
+        protectionTile: data
+            .map((value) => ProtectionTile.plain(
+                  title: value,
+                  onPressed: () {
+                    showModal(context,
+                        title: value, takeAction: getTodoCheckListView());
+                  },
+                ))
+            .toList(),
       );
     });
   }
