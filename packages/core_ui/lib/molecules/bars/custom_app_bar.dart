@@ -1,4 +1,4 @@
-import 'package:core_ui/atoms/app_images_data.dart';
+import 'package:core_ui/atoms/app_asset_image_data.dart';
 import 'package:core_ui/foundation/themes/extension.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: title == null
           ? Padding(
               padding: const EdgeInsets.all(8.0),
-              child: AppImagesData.logoIcon().name,
+              child: AppAssetImageData.logoIcon().image,
             )
           : null,
       actions: const [

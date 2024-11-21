@@ -1,13 +1,13 @@
-import 'package:core_ui/atoms/app_images_data.dart';
+import 'package:core_ui/atoms/app_asset_image_data.dart';
 import 'package:flutter/material.dart';
 
 class AppImagesTheme extends ThemeExtension<AppImagesTheme> {
-  final AppImagesData imagesData;
+  final AppAssetImageData imagesData;
 
   const AppImagesTheme._({required this.imagesData});
 
   factory AppImagesTheme.main() =>
-      AppImagesTheme._(imagesData: AppImagesData.geigerLogo());
+      AppImagesTheme._(imagesData: AppAssetImageData.geigerLogo());
 
   @override
   ThemeExtension<AppImagesTheme> copyWith() {

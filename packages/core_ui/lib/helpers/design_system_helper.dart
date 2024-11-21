@@ -239,6 +239,16 @@ class DesignSystemHelper {
     });
   }
 
+  static Widget getTileListView() {
+    return GoldenTestWrapper(getChild: (context) {
+      return const ProtectionTileListView(data: [
+        "Two-Factor Authentication (2FA)",
+        "VPN and Secure Connections",
+        "Control Remote Access Software"
+      ]);
+    });
+  }
+
   static Widget getTileList() {
     return GoldenTestWrapper(getChild: (context) {
       return const ProtectionTileList(data: [
@@ -299,4 +309,3 @@ class DesignSystemHelper {
     });
   }
 }
-

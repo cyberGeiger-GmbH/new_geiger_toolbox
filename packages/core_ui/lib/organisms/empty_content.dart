@@ -8,11 +8,13 @@ class EmptyContent extends StatelessWidget {
       {super.key,
       this.title,
       this.message = "Add a new item to get started",
-      this.color});
+      this.color,
+      this.textAlign});
 
   final String? title;
   final String message;
   final Color? color;
+  final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,8 +23,16 @@ class EmptyContent extends StatelessWidget {
         title == null
             ? const SizedBox.shrink()
             : AppText.titleLarge(
-                text: title ?? "", color: color, context: context),
-        AppText.bodyMedium(text: message, color: color, context: context),
+                textAlign: textAlign,
+                text: title ?? "",
+                color: color,
+                context: context),
+        AppText.bodyMedium(
+          text: message,
+          color: color,
+          context: context,
+          textAlign: textAlign,
+        ),
       ],
     );
   }

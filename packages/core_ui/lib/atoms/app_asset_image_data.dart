@@ -1,0 +1,15 @@
+import 'package:core_ui/gen/assets.gen.dart';
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'app_asset_image_data.freezed.dart';
+
+@freezed
+class AppAssetImageData with _$AppAssetImageData {
+  factory AppAssetImageData({required Image image}) = _AppAssetImageData;
+
+  factory AppAssetImageData.geigerLogo() =>
+      AppAssetImageData(image: Assets.images.geigerLogo.image());
+
+  factory AppAssetImageData.logoIcon() => AppAssetImageData(
+      image: Assets.images.geigerLogo.image(height: 40, width: 40));
+}
