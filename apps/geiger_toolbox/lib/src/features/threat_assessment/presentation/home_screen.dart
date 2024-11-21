@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/home_screen_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds.dart';
 
-import 'widgets/news_feeds.dart';
 
 //home screen
 class HomeScreen extends ConsumerWidget {
@@ -33,7 +33,7 @@ class HomeScreen extends ConsumerWidget {
                 },
         ),
         Spacing.gapH16,
-        const CarouselWithIndicatorDemo(),
+        const NewsFeedsWidget(),
         Spacing.gapH16,
         AppAssetsIcons.filledTonal(
           context: context,

@@ -5,19 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
+import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:go_router/go_router.dart';
 
-class CarouselWithIndicatorDemo extends ConsumerStatefulWidget {
-  const CarouselWithIndicatorDemo({super.key});
+class NewsFeedsWidget extends ConsumerStatefulWidget {
+  const NewsFeedsWidget({super.key});
 
   @override
-  ConsumerState<CarouselWithIndicatorDemo> createState() {
-    return _CarouselWithIndicatorState();
+  ConsumerState<NewsFeedsWidget> createState() {
+    return _NewsFeedsWidgetState();
   }
 }
 
-class _CarouselWithIndicatorState
-    extends ConsumerState<CarouselWithIndicatorDemo> {
+class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
   int _current = 0;
   final CarouselSliderController _controller = CarouselSliderController();
 
@@ -30,7 +32,14 @@ class _CarouselWithIndicatorState
       data: (news) => Column(
         children: [
           CarouselSlider(
-            items: news.toWidgetList(context: context, currentIndex: _current),
+            items: news.toWidgetList(
+                context: context,
+                currentIndex: _current,
+                onPressed: () {
+                  final title = news[_current].title;
+                  context.goNamed(AppRouter.newsFeedDetails.name,
+                      pathParameters: {AppRouter.newsFeedDetails.name: title});
+                }),
             controller: _controller,
             options: CarouselOptions(
               autoPlay: true,

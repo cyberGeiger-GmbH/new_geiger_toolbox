@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
 extension NewsListExtensions on List<News> {
   /// Converts List<News> to a list of JSON maps
@@ -15,7 +16,8 @@ extension NewsListExtensions on List<News> {
     return json.encode(_toJsonList());
   }
 
-  List<Widget> toWidgetList({required context, int? currentIndex}) {
+  List<Widget> toWidgetList(
+      {required context, int? currentIndex, VoidCallback? onPressed}) {
     return asMap()
         .entries
         .map(
@@ -23,10 +25,11 @@ extension NewsListExtensions on List<News> {
               ? AppButton.activeNews(
                   context: context,
                   title: value.value.title,
-                  onPressed: () {
-                    debugPrint(
-                        " go to detail newsfeed screen => ${value.value.title}");
-                  },
+                  onPressed: onPressed ??
+                      () {
+                        debugPrint(
+                            " go to detail newsfeed screen => ${value.value.title.replaceSpacesWithHyphen()}");
+                      },
                 )
               : AppButton.news(
                   context: context,

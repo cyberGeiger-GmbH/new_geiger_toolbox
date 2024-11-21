@@ -10,12 +10,13 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../features/threat_assessment/presentation/home_screen.dart';
+import '../features/threat_assessment/presentation/news_feed/news_feed_screen.dart';
 part 'app_routing.g.dart';
 
 enum AppRouter {
   appStartUp(name: "appStartUp", path: "/app-starup"),
   home(path: "/", name: "home"),
-  detailThreat(path: "/threat/:id", name: "detailThreat"),
+  newsFeedDetails(path: "/newsfeed/:title", name: "title"),
   community(path: "/communtiy", name: "community"),
   calendar(path: "/calendar", name: "calendar"),
   settings(path: "/settings", name: "settings"),
@@ -100,12 +101,13 @@ class AppRouting {
                   //nested route
                   routes: [
                     GoRoute(
-                      path: AppRouter.detailThreat.path,
-                      name: AppRouter.detailThreat.name,
+                      path: AppRouter.newsFeedDetails.path,
+                      name: AppRouter.newsFeedDetails.name,
                       pageBuilder: (context, state) {
-                        final id = state.pathParameters["id"]!;
+                        final title = state
+                            .pathParameters[AppRouter.newsFeedDetails.name]!;
                         return NoTransitionPage(
-                          child: DetailThreat(threatId: id),
+                          child: NewsFeedScreen(newsTitle: title),
                         );
                       },
                     ),
@@ -205,17 +207,6 @@ class Community extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text("Community"),
-    );
-  }
-}
-
-class DetailThreat extends StatelessWidget {
-  const DetailThreat({super.key, required this.threatId});
-  final String threatId;
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text("threat id => $threatId"),
     );
   }
 }
