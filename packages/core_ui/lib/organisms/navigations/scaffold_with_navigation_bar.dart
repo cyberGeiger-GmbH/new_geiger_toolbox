@@ -14,17 +14,15 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   final Widget body;
   final int selectedIndex;
   final ValueChanged<int> onDestinationSelected;
- 
 
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).appColors.appColor;
     return Scaffold(
-      backgroundColor: appColor.surface,
       body: body,
       bottomNavigationBar: NavigationBar(
-        backgroundColor: appColor.onSecondary,
-        indicatorColor: appColor.secondaryContainer,
+        backgroundColor: appColor.secondaryContainer,
+        indicatorColor: appColor.onPrimary,
         elevation: 1,
         destinations: CustomNavigationDestination.getDestination(),
         onDestinationSelected: onDestinationSelected,

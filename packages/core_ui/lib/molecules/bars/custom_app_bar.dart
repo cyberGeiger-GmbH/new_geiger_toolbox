@@ -1,21 +1,32 @@
 import 'package:core_ui/atoms/app_images_data.dart';
 import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final double height;
+  const CustomAppBar({super.key, this.height = kToolbarHeight, this.title});
 
-  const CustomAppBar({super.key, this.height = kToolbarHeight});
+  final double height;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).appColors.appColor;
 
     return AppBar(
-      leading: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: AppImagesData.logoIcon().name,
-      ),
+      title: title != null
+          ? AppText.titleMedium(
+              text: title!,
+              context: context,
+              color: appColor.defaultColor,
+            )
+          : null,
+      leading: title == null
+          ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppImagesData.logoIcon().name,
+            )
+          : null,
       actions: const [
         Padding(
           padding: EdgeInsets.all(8.0),

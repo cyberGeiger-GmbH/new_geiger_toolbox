@@ -38,7 +38,10 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
                 onPressed: () {
                   final title = news[_current].title;
                   context.goNamed(AppRouter.newsFeedDetails.name,
-                      pathParameters: {AppRouter.newsFeedDetails.name: title});
+                      pathParameters: {
+                        AppRouter.newsFeedDetails.name:
+                            title.replaceSpacesWithHyphen
+                      });
                 }),
             controller: _controller,
             options: CarouselOptions(

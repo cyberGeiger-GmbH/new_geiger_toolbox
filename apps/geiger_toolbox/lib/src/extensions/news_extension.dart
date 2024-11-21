@@ -28,7 +28,7 @@ extension NewsListExtensions on List<News> {
                   onPressed: onPressed ??
                       () {
                         debugPrint(
-                            " go to detail newsfeed screen => ${value.value.title.replaceSpacesWithHyphen()}");
+                            " go to detail newsfeed screen => ${value.value.title.replaceSpacesWithHyphen}");
                       },
                 )
               : AppButton.news(
