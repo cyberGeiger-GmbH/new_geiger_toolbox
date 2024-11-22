@@ -58,8 +58,8 @@ class NewsFeedCacheRepository {
   static News? _getNews(
       {required List<News> newsfeeds, required String newsTitle}) {
     try {
-      final result = newsfeeds.firstWhere((newsfeed) =>
-          newsfeed.title.replaceSpacesWithHyphen == newsTitle);
+      final result = newsfeeds.firstWhere(
+          (newsfeed) => newsfeed.title.replaceSpacesWithHyphen == newsTitle);
 
       return result;
     } catch (e) {

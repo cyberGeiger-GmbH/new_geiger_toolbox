@@ -36,6 +36,7 @@ export 'organisms/list/todo_tile_list.dart';
 
 //
 export './molecules/cards/protection_tile.dart';
+export './molecules/cards/todo_tile.dart';
 
 //extensions
 export './foundation/themes/extension.dart';

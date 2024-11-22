@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../molecules/cards/todo_tile.dart';
 
-///* DON'T EXPORT
+
 ///example on how to use [ListViewBuilder.outlined]
 
 class TodoTileListView extends StatelessWidget {
@@ -23,7 +23,7 @@ class TodoTileListView extends StatelessWidget {
 
 class TodoTileList extends StatelessWidget {
   const TodoTileList({super.key, required this.todoTile});
-  final List<TodoTile> todoTile;
+  final List<Widget> todoTile;
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).appColors.appColor;

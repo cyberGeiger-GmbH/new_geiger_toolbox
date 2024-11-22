@@ -34,18 +34,21 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
         children: [
           CarouselSlider(
             items: news.toWidgetList(
-                context: context,
-                currentIndex: _current,
-                onPressed: state.isLoading
-                    ? null
-                    : () {
-                        final title = news[_current].title;
-                        context.goNamed(AppRouter.newsFeedDetails.name,
-                            pathParameters: {
-                              AppRouter.newsFeedDetails.name:
-                                  title.replaceSpacesWithHyphen
-                            });
-                      }),
+              context: context,
+              currentIndex: _current,
+              onPressed: state.isLoading
+                  ? null
+                  : () {
+                      final title = news[_current].title;
+                      context.goNamed(
+                        AppRouter.newsFeedDetails.name,
+                        pathParameters: {
+                          AppRouter.newsFeedDetails.name:
+                              title.replaceSpacesWithHyphen
+                        },
+                      );
+                    },
+            ),
             controller: _controller,
             options: CarouselOptions(
               autoPlay: true,
