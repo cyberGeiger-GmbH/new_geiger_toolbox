@@ -1,12 +1,13 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo.dart';
+
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_controller.dart';
 
 class AddTodoWidget extends StatelessWidget {
   const AddTodoWidget({super.key, required this.todos});
-  final List<Todo> todos;
+  final List<TodoTask> todos;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +32,7 @@ class AddTodoListWidget extends ConsumerWidget {
     required this.todo,
   });
 
-  final Todo todo;
+  final TodoTask todo;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,13 +40,11 @@ class AddTodoListWidget extends ConsumerWidget {
 
     return TodoTile.plain(
         key: key,
-        summary: todo.offering.summary,
-        title: todo.offering.name,
-        done: state.done,
+        summary: todo.offering!.summary,
+        title: todo.offering!.name,
+        done: state.isCompleted!,
         onChange: (value) {
-          ref
-              .read(addTodoControllerProvider(todo).notifier)
-              .onChange(todo.copyWith(done: value));
+          ref.read(addTodoControllerProvider(todo).notifier).onChange(todo);
         });
   }
 }

@@ -6,7 +6,7 @@ part of 'add_todo_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addTodoControllerHash() => r'1f02f66c0f05a80b5a9c0faa251330bef494aa7a';
+String _$addTodoControllerHash() => r'58a7d86d918f0342ba3f6206d4a0ff4b6ff49702';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,11 +29,12 @@ class _SystemHash {
   }
 }
 
-abstract class _$AddTodoController extends BuildlessAutoDisposeNotifier<Todo> {
-  late final Todo todo;
+abstract class _$AddTodoController
+    extends BuildlessAutoDisposeNotifier<TodoTask> {
+  late final TodoTask todo;
 
-  Todo build(
-    Todo todo,
+  TodoTask build(
+    TodoTask todo,
   );
 }
 
@@ -42,13 +43,13 @@ abstract class _$AddTodoController extends BuildlessAutoDisposeNotifier<Todo> {
 const addTodoControllerProvider = AddTodoControllerFamily();
 
 /// See also [AddTodoController].
-class AddTodoControllerFamily extends Family<Todo> {
+class AddTodoControllerFamily extends Family<TodoTask> {
   /// See also [AddTodoController].
   const AddTodoControllerFamily();
 
   /// See also [AddTodoController].
   AddTodoControllerProvider call(
-    Todo todo,
+    TodoTask todo,
   ) {
     return AddTodoControllerProvider(
       todo,
@@ -81,10 +82,10 @@ class AddTodoControllerFamily extends Family<Todo> {
 
 /// See also [AddTodoController].
 class AddTodoControllerProvider
-    extends AutoDisposeNotifierProviderImpl<AddTodoController, Todo> {
+    extends AutoDisposeNotifierProviderImpl<AddTodoController, TodoTask> {
   /// See also [AddTodoController].
   AddTodoControllerProvider(
-    Todo todo,
+    TodoTask todo,
   ) : this._internal(
           () => AddTodoController()..todo = todo,
           from: addTodoControllerProvider,
@@ -109,10 +110,10 @@ class AddTodoControllerProvider
     required this.todo,
   }) : super.internal();
 
-  final Todo todo;
+  final TodoTask todo;
 
   @override
-  Todo runNotifierBuild(
+  TodoTask runNotifierBuild(
     covariant AddTodoController notifier,
   ) {
     return notifier.build(
@@ -137,7 +138,8 @@ class AddTodoControllerProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<AddTodoController, Todo> createElement() {
+  AutoDisposeNotifierProviderElement<AddTodoController, TodoTask>
+      createElement() {
     return _AddTodoControllerProviderElement(this);
   }
 
@@ -157,18 +159,18 @@ class AddTodoControllerProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin AddTodoControllerRef on AutoDisposeNotifierProviderRef<Todo> {
+mixin AddTodoControllerRef on AutoDisposeNotifierProviderRef<TodoTask> {
   /// The parameter `todo` of this provider.
-  Todo get todo;
+  TodoTask get todo;
 }
 
 class _AddTodoControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<AddTodoController, Todo>
+    extends AutoDisposeNotifierProviderElement<AddTodoController, TodoTask>
     with AddTodoControllerRef {
   _AddTodoControllerProviderElement(super.provider);
 
   @override
-  Todo get todo => (origin as AddTodoControllerProvider).todo;
+  TodoTask get todo => (origin as AddTodoControllerProvider).todo;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

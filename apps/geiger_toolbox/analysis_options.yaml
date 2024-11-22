@@ -11,3 +11,7 @@ analyzer:
   plugins: 
     # enable riverpod_lint
     - custom_lint
+  errors:
+    #fix json_serializable and freezed lint issues
+    invalid_annotation_target: ignore
+  
