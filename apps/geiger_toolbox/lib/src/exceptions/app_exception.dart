@@ -11,15 +11,26 @@ sealed class AppException implements Exception {
 
 //
 class UserNotFoundException extends AppException {
-  UserNotFoundException() : super(code: 'user-not-found', message: "User profile has not be created");
+  UserNotFoundException()
+      : super(
+            code: 'user-not-found', message: "User profile has not be created");
 }
 
-
 class CachedNewsFeedException extends AppException {
-  CachedNewsFeedException () : super(code: 'fail-read-newsfeed-cache', message: "Fail to retrived cached news data");
+  CachedNewsFeedException()
+      : super(
+            code: 'fail-read-newsfeed-cache',
+            message: "Fail to retrived cached news data");
 }
 
 class CachedNewsFeedStoreException extends AppException {
-  CachedNewsFeedStoreException () : super(code: 'fail-cache-newsfeed', message: "Fail to cache news data");
+  CachedNewsFeedStoreException()
+      : super(code: 'fail-cache-newsfeed', message: "Fail to cache news data");
 }
 
+class AddTodoTaskRepositryException extends AppException {
+  AddTodoTaskRepositryException()
+      : super(
+            code: 'fail-add-todo-cache',
+            message: "Fail to add todo task to cache");
+}

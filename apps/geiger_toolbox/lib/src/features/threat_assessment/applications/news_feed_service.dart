@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
@@ -34,16 +33,4 @@ class NewsFeedService {
 @riverpod
 NewsFeedService newsFeedService(Ref ref) {
   return NewsFeedService(ref);
-}
-
-@Riverpod(keepAlive: true)
-Stream<List<News>> watchNewsFeeds(Ref ref) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
-  return cachedRepos.watchNewsFeeds();
-}
-
-@riverpod
-Stream<News?> newsFeedStream(Ref ref, {required String newsTitle}) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
-  return cachedRepos.watchNewsFeed(newsTitle: newsTitle);
 }

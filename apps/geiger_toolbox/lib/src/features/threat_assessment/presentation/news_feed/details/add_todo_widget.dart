@@ -1,9 +1,11 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/extensions/todo_task_extension.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_controller.dart';
+
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_task_controller.dart';
 
 class AddTodoWidget extends StatelessWidget {
   const AddTodoWidget({super.key, required this.todos});
@@ -36,7 +38,10 @@ class AddTodoListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(addTodoControllerProvider(todo));
+    //listen to  message when adding recommendation to task to be done
+    ref.listen<TodoTask>(addTodoTaskControllerProvider(todo),
+        (_, nxtState) => nxtState.showSnackBarTodoMessage(context: context));
+    final state = ref.watch(addTodoTaskControllerProvider(todo));
 
     return TodoTile.plain(
         key: key,
@@ -44,7 +49,14 @@ class AddTodoListWidget extends ConsumerWidget {
         title: todo.offering!.name,
         done: state.isCompleted!,
         onChange: (value) {
-          ref.read(addTodoControllerProvider(todo).notifier).onChange(todo);
+          //set
+          ref
+              .read(addTodoTaskControllerProvider(todo).notifier)
+              .onChange(todo.copyWith(isCompleted: value));
+          //store
+          ref
+              .read(addTodoTaskCacheControllerProvider.notifier)
+              .addTodoToCache(state);
         });
   }
 }

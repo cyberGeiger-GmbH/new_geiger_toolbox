@@ -76,3 +76,15 @@ class NewsFeedCacheRepository {
 NewsFeedCacheRepository newsFeedCacheRepository(Ref ref) {
   return NewsFeedCacheRepository(ref);
 }
+
+@Riverpod(keepAlive: true)
+Stream<List<News>> watchNewsFeeds(Ref ref) {
+  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  return cachedRepos.watchNewsFeeds();
+}
+
+@riverpod
+Stream<News?> newsFeedStream(Ref ref, {required String newsTitle}) {
+  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  return cachedRepos.watchNewsFeed(newsTitle: newsTitle);
+}
