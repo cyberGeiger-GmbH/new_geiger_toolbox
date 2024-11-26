@@ -15,8 +15,7 @@ class ProtectionTile extends StatelessWidget {
   final BoxDecoration? decoration;
   final Widget? trailing;
 
-  factory ProtectionTile.trailingOnly(
-      {Key? key, required String title}) {
+  factory ProtectionTile.trailingOnly({Key? key, required String title}) {
     return ProtectionTile._(
       key: key,
       title: title,
@@ -34,7 +33,7 @@ class ProtectionTile extends StatelessWidget {
       trailing: AppIconButton.filled(
         context: context,
         iconData: Icons.chevron_right,
-        //iconColor: iconColor,
+        iconColor: Colors.white,
         onPressed: onPressed,
       ),
     );
@@ -51,7 +50,7 @@ class ProtectionTile extends StatelessWidget {
       trailing: AppIconButton.filled(
         context: context,
         iconData: Icons.chevron_right,
-        //iconColor: iconColor,
+        iconColor: appColors.primary,
         onPressed: onPressed,
       ),
       decoration: Utils.getDecoration(appColors),
