@@ -23,14 +23,29 @@ class NewsFeedService {
     List<News>? data =
         await remoteRepo.fetchNewsUpdate(smeProfile: profile ?? defaultProfile);
     if (data.isNotEmpty) {
+  
       final cachedRepos = ref.read(newsFeedCacheRepositoryProvider);
       //cache news Feed
       await cachedRepos.cacheNewsFeed(data: data);
     }
   }
+  
+  
 }
 
 @riverpod
 NewsFeedService newsFeedService(Ref ref) {
   return NewsFeedService(ref);
+}
+
+@riverpod
+Stream<List<News>> watchNewsFeeds(Ref ref) {
+  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  return cachedRepos.watchNewsFeeds();
+}
+
+@riverpod
+Stream<News?> newsFeedStream(Ref ref, {required String newsTitle}) {
+  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  return cachedRepos.watchNewsFeed(newsTitle: newsTitle);
 }

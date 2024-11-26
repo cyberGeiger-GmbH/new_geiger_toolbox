@@ -1,6 +1,8 @@
+import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/todo_task_cache_repository.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/mutable_task.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
@@ -29,10 +31,13 @@ class TaskService {
     await repo.setTask(update);
   }
 
-  Future<Task> updateTodoIfalreadyCache(List<TodoTask> todos) async {
+  Future<Task> updateTodoIfalreadyCache(
+      List<Recommendation> recommendations) async {
     final repo = ref.read(todoTaskCacheRespositoryProvider);
     final prevTodo = await repo.fetchTodoTask();
-    final update = prevTodo.updateTodosIfExists(todos);
+    final update = prevTodo.updateTodosIfExists(recommendations);
+    debugPrint("protect list => $update");
+    debugPrint("recommendation => $recommendations");
     return update;
   }
 }
@@ -46,4 +51,11 @@ TaskService taskService(Ref ref) {
 Stream<Task> taskStream(Ref ref) {
   final repoCache = ref.read(todoTaskCacheRespositoryProvider);
   return repoCache.watchTodoTask();
+}
+
+@riverpod
+Future<Task> filterProtectList(Ref ref,
+    {required List<Recommendation> recommendations}) async {
+  final taskService = ref.read(taskServiceProvider);
+  return await taskService.updateTodoIfalreadyCache(recommendations);
 }

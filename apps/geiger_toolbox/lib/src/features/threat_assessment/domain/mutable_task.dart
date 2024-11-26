@@ -1,3 +1,4 @@
+import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
@@ -40,14 +41,22 @@ extension MutableTask on Task {
     }
   }
 
-  Task updateTodosIfExists(List<TodoTask> todos) {
-    final copy = Map<OfferID, TodoTask>.from(items);
-    for (var todo in todos) {
-      final key = _getOfferid(todo);
-      if (items.containsKey(key)) {
-        copy[key] = todo;
-      } else {
-        return this;
+  Task updateTodosIfExists(List<Recommendation> recommendations) {
+    final copy = <OfferID, TodoTask>{};
+
+    for (var reco in recommendations) {
+      for (var protect in reco.offerings) {
+        String key = protect.name.toLowerCase().replaceSpacesWithHyphen;
+
+        if (items.containsKey(key)) {
+          copy[reco.name] = TodoTask(
+              offering: Offering(name: protect.name, summary: protect.summary),
+              isCompleted: true);
+        } else {
+          copy[reco.name] = TodoTask(
+              offering: Offering(name: protect.name, summary: protect.summary),
+              isCompleted: false);
+        }
       }
     }
     return Task(items: copy);

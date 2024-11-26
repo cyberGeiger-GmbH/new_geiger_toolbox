@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_task_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/news_feed_details.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/news_feed_details.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';

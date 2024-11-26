@@ -28,7 +28,6 @@ class AddTodoTaskCacheController extends _$AddTodoTaskCacheController {
 class AddTodoTaskController extends _$AddTodoTaskController {
   @override
   TodoTask build(TodoTask todo) {
-    //check if todo has already be added to cache
 
     return todo;
   }

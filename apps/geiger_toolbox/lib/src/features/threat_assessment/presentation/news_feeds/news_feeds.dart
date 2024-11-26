@@ -6,8 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
-
-import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/home_screen_controller.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';

@@ -4,6 +4,7 @@ import 'package:core_ui/organisms/news_content.dart';
 
 import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/protection_list_widget.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 class NewsFeedDetails extends StatelessWidget {
   const NewsFeedDetails({super.key, required this.newsfeed});
@@ -24,7 +25,7 @@ class NewsFeedDetails extends StatelessWidget {
                   title: newsfeed.title),
               Spacing.gapH4,
               ProtectionTileListWithTitle(
-                title: "How to Protect me?",
+                title: "How to Protect me?".hardcoded,
                 protectionTileList: ProtectionListWidget(
                   recommendations: newsfeed.recommendations,
                 ),

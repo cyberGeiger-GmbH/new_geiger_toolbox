@@ -2,24 +2,25 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/todo_task_extension.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_task_controller.dart';
 
 class AddTodoWidget extends StatelessWidget {
-  const AddTodoWidget({super.key, required this.todos});
-  final List<TodoTask> todos;
+  const AddTodoWidget({super.key, required this.task});
+  final Task task;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TodoTileList(
-        todoTile: todos
+        todoTile: task.toItemsList()
             .map(
               (todo) => AddTodoListWidget(
                 key: key,
-                todo: todo,
+                todo: TodoTask(offering: todo.offering, isCompleted: todo.isCompleted),
               ),
             )
             .toList(),

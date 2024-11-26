@@ -1,4 +1,5 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
@@ -43,6 +44,7 @@ class NewsFeedCacheRepository {
     return record.onSnapshot(db).map((snapshot) {
       if (snapshot != null) {
         final List<News> data = News.fromJsonString(snapshot.value as String);
+        debugPrint("News from cache total => ${data.length}");
         return data;
       } else {
         return [];
@@ -75,16 +77,4 @@ class NewsFeedCacheRepository {
 @Riverpod(keepAlive: true)
 NewsFeedCacheRepository newsFeedCacheRepository(Ref ref) {
   return NewsFeedCacheRepository(ref);
-}
-
-@riverpod
-Stream<List<News>> watchNewsFeeds(Ref ref) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
-  return cachedRepos.watchNewsFeeds();
-}
-
-@riverpod
-Stream<News?> newsFeedStream(Ref ref, {required String newsTitle}) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
-  return cachedRepos.watchNewsFeed(newsTitle: newsTitle);
 }
