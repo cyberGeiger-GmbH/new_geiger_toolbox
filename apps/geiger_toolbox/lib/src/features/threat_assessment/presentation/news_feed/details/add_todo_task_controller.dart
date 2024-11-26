@@ -1,4 +1,6 @@
-import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/todo_task_cache_repository.dart';
+// ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
+import 'package:geiger_toolbox/src/features/threat_assessment/applications/task_service.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'add_todo_task_controller.g.dart';
@@ -10,9 +12,14 @@ class AddTodoTaskCacheController extends _$AddTodoTaskCacheController {
 
   Future<void> addTodoToCache(TodoTask todo) async {
     state = const AsyncLoading<void>();
-    final todoRepo = ref.read(todoTaskCacheRespositoryProvider);
+    final taskService = ref.read(taskServiceProvider);
     //store the todoTask in cache
-    state = await AsyncValue.guard(() => todoRepo.addTodoTask(todo));
+
+    if (todo.isCompleted == false) {
+      state = await AsyncValue.guard(() => taskService.setTodoTask(todo));
+    } else {
+      state = await AsyncValue.guard(() => taskService.removeTodoTask(todo));
+    }
   }
 }
 
@@ -21,6 +28,8 @@ class AddTodoTaskCacheController extends _$AddTodoTaskCacheController {
 class AddTodoTaskController extends _$AddTodoTaskController {
   @override
   TodoTask build(TodoTask todo) {
+    //check if todo has already be added to cache
+
     return todo;
   }
 

@@ -8,9 +8,7 @@ part of 'todo_task.dart';
 
 _$TodoTaskImpl _$$TodoTaskImplFromJson(Map<String, dynamic> json) =>
     _$TodoTaskImpl(
-      offering: json['offering'] == null
-          ? null
-          : Offering.fromJson(json['offering'] as Map<String, dynamic>),
+      offering: Offering.fromJson(json['offering'] as Map<String, dynamic>),
       isCompleted: json['isCompleted'] as bool? ?? false,
     );
 

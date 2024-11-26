@@ -222,6 +222,7 @@ class DesignSystemHelper {
       return Column(
         children: [
           ProtectionTile.plain(
+            context: context,
             title: "Plain Protection Content",
             onPressed: () {},
           ),
@@ -247,8 +248,10 @@ class DesignSystemHelper {
         "Control Remote Access Software"
       ];
       return ProtectionTileListView(
-        protectionTile:
-            data.map((value) => ProtectionTile.plain(title: value)).toList(),
+        protectionTile: data
+            .map(
+                (value) => ProtectionTile.plain(context: context, title: value))
+            .toList(),
       );
     });
   }

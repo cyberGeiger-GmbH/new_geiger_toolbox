@@ -25,11 +25,11 @@ final newsFeedCacheRepositoryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NewsFeedCacheRepositoryRef = ProviderRef<NewsFeedCacheRepository>;
-String _$watchNewsFeedsHash() => r'af5ad6173f570010e97fe1443965207bd8309121';
+String _$watchNewsFeedsHash() => r'e2b00f5d4a827c6e5a057506bdc3ec3592085409';
 
 /// See also [watchNewsFeeds].
 @ProviderFor(watchNewsFeeds)
-final watchNewsFeedsProvider = StreamProvider<List<News>>.internal(
+final watchNewsFeedsProvider = AutoDisposeStreamProvider<List<News>>.internal(
   watchNewsFeeds,
   name: r'watchNewsFeedsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -41,7 +41,7 @@ final watchNewsFeedsProvider = StreamProvider<List<News>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchNewsFeedsRef = StreamProviderRef<List<News>>;
+typedef WatchNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
 String _$newsFeedStreamHash() => r'080b13c0727c91e26ecc6253f5e6f60a90387228';
 
 /// Copied from Dart SDK

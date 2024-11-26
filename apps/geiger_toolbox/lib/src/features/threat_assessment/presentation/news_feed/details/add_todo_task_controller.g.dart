@@ -7,7 +7,7 @@ part of 'add_todo_task_controller.dart';
 // **************************************************************************
 
 String _$addTodoTaskCacheControllerHash() =>
-    r'61e0e363950e25fb4eb90eb72bd1906d966c81f8';
+    r'26aaa4d0eeec432aee8d60fe467d894dbcbccaac';
 
 /// See also [AddTodoTaskCacheController].
 @ProviderFor(AddTodoTaskCacheController)

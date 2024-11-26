@@ -8,18 +8,35 @@ import '../../utils/utils.dart';
 
 class ProtectionTile extends StatelessWidget {
   const ProtectionTile._(
-      {super.key, required this.title, this.decoration, this.onPressed});
+      {super.key, required this.title, this.decoration, this.trailing});
 
   final String title;
-  final VoidCallback? onPressed;
-  final BoxDecoration? decoration;
 
-  factory ProtectionTile.plain(
-      {Key? key, required String title, VoidCallback? onPressed}) {
+  final BoxDecoration? decoration;
+  final Widget? trailing;
+
+  factory ProtectionTile.trailingOnly(
+      {Key? key, required String title}) {
     return ProtectionTile._(
       key: key,
       title: title,
-      onPressed: onPressed,
+    );
+  }
+
+  factory ProtectionTile.plain(
+      {Key? key,
+      required BuildContext context,
+      required String title,
+      VoidCallback? onPressed}) {
+    return ProtectionTile._(
+      key: key,
+      title: title,
+      trailing: AppIconButton.filled(
+        context: context,
+        iconData: Icons.chevron_right,
+        //iconColor: iconColor,
+        onPressed: onPressed,
+      ),
     );
   }
 
@@ -31,7 +48,12 @@ class ProtectionTile extends StatelessWidget {
 
     return ProtectionTile._(
       title: title,
-      onPressed: onPressed,
+      trailing: AppIconButton.filled(
+        context: context,
+        iconData: Icons.chevron_right,
+        //iconColor: iconColor,
+        onPressed: onPressed,
+      ),
       decoration: Utils.getDecoration(appColors),
     );
   }
@@ -45,7 +67,7 @@ class ProtectionTile extends StatelessWidget {
         key: key,
         title: title,
         iconColor: appColors.surface,
-        onPressed: onPressed,
+        trailing: trailing,
         textColor: appColors.defaultColor,
       ),
     );
@@ -57,28 +79,23 @@ class _ContentWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.iconColor,
-      required this.onPressed,
-      this.textColor});
+      this.textColor,
+      this.trailing});
 
   final String title;
   final Color iconColor;
   final Color? textColor;
-  final VoidCallback? onPressed;
+
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: AppText.bodyMedium(
-        text: title,
-        context: context,
-        color: textColor,
-      ),
-      trailing: AppIconButton.filled(
-        context: context,
-        iconData: Icons.chevron_right,
-        iconColor: iconColor,
-        onPressed: onPressed,
-      ),
-    );
+        leading: AppText.bodyMedium(
+          text: title,
+          context: context,
+          color: textColor,
+        ),
+        trailing: trailing);
   }
 }

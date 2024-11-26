@@ -41,12 +41,13 @@ class AddTodoListWidget extends ConsumerWidget {
     //listen to  message when adding recommendation to task to be done
     ref.listen<TodoTask>(addTodoTaskControllerProvider(todo),
         (_, nxtState) => nxtState.showSnackBarTodoMessage(context: context));
+    
     final state = ref.watch(addTodoTaskControllerProvider(todo));
 
     return TodoTile.plain(
         key: key,
-        summary: todo.offering!.summary,
-        title: todo.offering!.name,
+        summary: todo.offering.summary,
+        title: todo.offering.name,
         done: state.isCompleted!,
         onChange: (value) {
           //set

@@ -77,7 +77,7 @@ NewsFeedCacheRepository newsFeedCacheRepository(Ref ref) {
   return NewsFeedCacheRepository(ref);
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 Stream<List<News>> watchNewsFeeds(Ref ref) {
   final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
   return cachedRepos.watchNewsFeeds();

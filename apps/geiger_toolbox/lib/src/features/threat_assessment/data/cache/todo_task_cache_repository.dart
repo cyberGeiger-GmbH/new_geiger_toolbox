@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
 import 'package:geiger_toolbox/src/persistence/sembast_data_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sembast/sembast.dart';
@@ -14,7 +12,7 @@ class TodoCacheTaskRepository {
   final Ref ref;
   static const todoKey = 'todoObjectKey';
 
-  Future<void> addTodoTask(TodoTask task) async {
+  Future<void> setTask(Task task) async {
     try {
       await _storeTodo(task);
     } catch (e) {
@@ -22,28 +20,42 @@ class TodoCacheTaskRepository {
     }
   }
 
-  Stream<TodoTask> watchTodoTask() {
+  Future<Task> fetchTodoTask() async {
+    try {
+      final dataStore = _sembastDataStore;
+      final db = dataStore.db;
+      final store = dataStore.store;
+      final data = await store.record(todoKey).get(db) as String?;
+      if (data != null) {
+        return Task.fromJson(data);
+      } else {
+        return Task();
+      }
+    } catch (e) {
+      throw FetchTodoTaskRepositryException();
+    }
+  }
+
+  Stream<Task> watchTodoTask() {
     final dataStore = _sembastDataStore;
     final db = dataStore.db;
     final store = dataStore.store;
     final record = store.record(todoKey);
     return record.onSnapshot(db).map((snapshot) {
       if (snapshot != null) {
-        final task = TodoTask.fromJson(json.decode(snapshot.value as String));
+        final task = Task.fromJson(snapshot.value as String);
         return task;
       } else {
-        return TodoTask();
+        return Task();
       }
     });
   }
 
-  Future<void> _storeTodo(TodoTask task) async {
+  Future<void> _storeTodo(Task task) async {
     final dataStore = _sembastDataStore;
     final db = dataStore.db;
     final store = dataStore.store;
-    // debugPrint(
-    //     "data => ${task.offering!.name}, iscompeleted => ${task.isCompleted}");
-    await store.record(todoKey).put(db, json.encode(task.toJson()));
+    await store.record(todoKey).put(db, task.toJsonObject());
   }
 
   SembastDataStore get _sembastDataStore {
@@ -56,8 +68,3 @@ TodoCacheTaskRepository todoTaskCacheRespository(Ref ref) {
   return TodoCacheTaskRepository(ref);
 }
 
-@riverpod
-Stream<TodoTask> watchTodoTask(Ref ref) {
-  final cacheRepo = ref.read(todoTaskCacheRespositoryProvider);
-  return cacheRepo.watchTodoTask();
-}

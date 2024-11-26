@@ -34,3 +34,17 @@ class AddTodoTaskRepositryException extends AppException {
             code: 'fail-add-todo-cache',
             message: "Fail to add todo task to cache");
 }
+
+class FetchTodoTaskRepositryException extends AppException {
+  FetchTodoTaskRepositryException()
+      : super(
+            code: 'fail-to-get-todo-cache',
+            message: "Fail to retrive todo task to cache");
+}
+
+class RemoveTodoTaskRepositryException extends AppException {
+  RemoveTodoTaskRepositryException()
+      : super(
+            code: 'fail-remove-todo-cache',
+            message: "Fail to remove todo task to cache");
+}

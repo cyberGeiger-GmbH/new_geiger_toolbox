@@ -55,6 +55,7 @@ class NewsScreen extends StatelessWidget {
     return ProtectionTileList(
       protectionTile: data
           .map((value) => ProtectionTile.plain(
+            context: context,
                 title: value,
                 onPressed: () {
                   showModal(context,

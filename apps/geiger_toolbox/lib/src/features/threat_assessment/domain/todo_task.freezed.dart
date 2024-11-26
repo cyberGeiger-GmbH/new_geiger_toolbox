@@ -20,7 +20,7 @@ TodoTask _$TodoTaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TodoTask {
-  Offering? get offering => throw _privateConstructorUsedError;
+  Offering get offering => throw _privateConstructorUsedError;
   bool? get isCompleted => throw _privateConstructorUsedError;
 
   /// Serializes this TodoTask to a JSON map.
@@ -38,9 +38,9 @@ abstract class $TodoTaskCopyWith<$Res> {
   factory $TodoTaskCopyWith(TodoTask value, $Res Function(TodoTask) then) =
       _$TodoTaskCopyWithImpl<$Res, TodoTask>;
   @useResult
-  $Res call({Offering? offering, bool? isCompleted});
+  $Res call({Offering offering, bool? isCompleted});
 
-  $OfferingCopyWith<$Res>? get offering;
+  $OfferingCopyWith<$Res> get offering;
 }
 
 /// @nodoc
@@ -58,14 +58,14 @@ class _$TodoTaskCopyWithImpl<$Res, $Val extends TodoTask>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? offering = freezed,
+    Object? offering = null,
     Object? isCompleted = freezed,
   }) {
     return _then(_value.copyWith(
-      offering: freezed == offering
+      offering: null == offering
           ? _value.offering
           : offering // ignore: cast_nullable_to_non_nullable
-              as Offering?,
+              as Offering,
       isCompleted: freezed == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -77,12 +77,8 @@ class _$TodoTaskCopyWithImpl<$Res, $Val extends TodoTask>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $OfferingCopyWith<$Res>? get offering {
-    if (_value.offering == null) {
-      return null;
-    }
-
-    return $OfferingCopyWith<$Res>(_value.offering!, (value) {
+  $OfferingCopyWith<$Res> get offering {
+    return $OfferingCopyWith<$Res>(_value.offering, (value) {
       return _then(_value.copyWith(offering: value) as $Val);
     });
   }
@@ -96,10 +92,10 @@ abstract class _$$TodoTaskImplCopyWith<$Res>
       __$$TodoTaskImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Offering? offering, bool? isCompleted});
+  $Res call({Offering offering, bool? isCompleted});
 
   @override
-  $OfferingCopyWith<$Res>? get offering;
+  $OfferingCopyWith<$Res> get offering;
 }
 
 /// @nodoc
@@ -115,14 +111,14 @@ class __$$TodoTaskImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? offering = freezed,
+    Object? offering = null,
     Object? isCompleted = freezed,
   }) {
     return _then(_$TodoTaskImpl(
-      offering: freezed == offering
+      offering: null == offering
           ? _value.offering
           : offering // ignore: cast_nullable_to_non_nullable
-              as Offering?,
+              as Offering,
       isCompleted: freezed == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -134,13 +130,13 @@ class __$$TodoTaskImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TodoTaskImpl implements _TodoTask {
-  _$TodoTaskImpl({this.offering, this.isCompleted = false});
+  _$TodoTaskImpl({required this.offering, this.isCompleted = false});
 
   factory _$TodoTaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$TodoTaskImplFromJson(json);
 
   @override
-  final Offering? offering;
+  final Offering offering;
   @override
   @JsonKey()
   final bool? isCompleted;
@@ -182,14 +178,15 @@ class _$TodoTaskImpl implements _TodoTask {
 }
 
 abstract class _TodoTask implements TodoTask {
-  factory _TodoTask({final Offering? offering, final bool? isCompleted}) =
-      _$TodoTaskImpl;
+  factory _TodoTask(
+      {required final Offering offering,
+      final bool? isCompleted}) = _$TodoTaskImpl;
 
   factory _TodoTask.fromJson(Map<String, dynamic> json) =
       _$TodoTaskImpl.fromJson;
 
   @override
-  Offering? get offering;
+  Offering get offering;
   @override
   bool? get isCompleted;
 

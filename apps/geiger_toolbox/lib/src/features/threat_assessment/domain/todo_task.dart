@@ -7,7 +7,7 @@ part 'todo_task.g.dart';
 @freezed
 class TodoTask with _$TodoTask {
   factory TodoTask(
-      {final Offering? offering,
+      {required Offering offering,
       @Default(false) final bool? isCompleted}) = _TodoTask;
 
   factory TodoTask.fromJson(Map<String, dynamic> json) =>

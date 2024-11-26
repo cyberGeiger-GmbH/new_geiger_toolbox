@@ -15,6 +15,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //show error when scan button throw as exceptions
     ref.listen(
       homeScreenControllerProvider,
       (_, nextState) => nextState.showAlertDialogOnError(context: context),
@@ -25,19 +26,25 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: appColors.scaffoldBackgroundColor,
       appBar: CustomAppBar(),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Spacing.gapH32,
-          ScanWidget(),
-          Spacing.gapH16,
-          //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
-          const NewsFeedsWidget(),
-          Spacing.gapH16,
-          AssetWidget(),
-          Spacing.gapH16,
-          DashboardWidget()
-        ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Spacing.gapH8,
+              ScanWidget(),
+              Spacing.gapH16,
+              //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
+              const NewsFeedsWidget(),
+              Spacing.gapH16,
+              AssetWidget(),
+              Spacing.gapH16,
+              DashboardWidget(),
+              Spacing.gapH12,
+            ],
+          ),
+        ),
       ),
     );
   }
