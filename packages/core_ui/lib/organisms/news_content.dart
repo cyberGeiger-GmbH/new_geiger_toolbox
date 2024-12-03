@@ -21,7 +21,7 @@ class NewsContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText.headlineSmall(
+        AppText.titleLarge(
           text: title,
           context: context,
           color: appColors.defaultColor,
@@ -32,36 +32,36 @@ class NewsContent extends StatelessWidget {
             textAlign: TextAlign.justify,
             message: summary),
         Spacing.gapH4,
-        _HorizontalTitleContent(
-            key: key, title: source ?? "Source", source: articleUrl),
+        // _HorizontalTitleContent(
+        //     key: key, title: source ?? "Source", source: articleUrl),
       ],
     );
   }
 }
 
-class _HorizontalTitleContent extends StatelessWidget {
-  const _HorizontalTitleContent(
-      {super.key, required this.title, required this.source});
-  final String title;
-  final String source;
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final appTextStyle = theme.appTextStyles;
-    final appColors = theme.appColors.appColor;
-    return RichText(
-      text: TextSpan(
-        text: "$title: ", // Title in bold
-        style: appTextStyle.appTextStyle.titleSmall.copyWith(
-            fontWeight: FontWeight.bold, color: appColors.defaultColor),
-        children: [
-          TextSpan(
-            text: source, // Message in normal style
-            style: appTextStyle.appTextStyle.bodySmall
-                .copyWith(color: Colors.grey),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class _HorizontalTitleContent extends StatelessWidget {
+//   const _HorizontalTitleContent(
+//       {super.key, required this.title, required this.source});
+//   final String title;
+//   final String source;
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context);
+//     final appTextStyle = theme.appTextStyles;
+//     final appColors = theme.appColors.appColor;
+//     return RichText(
+//       text: TextSpan(
+//         text: "$title: ", // Title in bold
+//         style: appTextStyle.appTextStyle.titleSmall.copyWith(
+//             fontWeight: FontWeight.bold, color: appColors.defaultColor),
+//         children: [
+//           TextSpan(
+//             text: source, // Message in normal style
+//             style: appTextStyle.appTextStyle.bodySmall
+//                 .copyWith(color: Colors.grey),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
