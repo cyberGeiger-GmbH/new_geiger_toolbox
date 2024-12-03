@@ -1,4 +1,4 @@
-import 'package:conversational_agent_client/conversational_agent_client.dart';
+
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
@@ -13,7 +13,7 @@ extension MutableTask on Task {
     return Task(items: copy);
   }
 
-  // add a List<TodoTask> to the [Task] by **updating** the todoTask if it already exists
+  /// add a List<TodoTask> to the [Task] by **updating** the todoTask if it already exists
   Task addTodos(List<TodoTask> todos) {
     final copy = Map<OfferID, TodoTask>.from(items);
     for (var todo in todos) {
@@ -41,22 +41,18 @@ extension MutableTask on Task {
     }
   }
 
-  Task updateTodosIfExists(List<Recommendation> recommendations) {
+  Task updateTodosIfExists(List<TodoTask> todotasks) {
     final copy = <OfferID, TodoTask>{};
 
-    for (var reco in recommendations) {
-      for (var protect in reco.offerings) {
-        String key = protect.name.toLowerCase().replaceSpacesWithHyphen;
-
-        if (items.containsKey(key)) {
-          copy[reco.name] = TodoTask(
-              offering: Offering(name: protect.name, summary: protect.summary),
-              isCompleted: true);
-        } else {
-          copy[reco.name] = TodoTask(
-              offering: Offering(name: protect.name, summary: protect.summary),
-              isCompleted: false);
-        }
+    for (var task in todotasks) {
+      String offerKey =
+          task.offering.name.toLowerCase().replaceSpacesWithHyphen;
+//check if already added to todos
+      if (items.containsKey(offerKey)) {
+        // completed to true
+        copy[offerKey] = task.copyWith(isCompleted: true);
+      } else {
+        copy[offerKey] = task.copyWith(isCompleted: false);
       }
     }
     return Task(items: copy);

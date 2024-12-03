@@ -21,7 +21,7 @@ class NewsFeedService {
         digitalInfrastructure: DigitalInfrastructure(
             infoAbout: ["password", "teamView", "post finance"]));
     List<News>? data =
-        await remoteRepo.fetchNewsUpdate(smeProfile: profile ?? defaultProfile);
+        await remoteRepo.fetchNewsUpdate();
     if (data.isNotEmpty) {
   
       final cachedRepos = ref.read(newsFeedCacheRepositoryProvider);

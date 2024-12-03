@@ -38,7 +38,7 @@ final taskStreamProvider = StreamProvider<Task>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef TaskStreamRef = StreamProviderRef<Task>;
-String _$filterProtectListHash() => r'16052b95f5d9659cec68254eaca2c1622da5bfd7';
+String _$filterProtectListHash() => r'8cf15433c9ab9d3ac849da4df981a7797e4419a7';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -72,10 +72,10 @@ class FilterProtectListFamily extends Family<AsyncValue<Task>> {
 
   /// See also [filterProtectList].
   FilterProtectListProvider call({
-    required List<Recommendation> recommendations,
+    required List<TodoTask> todoTask,
   }) {
     return FilterProtectListProvider(
-      recommendations: recommendations,
+      todoTask: todoTask,
     );
   }
 
@@ -84,7 +84,7 @@ class FilterProtectListFamily extends Family<AsyncValue<Task>> {
     covariant FilterProtectListProvider provider,
   ) {
     return call(
-      recommendations: provider.recommendations,
+      todoTask: provider.todoTask,
     );
   }
 
@@ -107,11 +107,11 @@ class FilterProtectListFamily extends Family<AsyncValue<Task>> {
 class FilterProtectListProvider extends AutoDisposeFutureProvider<Task> {
   /// See also [filterProtectList].
   FilterProtectListProvider({
-    required List<Recommendation> recommendations,
+    required List<TodoTask> todoTask,
   }) : this._internal(
           (ref) => filterProtectList(
             ref as FilterProtectListRef,
-            recommendations: recommendations,
+            todoTask: todoTask,
           ),
           from: filterProtectListProvider,
           name: r'filterProtectListProvider',
@@ -122,7 +122,7 @@ class FilterProtectListProvider extends AutoDisposeFutureProvider<Task> {
           dependencies: FilterProtectListFamily._dependencies,
           allTransitiveDependencies:
               FilterProtectListFamily._allTransitiveDependencies,
-          recommendations: recommendations,
+          todoTask: todoTask,
         );
 
   FilterProtectListProvider._internal(
@@ -132,10 +132,10 @@ class FilterProtectListProvider extends AutoDisposeFutureProvider<Task> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.recommendations,
+    required this.todoTask,
   }) : super.internal();
 
-  final List<Recommendation> recommendations;
+  final List<TodoTask> todoTask;
 
   @override
   Override overrideWith(
@@ -150,7 +150,7 @@ class FilterProtectListProvider extends AutoDisposeFutureProvider<Task> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        recommendations: recommendations,
+        todoTask: todoTask,
       ),
     );
   }
@@ -162,14 +162,13 @@ class FilterProtectListProvider extends AutoDisposeFutureProvider<Task> {
 
   @override
   bool operator ==(Object other) {
-    return other is FilterProtectListProvider &&
-        other.recommendations == recommendations;
+    return other is FilterProtectListProvider && other.todoTask == todoTask;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, recommendations.hashCode);
+    hash = _SystemHash.combine(hash, todoTask.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -178,8 +177,8 @@ class FilterProtectListProvider extends AutoDisposeFutureProvider<Task> {
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin FilterProtectListRef on AutoDisposeFutureProviderRef<Task> {
-  /// The parameter `recommendations` of this provider.
-  List<Recommendation> get recommendations;
+  /// The parameter `todoTask` of this provider.
+  List<TodoTask> get todoTask;
 }
 
 class _FilterProtectListProviderElement
@@ -187,8 +186,7 @@ class _FilterProtectListProviderElement
   _FilterProtectListProviderElement(super.provider);
 
   @override
-  List<Recommendation> get recommendations =>
-      (origin as FilterProtectListProvider).recommendations;
+  List<TodoTask> get todoTask => (origin as FilterProtectListProvider).todoTask;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
