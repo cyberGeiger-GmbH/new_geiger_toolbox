@@ -6,7 +6,7 @@ import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/dashboard_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/home_screen_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scan_widget.dart';
 
 //home screen
@@ -23,6 +23,7 @@ class HomeScreen extends ConsumerWidget {
     // final state = ref.watch(homeScreenControllerProvider);
 
     final appColors = Theme.of(context).appColors.appColor;
+
     return Scaffold(
       backgroundColor: appColors.scaffoldBackgroundColor,
       appBar: CustomAppBar(),

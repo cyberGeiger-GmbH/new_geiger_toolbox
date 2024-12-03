@@ -1,6 +1,6 @@
 import 'package:core_ui/foundation/app_colors.dart';
 import 'package:core_ui/foundation/app_text_style.dart';
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../texts/app_text.dart';
@@ -42,11 +42,7 @@ class AppTextButton extends StatelessWidget {
           onTap: onTap,
           isEnabled: isEnabled);
 
-  final String label;
-  final VoidCallback onTap;
-  final Color disabledColor;
-  final Color color;
-  final bool isEnabled;
+ 
 
   static AppTextStyle appText(BuildContext context) {
     return Theme.of(context).appTextStyles.appTextStyle;
@@ -56,6 +52,12 @@ class AppTextButton extends StatelessWidget {
     return Theme.of(context).appColors.appColor;
   }
 
+ final String label;
+  final VoidCallback onTap;
+  final Color disabledColor;
+  final Color color;
+  final bool isEnabled;
+  
   @override
   Widget build(BuildContext context) {
     return TextButton(

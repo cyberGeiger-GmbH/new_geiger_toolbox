@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/organisms/navigations/scaffold_with_naviagion_rail.dart';
 import 'package:core_ui/organisms/navigations/scaffold_with_navigation_bar.dart';
 import 'package:flutter/material.dart';

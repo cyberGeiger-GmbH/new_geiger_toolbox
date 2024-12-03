@@ -31,15 +31,15 @@ export './organisms/show_model.dart';
 
 //list widget
 export 'organisms/list/app_assets_icons.dart';
-export 'organisms/list/protection_tile_list.dart';
-export 'organisms/list/todo_tile_list.dart';
+export 'organisms/list/protection_tile_list_view.dart';
+export 'organisms/list/todo_tile_list_view.dart';
 
 //
 export './molecules/cards/protection_tile.dart';
 export './molecules/cards/todo_tile.dart';
 
 //extensions
-export './foundation/themes/extension.dart';
+export 'foundation/themes/theme_data_extended.dart';
 
 //
 export "./atoms/app_cached_network_image.dart";

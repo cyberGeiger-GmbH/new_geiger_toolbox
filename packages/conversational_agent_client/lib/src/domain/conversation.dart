@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-dynamic
+
 import 'package:conversational_agent_client/src/domain/content.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

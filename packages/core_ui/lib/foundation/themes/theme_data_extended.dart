@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'package:core_ui/foundation/themes/app_colors_theme.dart';
 import 'package:core_ui/foundation/themes/app_icons_theme.dart';
 import 'package:core_ui/foundation/themes/app_images_theme.dart';
@@ -6,6 +8,8 @@ import 'package:core_ui/tokens/breakpoints.dart';
 import 'package:flutter/material.dart';
 
 extension ThemeDataExtended on ThemeData {
+  
+
   AppColorsTheme get appColors => extension<AppColorsTheme>()!;
   AppTextStyleTheme get appTextStyles => extension<AppTextStyleTheme>()!;
   AppIconsTheme get appIcons => extension<AppIconsTheme>()!;

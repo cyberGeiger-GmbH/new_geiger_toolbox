@@ -11,6 +11,7 @@ class ScanWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeScreenControllerProvider);
+    
     return AppButton.scan(
       label: state.isLoading ? "scanning.." : 'Scan',
       context: context,

@@ -37,6 +37,10 @@ dev_dependencies:
   riverpod_lint: 2.6.3
   freezed: 2.5.7
   json_serializable: 6.9.0
+  #check for memory
+  leak_tracker_flutter_testing: 3.0.5
+  #code analyzer
+  dart_code_metrics_presets: 2.18.0
 
 # The following section is specific to Flutter packages.
 flutter:

@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:core_ui/organisms/empty_content.dart';
 import 'package:core_ui/tokens/spacing.dart';
@@ -18,6 +18,7 @@ class NewsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).appColors.appColor;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

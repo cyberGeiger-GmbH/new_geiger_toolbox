@@ -16,6 +16,7 @@ class DashboardWidget extends ConsumerWidget {
     final todos = ref.watch(taskStreamProvider);
 
     final appColors = Theme.of(context).appColors.appColor;
+    
     return AsyncValueWidget(
       value: todos,
       data: (data) => data.items.isEmpty

@@ -56,6 +56,7 @@ Future<bool?> showAlertDialog({
 Future<void> showExceptionAlertDialog({
   required BuildContext context,
   required String title,
+  // ignore: avoid-dynamic
   required dynamic exception,
 }) =>
     showAlertDialog(

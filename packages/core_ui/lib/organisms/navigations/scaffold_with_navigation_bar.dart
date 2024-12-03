@@ -18,6 +18,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).appColors.appColor;
+    
     return Scaffold(
       body: body,
       bottomNavigationBar: NavigationBar(

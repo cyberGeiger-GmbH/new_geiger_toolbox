@@ -10,6 +10,7 @@ extension MutableTask on Task {
     final key = _getOfferid(todo);
     final copy = Map<OfferID, TodoTask>.from(items);
     copy[key] = todo;
+    
     return Task(items: copy);
   }
 
@@ -20,6 +21,7 @@ extension MutableTask on Task {
       final key = _getOfferid(todo);
       copy[key] = todo;
     }
+
     return Task(items: copy);
   }
 
@@ -27,6 +29,7 @@ extension MutableTask on Task {
     final key = _getOfferid(todo);
     final copy = Map<OfferID, TodoTask>.from(items);
     copy.remove(key);
+
     return Task(items: copy);
   }
 
@@ -35,6 +38,7 @@ extension MutableTask on Task {
     if (items.containsKey(key)) {
       final copy = Map<OfferID, TodoTask>.from(items);
       copy[key] = todo;
+
       return Task(items: copy);
     } else {
       return this;
@@ -55,6 +59,7 @@ extension MutableTask on Task {
         copy[offerKey] = task.copyWith(isCompleted: false);
       }
     }
+
     return Task(items: copy);
   }
 

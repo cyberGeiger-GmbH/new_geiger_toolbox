@@ -5,15 +5,16 @@ import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.d
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
-extension ValueMessageSnackBar on TodoTask {
+extension TodoTaskExtension on TodoTask {
   void showSnackBarTodoMessage({required BuildContext context}) {
     final appColor = Theme.of(context).appColors.appColor;
     showSnackBar(
         context: context,
-        content: isCompleted!
+        content: isCompleted == true
             ? "Recommendation added successfully".hardcoded
             : "Recommendation removed successfully",
-        backgroundColor:
-            isCompleted! ? appColor.primaryContainer : appColor.errorContainer);
+        backgroundColor: isCompleted == true
+            ? appColor.primaryContainer
+            : appColor.errorContainer);
   }
 }

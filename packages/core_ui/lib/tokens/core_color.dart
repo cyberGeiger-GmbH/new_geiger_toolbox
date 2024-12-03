@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CoreColor {
-  CoreColor._();
+
 
   //default color
   static const Color defaultColor = Colors.black;
@@ -63,4 +63,6 @@ class CoreColor {
   static const Color onErrorDark = Color(0xff690005);
   static const Color errorContainerDark = Color(0xff93000a);
   static const Color onErrorContainerDark = Color(0xffffdad6);
+
+    CoreColor._();
 }

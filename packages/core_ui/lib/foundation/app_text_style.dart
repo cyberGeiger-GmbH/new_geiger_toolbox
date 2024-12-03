@@ -8,7 +8,58 @@ part 'app_text_style.freezed.dart';
 
 @freezed
 class AppTextStyle with _$AppTextStyle {
-  const AppTextStyle._();
+
+
+  //display sizes
+  static const double fontSizeXDl = typo.Typography.sizeXXLB;
+  static const double fontSizeDl = typo.Typography.sizeXXL;
+
+  static const double fontSizeXDm = typo.Typography.sizeXLB;
+  static const double fontSizeDm = typo.Typography.sizeXL;
+
+  static const double fontSizeDsB = typo.Typography.sizeXLSB;
+  static const double fontSizeDs = typo.Typography.sizeLS;
+
+//headline sizes
+  static const double fontSizeXHl = typo.Typography.sizeLSB;
+  static const double fontSizeHl = typo.Typography.sizeL;
+
+  static const double fontSizeXHm = typo.Typography.sizeLS;
+  static const double fontSizeHm = typo.Typography.sizeXXMB;
+
+  static const double fontSizeHsB = typo.Typography.sizeL;
+  static const double fontSizeHs = typo.Typography.sizeXMB;
+
+// title sizes
+  static const double fontSizeXTl = typo.Typography.sizeXXMB;
+  static const double fontSizeTl = typo.Typography.sizeMB;
+
+  static const double fontSizeXTm = typo.Typography.sizeXMB;
+  static const double fontSizeTm = typo.Typography.sizeMS;
+
+  static const double fontSizeTsB = typo.Typography.sizeM;
+  static const double fontSizeTs = typo.Typography.sizeSM;
+
+//label sizes
+  static const double fontSizeXLl = typo.Typography.sizeM;
+  static const double fontSizeLl = typo.Typography.sizeMS;
+
+  static const double fontSizeXLm = typo.Typography.sizeMS;
+  static const double fontSizeLm = typo.Typography.sizeS;
+
+  static const double fontSizeLsB = typo.Typography.sizeMS;
+  static const double fontSizeLs = typo.Typography.sizeXS;
+
+  //body sizes
+  static const double fontSizeXBl = typo.Typography.sizeXMB;
+  static const double fontSizeBl = typo.Typography.sizeM;
+
+  static const double fontSizeXBm = typo.Typography.sizeM;
+  static const double fontSizeBm = typo.Typography.sizeSM;
+
+  static const double fontSizeBsB = typo.Typography.sizeMS;
+  static const double fontSizeBs = typo.Typography.sizeS;
+
 
   const factory AppTextStyle(
       {required TextStyle displayLarge,
@@ -213,53 +264,6 @@ class AppTextStyle with _$AppTextStyle {
             decoration: TextDecoration.none),
       );
 
-//display sizes
-  static const double fontSizeXDl = typo.Typography.sizeXXLB;
-  static const double fontSizeDl = typo.Typography.sizeXXL;
+  const AppTextStyle._();
 
-  static const double fontSizeXDm = typo.Typography.sizeXLB;
-  static const double fontSizeDm = typo.Typography.sizeXL;
-
-  static const double fontSizeDsB = typo.Typography.sizeXLSB;
-  static const double fontSizeDs = typo.Typography.sizeLS;
-
-//headline sizes
-  static const double fontSizeXHl = typo.Typography.sizeLSB;
-  static const double fontSizeHl = typo.Typography.sizeL;
-
-  static const double fontSizeXHm = typo.Typography.sizeLS;
-  static const double fontSizeHm = typo.Typography.sizeXXMB;
-
-  static const double fontSizeHsB = typo.Typography.sizeL;
-  static const double fontSizeHs = typo.Typography.sizeXMB;
-
-// title sizes
-  static const double fontSizeXTl = typo.Typography.sizeXXMB;
-  static const double fontSizeTl = typo.Typography.sizeMB;
-
-  static const double fontSizeXTm = typo.Typography.sizeXMB;
-  static const double fontSizeTm = typo.Typography.sizeMS;
-
-  static const double fontSizeTsB = typo.Typography.sizeM;
-  static const double fontSizeTs = typo.Typography.sizeSM;
-
-//label sizes
-  static const double fontSizeXLl = typo.Typography.sizeM;
-  static const double fontSizeLl = typo.Typography.sizeMS;
-
-  static const double fontSizeXLm = typo.Typography.sizeMS;
-  static const double fontSizeLm = typo.Typography.sizeS;
-
-  static const double fontSizeLsB = typo.Typography.sizeMS;
-  static const double fontSizeLs = typo.Typography.sizeXS;
-
-  //body sizes
-  static const double fontSizeXBl = typo.Typography.sizeXMB;
-  static const double fontSizeBl = typo.Typography.sizeM;
-
-  static const double fontSizeXBm = typo.Typography.sizeM;
-  static const double fontSizeBm = typo.Typography.sizeSM;
-
-  static const double fontSizeBsB = typo.Typography.sizeMS;
-  static const double fontSizeBs = typo.Typography.sizeS;
 }

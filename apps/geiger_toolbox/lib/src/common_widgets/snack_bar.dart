@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 void showSnackBar(
@@ -15,7 +16,9 @@ void showSnackBar(
     content: appText,
     action: SnackBarAction(
       label: "Dismiss".hardcoded,
-      onPressed: () {},
+      onPressed: () {
+        context.pop();
+      },
     ),
     backgroundColor: backgroundColor,
   );

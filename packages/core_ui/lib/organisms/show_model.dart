@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,7 @@ void showModal(BuildContext context,
 SliverWoltModalSheetPage takeActionSliverWolModalSheetPage(BuildContext context,
     {required String title, required Widget widget}) {
   final appColors = Theme.of(context).appColors.appColor;
+  
   return SliverWoltModalSheetPage(
     forceMaxHeight: true,
     backgroundColor: appColors.scaffoldBackgroundColor,

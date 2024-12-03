@@ -7,21 +7,19 @@ import 'package:flutter/material.dart';
 class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   final AppColors _appColors;
 
+  AppColors get appColor => _appColors;
+
   const AppColorsTheme._(this._appColors);
 
   factory AppColorsTheme.light() => AppColorsTheme._(AppColors.light());
 
   factory AppColorsTheme.dark() => AppColorsTheme._(AppColors.dark());
 
-  AppColors get appColor => _appColors;
-
   @override
   ThemeExtension<AppColorsTheme> copyWith({bool? lightMode}) {
-    if (lightMode == null || lightMode == true) {
-      return AppColorsTheme.light();
-    } else {
-      return AppColorsTheme.dark();
-    }
+    return (lightMode == null || lightMode)
+        ? AppColorsTheme.light()
+        : AppColorsTheme.dark();
   }
 
   @override

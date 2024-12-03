@@ -23,11 +23,8 @@ class AsyncErrorLogger extends ProviderObserver {
   }
 
 //ensure the object is an AsyncError
+  // ignore: avoid-dynamic
   AsyncError<dynamic>? _findError(Object? value) {
-    if (value is AsyncError) {
-      return value;
-    } else {
-      return null;
-    }
+    return value is AsyncError ? value : null;
   }
 }

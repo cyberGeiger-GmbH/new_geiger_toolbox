@@ -11,6 +11,7 @@ class DesignSystem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
+    
     return Scaffold(
       backgroundColor: appTheme.appColors.appColor.scaffoldBackgroundColor,
       appBar: const CustomAppBar(),

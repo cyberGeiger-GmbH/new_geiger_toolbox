@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:core_ui/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

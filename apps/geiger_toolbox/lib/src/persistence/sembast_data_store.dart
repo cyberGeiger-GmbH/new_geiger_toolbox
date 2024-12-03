@@ -8,19 +8,10 @@ import 'package:sembast_web/sembast_web.dart';
 part 'sembast_data_store.g.dart';
 
 class SembastDataStore {
-  SembastDataStore._(this.db);
-
   final Database db;
   final store = StoreRef.main();
 
-  static Future<Database> _createDatabase(String filename) async {
-    if (!kIsWeb) {
-      final appDocDir = await getApplicationDocumentsDirectory();
-      return databaseFactoryIo.openDatabase('${appDocDir.path}/$filename');
-    } else {
-      return databaseFactoryWeb.openDatabase(filename);
-    }
-  }
+  SembastDataStore._(this.db);
 
   static Future<SembastDataStore> makeDefault() async {
     return SembastDataStore._(await _createDatabase('default.db'));
@@ -29,6 +20,16 @@ class SembastDataStore {
   void dispose() {
     db.close();
   }
+
+  static Future<Database> _createDatabase(String filename) async {
+    if (!kIsWeb) {
+      final appDocDir = await getApplicationDocumentsDirectory();
+
+      return databaseFactoryIo.openDatabase('${appDocDir.path}/$filename');
+    } else {
+      return databaseFactoryWeb.openDatabase(filename);
+    }
+  }
 }
 
 @Riverpod(keepAlive: true)
@@ -36,5 +37,6 @@ Future<SembastDataStore> sembastDataStore(Ref ref) async {
   final store = await SembastDataStore.makeDefault();
   //ondispose close the dipose the db
   ref.onDispose(store.dispose);
+
   return store;
 }

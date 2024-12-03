@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/molecules/buttons/app_button.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +17,7 @@ class EmptyPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).appColors.appColor;
+    
     return Padding(
       padding: const EdgeInsets.all(Spacing.p16),
       child: Center(

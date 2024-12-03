@@ -1,6 +1,9 @@
+// ignore_for_file: avoid-throw-in-catch-block
+
 library conversational_agent_client;
 
 import 'dart:convert';
+import 'dart:io';
 import 'package:conversational_agent_client/src/domain/profile.dart';
 import 'package:conversational_agent_client/src/domain/news.dart';
 import 'package:conversational_agent_client/src/exception/remote_exceptions.dart';
@@ -14,15 +17,13 @@ import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-
-
 part 'news_repository.g.dart';
 
 class NewsRepository {
   final Ref ref;
-  NewsRepository(this.ref);
 
   final _log = logger(className: "$NewsRepository");
+  NewsRepository(this.ref);
 
   Future<List<News>> fetchNews({Profile? profile}) async {
     final dio = ref.read(dioProvider);
@@ -35,9 +36,25 @@ class NewsRepository {
       final Response response = await dio.getUri(uri,
           data: profile != null ? json.encode(profile.toJson()) : null,
           options: Options(headers: Base.headers));
-      final data = response.newsParser();
 
-      return data;
+      return response.newsParser();
+    } on DioException catch (e, s) {
+      _log.e("failed to get => $e, stack => $s");
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw ConnectionTimeoutException();
+      } else if (e.type == DioExceptionType.receiveTimeout) {
+        throw ServerTimeOutException();
+      } else if (e.type == DioExceptionType.unknown &&
+          e.error is SocketException) {
+        throw InterConnectionException();
+      } else if (e.type == DioExceptionType.connectionError) {
+        throw (ConnectionErrorException());
+      }
+      throw DioException(
+          requestOptions: RequestOptions(
+            data: profile,
+          ),
+          error: e);
     } catch (e, s) {
       _log.e("failed to get => $e, stack => $s");
       throw NewsFeedException();

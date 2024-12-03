@@ -2,7 +2,7 @@ import 'package:core_ui/core_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/routing/app_start_up.dart';
+import 'package:geiger_toolbox/src/routing/app_start_up_widget.dart';
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
 
@@ -13,6 +13,7 @@ import '../features/threat_assessment/presentation/home_screen.dart';
 import '../features/threat_assessment/presentation/news_feed/news_feed_screen.dart';
 part 'app_routing.g.dart';
 
+// ignore: prefer-match-file-name
 enum AppRouter {
   appStartUp(name: "appStartUp", path: "/app-starup"),
   home(path: "/", name: "home"),
@@ -30,8 +31,6 @@ enum AppRouter {
 }
 
 class AppRouting {
-  AppRouting._();
-
   static final GlobalKey<NavigatorState> _rootNavKey =
       GlobalKey<NavigatorState>();
   static final GlobalKey<NavigatorState> _shellHomeNavKey =
@@ -46,6 +45,7 @@ class AppRouting {
   static final GlobalKey<NavigatorState> _shellSettingNavKey =
       GlobalKey<NavigatorState>(debugLabel: "shellSetting");
 
+  AppRouting._();
   static GoRouter goRouter(Ref ref) {
     //rebuild GoRouter when app startup state changes
 
@@ -61,6 +61,7 @@ class AppRouting {
         if (appStartUpState.isLoading || appStartUpState.hasError) {
           return AppRouter.appStartUp.path;
         }
+
         return null;
       },
       routes: [
@@ -106,6 +107,7 @@ class AppRouting {
                       pageBuilder: (context, state) {
                         final title = state
                             .pathParameters[AppRouter.newsFeedDetails.name]!;
+
                         return NoTransitionPage(
                           child: NewsFeedScreen(newsTitle: title),
                         );
@@ -237,7 +239,7 @@ class TermsAndConditions extends StatelessWidget {
           AppButton.tertiary(
             label: "Home",
             onPressed: () {
-              //todo
+              context.goNamed(AppRouter.home.name);
             },
             context: context,
           ),

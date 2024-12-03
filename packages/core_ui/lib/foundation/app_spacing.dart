@@ -7,6 +7,8 @@ part 'app_spacing.freezed.dart';
 
 @freezed
 class AppSpacing with _$AppSpacing {
+  AppEdgeInsetsSpacing get asInsets => AppEdgeInsetsSpacing(spacing: this);
+
   const AppSpacing._();
 
   const factory AppSpacing(
@@ -22,19 +24,17 @@ class AppSpacing with _$AppSpacing {
       medium: Spacing.p16,
       big: Spacing.p12,
       large: Spacing.p22);
-
-  AppEdgeInsetsSpacing get asInsets => AppEdgeInsetsSpacing(spacing: this);
 }
 
 @freezed
 class AppEdgeInsetsSpacing with _$AppEdgeInsetsSpacing {
-  const AppEdgeInsetsSpacing._();
-  const factory AppEdgeInsetsSpacing({required AppSpacing spacing}) =
-      _AppEdgeInsetsSpacing;
-
   EdgeInsets get xsmall => EdgeInsets.all(spacing.xsmall);
   EdgeInsets get small => EdgeInsets.all(spacing.small);
   EdgeInsets get medium => EdgeInsets.all(spacing.medium);
   EdgeInsets get big => EdgeInsets.all(spacing.big);
   EdgeInsets get large => EdgeInsets.all(spacing.large);
+
+  const AppEdgeInsetsSpacing._();
+  const factory AppEdgeInsetsSpacing({required AppSpacing spacing}) =
+      _AppEdgeInsetsSpacing;
 }

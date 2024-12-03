@@ -1,10 +1,12 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+// ignore_for_file: no-empty-block, no-magic-number
+
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/golden/golden_test_wrapper.dart';
 import 'package:core_ui/molecules/cards/protection_tile.dart';
 import 'package:core_ui/molecules/cards/todo_tile.dart';
 import 'package:core_ui/organisms/list/app_assets_icons.dart';
-import 'package:core_ui/organisms/list/protection_tile_list.dart';
-import 'package:core_ui/organisms/list/todo_tile_list.dart';
+import 'package:core_ui/organisms/list/protection_tile_list_view.dart';
+import 'package:core_ui/organisms/list/todo_tile_list_view.dart';
 import 'package:flutter/material.dart';
 
 import '../molecules/buttons/app_button.dart';
@@ -19,6 +21,7 @@ class DesignSystemHelper {
     return GoldenTestWrapper(
       getChild: (context) {
         final appColor = Theme.of(context).appColors.appColor;
+
         return Container(
           color: Colors.grey,
           child: Padding(
@@ -247,6 +250,7 @@ class DesignSystemHelper {
         "VPN and Secure Connections",
         "Control Remote Access Software"
       ];
+
       return ProtectionTileListView(
         protectionTile: data
             .map(
@@ -300,6 +304,7 @@ class DesignSystemHelper {
                 "Dedicated prevention pages with tips and information about phone fraud",
             value: true)
       ];
+      
       return TodoTileListView(
         todoTile: data
             .map((value) => TodoTile.plain(

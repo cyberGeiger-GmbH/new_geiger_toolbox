@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class CustomNavigationDestination extends StatelessWidget {
   const CustomNavigationDestination._(
       {required this.icon, required this.label});
-  final IconData icon;
-  final String label;
 
   factory CustomNavigationDestination.home() {
     return const CustomNavigationDestination._(icon: Icons.home, label: "home");
@@ -28,19 +26,22 @@ class CustomNavigationDestination extends StatelessWidget {
     return const CustomNavigationDestination._(
         icon: Icons.settings, label: "setting");
   }
-  @override
-  Widget build(BuildContext context) {
-    return NavigationDestination(key: key, icon: Icon(icon), label: label);
-  }
 
   static List<CustomNavigationDestination> getDestination() {
-    List<CustomNavigationDestination> nav = [
+    return [
       CustomNavigationDestination.home(),
       CustomNavigationDestination.people(),
       CustomNavigationDestination.calendar(),
       CustomNavigationDestination.chat(),
       CustomNavigationDestination.setting(),
     ];
-    return nav;
+  }
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return NavigationDestination(key: key, icon: Icon(icon), label: label);
   }
 }

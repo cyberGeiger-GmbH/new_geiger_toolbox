@@ -22,6 +22,7 @@ class ProtectionTileList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).appColors.appColor;
+
     return Container(
       decoration: Utils.getDecoration(appColors),
       child: Column(
@@ -44,6 +45,7 @@ class ProtectionTileListWithTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).appColors.appColor;
     final appTextStyle = Theme.of(context).appTextStyles.appTextStyle;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

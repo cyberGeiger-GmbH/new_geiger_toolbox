@@ -8,7 +8,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_task_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_task_cache_controller.dart';
 
 class AddTodoWidget extends ConsumerWidget {
   const AddTodoWidget({super.key, required this.todos});
@@ -16,13 +16,14 @@ class AddTodoWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filtered = ref.watch(filterProtectListProvider(todoTask: todos));
+    
     return AsyncValueWidget(
       value: filtered,
-
-      data:(data) => Padding(
+      data: (data) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: TodoTileList(
-          todoTile: data.toItemsList()
+          todoTile: data
+              .toItemsList()
               .map(
                 (todo) => AddTodoListWidget(
                   key: key,
@@ -57,7 +58,7 @@ class AddTodoListWidget extends ConsumerWidget {
         key: key,
         summary: todo.offering.summary,
         title: todo.offering.name,
-        done: state.isCompleted!,
+        done: state.isCompleted ?? false,
         onChange: (value) {
           //set
           ref

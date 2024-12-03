@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +10,6 @@ class ListViewBuilder<T> extends StatelessWidget {
       required this.itemBuilder,
       required this.length,
       this.decoration});
-  final int length;
-
-  final ItemBuilder itemBuilder;
-  final BoxDecoration? decoration;
 
   factory ListViewBuilder.plain(
       {required ItemBuilder itemBuilder, required int length}) {
@@ -31,6 +27,11 @@ class ListViewBuilder<T> extends StatelessWidget {
       decoration: Utils.getDecoration(appColors),
     );
   }
+
+  final int length;
+  final ItemBuilder itemBuilder;
+  final BoxDecoration? decoration;
+
   @override
   Widget build(BuildContext context) {
     return Container(

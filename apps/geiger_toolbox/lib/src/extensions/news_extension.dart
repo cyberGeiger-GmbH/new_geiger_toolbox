@@ -5,7 +5,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 
-extension NewsListExtensions on List<News> {
+extension NewsExtension on List<News> {
   /// Converts List<News> to a list of JSON maps
   List<Map<String, dynamic>> _toJsonList() {
     return map((news) => news.toJson()).toList();

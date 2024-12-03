@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../molecules/texts/app_text.dart';

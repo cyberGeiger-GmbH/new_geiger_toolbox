@@ -17,10 +17,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'conversation_repository.g.dart';
 
 class ConversationRepository {
-  ConversationRepository(this.ref);
   final Ref ref;
 
   final _log = logger(className: "$ConversationRepository");
+  ConversationRepository(this.ref);
 
   ///create userId before starting conversational using Post request
   ///send origin
@@ -38,10 +38,10 @@ class ConversationRepository {
         options: Options(headers: Base.headers),
       );
 
-      final UserID? userId = response.userIdParser();
-      return userId;
+      return response.userIdParser();
     } catch (e, s) {
       _log.e("err => $e, stack => $s");
+
       return null;
     }
   }
@@ -69,10 +69,10 @@ class ConversationRepository {
         options: Options(headers: Base.headers),
       );
 
-      final Message? message = response.messageParser();
-      return message;
+      return response.messageParser();
     } catch (e, s) {
       _log.e("err => $e, stack => $s");
+      
       return null;
     }
   }
@@ -93,15 +93,17 @@ class ConversationRepository {
 //remap
       for (var data in conversations) {
         final Message message = Message(
-            message: data.content[0].text.value.message,
+            message: data.content.first.text.value.message,
             role: data.role == Role.user.value ? Role.user : Role.assistant,
             id: data.id,
             createdAt: DateTime(data.createdAt));
         messages.add(message);
       }
+
       return messages.toList();
     } catch (e, s) {
       _log.e("err => $e, stack => $s");
+
       return null;
     }
   }

@@ -1,5 +1,5 @@
 import 'package:core_ui/foundation/app_colors.dart';
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../../foundation/app_radius.dart';
@@ -101,8 +101,7 @@ class AppButton extends StatelessWidget {
         maximumSize: const Size(130, 100),
         minimumSize: const Size(130, 100),
         backgroundColor: color ?? _appColor(context).surface,
-        padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.p12, vertical: Spacing.p12),
+        padding: const EdgeInsets.all(Spacing.p12),
         overlayColor: _appColor(context).onSurface,
       ),
       onPressed: onPressed,
@@ -132,8 +131,7 @@ class AppButton extends StatelessWidget {
         maximumSize: const Size(100, 100),
         minimumSize: const Size(90, 90),
         backgroundColor: color ?? _appColor(context).surface,
-        padding: const EdgeInsets.symmetric(
-            horizontal: Spacing.p12, vertical: Spacing.p12),
+        padding: const EdgeInsets.all(Spacing.p12),
         overlayColor: _appColor(context).onSurface,
       ),
       onPressed: onPressed,

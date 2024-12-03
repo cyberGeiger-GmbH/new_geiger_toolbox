@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 class AppIconButton extends StatelessWidget {
@@ -6,7 +6,7 @@ class AppIconButton extends StatelessWidget {
     super.key,
     required this.variant,
   });
-  final IconButton variant;
+
 
   factory AppIconButton.filled(
       {Key? key,
@@ -16,6 +16,7 @@ class AppIconButton extends StatelessWidget {
       Color? backgroundColor,
       Color? iconColor}) {
     final appColor = Theme.of(context).appColors.appColor;
+    
     return AppIconButton(
       key: key,
       variant: IconButton.filled(
@@ -38,6 +39,7 @@ class AppIconButton extends StatelessWidget {
       Color? backgroundColor,
       Color? iconColor}) {
     final appColor = Theme.of(context).appColors.appColor;
+
     return AppIconButton(
       key: key,
       variant: IconButton.outlined(
@@ -59,6 +61,7 @@ class AppIconButton extends StatelessWidget {
       Color? backgroudColor,
       Color? iconColor}) {
     final appColor = Theme.of(context).appColors.appColor;
+
     return AppIconButton(
       key: key,
       variant: IconButton.filledTonal(
@@ -80,6 +83,7 @@ class AppIconButton extends StatelessWidget {
       Color? backgroundColor,
       Color? iconColor}) {
     final appColor = Theme.of(context).appColors.appColor;
+
     return AppIconButton(
       key: key,
       variant: IconButton(
@@ -92,6 +96,7 @@ class AppIconButton extends StatelessWidget {
       ),
     );
   }
+    final IconButton variant;
 
   @override
   Widget build(BuildContext context) {

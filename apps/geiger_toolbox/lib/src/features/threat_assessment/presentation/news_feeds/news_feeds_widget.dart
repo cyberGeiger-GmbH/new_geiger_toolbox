@@ -28,6 +28,7 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
   Widget build(BuildContext context) {
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(homeScreenControllerProvider);
+    
     return AsyncValueWidget(
       value: newsFeedValue,
       data: (news) => Column(
@@ -53,7 +54,9 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
             options: CarouselOptions(
               autoPlay: true,
               enlargeCenterPage: true,
+              // ignore: no-magic-number
               enlargeFactor: 0.3,
+              // ignore: no-magic-number
               height: 120,
               //aspectRatio: 4.0,
               disableCenter: true,
@@ -126,6 +129,7 @@ class Dot extends StatelessWidget {
       color: (Theme.of(context).brightness == Brightness.dark
               ? Colors.white
               : Colors.black)
+          // ignore: no-magic-number
           .withOpacity(current == next ? 0.9 : 0.4),
     );
   }

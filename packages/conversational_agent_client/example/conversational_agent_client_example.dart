@@ -7,14 +7,13 @@ import 'package:riverpod/riverpod.dart';
 void main() async {
   // a method to create your container  and to optionally override the default provider client with yours
   ProviderContainer getContainer(Dio? client) {
-    final container = client != null
+    return client != null
         ? ProviderContainer(
             overrides: [
               dioProvider.overrideWithValue(client),
             ],
           )
         : ProviderContainer();
-    return container;
   }
 
 //get your container using your client

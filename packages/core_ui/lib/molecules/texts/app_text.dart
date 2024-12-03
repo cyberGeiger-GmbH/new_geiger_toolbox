@@ -1,6 +1,6 @@
 import 'package:core_ui/foundation/app_colors.dart';
 import 'package:core_ui/foundation/app_text_style.dart';
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {

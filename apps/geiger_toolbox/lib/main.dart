@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/async_error_logger.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
-import 'src/app.dart';
+import 'src/geiger_app.dart';
 import 'src/exceptions/error_logger.dart';
 
 void main() {
@@ -31,6 +31,7 @@ void registerErroHandlers(ErrorLogger errorLogger) {
   // * Handle errors from the underlying platform/OS
   PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
     errorLogger.logError(error, stack);
+    
     return true;
   };
 

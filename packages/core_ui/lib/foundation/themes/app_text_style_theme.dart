@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class AppTextStyleTheme extends ThemeExtension<AppTextStyleTheme> {
   final AppTextStyle _appTextStyle;
+  AppTextStyle get appTextStyle => _appTextStyle;
 
   const AppTextStyleTheme._(this._appTextStyle);
 
@@ -13,8 +14,6 @@ class AppTextStyleTheme extends ThemeExtension<AppTextStyleTheme> {
       AppTextStyleTheme._(AppTextStyle.regular());
 
   factory AppTextStyleTheme.big() => AppTextStyleTheme._(AppTextStyle.big());
-
-  AppTextStyle get appTextStyle => _appTextStyle;
 
   @override
   ThemeExtension<AppTextStyleTheme> copyWith() {
@@ -26,8 +25,6 @@ class AppTextStyleTheme extends ThemeExtension<AppTextStyleTheme> {
       covariant ThemeExtension<AppTextStyleTheme>? other, double t) {
     return this;
   }
-
- 
 
   @override
   String toString() => 'AppTextStyleTheme(_appText: $_appTextStyle)';

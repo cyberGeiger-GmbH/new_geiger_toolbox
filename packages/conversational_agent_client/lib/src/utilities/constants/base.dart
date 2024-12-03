@@ -1,6 +1,4 @@
 class Base {
-  const Base._();
-
   static const String url = "geigercaapi.rhiyeszeros.ch";
 
   /// news path
@@ -14,7 +12,9 @@ class Base {
 
   //retrive previous chat history
   static const String chatHistory = "/messages";
-  
+
   static const origin = {"origin": "toolbox"};
   static const headers = {"Content-Type": "application/json"};
+
+  const Base._();
 }

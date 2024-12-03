@@ -2,41 +2,47 @@ import 'package:flutter/material.dart';
 
 import '../texts/app_text.dart';
 
-class CustomNavigationRailNavigation {
-  const CustomNavigationRailNavigation._({required this.icon, required this.label});
+class CustomNavigationRailDestination {
   //todo to user customIcon
   final IconData icon;
   final String label;
 
-  factory CustomNavigationRailNavigation.home() {
-    return const CustomNavigationRailNavigation._(icon: Icons.home, label: "home");
+  const CustomNavigationRailDestination._(
+      {required this.icon, required this.label});
+
+  factory CustomNavigationRailDestination.home() {
+    return const CustomNavigationRailDestination._(
+        icon: Icons.home, label: "home");
   }
 
-  factory CustomNavigationRailNavigation.people() {
-    return const CustomNavigationRailNavigation._(icon: Icons.people, label: "people");
+  factory CustomNavigationRailDestination.people() {
+    return const CustomNavigationRailDestination._(
+        icon: Icons.people, label: "people");
   }
 
-  factory CustomNavigationRailNavigation.calendar() {
-    return const CustomNavigationRailNavigation._(
+  factory CustomNavigationRailDestination.calendar() {
+    return const CustomNavigationRailDestination._(
         icon: Icons.calendar_month, label: "calendar");
   }
 
-  factory CustomNavigationRailNavigation.chat() {
-    return const CustomNavigationRailNavigation._(icon: Icons.chat, label: "chat");
+  factory CustomNavigationRailDestination.chat() {
+    return const CustomNavigationRailDestination._(
+        icon: Icons.chat, label: "chat");
   }
 
-  factory CustomNavigationRailNavigation.setting() {
-    return const CustomNavigationRailNavigation._(icon: Icons.settings, label: "setting");
+  factory CustomNavigationRailDestination.setting() {
+    return const CustomNavigationRailDestination._(
+        icon: Icons.settings, label: "setting");
   }
 
   static List<NavigationRailDestination> getdestination(BuildContext context) {
-    final home = CustomNavigationRailNavigation.home();
-    final people = CustomNavigationRailNavigation.people();
-    final calendar = CustomNavigationRailNavigation.calendar();
-    final chat = CustomNavigationRailNavigation.chat();
-    final setting = CustomNavigationRailNavigation.setting();
+    final home = CustomNavigationRailDestination.home();
+    final people = CustomNavigationRailDestination.people();
+    final calendar = CustomNavigationRailDestination.calendar();
+    final chat = CustomNavigationRailDestination.chat();
+    final setting = CustomNavigationRailDestination.setting();
 
-    List<NavigationRailDestination> nav = [
+    return [
       NavigationRailDestination(
         icon: Icon(home.icon),
         label: AppText.labelMedium(text: home.label, context: context),
@@ -58,6 +64,5 @@ class CustomNavigationRailNavigation {
         label: AppText.labelMedium(text: setting.label, context: context),
       )
     ];
-    return nav;
   }
 }

@@ -1,6 +1,5 @@
 class Typography {
-  //don't allow user to create an instance
-  Typography._();
+  
 
   //sizes
 
@@ -23,4 +22,7 @@ class Typography {
   static const double sizeXLB = 52;
   static const double sizeXXL = 57;
   static const double sizeXXLB = 64;
+
+  //don't allow user to create an instance
+  Typography._();
 }

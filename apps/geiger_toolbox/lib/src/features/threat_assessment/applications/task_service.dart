@@ -10,8 +10,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'task_service.g.dart';
 
 class TaskService {
-  TaskService(this.ref);
   final Ref ref;
+  TaskService(this.ref);
 
   Future<void> setTodoTask(TodoTask todo) async {
     final repo = ref.read(todoTaskCacheRespositoryProvider);
@@ -51,6 +51,7 @@ TaskService taskService(Ref ref) {
 @Riverpod(keepAlive: true)
 Stream<Task> taskStream(Ref ref) {
   final repoCache = ref.read(todoTaskCacheRespositoryProvider);
+
   return repoCache.watchTodoTask();
 }
 
@@ -58,5 +59,6 @@ Stream<Task> taskStream(Ref ref) {
 Future<Task> filterProtectList(Ref ref,
     {required List<TodoTask> todoTask}) async {
   final taskService = ref.read(taskServiceProvider);
+
   return await taskService.updateTodoIfalreadyCache(todoTask);
 }

@@ -5,14 +5,16 @@ import '../tokens/spacing.dart';
 
 class Utils {
   const Utils._();
-
   static BoxDecoration getDecoration(AppColors appColors) {
+
     return BoxDecoration(
       color: appColors.surface,
-      borderRadius: BorderRadius.circular(Spacing.p8),
+      borderRadius: const BorderRadius.all(Radius.circular(Spacing.p8)),
       boxShadow: [
         BoxShadow(
+          // ignore: no-magic-number
           color: Colors.grey.withOpacity(0.2),
+          // ignore: no-magic-number
           blurRadius: 6,
           offset: const Offset(0, 3), // Shadow position
         ),
@@ -23,10 +25,11 @@ class Utils {
 
   static BoxShadow getBoxShadow(AppColors appColors) {
     return BoxShadow(
+      // ignore: no-magic-number
       color: Colors.grey.withOpacity(0.2),
+      // ignore: no-magic-number
       blurRadius: 6,
       offset: const Offset(0, 3), // Shadow position
-
     );
   }
 }

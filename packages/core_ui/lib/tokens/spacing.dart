@@ -1,8 +1,7 @@
 import 'package:gap/gap.dart';
 
 class Spacing {
-  //don't allow user to create an instance
-  Spacing._();
+ 
   static const double p4 = 4.0;
   static const double p8 = 8.0;
   static const double p12 = 12.0;
@@ -25,4 +24,7 @@ class Spacing {
   static const gapH16 = Gap(Spacing.p16);
   static const gapH22 = Gap(Spacing.p22);
   static const gapH32 = Gap(Spacing.p32);
+
+   //don't allow user to create an instance
+  Spacing._();
 }

@@ -5,6 +5,7 @@ part 'home_screen_controller.g.dart';
 @riverpod
 class HomeScreenController extends _$HomeScreenController {
   @override
+  // ignore: no-empty-block
   FutureOr<void> build() {
     //nothing to do
   }

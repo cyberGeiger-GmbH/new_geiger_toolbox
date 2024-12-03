@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-dynamic
+
 library conversational_agent_client;
 
 import 'dart:convert';
@@ -27,14 +29,15 @@ class News with _$News {
     return json.map<News>((data) => News.fromJson(data)).toList();
   }
 
-  /// Converts a list of JSON maps back to a List<News>
-  static List<News> _fromJsonList(List<Map<String, dynamic>> jsonList) {
-    return jsonList.map((json) => News.fromJson(json)).toList();
-  }
-
   /// Converts a JSON string back to a List<News>
   static List<News> fromJsonString(String jsonString) {
     final List<dynamic> jsonList = json.decode(jsonString);
+
     return _fromJsonList(jsonList.cast<Map<String, dynamic>>());
+  }
+
+  /// Converts a list of JSON maps back to a List<News>
+  static List<News> _fromJsonList(List<Map<String, dynamic>> jsonList) {
+    return jsonList.map((json) => News.fromJson(json)).toList();
   }
 }

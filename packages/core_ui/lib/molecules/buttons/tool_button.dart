@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../../foundation/app_radius.dart';
@@ -12,13 +12,6 @@ class ToolButton extends StatelessWidget {
     required this.icon,
     required this.text,
   });
-
-  final Widget text;
-  final Icon icon;
-
-  final ButtonStyle? style;
-  final VoidCallback? onPressed;
-  // bool
 
   factory ToolButton.elevated(
       {Key? key,
@@ -75,6 +68,12 @@ class ToolButton extends StatelessWidget {
     );
   }
 
+  final Widget text;
+  final Icon icon;
+
+  final ButtonStyle? style;
+  final VoidCallback? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return _CustomButton(
@@ -123,6 +122,7 @@ class _ContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      // ignore: no-magic-number
       height: 80,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

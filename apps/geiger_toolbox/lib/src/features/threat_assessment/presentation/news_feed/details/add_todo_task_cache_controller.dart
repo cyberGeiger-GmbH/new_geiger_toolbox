@@ -8,6 +8,7 @@ part 'add_todo_task_controller.g.dart';
 @riverpod
 class AddTodoTaskCacheController extends _$AddTodoTaskCacheController {
   @override
+  // ignore: no-empty-block
   FutureOr<void> build() {}
 
   Future<void> addTodoToCache(TodoTask todo) async {
@@ -15,11 +16,10 @@ class AddTodoTaskCacheController extends _$AddTodoTaskCacheController {
     final taskService = ref.read(taskServiceProvider);
     //store the todoTask in cache
 
-    if (todo.isCompleted == false) {
-      state = await AsyncValue.guard(() => taskService.setTodoTask(todo));
-    } else {
-      state = await AsyncValue.guard(() => taskService.removeTodoTask(todo));
-    }
+    todo.isCompleted == false
+        ? state = await AsyncValue.guard(() => taskService.setTodoTask(todo))
+        : state =
+            await AsyncValue.guard(() => taskService.removeTodoTask(todo));
   }
 }
 
@@ -28,7 +28,6 @@ class AddTodoTaskCacheController extends _$AddTodoTaskCacheController {
 class AddTodoTaskController extends _$AddTodoTaskController {
   @override
   TodoTask build(TodoTask todo) {
-
     return todo;
   }
 

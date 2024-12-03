@@ -1,19 +1,20 @@
 import 'package:core_ui/gen/fonts.gen.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../tokens/spacing.dart';
 part 'app_icons.freezed.dart';
 
-
 @freezed
-class AppIconData with _$AppIconData {
-  const AppIconData._();
+class AppIconsData with _$AppIconData {
+  const AppIconsData._();
 
-  factory AppIconData(
+  factory AppIconsData(
       {required String fontFamily,
       //required String fontPackage,
       required AppIconCharactersData character,
       required AppIconSizesData sizes}) = _AppIconData;
 
-  factory AppIconData.regular() => AppIconData(
+  factory AppIconsData.regular() => AppIconsData(
       fontFamily: FontFamily.geigerIcons,
       //fontPackage: "core_ui",
       character: AppIconCharactersData.regular(),
@@ -52,5 +53,5 @@ class AppIconSizesData with _$AppIconSizesData {
       required double large}) = _AppIconSizeData;
 
   factory AppIconSizesData.regular() =>
-      AppIconSizesData(small: 16.0, medium: 22.0, large: 32.0);
+      AppIconSizesData(small: Spacing.p16, medium: Spacing.p22, large: Spacing.p32);
 }

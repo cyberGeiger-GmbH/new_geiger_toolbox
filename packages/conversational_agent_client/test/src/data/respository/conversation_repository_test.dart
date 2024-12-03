@@ -18,6 +18,7 @@ void main() {
           )
         : ProviderContainer();
     addTearDown(container.dispose);
+    
     return container;
   }
 
@@ -31,7 +32,7 @@ void main() {
     const userID = UserID(userID: "eb38fecf-c097-4e8a-aea5-dd6953459f11");
     final prompt = Prompt(
         userID: userID.userID,
-        origin: userID.origin!,
+        origin: userID.origin??"",
         userMessage: "hello, what is geiger toolbox");
     final container = getContainer();
     final convRepo = container.read(conversationRepositoryProvider);

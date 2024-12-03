@@ -1,5 +1,5 @@
 import 'package:core_ui/foundation/app_colors.dart';
-import 'package:core_ui/foundation/themes/extension.dart';
+import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +14,7 @@ class TodoTile extends StatelessWidget {
       this.decoration,
       this.done = false});
 
-  final String title;
-  final String summary;
-  final bool done;
-  final ValueChanged? onChange;
-  final BoxDecoration? decoration;
+ 
 
   factory TodoTile.plain(
       {Key? key,
@@ -43,6 +39,7 @@ class TodoTile extends StatelessWidget {
       required BuildContext context,
       bool done = false}) {
     final appColors = Theme.of(context).appColors.appColor;
+
     return TodoTile._(
       key: key,
       decoration: Utils.getDecoration(appColors),
@@ -53,9 +50,16 @@ class TodoTile extends StatelessWidget {
     );
   }
 
+   final String title;
+  final String summary;
+  final bool done;
+  final ValueChanged? onChange;
+  final BoxDecoration? decoration;
+
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).appColors.appColor;
+    
     return Container(
       decoration: decoration,
       child: _ContentWidget(

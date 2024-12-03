@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'app_icons.dart';
+part of 'app_icons_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -24,15 +24,15 @@ mixin _$AppIconData {
   /// Create a copy of AppIconData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppIconDataCopyWith<AppIconData> get copyWith =>
+  $AppIconDataCopyWith<AppIconsData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppIconDataCopyWith<$Res> {
   factory $AppIconDataCopyWith(
-          AppIconData value, $Res Function(AppIconData) then) =
-      _$AppIconDataCopyWithImpl<$Res, AppIconData>;
+          AppIconsData value, $Res Function(AppIconsData) then) =
+      _$AppIconDataCopyWithImpl<$Res, AppIconsData>;
   @useResult
   $Res call(
       {String fontFamily,
@@ -44,7 +44,7 @@ abstract class $AppIconDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AppIconDataCopyWithImpl<$Res, $Val extends AppIconData>
+class _$AppIconDataCopyWithImpl<$Res, $Val extends AppIconsData>
     implements $AppIconDataCopyWith<$Res> {
   _$AppIconDataCopyWithImpl(this._value, this._then);
 
@@ -196,7 +196,7 @@ class _$AppIconDataImpl extends _AppIconData {
       __$$AppIconDataImplCopyWithImpl<_$AppIconDataImpl>(this, _$identity);
 }
 
-abstract class _AppIconData extends AppIconData {
+abstract class _AppIconData extends AppIconsData {
   factory _AppIconData(
       {required final String fontFamily,
       required final AppIconCharactersData character,
