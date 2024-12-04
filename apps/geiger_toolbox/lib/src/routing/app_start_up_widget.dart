@@ -16,7 +16,8 @@ Future<void> appStartUp(Ref ref) async {
     //ensure we invalidate all the providers we depend on
     ref.invalidate(sembastDataStoreProvider);
   });
-  //all asynchronous app initialization
+  //Preload any other FutureProviders what will be used with requireValue
+  
   //await Future.delayed(Duration(seconds: 2));
   await ref.watch(sembastDataStoreProvider.future);
 }

@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_screen_controller.dart';
+part of 'scan_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$homeScreenControllerHash() =>
-    r'a4d9f570d93d4c70dacd8bb58400e63406be730e';
+String _$scanControllerHash() => r'a82c5b9bafd0f2e8653df82a072797de68d1ee45';
 
-/// See also [HomeScreenController].
-@ProviderFor(HomeScreenController)
-final homeScreenControllerProvider =
-    AutoDisposeAsyncNotifierProvider<HomeScreenController, void>.internal(
-  HomeScreenController.new,
-  name: r'homeScreenControllerProvider',
+/// See also [ScanController].
+@ProviderFor(ScanController)
+final scanControllerProvider =
+    AutoDisposeAsyncNotifierProvider<ScanController, void>.internal(
+  ScanController.new,
+  name: r'scanControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$homeScreenControllerHash,
+      : _$scanControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$HomeScreenController = AutoDisposeAsyncNotifier<void>;
+typedef _$ScanController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,7 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/home_screen_controller.dart';
+
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_controller.dart';
 
 class ScanWidget extends ConsumerWidget {
   const ScanWidget({
@@ -10,15 +11,15 @@ class ScanWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeScreenControllerProvider);
-    
+    final state = ref.watch(scanControllerProvider);
+
     return AppButton.scan(
       label: state.isLoading ? "scanning.." : 'Scan',
       context: context,
       onPressed: state.isLoading
           ? null
           : () {
-              ref.read(homeScreenControllerProvider.notifier).scan();
+              ref.read(scanControllerProvider.notifier).scan();
             },
     );
   }

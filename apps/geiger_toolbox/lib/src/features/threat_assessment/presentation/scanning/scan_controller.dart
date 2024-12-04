@@ -1,9 +1,10 @@
-import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'home_screen_controller.g.dart';
+
+import '../../applications/news_feed_service.dart';
+part 'scan_controller.g.dart';
 
 @riverpod
-class HomeScreenController extends _$HomeScreenController {
+class ScanController extends _$ScanController {
   @override
   // ignore: no-empty-block
   FutureOr<void> build() {

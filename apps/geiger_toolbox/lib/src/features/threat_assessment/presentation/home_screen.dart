@@ -5,9 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/dashboard_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/home_screen_controller.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scan_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_widget.dart';
 
 //home screen
 class HomeScreen extends ConsumerWidget {
@@ -17,9 +18,10 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //show error when scan button throw as exceptions
     ref.listen(
-      homeScreenControllerProvider,
+      scanControllerProvider,
       (_, nextState) => nextState.showAlertDialogOnError(context: context),
     );
+
     // final state = ref.watch(homeScreenControllerProvider);
 
     final appColors = Theme.of(context).appColors.appColor;

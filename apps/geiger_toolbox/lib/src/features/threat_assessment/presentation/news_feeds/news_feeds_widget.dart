@@ -7,7 +7,8 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/home_screen_controller.dart';
+
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_controller.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,7 +28,7 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
   @override
   Widget build(BuildContext context) {
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
-    final state = ref.watch(homeScreenControllerProvider);
+    final state = ref.watch(scanControllerProvider);
     
     return AsyncValueWidget(
       value: newsFeedValue,

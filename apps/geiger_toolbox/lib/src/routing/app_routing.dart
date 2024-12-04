@@ -71,12 +71,12 @@ class AppRouting {
           name: AppRouter.appStartUp.name,
           pageBuilder: (context, state) => NoTransitionPage(
             child: AppStartUpWidget(
-                key: state.pageKey,
-                 //* the loaded route will be managed by GoRouter on state change 
+               // key: state.pageKey,
+                //* the loaded route will be managed by GoRouter on state change
                 //* this can be placeholder but is show a dark screen when [SizedBox.shrink()] is used before transition to the next screen
                 //* I has pass the home screen to avoid this
-               
-                onLoaded: (_) => const HomeScreen()),
+
+                onLoaded: (context) => SizedBox.shrink()),
           ),
         ),
         GoRoute(

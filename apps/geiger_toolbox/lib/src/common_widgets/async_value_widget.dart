@@ -1,4 +1,5 @@
 import 'package:core_ui/organisms/error_message.dart';
+import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,8 +18,11 @@ class AsyncValueWidget<T> extends StatelessWidget {
           errorMessage: e.toString(),
         ),
       ),
-      loading: () =>
-          loadingWidget ?? const Center(child: CircularProgressIndicator()),
+      loading: () => Padding(
+        padding: const EdgeInsets.all(Spacing.p16),
+        child:
+            loadingWidget ?? const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }
