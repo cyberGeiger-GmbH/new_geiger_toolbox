@@ -1,0 +1,30 @@
+flavorizr:
+ide: "vscode"
+app:
+  android:
+    flavorDimensions: "flavor-type"
+    
+flavors:
+  dev:
+    app:
+      name: "Geiger Toolbox Dev"
+    android:
+      applicationId: "com.cyber_geiger.geiger_toolbox.dev"
+    ios:
+      bundleId: "com.cyber_geiger.geigerToolbox.dev"
+  
+  stg:
+    app:
+      name: "Geiger Toolbox Stg"
+    android:
+      applicationId: "com.cyber_geiger.geiger_toolbox.stg"  
+    ios:
+      bundleId: "com.cyber_geiger.geigerToolbox.stg"
+  
+  prod:
+    app:
+      name: "Geiger Toolbox"
+    android:
+      applicationId: "com.cyber_geiger.geiger_toolbox"  
+    ios:
+      bundleId: "com.cyber_geiger.geigerToolbox"
