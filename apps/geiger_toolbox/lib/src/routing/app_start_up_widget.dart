@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../persistence/sembast_data_store.dart';
 
-part 'app_start_up.g.dart';
+part 'app_start_up_widget.g.dart';
 
 @Riverpod(keepAlive: true)
 Future<void> appStartUp(Ref ref) async {
@@ -16,8 +16,8 @@ Future<void> appStartUp(Ref ref) async {
     //ensure we invalidate all the providers we depend on
     ref.invalidate(sembastDataStoreProvider);
   });
-  //al asynchronous app initialization
-
+  //all asynchronous app initialization
+  //await Future.delayed(Duration(seconds: 2));
   await ref.watch(sembastDataStoreProvider.future);
 }
 
@@ -29,12 +29,13 @@ class AppStartUpWidget extends ConsumerWidget {
     final appStartupState = ref.watch(appStartUpProvider);
 
     return appStartupState.when(
-        data: (_) => onLoaded(context),
-        error: (e, s) => AppStartUpErrorWidget(
-              message: e.toString(),
-              onRetry: () => ref.invalidate(appStartUpProvider),
-            ),
-        loading: () => const AppStartUpLoadingWidget());
+      data: (_) => onLoaded(context),
+      error: (e, s) => AppStartUpErrorWidget(
+        message: e.toString(),
+        onRetry: () => ref.invalidate(appStartUpProvider),
+      ),
+      loading: () => const AppStartUpLoadingWidget(),
+    );
   }
 }
 
@@ -43,9 +44,15 @@ class AppStartUpLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final appColors = Theme.of(context).appColors.appColor;
+
+    return Scaffold(
+      backgroundColor: appColors.scaffoldBackgroundColor,
       appBar: CustomAppBar(),
-      body: Center(child: CircularProgressIndicator()),
+      body: Padding(
+        padding: const EdgeInsets.all(Spacing.p16),
+        child: const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }
@@ -58,7 +65,10 @@ class AppStartUpErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).appColors.appColor;
+
     return Scaffold(
+      backgroundColor: appColors.scaffoldBackgroundColor,
       appBar: const CustomAppBar(),
       body: Center(
         child: Column(

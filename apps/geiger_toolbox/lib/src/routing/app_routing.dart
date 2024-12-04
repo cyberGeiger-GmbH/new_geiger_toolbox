@@ -67,24 +67,26 @@ class AppRouting {
       routes: [
         //for ui without bottom navigation
         GoRoute(
+          path: AppRouter.appStartUp.path,
+          name: AppRouter.appStartUp.name,
+          pageBuilder: (context, state) => NoTransitionPage(
+            child: AppStartUpWidget(
+                key: state.pageKey,
+                 //* the loaded route will be managed by GoRouter on state change 
+                //* this can be placeholder but is show a dark screen when [SizedBox.shrink()] is used before transition to the next screen
+                //* I has pass the home screen to avoid this
+               
+                onLoaded: (_) => const HomeScreen()),
+          ),
+        ),
+        GoRoute(
           path: AppRouter.termsAndCondation.path,
           name: AppRouter.termsAndCondation.name,
           pageBuilder: (context, state) => const NoTransitionPage(
             child: TermsAndConditions(),
           ),
         ),
-        GoRoute(
-          path: AppRouter.appStartUp.path,
-          name: AppRouter.appStartUp.name,
-          pageBuilder: (context, state) => NoTransitionPage(
-            child: AppStartUpWidget(
-              key: state.pageKey,
-              //* this is a placeholder
-              //* the loaded route will be managed by GoRouter on state change
-              onLoaded: (_) => const SizedBox.shrink(),
-            ),
-          ),
-        ),
+
         //for ui with bottom navigation
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) =>

@@ -3,7 +3,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/task_
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'add_todo_task_controller.g.dart';
+part 'add_todo_task_cache_controller.g.dart';
 
 @riverpod
 class AddTodoTaskCacheController extends _$AddTodoTaskCacheController {
