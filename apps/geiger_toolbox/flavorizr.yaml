@@ -1,4 +1,3 @@
-flavorizr:
   ide: "vscode"
   app:
     android:
@@ -33,9 +32,9 @@ flavorizr:
         name: "Geiger Toolbox"
       android:
         applicationId: "com.cyber_geiger.geiger_toolbox"  
-        icon: "assets/android/app-icon.png"
+        icon: "assets/prod/app-icon.png"
         adaptiveIcon:
-          foreground: "assets/android/app-icon-foreground.png"
+          foreground: "assets/prod/app-icon-foreground.png"
           background: "assets/android/app-icon-background.png"
       ios:
         bundleId: "com.cyber_geiger.geigerToolbox"

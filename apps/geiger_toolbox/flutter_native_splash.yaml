@@ -5,4 +5,4 @@ flutter_native_splash:
   color_dark_android: "#121212"
   color_ios: "#ffffff"
   color_dark_ios: "#121212"
-  image: "assets/android/app-icon-foreground.png"
+  image: "assets/prod/app-icon-foreground.png"
