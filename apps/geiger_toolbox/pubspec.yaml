@@ -27,6 +27,7 @@ dependencies:
   json_annotation: 4.9.0
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -41,9 +42,12 @@ dev_dependencies:
   leak_tracker_flutter_testing: 3.0.5
   #code analyzer
   dart_code_metrics_presets: 2.18.0
+  flutter_launcher_icons: 0.14.1
 
 # The following section is specific to Flutter packages.
 flutter:
 
   uses-material-design: true
+  assets:
+    - assets/
 

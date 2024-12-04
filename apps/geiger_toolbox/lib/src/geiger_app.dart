@@ -13,7 +13,7 @@ class GeigerApp extends ConsumerWidget {
     final GoRouter router = ref.watch(goRouterProvider);
 
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Geiger Toolbox',
       theme: ThemeData(
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         extensions: [
