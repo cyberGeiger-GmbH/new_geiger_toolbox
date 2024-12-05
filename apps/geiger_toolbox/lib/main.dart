@@ -8,7 +8,7 @@ import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'src/geiger_app.dart';
 import 'src/exceptions/error_logger.dart';
 
-void main() {
+Future<void> runMainApp() async{
   WidgetsFlutterBinding.ensureInitialized();
   //* Register error handler.For more info, see:
   // * https://docs.flutter.dev/testing/errors
