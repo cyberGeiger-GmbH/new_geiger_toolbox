@@ -1,6 +1,8 @@
+import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
@@ -39,16 +41,31 @@ class HomeScreen extends ConsumerWidget {
               ScanWidget(),
               Spacing.gapH16,
               //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
-              const NewsFeedsWidget(),
+              NewsFeedsWidget(),
               Spacing.gapH16,
               AssetWidget(),
               Spacing.gapH16,
-              DashboardWidget(),
+              appFlavor == "dev" ? TodoRecommendation() : DashboardWidget(),
               Spacing.gapH12,
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class TodoRecommendation extends StatelessWidget {
+  const TodoRecommendation({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppText.bodyLarge(
+      text: "dev mode... feature coming soon",
+      context: context,
+      color: Colors.black,
     );
   }
 }

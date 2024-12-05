@@ -7,28 +7,22 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_controller.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
-class NewsFeedsWidget extends ConsumerStatefulWidget {
-  const NewsFeedsWidget({super.key});
+class NewsFeedsWidget extends ConsumerWidget {
+  NewsFeedsWidget({super.key});
 
-  @override
-  ConsumerState<NewsFeedsWidget> createState() {
-    return _NewsFeedsWidgetState();
-  }
-}
-
-class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
-  int _current = 0;
   final CarouselSliderController _controller = CarouselSliderController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(scanControllerProvider);
+    final index = ref.watch(newsFeedsControllerProvider);
 
     return AsyncValueWidget(
       value: newsFeedValue,
@@ -39,11 +33,11 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
                 CarouselSlider(
                   items: news.toWidgetList(
                     context: context,
-                    currentIndex: _current,
+                    currentIndex: index,
                     onPressed: state.isLoading
                         ? null
                         : () {
-                            final title = news[_current].title;
+                            final title = news[index].title;
                             context.goNamed(
                               AppRouter.newsFeedDetails.name,
                               pathParameters: {
@@ -55,7 +49,7 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
                   ),
                   controller: _controller,
                   options: CarouselOptions(
-                    autoPlay: true,
+                    autoPlay: false,
                     enlargeCenterPage: true,
                     // ignore: no-magic-number
                     enlargeFactor: 0.3,
@@ -65,11 +59,13 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
                     disableCenter: true,
                     //auto callback
                     onPageChanged: (index, reason) {
-                      setState(() => _current = index);
+                      ref
+                          .read(newsFeedsControllerProvider.notifier)
+                          .update(index);
                     },
                   ),
                 ),
-                Indicator(data: news, current: _current),
+                Indicator(data: news, current: index),
               ],
             ),
     );
