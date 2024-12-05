@@ -21,7 +21,7 @@ class NewsFeedsWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appColors = Theme.of(context).appColors.appColor;
-    
+
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(scanControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);

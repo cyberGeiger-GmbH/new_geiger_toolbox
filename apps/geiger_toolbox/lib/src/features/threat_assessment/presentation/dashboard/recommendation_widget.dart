@@ -19,9 +19,15 @@ class RecommendationWidget extends ConsumerWidget {
     return AsyncValueWidget(
       value: newsFeedValue,
       data: (data) {
-        final recommendations = data[newsFeedIndex].recommendations;
+        try {
+          final recommendations = data[newsFeedIndex].recommendations;
 
-        return RecommendationTileListWidget(recommendations: recommendations);
+          return recommendations.isEmpty
+              ? SizedBox.shrink()
+              : RecommendationTileListWidget(recommendations: recommendations);
+        } catch (e) {
+          return const SizedBox.shrink();
+        }
       },
     );
   }
