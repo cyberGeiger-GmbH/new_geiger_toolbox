@@ -1,31 +1,105 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "1.0.0",
+    "version": "0.2.0",
     "configurations": [
-
-        {
-            "name": "geiger_toolbox (debug mode)",
-            "cwd": "apps/geiger_toolbox",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug"
-        },
-        {
-            "name": "geiger_toolbox (profile mode)",
-            "cwd": "apps/geiger_toolbox",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "geiger_toolbox (release mode)",
-            "cwd": "apps/geiger_toolbox",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
+      {
+        "name": "dev Debug",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "args": [
+          "--flavor",
+          "dev"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_dev.dart"
+      },
+      {
+        "name": "dev Profile",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "profile",
+        "args": [
+          "--flavor",
+          "dev"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_dev.dart"
+      },
+      {
+        "name": "dev Release",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "release",
+        "args": [
+          "--flavor",
+          "dev"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_dev.dart"
+      },
+      {
+        "name": "stg Debug",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "args": [
+          "--flavor",
+          "stg"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_stg.dart"
+      },
+      {
+        "name": "stg Profile",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "profile",
+        "args": [
+          "--flavor",
+          "stg"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_stg.dart"
+      },
+      {
+        "name": "stg Release",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "release",
+        "args": [
+          "--flavor",
+          "stg"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_stg.dart"
+      },
+      {
+        "name": "prod Debug",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "args": [
+          "--flavor",
+          "prod"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_prod.dart"
+      },
+      {
+        "name": "prod Profile",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "profile",
+        "args": [
+          "--flavor",
+          "prod"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_prod.dart"
+      },
+      {
+        "name": "prod Release",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "release",
+        "args": [
+          "--flavor",
+          "prod"
+        ],
+        "program": "apps/geiger_toolbox/lib/main_prod.dart"
+      },
      
         {
             "name": "core_ui (debug mode)",
