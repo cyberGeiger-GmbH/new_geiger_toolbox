@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/dashboard_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/recommendation_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_controller.dart';
@@ -45,27 +46,12 @@ class HomeScreen extends ConsumerWidget {
               Spacing.gapH16,
               AssetWidget(),
               Spacing.gapH16,
-              appFlavor == "dev" ? TodoRecommendation() : DashboardWidget(),
+              appFlavor == "dev" ? RecommendationWidget() : DashboardWidget(),
               Spacing.gapH12,
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class TodoRecommendation extends StatelessWidget {
-  const TodoRecommendation({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AppText.bodyLarge(
-      text: "dev mode... feature coming soon",
-      context: context,
-      color: Colors.black,
     );
   }
 }

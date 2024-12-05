@@ -27,6 +27,7 @@ class NewsFeedCacheRepository {
 
   NewsFeedCacheRepository(this.ref);
 
+///store news in localstorage
   Future<void> cacheNewsFeed(
       {Profile? profile, required List<News> data}) async {
     try {
@@ -38,6 +39,7 @@ class NewsFeedCacheRepository {
     }
   }
 
+/// retrive store news object
   Stream<List<News>> watchNewsFeeds() {
     final dataStore = _sembastDataStore;
     final record = dataStore.store.record(newsObjectsKey);

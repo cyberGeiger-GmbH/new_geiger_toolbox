@@ -20,6 +20,8 @@ class NewsFeedsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appColors = Theme.of(context).appColors.appColor;
+    
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(scanControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);
@@ -27,7 +29,10 @@ class NewsFeedsWidget extends ConsumerWidget {
     return AsyncValueWidget(
       value: newsFeedValue,
       data: (news) => news.isEmpty
-          ? const SizedBox.shrink()
+          ? EmptyContent(
+              message: "Please Press the Scan button",
+              color: appColors.defaultColor,
+            )
           : Column(
               children: [
                 CarouselSlider(
