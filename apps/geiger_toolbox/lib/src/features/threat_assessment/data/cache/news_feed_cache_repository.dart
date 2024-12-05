@@ -8,7 +8,7 @@ import 'package:geiger_toolbox/src/exceptions/error_logger.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
-import 'package:geiger_toolbox/src/persistence/sembast_data_store.dart';
+import 'package:geiger_toolbox/src/utils/sembast_data_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sembast/sembast_io.dart';
 

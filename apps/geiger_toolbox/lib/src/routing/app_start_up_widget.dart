@@ -3,10 +3,11 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/utils/package_info_provider.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../persistence/sembast_data_store.dart';
+import '../utils/sembast_data_store.dart';
 
 part 'app_start_up_widget.g.dart';
 
@@ -15,11 +16,15 @@ Future<void> appStartUp(Ref ref) async {
   ref.onDispose(() {
     //ensure we invalidate all the providers we depend on
     ref.invalidate(sembastDataStoreProvider);
+    ref.invalidate(packageInfoProvider);
   });
   //Preload any other FutureProviders what will be used with requireValue
-  
-  //await Future.delayed(Duration(seconds: 2));
+
+//just to see the loading screen;
+//todo remove in production
+  await Future.delayed(Duration(seconds: 2));
   await ref.watch(sembastDataStoreProvider.future);
+  await ref.watch(packageInfoProvider.future);
 }
 
 class AppStartUpWidget extends ConsumerWidget {

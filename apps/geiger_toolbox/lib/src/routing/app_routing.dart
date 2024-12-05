@@ -73,10 +73,9 @@ class AppRouting {
             child: AppStartUpWidget(
                // key: state.pageKey,
                 //* the loaded route will be managed by GoRouter on state change
-                //* this can be placeholder but is show a dark screen when [SizedBox.shrink()] is used before transition to the next screen
-                //* I has pass the home screen to avoid this
+                //* this can be placeholde
 
-                onLoaded: (context) => SizedBox.shrink()),
+                onLoaded: (context) => const SizedBox.shrink()),
           ),
         ),
         GoRoute(

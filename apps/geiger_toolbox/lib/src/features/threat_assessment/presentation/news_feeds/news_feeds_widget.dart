@@ -29,47 +29,49 @@ class _NewsFeedsWidgetState extends ConsumerState<NewsFeedsWidget> {
   Widget build(BuildContext context) {
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(scanControllerProvider);
-    
+
     return AsyncValueWidget(
       value: newsFeedValue,
-      data: (news) => Column(
-        children: [
-          CarouselSlider(
-            items: news.toWidgetList(
-              context: context,
-              currentIndex: _current,
-              onPressed: state.isLoading
-                  ? null
-                  : () {
-                      final title = news[_current].title;
-                      context.goNamed(
-                        AppRouter.newsFeedDetails.name,
-                        pathParameters: {
-                          AppRouter.newsFeedDetails.name:
-                              title.replaceSpacesWithHyphen
-                        },
-                      );
+      data: (news) => news.isEmpty
+          ? const SizedBox.shrink()
+          : Column(
+              children: [
+                CarouselSlider(
+                  items: news.toWidgetList(
+                    context: context,
+                    currentIndex: _current,
+                    onPressed: state.isLoading
+                        ? null
+                        : () {
+                            final title = news[_current].title;
+                            context.goNamed(
+                              AppRouter.newsFeedDetails.name,
+                              pathParameters: {
+                                AppRouter.newsFeedDetails.name:
+                                    title.replaceSpacesWithHyphen
+                              },
+                            );
+                          },
+                  ),
+                  controller: _controller,
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    // ignore: no-magic-number
+                    enlargeFactor: 0.3,
+                    // ignore: no-magic-number
+                    height: 120,
+                    //aspectRatio: 4.0,
+                    disableCenter: true,
+                    //auto callback
+                    onPageChanged: (index, reason) {
+                      setState(() => _current = index);
                     },
+                  ),
+                ),
+                Indicator(data: news, current: _current),
+              ],
             ),
-            controller: _controller,
-            options: CarouselOptions(
-              autoPlay: true,
-              enlargeCenterPage: true,
-              // ignore: no-magic-number
-              enlargeFactor: 0.3,
-              // ignore: no-magic-number
-              height: 120,
-              //aspectRatio: 4.0,
-              disableCenter: true,
-              //auto callback
-              onPageChanged: (index, reason) {
-                setState(() => _current = index);
-              },
-            ),
-          ),
-          Indicator(data: news, current: _current),
-        ],
-      ),
     );
   }
 }

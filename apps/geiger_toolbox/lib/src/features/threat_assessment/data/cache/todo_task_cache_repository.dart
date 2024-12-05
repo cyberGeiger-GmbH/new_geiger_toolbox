@@ -3,7 +3,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
-import 'package:geiger_toolbox/src/persistence/sembast_data_store.dart';
+import 'package:geiger_toolbox/src/utils/sembast_data_store.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sembast/sembast.dart';
 
