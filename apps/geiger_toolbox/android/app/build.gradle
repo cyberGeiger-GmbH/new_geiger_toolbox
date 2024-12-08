@@ -13,17 +13,17 @@ android {
     productFlavors {
         dev {
             dimension "flavor-type"
-            applicationId "com.cyber_geiger.geiger_toolbox.dev"
+            applicationId "com.cybergeiger.toolbox.dev"
             resValue "string", "app_name", "Geiger Toolbox Dev"
         }
         stg {
             dimension "flavor-type"
-            applicationId "com.cyber_geiger.geiger_toolbox.stg"
+            applicationId "com.cybergeiger.toolbox.stg"
             resValue "string", "app_name", "Geiger Toolbox Stg"
         }
         prod {
             dimension "flavor-type"
-            applicationId "com.cyber_geiger.geiger_toolbox"
+            applicationId "com.cybergeiger.toolbox"
             resValue "string", "app_name", "Geiger Toolbox"
         }
     }
@@ -45,7 +45,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.cyber_geiger.geiger_toolbox"
+        applicationId = "com.cybergeiger.toolbox"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

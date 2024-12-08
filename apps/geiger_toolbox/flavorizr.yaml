@@ -7,35 +7,35 @@
       app:
         name: "Geiger Toolbox Dev"
       android:
-        applicationId: "com.cyber_geiger.geiger_toolbox.dev"
+        applicationId: "com.cybergeiger.toolbox.dev"
         icon: "assets/dev/app-icon.png"
         adaptiveIcon:
           foreground: "assets/dev/app-icon-foreground.png"
           background: "assets/android/app-icon-background.png"
       ios:
-        bundleId: "com.cyber_geiger.geigerToolbox.dev"
+        bundleId: "com.cybergeiger.toolbox.dev"
         icon: "assets/dev/app-icon.png"
     stg:
       app:
         name: "Geiger Toolbox Stg"
       android:
-        applicationId: "com.cyber_geiger.geiger_toolbox.stg"  
+        applicationId: "com.cybergeiger.toolbox.stg"  
         icon: "assets/stg/app-icon.png"
         adaptiveIcon:
           foreground: "assets/stg/app-icon-foreground.png"
           background: "assets/android/app-icon-background.png"
       ios:
-        bundleId: "com.cyber_geiger.geigerToolbox.stg"
+        bundleId: "com.cybergeiger.toolbox.stg"
         icon: "assets/stg/app-icon.png" 
     prod:
       app:
         name: "Geiger Toolbox"
       android:
-        applicationId: "com.cyber_geiger.geiger_toolbox"  
+        applicationId: "com.cybergeiger.toolbox"  
         icon: "assets/prod/app-icon.png"
         adaptiveIcon:
           foreground: "assets/prod/app-icon-foreground.png"
           background: "assets/android/app-icon-background.png"
       ios:
-        bundleId: "com.cyber_geiger.geigerToolbox"
+        bundleId: "com.cybergeiger.toolbox"
         icon: "assets/prod/app-icon.png"
