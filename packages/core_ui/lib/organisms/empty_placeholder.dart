@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/molecules/buttons/app_button.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,6 @@ class EmptyPlaceholder extends StatelessWidget {
   final String label;
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).appColors.appColor;
     
     return Padding(
       padding: const EdgeInsets.all(Spacing.p16),
@@ -27,7 +25,7 @@ class EmptyPlaceholder extends StatelessWidget {
               context: context,
               text: message,
               textAlign: TextAlign.center,
-              color: appColor.defaultColor,
+          
             ),
             Spacing.gapH32,
             AppButton.primary(label: label, onPressed: onTap, context: context)

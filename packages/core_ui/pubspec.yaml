@@ -8,9 +8,11 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  cached_network_image: 3.4.1
   flutter:
     sdk: flutter
+  cached_network_image: 3.4.1
+  flex_color_scheme: 8.0.2
+  
   freezed_annotation: 2.4.4
   gap: 3.0.1
   json_annotation: 4.9.0
@@ -27,8 +29,6 @@ dev_dependencies:
   json_serializable: 6.8.0
   flutter_gen_runner: 5.8.0
   golden_toolkit: 0.15.0
-     #code analyzer
-  dart_code_metrics_presets: 2.18.0
 
 #for auto generating referece class for assets
 flutter_gen:

@@ -1,11 +1,9 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/utils/list_view_builder.dart';
 import 'package:core_ui/utils/utils.dart';
 
 import 'package:flutter/material.dart';
 
 import '../../molecules/cards/todo_tile.dart';
-
 
 ///example on how to use [ListViewBuilder.outlined]
 
@@ -26,8 +24,8 @@ class TodoTileList extends StatelessWidget {
   final List<Widget> todoTile;
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
-    
+    final appColors = Theme.of(context).colorScheme;
+
     return Container(
       decoration: Utils.getDecoration(appColors),
       child: Column(

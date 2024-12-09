@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +23,11 @@ void showModal(BuildContext context,
 
 SliverWoltModalSheetPage takeActionSliverWolModalSheetPage(BuildContext context,
     {required String title, required Widget widget}) {
-  final appColors = Theme.of(context).appColors.appColor;
-  
+  final appColors = Theme.of(context).colorScheme;
+
   return SliverWoltModalSheetPage(
     forceMaxHeight: true,
-    backgroundColor: appColors.scaffoldBackgroundColor,
+    backgroundColor: appColors.surface,
     // trailingNavBarWidget: AppIconButton.filledTonal(
     //   iconData: Icons.close,
     //   context: context,
@@ -41,7 +40,6 @@ SliverWoltModalSheetPage takeActionSliverWolModalSheetPage(BuildContext context,
     pageTitle: AppText.headlineSmall(
       text: title,
       context: context,
-      color: appColors.defaultColor,
       textAlign: TextAlign.center,
     ),
     mainContentSliversBuilder: (bottomSheetContext) {

@@ -20,7 +20,7 @@ class NewsFeedsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appColors = Theme.of(context).appColors.appColor;
+   
 
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(scanControllerProvider);
@@ -31,7 +31,7 @@ class NewsFeedsWidget extends ConsumerWidget {
       data: (news) => news.isEmpty
           ? EmptyContent(
               message: "Please Press the Scan button",
-              color: appColors.defaultColor,
+              
             )
           : Column(
               children: [

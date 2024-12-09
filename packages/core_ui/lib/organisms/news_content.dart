@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
+
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:core_ui/organisms/empty_content.dart';
 import 'package:core_ui/tokens/spacing.dart';
@@ -17,19 +17,16 @@ class NewsContent extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppText.titleLarge(
           text: title,
           context: context,
-          color: appColors.defaultColor,
         ),
         Spacing.gapH4,
         EmptyContent(
-            color: appColors.defaultColor,
             textAlign: TextAlign.justify,
             message: summary),
         Spacing.gapH4,

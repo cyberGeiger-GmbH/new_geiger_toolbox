@@ -3,24 +3,25 @@ import 'package:flutter/material.dart';
 class CoreColor {
 
 
-  //default color
-  static const Color defaultColor = Colors.black;
+
   //todo at an inactive color
 //colors for light theme
   //primary color variant
-  static const Color primary = Color(0xFF276A49);
+
+
+  static const Color primary = Color.fromRGBO(56, 105, 63, 1);
   static const Color onPrimary = Color(0xFFFFFFFF);
   static const Color primaryContainer = Color(0xFFADF2C7);
   static const Color onPrimaryContainer = Color(0xFF002111);
 
 //seconday color variant
-  static const Color secondary = Color(0xFF4E6355);
+  static const Color secondary = Color(0xFF526350);
   static const Color onSecondary = Color(0xFFFFFFFF);
   static const Color secondaryContainer = Color(0xFFD0E8D6);
   static const Color onSecondaryContainer = Color(0xFF0B1F14);
 
 //tertiary color variant
-  static const Color tertiary = Color(0xFF3C6471);
+  static const Color tertiary = Color(0xFF39656B);
   static const Color onTertiary = Color(0xFFFFFFFF);
   static const Color tertiaryContainer = Color(0xFFBFE9F9);
   static const Color onTertiaryContainer = Color(0xFF001F27);
@@ -30,7 +31,7 @@ class CoreColor {
   static const onSurface = Color(0xff171d19);
 
 //error color variant
-  static const Color error = Color(0xffba1a1a);
+   static const Color error = Color(0xffba1a1a);
   static const Color onError = Color(0xffffffff);
   static const Color errorContainer = Color(0xffffdad6);
   static const Color onErrorContainer = Color(0xff410002);

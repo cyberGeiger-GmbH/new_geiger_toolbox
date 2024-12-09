@@ -1,4 +1,3 @@
-import 'package:core_ui/core_ui.dart';
 
 import 'package:flutter/material.dart';
 
@@ -17,8 +16,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).appColors.appColor;
-    
+    final appColor = Theme.of(context).colorScheme;
     return Scaffold(
       body: body,
       bottomNavigationBar: NavigationBar(

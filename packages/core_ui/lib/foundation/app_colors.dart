@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'app_colors.freezed.dart';
 
-//part 'app_colors.g.dart';
 
 @freezed
 class AppColors with _$AppColors {
@@ -30,7 +29,7 @@ class AppColors with _$AppColors {
       required Color errorContainer,
       required Color onErrorContainer,
       required Color scaffoldBackgroundColor,
-      required Color defaultColor}) = _AppColors;
+    }) = _AppColors;
 
   factory AppColors.light() => const AppColors(
       brightness: Brightness.light,
@@ -53,7 +52,7 @@ class AppColors with _$AppColors {
       errorContainer: CoreColor.errorContainer,
       onErrorContainer: CoreColor.onErrorContainer,
       scaffoldBackgroundColor: CoreColor.surface,
-      defaultColor: CoreColor.defaultColor);
+      );
 
   factory AppColors.dark() => const AppColors(
       brightness: Brightness.dark,
@@ -76,5 +75,5 @@ class AppColors with _$AppColors {
       errorContainer: CoreColor.errorContainer,
       onErrorContainer: CoreColor.onErrorContainer,
       scaffoldBackgroundColor: CoreColor.surfaceDark,
-      defaultColor: CoreColor.defaultColor);
+      );
 }

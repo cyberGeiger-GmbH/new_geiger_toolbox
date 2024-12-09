@@ -1,5 +1,3 @@
-import 'package:core_ui/foundation/app_colors.dart';
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../../foundation/app_radius.dart';
@@ -108,7 +106,7 @@ class AppButton extends StatelessWidget {
       child: AppText.titleSmall(
         text: title,
         context: context,
-        color: color ?? _appColor(context).defaultColor,
+        color: color,
         textAlign: TextAlign.justify,
         textOverflow: TextOverflow.fade,
       ),
@@ -138,15 +136,15 @@ class AppButton extends StatelessWidget {
       child: AppText.titleMedium(
         text: title,
         context: context,
-        color: color ?? _appColor(context).defaultColor,
+        color: color,
         textAlign: TextAlign.center,
         textOverflow: TextOverflow.fade,
       ),
     );
   }
 
-  static AppColors _appColor(BuildContext context) {
-    return Theme.of(context).appColors.appColor;
+  static ColorScheme _appColor(BuildContext context) {
+    return Theme.of(context).colorScheme;
   }
 
   final VoidCallback? onPressed;

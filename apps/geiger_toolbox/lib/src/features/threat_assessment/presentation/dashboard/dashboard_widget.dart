@@ -15,14 +15,14 @@ class DashboardWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref.watch(taskStreamProvider);
 
-    final appColors = Theme.of(context).appColors.appColor;
-    
+   
+
     return AsyncValueWidget(
       value: todos,
       data: (data) => data.items.isEmpty
           ? EmptyContent(
               message: "Please Press the Scan button",
-              color: appColors.defaultColor,
+           
             )
           : ProtectionTileList(
               protectionTile: data.toItemsList().map((value) {
@@ -32,4 +32,3 @@ class DashboardWidget extends ConsumerWidget {
     );
   }
 }
-

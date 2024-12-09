@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
@@ -28,7 +28,7 @@ class AppCachedNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
+  
 
     return CachedNetworkImage(
       fit: boxfit,
@@ -41,7 +41,7 @@ class AppCachedNetworkImage extends StatelessWidget {
           child: Container(
               width: imageWidth,
               height: imageHeight,
-              color: appColors.defaultColor),
+              color: Colors.black),
         );
       },
       errorWidget: (context, url, error) => const Icon(Icons.error),

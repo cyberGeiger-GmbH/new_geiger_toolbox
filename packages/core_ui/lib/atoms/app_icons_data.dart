@@ -2,10 +2,10 @@ import 'package:core_ui/gen/fonts.gen.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../tokens/spacing.dart';
-part 'app_icons.freezed.dart';
+part 'app_icons_data.freezed.dart';
 
 @freezed
-class AppIconsData with _$AppIconData {
+class AppIconsData with _$AppIconsData {
   const AppIconsData._();
 
   factory AppIconsData(
@@ -52,6 +52,6 @@ class AppIconSizesData with _$AppIconSizesData {
       required double medium,
       required double large}) = _AppIconSizeData;
 
-  factory AppIconSizesData.regular() =>
-      AppIconSizesData(small: Spacing.p16, medium: Spacing.p22, large: Spacing.p32);
+  factory AppIconSizesData.regular() => AppIconSizesData(
+      small: Spacing.p16, medium: Spacing.p22, large: Spacing.p32);
 }

@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,7 @@ class ListViewBuilder<T> extends StatelessWidget {
       {required ItemBuilder itemBuilder,
       required int length,
       required BuildContext context}) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return ListViewBuilder._(
       itemBuilder: itemBuilder,

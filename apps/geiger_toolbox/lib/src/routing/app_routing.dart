@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/routing/app_start_up_widget.dart';
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
-import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -60,8 +59,7 @@ class AppRouting {
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
-        if (appFlavor == "dev" || appFlavor ==  "stg")
-          SentryNavigatorObserver()
+        if (appFlavor == "dev" || appFlavor == "stg") SentryNavigatorObserver()
       ],
       redirect: (context, state) {
         // if the app is still initialing, show the /startup route

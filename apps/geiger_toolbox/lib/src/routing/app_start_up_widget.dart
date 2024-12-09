@@ -50,10 +50,10 @@ class AppStartUpLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: appColors.scaffoldBackgroundColor,
+      backgroundColor: appColors.surface,
       appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(Spacing.p16),
@@ -71,10 +71,10 @@ class AppStartUpErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: appColors.scaffoldBackgroundColor,
+      backgroundColor: appColors.surface,
       appBar: const CustomAppBar(),
       body: Center(
         child: Column(

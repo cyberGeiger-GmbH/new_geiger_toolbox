@@ -19,10 +19,10 @@ class NewsFeedScreen extends StatelessWidget {
   final String newsTitle;
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: appColors.scaffoldBackgroundColor,
+      backgroundColor: appColors.surface,
       appBar: CustomAppBar(
         title: "News".hardcoded,
       ),

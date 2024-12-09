@@ -1,4 +1,5 @@
-import 'package:core_ui/core_ui.dart';
+
+import 'package:core_ui/foundation/themes/app_theme_data.dart';
 import 'package:core_ui/pages/design_system.dart';
 import 'package:flutter/material.dart';
 
@@ -11,15 +12,23 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     title: 'Toolbox Styling',
+  //     theme: ThemeData(extensions: [
+  //       AppColorsTheme.light(),
+  //       AppTextStyleTheme.main(),
+  //       AppIconsTheme.main(),
+  //       AppImagesTheme.main(),
+  //     ], useMaterial3: true),
+  //     home: const DesignSystem(),
+  //   );
+  // }
+   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Toolbox Styling',
-      theme: ThemeData(extensions: [
-        AppColorsTheme.light(),
-        AppTextStyleTheme.main(),
-        AppIconsTheme.main(),
-        AppImagesTheme.main(),
-      ], useMaterial3: true),
+      theme: AppThemeData.light,
+      darkTheme: AppThemeData.dark,
       home: const DesignSystem(),
     );
   }

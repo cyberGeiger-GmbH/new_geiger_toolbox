@@ -1,7 +1,6 @@
 // ignore_for_file: avoid-returning-widgets
 
 import 'package:core_ui/atoms/app_cached_network_image.dart';
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/molecules/bars/custom_app_bar.dart';
 import 'package:core_ui/organisms/news_content.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +16,6 @@ import '../tokens/spacing.dart';
 class NewsScreen extends StatelessWidget {
   const NewsScreen({super.key});
 
-  
-
 //this is just for example purposes
 // * alway create a separate statless class
   ProtectionTileList _getProtectionTileList(BuildContext context) {
@@ -31,7 +28,7 @@ class NewsScreen extends StatelessWidget {
     return ProtectionTileList(
       protectionTile: data
           .map((value) => ProtectionTile.plain(
-            context: context,
+                context: context,
                 title: value,
                 onPressed: () {
                   showModal(context,
@@ -41,6 +38,7 @@ class NewsScreen extends StatelessWidget {
           .toList(),
     );
   }
+
 //this is just for example purposes
 // * alway create a separa statless class
   TodoTileList _getTodoCheckList() {
@@ -56,7 +54,7 @@ class NewsScreen extends StatelessWidget {
               "Dedicated prevention pages with tips and information about phone fraud",
           value: true)
     ];
-    
+
     return TodoTileList(
       todoTile: data
           .map((value) => TodoTile.plain(
@@ -72,10 +70,10 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
-    
+    final appColors = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: appColors.scaffoldBackgroundColor,
+      backgroundColor: appColors.surface,
       appBar: const CustomAppBar(
         title: "News",
       ),

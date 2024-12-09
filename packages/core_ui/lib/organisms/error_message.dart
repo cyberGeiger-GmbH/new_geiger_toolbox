@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../molecules/texts/app_text.dart';
@@ -9,7 +8,7 @@ class ErrorMessage extends StatelessWidget {
   final String errorMessage;
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).appColors.appColor;
+    final appColor = Theme.of(context).colorScheme;
 
     return AppText.titleLarge(
       text: errorMessage,

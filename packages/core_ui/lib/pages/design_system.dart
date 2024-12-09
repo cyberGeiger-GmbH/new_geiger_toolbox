@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 
+
 import 'package:core_ui/helpers/design_system_helper.dart';
 import 'package:core_ui/pages/news_screen.dart';
 
@@ -13,22 +14,22 @@ class DesignSystem extends StatelessWidget {
     final appTheme = Theme.of(context);
     
     return Scaffold(
-      backgroundColor: appTheme.appColors.appColor.scaffoldBackgroundColor,
+      backgroundColor: appTheme.colorScheme.surface,
       appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              Theme.of(context).appIcons.appIcon.character.search,
+              Theme.of(context).iconTheme.appIcons.appIcon.character.search,
               style: TextStyle(
-                  fontSize: Theme.of(context).appIcons.appIcon.sizes.large),
+                  fontSize: Theme.of(context).iconTheme.appIcons.appIcon.sizes.large),
             ),
             Spacing.gapH8,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Theme.of(context).appImages.imagesData.image,
+               // Theme.of(context).iconTheme.appIcons.appImages.imagesData.image,
                 AppButton.primary(
                   label: "News Screen",
                   context: context,

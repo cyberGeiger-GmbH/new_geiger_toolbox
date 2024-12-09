@@ -1,5 +1,4 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
-import 'package:core_ui/helpers/design_system_helper.dart';
+
 import 'package:flutter/material.dart';
 
 import '../molecules/texts/app_text.dart';
@@ -19,7 +18,7 @@ class EmptyContent extends StatelessWidget {
   final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).appColors.appColor;
+
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +32,6 @@ class EmptyContent extends StatelessWidget {
                 context: context),
         AppText.bodyMedium(
           text: message,
-          color: color ?? appColor.defaultColor,
           context: context,
           textAlign: textAlign,
         ),

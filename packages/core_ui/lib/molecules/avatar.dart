@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
@@ -25,18 +24,17 @@ class Avatar extends StatelessWidget {
 
     return null;
   }
-  
 
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).appColors.appColor;
+    final appColor = Theme.of(context).colorScheme;
 
     return Container(
       decoration: _borderDecoration(),
       child: CircleAvatar(
         radius: radius,
         backgroundColor: appColor.surface,
-        backgroundImage: photoUrl != null ? NetworkImage(photoUrl??"") : null,
+        backgroundImage: photoUrl != null ? NetworkImage(photoUrl ?? "") : null,
         child: photoUrl != null ? null : const Icon(Icons.camera_alt),
       ),
     );

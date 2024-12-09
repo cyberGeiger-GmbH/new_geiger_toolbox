@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../../foundation/app_radius.dart';
@@ -19,14 +18,13 @@ class ToolButton extends StatelessWidget {
       required BuildContext context,
       VoidCallback? ontap,
       IconData? icon}) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return ToolButton._(
       key: key,
-      text: AppText.labelLarge(
+      text: AppText.titleLarge(
         text: label,
         context: context,
-        color: appColors.primary,
       ),
       icon: Icon(icon ?? Icons.settings),
       onPressed: ontap,
@@ -46,14 +44,13 @@ class ToolButton extends StatelessWidget {
       required BuildContext context,
       VoidCallback? onPressed,
       IconData? icon}) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return ToolButton._(
       key: key,
-      text: AppText.labelLarge(
+      text: AppText.titleLarge(
         text: label,
         context: context,
-        color: appColors.primary,
       ),
       icon: Icon(icon ?? Icons.settings),
       onPressed: onPressed,

@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 
-
 import 'package:flutter/material.dart';
 
 class ProtectionTileListView extends StatelessWidget {
@@ -21,7 +20,7 @@ class ProtectionTileList extends StatelessWidget {
   final List<ProtectionTile> protectionTile;
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return Container(
       decoration: Utils.getDecoration(appColors),
@@ -43,15 +42,14 @@ class ProtectionTileListWithTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
-    final appTextStyle = Theme.of(context).appTextStyles.appTextStyle;
-    
+    final appTextStyle = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title,
-            style: appTextStyle.titleMedium.copyWith(
-                color: appColors.defaultColor, fontWeight: FontWeight.bold)),
+            style: appTextStyle.titleMedium!
+                .copyWith(fontWeight: FontWeight.bold)),
         Spacing.gapH8,
         protectionTileList
       ],

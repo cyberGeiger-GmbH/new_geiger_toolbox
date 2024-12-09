@@ -1,4 +1,4 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
+
 import 'package:flutter/material.dart';
 
 class AppIconButton extends StatelessWidget {
@@ -7,7 +7,6 @@ class AppIconButton extends StatelessWidget {
     required this.variant,
   });
 
-
   factory AppIconButton.filled(
       {Key? key,
       required IconData iconData,
@@ -15,8 +14,8 @@ class AppIconButton extends StatelessWidget {
       VoidCallback? onPressed,
       Color? backgroundColor,
       Color? iconColor}) {
-    final appColor = Theme.of(context).appColors.appColor;
-    
+    final appColor = Theme.of(context).colorScheme;
+
     return AppIconButton(
       key: key,
       variant: IconButton.filled(
@@ -38,7 +37,7 @@ class AppIconButton extends StatelessWidget {
       VoidCallback? onPressed,
       Color? backgroundColor,
       Color? iconColor}) {
-    final appColor = Theme.of(context).appColors.appColor;
+    final appColor = Theme.of(context).colorScheme;
 
     return AppIconButton(
       key: key,
@@ -60,7 +59,7 @@ class AppIconButton extends StatelessWidget {
       VoidCallback? onPressed,
       Color? backgroudColor,
       Color? iconColor}) {
-    final appColor = Theme.of(context).appColors.appColor;
+    final appColor = Theme.of(context).colorScheme;
 
     return AppIconButton(
       key: key,
@@ -82,7 +81,7 @@ class AppIconButton extends StatelessWidget {
       VoidCallback? onPressed,
       Color? backgroundColor,
       Color? iconColor}) {
-    final appColor = Theme.of(context).appColors.appColor;
+    final appColor = Theme.of(context).colorScheme;
 
     return AppIconButton(
       key: key,
@@ -96,7 +95,7 @@ class AppIconButton extends StatelessWidget {
       ),
     );
   }
-    final IconButton variant;
+  final IconButton variant;
 
   @override
   Widget build(BuildContext context) {

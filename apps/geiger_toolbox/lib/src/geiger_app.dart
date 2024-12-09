@@ -15,16 +15,8 @@ class GeigerApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'Geiger Toolbox',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        extensions: [
-          AppColorsTheme.light(),
-          AppTextStyleTheme.main(),
-          AppIconsTheme.main(),
-          AppImagesTheme.main(),
-        ],
-        useMaterial3: true,
-      ),
+      theme: AppThemeData.light,
+      darkTheme: AppThemeData.dark,
       routerConfig: router,
     );
   }

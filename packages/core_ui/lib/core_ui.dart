@@ -5,10 +5,9 @@ library core_ui;
 export './tokens/spacing.dart';
 
 //themes
-export './foundation/themes/app_colors_theme.dart';
-export 'foundation/themes/app_text_style_theme.dart';
 export './foundation/themes/app_icons_theme.dart';
-export './foundation/themes/app_images_theme.dart';
+export './foundation/themes/app_theme_data.dart';
+
 //icons
 
 ///export molecules

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../foundation/app_colors.dart';
 import '../tokens/spacing.dart';
 
 class Utils {
   const Utils._();
-  static BoxDecoration getDecoration(AppColors appColors) {
-
+  static BoxDecoration getDecoration(ColorScheme appColors) {
     return BoxDecoration(
       color: appColors.surface,
       borderRadius: const BorderRadius.all(Radius.circular(Spacing.p8)),
@@ -23,7 +20,7 @@ class Utils {
     );
   }
 
-  static BoxShadow getBoxShadow(AppColors appColors) {
+  static BoxShadow getBoxShadow(ColorScheme appColors) {
     return BoxShadow(
       // ignore: no-magic-number
       color: Colors.grey.withOpacity(0.2),

@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/molecules/buttons/app_icon_button.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
 
@@ -22,13 +21,14 @@ class ProtectionTile extends StatelessWidget {
       required BuildContext context,
       required String title,
       VoidCallback? onPressed}) {
+    final appColors = Theme.of(context).colorScheme;
     return ProtectionTile._(
       key: key,
       title: title,
       trailing: AppIconButton.filled(
         context: context,
         iconData: Icons.chevron_right,
-        iconColor: Colors.white,
+        iconColor: appColors.onPrimary,
         onPressed: onPressed,
       ),
     );
@@ -38,14 +38,14 @@ class ProtectionTile extends StatelessWidget {
       {required String title,
       required BuildContext context,
       VoidCallback? onPressed}) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return ProtectionTile._(
       title: title,
       trailing: AppIconButton.filled(
         context: context,
         iconData: Icons.chevron_right,
-        iconColor: appColors.primary,
+        iconColor: appColors.onPrimary,
         onPressed: onPressed,
       ),
       decoration: Utils.getDecoration(appColors),
@@ -59,7 +59,7 @@ class ProtectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return Container(
       decoration: decoration,
@@ -68,7 +68,6 @@ class ProtectionTile extends StatelessWidget {
         title: title,
         iconColor: appColors.surface,
         trailing: trailing,
-        textColor: appColors.defaultColor,
       ),
     );
   }
@@ -76,15 +75,10 @@ class ProtectionTile extends StatelessWidget {
 
 class _ContentWidget extends StatelessWidget {
   const _ContentWidget(
-      {super.key,
-      required this.title,
-      required this.iconColor,
-      this.textColor,
-      this.trailing});
+      {super.key, required this.title, required this.iconColor, this.trailing});
 
   final String title;
   final Color iconColor;
-  final Color? textColor;
 
   final Widget? trailing;
 
@@ -94,7 +88,6 @@ class _ContentWidget extends StatelessWidget {
         leading: AppText.bodyMedium(
           text: title,
           context: context,
-          color: textColor,
         ),
         trailing: trailing);
   }

@@ -15,24 +15,24 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$AppIconData {
+mixin _$AppIconsData {
   String get fontFamily =>
       throw _privateConstructorUsedError; //required String fontPackage,
   AppIconCharactersData get character => throw _privateConstructorUsedError;
   AppIconSizesData get sizes => throw _privateConstructorUsedError;
 
-  /// Create a copy of AppIconData
+  /// Create a copy of AppIconsData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppIconDataCopyWith<AppIconsData> get copyWith =>
+  $AppIconsDataCopyWith<AppIconsData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AppIconDataCopyWith<$Res> {
-  factory $AppIconDataCopyWith(
+abstract class $AppIconsDataCopyWith<$Res> {
+  factory $AppIconsDataCopyWith(
           AppIconsData value, $Res Function(AppIconsData) then) =
-      _$AppIconDataCopyWithImpl<$Res, AppIconsData>;
+      _$AppIconsDataCopyWithImpl<$Res, AppIconsData>;
   @useResult
   $Res call(
       {String fontFamily,
@@ -44,16 +44,16 @@ abstract class $AppIconDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AppIconDataCopyWithImpl<$Res, $Val extends AppIconsData>
-    implements $AppIconDataCopyWith<$Res> {
-  _$AppIconDataCopyWithImpl(this._value, this._then);
+class _$AppIconsDataCopyWithImpl<$Res, $Val extends AppIconsData>
+    implements $AppIconsDataCopyWith<$Res> {
+  _$AppIconsDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AppIconData
+  /// Create a copy of AppIconsData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -78,7 +78,7 @@ class _$AppIconDataCopyWithImpl<$Res, $Val extends AppIconsData>
     ) as $Val);
   }
 
-  /// Create a copy of AppIconData
+  /// Create a copy of AppIconsData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class _$AppIconDataCopyWithImpl<$Res, $Val extends AppIconsData>
     });
   }
 
-  /// Create a copy of AppIconData
+  /// Create a copy of AppIconsData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class _$AppIconDataCopyWithImpl<$Res, $Val extends AppIconsData>
 
 /// @nodoc
 abstract class _$$AppIconDataImplCopyWith<$Res>
-    implements $AppIconDataCopyWith<$Res> {
+    implements $AppIconsDataCopyWith<$Res> {
   factory _$$AppIconDataImplCopyWith(
           _$AppIconDataImpl value, $Res Function(_$AppIconDataImpl) then) =
       __$$AppIconDataImplCopyWithImpl<$Res>;
@@ -120,13 +120,13 @@ abstract class _$$AppIconDataImplCopyWith<$Res>
 
 /// @nodoc
 class __$$AppIconDataImplCopyWithImpl<$Res>
-    extends _$AppIconDataCopyWithImpl<$Res, _$AppIconDataImpl>
+    extends _$AppIconsDataCopyWithImpl<$Res, _$AppIconDataImpl>
     implements _$$AppIconDataImplCopyWith<$Res> {
   __$$AppIconDataImplCopyWithImpl(
       _$AppIconDataImpl _value, $Res Function(_$AppIconDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AppIconData
+  /// Create a copy of AppIconsData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -169,7 +169,7 @@ class _$AppIconDataImpl extends _AppIconData {
 
   @override
   String toString() {
-    return 'AppIconData(fontFamily: $fontFamily, character: $character, sizes: $sizes)';
+    return 'AppIconsData(fontFamily: $fontFamily, character: $character, sizes: $sizes)';
   }
 
   @override
@@ -187,7 +187,7 @@ class _$AppIconDataImpl extends _AppIconData {
   @override
   int get hashCode => Object.hash(runtimeType, fontFamily, character, sizes);
 
-  /// Create a copy of AppIconData
+  /// Create a copy of AppIconsData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -210,7 +210,7 @@ abstract class _AppIconData extends AppIconsData {
   @override
   AppIconSizesData get sizes;
 
-  /// Create a copy of AppIconData
+  /// Create a copy of AppIconsData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)

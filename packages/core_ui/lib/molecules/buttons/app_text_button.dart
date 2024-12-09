@@ -1,6 +1,3 @@
-import 'package:core_ui/foundation/app_colors.dart';
-import 'package:core_ui/foundation/app_text_style.dart';
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../texts/app_text.dart';
@@ -9,7 +6,7 @@ class AppTextButton extends StatelessWidget {
   const AppTextButton._(
       {super.key,
       required this.label,
-      required this.color,
+      this.color,
       required this.disabledColor,
       required this.onTap,
       required this.isEnabled});
@@ -42,22 +39,20 @@ class AppTextButton extends StatelessWidget {
           onTap: onTap,
           isEnabled: isEnabled);
 
- 
-
-  static AppTextStyle appText(BuildContext context) {
-    return Theme.of(context).appTextStyles.appTextStyle;
+  static TextTheme appText(BuildContext context) {
+    return Theme.of(context).textTheme;
   }
 
-  static AppColors appColor(BuildContext context) {
-    return Theme.of(context).appColors.appColor;
+  static ColorScheme appColor(BuildContext context) {
+    return Theme.of(context).colorScheme;
   }
 
- final String label;
+  final String label;
   final VoidCallback onTap;
   final Color disabledColor;
-  final Color color;
+  final Color? color;
   final bool isEnabled;
-  
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -66,7 +61,7 @@ class AppTextButton extends StatelessWidget {
       child: AppText.labelLarge(
         text: label,
         context: context,
-        color: isEnabled ? color : disabledColor,
+        color: color,
       ),
     );
   }

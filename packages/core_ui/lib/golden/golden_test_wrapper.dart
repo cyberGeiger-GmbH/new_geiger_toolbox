@@ -1,4 +1,4 @@
-import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/foundation/themes/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 class GoldenTestWrapper extends StatelessWidget {
@@ -9,14 +9,7 @@ class GoldenTestWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: Theme.of(context).copyWith(
-        extensions: [
-          AppColorsTheme.light(),
-          AppTextStyleTheme.main(),
-          AppImagesTheme.main(),
-          AppIconsTheme.main()
-        ],
-      ),
+      data: AppThemeData.light,
       child: Builder(builder: getChild),
     );
   }

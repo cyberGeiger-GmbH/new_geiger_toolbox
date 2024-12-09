@@ -1,5 +1,3 @@
-import 'package:core_ui/foundation/app_colors.dart';
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +11,6 @@ class TodoTile extends StatelessWidget {
       this.onChange,
       this.decoration,
       this.done = false});
-
- 
 
   factory TodoTile.plain(
       {Key? key,
@@ -35,10 +31,10 @@ class TodoTile extends StatelessWidget {
       {Key? key,
       required String title,
       required String summary,
-       ValueChanged? onChange,
+      ValueChanged? onChange,
       required BuildContext context,
       bool done = false}) {
-    final appColors = Theme.of(context).appColors.appColor;
+    final appColors = Theme.of(context).colorScheme;
 
     return TodoTile._(
       key: key,
@@ -50,7 +46,7 @@ class TodoTile extends StatelessWidget {
     );
   }
 
-   final String title;
+  final String title;
   final String summary;
   final bool done;
   final ValueChanged? onChange;
@@ -58,8 +54,8 @@ class TodoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors.appColor;
-    
+    final appColors = Theme.of(context).colorScheme;
+
     return Container(
       decoration: decoration,
       child: _ContentWidget(
@@ -77,14 +73,14 @@ class _ContentWidget extends StatelessWidget {
   const _ContentWidget({
     super.key,
     required this.title,
-    required this.appColors,
+ this.appColors,
     required this.summary,
     required this.done,
-  this.onChange,
+    this.onChange,
   });
 
   final String title;
-  final AppColors appColors;
+  final ColorScheme? appColors;
   final String summary;
   final bool done;
   final ValueChanged? onChange;
@@ -95,17 +91,15 @@ class _ContentWidget extends StatelessWidget {
       title: AppText.titleMedium(
         text: title,
         context: context,
-        color: appColors.defaultColor,
       ),
       subtitle: AppText.bodySmall(
         text: summary,
         context: context,
-        color: appColors.defaultColor,
       ),
       trailing: Checkbox.adaptive(
         value: done,
         onChanged: onChange,
-        activeColor: appColors.primary,
+        activeColor: appColors!.primary,
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:flutter/material.dart';
 
 import '../../molecules/bars/custom_navigation_rail_destination.dart';
@@ -15,7 +14,7 @@ class ScaffoldWithNaviagionRail extends StatelessWidget {
   final ValueChanged<int> onDestinationSelected;
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).appColors.appColor;
+    final appColor = Theme.of(context).colorScheme;
 
     return Scaffold(
       backgroundColor: appColor.surface,

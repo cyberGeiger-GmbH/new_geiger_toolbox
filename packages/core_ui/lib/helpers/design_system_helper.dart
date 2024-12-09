@@ -1,6 +1,5 @@
 // ignore_for_file: no-empty-block, no-magic-number
 
-import 'package:core_ui/foundation/themes/theme_data_extended.dart';
 import 'package:core_ui/golden/golden_test_wrapper.dart';
 import 'package:core_ui/molecules/cards/protection_tile.dart';
 import 'package:core_ui/molecules/cards/todo_tile.dart';
@@ -20,7 +19,7 @@ class DesignSystemHelper {
   static Widget getColors() {
     return GoldenTestWrapper(
       getChild: (context) {
-        final appColor = Theme.of(context).appColors.appColor;
+        final appColor = Theme.of(context).colorScheme;
 
         return Container(
           color: Colors.grey,
@@ -200,15 +199,33 @@ class DesignSystemHelper {
         color: Colors.black12,
         child: Column(
           children: [
-            AppAssetsIcons.defaultStyle(context: context),
+            AppAssetsIcons.defaultStyle(
+              context: context,
+              desktop: () {},
+              wifi: () {},
+              todos: () {},
+              devices: () {},
+            ),
             AppAssetsIcons.filled(
               context: context,
+              desktop: () {},
+              wifi: () {},
+              todos: () {},
+              devices: () {},
             ),
             AppAssetsIcons.filledTonal(
               context: context,
+              desktop: () {},
+              wifi: () {},
+              todos: () {},
+              devices: () {},
             ),
             AppAssetsIcons.outlined(
               context: context,
+              desktop: () {},
+              wifi: () {},
+              todos: () {},
+              devices: () {},
             ),
           ]
               .map(
@@ -304,7 +321,7 @@ class DesignSystemHelper {
                 "Dedicated prevention pages with tips and information about phone fraud",
             value: true)
       ];
-      
+
       return TodoTileListView(
         todoTile: data
             .map((value) => TodoTile.plain(
