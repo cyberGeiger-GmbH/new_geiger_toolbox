@@ -8,7 +8,7 @@
         "flutterMode": "debug",
         "args": [
           "--flavor",
-          "dev"
+          "dev", "--dart-define-from-file", ".env.dev"
         ],
         "program": "apps/geiger_toolbox/lib/main_dev.dart"
       },
@@ -19,7 +19,7 @@
         "flutterMode": "profile",
         "args": [
           "--flavor",
-          "dev"
+          "dev", "--dart-define-from-file", ".env.dev"
         ],
         "program": "apps/geiger_toolbox/lib/main_dev.dart"
       },
@@ -30,7 +30,7 @@
         "flutterMode": "release",
         "args": [
           "--flavor",
-          "dev"
+          "dev", "--dart-define-from-file", ".env.dev"
         ],
         "program": "apps/geiger_toolbox/lib/main_dev.dart"
       },
@@ -41,7 +41,7 @@
         "flutterMode": "debug",
         "args": [
           "--flavor",
-          "stg"
+          "stg", "--dart-define-from-file", ".env.stg"
         ],
         "program": "apps/geiger_toolbox/lib/main_stg.dart"
       },
@@ -52,7 +52,7 @@
         "flutterMode": "profile",
         "args": [
           "--flavor",
-          "stg"
+          "stg", "--dart-define-from-file", ".env.stg"
         ],
         "program": "apps/geiger_toolbox/lib/main_stg.dart"
       },
@@ -63,7 +63,7 @@
         "flutterMode": "release",
         "args": [
           "--flavor",
-          "stg"
+          "stg", "--dart-define-from-file", ".env.stg"
         ],
         "program": "apps/geiger_toolbox/lib/main_stg.dart"
       },

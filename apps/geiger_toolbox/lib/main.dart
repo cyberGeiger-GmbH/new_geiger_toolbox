@@ -3,25 +3,40 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/env.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/exceptions/async_error_logger.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/geiger_app.dart';
 import 'src/exceptions/error_logger.dart';
 
 Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
-  WidgetsFlutterBinding.ensureInitialized();
+   WidgetsFlutterBinding.ensureInitialized();
+  //sentry error monitoring 
+  await SentryFlutter.init(
+    (options) {
+      options.dsn = Env.sentryDsn;
+      options.environment = getFlavor().name;
+    },
+  );
+
   // initialize firebase
   await Firebase.initializeApp(options: firebaseOptions);
+
   //* Register error handler.For more info, see:
   // * https://docs.flutter.dev/testing/errors
   final container = ProviderContainer(observers: [AsyncErrorLogger()]);
   final errorLogger = container.read(errorLoggerProvider);
   registerErroHandlers(errorLogger);
-  runApp(UncontrolledProviderScope(
-    container: container,
-    child: const GeigerApp(),
-  ));
+
+  runApp(
+    UncontrolledProviderScope(
+      container: container,
+      child: const GeigerApp(),
+    ),
+  );
 }
 
 void registerErroHandlers(ErrorLogger errorLogger) {
