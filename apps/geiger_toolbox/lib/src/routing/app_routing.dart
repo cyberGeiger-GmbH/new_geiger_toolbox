@@ -1,13 +1,16 @@
 import 'package:core_ui/core_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/routing/app_start_up_widget.dart';
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
+import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../features/threat_assessment/presentation/home_screen.dart';
 import '../features/threat_assessment/presentation/news_feed/news_feed_screen.dart';
@@ -56,6 +59,10 @@ class AppRouting {
       initialLocation: AppRouter.home.path,
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
+      observers: [
+        if (appFlavor == "dev" || appFlavor ==  "stg")
+          SentryNavigatorObserver()
+      ],
       redirect: (context, state) {
         // if the app is still initialing, show the /startup route
         if (appStartUpState.isLoading || appStartUpState.hasError) {
@@ -71,7 +78,7 @@ class AppRouting {
           name: AppRouter.appStartUp.name,
           pageBuilder: (context, state) => NoTransitionPage(
             child: AppStartUpWidget(
-               // key: state.pageKey,
+                // key: state.pageKey,
                 //* the loaded route will be managed by GoRouter on state change
                 //* this can be placeholde
 

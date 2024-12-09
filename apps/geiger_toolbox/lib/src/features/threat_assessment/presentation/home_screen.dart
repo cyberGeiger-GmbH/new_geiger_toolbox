@@ -1,5 +1,5 @@
-import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:feedback_sentry/feedback_sentry.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +12,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashb
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_widget.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 //home screen
 class HomeScreen extends ConsumerWidget {
@@ -38,6 +39,7 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
               Spacing.gapH8,
               ScanWidget(),
               Spacing.gapH16,
@@ -52,6 +54,20 @@ class HomeScreen extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SendFeedback extends StatelessWidget {
+  const SendFeedback({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: Text('Send feedback'.hardcoded),
+      onPressed: () {
+        BetterFeedback.of(context).showAndUploadToSentry();
+      },
     );
   }
 }

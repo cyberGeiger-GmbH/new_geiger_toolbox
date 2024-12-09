@@ -7,18 +7,32 @@ import 'package:geiger_toolbox/env/env.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/exceptions/async_error_logger.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/geiger_app.dart';
 import 'src/exceptions/error_logger.dart';
 
 Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
-   WidgetsFlutterBinding.ensureInitialized();
-  //sentry error monitoring 
+  WidgetsFlutterBinding.ensureInitialized();
+  //sentry error monitoring
   await SentryFlutter.init(
     (options) {
       options.dsn = Env.sentryDsn;
       options.environment = getFlavor().name;
+      options
+        ..considerInAppFramesByDefault = false
+        ..addInAppInclude('geiger_toolbox')
+        ..addInAppInclude('conversational_agent_client');
+
+      options.beforeSend = (SentryEvent event, Hint hint) async {
+        // Ignore events that are not from release builds
+        if (!kReleaseMode) {
+          return null;
+        }
+
+        return event;
+      };
     },
   );
 
@@ -34,7 +48,7 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   runApp(
     UncontrolledProviderScope(
       container: container,
-      child: const GeigerApp(),
+      child: FeedbackWidget.wrapWidget(child: const GeigerApp()),
     ),
   );
 }
