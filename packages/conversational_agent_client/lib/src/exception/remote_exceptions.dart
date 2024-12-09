@@ -26,6 +26,11 @@ class ServerTimeOutException extends RemoteExceptions {
       : super(code: 'server-time-out', message: "Application Timeout");
 }
 
+class BadResponseException extends RemoteExceptions {
+  BadResponseException()
+      : super(code: 'bad-response', message: "Bad response received");
+}
+
 class InterConnectionException extends RemoteExceptions {
   InterConnectionException()
       : super(

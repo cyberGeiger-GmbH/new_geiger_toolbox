@@ -44,6 +44,8 @@ class NewsRepository {
         throw ConnectionTimeoutException();
       } else if (e.type == DioExceptionType.receiveTimeout) {
         throw ServerTimeOutException();
+      } else if (e.type == DioExceptionType.badResponse) {
+        throw BadResponseException();
       } else if (e.type == DioExceptionType.unknown &&
           e.error is SocketException) {
         throw InterConnectionException();

@@ -1,6 +1,6 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/exceptions/error_logger.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/todo_task_cache_repository.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/mutable_task.dart';
@@ -14,13 +14,17 @@ class TaskService {
   TaskService(this.ref);
 
   Future<void> setTodoTask(TodoTask todo) async {
-    final repo = ref.read(todoTaskCacheRespositoryProvider);
-    final prevTodo = await repo.fetchTodoTask();
+    try {
+      final repo = ref.read(todoTaskCacheRespositoryProvider);
+      final prevTodo = await repo.fetchTodoTask();
 
-    final updated = prevTodo.addTodo(todo);
-    debugPrint("task => $updated");
-    //update cache
-    await repo.setTask(updated);
+      final updated = prevTodo.addTodo(todo);
+      debugPrint("task => $updated");
+      //update cache
+      await repo.setTask(updated);
+    } catch (e, s) {
+      ref.read(errorLoggerProvider).logError(e, s);
+    }
   }
 
   Future<void> removeTodoTask(TodoTask todo) async {
