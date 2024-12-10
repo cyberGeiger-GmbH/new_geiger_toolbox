@@ -15,7 +15,7 @@ class NotFoundScreen extends StatelessWidget {
           label: "Go to home".hardcoded,
           message: "404 - Page not found!".hardcoded,
           onTap: () {
-            context.goNamed(AppRouter.home.name);
+            context.goNamed(AppRouter.main.name);
           },
         ));
   }

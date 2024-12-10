@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
 import 'package:geiger_toolbox/src/routing/app_start_up_widget.dart';
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
@@ -17,13 +18,13 @@ part 'app_routing.g.dart';
 // ignore: prefer-match-file-name
 enum AppRouter {
   appStartUp(name: "appStartUp", path: "/app-starup"),
-  home(path: "/", name: "home"),
+  main(path: "/", name: "main"),
   newsFeedDetails(path: "/newsfeed/:title", name: "title"),
-  community(path: "/communtiy", name: "community"),
+  community(path: "/community", name: "community"),
   calendar(path: "/calendar", name: "calendar"),
   settings(path: "/settings", name: "settings"),
   chat(path: "/chat", name: "chat"),
-  termsAndCondation(
+  termsAndCondition(
       path: "/terms-and-conditions", name: "terms-and-conditions");
 
   const AppRouter({required this.path, required this.name});
@@ -54,7 +55,7 @@ class AppRouting {
 
     return GoRouter(
       navigatorKey: _rootNavKey,
-      initialLocation: AppRouter.termsAndCondation.path,
+      initialLocation: AppRouter.termsAndCondition.path,
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
@@ -64,6 +65,15 @@ class AppRouting {
         // if the app is still initialing, show the /startup route
         if (appStartUpState.isLoading || appStartUpState.hasError) {
           return AppRouter.appStartUp.path;
+        }
+
+        final termsConditionState = ref.read(termsConditionControllerProvider);
+        if (termsConditionState && state.path != AppRouter.main.path) {
+          return AppRouter.main.path;
+        }
+        if (!termsConditionState &&
+            state.path != AppRouter.termsAndCondition.path) {
+          return AppRouter.termsAndCondition.path;
         }
 
         return null;
@@ -83,8 +93,8 @@ class AppRouting {
           ),
         ),
         GoRoute(
-          path: AppRouter.termsAndCondation.path,
-          name: AppRouter.termsAndCondation.name,
+          path: AppRouter.termsAndCondition.path,
+          name: AppRouter.termsAndCondition.name,
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: TermsConditionScreen()),
         ),
@@ -98,8 +108,8 @@ class AppRouting {
               navigatorKey: _shellHomeNavKey,
               routes: [
                 GoRoute(
-                  path: AppRouter.home.path,
-                  name: AppRouter.home.name,
+                  path: AppRouter.main.path,
+                  name: AppRouter.main.name,
                   pageBuilder: (context, state) => const NoTransitionPage(
                     child: HomeScreen(),
                   ),

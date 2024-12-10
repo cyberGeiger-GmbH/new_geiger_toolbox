@@ -12,6 +12,7 @@ class TermsAndConditionScreen extends StatelessWidget {
       this.allSizePadding,
       this.getStartedLabel,
       required this.acceptCondition,
+      this.value = false,
       this.getStarted});
   final String? title;
   final String? subtitle;
@@ -20,6 +21,7 @@ class TermsAndConditionScreen extends StatelessWidget {
   final VoidCallback? getStarted;
   final String? getStartedLabel;
   final double? allSizePadding;
+  final bool value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +51,7 @@ class TermsAndConditionScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Checkbox(value: false, onChanged: acceptCondition),
+                leading: Checkbox(value: value, onChanged: acceptCondition),
                 trailing: AppText.bodyMedium(
                     text: policyStatement ??
                         "Privacy policy for the handling of data",

@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
+import 'package:core_ui/atoms/app_asset_image_data.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/molecules/background_with_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/package_info_provider.dart';
 import 'package:geiger_toolbox/src/utils/shared_preference_provider.dart';
@@ -34,6 +37,8 @@ class AppStartUpWidget extends ConsumerWidget {
   final WidgetBuilder onLoaded;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
+
     final appStartupState = ref.watch(appStartUpProvider);
 
     return appStartupState.when(
@@ -52,14 +57,18 @@ class AppStartUpLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).colorScheme;
-
     return Scaffold(
-      backgroundColor: appColors.surface,
-      appBar: CustomAppBar(),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(Spacing.p16),
-        child: const Center(child: CircularProgressIndicator()),
+        child: BackgroundWithImage(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppAssetImageData.geigerLogo().image,
+            CircularProgressIndicator(),
+          ],
+        )),
       ),
     );
   }
