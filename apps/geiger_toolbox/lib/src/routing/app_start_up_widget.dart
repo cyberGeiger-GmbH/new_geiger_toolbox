@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/package_info_provider.dart';
+import 'package:geiger_toolbox/src/utils/shared_preference_provider.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -25,6 +26,7 @@ Future<void> appStartUp(Ref ref) async {
   await Future.delayed(Duration(seconds: 2));
   await ref.watch(sembastDataStoreProvider.future);
   await ref.watch(packageInfoProvider.future);
+  await ref.watch(sharedPreferencesProvider.future);
 }
 
 class AppStartUpWidget extends ConsumerWidget {

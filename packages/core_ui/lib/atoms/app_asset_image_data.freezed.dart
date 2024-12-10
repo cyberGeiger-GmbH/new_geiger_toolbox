@@ -97,8 +97,8 @@ class __$$AppAssetImageDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppAssetImageDataImpl implements _AppAssetImageData {
-  _$AppAssetImageDataImpl({required this.image});
+class _$AppAssetImageDataImpl extends _AppAssetImageData {
+  _$AppAssetImageDataImpl({required this.image}) : super._();
 
   @override
   final Image image;
@@ -129,9 +129,10 @@ class _$AppAssetImageDataImpl implements _AppAssetImageData {
           this, _$identity);
 }
 
-abstract class _AppAssetImageData implements AppAssetImageData {
+abstract class _AppAssetImageData extends AppAssetImageData {
   factory _AppAssetImageData({required final Image image}) =
       _$AppAssetImageDataImpl;
+  _AppAssetImageData._() : super._();
 
   @override
   Image get image;

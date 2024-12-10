@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 
-
 import 'package:core_ui/helpers/design_system_helper.dart';
 import 'package:core_ui/pages/news_screen.dart';
 
@@ -12,7 +11,7 @@ class DesignSystem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
-    
+
     return Scaffold(
       backgroundColor: appTheme.colorScheme.surface,
       appBar: const CustomAppBar(),
@@ -23,13 +22,14 @@ class DesignSystem extends StatelessWidget {
             Text(
               Theme.of(context).iconTheme.appIcons.appIcon.character.search,
               style: TextStyle(
-                  fontSize: Theme.of(context).iconTheme.appIcons.appIcon.sizes.large),
+                  fontSize:
+                      Theme.of(context).iconTheme.appIcons.appIcon.sizes.large),
             ),
             Spacing.gapH8,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-               // Theme.of(context).iconTheme.appIcons.appImages.imagesData.image,
+                // Theme.of(context).iconTheme.appIcons.appImages.imagesData.image,
                 AppButton.primary(
                   label: "News Screen",
                   context: context,
@@ -39,6 +39,20 @@ class DesignSystem extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const NewsScreen()),
+                    );
+                  },
+                ),
+                AppButton.primary(
+                  label: "terms and conditions",
+                  context: context,
+                  onPressed: () {
+                    // Navigate to SecondScreen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TermsAndConditionScreen(
+                                acceptCondition: (value) {},
+                              )),
                     );
                   },
                 ),
@@ -56,7 +70,6 @@ class DesignSystem extends StatelessWidget {
             DesignSystemHelper.getProtectionTileListView(),
             Spacing.gapH16,
             DesignSystemHelper.getTodoTileVariants(),
-        
             Spacing.gapH16,
             DesignSystemHelper.getAppAssestIcons(),
             Spacing.gapH16,

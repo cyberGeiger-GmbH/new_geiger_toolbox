@@ -1,8 +1,7 @@
-import 'package:core_ui/core_ui.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
 import 'package:geiger_toolbox/src/routing/app_start_up_widget.dart';
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
@@ -55,7 +54,7 @@ class AppRouting {
 
     return GoRouter(
       navigatorKey: _rootNavKey,
-      initialLocation: AppRouter.home.path,
+      initialLocation: AppRouter.termsAndCondation.path,
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
@@ -86,9 +85,8 @@ class AppRouting {
         GoRoute(
           path: AppRouter.termsAndCondation.path,
           name: AppRouter.termsAndCondation.name,
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: TermsAndConditions(),
-          ),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: TermsConditionScreen()),
         ),
 
         //for ui with bottom navigation
@@ -226,31 +224,6 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text("Settings"),
-    );
-  }
-}
-
-class TermsAndConditions extends StatelessWidget {
-  const TermsAndConditions({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Center(
-            child: Text("Terms and Condition Screent"),
-          ),
-          AppButton.tertiary(
-            label: "Home",
-            onPressed: () {
-              context.goNamed(AppRouter.home.name);
-            },
-            context: context,
-          ),
-        ],
-      ),
     );
   }
 }

@@ -47,3 +47,6 @@ export "./atoms/app_cached_network_image.dart";
 export './utils/typedef.dart';
 export './utils/list_view_builder.dart';
 export './utils/utils.dart';
+
+//pages
+export './pages/terms_and_condition_screen.dart';

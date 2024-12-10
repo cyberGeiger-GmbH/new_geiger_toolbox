@@ -28,10 +28,9 @@ class HomeScreen extends ConsumerWidget {
 
     // final state = ref.watch(homeScreenControllerProvider);
 
-    final appColors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: appColors.surface,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(),
       body: SingleChildScrollView(
         child: Padding(
