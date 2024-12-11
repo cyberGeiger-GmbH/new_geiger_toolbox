@@ -9,7 +9,7 @@ import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,7 +23,7 @@ class NewsFeedsWidget extends ConsumerWidget {
    
 
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
-    final state = ref.watch(scanControllerProvider);
+    final state = ref.watch(scanButtonControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);
 
     return AsyncValueWidget(

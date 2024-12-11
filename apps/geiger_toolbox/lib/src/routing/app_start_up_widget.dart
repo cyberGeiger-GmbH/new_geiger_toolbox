@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/package_info_provider.dart';
-import 'package:geiger_toolbox/src/utils/shared_preference_provider.dart';
+import 'package:geiger_toolbox/src/utils/shared_preference.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -37,8 +37,6 @@ class AppStartUpWidget extends ConsumerWidget {
   final WidgetBuilder onLoaded;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
-
     final appStartupState = ref.watch(appStartUpProvider);
 
     return appStartupState.when(

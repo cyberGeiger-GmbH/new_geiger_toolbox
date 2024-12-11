@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
-import 'package:geiger_toolbox/src/routing/app_start_up_widget.dart';
+
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
 
@@ -11,21 +11,20 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import '../features/threat_assessment/presentation/home_screen.dart';
+import '../features/threat_assessment/presentation/main_screen.dart';
 import '../features/threat_assessment/presentation/news_feed/news_feed_screen.dart';
 part 'app_routing.g.dart';
 
 // ignore: prefer-match-file-name
 enum AppRouter {
-  appStartUp(name: "appStartUp", path: "/app-starup"),
-  main(path: "/", name: "main"),
+  main(path: "/", name: "main-screen"),
   newsFeedDetails(path: "/newsfeed/:title", name: "title"),
   community(path: "/community", name: "community"),
   calendar(path: "/calendar", name: "calendar"),
   settings(path: "/settings", name: "settings"),
   chat(path: "/chat", name: "chat"),
   termsAndCondition(
-      path: "/terms-and-conditions", name: "terms-and-conditions");
+      path: "/terms-and-conditions", name: "terms-and-conditions-screen");
 
   const AppRouter({required this.path, required this.name});
   final String path;
@@ -51,47 +50,31 @@ class AppRouting {
   static GoRouter goRouter(Ref ref) {
     //rebuild GoRouter when app startup state changes
 
-    final appStartUpState = ref.watch(appStartUpProvider);
-
     return GoRouter(
       navigatorKey: _rootNavKey,
-      initialLocation: AppRouter.termsAndCondition.path,
+      initialLocation: AppRouter.main.path,
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
         if (appFlavor == "dev" || appFlavor == "stg") SentryNavigatorObserver()
       ],
       redirect: (context, state) {
-        // if the app is still initialing, show the /startup route
-        if (appStartUpState.isLoading || appStartUpState.hasError) {
-          return AppRouter.appStartUp.path;
-        }
-
         final termsConditionState = ref.read(termsConditionControllerProvider);
-        if (termsConditionState && state.path != AppRouter.main.path) {
-          return AppRouter.main.path;
-        }
-        if (!termsConditionState &&
-            state.path != AppRouter.termsAndCondition.path) {
-          return AppRouter.termsAndCondition.path;
+        final path = state.uri.path;
+
+        if (!termsConditionState) {
+          if (path != AppRouter.termsAndCondition.path) {
+            return AppRouter.termsAndCondition.path;
+          }
+
+          return null;
         }
 
         return null;
       },
       routes: [
         //for ui without bottom navigation
-        GoRoute(
-          path: AppRouter.appStartUp.path,
-          name: AppRouter.appStartUp.name,
-          pageBuilder: (context, state) => NoTransitionPage(
-            child: AppStartUpWidget(
-                // key: state.pageKey,
-                //* the loaded route will be managed by GoRouter on state change
-                //* this can be placeholde
 
-                onLoaded: (context) => const SizedBox.shrink()),
-          ),
-        ),
         GoRoute(
           path: AppRouter.termsAndCondition.path,
           name: AppRouter.termsAndCondition.name,
@@ -111,7 +94,7 @@ class AppRouting {
                   path: AppRouter.main.path,
                   name: AppRouter.main.name,
                   pageBuilder: (context, state) => const NoTransitionPage(
-                    child: HomeScreen(),
+                    child: MainScreen(),
                   ),
                   //nested route
                   routes: [

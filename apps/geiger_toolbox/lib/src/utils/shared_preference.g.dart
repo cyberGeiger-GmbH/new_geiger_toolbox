@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'shared_preference_provider.dart';
+part of 'shared_preference.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sharedPreferencesHash() => r'48e60558ea6530114ea20ea03e69b9fb339ab129';
+String _$sharedPreferencesHash() => r'50d46e3f8d9f32715d0f3efabdce724e4b2593b4';
 
 /// See also [sharedPreferences].
 @ProviderFor(sharedPreferences)

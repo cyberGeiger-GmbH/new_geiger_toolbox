@@ -1,10 +1,13 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+
 import '../../applications/news_feed_service.dart';
-part 'scan_controller.g.dart';
+part 'scan_button_controller.g.dart';
 
 @riverpod
-class ScanController extends _$ScanController {
+class ScanButtonController extends _$ScanButtonController {
+
+
   @override
   // ignore: no-empty-block
   FutureOr<void> build() {
@@ -13,7 +16,6 @@ class ScanController extends _$ScanController {
 
   Future<void> scan() async {
     state = const AsyncLoading();
-
     state = await AsyncValue.guard(
         () => ref.read(newsFeedServiceProvider).cacheNews());
   }
