@@ -20,8 +20,6 @@ class NewsFeedsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   
-
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(scanButtonControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);
@@ -29,10 +27,7 @@ class NewsFeedsWidget extends ConsumerWidget {
     return AsyncValueWidget(
       value: newsFeedValue,
       data: (news) => news.isEmpty
-          ? EmptyContent(
-              message: "Please Press the Scan button",
-              
-            )
+          ? const SizedBox.shrink()
           : Column(
               children: [
                 CarouselSlider(

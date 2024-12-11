@@ -40,27 +40,38 @@ class MainScreen extends ConsumerWidget {
               newsFeedState.value != null &&
               newsFeedState.value!.isEmpty)
           ? WelcomeWidget()
-          : SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
-                  Spacing.gapH8,
-                  ScanButtonWidget(),
-                  Spacing.gapH16,
-                  //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
-                  NewsFeedsWidget(),
-                  Spacing.gapH16,
-                  AssetWidget(),
-                  Spacing.gapH16,
-                  appFlavor == "dev"
-                      ? RecommendationWidget()
-                      : DashboardWidget(),
-                  Spacing.gapH12,
-                ],
-              ),
-            ),
+          : DataWidget(),
     );
+  }
+}
+
+class DataWidget extends StatelessWidget {
+  const DataWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
+            Spacing.gapH8,
+            ScanButtonWidget(),
+            Spacing.gapH16,
+            //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
+            NewsFeedsWidget(),
+            Spacing.gapH16,
+            AssetWidget(),
+            Spacing.gapH16,
+            appFlavor == "dev"
+                ? RecommendationWidget()
+                : DashboardWidget(),
+            Spacing.gapH12,
+          ],
+        ),
+      );
   }
 }
 

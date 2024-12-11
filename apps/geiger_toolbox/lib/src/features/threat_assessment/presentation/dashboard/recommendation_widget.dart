@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
@@ -16,19 +15,23 @@ class RecommendationWidget extends ConsumerWidget {
     final newsFeedIndex = ref.watch(newsFeedsControllerProvider);
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
 
-    return AsyncValueWidget(
-      value: newsFeedValue,
-      data: (data) {
-        try {
-          final recommendations = data[newsFeedIndex].recommendations;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AsyncValueWidget(
+        value: newsFeedValue,
+        data: (data) {
+          try {
+            final recommendations = data[newsFeedIndex].recommendations;
 
-          return recommendations.isEmpty
-              ? SizedBox.shrink()
-              : RecommendationTileListWidget(recommendations: recommendations);
-        } catch (e) {
-          return const SizedBox.shrink();
-        }
-      },
+            return recommendations.isEmpty
+                ? SizedBox.shrink()
+                : RecommendationTileListWidget(
+                    recommendations: recommendations);
+          } catch (e) {
+            return const SizedBox.shrink();
+          }
+        },
+      ),
     );
   }
 }
