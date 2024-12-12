@@ -68,34 +68,44 @@ class Locations extends Table {
 
 @DataClassName('NewsData')
 class News extends Table {
-  IntColumn get id => integer().autoIncrement()();
+  TextColumn get id =>
+      text().withLength(min: 1, max: 8).customConstraint('UNIQUE NOT NULL')();
+  IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
+
   TextColumn get title => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
   TextColumn get imageUrl => text().withLength(min: 1, max: 100)();
   TextColumn get dateCreated => text().withLength(min: 1, max: 100)();
-  TextColumn get recommendationId =>
-      text().references(Recommendations, #id)(); // Foreign key
+
+  @override
+  Set<Column> get primaryKey => {id};
 }
 
 @DataClassName('RecommendationData')
 class Recommendations extends Table {
-  TextColumn get id =>
-      text().withLength(min: 1, max: 8).customConstraint('UNIQUE NOT NULL')();
+  TextColumn get id => text().withLength(min: 1, max: 8)();
+  TextColumn get newsId => text().references(News, #id)(); // Foreign key
   IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
   TextColumn get name => text().withLength(min: 1, max: 255)();
-  TextColumn get specificOfferingsId => text()
-      .withLength(min: 1, max: 100)
-      .references(Offerings, #id)(); // Foreign key
+
+  @override
+  Set<Column> get primaryKey => {id};
 }
 
 @DataClassName('OfferingData')
 class Offerings extends Table {
   TextColumn get id =>
       text().withLength(min: 1, max: 8).customConstraint('UNIQUE NOT NULL')();
+  TextColumn get recommendationId =>
+      text().references(Recommendations, #id)(); // Foreign key
+
   IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
 
   TextColumn get name => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
+
+  @override
+  Set<Column> get primaryKey => {id};
 }
 
 @DataClassName('SmeProfileData')

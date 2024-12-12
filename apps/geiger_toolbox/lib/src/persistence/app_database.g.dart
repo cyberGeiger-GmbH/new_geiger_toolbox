@@ -1595,12 +1595,11 @@ class BusinessProfilesCompanion extends UpdateCompanion<BusinessProfileData> {
   }
 }
 
-class $OfferingsTable extends Offerings
-    with TableInfo<$OfferingsTable, OfferingData> {
+class $NewsTable extends News with TableInfo<$NewsTable, NewsData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $OfferingsTable(this.attachedDatabase, [this._alias]);
+  $NewsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
@@ -1617,10 +1616,10 @@ class $OfferingsTable extends Offerings
       type: DriftSqlType.int,
       requiredDuringInsert: true,
       $customConstraints: 'UNIQUE NOT NULL');
-  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
-  late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
       additionalChecks:
           GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 255),
       type: DriftSqlType.string,
@@ -1631,15 +1630,34 @@ class $OfferingsTable extends Offerings
   late final GeneratedColumn<String> summary = GeneratedColumn<String>(
       'summary', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _imageUrlMeta =
+      const VerificationMeta('imageUrl');
   @override
-  List<GeneratedColumn> get $columns => [id, order, name, summary];
+  late final GeneratedColumn<String> imageUrl = GeneratedColumn<String>(
+      'image_url', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _dateCreatedMeta =
+      const VerificationMeta('dateCreated');
+  @override
+  late final GeneratedColumn<String> dateCreated = GeneratedColumn<String>(
+      'date_created', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, order, title, summary, imageUrl, dateCreated];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'offerings';
+  static const String $name = 'news';
   @override
-  VerificationContext validateIntegrity(Insertable<OfferingData> instance,
+  VerificationContext validateIntegrity(Insertable<NewsData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -1654,11 +1672,11 @@ class $OfferingsTable extends Offerings
     } else if (isInserting) {
       context.missing(_orderMeta);
     }
-    if (data.containsKey('name')) {
+    if (data.containsKey('title')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
     } else if (isInserting) {
-      context.missing(_nameMeta);
+      context.missing(_titleMeta);
     }
     if (data.containsKey('summary')) {
       context.handle(_summaryMeta,
@@ -1666,69 +1684,97 @@ class $OfferingsTable extends Offerings
     } else if (isInserting) {
       context.missing(_summaryMeta);
     }
+    if (data.containsKey('image_url')) {
+      context.handle(_imageUrlMeta,
+          imageUrl.isAcceptableOrUnknown(data['image_url']!, _imageUrlMeta));
+    } else if (isInserting) {
+      context.missing(_imageUrlMeta);
+    }
+    if (data.containsKey('date_created')) {
+      context.handle(
+          _dateCreatedMeta,
+          dateCreated.isAcceptableOrUnknown(
+              data['date_created']!, _dateCreatedMeta));
+    } else if (isInserting) {
+      context.missing(_dateCreatedMeta);
+    }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  OfferingData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  NewsData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return OfferingData(
+    return NewsData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
       order: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}order'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       summary: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}summary'])!,
+      imageUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image_url'])!,
+      dateCreated: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}date_created'])!,
     );
   }
 
   @override
-  $OfferingsTable createAlias(String alias) {
-    return $OfferingsTable(attachedDatabase, alias);
+  $NewsTable createAlias(String alias) {
+    return $NewsTable(attachedDatabase, alias);
   }
 }
 
-class OfferingData extends DataClass implements Insertable<OfferingData> {
+class NewsData extends DataClass implements Insertable<NewsData> {
   final String id;
   final int order;
-  final String name;
+  final String title;
   final String summary;
-  const OfferingData(
+  final String imageUrl;
+  final String dateCreated;
+  const NewsData(
       {required this.id,
       required this.order,
-      required this.name,
-      required this.summary});
+      required this.title,
+      required this.summary,
+      required this.imageUrl,
+      required this.dateCreated});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
     map['order'] = Variable<int>(order);
-    map['name'] = Variable<String>(name);
+    map['title'] = Variable<String>(title);
     map['summary'] = Variable<String>(summary);
+    map['image_url'] = Variable<String>(imageUrl);
+    map['date_created'] = Variable<String>(dateCreated);
     return map;
   }
 
-  OfferingsCompanion toCompanion(bool nullToAbsent) {
-    return OfferingsCompanion(
+  NewsCompanion toCompanion(bool nullToAbsent) {
+    return NewsCompanion(
       id: Value(id),
       order: Value(order),
-      name: Value(name),
+      title: Value(title),
       summary: Value(summary),
+      imageUrl: Value(imageUrl),
+      dateCreated: Value(dateCreated),
     );
   }
 
-  factory OfferingData.fromJson(Map<String, dynamic> json,
+  factory NewsData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return OfferingData(
+    return NewsData(
       id: serializer.fromJson<String>(json['id']),
       order: serializer.fromJson<int>(json['order']),
-      name: serializer.fromJson<String>(json['name']),
+      title: serializer.fromJson<String>(json['title']),
       summary: serializer.fromJson<String>(json['summary']),
+      imageUrl: serializer.fromJson<String>(json['imageUrl']),
+      dateCreated: serializer.fromJson<String>(json['dateCreated']),
     );
   }
   @override
@@ -1737,101 +1783,134 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'order': serializer.toJson<int>(order),
-      'name': serializer.toJson<String>(name),
+      'title': serializer.toJson<String>(title),
       'summary': serializer.toJson<String>(summary),
+      'imageUrl': serializer.toJson<String>(imageUrl),
+      'dateCreated': serializer.toJson<String>(dateCreated),
     };
   }
 
-  OfferingData copyWith(
-          {String? id, int? order, String? name, String? summary}) =>
-      OfferingData(
+  NewsData copyWith(
+          {String? id,
+          int? order,
+          String? title,
+          String? summary,
+          String? imageUrl,
+          String? dateCreated}) =>
+      NewsData(
         id: id ?? this.id,
         order: order ?? this.order,
-        name: name ?? this.name,
+        title: title ?? this.title,
         summary: summary ?? this.summary,
+        imageUrl: imageUrl ?? this.imageUrl,
+        dateCreated: dateCreated ?? this.dateCreated,
       );
-  OfferingData copyWithCompanion(OfferingsCompanion data) {
-    return OfferingData(
+  NewsData copyWithCompanion(NewsCompanion data) {
+    return NewsData(
       id: data.id.present ? data.id.value : this.id,
       order: data.order.present ? data.order.value : this.order,
-      name: data.name.present ? data.name.value : this.name,
+      title: data.title.present ? data.title.value : this.title,
       summary: data.summary.present ? data.summary.value : this.summary,
+      imageUrl: data.imageUrl.present ? data.imageUrl.value : this.imageUrl,
+      dateCreated:
+          data.dateCreated.present ? data.dateCreated.value : this.dateCreated,
     );
   }
 
   @override
   String toString() {
-    return (StringBuffer('OfferingData(')
+    return (StringBuffer('NewsData(')
           ..write('id: $id, ')
           ..write('order: $order, ')
-          ..write('name: $name, ')
-          ..write('summary: $summary')
+          ..write('title: $title, ')
+          ..write('summary: $summary, ')
+          ..write('imageUrl: $imageUrl, ')
+          ..write('dateCreated: $dateCreated')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, order, name, summary);
+  int get hashCode =>
+      Object.hash(id, order, title, summary, imageUrl, dateCreated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is OfferingData &&
+      (other is NewsData &&
           other.id == this.id &&
           other.order == this.order &&
-          other.name == this.name &&
-          other.summary == this.summary);
+          other.title == this.title &&
+          other.summary == this.summary &&
+          other.imageUrl == this.imageUrl &&
+          other.dateCreated == this.dateCreated);
 }
 
-class OfferingsCompanion extends UpdateCompanion<OfferingData> {
+class NewsCompanion extends UpdateCompanion<NewsData> {
   final Value<String> id;
   final Value<int> order;
-  final Value<String> name;
+  final Value<String> title;
   final Value<String> summary;
+  final Value<String> imageUrl;
+  final Value<String> dateCreated;
   final Value<int> rowid;
-  const OfferingsCompanion({
+  const NewsCompanion({
     this.id = const Value.absent(),
     this.order = const Value.absent(),
-    this.name = const Value.absent(),
+    this.title = const Value.absent(),
     this.summary = const Value.absent(),
+    this.imageUrl = const Value.absent(),
+    this.dateCreated = const Value.absent(),
     this.rowid = const Value.absent(),
   });
-  OfferingsCompanion.insert({
+  NewsCompanion.insert({
     required String id,
     required int order,
-    required String name,
+    required String title,
     required String summary,
+    required String imageUrl,
+    required String dateCreated,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         order = Value(order),
-        name = Value(name),
-        summary = Value(summary);
-  static Insertable<OfferingData> custom({
+        title = Value(title),
+        summary = Value(summary),
+        imageUrl = Value(imageUrl),
+        dateCreated = Value(dateCreated);
+  static Insertable<NewsData> custom({
     Expression<String>? id,
     Expression<int>? order,
-    Expression<String>? name,
+    Expression<String>? title,
     Expression<String>? summary,
+    Expression<String>? imageUrl,
+    Expression<String>? dateCreated,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (order != null) 'order': order,
-      if (name != null) 'name': name,
+      if (title != null) 'title': title,
       if (summary != null) 'summary': summary,
+      if (imageUrl != null) 'image_url': imageUrl,
+      if (dateCreated != null) 'date_created': dateCreated,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
-  OfferingsCompanion copyWith(
+  NewsCompanion copyWith(
       {Value<String>? id,
       Value<int>? order,
-      Value<String>? name,
+      Value<String>? title,
       Value<String>? summary,
+      Value<String>? imageUrl,
+      Value<String>? dateCreated,
       Value<int>? rowid}) {
-    return OfferingsCompanion(
+    return NewsCompanion(
       id: id ?? this.id,
       order: order ?? this.order,
-      name: name ?? this.name,
+      title: title ?? this.title,
       summary: summary ?? this.summary,
+      imageUrl: imageUrl ?? this.imageUrl,
+      dateCreated: dateCreated ?? this.dateCreated,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1845,11 +1924,17 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
     if (order.present) {
       map['order'] = Variable<int>(order.value);
     }
-    if (name.present) {
-      map['name'] = Variable<String>(name.value);
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
     }
     if (summary.present) {
       map['summary'] = Variable<String>(summary.value);
+    }
+    if (imageUrl.present) {
+      map['image_url'] = Variable<String>(imageUrl.value);
+    }
+    if (dateCreated.present) {
+      map['date_created'] = Variable<String>(dateCreated.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -1859,11 +1944,13 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
 
   @override
   String toString() {
-    return (StringBuffer('OfferingsCompanion(')
+    return (StringBuffer('NewsCompanion(')
           ..write('id: $id, ')
           ..write('order: $order, ')
-          ..write('name: $name, ')
+          ..write('title: $title, ')
           ..write('summary: $summary, ')
+          ..write('imageUrl: $imageUrl, ')
+          ..write('dateCreated: $dateCreated, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -1883,8 +1970,15 @@ class $RecommendationsTable extends Recommendations
       additionalChecks:
           GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 8),
       type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _newsIdMeta = const VerificationMeta('newsId');
+  @override
+  late final GeneratedColumn<String> newsId = GeneratedColumn<String>(
+      'news_id', aliasedName, false,
+      type: DriftSqlType.string,
       requiredDuringInsert: true,
-      $customConstraints: 'UNIQUE NOT NULL');
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES news (id)'));
   static const VerificationMeta _orderMeta = const VerificationMeta('order');
   @override
   late final GeneratedColumn<int> order = GeneratedColumn<int>(
@@ -1900,19 +1994,8 @@ class $RecommendationsTable extends Recommendations
           GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 255),
       type: DriftSqlType.string,
       requiredDuringInsert: true);
-  static const VerificationMeta _specificOfferingsIdMeta =
-      const VerificationMeta('specificOfferingsId');
   @override
-  late final GeneratedColumn<String> specificOfferingsId =
-      GeneratedColumn<String>('specific_offerings_id', aliasedName, false,
-          additionalChecks: GeneratedColumn.checkTextLength(
-              minTextLength: 1, maxTextLength: 100),
-          type: DriftSqlType.string,
-          requiredDuringInsert: true,
-          defaultConstraints:
-              GeneratedColumn.constraintIsAlways('REFERENCES offerings (id)'));
-  @override
-  List<GeneratedColumn> get $columns => [id, order, name, specificOfferingsId];
+  List<GeneratedColumn> get $columns => [id, newsId, order, name];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1928,6 +2011,12 @@ class $RecommendationsTable extends Recommendations
     } else if (isInserting) {
       context.missing(_idMeta);
     }
+    if (data.containsKey('news_id')) {
+      context.handle(_newsIdMeta,
+          newsId.isAcceptableOrUnknown(data['news_id']!, _newsIdMeta));
+    } else if (isInserting) {
+      context.missing(_newsIdMeta);
+    }
     if (data.containsKey('order')) {
       context.handle(
           _orderMeta, order.isAcceptableOrUnknown(data['order']!, _orderMeta));
@@ -1940,32 +2029,23 @@ class $RecommendationsTable extends Recommendations
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('specific_offerings_id')) {
-      context.handle(
-          _specificOfferingsIdMeta,
-          specificOfferingsId.isAcceptableOrUnknown(
-              data['specific_offerings_id']!, _specificOfferingsIdMeta));
-    } else if (isInserting) {
-      context.missing(_specificOfferingsIdMeta);
-    }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   RecommendationData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return RecommendationData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      newsId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}news_id'])!,
       order: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}order'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      specificOfferingsId: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}specific_offerings_id'])!,
     );
   }
 
@@ -1978,30 +2058,30 @@ class $RecommendationsTable extends Recommendations
 class RecommendationData extends DataClass
     implements Insertable<RecommendationData> {
   final String id;
+  final String newsId;
   final int order;
   final String name;
-  final String specificOfferingsId;
   const RecommendationData(
       {required this.id,
+      required this.newsId,
       required this.order,
-      required this.name,
-      required this.specificOfferingsId});
+      required this.name});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
+    map['news_id'] = Variable<String>(newsId);
     map['order'] = Variable<int>(order);
     map['name'] = Variable<String>(name);
-    map['specific_offerings_id'] = Variable<String>(specificOfferingsId);
     return map;
   }
 
   RecommendationsCompanion toCompanion(bool nullToAbsent) {
     return RecommendationsCompanion(
       id: Value(id),
+      newsId: Value(newsId),
       order: Value(order),
       name: Value(name),
-      specificOfferingsId: Value(specificOfferingsId),
     );
   }
 
@@ -2010,10 +2090,9 @@ class RecommendationData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return RecommendationData(
       id: serializer.fromJson<String>(json['id']),
+      newsId: serializer.fromJson<String>(json['newsId']),
       order: serializer.fromJson<int>(json['order']),
       name: serializer.fromJson<String>(json['name']),
-      specificOfferingsId:
-          serializer.fromJson<String>(json['specificOfferingsId']),
     );
   }
   @override
@@ -2021,31 +2100,26 @@ class RecommendationData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
+      'newsId': serializer.toJson<String>(newsId),
       'order': serializer.toJson<int>(order),
       'name': serializer.toJson<String>(name),
-      'specificOfferingsId': serializer.toJson<String>(specificOfferingsId),
     };
   }
 
   RecommendationData copyWith(
-          {String? id,
-          int? order,
-          String? name,
-          String? specificOfferingsId}) =>
+          {String? id, String? newsId, int? order, String? name}) =>
       RecommendationData(
         id: id ?? this.id,
+        newsId: newsId ?? this.newsId,
         order: order ?? this.order,
         name: name ?? this.name,
-        specificOfferingsId: specificOfferingsId ?? this.specificOfferingsId,
       );
   RecommendationData copyWithCompanion(RecommendationsCompanion data) {
     return RecommendationData(
       id: data.id.present ? data.id.value : this.id,
+      newsId: data.newsId.present ? data.newsId.value : this.newsId,
       order: data.order.present ? data.order.value : this.order,
       name: data.name.present ? data.name.value : this.name,
-      specificOfferingsId: data.specificOfferingsId.present
-          ? data.specificOfferingsId.value
-          : this.specificOfferingsId,
     );
   }
 
@@ -2053,76 +2127,75 @@ class RecommendationData extends DataClass
   String toString() {
     return (StringBuffer('RecommendationData(')
           ..write('id: $id, ')
+          ..write('newsId: $newsId, ')
           ..write('order: $order, ')
-          ..write('name: $name, ')
-          ..write('specificOfferingsId: $specificOfferingsId')
+          ..write('name: $name')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, order, name, specificOfferingsId);
+  int get hashCode => Object.hash(id, newsId, order, name);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is RecommendationData &&
           other.id == this.id &&
+          other.newsId == this.newsId &&
           other.order == this.order &&
-          other.name == this.name &&
-          other.specificOfferingsId == this.specificOfferingsId);
+          other.name == this.name);
 }
 
 class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
   final Value<String> id;
+  final Value<String> newsId;
   final Value<int> order;
   final Value<String> name;
-  final Value<String> specificOfferingsId;
   final Value<int> rowid;
   const RecommendationsCompanion({
     this.id = const Value.absent(),
+    this.newsId = const Value.absent(),
     this.order = const Value.absent(),
     this.name = const Value.absent(),
-    this.specificOfferingsId = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   RecommendationsCompanion.insert({
     required String id,
+    required String newsId,
     required int order,
     required String name,
-    required String specificOfferingsId,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
+        newsId = Value(newsId),
         order = Value(order),
-        name = Value(name),
-        specificOfferingsId = Value(specificOfferingsId);
+        name = Value(name);
   static Insertable<RecommendationData> custom({
     Expression<String>? id,
+    Expression<String>? newsId,
     Expression<int>? order,
     Expression<String>? name,
-    Expression<String>? specificOfferingsId,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (newsId != null) 'news_id': newsId,
       if (order != null) 'order': order,
       if (name != null) 'name': name,
-      if (specificOfferingsId != null)
-        'specific_offerings_id': specificOfferingsId,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
   RecommendationsCompanion copyWith(
       {Value<String>? id,
+      Value<String>? newsId,
       Value<int>? order,
       Value<String>? name,
-      Value<String>? specificOfferingsId,
       Value<int>? rowid}) {
     return RecommendationsCompanion(
       id: id ?? this.id,
+      newsId: newsId ?? this.newsId,
       order: order ?? this.order,
       name: name ?? this.name,
-      specificOfferingsId: specificOfferingsId ?? this.specificOfferingsId,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -2133,15 +2206,14 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
     if (id.present) {
       map['id'] = Variable<String>(id.value);
     }
+    if (newsId.present) {
+      map['news_id'] = Variable<String>(newsId.value);
+    }
     if (order.present) {
       map['order'] = Variable<int>(order.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
-    }
-    if (specificOfferingsId.present) {
-      map['specific_offerings_id'] =
-          Variable<String>(specificOfferingsId.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -2153,9 +2225,9 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
   String toString() {
     return (StringBuffer('RecommendationsCompanion(')
           ..write('id: $id, ')
+          ..write('newsId: $newsId, ')
           ..write('order: $order, ')
           ..write('name: $name, ')
-          ..write('specificOfferingsId: $specificOfferingsId, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -2403,6 +2475,329 @@ class SmeProfilesCompanion extends UpdateCompanion<SmeProfileData> {
   }
 }
 
+class $OfferingsTable extends Offerings
+    with TableInfo<$OfferingsTable, OfferingData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $OfferingsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 8),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'UNIQUE NOT NULL');
+  static const VerificationMeta _recommendationIdMeta =
+      const VerificationMeta('recommendationId');
+  @override
+  late final GeneratedColumn<String> recommendationId = GeneratedColumn<String>(
+      'recommendation_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES recommendations (id)'));
+  static const VerificationMeta _orderMeta = const VerificationMeta('order');
+  @override
+  late final GeneratedColumn<int> order = GeneratedColumn<int>(
+      'order', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      $customConstraints: 'UNIQUE NOT NULL');
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 255),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _summaryMeta =
+      const VerificationMeta('summary');
+  @override
+  late final GeneratedColumn<String> summary = GeneratedColumn<String>(
+      'summary', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, recommendationId, order, name, summary];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'offerings';
+  @override
+  VerificationContext validateIntegrity(Insertable<OfferingData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('recommendation_id')) {
+      context.handle(
+          _recommendationIdMeta,
+          recommendationId.isAcceptableOrUnknown(
+              data['recommendation_id']!, _recommendationIdMeta));
+    } else if (isInserting) {
+      context.missing(_recommendationIdMeta);
+    }
+    if (data.containsKey('order')) {
+      context.handle(
+          _orderMeta, order.isAcceptableOrUnknown(data['order']!, _orderMeta));
+    } else if (isInserting) {
+      context.missing(_orderMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('summary')) {
+      context.handle(_summaryMeta,
+          summary.isAcceptableOrUnknown(data['summary']!, _summaryMeta));
+    } else if (isInserting) {
+      context.missing(_summaryMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  OfferingData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return OfferingData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      recommendationId: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}recommendation_id'])!,
+      order: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}order'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      summary: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}summary'])!,
+    );
+  }
+
+  @override
+  $OfferingsTable createAlias(String alias) {
+    return $OfferingsTable(attachedDatabase, alias);
+  }
+}
+
+class OfferingData extends DataClass implements Insertable<OfferingData> {
+  final String id;
+  final String recommendationId;
+  final int order;
+  final String name;
+  final String summary;
+  const OfferingData(
+      {required this.id,
+      required this.recommendationId,
+      required this.order,
+      required this.name,
+      required this.summary});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['recommendation_id'] = Variable<String>(recommendationId);
+    map['order'] = Variable<int>(order);
+    map['name'] = Variable<String>(name);
+    map['summary'] = Variable<String>(summary);
+    return map;
+  }
+
+  OfferingsCompanion toCompanion(bool nullToAbsent) {
+    return OfferingsCompanion(
+      id: Value(id),
+      recommendationId: Value(recommendationId),
+      order: Value(order),
+      name: Value(name),
+      summary: Value(summary),
+    );
+  }
+
+  factory OfferingData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return OfferingData(
+      id: serializer.fromJson<String>(json['id']),
+      recommendationId: serializer.fromJson<String>(json['recommendationId']),
+      order: serializer.fromJson<int>(json['order']),
+      name: serializer.fromJson<String>(json['name']),
+      summary: serializer.fromJson<String>(json['summary']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'recommendationId': serializer.toJson<String>(recommendationId),
+      'order': serializer.toJson<int>(order),
+      'name': serializer.toJson<String>(name),
+      'summary': serializer.toJson<String>(summary),
+    };
+  }
+
+  OfferingData copyWith(
+          {String? id,
+          String? recommendationId,
+          int? order,
+          String? name,
+          String? summary}) =>
+      OfferingData(
+        id: id ?? this.id,
+        recommendationId: recommendationId ?? this.recommendationId,
+        order: order ?? this.order,
+        name: name ?? this.name,
+        summary: summary ?? this.summary,
+      );
+  OfferingData copyWithCompanion(OfferingsCompanion data) {
+    return OfferingData(
+      id: data.id.present ? data.id.value : this.id,
+      recommendationId: data.recommendationId.present
+          ? data.recommendationId.value
+          : this.recommendationId,
+      order: data.order.present ? data.order.value : this.order,
+      name: data.name.present ? data.name.value : this.name,
+      summary: data.summary.present ? data.summary.value : this.summary,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('OfferingData(')
+          ..write('id: $id, ')
+          ..write('recommendationId: $recommendationId, ')
+          ..write('order: $order, ')
+          ..write('name: $name, ')
+          ..write('summary: $summary')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, recommendationId, order, name, summary);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is OfferingData &&
+          other.id == this.id &&
+          other.recommendationId == this.recommendationId &&
+          other.order == this.order &&
+          other.name == this.name &&
+          other.summary == this.summary);
+}
+
+class OfferingsCompanion extends UpdateCompanion<OfferingData> {
+  final Value<String> id;
+  final Value<String> recommendationId;
+  final Value<int> order;
+  final Value<String> name;
+  final Value<String> summary;
+  final Value<int> rowid;
+  const OfferingsCompanion({
+    this.id = const Value.absent(),
+    this.recommendationId = const Value.absent(),
+    this.order = const Value.absent(),
+    this.name = const Value.absent(),
+    this.summary = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  OfferingsCompanion.insert({
+    required String id,
+    required String recommendationId,
+    required int order,
+    required String name,
+    required String summary,
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        recommendationId = Value(recommendationId),
+        order = Value(order),
+        name = Value(name),
+        summary = Value(summary);
+  static Insertable<OfferingData> custom({
+    Expression<String>? id,
+    Expression<String>? recommendationId,
+    Expression<int>? order,
+    Expression<String>? name,
+    Expression<String>? summary,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (recommendationId != null) 'recommendation_id': recommendationId,
+      if (order != null) 'order': order,
+      if (name != null) 'name': name,
+      if (summary != null) 'summary': summary,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  OfferingsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? recommendationId,
+      Value<int>? order,
+      Value<String>? name,
+      Value<String>? summary,
+      Value<int>? rowid}) {
+    return OfferingsCompanion(
+      id: id ?? this.id,
+      recommendationId: recommendationId ?? this.recommendationId,
+      order: order ?? this.order,
+      name: name ?? this.name,
+      summary: summary ?? this.summary,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (recommendationId.present) {
+      map['recommendation_id'] = Variable<String>(recommendationId.value);
+    }
+    if (order.present) {
+      map['order'] = Variable<int>(order.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (summary.present) {
+      map['summary'] = Variable<String>(summary.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('OfferingsCompanion(')
+          ..write('id: $id, ')
+          ..write('recommendationId: $recommendationId, ')
+          ..write('order: $order, ')
+          ..write('name: $name, ')
+          ..write('summary: $summary, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $TodoRecommendationStatusesTable extends TodoRecommendationStatuses
     with
         TableInfo<$TodoRecommendationStatusesTable,
@@ -2612,360 +3007,6 @@ class TodoRecommendationStatusesCompanion
   }
 }
 
-class $NewsTable extends News with TableInfo<$NewsTable, NewsData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $NewsTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _titleMeta = const VerificationMeta('title');
-  @override
-  late final GeneratedColumn<String> title = GeneratedColumn<String>(
-      'title', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 255),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
-  static const VerificationMeta _summaryMeta =
-      const VerificationMeta('summary');
-  @override
-  late final GeneratedColumn<String> summary = GeneratedColumn<String>(
-      'summary', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _imageUrlMeta =
-      const VerificationMeta('imageUrl');
-  @override
-  late final GeneratedColumn<String> imageUrl = GeneratedColumn<String>(
-      'image_url', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
-  static const VerificationMeta _dateCreatedMeta =
-      const VerificationMeta('dateCreated');
-  @override
-  late final GeneratedColumn<String> dateCreated = GeneratedColumn<String>(
-      'date_created', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
-  static const VerificationMeta _recommendationIdMeta =
-      const VerificationMeta('recommendationId');
-  @override
-  late final GeneratedColumn<String> recommendationId = GeneratedColumn<String>(
-      'recommendation_id', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES recommendations (id)'));
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, title, summary, imageUrl, dateCreated, recommendationId];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'news';
-  @override
-  VerificationContext validateIntegrity(Insertable<NewsData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('title')) {
-      context.handle(
-          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
-    } else if (isInserting) {
-      context.missing(_titleMeta);
-    }
-    if (data.containsKey('summary')) {
-      context.handle(_summaryMeta,
-          summary.isAcceptableOrUnknown(data['summary']!, _summaryMeta));
-    } else if (isInserting) {
-      context.missing(_summaryMeta);
-    }
-    if (data.containsKey('image_url')) {
-      context.handle(_imageUrlMeta,
-          imageUrl.isAcceptableOrUnknown(data['image_url']!, _imageUrlMeta));
-    } else if (isInserting) {
-      context.missing(_imageUrlMeta);
-    }
-    if (data.containsKey('date_created')) {
-      context.handle(
-          _dateCreatedMeta,
-          dateCreated.isAcceptableOrUnknown(
-              data['date_created']!, _dateCreatedMeta));
-    } else if (isInserting) {
-      context.missing(_dateCreatedMeta);
-    }
-    if (data.containsKey('recommendation_id')) {
-      context.handle(
-          _recommendationIdMeta,
-          recommendationId.isAcceptableOrUnknown(
-              data['recommendation_id']!, _recommendationIdMeta));
-    } else if (isInserting) {
-      context.missing(_recommendationIdMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  NewsData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return NewsData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      title: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
-      summary: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}summary'])!,
-      imageUrl: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}image_url'])!,
-      dateCreated: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}date_created'])!,
-      recommendationId: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}recommendation_id'])!,
-    );
-  }
-
-  @override
-  $NewsTable createAlias(String alias) {
-    return $NewsTable(attachedDatabase, alias);
-  }
-}
-
-class NewsData extends DataClass implements Insertable<NewsData> {
-  final int id;
-  final String title;
-  final String summary;
-  final String imageUrl;
-  final String dateCreated;
-  final String recommendationId;
-  const NewsData(
-      {required this.id,
-      required this.title,
-      required this.summary,
-      required this.imageUrl,
-      required this.dateCreated,
-      required this.recommendationId});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['title'] = Variable<String>(title);
-    map['summary'] = Variable<String>(summary);
-    map['image_url'] = Variable<String>(imageUrl);
-    map['date_created'] = Variable<String>(dateCreated);
-    map['recommendation_id'] = Variable<String>(recommendationId);
-    return map;
-  }
-
-  NewsCompanion toCompanion(bool nullToAbsent) {
-    return NewsCompanion(
-      id: Value(id),
-      title: Value(title),
-      summary: Value(summary),
-      imageUrl: Value(imageUrl),
-      dateCreated: Value(dateCreated),
-      recommendationId: Value(recommendationId),
-    );
-  }
-
-  factory NewsData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return NewsData(
-      id: serializer.fromJson<int>(json['id']),
-      title: serializer.fromJson<String>(json['title']),
-      summary: serializer.fromJson<String>(json['summary']),
-      imageUrl: serializer.fromJson<String>(json['imageUrl']),
-      dateCreated: serializer.fromJson<String>(json['dateCreated']),
-      recommendationId: serializer.fromJson<String>(json['recommendationId']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'title': serializer.toJson<String>(title),
-      'summary': serializer.toJson<String>(summary),
-      'imageUrl': serializer.toJson<String>(imageUrl),
-      'dateCreated': serializer.toJson<String>(dateCreated),
-      'recommendationId': serializer.toJson<String>(recommendationId),
-    };
-  }
-
-  NewsData copyWith(
-          {int? id,
-          String? title,
-          String? summary,
-          String? imageUrl,
-          String? dateCreated,
-          String? recommendationId}) =>
-      NewsData(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        summary: summary ?? this.summary,
-        imageUrl: imageUrl ?? this.imageUrl,
-        dateCreated: dateCreated ?? this.dateCreated,
-        recommendationId: recommendationId ?? this.recommendationId,
-      );
-  NewsData copyWithCompanion(NewsCompanion data) {
-    return NewsData(
-      id: data.id.present ? data.id.value : this.id,
-      title: data.title.present ? data.title.value : this.title,
-      summary: data.summary.present ? data.summary.value : this.summary,
-      imageUrl: data.imageUrl.present ? data.imageUrl.value : this.imageUrl,
-      dateCreated:
-          data.dateCreated.present ? data.dateCreated.value : this.dateCreated,
-      recommendationId: data.recommendationId.present
-          ? data.recommendationId.value
-          : this.recommendationId,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('NewsData(')
-          ..write('id: $id, ')
-          ..write('title: $title, ')
-          ..write('summary: $summary, ')
-          ..write('imageUrl: $imageUrl, ')
-          ..write('dateCreated: $dateCreated, ')
-          ..write('recommendationId: $recommendationId')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(id, title, summary, imageUrl, dateCreated, recommendationId);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is NewsData &&
-          other.id == this.id &&
-          other.title == this.title &&
-          other.summary == this.summary &&
-          other.imageUrl == this.imageUrl &&
-          other.dateCreated == this.dateCreated &&
-          other.recommendationId == this.recommendationId);
-}
-
-class NewsCompanion extends UpdateCompanion<NewsData> {
-  final Value<int> id;
-  final Value<String> title;
-  final Value<String> summary;
-  final Value<String> imageUrl;
-  final Value<String> dateCreated;
-  final Value<String> recommendationId;
-  const NewsCompanion({
-    this.id = const Value.absent(),
-    this.title = const Value.absent(),
-    this.summary = const Value.absent(),
-    this.imageUrl = const Value.absent(),
-    this.dateCreated = const Value.absent(),
-    this.recommendationId = const Value.absent(),
-  });
-  NewsCompanion.insert({
-    this.id = const Value.absent(),
-    required String title,
-    required String summary,
-    required String imageUrl,
-    required String dateCreated,
-    required String recommendationId,
-  })  : title = Value(title),
-        summary = Value(summary),
-        imageUrl = Value(imageUrl),
-        dateCreated = Value(dateCreated),
-        recommendationId = Value(recommendationId);
-  static Insertable<NewsData> custom({
-    Expression<int>? id,
-    Expression<String>? title,
-    Expression<String>? summary,
-    Expression<String>? imageUrl,
-    Expression<String>? dateCreated,
-    Expression<String>? recommendationId,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (title != null) 'title': title,
-      if (summary != null) 'summary': summary,
-      if (imageUrl != null) 'image_url': imageUrl,
-      if (dateCreated != null) 'date_created': dateCreated,
-      if (recommendationId != null) 'recommendation_id': recommendationId,
-    });
-  }
-
-  NewsCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? title,
-      Value<String>? summary,
-      Value<String>? imageUrl,
-      Value<String>? dateCreated,
-      Value<String>? recommendationId}) {
-    return NewsCompanion(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      summary: summary ?? this.summary,
-      imageUrl: imageUrl ?? this.imageUrl,
-      dateCreated: dateCreated ?? this.dateCreated,
-      recommendationId: recommendationId ?? this.recommendationId,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (title.present) {
-      map['title'] = Variable<String>(title.value);
-    }
-    if (summary.present) {
-      map['summary'] = Variable<String>(summary.value);
-    }
-    if (imageUrl.present) {
-      map['image_url'] = Variable<String>(imageUrl.value);
-    }
-    if (dateCreated.present) {
-      map['date_created'] = Variable<String>(dateCreated.value);
-    }
-    if (recommendationId.present) {
-      map['recommendation_id'] = Variable<String>(recommendationId.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('NewsCompanion(')
-          ..write('id: $id, ')
-          ..write('title: $title, ')
-          ..write('summary: $summary, ')
-          ..write('imageUrl: $imageUrl, ')
-          ..write('dateCreated: $dateCreated, ')
-          ..write('recommendationId: $recommendationId')
-          ..write(')'))
-        .toString();
-  }
-}
-
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2976,13 +3017,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $IndustriesTable industries = $IndustriesTable(this);
   late final $BusinessProfilesTable businessProfiles =
       $BusinessProfilesTable(this);
-  late final $OfferingsTable offerings = $OfferingsTable(this);
+  late final $NewsTable news = $NewsTable(this);
   late final $RecommendationsTable recommendations =
       $RecommendationsTable(this);
   late final $SmeProfilesTable smeProfiles = $SmeProfilesTable(this);
+  late final $OfferingsTable offerings = $OfferingsTable(this);
   late final $TodoRecommendationStatusesTable todoRecommendationStatuses =
       $TodoRecommendationStatusesTable(this);
-  late final $NewsTable news = $NewsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2994,11 +3035,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         users,
         industries,
         businessProfiles,
-        offerings,
+        news,
         recommendations,
         smeProfiles,
-        todoRecommendationStatuses,
-        news
+        offerings,
+        todoRecommendationStatuses
       ];
 }
 
@@ -4966,65 +5007,49 @@ typedef $$BusinessProfilesTableProcessedTableManager = ProcessedTableManager<
     (BusinessProfileData, $$BusinessProfilesTableReferences),
     BusinessProfileData,
     PrefetchHooks Function({bool industryType, bool owner, bool employees})>;
-typedef $$OfferingsTableCreateCompanionBuilder = OfferingsCompanion Function({
+typedef $$NewsTableCreateCompanionBuilder = NewsCompanion Function({
   required String id,
   required int order,
-  required String name,
+  required String title,
   required String summary,
+  required String imageUrl,
+  required String dateCreated,
   Value<int> rowid,
 });
-typedef $$OfferingsTableUpdateCompanionBuilder = OfferingsCompanion Function({
+typedef $$NewsTableUpdateCompanionBuilder = NewsCompanion Function({
   Value<String> id,
   Value<int> order,
-  Value<String> name,
+  Value<String> title,
   Value<String> summary,
+  Value<String> imageUrl,
+  Value<String> dateCreated,
   Value<int> rowid,
 });
 
-final class $$OfferingsTableReferences
-    extends BaseReferences<_$AppDatabase, $OfferingsTable, OfferingData> {
-  $$OfferingsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+final class $$NewsTableReferences
+    extends BaseReferences<_$AppDatabase, $NewsTable, NewsData> {
+  $$NewsTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static MultiTypedResultKey<$RecommendationsTable, List<RecommendationData>>
       _recommendationsRefsTable(_$AppDatabase db) =>
           MultiTypedResultKey.fromTable(db.recommendations,
-              aliasName: $_aliasNameGenerator(
-                  db.offerings.id, db.recommendations.specificOfferingsId));
+              aliasName:
+                  $_aliasNameGenerator(db.news.id, db.recommendations.newsId));
 
   $$RecommendationsTableProcessedTableManager get recommendationsRefs {
     final manager =
         $$RecommendationsTableTableManager($_db, $_db.recommendations)
-            .filter((f) => f.specificOfferingsId.id($_item.id));
+            .filter((f) => f.newsId.id($_item.id));
 
     final cache =
         $_typedResult.readTableOrNull(_recommendationsRefsTable($_db));
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: cache));
   }
-
-  static MultiTypedResultKey<$TodoRecommendationStatusesTable,
-      List<TodoRecommendationStatusData>> _todoRecommendationStatusesRefsTable(
-          _$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(db.todoRecommendationStatuses,
-          aliasName: $_aliasNameGenerator(
-              db.offerings.id, db.todoRecommendationStatuses.offeringsId));
-
-  $$TodoRecommendationStatusesTableProcessedTableManager
-      get todoRecommendationStatusesRefs {
-    final manager = $$TodoRecommendationStatusesTableTableManager(
-            $_db, $_db.todoRecommendationStatuses)
-        .filter((f) => f.offeringsId.id($_item.id));
-
-    final cache = $_typedResult
-        .readTableOrNull(_todoRecommendationStatusesRefsTable($_db));
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
-  }
 }
 
-class $$OfferingsTableFilterComposer
-    extends Composer<_$AppDatabase, $OfferingsTable> {
-  $$OfferingsTableFilterComposer({
+class $$NewsTableFilterComposer extends Composer<_$AppDatabase, $NewsTable> {
+  $$NewsTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -5037,11 +5062,17 @@ class $$OfferingsTableFilterComposer
   ColumnFilters<int> get order => $composableBuilder(
       column: $table.order, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get summary => $composableBuilder(
       column: $table.summary, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get imageUrl => $composableBuilder(
+      column: $table.imageUrl, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get dateCreated => $composableBuilder(
+      column: $table.dateCreated, builder: (column) => ColumnFilters(column));
 
   Expression<bool> recommendationsRefs(
       Expression<bool> Function($$RecommendationsTableFilterComposer f) f) {
@@ -5049,7 +5080,7 @@ class $$OfferingsTableFilterComposer
         composer: this,
         getCurrentColumn: (t) => t.id,
         referencedTable: $db.recommendations,
-        getReferencedColumn: (t) => t.specificOfferingsId,
+        getReferencedColumn: (t) => t.newsId,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
@@ -5063,35 +5094,10 @@ class $$OfferingsTableFilterComposer
             ));
     return f(composer);
   }
-
-  Expression<bool> todoRecommendationStatusesRefs(
-      Expression<bool> Function(
-              $$TodoRecommendationStatusesTableFilterComposer f)
-          f) {
-    final $$TodoRecommendationStatusesTableFilterComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.todoRecommendationStatuses,
-            getReferencedColumn: (t) => t.offeringsId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$TodoRecommendationStatusesTableFilterComposer(
-                  $db: $db,
-                  $table: $db.todoRecommendationStatuses,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return f(composer);
-  }
 }
 
-class $$OfferingsTableOrderingComposer
-    extends Composer<_$AppDatabase, $OfferingsTable> {
-  $$OfferingsTableOrderingComposer({
+class $$NewsTableOrderingComposer extends Composer<_$AppDatabase, $NewsTable> {
+  $$NewsTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -5104,16 +5110,22 @@ class $$OfferingsTableOrderingComposer
   ColumnOrderings<int> get order => $composableBuilder(
       column: $table.order, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get summary => $composableBuilder(
       column: $table.summary, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get imageUrl => $composableBuilder(
+      column: $table.imageUrl, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get dateCreated => $composableBuilder(
+      column: $table.dateCreated, builder: (column) => ColumnOrderings(column));
 }
 
-class $$OfferingsTableAnnotationComposer
-    extends Composer<_$AppDatabase, $OfferingsTable> {
-  $$OfferingsTableAnnotationComposer({
+class $$NewsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $NewsTable> {
+  $$NewsTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -5126,11 +5138,17 @@ class $$OfferingsTableAnnotationComposer
   GeneratedColumn<int> get order =>
       $composableBuilder(column: $table.order, builder: (column) => column);
 
-  GeneratedColumn<String> get name =>
-      $composableBuilder(column: $table.name, builder: (column) => column);
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
 
   GeneratedColumn<String> get summary =>
       $composableBuilder(column: $table.summary, builder: (column) => column);
+
+  GeneratedColumn<String> get imageUrl =>
+      $composableBuilder(column: $table.imageUrl, builder: (column) => column);
+
+  GeneratedColumn<String> get dateCreated => $composableBuilder(
+      column: $table.dateCreated, builder: (column) => column);
 
   Expression<T> recommendationsRefs<T extends Object>(
       Expression<T> Function($$RecommendationsTableAnnotationComposer a) f) {
@@ -5138,7 +5156,7 @@ class $$OfferingsTableAnnotationComposer
         composer: this,
         getCurrentColumn: (t) => t.id,
         referencedTable: $db.recommendations,
-        getReferencedColumn: (t) => t.specificOfferingsId,
+        getReferencedColumn: (t) => t.newsId,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
@@ -5152,98 +5170,75 @@ class $$OfferingsTableAnnotationComposer
             ));
     return f(composer);
   }
-
-  Expression<T> todoRecommendationStatusesRefs<T extends Object>(
-      Expression<T> Function(
-              $$TodoRecommendationStatusesTableAnnotationComposer a)
-          f) {
-    final $$TodoRecommendationStatusesTableAnnotationComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.todoRecommendationStatuses,
-            getReferencedColumn: (t) => t.offeringsId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$TodoRecommendationStatusesTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.todoRecommendationStatuses,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return f(composer);
-  }
 }
 
-class $$OfferingsTableTableManager extends RootTableManager<
+class $$NewsTableTableManager extends RootTableManager<
     _$AppDatabase,
-    $OfferingsTable,
-    OfferingData,
-    $$OfferingsTableFilterComposer,
-    $$OfferingsTableOrderingComposer,
-    $$OfferingsTableAnnotationComposer,
-    $$OfferingsTableCreateCompanionBuilder,
-    $$OfferingsTableUpdateCompanionBuilder,
-    (OfferingData, $$OfferingsTableReferences),
-    OfferingData,
-    PrefetchHooks Function(
-        {bool recommendationsRefs, bool todoRecommendationStatusesRefs})> {
-  $$OfferingsTableTableManager(_$AppDatabase db, $OfferingsTable table)
+    $NewsTable,
+    NewsData,
+    $$NewsTableFilterComposer,
+    $$NewsTableOrderingComposer,
+    $$NewsTableAnnotationComposer,
+    $$NewsTableCreateCompanionBuilder,
+    $$NewsTableUpdateCompanionBuilder,
+    (NewsData, $$NewsTableReferences),
+    NewsData,
+    PrefetchHooks Function({bool recommendationsRefs})> {
+  $$NewsTableTableManager(_$AppDatabase db, $NewsTable table)
       : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$OfferingsTableFilterComposer($db: db, $table: table),
+              $$NewsTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$OfferingsTableOrderingComposer($db: db, $table: table),
+              $$NewsTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$OfferingsTableAnnotationComposer($db: db, $table: table),
+              $$NewsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<int> order = const Value.absent(),
-            Value<String> name = const Value.absent(),
+            Value<String> title = const Value.absent(),
             Value<String> summary = const Value.absent(),
+            Value<String> imageUrl = const Value.absent(),
+            Value<String> dateCreated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
-              OfferingsCompanion(
+              NewsCompanion(
             id: id,
             order: order,
-            name: name,
+            title: title,
             summary: summary,
+            imageUrl: imageUrl,
+            dateCreated: dateCreated,
             rowid: rowid,
           ),
           createCompanionCallback: ({
             required String id,
             required int order,
-            required String name,
+            required String title,
             required String summary,
+            required String imageUrl,
+            required String dateCreated,
             Value<int> rowid = const Value.absent(),
           }) =>
-              OfferingsCompanion.insert(
+              NewsCompanion.insert(
             id: id,
             order: order,
-            name: name,
+            title: title,
             summary: summary,
+            imageUrl: imageUrl,
+            dateCreated: dateCreated,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$OfferingsTableReferences(db, table, e)
-                  ))
+              .map((e) =>
+                  (e.readTable(table), $$NewsTableReferences(db, table, e)))
               .toList(),
-          prefetchHooksCallback: (
-              {recommendationsRefs = false,
-              todoRecommendationStatusesRefs = false}) {
+          prefetchHooksCallback: ({recommendationsRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
-                if (recommendationsRefs) db.recommendations,
-                if (todoRecommendationStatusesRefs)
-                  db.todoRecommendationStatuses
+                if (recommendationsRefs) db.recommendations
               ],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
@@ -5251,26 +5246,14 @@ class $$OfferingsTableTableManager extends RootTableManager<
                   if (recommendationsRefs)
                     await $_getPrefetchedData(
                         currentTable: table,
-                        referencedTable: $$OfferingsTableReferences
-                            ._recommendationsRefsTable(db),
+                        referencedTable:
+                            $$NewsTableReferences._recommendationsRefsTable(db),
                         managerFromTypedResult: (p0) =>
-                            $$OfferingsTableReferences(db, table, p0)
+                            $$NewsTableReferences(db, table, p0)
                                 .recommendationsRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.specificOfferingsId == item.id),
-                        typedResults: items),
-                  if (todoRecommendationStatusesRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$OfferingsTableReferences
-                            ._todoRecommendationStatusesRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$OfferingsTableReferences(db, table, p0)
-                                .todoRecommendationStatusesRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.offeringsId == item.id),
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.newsId == item.id),
                         typedResults: items)
                 ];
               },
@@ -5279,33 +5262,32 @@ class $$OfferingsTableTableManager extends RootTableManager<
         ));
 }
 
-typedef $$OfferingsTableProcessedTableManager = ProcessedTableManager<
+typedef $$NewsTableProcessedTableManager = ProcessedTableManager<
     _$AppDatabase,
-    $OfferingsTable,
-    OfferingData,
-    $$OfferingsTableFilterComposer,
-    $$OfferingsTableOrderingComposer,
-    $$OfferingsTableAnnotationComposer,
-    $$OfferingsTableCreateCompanionBuilder,
-    $$OfferingsTableUpdateCompanionBuilder,
-    (OfferingData, $$OfferingsTableReferences),
-    OfferingData,
-    PrefetchHooks Function(
-        {bool recommendationsRefs, bool todoRecommendationStatusesRefs})>;
+    $NewsTable,
+    NewsData,
+    $$NewsTableFilterComposer,
+    $$NewsTableOrderingComposer,
+    $$NewsTableAnnotationComposer,
+    $$NewsTableCreateCompanionBuilder,
+    $$NewsTableUpdateCompanionBuilder,
+    (NewsData, $$NewsTableReferences),
+    NewsData,
+    PrefetchHooks Function({bool recommendationsRefs})>;
 typedef $$RecommendationsTableCreateCompanionBuilder = RecommendationsCompanion
     Function({
   required String id,
+  required String newsId,
   required int order,
   required String name,
-  required String specificOfferingsId,
   Value<int> rowid,
 });
 typedef $$RecommendationsTableUpdateCompanionBuilder = RecommendationsCompanion
     Function({
   Value<String> id,
+  Value<String> newsId,
   Value<int> order,
   Value<String> name,
-  Value<String> specificOfferingsId,
   Value<int> rowid,
 });
 
@@ -5314,15 +5296,14 @@ final class $$RecommendationsTableReferences extends BaseReferences<
   $$RecommendationsTableReferences(
       super.$_db, super.$_table, super.$_typedResult);
 
-  static $OfferingsTable _specificOfferingsIdTable(_$AppDatabase db) =>
-      db.offerings.createAlias($_aliasNameGenerator(
-          db.recommendations.specificOfferingsId, db.offerings.id));
+  static $NewsTable _newsIdTable(_$AppDatabase db) => db.news
+      .createAlias($_aliasNameGenerator(db.recommendations.newsId, db.news.id));
 
-  $$OfferingsTableProcessedTableManager? get specificOfferingsId {
-    if ($_item.specificOfferingsId == null) return null;
-    final manager = $$OfferingsTableTableManager($_db, $_db.offerings)
-        .filter((f) => f.id($_item.specificOfferingsId!));
-    final item = $_typedResult.readTableOrNull(_specificOfferingsIdTable($_db));
+  $$NewsTableProcessedTableManager? get newsId {
+    if ($_item.newsId == null) return null;
+    final manager = $$NewsTableTableManager($_db, $_db.news)
+        .filter((f) => f.id($_item.newsId!));
+    final item = $_typedResult.readTableOrNull(_newsIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: [item]));
@@ -5343,17 +5324,17 @@ final class $$RecommendationsTableReferences extends BaseReferences<
         manager.$state.copyWith(prefetchedData: cache));
   }
 
-  static MultiTypedResultKey<$NewsTable, List<NewsData>> _newsRefsTable(
-          _$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(db.news,
-          aliasName: $_aliasNameGenerator(
-              db.recommendations.id, db.news.recommendationId));
+  static MultiTypedResultKey<$OfferingsTable, List<OfferingData>>
+      _offeringsRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.offerings,
+              aliasName: $_aliasNameGenerator(
+                  db.recommendations.id, db.offerings.recommendationId));
 
-  $$NewsTableProcessedTableManager get newsRefs {
-    final manager = $$NewsTableTableManager($_db, $_db.news)
+  $$OfferingsTableProcessedTableManager get offeringsRefs {
+    final manager = $$OfferingsTableTableManager($_db, $_db.offerings)
         .filter((f) => f.recommendationId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(_newsRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(_offeringsRefsTable($_db));
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: cache));
   }
@@ -5377,18 +5358,18 @@ class $$RecommendationsTableFilterComposer
   ColumnFilters<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnFilters(column));
 
-  $$OfferingsTableFilterComposer get specificOfferingsId {
-    final $$OfferingsTableFilterComposer composer = $composerBuilder(
+  $$NewsTableFilterComposer get newsId {
+    final $$NewsTableFilterComposer composer = $composerBuilder(
         composer: this,
-        getCurrentColumn: (t) => t.specificOfferingsId,
-        referencedTable: $db.offerings,
+        getCurrentColumn: (t) => t.newsId,
+        referencedTable: $db.news,
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$OfferingsTableFilterComposer(
+            $$NewsTableFilterComposer(
               $db: $db,
-              $table: $db.offerings,
+              $table: $db.news,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5418,19 +5399,19 @@ class $$RecommendationsTableFilterComposer
     return f(composer);
   }
 
-  Expression<bool> newsRefs(
-      Expression<bool> Function($$NewsTableFilterComposer f) f) {
-    final $$NewsTableFilterComposer composer = $composerBuilder(
+  Expression<bool> offeringsRefs(
+      Expression<bool> Function($$OfferingsTableFilterComposer f) f) {
+    final $$OfferingsTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.id,
-        referencedTable: $db.news,
+        referencedTable: $db.offerings,
         getReferencedColumn: (t) => t.recommendationId,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$NewsTableFilterComposer(
+            $$OfferingsTableFilterComposer(
               $db: $db,
-              $table: $db.news,
+              $table: $db.offerings,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5458,18 +5439,18 @@ class $$RecommendationsTableOrderingComposer
   ColumnOrderings<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnOrderings(column));
 
-  $$OfferingsTableOrderingComposer get specificOfferingsId {
-    final $$OfferingsTableOrderingComposer composer = $composerBuilder(
+  $$NewsTableOrderingComposer get newsId {
+    final $$NewsTableOrderingComposer composer = $composerBuilder(
         composer: this,
-        getCurrentColumn: (t) => t.specificOfferingsId,
-        referencedTable: $db.offerings,
+        getCurrentColumn: (t) => t.newsId,
+        referencedTable: $db.news,
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$OfferingsTableOrderingComposer(
+            $$NewsTableOrderingComposer(
               $db: $db,
-              $table: $db.offerings,
+              $table: $db.news,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5497,18 +5478,18 @@ class $$RecommendationsTableAnnotationComposer
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
 
-  $$OfferingsTableAnnotationComposer get specificOfferingsId {
-    final $$OfferingsTableAnnotationComposer composer = $composerBuilder(
+  $$NewsTableAnnotationComposer get newsId {
+    final $$NewsTableAnnotationComposer composer = $composerBuilder(
         composer: this,
-        getCurrentColumn: (t) => t.specificOfferingsId,
-        referencedTable: $db.offerings,
+        getCurrentColumn: (t) => t.newsId,
+        referencedTable: $db.news,
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$OfferingsTableAnnotationComposer(
+            $$NewsTableAnnotationComposer(
               $db: $db,
-              $table: $db.offerings,
+              $table: $db.news,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5538,19 +5519,19 @@ class $$RecommendationsTableAnnotationComposer
     return f(composer);
   }
 
-  Expression<T> newsRefs<T extends Object>(
-      Expression<T> Function($$NewsTableAnnotationComposer a) f) {
-    final $$NewsTableAnnotationComposer composer = $composerBuilder(
+  Expression<T> offeringsRefs<T extends Object>(
+      Expression<T> Function($$OfferingsTableAnnotationComposer a) f) {
+    final $$OfferingsTableAnnotationComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.id,
-        referencedTable: $db.news,
+        referencedTable: $db.offerings,
         getReferencedColumn: (t) => t.recommendationId,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$NewsTableAnnotationComposer(
+            $$OfferingsTableAnnotationComposer(
               $db: $db,
-              $table: $db.news,
+              $table: $db.offerings,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5572,7 +5553,7 @@ class $$RecommendationsTableTableManager extends RootTableManager<
     (RecommendationData, $$RecommendationsTableReferences),
     RecommendationData,
     PrefetchHooks Function(
-        {bool specificOfferingsId, bool smeProfilesRefs, bool newsRefs})> {
+        {bool newsId, bool smeProfilesRefs, bool offeringsRefs})> {
   $$RecommendationsTableTableManager(
       _$AppDatabase db, $RecommendationsTable table)
       : super(TableManagerState(
@@ -5586,30 +5567,30 @@ class $$RecommendationsTableTableManager extends RootTableManager<
               $$RecommendationsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
+            Value<String> newsId = const Value.absent(),
             Value<int> order = const Value.absent(),
             Value<String> name = const Value.absent(),
-            Value<String> specificOfferingsId = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationsCompanion(
             id: id,
+            newsId: newsId,
             order: order,
             name: name,
-            specificOfferingsId: specificOfferingsId,
             rowid: rowid,
           ),
           createCompanionCallback: ({
             required String id,
+            required String newsId,
             required int order,
             required String name,
-            required String specificOfferingsId,
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationsCompanion.insert(
             id: id,
+            newsId: newsId,
             order: order,
             name: name,
-            specificOfferingsId: specificOfferingsId,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
@@ -5619,14 +5600,14 @@ class $$RecommendationsTableTableManager extends RootTableManager<
                   ))
               .toList(),
           prefetchHooksCallback: (
-              {specificOfferingsId = false,
+              {newsId = false,
               smeProfilesRefs = false,
-              newsRefs = false}) {
+              offeringsRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
                 if (smeProfilesRefs) db.smeProfiles,
-                if (newsRefs) db.news
+                if (offeringsRefs) db.offerings
               ],
               addJoins: <
                   T extends TableManagerState<
@@ -5641,15 +5622,14 @@ class $$RecommendationsTableTableManager extends RootTableManager<
                       dynamic,
                       dynamic,
                       dynamic>>(state) {
-                if (specificOfferingsId) {
+                if (newsId) {
                   state = state.withJoin(
                     currentTable: table,
-                    currentColumn: table.specificOfferingsId,
-                    referencedTable: $$RecommendationsTableReferences
-                        ._specificOfferingsIdTable(db),
-                    referencedColumn: $$RecommendationsTableReferences
-                        ._specificOfferingsIdTable(db)
-                        .id,
+                    currentColumn: table.newsId,
+                    referencedTable:
+                        $$RecommendationsTableReferences._newsIdTable(db),
+                    referencedColumn:
+                        $$RecommendationsTableReferences._newsIdTable(db).id,
                   ) as T;
                 }
 
@@ -5669,14 +5649,14 @@ class $$RecommendationsTableTableManager extends RootTableManager<
                             (item, referencedItems) => referencedItems
                                 .where((e) => e.implRecoID == item.id),
                         typedResults: items),
-                  if (newsRefs)
+                  if (offeringsRefs)
                     await $_getPrefetchedData(
                         currentTable: table,
-                        referencedTable:
-                            $$RecommendationsTableReferences._newsRefsTable(db),
+                        referencedTable: $$RecommendationsTableReferences
+                            ._offeringsRefsTable(db),
                         managerFromTypedResult: (p0) =>
                             $$RecommendationsTableReferences(db, table, p0)
-                                .newsRefs,
+                                .offeringsRefs,
                         referencedItemsForCurrentItem:
                             (item, referencedItems) => referencedItems
                                 .where((e) => e.recommendationId == item.id),
@@ -5700,7 +5680,7 @@ typedef $$RecommendationsTableProcessedTableManager = ProcessedTableManager<
     (RecommendationData, $$RecommendationsTableReferences),
     RecommendationData,
     PrefetchHooks Function(
-        {bool specificOfferingsId, bool smeProfilesRefs, bool newsRefs})>;
+        {bool newsId, bool smeProfilesRefs, bool offeringsRefs})>;
 typedef $$SmeProfilesTableCreateCompanionBuilder = SmeProfilesCompanion
     Function({
   required int actor,
@@ -6020,6 +6000,367 @@ typedef $$SmeProfilesTableProcessedTableManager = ProcessedTableManager<
     (SmeProfileData, $$SmeProfilesTableReferences),
     SmeProfileData,
     PrefetchHooks Function({bool actor, bool implRecoID})>;
+typedef $$OfferingsTableCreateCompanionBuilder = OfferingsCompanion Function({
+  required String id,
+  required String recommendationId,
+  required int order,
+  required String name,
+  required String summary,
+  Value<int> rowid,
+});
+typedef $$OfferingsTableUpdateCompanionBuilder = OfferingsCompanion Function({
+  Value<String> id,
+  Value<String> recommendationId,
+  Value<int> order,
+  Value<String> name,
+  Value<String> summary,
+  Value<int> rowid,
+});
+
+final class $$OfferingsTableReferences
+    extends BaseReferences<_$AppDatabase, $OfferingsTable, OfferingData> {
+  $$OfferingsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $RecommendationsTable _recommendationIdTable(_$AppDatabase db) =>
+      db.recommendations.createAlias($_aliasNameGenerator(
+          db.offerings.recommendationId, db.recommendations.id));
+
+  $$RecommendationsTableProcessedTableManager? get recommendationId {
+    if ($_item.recommendationId == null) return null;
+    final manager =
+        $$RecommendationsTableTableManager($_db, $_db.recommendations)
+            .filter((f) => f.id($_item.recommendationId!));
+    final item = $_typedResult.readTableOrNull(_recommendationIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static MultiTypedResultKey<$TodoRecommendationStatusesTable,
+      List<TodoRecommendationStatusData>> _todoRecommendationStatusesRefsTable(
+          _$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(db.todoRecommendationStatuses,
+          aliasName: $_aliasNameGenerator(
+              db.offerings.id, db.todoRecommendationStatuses.offeringsId));
+
+  $$TodoRecommendationStatusesTableProcessedTableManager
+      get todoRecommendationStatusesRefs {
+    final manager = $$TodoRecommendationStatusesTableTableManager(
+            $_db, $_db.todoRecommendationStatuses)
+        .filter((f) => f.offeringsId.id($_item.id));
+
+    final cache = $_typedResult
+        .readTableOrNull(_todoRecommendationStatusesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$OfferingsTableFilterComposer
+    extends Composer<_$AppDatabase, $OfferingsTable> {
+  $$OfferingsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get order => $composableBuilder(
+      column: $table.order, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get summary => $composableBuilder(
+      column: $table.summary, builder: (column) => ColumnFilters(column));
+
+  $$RecommendationsTableFilterComposer get recommendationId {
+    final $$RecommendationsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.recommendationId,
+        referencedTable: $db.recommendations,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$RecommendationsTableFilterComposer(
+              $db: $db,
+              $table: $db.recommendations,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<bool> todoRecommendationStatusesRefs(
+      Expression<bool> Function(
+              $$TodoRecommendationStatusesTableFilterComposer f)
+          f) {
+    final $$TodoRecommendationStatusesTableFilterComposer composer =
+        $composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.todoRecommendationStatuses,
+            getReferencedColumn: (t) => t.offeringsId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$TodoRecommendationStatusesTableFilterComposer(
+                  $db: $db,
+                  $table: $db.todoRecommendationStatuses,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
+    return f(composer);
+  }
+}
+
+class $$OfferingsTableOrderingComposer
+    extends Composer<_$AppDatabase, $OfferingsTable> {
+  $$OfferingsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get order => $composableBuilder(
+      column: $table.order, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get summary => $composableBuilder(
+      column: $table.summary, builder: (column) => ColumnOrderings(column));
+
+  $$RecommendationsTableOrderingComposer get recommendationId {
+    final $$RecommendationsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.recommendationId,
+        referencedTable: $db.recommendations,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$RecommendationsTableOrderingComposer(
+              $db: $db,
+              $table: $db.recommendations,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$OfferingsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $OfferingsTable> {
+  $$OfferingsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get order =>
+      $composableBuilder(column: $table.order, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get summary =>
+      $composableBuilder(column: $table.summary, builder: (column) => column);
+
+  $$RecommendationsTableAnnotationComposer get recommendationId {
+    final $$RecommendationsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.recommendationId,
+        referencedTable: $db.recommendations,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$RecommendationsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.recommendations,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<T> todoRecommendationStatusesRefs<T extends Object>(
+      Expression<T> Function(
+              $$TodoRecommendationStatusesTableAnnotationComposer a)
+          f) {
+    final $$TodoRecommendationStatusesTableAnnotationComposer composer =
+        $composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.todoRecommendationStatuses,
+            getReferencedColumn: (t) => t.offeringsId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$TodoRecommendationStatusesTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.todoRecommendationStatuses,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
+    return f(composer);
+  }
+}
+
+class $$OfferingsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $OfferingsTable,
+    OfferingData,
+    $$OfferingsTableFilterComposer,
+    $$OfferingsTableOrderingComposer,
+    $$OfferingsTableAnnotationComposer,
+    $$OfferingsTableCreateCompanionBuilder,
+    $$OfferingsTableUpdateCompanionBuilder,
+    (OfferingData, $$OfferingsTableReferences),
+    OfferingData,
+    PrefetchHooks Function(
+        {bool recommendationId, bool todoRecommendationStatusesRefs})> {
+  $$OfferingsTableTableManager(_$AppDatabase db, $OfferingsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$OfferingsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$OfferingsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$OfferingsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> recommendationId = const Value.absent(),
+            Value<int> order = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> summary = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              OfferingsCompanion(
+            id: id,
+            recommendationId: recommendationId,
+            order: order,
+            name: name,
+            summary: summary,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String recommendationId,
+            required int order,
+            required String name,
+            required String summary,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              OfferingsCompanion.insert(
+            id: id,
+            recommendationId: recommendationId,
+            order: order,
+            name: name,
+            summary: summary,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$OfferingsTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: (
+              {recommendationId = false,
+              todoRecommendationStatusesRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (todoRecommendationStatusesRefs)
+                  db.todoRecommendationStatuses
+              ],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (recommendationId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.recommendationId,
+                    referencedTable:
+                        $$OfferingsTableReferences._recommendationIdTable(db),
+                    referencedColumn: $$OfferingsTableReferences
+                        ._recommendationIdTable(db)
+                        .id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (todoRecommendationStatusesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$OfferingsTableReferences
+                            ._todoRecommendationStatusesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$OfferingsTableReferences(db, table, p0)
+                                .todoRecommendationStatusesRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.offeringsId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$OfferingsTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $OfferingsTable,
+    OfferingData,
+    $$OfferingsTableFilterComposer,
+    $$OfferingsTableOrderingComposer,
+    $$OfferingsTableAnnotationComposer,
+    $$OfferingsTableCreateCompanionBuilder,
+    $$OfferingsTableUpdateCompanionBuilder,
+    (OfferingData, $$OfferingsTableReferences),
+    OfferingData,
+    PrefetchHooks Function(
+        {bool recommendationId, bool todoRecommendationStatusesRefs})>;
 typedef $$TodoRecommendationStatusesTableCreateCompanionBuilder
     = TodoRecommendationStatusesCompanion Function({
   required String offeringsId,
@@ -6262,284 +6603,6 @@ typedef $$TodoRecommendationStatusesTableProcessedTableManager
         ),
         TodoRecommendationStatusData,
         PrefetchHooks Function({bool offeringsId})>;
-typedef $$NewsTableCreateCompanionBuilder = NewsCompanion Function({
-  Value<int> id,
-  required String title,
-  required String summary,
-  required String imageUrl,
-  required String dateCreated,
-  required String recommendationId,
-});
-typedef $$NewsTableUpdateCompanionBuilder = NewsCompanion Function({
-  Value<int> id,
-  Value<String> title,
-  Value<String> summary,
-  Value<String> imageUrl,
-  Value<String> dateCreated,
-  Value<String> recommendationId,
-});
-
-final class $$NewsTableReferences
-    extends BaseReferences<_$AppDatabase, $NewsTable, NewsData> {
-  $$NewsTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static $RecommendationsTable _recommendationIdTable(_$AppDatabase db) =>
-      db.recommendations.createAlias($_aliasNameGenerator(
-          db.news.recommendationId, db.recommendations.id));
-
-  $$RecommendationsTableProcessedTableManager? get recommendationId {
-    if ($_item.recommendationId == null) return null;
-    final manager =
-        $$RecommendationsTableTableManager($_db, $_db.recommendations)
-            .filter((f) => f.id($_item.recommendationId!));
-    final item = $_typedResult.readTableOrNull(_recommendationIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
-  }
-}
-
-class $$NewsTableFilterComposer extends Composer<_$AppDatabase, $NewsTable> {
-  $$NewsTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get title => $composableBuilder(
-      column: $table.title, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get summary => $composableBuilder(
-      column: $table.summary, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get imageUrl => $composableBuilder(
-      column: $table.imageUrl, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<String> get dateCreated => $composableBuilder(
-      column: $table.dateCreated, builder: (column) => ColumnFilters(column));
-
-  $$RecommendationsTableFilterComposer get recommendationId {
-    final $$RecommendationsTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.recommendationId,
-        referencedTable: $db.recommendations,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$RecommendationsTableFilterComposer(
-              $db: $db,
-              $table: $db.recommendations,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$NewsTableOrderingComposer extends Composer<_$AppDatabase, $NewsTable> {
-  $$NewsTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get title => $composableBuilder(
-      column: $table.title, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get summary => $composableBuilder(
-      column: $table.summary, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get imageUrl => $composableBuilder(
-      column: $table.imageUrl, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<String> get dateCreated => $composableBuilder(
-      column: $table.dateCreated, builder: (column) => ColumnOrderings(column));
-
-  $$RecommendationsTableOrderingComposer get recommendationId {
-    final $$RecommendationsTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.recommendationId,
-        referencedTable: $db.recommendations,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$RecommendationsTableOrderingComposer(
-              $db: $db,
-              $table: $db.recommendations,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$NewsTableAnnotationComposer
-    extends Composer<_$AppDatabase, $NewsTable> {
-  $$NewsTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<int> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<String> get title =>
-      $composableBuilder(column: $table.title, builder: (column) => column);
-
-  GeneratedColumn<String> get summary =>
-      $composableBuilder(column: $table.summary, builder: (column) => column);
-
-  GeneratedColumn<String> get imageUrl =>
-      $composableBuilder(column: $table.imageUrl, builder: (column) => column);
-
-  GeneratedColumn<String> get dateCreated => $composableBuilder(
-      column: $table.dateCreated, builder: (column) => column);
-
-  $$RecommendationsTableAnnotationComposer get recommendationId {
-    final $$RecommendationsTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.recommendationId,
-        referencedTable: $db.recommendations,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$RecommendationsTableAnnotationComposer(
-              $db: $db,
-              $table: $db.recommendations,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$NewsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $NewsTable,
-    NewsData,
-    $$NewsTableFilterComposer,
-    $$NewsTableOrderingComposer,
-    $$NewsTableAnnotationComposer,
-    $$NewsTableCreateCompanionBuilder,
-    $$NewsTableUpdateCompanionBuilder,
-    (NewsData, $$NewsTableReferences),
-    NewsData,
-    PrefetchHooks Function({bool recommendationId})> {
-  $$NewsTableTableManager(_$AppDatabase db, $NewsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$NewsTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$NewsTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$NewsTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<String> title = const Value.absent(),
-            Value<String> summary = const Value.absent(),
-            Value<String> imageUrl = const Value.absent(),
-            Value<String> dateCreated = const Value.absent(),
-            Value<String> recommendationId = const Value.absent(),
-          }) =>
-              NewsCompanion(
-            id: id,
-            title: title,
-            summary: summary,
-            imageUrl: imageUrl,
-            dateCreated: dateCreated,
-            recommendationId: recommendationId,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required String title,
-            required String summary,
-            required String imageUrl,
-            required String dateCreated,
-            required String recommendationId,
-          }) =>
-              NewsCompanion.insert(
-            id: id,
-            title: title,
-            summary: summary,
-            imageUrl: imageUrl,
-            dateCreated: dateCreated,
-            recommendationId: recommendationId,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) =>
-                  (e.readTable(table), $$NewsTableReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: ({recommendationId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
-                if (recommendationId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.recommendationId,
-                    referencedTable:
-                        $$NewsTableReferences._recommendationIdTable(db),
-                    referencedColumn:
-                        $$NewsTableReferences._recommendationIdTable(db).id,
-                  ) as T;
-                }
-
-                return state;
-              },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
-        ));
-}
-
-typedef $$NewsTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $NewsTable,
-    NewsData,
-    $$NewsTableFilterComposer,
-    $$NewsTableOrderingComposer,
-    $$NewsTableAnnotationComposer,
-    $$NewsTableCreateCompanionBuilder,
-    $$NewsTableUpdateCompanionBuilder,
-    (NewsData, $$NewsTableReferences),
-    NewsData,
-    PrefetchHooks Function({bool recommendationId})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6556,17 +6619,17 @@ class $AppDatabaseManager {
       $$IndustriesTableTableManager(_db, _db.industries);
   $$BusinessProfilesTableTableManager get businessProfiles =>
       $$BusinessProfilesTableTableManager(_db, _db.businessProfiles);
-  $$OfferingsTableTableManager get offerings =>
-      $$OfferingsTableTableManager(_db, _db.offerings);
+  $$NewsTableTableManager get news => $$NewsTableTableManager(_db, _db.news);
   $$RecommendationsTableTableManager get recommendations =>
       $$RecommendationsTableTableManager(_db, _db.recommendations);
   $$SmeProfilesTableTableManager get smeProfiles =>
       $$SmeProfilesTableTableManager(_db, _db.smeProfiles);
+  $$OfferingsTableTableManager get offerings =>
+      $$OfferingsTableTableManager(_db, _db.offerings);
   $$TodoRecommendationStatusesTableTableManager
       get todoRecommendationStatuses =>
           $$TodoRecommendationStatusesTableTableManager(
               _db, _db.todoRecommendationStatuses);
-  $$NewsTableTableManager get news => $$NewsTableTableManager(_db, _db.news);
 }
 
 // **************************************************************************
