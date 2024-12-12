@@ -48,3 +48,8 @@ class RemoveTodoTaskRepositryException extends AppException {
             code: 'fail-remove-todo-cache',
             message: "Fail to remove todo task to cache");
 }
+
+class DataBaseException extends AppException {
+  DataBaseException(String err, String message)
+      : super(code: err, message: message);
+}

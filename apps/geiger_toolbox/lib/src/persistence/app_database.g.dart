@@ -1595,11 +1595,11 @@ class BusinessProfilesCompanion extends UpdateCompanion<BusinessProfileData> {
   }
 }
 
-class $NewsTable extends News with TableInfo<$NewsTable, NewsData> {
+class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $NewsTable(this.attachedDatabase, [this._alias]);
+  $NewsInfoTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
@@ -1635,10 +1635,7 @@ class $NewsTable extends News with TableInfo<$NewsTable, NewsData> {
   @override
   late final GeneratedColumn<String> imageUrl = GeneratedColumn<String>(
       'image_url', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _dateCreatedMeta =
       const VerificationMeta('dateCreated');
   @override
@@ -1655,7 +1652,7 @@ class $NewsTable extends News with TableInfo<$NewsTable, NewsData> {
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'news';
+  static const String $name = 'news_info';
   @override
   VerificationContext validateIntegrity(Insertable<NewsData> instance,
       {bool isInserting = false}) {
@@ -1723,8 +1720,8 @@ class $NewsTable extends News with TableInfo<$NewsTable, NewsData> {
   }
 
   @override
-  $NewsTable createAlias(String alias) {
-    return $NewsTable(attachedDatabase, alias);
+  $NewsInfoTable createAlias(String alias) {
+    return $NewsInfoTable(attachedDatabase, alias);
   }
 }
 
@@ -1754,8 +1751,8 @@ class NewsData extends DataClass implements Insertable<NewsData> {
     return map;
   }
 
-  NewsCompanion toCompanion(bool nullToAbsent) {
-    return NewsCompanion(
+  NewsInfoCompanion toCompanion(bool nullToAbsent) {
+    return NewsInfoCompanion(
       id: Value(id),
       order: Value(order),
       title: Value(title),
@@ -1805,7 +1802,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
         imageUrl: imageUrl ?? this.imageUrl,
         dateCreated: dateCreated ?? this.dateCreated,
       );
-  NewsData copyWithCompanion(NewsCompanion data) {
+  NewsData copyWithCompanion(NewsInfoCompanion data) {
     return NewsData(
       id: data.id.present ? data.id.value : this.id,
       order: data.order.present ? data.order.value : this.order,
@@ -1845,7 +1842,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
           other.dateCreated == this.dateCreated);
 }
 
-class NewsCompanion extends UpdateCompanion<NewsData> {
+class NewsInfoCompanion extends UpdateCompanion<NewsData> {
   final Value<String> id;
   final Value<int> order;
   final Value<String> title;
@@ -1853,7 +1850,7 @@ class NewsCompanion extends UpdateCompanion<NewsData> {
   final Value<String> imageUrl;
   final Value<String> dateCreated;
   final Value<int> rowid;
-  const NewsCompanion({
+  const NewsInfoCompanion({
     this.id = const Value.absent(),
     this.order = const Value.absent(),
     this.title = const Value.absent(),
@@ -1862,7 +1859,7 @@ class NewsCompanion extends UpdateCompanion<NewsData> {
     this.dateCreated = const Value.absent(),
     this.rowid = const Value.absent(),
   });
-  NewsCompanion.insert({
+  NewsInfoCompanion.insert({
     required String id,
     required int order,
     required String title,
@@ -1896,7 +1893,7 @@ class NewsCompanion extends UpdateCompanion<NewsData> {
     });
   }
 
-  NewsCompanion copyWith(
+  NewsInfoCompanion copyWith(
       {Value<String>? id,
       Value<int>? order,
       Value<String>? title,
@@ -1904,7 +1901,7 @@ class NewsCompanion extends UpdateCompanion<NewsData> {
       Value<String>? imageUrl,
       Value<String>? dateCreated,
       Value<int>? rowid}) {
-    return NewsCompanion(
+    return NewsInfoCompanion(
       id: id ?? this.id,
       order: order ?? this.order,
       title: title ?? this.title,
@@ -1944,7 +1941,7 @@ class NewsCompanion extends UpdateCompanion<NewsData> {
 
   @override
   String toString() {
-    return (StringBuffer('NewsCompanion(')
+    return (StringBuffer('NewsInfoCompanion(')
           ..write('id: $id, ')
           ..write('order: $order, ')
           ..write('title: $title, ')
@@ -1978,7 +1975,7 @@ class $RecommendationsTable extends Recommendations
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES news (id)'));
+          GeneratedColumn.constraintIsAlways('REFERENCES news_info (id)'));
   static const VerificationMeta _orderMeta = const VerificationMeta('order');
   @override
   late final GeneratedColumn<int> order = GeneratedColumn<int>(
@@ -2475,6 +2472,218 @@ class SmeProfilesCompanion extends UpdateCompanion<SmeProfileData> {
   }
 }
 
+class $TodoRecommendationStatusesTable extends TodoRecommendationStatuses
+    with
+        TableInfo<$TodoRecommendationStatusesTable,
+            TodoRecommendationStatusData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TodoRecommendationStatusesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _recommendationIdMeta =
+      const VerificationMeta('recommendationId');
+  @override
+  late final GeneratedColumn<String> recommendationId = GeneratedColumn<String>(
+      'recommendation_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES recommendations (id)'));
+  static const VerificationMeta _completedMeta =
+      const VerificationMeta('completed');
+  @override
+  late final GeneratedColumn<bool> completed = GeneratedColumn<bool>(
+      'completed', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("completed" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  @override
+  List<GeneratedColumn> get $columns => [recommendationId, completed];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'todo_recommendation_statuses';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<TodoRecommendationStatusData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('recommendation_id')) {
+      context.handle(
+          _recommendationIdMeta,
+          recommendationId.isAcceptableOrUnknown(
+              data['recommendation_id']!, _recommendationIdMeta));
+    } else if (isInserting) {
+      context.missing(_recommendationIdMeta);
+    }
+    if (data.containsKey('completed')) {
+      context.handle(_completedMeta,
+          completed.isAcceptableOrUnknown(data['completed']!, _completedMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => const {};
+  @override
+  TodoRecommendationStatusData map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TodoRecommendationStatusData(
+      recommendationId: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}recommendation_id'])!,
+      completed: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}completed'])!,
+    );
+  }
+
+  @override
+  $TodoRecommendationStatusesTable createAlias(String alias) {
+    return $TodoRecommendationStatusesTable(attachedDatabase, alias);
+  }
+}
+
+class TodoRecommendationStatusData extends DataClass
+    implements Insertable<TodoRecommendationStatusData> {
+  final String recommendationId;
+  final bool completed;
+  const TodoRecommendationStatusData(
+      {required this.recommendationId, required this.completed});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['recommendation_id'] = Variable<String>(recommendationId);
+    map['completed'] = Variable<bool>(completed);
+    return map;
+  }
+
+  TodoRecommendationStatusesCompanion toCompanion(bool nullToAbsent) {
+    return TodoRecommendationStatusesCompanion(
+      recommendationId: Value(recommendationId),
+      completed: Value(completed),
+    );
+  }
+
+  factory TodoRecommendationStatusData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TodoRecommendationStatusData(
+      recommendationId: serializer.fromJson<String>(json['recommendationId']),
+      completed: serializer.fromJson<bool>(json['completed']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'recommendationId': serializer.toJson<String>(recommendationId),
+      'completed': serializer.toJson<bool>(completed),
+    };
+  }
+
+  TodoRecommendationStatusData copyWith(
+          {String? recommendationId, bool? completed}) =>
+      TodoRecommendationStatusData(
+        recommendationId: recommendationId ?? this.recommendationId,
+        completed: completed ?? this.completed,
+      );
+  TodoRecommendationStatusData copyWithCompanion(
+      TodoRecommendationStatusesCompanion data) {
+    return TodoRecommendationStatusData(
+      recommendationId: data.recommendationId.present
+          ? data.recommendationId.value
+          : this.recommendationId,
+      completed: data.completed.present ? data.completed.value : this.completed,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TodoRecommendationStatusData(')
+          ..write('recommendationId: $recommendationId, ')
+          ..write('completed: $completed')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(recommendationId, completed);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TodoRecommendationStatusData &&
+          other.recommendationId == this.recommendationId &&
+          other.completed == this.completed);
+}
+
+class TodoRecommendationStatusesCompanion
+    extends UpdateCompanion<TodoRecommendationStatusData> {
+  final Value<String> recommendationId;
+  final Value<bool> completed;
+  final Value<int> rowid;
+  const TodoRecommendationStatusesCompanion({
+    this.recommendationId = const Value.absent(),
+    this.completed = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  TodoRecommendationStatusesCompanion.insert({
+    required String recommendationId,
+    this.completed = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : recommendationId = Value(recommendationId);
+  static Insertable<TodoRecommendationStatusData> custom({
+    Expression<String>? recommendationId,
+    Expression<bool>? completed,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (recommendationId != null) 'recommendation_id': recommendationId,
+      if (completed != null) 'completed': completed,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  TodoRecommendationStatusesCompanion copyWith(
+      {Value<String>? recommendationId,
+      Value<bool>? completed,
+      Value<int>? rowid}) {
+    return TodoRecommendationStatusesCompanion(
+      recommendationId: recommendationId ?? this.recommendationId,
+      completed: completed ?? this.completed,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (recommendationId.present) {
+      map['recommendation_id'] = Variable<String>(recommendationId.value);
+    }
+    if (completed.present) {
+      map['completed'] = Variable<bool>(completed.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TodoRecommendationStatusesCompanion(')
+          ..write('recommendationId: $recommendationId, ')
+          ..write('completed: $completed, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $OfferingsTable extends Offerings
     with TableInfo<$OfferingsTable, OfferingData> {
   @override
@@ -2485,8 +2694,6 @@ class $OfferingsTable extends Offerings
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 8),
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'UNIQUE NOT NULL');
@@ -2798,215 +3005,6 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
   }
 }
 
-class $TodoRecommendationStatusesTable extends TodoRecommendationStatuses
-    with
-        TableInfo<$TodoRecommendationStatusesTable,
-            TodoRecommendationStatusData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $TodoRecommendationStatusesTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _offeringsIdMeta =
-      const VerificationMeta('offeringsId');
-  @override
-  late final GeneratedColumn<String> offeringsId = GeneratedColumn<String>(
-      'offerings_id', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES offerings (id)'));
-  static const VerificationMeta _completedMeta =
-      const VerificationMeta('completed');
-  @override
-  late final GeneratedColumn<bool> completed = GeneratedColumn<bool>(
-      'completed', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("completed" IN (0, 1))'),
-      defaultValue: const Constant(false));
-  @override
-  List<GeneratedColumn> get $columns => [offeringsId, completed];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'todo_recommendation_statuses';
-  @override
-  VerificationContext validateIntegrity(
-      Insertable<TodoRecommendationStatusData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('offerings_id')) {
-      context.handle(
-          _offeringsIdMeta,
-          offeringsId.isAcceptableOrUnknown(
-              data['offerings_id']!, _offeringsIdMeta));
-    } else if (isInserting) {
-      context.missing(_offeringsIdMeta);
-    }
-    if (data.containsKey('completed')) {
-      context.handle(_completedMeta,
-          completed.isAcceptableOrUnknown(data['completed']!, _completedMeta));
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => const {};
-  @override
-  TodoRecommendationStatusData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return TodoRecommendationStatusData(
-      offeringsId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}offerings_id'])!,
-      completed: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}completed'])!,
-    );
-  }
-
-  @override
-  $TodoRecommendationStatusesTable createAlias(String alias) {
-    return $TodoRecommendationStatusesTable(attachedDatabase, alias);
-  }
-}
-
-class TodoRecommendationStatusData extends DataClass
-    implements Insertable<TodoRecommendationStatusData> {
-  final String offeringsId;
-  final bool completed;
-  const TodoRecommendationStatusData(
-      {required this.offeringsId, required this.completed});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['offerings_id'] = Variable<String>(offeringsId);
-    map['completed'] = Variable<bool>(completed);
-    return map;
-  }
-
-  TodoRecommendationStatusesCompanion toCompanion(bool nullToAbsent) {
-    return TodoRecommendationStatusesCompanion(
-      offeringsId: Value(offeringsId),
-      completed: Value(completed),
-    );
-  }
-
-  factory TodoRecommendationStatusData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return TodoRecommendationStatusData(
-      offeringsId: serializer.fromJson<String>(json['offeringsId']),
-      completed: serializer.fromJson<bool>(json['completed']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'offeringsId': serializer.toJson<String>(offeringsId),
-      'completed': serializer.toJson<bool>(completed),
-    };
-  }
-
-  TodoRecommendationStatusData copyWith(
-          {String? offeringsId, bool? completed}) =>
-      TodoRecommendationStatusData(
-        offeringsId: offeringsId ?? this.offeringsId,
-        completed: completed ?? this.completed,
-      );
-  TodoRecommendationStatusData copyWithCompanion(
-      TodoRecommendationStatusesCompanion data) {
-    return TodoRecommendationStatusData(
-      offeringsId:
-          data.offeringsId.present ? data.offeringsId.value : this.offeringsId,
-      completed: data.completed.present ? data.completed.value : this.completed,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('TodoRecommendationStatusData(')
-          ..write('offeringsId: $offeringsId, ')
-          ..write('completed: $completed')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(offeringsId, completed);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is TodoRecommendationStatusData &&
-          other.offeringsId == this.offeringsId &&
-          other.completed == this.completed);
-}
-
-class TodoRecommendationStatusesCompanion
-    extends UpdateCompanion<TodoRecommendationStatusData> {
-  final Value<String> offeringsId;
-  final Value<bool> completed;
-  final Value<int> rowid;
-  const TodoRecommendationStatusesCompanion({
-    this.offeringsId = const Value.absent(),
-    this.completed = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  TodoRecommendationStatusesCompanion.insert({
-    required String offeringsId,
-    this.completed = const Value.absent(),
-    this.rowid = const Value.absent(),
-  }) : offeringsId = Value(offeringsId);
-  static Insertable<TodoRecommendationStatusData> custom({
-    Expression<String>? offeringsId,
-    Expression<bool>? completed,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (offeringsId != null) 'offerings_id': offeringsId,
-      if (completed != null) 'completed': completed,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  TodoRecommendationStatusesCompanion copyWith(
-      {Value<String>? offeringsId, Value<bool>? completed, Value<int>? rowid}) {
-    return TodoRecommendationStatusesCompanion(
-      offeringsId: offeringsId ?? this.offeringsId,
-      completed: completed ?? this.completed,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (offeringsId.present) {
-      map['offerings_id'] = Variable<String>(offeringsId.value);
-    }
-    if (completed.present) {
-      map['completed'] = Variable<bool>(completed.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('TodoRecommendationStatusesCompanion(')
-          ..write('offeringsId: $offeringsId, ')
-          ..write('completed: $completed, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3017,13 +3015,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $IndustriesTable industries = $IndustriesTable(this);
   late final $BusinessProfilesTable businessProfiles =
       $BusinessProfilesTable(this);
-  late final $NewsTable news = $NewsTable(this);
+  late final $NewsInfoTable newsInfo = $NewsInfoTable(this);
   late final $RecommendationsTable recommendations =
       $RecommendationsTable(this);
   late final $SmeProfilesTable smeProfiles = $SmeProfilesTable(this);
-  late final $OfferingsTable offerings = $OfferingsTable(this);
   late final $TodoRecommendationStatusesTable todoRecommendationStatuses =
       $TodoRecommendationStatusesTable(this);
+  late final $OfferingsTable offerings = $OfferingsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3035,11 +3033,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         users,
         industries,
         businessProfiles,
-        news,
+        newsInfo,
         recommendations,
         smeProfiles,
-        offerings,
-        todoRecommendationStatuses
+        todoRecommendationStatuses,
+        offerings
       ];
 }
 
@@ -5007,7 +5005,7 @@ typedef $$BusinessProfilesTableProcessedTableManager = ProcessedTableManager<
     (BusinessProfileData, $$BusinessProfilesTableReferences),
     BusinessProfileData,
     PrefetchHooks Function({bool industryType, bool owner, bool employees})>;
-typedef $$NewsTableCreateCompanionBuilder = NewsCompanion Function({
+typedef $$NewsInfoTableCreateCompanionBuilder = NewsInfoCompanion Function({
   required String id,
   required int order,
   required String title,
@@ -5016,7 +5014,7 @@ typedef $$NewsTableCreateCompanionBuilder = NewsCompanion Function({
   required String dateCreated,
   Value<int> rowid,
 });
-typedef $$NewsTableUpdateCompanionBuilder = NewsCompanion Function({
+typedef $$NewsInfoTableUpdateCompanionBuilder = NewsInfoCompanion Function({
   Value<String> id,
   Value<int> order,
   Value<String> title,
@@ -5026,15 +5024,15 @@ typedef $$NewsTableUpdateCompanionBuilder = NewsCompanion Function({
   Value<int> rowid,
 });
 
-final class $$NewsTableReferences
-    extends BaseReferences<_$AppDatabase, $NewsTable, NewsData> {
-  $$NewsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+final class $$NewsInfoTableReferences
+    extends BaseReferences<_$AppDatabase, $NewsInfoTable, NewsData> {
+  $$NewsInfoTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static MultiTypedResultKey<$RecommendationsTable, List<RecommendationData>>
       _recommendationsRefsTable(_$AppDatabase db) =>
           MultiTypedResultKey.fromTable(db.recommendations,
-              aliasName:
-                  $_aliasNameGenerator(db.news.id, db.recommendations.newsId));
+              aliasName: $_aliasNameGenerator(
+                  db.newsInfo.id, db.recommendations.newsId));
 
   $$RecommendationsTableProcessedTableManager get recommendationsRefs {
     final manager =
@@ -5048,8 +5046,9 @@ final class $$NewsTableReferences
   }
 }
 
-class $$NewsTableFilterComposer extends Composer<_$AppDatabase, $NewsTable> {
-  $$NewsTableFilterComposer({
+class $$NewsInfoTableFilterComposer
+    extends Composer<_$AppDatabase, $NewsInfoTable> {
+  $$NewsInfoTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -5096,8 +5095,9 @@ class $$NewsTableFilterComposer extends Composer<_$AppDatabase, $NewsTable> {
   }
 }
 
-class $$NewsTableOrderingComposer extends Composer<_$AppDatabase, $NewsTable> {
-  $$NewsTableOrderingComposer({
+class $$NewsInfoTableOrderingComposer
+    extends Composer<_$AppDatabase, $NewsInfoTable> {
+  $$NewsInfoTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -5123,9 +5123,9 @@ class $$NewsTableOrderingComposer extends Composer<_$AppDatabase, $NewsTable> {
       column: $table.dateCreated, builder: (column) => ColumnOrderings(column));
 }
 
-class $$NewsTableAnnotationComposer
-    extends Composer<_$AppDatabase, $NewsTable> {
-  $$NewsTableAnnotationComposer({
+class $$NewsInfoTableAnnotationComposer
+    extends Composer<_$AppDatabase, $NewsInfoTable> {
+  $$NewsInfoTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -5172,28 +5172,28 @@ class $$NewsTableAnnotationComposer
   }
 }
 
-class $$NewsTableTableManager extends RootTableManager<
+class $$NewsInfoTableTableManager extends RootTableManager<
     _$AppDatabase,
-    $NewsTable,
+    $NewsInfoTable,
     NewsData,
-    $$NewsTableFilterComposer,
-    $$NewsTableOrderingComposer,
-    $$NewsTableAnnotationComposer,
-    $$NewsTableCreateCompanionBuilder,
-    $$NewsTableUpdateCompanionBuilder,
-    (NewsData, $$NewsTableReferences),
+    $$NewsInfoTableFilterComposer,
+    $$NewsInfoTableOrderingComposer,
+    $$NewsInfoTableAnnotationComposer,
+    $$NewsInfoTableCreateCompanionBuilder,
+    $$NewsInfoTableUpdateCompanionBuilder,
+    (NewsData, $$NewsInfoTableReferences),
     NewsData,
     PrefetchHooks Function({bool recommendationsRefs})> {
-  $$NewsTableTableManager(_$AppDatabase db, $NewsTable table)
+  $$NewsInfoTableTableManager(_$AppDatabase db, $NewsInfoTable table)
       : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$NewsTableFilterComposer($db: db, $table: table),
+              $$NewsInfoTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$NewsTableOrderingComposer($db: db, $table: table),
+              $$NewsInfoTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$NewsTableAnnotationComposer($db: db, $table: table),
+              $$NewsInfoTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<int> order = const Value.absent(),
@@ -5203,7 +5203,7 @@ class $$NewsTableTableManager extends RootTableManager<
             Value<String> dateCreated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
-              NewsCompanion(
+              NewsInfoCompanion(
             id: id,
             order: order,
             title: title,
@@ -5221,7 +5221,7 @@ class $$NewsTableTableManager extends RootTableManager<
             required String dateCreated,
             Value<int> rowid = const Value.absent(),
           }) =>
-              NewsCompanion.insert(
+              NewsInfoCompanion.insert(
             id: id,
             order: order,
             title: title,
@@ -5232,7 +5232,7 @@ class $$NewsTableTableManager extends RootTableManager<
           ),
           withReferenceMapper: (p0) => p0
               .map((e) =>
-                  (e.readTable(table), $$NewsTableReferences(db, table, e)))
+                  (e.readTable(table), $$NewsInfoTableReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: ({recommendationsRefs = false}) {
             return PrefetchHooks(
@@ -5246,10 +5246,10 @@ class $$NewsTableTableManager extends RootTableManager<
                   if (recommendationsRefs)
                     await $_getPrefetchedData(
                         currentTable: table,
-                        referencedTable:
-                            $$NewsTableReferences._recommendationsRefsTable(db),
+                        referencedTable: $$NewsInfoTableReferences
+                            ._recommendationsRefsTable(db),
                         managerFromTypedResult: (p0) =>
-                            $$NewsTableReferences(db, table, p0)
+                            $$NewsInfoTableReferences(db, table, p0)
                                 .recommendationsRefs,
                         referencedItemsForCurrentItem: (item,
                                 referencedItems) =>
@@ -5262,16 +5262,16 @@ class $$NewsTableTableManager extends RootTableManager<
         ));
 }
 
-typedef $$NewsTableProcessedTableManager = ProcessedTableManager<
+typedef $$NewsInfoTableProcessedTableManager = ProcessedTableManager<
     _$AppDatabase,
-    $NewsTable,
+    $NewsInfoTable,
     NewsData,
-    $$NewsTableFilterComposer,
-    $$NewsTableOrderingComposer,
-    $$NewsTableAnnotationComposer,
-    $$NewsTableCreateCompanionBuilder,
-    $$NewsTableUpdateCompanionBuilder,
-    (NewsData, $$NewsTableReferences),
+    $$NewsInfoTableFilterComposer,
+    $$NewsInfoTableOrderingComposer,
+    $$NewsInfoTableAnnotationComposer,
+    $$NewsInfoTableCreateCompanionBuilder,
+    $$NewsInfoTableUpdateCompanionBuilder,
+    (NewsData, $$NewsInfoTableReferences),
     NewsData,
     PrefetchHooks Function({bool recommendationsRefs})>;
 typedef $$RecommendationsTableCreateCompanionBuilder = RecommendationsCompanion
@@ -5296,12 +5296,13 @@ final class $$RecommendationsTableReferences extends BaseReferences<
   $$RecommendationsTableReferences(
       super.$_db, super.$_table, super.$_typedResult);
 
-  static $NewsTable _newsIdTable(_$AppDatabase db) => db.news
-      .createAlias($_aliasNameGenerator(db.recommendations.newsId, db.news.id));
+  static $NewsInfoTable _newsIdTable(_$AppDatabase db) =>
+      db.newsInfo.createAlias(
+          $_aliasNameGenerator(db.recommendations.newsId, db.newsInfo.id));
 
-  $$NewsTableProcessedTableManager? get newsId {
+  $$NewsInfoTableProcessedTableManager? get newsId {
     if ($_item.newsId == null) return null;
-    final manager = $$NewsTableTableManager($_db, $_db.news)
+    final manager = $$NewsInfoTableTableManager($_db, $_db.newsInfo)
         .filter((f) => f.id($_item.newsId!));
     final item = $_typedResult.readTableOrNull(_newsIdTable($_db));
     if (item == null) return manager;
@@ -5320,6 +5321,25 @@ final class $$RecommendationsTableReferences extends BaseReferences<
         .filter((f) => f.implRecoID.id($_item.id));
 
     final cache = $_typedResult.readTableOrNull(_smeProfilesRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+
+  static MultiTypedResultKey<$TodoRecommendationStatusesTable,
+      List<TodoRecommendationStatusData>> _todoRecommendationStatusesRefsTable(
+          _$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(db.todoRecommendationStatuses,
+          aliasName: $_aliasNameGenerator(db.recommendations.id,
+              db.todoRecommendationStatuses.recommendationId));
+
+  $$TodoRecommendationStatusesTableProcessedTableManager
+      get todoRecommendationStatusesRefs {
+    final manager = $$TodoRecommendationStatusesTableTableManager(
+            $_db, $_db.todoRecommendationStatuses)
+        .filter((f) => f.recommendationId.id($_item.id));
+
+    final cache = $_typedResult
+        .readTableOrNull(_todoRecommendationStatusesRefsTable($_db));
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: cache));
   }
@@ -5358,18 +5378,18 @@ class $$RecommendationsTableFilterComposer
   ColumnFilters<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnFilters(column));
 
-  $$NewsTableFilterComposer get newsId {
-    final $$NewsTableFilterComposer composer = $composerBuilder(
+  $$NewsInfoTableFilterComposer get newsId {
+    final $$NewsInfoTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.newsId,
-        referencedTable: $db.news,
+        referencedTable: $db.newsInfo,
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$NewsTableFilterComposer(
+            $$NewsInfoTableFilterComposer(
               $db: $db,
-              $table: $db.news,
+              $table: $db.newsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5396,6 +5416,30 @@ class $$RecommendationsTableFilterComposer
               $removeJoinBuilderFromRootComposer:
                   $removeJoinBuilderFromRootComposer,
             ));
+    return f(composer);
+  }
+
+  Expression<bool> todoRecommendationStatusesRefs(
+      Expression<bool> Function(
+              $$TodoRecommendationStatusesTableFilterComposer f)
+          f) {
+    final $$TodoRecommendationStatusesTableFilterComposer composer =
+        $composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.todoRecommendationStatuses,
+            getReferencedColumn: (t) => t.recommendationId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$TodoRecommendationStatusesTableFilterComposer(
+                  $db: $db,
+                  $table: $db.todoRecommendationStatuses,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 
@@ -5439,18 +5483,18 @@ class $$RecommendationsTableOrderingComposer
   ColumnOrderings<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnOrderings(column));
 
-  $$NewsTableOrderingComposer get newsId {
-    final $$NewsTableOrderingComposer composer = $composerBuilder(
+  $$NewsInfoTableOrderingComposer get newsId {
+    final $$NewsInfoTableOrderingComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.newsId,
-        referencedTable: $db.news,
+        referencedTable: $db.newsInfo,
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$NewsTableOrderingComposer(
+            $$NewsInfoTableOrderingComposer(
               $db: $db,
-              $table: $db.news,
+              $table: $db.newsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5478,18 +5522,18 @@ class $$RecommendationsTableAnnotationComposer
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
 
-  $$NewsTableAnnotationComposer get newsId {
-    final $$NewsTableAnnotationComposer composer = $composerBuilder(
+  $$NewsInfoTableAnnotationComposer get newsId {
+    final $$NewsInfoTableAnnotationComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.newsId,
-        referencedTable: $db.news,
+        referencedTable: $db.newsInfo,
         getReferencedColumn: (t) => t.id,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$NewsTableAnnotationComposer(
+            $$NewsInfoTableAnnotationComposer(
               $db: $db,
-              $table: $db.news,
+              $table: $db.newsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
@@ -5516,6 +5560,30 @@ class $$RecommendationsTableAnnotationComposer
               $removeJoinBuilderFromRootComposer:
                   $removeJoinBuilderFromRootComposer,
             ));
+    return f(composer);
+  }
+
+  Expression<T> todoRecommendationStatusesRefs<T extends Object>(
+      Expression<T> Function(
+              $$TodoRecommendationStatusesTableAnnotationComposer a)
+          f) {
+    final $$TodoRecommendationStatusesTableAnnotationComposer composer =
+        $composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.todoRecommendationStatuses,
+            getReferencedColumn: (t) => t.recommendationId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$TodoRecommendationStatusesTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.todoRecommendationStatuses,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 
@@ -5553,7 +5621,10 @@ class $$RecommendationsTableTableManager extends RootTableManager<
     (RecommendationData, $$RecommendationsTableReferences),
     RecommendationData,
     PrefetchHooks Function(
-        {bool newsId, bool smeProfilesRefs, bool offeringsRefs})> {
+        {bool newsId,
+        bool smeProfilesRefs,
+        bool todoRecommendationStatusesRefs,
+        bool offeringsRefs})> {
   $$RecommendationsTableTableManager(
       _$AppDatabase db, $RecommendationsTable table)
       : super(TableManagerState(
@@ -5602,11 +5673,14 @@ class $$RecommendationsTableTableManager extends RootTableManager<
           prefetchHooksCallback: (
               {newsId = false,
               smeProfilesRefs = false,
+              todoRecommendationStatusesRefs = false,
               offeringsRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
                 if (smeProfilesRefs) db.smeProfiles,
+                if (todoRecommendationStatusesRefs)
+                  db.todoRecommendationStatuses,
                 if (offeringsRefs) db.offerings
               ],
               addJoins: <
@@ -5649,6 +5723,18 @@ class $$RecommendationsTableTableManager extends RootTableManager<
                             (item, referencedItems) => referencedItems
                                 .where((e) => e.implRecoID == item.id),
                         typedResults: items),
+                  if (todoRecommendationStatusesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$RecommendationsTableReferences
+                            ._todoRecommendationStatusesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$RecommendationsTableReferences(db, table, p0)
+                                .todoRecommendationStatusesRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.recommendationId == item.id),
+                        typedResults: items),
                   if (offeringsRefs)
                     await $_getPrefetchedData(
                         currentTable: table,
@@ -5680,7 +5766,10 @@ typedef $$RecommendationsTableProcessedTableManager = ProcessedTableManager<
     (RecommendationData, $$RecommendationsTableReferences),
     RecommendationData,
     PrefetchHooks Function(
-        {bool newsId, bool smeProfilesRefs, bool offeringsRefs})>;
+        {bool newsId,
+        bool smeProfilesRefs,
+        bool todoRecommendationStatusesRefs,
+        bool offeringsRefs})>;
 typedef $$SmeProfilesTableCreateCompanionBuilder = SmeProfilesCompanion
     Function({
   required int actor,
@@ -6000,6 +6089,250 @@ typedef $$SmeProfilesTableProcessedTableManager = ProcessedTableManager<
     (SmeProfileData, $$SmeProfilesTableReferences),
     SmeProfileData,
     PrefetchHooks Function({bool actor, bool implRecoID})>;
+typedef $$TodoRecommendationStatusesTableCreateCompanionBuilder
+    = TodoRecommendationStatusesCompanion Function({
+  required String recommendationId,
+  Value<bool> completed,
+  Value<int> rowid,
+});
+typedef $$TodoRecommendationStatusesTableUpdateCompanionBuilder
+    = TodoRecommendationStatusesCompanion Function({
+  Value<String> recommendationId,
+  Value<bool> completed,
+  Value<int> rowid,
+});
+
+final class $$TodoRecommendationStatusesTableReferences extends BaseReferences<
+    _$AppDatabase,
+    $TodoRecommendationStatusesTable,
+    TodoRecommendationStatusData> {
+  $$TodoRecommendationStatusesTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $RecommendationsTable _recommendationIdTable(_$AppDatabase db) =>
+      db.recommendations.createAlias($_aliasNameGenerator(
+          db.todoRecommendationStatuses.recommendationId,
+          db.recommendations.id));
+
+  $$RecommendationsTableProcessedTableManager? get recommendationId {
+    if ($_item.recommendationId == null) return null;
+    final manager =
+        $$RecommendationsTableTableManager($_db, $_db.recommendations)
+            .filter((f) => f.id($_item.recommendationId!));
+    final item = $_typedResult.readTableOrNull(_recommendationIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$TodoRecommendationStatusesTableFilterComposer
+    extends Composer<_$AppDatabase, $TodoRecommendationStatusesTable> {
+  $$TodoRecommendationStatusesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<bool> get completed => $composableBuilder(
+      column: $table.completed, builder: (column) => ColumnFilters(column));
+
+  $$RecommendationsTableFilterComposer get recommendationId {
+    final $$RecommendationsTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.recommendationId,
+        referencedTable: $db.recommendations,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$RecommendationsTableFilterComposer(
+              $db: $db,
+              $table: $db.recommendations,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$TodoRecommendationStatusesTableOrderingComposer
+    extends Composer<_$AppDatabase, $TodoRecommendationStatusesTable> {
+  $$TodoRecommendationStatusesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<bool> get completed => $composableBuilder(
+      column: $table.completed, builder: (column) => ColumnOrderings(column));
+
+  $$RecommendationsTableOrderingComposer get recommendationId {
+    final $$RecommendationsTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.recommendationId,
+        referencedTable: $db.recommendations,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$RecommendationsTableOrderingComposer(
+              $db: $db,
+              $table: $db.recommendations,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$TodoRecommendationStatusesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $TodoRecommendationStatusesTable> {
+  $$TodoRecommendationStatusesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<bool> get completed =>
+      $composableBuilder(column: $table.completed, builder: (column) => column);
+
+  $$RecommendationsTableAnnotationComposer get recommendationId {
+    final $$RecommendationsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.recommendationId,
+        referencedTable: $db.recommendations,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$RecommendationsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.recommendations,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$TodoRecommendationStatusesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $TodoRecommendationStatusesTable,
+    TodoRecommendationStatusData,
+    $$TodoRecommendationStatusesTableFilterComposer,
+    $$TodoRecommendationStatusesTableOrderingComposer,
+    $$TodoRecommendationStatusesTableAnnotationComposer,
+    $$TodoRecommendationStatusesTableCreateCompanionBuilder,
+    $$TodoRecommendationStatusesTableUpdateCompanionBuilder,
+    (TodoRecommendationStatusData, $$TodoRecommendationStatusesTableReferences),
+    TodoRecommendationStatusData,
+    PrefetchHooks Function({bool recommendationId})> {
+  $$TodoRecommendationStatusesTableTableManager(
+      _$AppDatabase db, $TodoRecommendationStatusesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$TodoRecommendationStatusesTableFilterComposer(
+                  $db: db, $table: table),
+          createOrderingComposer: () =>
+              $$TodoRecommendationStatusesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$TodoRecommendationStatusesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> recommendationId = const Value.absent(),
+            Value<bool> completed = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              TodoRecommendationStatusesCompanion(
+            recommendationId: recommendationId,
+            completed: completed,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String recommendationId,
+            Value<bool> completed = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              TodoRecommendationStatusesCompanion.insert(
+            recommendationId: recommendationId,
+            completed: completed,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$TodoRecommendationStatusesTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({recommendationId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (recommendationId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.recommendationId,
+                    referencedTable: $$TodoRecommendationStatusesTableReferences
+                        ._recommendationIdTable(db),
+                    referencedColumn:
+                        $$TodoRecommendationStatusesTableReferences
+                            ._recommendationIdTable(db)
+                            .id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$TodoRecommendationStatusesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $TodoRecommendationStatusesTable,
+        TodoRecommendationStatusData,
+        $$TodoRecommendationStatusesTableFilterComposer,
+        $$TodoRecommendationStatusesTableOrderingComposer,
+        $$TodoRecommendationStatusesTableAnnotationComposer,
+        $$TodoRecommendationStatusesTableCreateCompanionBuilder,
+        $$TodoRecommendationStatusesTableUpdateCompanionBuilder,
+        (
+          TodoRecommendationStatusData,
+          $$TodoRecommendationStatusesTableReferences
+        ),
+        TodoRecommendationStatusData,
+        PrefetchHooks Function({bool recommendationId})>;
 typedef $$OfferingsTableCreateCompanionBuilder = OfferingsCompanion Function({
   required String id,
   required String recommendationId,
@@ -6034,25 +6367,6 @@ final class $$OfferingsTableReferences
     if (item == null) return manager;
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: [item]));
-  }
-
-  static MultiTypedResultKey<$TodoRecommendationStatusesTable,
-      List<TodoRecommendationStatusData>> _todoRecommendationStatusesRefsTable(
-          _$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(db.todoRecommendationStatuses,
-          aliasName: $_aliasNameGenerator(
-              db.offerings.id, db.todoRecommendationStatuses.offeringsId));
-
-  $$TodoRecommendationStatusesTableProcessedTableManager
-      get todoRecommendationStatusesRefs {
-    final manager = $$TodoRecommendationStatusesTableTableManager(
-            $_db, $_db.todoRecommendationStatuses)
-        .filter((f) => f.offeringsId.id($_item.id));
-
-    final cache = $_typedResult
-        .readTableOrNull(_todoRecommendationStatusesRefsTable($_db));
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -6095,30 +6409,6 @@ class $$OfferingsTableFilterComposer
                   $removeJoinBuilderFromRootComposer,
             ));
     return composer;
-  }
-
-  Expression<bool> todoRecommendationStatusesRefs(
-      Expression<bool> Function(
-              $$TodoRecommendationStatusesTableFilterComposer f)
-          f) {
-    final $$TodoRecommendationStatusesTableFilterComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.todoRecommendationStatuses,
-            getReferencedColumn: (t) => t.offeringsId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$TodoRecommendationStatusesTableFilterComposer(
-                  $db: $db,
-                  $table: $db.todoRecommendationStatuses,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return f(composer);
   }
 }
 
@@ -6204,30 +6494,6 @@ class $$OfferingsTableAnnotationComposer
             ));
     return composer;
   }
-
-  Expression<T> todoRecommendationStatusesRefs<T extends Object>(
-      Expression<T> Function(
-              $$TodoRecommendationStatusesTableAnnotationComposer a)
-          f) {
-    final $$TodoRecommendationStatusesTableAnnotationComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.todoRecommendationStatuses,
-            getReferencedColumn: (t) => t.offeringsId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$TodoRecommendationStatusesTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.todoRecommendationStatuses,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return f(composer);
-  }
 }
 
 class $$OfferingsTableTableManager extends RootTableManager<
@@ -6241,8 +6507,7 @@ class $$OfferingsTableTableManager extends RootTableManager<
     $$OfferingsTableUpdateCompanionBuilder,
     (OfferingData, $$OfferingsTableReferences),
     OfferingData,
-    PrefetchHooks Function(
-        {bool recommendationId, bool todoRecommendationStatusesRefs})> {
+    PrefetchHooks Function({bool recommendationId})> {
   $$OfferingsTableTableManager(_$AppDatabase db, $OfferingsTable table)
       : super(TableManagerState(
           db: db,
@@ -6291,15 +6556,10 @@ class $$OfferingsTableTableManager extends RootTableManager<
                     $$OfferingsTableReferences(db, table, e)
                   ))
               .toList(),
-          prefetchHooksCallback: (
-              {recommendationId = false,
-              todoRecommendationStatusesRefs = false}) {
+          prefetchHooksCallback: ({recommendationId = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [
-                if (todoRecommendationStatusesRefs)
-                  db.todoRecommendationStatuses
-              ],
+              explicitlyWatchedTables: [],
               addJoins: <
                   T extends TableManagerState<
                       dynamic,
@@ -6328,20 +6588,7 @@ class $$OfferingsTableTableManager extends RootTableManager<
                 return state;
               },
               getPrefetchedDataCallback: (items) async {
-                return [
-                  if (todoRecommendationStatusesRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable: $$OfferingsTableReferences
-                            ._todoRecommendationStatusesRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$OfferingsTableReferences(db, table, p0)
-                                .todoRecommendationStatusesRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.offeringsId == item.id),
-                        typedResults: items)
-                ];
+                return [];
               },
             );
           },
@@ -6359,250 +6606,7 @@ typedef $$OfferingsTableProcessedTableManager = ProcessedTableManager<
     $$OfferingsTableUpdateCompanionBuilder,
     (OfferingData, $$OfferingsTableReferences),
     OfferingData,
-    PrefetchHooks Function(
-        {bool recommendationId, bool todoRecommendationStatusesRefs})>;
-typedef $$TodoRecommendationStatusesTableCreateCompanionBuilder
-    = TodoRecommendationStatusesCompanion Function({
-  required String offeringsId,
-  Value<bool> completed,
-  Value<int> rowid,
-});
-typedef $$TodoRecommendationStatusesTableUpdateCompanionBuilder
-    = TodoRecommendationStatusesCompanion Function({
-  Value<String> offeringsId,
-  Value<bool> completed,
-  Value<int> rowid,
-});
-
-final class $$TodoRecommendationStatusesTableReferences extends BaseReferences<
-    _$AppDatabase,
-    $TodoRecommendationStatusesTable,
-    TodoRecommendationStatusData> {
-  $$TodoRecommendationStatusesTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
-
-  static $OfferingsTable _offeringsIdTable(_$AppDatabase db) =>
-      db.offerings.createAlias($_aliasNameGenerator(
-          db.todoRecommendationStatuses.offeringsId, db.offerings.id));
-
-  $$OfferingsTableProcessedTableManager? get offeringsId {
-    if ($_item.offeringsId == null) return null;
-    final manager = $$OfferingsTableTableManager($_db, $_db.offerings)
-        .filter((f) => f.id($_item.offeringsId!));
-    final item = $_typedResult.readTableOrNull(_offeringsIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
-  }
-}
-
-class $$TodoRecommendationStatusesTableFilterComposer
-    extends Composer<_$AppDatabase, $TodoRecommendationStatusesTable> {
-  $$TodoRecommendationStatusesTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<bool> get completed => $composableBuilder(
-      column: $table.completed, builder: (column) => ColumnFilters(column));
-
-  $$OfferingsTableFilterComposer get offeringsId {
-    final $$OfferingsTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.offeringsId,
-        referencedTable: $db.offerings,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$OfferingsTableFilterComposer(
-              $db: $db,
-              $table: $db.offerings,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$TodoRecommendationStatusesTableOrderingComposer
-    extends Composer<_$AppDatabase, $TodoRecommendationStatusesTable> {
-  $$TodoRecommendationStatusesTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<bool> get completed => $composableBuilder(
-      column: $table.completed, builder: (column) => ColumnOrderings(column));
-
-  $$OfferingsTableOrderingComposer get offeringsId {
-    final $$OfferingsTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.offeringsId,
-        referencedTable: $db.offerings,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$OfferingsTableOrderingComposer(
-              $db: $db,
-              $table: $db.offerings,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$TodoRecommendationStatusesTableAnnotationComposer
-    extends Composer<_$AppDatabase, $TodoRecommendationStatusesTable> {
-  $$TodoRecommendationStatusesTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<bool> get completed =>
-      $composableBuilder(column: $table.completed, builder: (column) => column);
-
-  $$OfferingsTableAnnotationComposer get offeringsId {
-    final $$OfferingsTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.offeringsId,
-        referencedTable: $db.offerings,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$OfferingsTableAnnotationComposer(
-              $db: $db,
-              $table: $db.offerings,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$TodoRecommendationStatusesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $TodoRecommendationStatusesTable,
-    TodoRecommendationStatusData,
-    $$TodoRecommendationStatusesTableFilterComposer,
-    $$TodoRecommendationStatusesTableOrderingComposer,
-    $$TodoRecommendationStatusesTableAnnotationComposer,
-    $$TodoRecommendationStatusesTableCreateCompanionBuilder,
-    $$TodoRecommendationStatusesTableUpdateCompanionBuilder,
-    (TodoRecommendationStatusData, $$TodoRecommendationStatusesTableReferences),
-    TodoRecommendationStatusData,
-    PrefetchHooks Function({bool offeringsId})> {
-  $$TodoRecommendationStatusesTableTableManager(
-      _$AppDatabase db, $TodoRecommendationStatusesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$TodoRecommendationStatusesTableFilterComposer(
-                  $db: db, $table: table),
-          createOrderingComposer: () =>
-              $$TodoRecommendationStatusesTableOrderingComposer(
-                  $db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$TodoRecommendationStatusesTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> offeringsId = const Value.absent(),
-            Value<bool> completed = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              TodoRecommendationStatusesCompanion(
-            offeringsId: offeringsId,
-            completed: completed,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String offeringsId,
-            Value<bool> completed = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              TodoRecommendationStatusesCompanion.insert(
-            offeringsId: offeringsId,
-            completed: completed,
-            rowid: rowid,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$TodoRecommendationStatusesTableReferences(db, table, e)
-                  ))
-              .toList(),
-          prefetchHooksCallback: ({offeringsId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
-                if (offeringsId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.offeringsId,
-                    referencedTable: $$TodoRecommendationStatusesTableReferences
-                        ._offeringsIdTable(db),
-                    referencedColumn:
-                        $$TodoRecommendationStatusesTableReferences
-                            ._offeringsIdTable(db)
-                            .id,
-                  ) as T;
-                }
-
-                return state;
-              },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
-        ));
-}
-
-typedef $$TodoRecommendationStatusesTableProcessedTableManager
-    = ProcessedTableManager<
-        _$AppDatabase,
-        $TodoRecommendationStatusesTable,
-        TodoRecommendationStatusData,
-        $$TodoRecommendationStatusesTableFilterComposer,
-        $$TodoRecommendationStatusesTableOrderingComposer,
-        $$TodoRecommendationStatusesTableAnnotationComposer,
-        $$TodoRecommendationStatusesTableCreateCompanionBuilder,
-        $$TodoRecommendationStatusesTableUpdateCompanionBuilder,
-        (
-          TodoRecommendationStatusData,
-          $$TodoRecommendationStatusesTableReferences
-        ),
-        TodoRecommendationStatusData,
-        PrefetchHooks Function({bool offeringsId})>;
+    PrefetchHooks Function({bool recommendationId})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6619,17 +6623,18 @@ class $AppDatabaseManager {
       $$IndustriesTableTableManager(_db, _db.industries);
   $$BusinessProfilesTableTableManager get businessProfiles =>
       $$BusinessProfilesTableTableManager(_db, _db.businessProfiles);
-  $$NewsTableTableManager get news => $$NewsTableTableManager(_db, _db.news);
+  $$NewsInfoTableTableManager get newsInfo =>
+      $$NewsInfoTableTableManager(_db, _db.newsInfo);
   $$RecommendationsTableTableManager get recommendations =>
       $$RecommendationsTableTableManager(_db, _db.recommendations);
   $$SmeProfilesTableTableManager get smeProfiles =>
       $$SmeProfilesTableTableManager(_db, _db.smeProfiles);
-  $$OfferingsTableTableManager get offerings =>
-      $$OfferingsTableTableManager(_db, _db.offerings);
   $$TodoRecommendationStatusesTableTableManager
       get todoRecommendationStatuses =>
           $$TodoRecommendationStatusesTableTableManager(
               _db, _db.todoRecommendationStatuses);
+  $$OfferingsTableTableManager get offerings =>
+      $$OfferingsTableTableManager(_db, _db.offerings);
 }
 
 // **************************************************************************

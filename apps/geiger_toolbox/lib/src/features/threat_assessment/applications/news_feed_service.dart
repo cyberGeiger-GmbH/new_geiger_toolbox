@@ -2,6 +2,8 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/error_logger.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
+import 'package:geiger_toolbox/src/persistence/app_database.dart';
+import 'package:geiger_toolbox/src/persistence/app_database_crud.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../data/remote/news_feed_remote_repository.dart';
@@ -15,17 +17,20 @@ class NewsFeedService {
   Future<void> cacheNews({Profile? profile}) async {
     try {
       final remoteRepo = ref.read(newsFeedRepositoryProvider);
-
+      throw Exception("nosa exception");
       //todo: read from sme profile repository
       // final defaultProfile = Profile(
       //     location: "Zurich",
       //     digitalInfrastructure: DigitalInfrastructure(
       //         infoAbout: ["password", "teamView", "post finance"]));
-      List<News>? data = await remoteRepo.fetchNewsUpdate();
+      List<News> data = await remoteRepo.fetchNewsUpdate();
       if (data.isNotEmpty) {
-        final cachedRepos = ref.read(newsFeedCacheRepositoryProvider);
-        //cache news Feed
-        await cachedRepos.cacheNewsFeed(data: data);
+        // final cachedRepos = ref.read(newsFeedCacheRepositoryProvider);
+        // //cache news Feed
+        // await cachedRepos.cacheNewsFeed(data: data);
+
+        final db = ref.read(appDatabaseProvider);
+        await db.synFromRemote(data);
       }
     } catch (e, s) {
       ref.read(errorLoggerProvider).logError(e, s);

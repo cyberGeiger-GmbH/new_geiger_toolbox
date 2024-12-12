@@ -10,6 +10,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
+import 'package:geiger_toolbox/src/persistence/app_database_crud.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,7 +21,7 @@ class NewsFeedsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newsFeedValue = ref.watch(watchNewsFeedsProvider);
+    final newsFeedValue = ref.watch(fetchAllNewsProvider);
     final state = ref.watch(scanButtonControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);
 

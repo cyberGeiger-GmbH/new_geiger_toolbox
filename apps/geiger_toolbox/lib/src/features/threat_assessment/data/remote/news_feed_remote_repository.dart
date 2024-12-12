@@ -12,7 +12,7 @@ class NewsFeedRemoteRepository {
     final newsRepo = ref.read(newsRepositoryProvider);
     final data = await newsRepo.fetchNews(profile: smeProfile);
     debugPrint("News from remote total => ${data.length}");
-    
+
     return data;
   }
 }

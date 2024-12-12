@@ -4,6 +4,7 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/recommendation_tile_list_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
+import 'package:geiger_toolbox/src/persistence/app_database_crud.dart';
 
 class RecommendationWidget extends ConsumerWidget {
   const RecommendationWidget({
@@ -13,7 +14,7 @@ class RecommendationWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final newsFeedIndex = ref.watch(newsFeedsControllerProvider);
-    final newsFeedValue = ref.watch(watchNewsFeedsProvider);
+    final newsFeedValue = ref.watch(fetchAllNewsProvider);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

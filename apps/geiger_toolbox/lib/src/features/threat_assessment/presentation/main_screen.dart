@@ -28,7 +28,10 @@ class MainScreen extends ConsumerWidget {
     //show error when scan button throw as exceptions
     ref.listen(
       scanButtonControllerProvider,
-      (_, nextState) => nextState.showAlertDialogOnError(context: context),
+      (_, nextState) {
+        debugPrint("ui error => ${nextState.error}");
+        return nextState.showAlertDialogOnError(context: context);
+      },
     );
 
     // final state = ref.watch(homeScreenControllerProvider);
@@ -36,7 +39,7 @@ class MainScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(),
-      body: (newsFeedState.hasValue &&
+      body: !(newsFeedState.hasValue &&
               newsFeedState.value != null &&
               newsFeedState.value!.isEmpty)
           ? WelcomeWidget()
@@ -53,25 +56,23 @@ class DataWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
-            Spacing.gapH8,
-            ScanButtonWidget(),
-            Spacing.gapH16,
-            //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
-            NewsFeedsWidget(),
-            Spacing.gapH16,
-            AssetWidget(),
-            Spacing.gapH16,
-            appFlavor == "dev"
-                ? RecommendationWidget()
-                : DashboardWidget(),
-            Spacing.gapH12,
-          ],
-        ),
-      );
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
+          Spacing.gapH8,
+          ScanButtonWidget(),
+          Spacing.gapH16,
+          //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
+          NewsFeedsWidget(),
+          Spacing.gapH16,
+          AssetWidget(),
+          Spacing.gapH16,
+          appFlavor == "dev" ? RecommendationWidget() : DashboardWidget(),
+          Spacing.gapH12,
+        ],
+      ),
+    );
   }
 }
 

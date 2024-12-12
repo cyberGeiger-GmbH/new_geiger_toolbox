@@ -67,14 +67,14 @@ class Locations extends Table {
 }
 
 @DataClassName('NewsData')
-class News extends Table {
+class NewsInfo extends Table {
   TextColumn get id =>
       text().withLength(min: 1, max: 8).customConstraint('UNIQUE NOT NULL')();
   IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
 
   TextColumn get title => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
-  TextColumn get imageUrl => text().withLength(min: 1, max: 100)();
+  TextColumn get imageUrl => text()();
   TextColumn get dateCreated => text().withLength(min: 1, max: 100)();
 
   @override
@@ -84,7 +84,7 @@ class News extends Table {
 @DataClassName('RecommendationData')
 class Recommendations extends Table {
   TextColumn get id => text().withLength(min: 1, max: 8)();
-  TextColumn get newsId => text().references(News, #id)(); // Foreign key
+  TextColumn get newsId => text().references(NewsInfo, #id)(); // Foreign key
   IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
   TextColumn get name => text().withLength(min: 1, max: 255)();
 
@@ -95,7 +95,7 @@ class Recommendations extends Table {
 @DataClassName('OfferingData')
 class Offerings extends Table {
   TextColumn get id =>
-      text().withLength(min: 1, max: 8).customConstraint('UNIQUE NOT NULL')();
+      text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get recommendationId =>
       text().references(Recommendations, #id)(); // Foreign key
 
@@ -117,8 +117,8 @@ class SmeProfiles extends Table {
 
 @DataClassName('TodoRecommendationStatusData')
 class TodoRecommendationStatuses extends Table {
-  TextColumn get offeringsId =>
-      text().references(Offerings, #id)(); // Foreign key
+  TextColumn get recommendationId =>
+      text().references(Recommendations, #id)(); // Foreign key
   BoolColumn get completed => boolean().withDefault(const Constant(false))();
 }
 
@@ -132,7 +132,7 @@ class TodoRecommendationStatuses extends Table {
     Locations,
     SmeProfiles,
     TodoRecommendationStatuses,
-    News,
+    NewsInfo,
     Recommendations,
     Offerings,
   ],
