@@ -21,9 +21,19 @@ dependencies:
   logger: 2.4.0
   freezed_annotation: 2.4.4
   carousel_slider_plus: 7.0.2
+
+   # Drift and friends
+  drift: 2.21.0
+  drift_dev: 2.21.2
+  path_provider: 2.1.5
+  path: 1.9.0
+  sqlite3_flutter_libs: 0.5.26
+  sqlite3: 2.4.7
+  
+  #other packages
   sembast: 3.7.5+2
   sembast_web: 2.4.0+4
-  path_provider: 2.1.5
+  #path_provider: 2.1.5
   json_annotation: 4.9.0
   package_info_plus: 8.1.1
   firebase_core: 3.6.0
