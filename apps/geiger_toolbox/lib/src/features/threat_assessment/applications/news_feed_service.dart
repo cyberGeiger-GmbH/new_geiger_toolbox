@@ -29,6 +29,7 @@ class NewsFeedService {
       }
     } catch (e, s) {
       ref.read(errorLoggerProvider).logError(e, s);
+      rethrow;
     }
   }
 }
