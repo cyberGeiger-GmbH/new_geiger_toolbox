@@ -9,6 +9,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/news_feed_details.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,7 +34,7 @@ class NewsFeedScreen extends StatelessWidget {
                   nxtState.showAlertDialogOnError(context: context));
 
           final newsFeed =
-              ref.watch(newsFeedStreamProvider(newsTitle: newsTitle));
+              ref.watch(watchNewsFeedByTitleProvider(newsTitle: newsTitle));
 
           return AsyncValueWidget(
             value: newsFeed,

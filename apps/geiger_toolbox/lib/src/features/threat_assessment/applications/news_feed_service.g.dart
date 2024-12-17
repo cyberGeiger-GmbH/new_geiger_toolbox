@@ -23,7 +23,7 @@ final newsFeedServiceProvider = AutoDisposeProvider<NewsFeedService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NewsFeedServiceRef = AutoDisposeProviderRef<NewsFeedService>;
-String _$watchNewsFeedsHash() => r'e2b00f5d4a827c6e5a057506bdc3ec3592085409';
+String _$watchNewsFeedsHash() => r'426955e0a8d222f05c0fcf22be829cf18def38e8';
 
 /// See also [watchNewsFeeds].
 @ProviderFor(watchNewsFeeds)
@@ -40,7 +40,8 @@ final watchNewsFeedsProvider = AutoDisposeStreamProvider<List<News>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
-String _$newsFeedStreamHash() => r'080b13c0727c91e26ecc6253f5e6f60a90387228';
+String _$watchNewsFeedByTitleHash() =>
+    r'aa07006b198e2daf790d84f9f33262e5ac9cd799';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -63,27 +64,27 @@ class _SystemHash {
   }
 }
 
-/// See also [newsFeedStream].
-@ProviderFor(newsFeedStream)
-const newsFeedStreamProvider = NewsFeedStreamFamily();
+/// See also [watchNewsFeedByTitle].
+@ProviderFor(watchNewsFeedByTitle)
+const watchNewsFeedByTitleProvider = WatchNewsFeedByTitleFamily();
 
-/// See also [newsFeedStream].
-class NewsFeedStreamFamily extends Family<AsyncValue<News?>> {
-  /// See also [newsFeedStream].
-  const NewsFeedStreamFamily();
+/// See also [watchNewsFeedByTitle].
+class WatchNewsFeedByTitleFamily extends Family<AsyncValue<News?>> {
+  /// See also [watchNewsFeedByTitle].
+  const WatchNewsFeedByTitleFamily();
 
-  /// See also [newsFeedStream].
-  NewsFeedStreamProvider call({
+  /// See also [watchNewsFeedByTitle].
+  WatchNewsFeedByTitleProvider call({
     required String newsTitle,
   }) {
-    return NewsFeedStreamProvider(
+    return WatchNewsFeedByTitleProvider(
       newsTitle: newsTitle,
     );
   }
 
   @override
-  NewsFeedStreamProvider getProviderOverride(
-    covariant NewsFeedStreamProvider provider,
+  WatchNewsFeedByTitleProvider getProviderOverride(
+    covariant WatchNewsFeedByTitleProvider provider,
   ) {
     return call(
       newsTitle: provider.newsTitle,
@@ -102,32 +103,32 @@ class NewsFeedStreamFamily extends Family<AsyncValue<News?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'newsFeedStreamProvider';
+  String? get name => r'watchNewsFeedByTitleProvider';
 }
 
-/// See also [newsFeedStream].
-class NewsFeedStreamProvider extends AutoDisposeStreamProvider<News?> {
-  /// See also [newsFeedStream].
-  NewsFeedStreamProvider({
+/// See also [watchNewsFeedByTitle].
+class WatchNewsFeedByTitleProvider extends AutoDisposeStreamProvider<News?> {
+  /// See also [watchNewsFeedByTitle].
+  WatchNewsFeedByTitleProvider({
     required String newsTitle,
   }) : this._internal(
-          (ref) => newsFeedStream(
-            ref as NewsFeedStreamRef,
+          (ref) => watchNewsFeedByTitle(
+            ref as WatchNewsFeedByTitleRef,
             newsTitle: newsTitle,
           ),
-          from: newsFeedStreamProvider,
-          name: r'newsFeedStreamProvider',
+          from: watchNewsFeedByTitleProvider,
+          name: r'watchNewsFeedByTitleProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$newsFeedStreamHash,
-          dependencies: NewsFeedStreamFamily._dependencies,
+                  : _$watchNewsFeedByTitleHash,
+          dependencies: WatchNewsFeedByTitleFamily._dependencies,
           allTransitiveDependencies:
-              NewsFeedStreamFamily._allTransitiveDependencies,
+              WatchNewsFeedByTitleFamily._allTransitiveDependencies,
           newsTitle: newsTitle,
         );
 
-  NewsFeedStreamProvider._internal(
+  WatchNewsFeedByTitleProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -141,12 +142,12 @@ class NewsFeedStreamProvider extends AutoDisposeStreamProvider<News?> {
 
   @override
   Override overrideWith(
-    Stream<News?> Function(NewsFeedStreamRef provider) create,
+    Stream<News?> Function(WatchNewsFeedByTitleRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: NewsFeedStreamProvider._internal(
-        (ref) => create(ref as NewsFeedStreamRef),
+      override: WatchNewsFeedByTitleProvider._internal(
+        (ref) => create(ref as WatchNewsFeedByTitleRef),
         from: from,
         name: null,
         dependencies: null,
@@ -159,12 +160,13 @@ class NewsFeedStreamProvider extends AutoDisposeStreamProvider<News?> {
 
   @override
   AutoDisposeStreamProviderElement<News?> createElement() {
-    return _NewsFeedStreamProviderElement(this);
+    return _WatchNewsFeedByTitleProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is NewsFeedStreamProvider && other.newsTitle == newsTitle;
+    return other is WatchNewsFeedByTitleProvider &&
+        other.newsTitle == newsTitle;
   }
 
   @override
@@ -178,17 +180,18 @@ class NewsFeedStreamProvider extends AutoDisposeStreamProvider<News?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin NewsFeedStreamRef on AutoDisposeStreamProviderRef<News?> {
+mixin WatchNewsFeedByTitleRef on AutoDisposeStreamProviderRef<News?> {
   /// The parameter `newsTitle` of this provider.
   String get newsTitle;
 }
 
-class _NewsFeedStreamProviderElement
-    extends AutoDisposeStreamProviderElement<News?> with NewsFeedStreamRef {
-  _NewsFeedStreamProviderElement(super.provider);
+class _WatchNewsFeedByTitleProviderElement
+    extends AutoDisposeStreamProviderElement<News?>
+    with WatchNewsFeedByTitleRef {
+  _WatchNewsFeedByTitleProviderElement(super.provider);
 
   @override
-  String get newsTitle => (origin as NewsFeedStreamProvider).newsTitle;
+  String get newsTitle => (origin as WatchNewsFeedByTitleProvider).newsTitle;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

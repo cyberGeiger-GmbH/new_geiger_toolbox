@@ -14,9 +14,9 @@ import 'package:sembast/sembast_io.dart';
 
 import '../../../../exceptions/app_exception.dart';
 
-part 'news_feed_cache_repository.g.dart';
+part 'news_feed_sembast_cache_repository.g.dart';
 
-class NewsFeedCacheRepository {
+class NewsFeedSembastCacheRepository {
   final Ref ref;
 
   static const newsObjectsKey = 'newsObject';
@@ -25,11 +25,10 @@ class NewsFeedCacheRepository {
     return ref.read(sembastDataStoreProvider).requireValue;
   }
 
-  NewsFeedCacheRepository(this.ref);
+  NewsFeedSembastCacheRepository(this.ref);
 
   ///store news in localstorage
-  Future<void> cacheNewsFeed(
-      {Profile? profile, required List<News> data}) async {
+  Future<void> synFromRemote({required List<News> data}) async {
     try {
       //cache data
       await _storeNewsFeed(data.toJsonString());
@@ -40,7 +39,7 @@ class NewsFeedCacheRepository {
   }
 
   /// retrive store news object
-  Stream<List<News>> watchNewsFeeds() {
+  Stream<List<News>> watchNewsList() {
     final dataStore = _sembastDataStore;
     final record = dataStore.store.record(newsObjectsKey);
     final db = dataStore.db;
@@ -48,7 +47,8 @@ class NewsFeedCacheRepository {
     return record.onSnapshot(db).map((snapshot) {
       if (snapshot != null) {
         final List<News> data = News.fromJsonString(snapshot.value as String);
-        debugPrint("News from cache total => ${data.length}");
+        debugPrint(
+            "News from cache total from sembast database => ${data.length}");
 
         return data;
       } else {
@@ -57,9 +57,20 @@ class NewsFeedCacheRepository {
     });
   }
 
-  Stream<News?> watchNewsFeed({required String newsTitle}) {
-    return watchNewsFeeds()
-        .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: newsTitle));
+  Stream<News?> watchNewsByTitle({required String title}) {
+    return watchNewsList()
+        .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: title));
+  }
+
+  Future<void> deleteNews() async {
+    try {
+      final dataStore = _sembastDataStore;
+      final db = dataStore.db;
+      final store = dataStore.store;
+      await store.record(newsObjectsKey).delete(db);
+    } catch (e) {
+      throw DeleteCachedNewsFeedStoreException();
+    }
   }
 
   Future<void> _storeNewsFeed(String jsonNews) async {
@@ -80,7 +91,7 @@ class NewsFeedCacheRepository {
   }
 }
 
-@Riverpod(keepAlive: true)
-NewsFeedCacheRepository newsFeedCacheRepository(Ref ref) {
-  return NewsFeedCacheRepository(ref);
+@riverpod
+NewsFeedSembastCacheRepository newsFeedSembastCacheRepository(Ref ref) {
+  return NewsFeedSembastCacheRepository(ref);
 }

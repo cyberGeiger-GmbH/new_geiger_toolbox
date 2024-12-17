@@ -70,4 +70,6 @@ Future<void> showNotImplementedAlertDialog({required BuildContext context}) =>
     showAlertDialog(
       context: context,
       title: 'Not implemented'.hardcoded,
+      content: "This feature is not quite ready yet.\n Thank you for your interest.".hardcoded
+
     );

@@ -29,7 +29,6 @@ class MainScreen extends ConsumerWidget {
     ref.listen(
       scanButtonControllerProvider,
       (_, nextState) {
-        debugPrint("ui error => ${nextState.error}");
         return nextState.showAlertDialogOnError(context: context);
       },
     );
@@ -39,9 +38,8 @@ class MainScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(),
-      body: !(newsFeedState.hasValue &&
-              newsFeedState.value != null &&
-              newsFeedState.value!.isEmpty)
+      body: ((newsFeedState.isLoading || newsFeedState.value != null) &&
+              (newsFeedState.value != null && newsFeedState.value!.isEmpty))
           ? WelcomeWidget()
           : DataWidget(),
     );
@@ -60,6 +58,8 @@ class DataWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
+          Spacing.gapH8,
+          if (appFlavor == "dev" || appFlavor == 'stg') CleanData(),
           Spacing.gapH8,
           ScanButtonWidget(),
           Spacing.gapH16,

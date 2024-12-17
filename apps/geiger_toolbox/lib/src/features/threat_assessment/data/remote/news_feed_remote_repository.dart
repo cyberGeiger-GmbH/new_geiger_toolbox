@@ -18,6 +18,6 @@ class NewsFeedRemoteRepository {
 }
 
 @riverpod
-NewsFeedRemoteRepository newsFeedRepository(Ref ref) {
+NewsFeedRemoteRepository newsFeedRemoteRepository(Ref ref) {
   return NewsFeedRemoteRepository(ref);
 }

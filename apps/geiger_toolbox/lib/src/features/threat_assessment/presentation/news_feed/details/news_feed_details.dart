@@ -11,31 +11,33 @@ class NewsFeedDetails extends StatelessWidget {
   final News newsfeed;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppCachedNetworkImage.newsImage(imageUrl: newsfeed.imageUrl),
-        Spacing.gapH4,
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              NewsContent(
-                  summary: newsfeed.summary,
-                  articleUrl: newsfeed.articleUrl,
-                  title: newsfeed.title),
-              Spacing.gapH4,
-              ProtectionTileListWithTitle(
-                title: "How to Protect me?".hardcoded,
-                protectionTileList: ProtectionListWidget(
-                  recommendations: newsfeed.recommendations,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          AppCachedNetworkImage.newsImage(imageUrl: newsfeed.imageUrl),
+          Spacing.gapH4,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NewsContent(
+                    summary: newsfeed.summary,
+                    articleUrl: newsfeed.articleUrl,
+                    title: newsfeed.title),
+                Spacing.gapH4,
+                ProtectionTileListWithTitle(
+                  title: "How to Protect me?".hardcoded,
+                  protectionTileList: ProtectionListWidget(
+                    recommendations: newsfeed.recommendations.toList(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

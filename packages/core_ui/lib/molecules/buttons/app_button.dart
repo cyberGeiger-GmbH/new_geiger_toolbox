@@ -63,6 +63,22 @@ class AppButton extends StatelessWidget {
     );
   }
 
+  factory AppButton.delete(
+      {Key? key,
+      required String label,
+      VoidCallback? onPressed,
+      required BuildContext context}) {
+    return AppButton._(
+      key: key,
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+          backgroundColor: _appColor(context).error,
+          overlayColor: _appColor(context).onError),
+      child: AppText.labelLarge(
+          text: label, context: context, color: _appColor(context).onTertiary),
+    );
+  }
+
   factory AppButton.scan(
       {Key? key,
       required String label,

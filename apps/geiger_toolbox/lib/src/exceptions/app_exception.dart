@@ -28,6 +28,16 @@ class CachedNewsFeedStoreException extends AppException {
       : super(code: 'fail-cache-newsfeed', message: "Fail to cache news data");
 }
 
+class DeleteCachedNewsFeedStoreException extends AppException {
+  DeleteCachedNewsFeedStoreException({this.error, this.stack})
+      : super(
+            code: error ?? 'fail-delete-cache-newsList',
+            message: stack ?? "Fail to delete news object from cache");
+
+  final String? error;
+  final String? stack;
+}
+
 class AddTodoTaskRepositryException extends AppException {
   AddTodoTaskRepositryException()
       : super(
@@ -50,6 +60,11 @@ class RemoveTodoTaskRepositryException extends AppException {
 }
 
 class DataBaseException extends AppException {
-  DataBaseException(String err, String message)
-      : super(code: err, message: message);
+  DataBaseException({this.error, this.stack})
+      : super(
+            code: error ?? "database-exception",
+            message: stack ?? "Data Exception");
+
+  final String? error;
+  final String? stack;
 }

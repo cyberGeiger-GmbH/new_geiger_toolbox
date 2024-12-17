@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 // https://github.com/simolus3/drift/tree/develop/examples/app
 import 'connection/connection.dart' as impl;
 
-part 'app_database.g.dart';
+part 'drift_database.g.dart';
 
 @DataClassName('UserData')
 class Users extends Table {
@@ -94,8 +94,7 @@ class Recommendations extends Table {
 
 @DataClassName('OfferingData')
 class Offerings extends Table {
-  TextColumn get id =>
-      text().customConstraint('UNIQUE NOT NULL')();
+  TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get recommendationId =>
       text().references(Recommendations, #id)(); // Foreign key
 

@@ -2,10 +2,14 @@ import 'package:core_ui/core_ui.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/env.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/exceptions/async_error_logger.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_drift_cache_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_sembast_cache_repository.dart';
+
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -41,7 +45,14 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
 
   //* Register error handler.For more info, see:
   // * https://docs.flutter.dev/testing/errors
-  final container = ProviderContainer(observers: [AsyncErrorLogger()]);
+  final container = ProviderContainer(observers: [
+    AsyncErrorLogger()
+  ], overrides: [
+    if (appFlavor == "dev")
+      newsFeedSembastCacheRepositoryProvider.overrideWith((ref) {
+        return NewsFeedDriftCacheRepository(ref);
+      })
+  ]);
   final errorLogger = container.read(errorLoggerProvider);
   registerErroHandlers(errorLogger);
 

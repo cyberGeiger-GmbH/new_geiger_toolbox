@@ -1,9 +1,9 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/error_logger.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
-import 'package:geiger_toolbox/src/persistence/app_database.dart';
-import 'package:geiger_toolbox/src/persistence/app_database_crud.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_sembast_cache_repository.dart';
+
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../data/remote/news_feed_remote_repository.dart';
@@ -16,8 +16,7 @@ class NewsFeedService {
 
   Future<void> cacheNews({Profile? profile}) async {
     try {
-      final remoteRepo = ref.read(newsFeedRepositoryProvider);
-      throw Exception("nosa exception");
+      final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
       //todo: read from sme profile repository
       // final defaultProfile = Profile(
       //     location: "Zurich",
@@ -25,17 +24,18 @@ class NewsFeedService {
       //         infoAbout: ["password", "teamView", "post finance"]));
       List<News> data = await remoteRepo.fetchNewsUpdate();
       if (data.isNotEmpty) {
-        // final cachedRepos = ref.read(newsFeedCacheRepositoryProvider);
-        // //cache news Feed
-        // await cachedRepos.cacheNewsFeed(data: data);
-
-        final db = ref.read(appDatabaseProvider);
-        await db.synFromRemote(data);
+        final cache = ref.read(newsFeedSembastCacheRepositoryProvider);
+        await cache.synFromRemote(data: data);
       }
     } catch (e, s) {
       ref.read(errorLoggerProvider).logError(e, s);
       rethrow;
     }
+  }
+
+  Future<void> cleanNewsCache() async {
+    final cache = ref.read(newsFeedSembastCacheRepositoryProvider);
+    await cache.deleteNews();
   }
 }
 
@@ -46,14 +46,14 @@ NewsFeedService newsFeedService(Ref ref) {
 
 @riverpod
 Stream<List<News>> watchNewsFeeds(Ref ref) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  final cachedRepos = ref.watch(newsFeedSembastCacheRepositoryProvider);
 
-  return cachedRepos.watchNewsFeeds();
+  return cachedRepos.watchNewsList();
 }
 
 @riverpod
-Stream<News?> newsFeedStream(Ref ref, {required String newsTitle}) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+Stream<News?> watchNewsFeedByTitle(Ref ref, {required String newsTitle}) {
+  final cachedRepos = ref.watch(newsFeedSembastCacheRepositoryProvider);
 
-  return cachedRepos.watchNewsFeed(newsTitle: newsTitle);
+  return cachedRepos.watchNewsByTitle(title: newsTitle);
 }

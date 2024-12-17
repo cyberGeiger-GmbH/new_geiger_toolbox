@@ -6,25 +6,25 @@ part of 'news_feed_remote_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$newsFeedRepositoryHash() =>
-    r'48f0478a216656346f68b089d5c75348dd6f4057';
+String _$newsFeedRemoteRepositoryHash() =>
+    r'be6bab9417f0eb8b10225b444800b805d6e00769';
 
-/// See also [newsFeedRepository].
-@ProviderFor(newsFeedRepository)
-final newsFeedRepositoryProvider =
+/// See also [newsFeedRemoteRepository].
+@ProviderFor(newsFeedRemoteRepository)
+final newsFeedRemoteRepositoryProvider =
     AutoDisposeProvider<NewsFeedRemoteRepository>.internal(
-  newsFeedRepository,
-  name: r'newsFeedRepositoryProvider',
+  newsFeedRemoteRepository,
+  name: r'newsFeedRemoteRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$newsFeedRepositoryHash,
+      : _$newsFeedRemoteRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef NewsFeedRepositoryRef
+typedef NewsFeedRemoteRepositoryRef
     = AutoDisposeProviderRef<NewsFeedRemoteRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
