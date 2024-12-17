@@ -1,4 +1,6 @@
+import 'dart:async';
 
+import 'package:geiger_toolbox/src/monitoring/analytics_facade.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../applications/news_feed_service.dart';
@@ -14,9 +16,13 @@ class ScanButtonController extends _$ScanButtonController {
 
   Future<void> scan() async {
     state = const AsyncLoading();
-
     state = await AsyncValue.guard(
         () => ref.read(newsFeedServiceProvider).cacheNews());
+
+//analytics
+    unawaited(
+      (ref.read(analyticsFacadeProvider).trackScanWithoutProfile()),
+    );
   }
 
   Future<void> deleteData() async {
