@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/monitoring/analytics_client.dart';
 import 'package:geiger_toolbox/src/monitoring/logger_analytics_client.dart';
+import 'package:geiger_toolbox/src/monitoring/mixpanel_analytics_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'analytics_facade.g.dart';
@@ -36,8 +37,8 @@ class AnalyticsFacade implements AnalyticsClient {
       _dispatch((c) => c.trackScreenView(routeName, action));
 
   @override
-  Future<void> setAnalyticsCollectionEnabled(bool value) =>
-      _dispatch((c) => c.setAnalyticsCollectionEnabled(value));
+  Future<void> setAnalyticsCollectionEnabled(bool enable) =>
+      _dispatch((c) => c.setAnalyticsCollectionEnabled(enable));
 
   Future<void> _dispatch(
       Future<void> Function(AnalyticsClient client) work) async {
@@ -49,5 +50,13 @@ class AnalyticsFacade implements AnalyticsClient {
 
 @Riverpod(keepAlive: true)
 AnalyticsFacade analyticsFacade(Ref ref) {
-  return AnalyticsFacade([if (!kReleaseMode) LoggerAnalyticsClient(ref)]);
+  final mixpanelAnalyticsClient =
+      ref.watch(mixpanelAnalyticsClientProvider).requireValue;
+
+  return AnalyticsFacade(
+    [
+      mixpanelAnalyticsClient,
+      if (!kReleaseMode) LoggerAnalyticsClient(ref),
+    ],
+  );
 }

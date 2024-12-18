@@ -1,4 +1,6 @@
+import 'package:feedback_sentry/feedback_sentry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/monitoring/collect_usage_statistics_store.dart';
@@ -12,7 +14,9 @@ class SettingsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CollectUsageStatisticsListTile(),
+        if (appFlavor == "dev" || appFlavor == "stg")
+          const CollectUsageStatisticsListTile(),
+        const SendFeedListTile()
       ],
     );
   }
@@ -38,6 +42,22 @@ class CollectUsageStatisticsListTile extends ConsumerWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class SendFeedListTile extends StatelessWidget {
+  const SendFeedListTile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: ListTile(
+        title: Text('Send feedback'.hardcoded),
+      ),
+      onTap: () {
+        BetterFeedback.of(context).showAndUploadToSentry();
+      },
     );
   }
 }

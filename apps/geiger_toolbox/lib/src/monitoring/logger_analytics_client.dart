@@ -46,7 +46,7 @@ class LoggerAnalyticsClient implements AnalyticsClient {
   }
 
   @override
-  Future<void> setAnalyticsCollectionEnabled(bool value) async {
-    _log.info(message: "setAnalyticsCollectionEnabled($value)", name: _name);
+  Future<void> setAnalyticsCollectionEnabled(bool enable) async {
+    _log.info(message: "setAnalyticsCollectionEnabled($enable)", name: _name);
   }
 }

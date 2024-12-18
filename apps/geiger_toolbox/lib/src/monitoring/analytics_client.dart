@@ -8,5 +8,5 @@ abstract class AnalyticsClient {
     String routeName,
     String action,
   );
-  Future<void> setAnalyticsCollectionEnabled(bool value);
+  Future<void> setAnalyticsCollectionEnabled(bool enable);
 }
