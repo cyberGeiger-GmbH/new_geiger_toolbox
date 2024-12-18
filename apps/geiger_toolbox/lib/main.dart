@@ -13,7 +13,6 @@ import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_fe
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_sembast_cache_repository.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
-import 'package:geiger_toolbox/src/monitoring/analytics_facade.dart';
 import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -46,7 +45,7 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   // initialize firebase
   await Firebase.initializeApp(options: firebaseOptions);
 
-  // * riverpod container for pass errorLogger and overriding default storage
+  // * riverpod container for observing container errors [ AsyncErrorLogger] and overriding default storage
   final container = ProviderContainer(observers: [
     AsyncErrorLogger()
   ], overrides: [

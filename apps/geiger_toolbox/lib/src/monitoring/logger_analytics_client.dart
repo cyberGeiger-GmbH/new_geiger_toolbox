@@ -39,4 +39,14 @@ class LoggerAnalyticsClient implements AnalyticsClient {
     final log = ref.read(errorLoggerProvider);
     log.info(message: "trackTodosUpdated", name: _name);
   }
+
+  @override
+  Future<void> trackScreenView(
+    String routeName,
+    String action,
+  ) async {
+    final log = ref.read(errorLoggerProvider);
+    log.info(
+        message: "trackScreenView($routeName, $action)", name: "Navigation");
+  }
 }

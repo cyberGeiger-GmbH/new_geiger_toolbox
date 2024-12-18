@@ -4,5 +4,8 @@ abstract class AnalyticsClient {
   Future<void> trackTodosCreated();
   Future<void> trackTodosUpdated();
   Future<void> trackTodoCompleted(int completedCount);
-
+  Future<void> trackScreenView(
+    String routeName,
+    String action,
+  );
 }

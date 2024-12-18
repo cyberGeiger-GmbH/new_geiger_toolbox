@@ -10,8 +10,6 @@ class AnalyticsFacade implements AnalyticsClient {
   const AnalyticsFacade(this.clients);
   final List<AnalyticsClient> clients;
 
-
-  
   @override
   Future<void> trackScanWithProfile() =>
       _dispatch((c) => c.trackScanWithProfile());
@@ -29,6 +27,13 @@ class AnalyticsFacade implements AnalyticsClient {
 
   @override
   Future<void> trackTodosUpdated() => _dispatch((c) => c.trackTodosUpdated());
+
+  @override
+  Future<void> trackScreenView(
+    String routeName,
+    String action,
+  ) =>
+      _dispatch((c) => c.trackScreenView(routeName, action));
 
   Future<void> _dispatch(
       Future<void> Function(AnalyticsClient client) work) async {

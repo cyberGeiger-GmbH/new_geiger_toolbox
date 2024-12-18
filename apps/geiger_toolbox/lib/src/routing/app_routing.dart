@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
+import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
 
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
@@ -56,7 +57,11 @@ class AppRouting {
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
-        if (appFlavor == "dev" || appFlavor == "stg") SentryNavigatorObserver()
+        if (appFlavor == "dev" || appFlavor == "stg")
+          //tracking navigation events
+          SentryNavigatorObserver(),
+        //analytics
+        LoggerNavigatorObserver(ref),
       ],
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
@@ -78,8 +83,10 @@ class AppRouting {
         GoRoute(
           path: AppRouter.termsAndCondition.path,
           name: AppRouter.termsAndCondition.name,
-          pageBuilder: (context, state) =>
-              const NoTransitionPage(child: TermsConditionScreen()),
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+              child: TermsConditionScreen(),
+              key: state.pageKey,
+              name: state.name),
         ),
 
         //for ui with bottom navigation
@@ -89,12 +96,18 @@ class AppRouting {
           branches: [
             StatefulShellBranch(
               navigatorKey: _shellHomeNavKey,
+              observers: [
+                //analytics
+                LoggerNavigatorObserver(ref),
+              ],
               routes: [
                 GoRoute(
                   path: AppRouter.main.path,
                   name: AppRouter.main.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: MainScreen(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                   //nested route
                   routes: [
@@ -107,6 +120,8 @@ class AppRouting {
 
                         return NoTransitionPage(
                           child: NewsFeedScreen(newsTitle: title),
+                          key: state.pageKey,
+                          name: state.name,
                         );
                       },
                     ),
@@ -120,8 +135,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.community.path,
                   name: AppRouter.community.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: Community(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
@@ -132,8 +149,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.calendar.path,
                   name: AppRouter.calendar.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: Calendar(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
@@ -144,8 +163,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.chat.path,
                   name: AppRouter.chat.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: Chat(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
@@ -156,8 +177,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.settings.path,
                   name: AppRouter.settings.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: Settings(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
