@@ -44,7 +44,9 @@ dependencies:
   # feedback collection
   feedback_sentry: 3.1.0
   # app analytics
+  firebase_analytics: 11.3.3
   firebase_core: 3.6.0
+  # mixpanel
   mixpanel_flutter: 2.3.3
 
 dev_dependencies:

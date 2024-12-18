@@ -48,7 +48,7 @@ class MixpanelAnalyticsClient implements AnalyticsClient {
 
   @override
   Future<void> trackTodosUpdated() async {
-    await _mixpanel.track("Todo created");
+    await _mixpanel.track("Todo updated");
   }
 }
 
