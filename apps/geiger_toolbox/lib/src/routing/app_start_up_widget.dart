@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/monitoring/mixpanel_analytics_client.dart';
 import 'package:geiger_toolbox/src/utils/package_info_provider.dart';
 import 'package:geiger_toolbox/src/utils/shared_preference.dart';
 
@@ -25,11 +26,13 @@ Future<void> appStartUp(Ref ref) async {
   //Preload any other FutureProviders what will be used with requireValue
 
 //just to see the loading screen;
-//todo remove in production
+//todo remove in production delay
   await Future.delayed(Duration(seconds: 2));
-  await ref.watch(sembastDataStoreProvider.future);
-  await ref.watch(packageInfoProvider.future);
-  await ref.watch(sharedPreferencesProvider.future);
+  await ref.read(sembastDataStoreProvider.future);
+  await ref.read(packageInfoProvider.future);
+  await ref.read(sharedPreferencesProvider.future);
+  // * Preload MixpanelAnalyticsClient, so we can make unawaited analytics calls
+  await ref.read(mixpanelAnalyticsClientProvider.future);
 }
 
 class AppStartUpWidget extends ConsumerWidget {

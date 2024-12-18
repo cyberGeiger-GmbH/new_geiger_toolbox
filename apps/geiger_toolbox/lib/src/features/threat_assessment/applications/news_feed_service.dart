@@ -1,6 +1,6 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/exceptions/error_logger.dart';
+import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_sembast_cache_repository.dart';
 
 
@@ -28,7 +28,7 @@ class NewsFeedService {
         await cache.synFromRemote(data: data);
       }
     } catch (e, s) {
-      ref.read(errorLoggerProvider).logError(e, s);
+      ref.read(appLoggerProvider).logError(e, s);
       rethrow;
     }
   }

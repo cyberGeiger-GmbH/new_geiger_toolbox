@@ -18,7 +18,6 @@ dependencies:
   flutter_riverpod: 2.6.1
   riverpod_annotation: 2.6.1
   custom_lint: 0.7.0
-  logger: 2.4.0
   freezed_annotation: 2.4.4
   carousel_slider_plus: 7.0.2
 
@@ -36,11 +35,19 @@ dependencies:
   #path_provider: 2.1.5
   json_annotation: 4.9.0
   package_info_plus: 8.1.1
-  firebase_core: 3.6.0
-  sentry_flutter: 8.10.1
-  feedback: 3.1.0
-  feedback_sentry: 3.1.0
+  
   shared_preferences: 2.3.3
+  # error monitor
+  sentry_flutter: 8.10.1
+  # send feedback
+  feedback: 3.1.0
+  # feedback collection
+  feedback_sentry: 3.1.0
+  # app analytics
+  firebase_analytics: 11.3.3
+  firebase_core: 3.6.0
+  # mixpanel
+  mixpanel_flutter: 2.3.3
 
 dev_dependencies:
   flutter_test:

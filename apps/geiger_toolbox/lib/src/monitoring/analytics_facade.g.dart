@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'scan_button_controller.dart';
+part of 'analytics_facade.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$scanButtonControllerHash() =>
-    r'2a7a966d885ee62bf0f3e709ba7971e41cd71575';
+String _$analyticsFacadeHash() => r'64aef27b4a3de0d7c14b45d1833200a776dd3c81';
 
-/// See also [ScanButtonController].
-@ProviderFor(ScanButtonController)
-final scanButtonControllerProvider =
-    AutoDisposeAsyncNotifierProvider<ScanButtonController, void>.internal(
-  ScanButtonController.new,
-  name: r'scanButtonControllerProvider',
+/// See also [analyticsFacade].
+@ProviderFor(analyticsFacade)
+final analyticsFacadeProvider = Provider<AnalyticsFacade>.internal(
+  analyticsFacade,
+  name: r'analyticsFacadeProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$scanButtonControllerHash,
+      : _$analyticsFacadeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ScanButtonController = AutoDisposeAsyncNotifier<void>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AnalyticsFacadeRef = ProviderRef<AnalyticsFacade>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

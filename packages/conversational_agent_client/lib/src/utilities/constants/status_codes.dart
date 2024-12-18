@@ -1,11 +1,14 @@
-import 'package:conversational_agent_client/src/utilities/log.dart';
-import 'package:logger/logger.dart';
+import 'package:conversational_agent_client/src/utilities/log_handling.dart';
+import 'package:riverpod/riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'status_codes.g.dart';
 
 class StatusCodes {
-  const StatusCodes._();
+  final Ref ref;
+  const StatusCodes(this.ref);
 
-  static StatusCode? getStatus(int? statusCode) {
-    final Logger log = logger(className: "$StatusCodes");
+  StatusCode? getStatus(int? statusCode) {
+    final log = ref.read(logHandlerProvider("Status:"));
     if (statusCode == StatusCode.unauthorised.code) {
       log.w("UNAUTHORISED: either no API key was provided or it wasn't valid");
 
@@ -47,4 +50,9 @@ enum StatusCode {
 
   const StatusCode(this.code);
   final int code;
+}
+
+@riverpod
+StatusCodes statusCodes(Ref ref) {
+  return StatusCodes(ref);
 }

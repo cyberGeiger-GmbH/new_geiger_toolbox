@@ -4,7 +4,7 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/exceptions/error_logger.dart';
+import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
@@ -33,7 +33,7 @@ class NewsFeedSembastCacheRepository {
       //cache data
       await _storeNewsFeed(data.toJsonString());
     } catch (e, s) {
-      ref.read(errorLoggerProvider).logError(e, s);
+      ref.read(appLoggerProvider).logError(e, s);
       throw CachedNewsFeedStoreException();
     }
   }

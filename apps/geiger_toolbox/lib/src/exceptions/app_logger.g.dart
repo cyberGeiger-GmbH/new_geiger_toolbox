@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'error_logger.dart';
+part of 'app_logger.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$errorLoggerHash() => r'7b218ca355d3a47fb1653e16bcbc688e6a5584b9';
+String _$appLoggerHash() => r'3767508806d8994fe7af71cd927099cc7f428a8e';
 
-/// See also [errorLogger].
-@ProviderFor(errorLogger)
-final errorLoggerProvider = AutoDisposeProvider<ErrorLogger>.internal(
-  errorLogger,
-  name: r'errorLoggerProvider',
+/// See also [appLogger].
+@ProviderFor(appLogger)
+final appLoggerProvider = Provider<AppLogger>.internal(
+  appLogger,
+  name: r'appLoggerProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$errorLoggerHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$appLoggerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ErrorLoggerRef = AutoDisposeProviderRef<ErrorLogger>;
+typedef AppLoggerRef = ProviderRef<AppLogger>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
