@@ -56,10 +56,13 @@ AnalyticsFacade analyticsFacade(Ref ref) {
   final firebaseAnalyticsClient = ref.watch(firebaseAnalyticsClientProvider);
 
   return AnalyticsFacade(
-    [
-      if (kReleaseMode) mixpanelAnalyticsClient,
-      if (kReleaseMode) firebaseAnalyticsClient,
-      if (!kReleaseMode) LoggerAnalyticsClient(ref),
-    ],
+    kReleaseMode
+        ? [
+            mixpanelAnalyticsClient,
+            firebaseAnalyticsClient,
+          ]
+        : [
+            LoggerAnalyticsClient(ref),
+          ],
   );
 }

@@ -2,6 +2,7 @@ import 'package:feedback_sentry/feedback_sentry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/monitoring/collect_usage_statistics_store.dart';
 
@@ -14,7 +15,7 @@ class SettingsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (appFlavor == "dev" || appFlavor == "stg")
+        if (getFlavor() == Flavor.prod || getFlavor() == Flavor.stg)
           const CollectUsageStatisticsListTile(),
         const SendFeedListTile()
       ],

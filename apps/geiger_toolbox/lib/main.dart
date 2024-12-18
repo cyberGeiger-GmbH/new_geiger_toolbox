@@ -49,7 +49,7 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   final container = ProviderContainer(observers: [
     AsyncErrorLogger()
   ], overrides: [
-    if (appFlavor == "dev")
+    if (getFlavor() == Flavor.dev)
       newsFeedSembastCacheRepositoryProvider.overrideWith((ref) {
         return NewsFeedDriftCacheRepository(ref);
       })

@@ -6,7 +6,7 @@ part of 'analytics_facade.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyticsFacadeHash() => r'aecd2c93714a072edd5a2bbd223760498c00e015';
+String _$analyticsFacadeHash() => r'64aef27b4a3de0d7c14b45d1833200a776dd3c81';
 
 /// See also [analyticsFacade].
 @ProviderFor(analyticsFacade)
