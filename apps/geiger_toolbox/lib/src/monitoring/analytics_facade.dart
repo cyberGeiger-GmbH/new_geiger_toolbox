@@ -35,6 +35,10 @@ class AnalyticsFacade implements AnalyticsClient {
   ) =>
       _dispatch((c) => c.trackScreenView(routeName, action));
 
+  @override
+  Future<void> setAnalyticsCollectionEnabled(bool value) =>
+      _dispatch((c) => c.setAnalyticsCollectionEnabled(value));
+
   Future<void> _dispatch(
       Future<void> Function(AnalyticsClient client) work) async {
     for (var client in clients) {

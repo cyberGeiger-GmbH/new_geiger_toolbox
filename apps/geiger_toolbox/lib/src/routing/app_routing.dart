@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
 import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
@@ -178,7 +179,7 @@ class AppRouting {
                   path: AppRouter.settings.path,
                   name: AppRouter.settings.name,
                   pageBuilder: (context, state) => NoTransitionPage(
-                    child: Settings(),
+                    child: SettingsScreen(),
                     key: state.pageKey,
                     name: state.name,
                   ),
@@ -229,17 +230,6 @@ class Community extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text("Community"),
-    );
-  }
-}
-
-class Settings extends StatelessWidget {
-  const Settings({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Settings"),
     );
   }
 }

@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-part 'error_logger.g.dart';
+part 'app_logger.g.dart';
 
-class ErrorLogger {
-  ErrorLogger(this.ref);
+class AppLogger {
+  AppLogger(this.ref);
 
   final Ref ref;
   FutureOr<void> logError(Object error, StackTrace? stackTrace) async {
@@ -31,6 +31,6 @@ class ErrorLogger {
 }
 
 @Riverpod(keepAlive: true)
-ErrorLogger errorLogger(Ref ref) {
-  return ErrorLogger(ref);
+AppLogger appLogger(Ref ref) {
+  return AppLogger(ref);
 }

@@ -17,7 +17,7 @@ import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/geiger_app.dart';
-import 'src/exceptions/error_logger.dart';
+import 'src/exceptions/app_logger.dart';
 
 Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,12 +55,11 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
       })
   ]);
 
-    //* Register error handler.For more info, see:
+  //* Register error handler.For more info, see:
   // * https://docs.flutter.dev/testing/errors
-  final errorLogger = container.read(errorLoggerProvider);
+  final errorLogger = container.read(appLoggerProvider);
   registerErroHandlers(errorLogger);
 
-  
   // * run app
   runApp(
     UncontrolledProviderScope(
@@ -70,7 +69,7 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   );
 }
 
-void registerErroHandlers(ErrorLogger errorLogger) {
+void registerErroHandlers(AppLogger errorLogger) {
   // * Show some error UI if any uncaught exception happens
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);

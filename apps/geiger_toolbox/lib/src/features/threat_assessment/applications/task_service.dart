@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/exceptions/error_logger.dart';
+import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/todo_task_cache_repository.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/mutable_task.dart';
@@ -23,7 +23,7 @@ class TaskService {
       //update cache
       await repo.setTask(updated);
     } catch (e, s) {
-      ref.read(errorLoggerProvider).logError(e, s);
+      ref.read(appLoggerProvider).logError(e, s);
     }
   }
 

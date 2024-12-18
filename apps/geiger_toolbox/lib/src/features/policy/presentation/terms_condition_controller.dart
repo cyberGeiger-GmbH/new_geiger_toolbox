@@ -20,6 +20,7 @@ class TermsConditionController extends _$TermsConditionController {
 
   void acceptTermsAndCondition(bool value) {
     _sharedPreferences.setBool(SharedPreference.termsConditionKey, value);
-    state = value;
+        // invalidate to ensure listeners rebuild when the value changes
+    ref.invalidateSelf();
   }
 }
