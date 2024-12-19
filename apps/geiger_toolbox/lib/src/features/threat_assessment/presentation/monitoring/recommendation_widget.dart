@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
-import 'package:geiger_toolbox/src/common_widgets/recommendation_tile_list_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/recommendations/recommendation_tile_list_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';

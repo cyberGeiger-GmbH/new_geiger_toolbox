@@ -12,6 +12,7 @@ class AppButton extends StatelessWidget {
     this.style,
   });
 
+//todo: wrap with Semantics for visual impair user
   factory AppButton.primary(
       {Key? key,
       required String label,

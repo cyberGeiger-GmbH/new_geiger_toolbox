@@ -6,8 +6,10 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/task_
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
 
-class DashboardWidget extends ConsumerWidget {
-  const DashboardWidget({
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+
+class TaskWidget extends ConsumerWidget {
+  const TaskWidget({
     super.key,
   });
 
@@ -15,14 +17,13 @@ class DashboardWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref.watch(taskStreamProvider);
 
-   
-
     return AsyncValueWidget(
       value: todos,
       data: (data) => data.items.isEmpty
           ? EmptyContent(
-              message: "Please Press the Scan button",
-           
+              message:
+                  "Oops todos list is empty.\n Add recommended migitation from how to protect me list"
+                      .hardcoded,
             )
           : ProtectionTileList(
               protectionTile: data.toItemsList().map((value) {

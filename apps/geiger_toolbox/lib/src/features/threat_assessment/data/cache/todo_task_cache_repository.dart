@@ -9,6 +9,7 @@ import 'package:sembast/sembast.dart';
 
 part 'todo_task_cache_repository.g.dart';
 
+//todo write replace with drift
 class TodoTaskCacheRepository {
   final Ref ref;
   static const todoKey = 'todoObjectKey';
@@ -38,6 +39,14 @@ class TodoTaskCacheRepository {
     } catch (e) {
       throw FetchTodoTaskRepositryException();
     }
+  }
+
+  Future<void> deleteAllTodoTask() async {
+    final dataStore = _sembastDataStore;
+    final db = dataStore.db;
+    final store = dataStore.store;
+    final deleted = await store.record(todoKey).delete(db);
+    if (deleted == null) throw Exception("Task Already Deleted");
   }
 
   Stream<Task> watchTodoTask() {

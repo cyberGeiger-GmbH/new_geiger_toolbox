@@ -7,10 +7,12 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   const ScaffoldWithNavigationBar(
       {super.key,
       required this.body,
+      this.feedback,
       required this.selectedIndex,
       required this.onDestinationSelected});
 
   final Widget body;
+  final Widget? feedback;
   final int selectedIndex;
   final ValueChanged<int> onDestinationSelected;
 
@@ -19,6 +21,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
     final appColor = Theme.of(context).colorScheme;
     return Scaffold(
       body: body,
+      floatingActionButton: feedback,
       bottomNavigationBar: NavigationBar(
         backgroundColor: appColor.secondaryContainer,
         indicatorColor: appColor.onPrimary,
