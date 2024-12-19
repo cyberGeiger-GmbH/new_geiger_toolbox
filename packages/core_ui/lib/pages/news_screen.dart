@@ -87,7 +87,7 @@ class NewsScreen extends StatelessWidget {
               title: "Cyberbetrug durch  Telefontricks  verbreitet",
               summary:
                   "Cyberbetrug nimmt rasant zu, oft per Telefon. Bacs erhielt 2024 bereits 52'700 Meldungen, darunter viele gefälschte Behördenanrufe und Phishing-Angriffe. Ab 2025 wird für kritische Infrastrukturen eine Meldepflicht eingeführt.",
-              articleUrl: "facebook"),
+              lastedUpdated: "2024-12-12"),
           Spacing.gapH16,
           ProtectionTileListWithTitle(
             title: "How to protect me?",

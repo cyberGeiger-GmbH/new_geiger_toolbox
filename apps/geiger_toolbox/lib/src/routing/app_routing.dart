@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
+
 import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
 
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
@@ -14,7 +17,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../features/threat_assessment/presentation/main_screen.dart';
-import '../features/threat_assessment/presentation/news_feed/news_feed_screen.dart';
+import '../features/threat_assessment/presentation/news_details/news_details_screen.dart';
 part 'app_routing.g.dart';
 
 // ignore: prefer-match-file-name
@@ -92,8 +95,13 @@ class AppRouting {
 
         //for ui with bottom navigation
         StatefulShellRoute.indexedStack(
-          builder: (context, state, navigationShell) =>
-              ScaffoldWithNavigation(navigationShell: navigationShell),
+          builder: (context, state, navigationShell) => ScaffoldWithNavigation(
+            navigationShell: navigationShell,
+            feedbackButton:
+                (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
+                    ? TesterButtons()
+                    : null,
+          ),
           branches: [
             StatefulShellBranch(
               navigatorKey: _shellHomeNavKey,
@@ -120,7 +128,7 @@ class AppRouting {
                             .pathParameters[AppRouter.newsFeedDetails.name]!;
 
                         return NoTransitionPage(
-                          child: NewsFeedScreen(newsTitle: title),
+                          child: NewsDetailsScreen(newsTitle: title),
                           key: state.pageKey,
                           name: state.name,
                         );

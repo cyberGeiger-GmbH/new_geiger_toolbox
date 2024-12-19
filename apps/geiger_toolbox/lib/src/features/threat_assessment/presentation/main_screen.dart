@@ -1,23 +1,19 @@
 // ignore_for_file: avoid-non-null-assertion
 
 import 'package:core_ui/core_ui.dart';
-import 'package:feedback_sentry/feedback_sentry.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/dashboard_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/recommendation_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/task_widget.dart';
+
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/welcome_widget.dart';
-
-import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 //home screen
 class MainScreen extends ConsumerWidget {
@@ -53,13 +49,12 @@ class DataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //todo: use custom scrollable, with silvers
+    //
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
-          Spacing.gapH8,
-          if (appFlavor == "dev" || appFlavor == 'stg') CleanData(),
           Spacing.gapH8,
           ScanButtonWidget(),
           Spacing.gapH16,
@@ -68,24 +63,11 @@ class DataWidget extends StatelessWidget {
           Spacing.gapH16,
           AssetWidget(),
           Spacing.gapH16,
-          appFlavor == "dev" ? RecommendationWidget() : DashboardWidget(),
+          // getFlavor() == Flavor.dev ? RecommendationWidget() :
+          TaskWidget(),
           Spacing.gapH12,
         ],
       ),
-    );
-  }
-}
-
-class SendFeedback extends StatelessWidget {
-  const SendFeedback({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: Text('Send feedback'.hardcoded),
-      onPressed: () {
-        BetterFeedback.of(context).showAndUploadToSentry();
-      },
     );
   }
 }

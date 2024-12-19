@@ -5,16 +5,16 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_task_cache_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/news_feed_details.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/todos/add_todo_task_cache_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/news_details_widget.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
-class NewsFeedScreen extends StatelessWidget {
-  const NewsFeedScreen({super.key, required this.newsTitle});
+class NewsDetailsScreen extends StatelessWidget {
+  const NewsDetailsScreen({super.key, required this.newsTitle});
   final String newsTitle;
   @override
   Widget build(BuildContext context) {
@@ -41,13 +41,13 @@ class NewsFeedScreen extends StatelessWidget {
             data: (data) {
               return data == null
                   ? EmptyPlaceholder(
-                      message: "New not found".hardcoded,
+                      message: "News not found".hardcoded,
                       label: "Go back".hardcoded,
                       onTap: () {
                         context.goNamed(AppRouter.main.name);
                       },
                     )
-                  : NewsFeedDetails(newsfeed: data);
+                  : NewsDetailsWidget(newsfeed: data);
             },
           );
         },

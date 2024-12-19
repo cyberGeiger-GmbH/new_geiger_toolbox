@@ -1,5 +1,4 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_sembast_cache_repository.dart';
@@ -77,6 +76,7 @@ class NewsFeedDriftCacheRepository implements NewsFeedSembastCacheRepository {
         await db.delete(db.recommendations).go();
         await db.delete(db.offerings).go();
       });
+  
     } catch (e) {
       throw DataBaseException();
     }
@@ -121,8 +121,8 @@ class NewsFeedDriftCacheRepository implements NewsFeedSembastCacheRepository {
         // debugPrint("all recommendations table => $recommendationEntry");
         // read offering
         final offeringEntry = row.readTableOrNull(db.offerings);
-        debugPrint("all news => $newsEntry");
-        debugPrint("all recommendations => $recommendationEntry");
+        // debugPrint("all news => $newsEntry");
+        // debugPrint("all recommendations => $recommendationEntry");
 
         // add offfer to the corresponding list in offerMap
         if (offeringEntry != null) {
@@ -134,7 +134,9 @@ class NewsFeedDriftCacheRepository implements NewsFeedSembastCacheRepository {
         }
 
         // if the recommendation is not yet in the list add it
-        if (recommendationEntry != null && !recosMap.entries.any((value)=>value.key == recommendationEntry.newsId)) {
+        if (recommendationEntry != null &&
+            !recosMap.entries
+                .any((value) => value.key == recommendationEntry.newsId)) {
           final reco = Recommendation(
               id: recommendationEntry.id,
               name: recommendationEntry.name,

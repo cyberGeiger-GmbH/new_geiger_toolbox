@@ -24,13 +24,4 @@ class ScanButtonController extends _$ScanButtonController {
       (ref.read(analyticsFacadeProvider).trackScanWithoutProfile()),
     );
   }
-
-  Future<void> deleteData() async {
-    state = const AsyncLoading();
-    final data = ref.read(watchNewsFeedsProvider);
-    state = await AsyncValue.guard(() {
-      data.valueOrNull!.clear();
-      return ref.read(newsFeedServiceProvider).cleanNewsCache();
-    });
-  }
 }

@@ -8,7 +8,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/domain/task.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_task.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feed/details/add_todo_task_cache_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/todos/add_todo_task_cache_controller.dart';
 
 class AddTodoWidget extends ConsumerWidget {
   const AddTodoWidget({super.key, required this.todos});

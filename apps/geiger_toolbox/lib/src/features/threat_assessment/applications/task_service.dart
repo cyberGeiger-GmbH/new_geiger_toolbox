@@ -35,6 +35,17 @@ class TaskService {
     await repo.setTask(update);
   }
 
+  Future<void> deletedAllTask() async {
+    final repo = ref.read(todoTaskCacheRespositoryProvider);
+    final prevTodo = await repo.fetchTodoTask();
+    if (prevTodo.items.isNotEmpty) {
+      await repo.deleteAllTodoTask();
+    }
+    // else{
+    //   throw Exception("Data")
+    // }
+  }
+
   Future<Task> updateTodoIfalreadyCache(List<TodoTask> todoTask) async {
     final repo = ref.read(todoTaskCacheRespositoryProvider);
     final prevTodo = await repo.fetchTodoTask();

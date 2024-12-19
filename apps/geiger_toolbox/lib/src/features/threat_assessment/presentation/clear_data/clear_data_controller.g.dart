@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'scan_button_controller.dart';
+part of 'clear_data_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$scanButtonControllerHash() =>
-    r'3cfef4e1047e99b2f67a9ce79045b31aeb19620f';
+String _$cleanDataControllerHash() =>
+    r'1dfe0f3e4faffe6a085e3f12ec9369aa1c238e59';
 
-/// See also [ScanButtonController].
-@ProviderFor(ScanButtonController)
-final scanButtonControllerProvider =
-    AutoDisposeAsyncNotifierProvider<ScanButtonController, void>.internal(
-  ScanButtonController.new,
-  name: r'scanButtonControllerProvider',
+/// See also [CleanDataController].
+@ProviderFor(CleanDataController)
+final cleanDataControllerProvider =
+    AutoDisposeAsyncNotifierProvider<CleanDataController, void>.internal(
+  CleanDataController.new,
+  name: r'cleanDataControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$scanButtonControllerHash,
+      : _$cleanDataControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ScanButtonController = AutoDisposeAsyncNotifier<void>;
+typedef _$CleanDataController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
