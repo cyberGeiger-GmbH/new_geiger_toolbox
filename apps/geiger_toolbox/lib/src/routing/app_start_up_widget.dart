@@ -12,7 +12,6 @@ import 'package:geiger_toolbox/src/utils/shared_preference.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../utils/sembast_data_store.dart';
 
 part 'app_start_up_widget.g.dart';
 
@@ -20,7 +19,6 @@ part 'app_start_up_widget.g.dart';
 Future<void> appStartUp(Ref ref) async {
   ref.onDispose(() {
     //ensure we invalidate all the providers we depend on
-    ref.invalidate(sembastDataStoreProvider);
     ref.invalidate(packageInfoProvider);
   });
   //Preload any other FutureProviders what will be used with requireValue
@@ -28,7 +26,6 @@ Future<void> appStartUp(Ref ref) async {
 //just to see the loading screen;
 //todo remove in production delay
   await Future.delayed(Duration(seconds: 2));
-  await ref.read(sembastDataStoreProvider.future);
   await ref.read(packageInfoProvider.future);
   await ref.read(sharedPreferencesProvider.future);
   // * Preload MixpanelAnalyticsClient, so we can make unawaited analytics calls

@@ -38,8 +38,8 @@ class NewsDetailsWidget extends StatelessWidget {
                 Spacing.gapH4,
                 ProtectionTileListWithTitle(
                   title: "How to Protect me?".hardcoded,
-                  protectionTileList: ProtectionListWidget(
-                    recommendations: newsfeed.recommendations.toList(),
+                  protectionTileList: RecommendationTileListWidget(
+                    recommendations: newsfeed.recommendations,
                   ),
                 ),
               ],
@@ -51,12 +51,4 @@ class NewsDetailsWidget extends StatelessWidget {
   }
 }
 
-class ProtectionListWidget extends StatelessWidget {
-  const ProtectionListWidget({super.key, required this.recommendations});
 
-  final List<Recommendation> recommendations;
-  @override
-  Widget build(BuildContext context) {
-    return RecommendationTileListWidget(recommendations: recommendations);
-  }
-}

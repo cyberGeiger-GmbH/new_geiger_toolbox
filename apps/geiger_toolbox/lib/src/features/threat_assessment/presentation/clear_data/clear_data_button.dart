@@ -24,7 +24,6 @@ class ClearDataButton extends ConsumerWidget {
               await ref
                   .read(cleanDataControllerProvider.notifier)
                   .deleteNewsData();
-              await ref.read(cleanDataControllerProvider.notifier).deleteTask();
             },
     );
   }

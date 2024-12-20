@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 // https://github.com/simolus3/drift/tree/develop/examples/app
 import 'connection/connection.dart' as impl;
 
-part 'drift_database.g.dart';
+part 'database_table.g.dart';
 
 @DataClassName('UserData')
 class Users extends Table {
@@ -107,18 +107,21 @@ class Offerings extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@DataClassName('TodoOfferingStatusData')
+class TodoOfferingStatuses extends Table {
+  TextColumn get offeringId => text().references(Offerings, #id)();
+// Foreign key
+  BoolColumn get added => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column> get primaryKey => {offeringId};
+}
+
 @DataClassName('SmeProfileData')
 class SmeProfiles extends Table {
   IntColumn get actor => integer().references(Users, #id)(); // Foreign key
   TextColumn get verb => text().withLength(min: 1, max: 255)();
   TextColumn get implRecoID => text().references(Recommendations, #id)();
-}
-
-@DataClassName('TodoRecommendationStatusData')
-class TodoRecommendationStatuses extends Table {
-  TextColumn get recommendationId =>
-      text().references(Recommendations, #id)(); // Foreign key
-  BoolColumn get completed => boolean().withDefault(const Constant(false))();
 }
 
 @DriftDatabase(
@@ -130,7 +133,7 @@ class TodoRecommendationStatuses extends Table {
     Industries,
     Locations,
     SmeProfiles,
-    TodoRecommendationStatuses,
+    TodoOfferingStatuses,
     NewsInfo,
     Recommendations,
     Offerings,

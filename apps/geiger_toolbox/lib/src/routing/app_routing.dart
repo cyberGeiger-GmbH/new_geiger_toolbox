@@ -23,7 +23,7 @@ part 'app_routing.g.dart';
 // ignore: prefer-match-file-name
 enum AppRouter {
   main(path: "/", name: "main-screen"),
-  newsFeedDetails(path: "/newsfeed/:title", name: "title"),
+  newsFeedDetails(path: "/newsfeed/:news", name: "news"),
   community(path: "/community", name: "community"),
   calendar(path: "/calendar", name: "calendar"),
   settings(path: "/settings", name: "settings"),
@@ -127,7 +127,8 @@ class AppRouting {
                         final title = state
                             .pathParameters[AppRouter.newsFeedDetails.name]!;
 
-                        return NoTransitionPage(
+                        return MaterialPage(
+                          fullscreenDialog: true,
                           child: NewsDetailsScreen(newsTitle: title),
                           key: state.pageKey,
                           name: state.name,
