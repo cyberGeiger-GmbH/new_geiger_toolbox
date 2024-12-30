@@ -1,10 +1,12 @@
 import 'package:core_ui/molecules/buttons/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/alert_dialogs.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/clear_data_controller.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:go_router/go_router.dart';
 
 class ClearDataButton extends ConsumerWidget {
   const ClearDataButton({super.key});
@@ -21,9 +23,19 @@ class ClearDataButton extends ConsumerWidget {
       onPressed: state.isLoading
           ? null
           : () async {
-              await ref
-                  .read(cleanDataControllerProvider.notifier)
-                  .deleteNewsData();
+              showAlertDialog(
+                  context: context,
+                  title: "Alert".hardcoded,
+                  content:
+                      "Are you sure you want to delete clean? \n Note: This action can't be undone.",
+                  cancelActionText: 'Cancel'.hardcoded,
+                  trigger: () {
+                    ref
+                        .read(cleanDataControllerProvider.notifier)
+                        .deleteNewsData();
+                    //pop alert
+                    context.pop(true);
+                  });
             },
     );
   }

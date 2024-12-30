@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:core_ui/molecules/buttons/app_icon_button.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
 
@@ -84,10 +85,12 @@ class _ContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ListTile(
-        leading: AppText.bodyMedium(
-          text: title,
-          context: context,
+        leading: AutoSizeText(
+          title,
+          style: theme.textTheme.labelLarge!
+              .copyWith(color: theme.colorScheme.scrim),
         ),
         trailing: trailing);
   }

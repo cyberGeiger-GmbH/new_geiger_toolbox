@@ -1,4 +1,5 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
@@ -169,10 +170,13 @@ class NewsFeedCacheRepository {
   static News? _getNews(
       {required List<News> newsfeeds, required String newsTitle}) {
     try {
-      return newsfeeds.firstWhere(
+      final obj = newsfeeds.firstWhere(
           (news) => news.title.replaceSpacesWithHyphen == newsTitle);
+
+      return obj;
     } catch (e) {
-      return null;
+      rethrow;
+      //return null;
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:core_ui/atoms/app_asset_image_data.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/background_with_image.dart';
@@ -51,11 +52,12 @@ class TermsAndConditionScreen extends StatelessWidget {
                 ),
               ),
               ListTile(
+                contentPadding: const EdgeInsets.all(Spacing.p0),
                 leading: Checkbox(value: value, onChanged: acceptCondition),
-                trailing: AppText.bodyMedium(
-                    text: policyStatement ??
-                        "Privacy policy for the handling of data",
-                    context: context),
+                trailing: AutoSizeText(
+                  policyStatement ?? "Privacy policy for the handling of data",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
               SizedBox(
                 width: double.infinity,

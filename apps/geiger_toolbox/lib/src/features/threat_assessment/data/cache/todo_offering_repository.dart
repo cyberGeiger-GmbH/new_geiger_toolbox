@@ -63,7 +63,7 @@ class TodoOfferingRepository {
     });
   }
 
-  //filter by recommendation id
+  //get offering that has already be added to todos by filtering by recommendation id
   Future<List<OfferingStatus>> fetchFilteredOfferingStatus(
       {required String recommendationId}) async {
     //create a join query that include TodoOfferingStatusesTable and OfferingsTable

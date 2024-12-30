@@ -128,8 +128,11 @@ class AppRouting {
                             .pathParameters[AppRouter.newsFeedDetails.name]!;
 
                         return MaterialPage(
-                          fullscreenDialog: true,
-                          child: NewsDetailsScreen(newsTitle: title),
+                          //fullscreenDialog: true,
+                          child: NewsDetailsScreen(
+                            newsTitle: title,
+                            key: state.pageKey,
+                          ),
                           key: state.pageKey,
                           name: state.name,
                         );
