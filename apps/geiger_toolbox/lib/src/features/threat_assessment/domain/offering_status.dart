@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'offering_status.freezed.dart';
 
-//* offeringId is the with hypen separated name of [Offering]
+//* offeringId is the with hypen separated name of [Offering] name
 typedef OfferingId = String;
 
 @freezed

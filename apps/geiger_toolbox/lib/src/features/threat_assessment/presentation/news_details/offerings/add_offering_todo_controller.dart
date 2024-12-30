@@ -11,15 +11,13 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
   @override
   FutureOr<void> build() {}
 
-  Future<void> addOrUpdate(
-      {required OfferingId id, required bool added}) async {
+  Future<void> addOrUpdate({required OfferingStatus status}) async {
     final repo = ref.read(todoOfferingRepoProvider);
     state = const AsyncLoading<void>();
 
     //store the todoTask in cache
-    
-    state = await AsyncValue.guard(
-        () => repo.updateTodoOfferingStatus(id: id, isAdded: added));
+    state = await AsyncValue.guard(() => repo.updateTodoOfferingStatus(
+        id: status.id, isAdded: status.added ?? false));
   }
 }
 

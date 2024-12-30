@@ -17,6 +17,7 @@ class TodoOfferingRepository {
   TodoOfferingRepository(this.ref);
 
   //update the added status of a given offering
+
   Future<void> updateTodoOfferingStatus(
       {required OfferingId id, required bool isAdded}) async {
     final offeringStatus = TodoOfferingStatusesCompanion(
@@ -41,7 +42,9 @@ class TodoOfferingRepository {
           db.todoOfferingStatuses.offeringId.equalsExp(db.offerings.id),
         ),
       ],
-    )..orderBy(
+      //filter by offerings id
+    )..where(db.todoOfferingStatuses.offeringId.equalsExp(db.offerings.id))
+    ..orderBy(
         [
           OrderingTerm.asc(db.offerings.order),
         ],

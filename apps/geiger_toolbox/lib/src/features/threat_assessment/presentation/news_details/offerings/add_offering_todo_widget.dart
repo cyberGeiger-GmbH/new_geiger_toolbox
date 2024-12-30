@@ -55,7 +55,7 @@ class AddOfferingToDoWidget extends ConsumerWidget {
           //store in db
           await ref
               .read(addOfferingTodoControllerProvider.notifier)
-              .addOrUpdate(id: offer.id, added: value);
+              .addOrUpdate(status: offer.copyWith(added: value));
         });
   }
 }
