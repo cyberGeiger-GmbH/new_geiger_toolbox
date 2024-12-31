@@ -19,6 +19,7 @@ class NewsFeedCacheRepository {
   AppDatabase get db => ref.read(appDatabaseProvider);
 
   Future<void> synFromRemote({required List<News> data}) async {
+
     try {
       await db.transaction(() async {
         var newsOrder = 1;

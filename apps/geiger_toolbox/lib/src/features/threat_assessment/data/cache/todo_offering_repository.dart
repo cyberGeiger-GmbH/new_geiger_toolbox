@@ -16,20 +16,37 @@ class TodoOfferingRepository {
 
   TodoOfferingRepository(this.ref);
 
-  //update the added status of a given offering
-
-  Future<void> updateTodoOfferingStatus(
+  //add/update status of a given offering
+  Future<void> addOrUpdateTodoOfferingStatus(
       {required OfferingId id, required bool isAdded}) async {
+   // throw Exception("eeeororor");
     final offeringStatus = TodoOfferingStatusesCompanion(
       offeringId: Value(id),
       added: Value(isAdded),
     );
 
-    
     /// insert or update the todoOffer status
     await db
         .into(db.todoOfferingStatuses)
         .insertOnConflictUpdate(offeringStatus);
+  }
+
+  //* add/update status of a given offerings
+  Future<void> addOrUpdateTodoOfferingsStatus(
+      {required List<OfferingStatus> offerData}) async {
+    await db.transaction(() async {
+      for (var data in offerData) {
+        final offeringStatus = TodoOfferingStatusesCompanion(
+          offeringId: Value(data.id),
+          added: Value(data.added!),
+        );
+
+        /// insert or update the todoOffer status
+        await db
+            .into(db.todoOfferingStatuses)
+            .insertOnConflictUpdate(offeringStatus);
+      }
+    });
   }
 
   //Get all Offers that has be added to the todoOfferingStatus
@@ -43,8 +60,9 @@ class TodoOfferingRepository {
         ),
       ],
       //filter by offerings id
-    )..where(db.todoOfferingStatuses.offeringId.equalsExp(db.offerings.id))
-    ..orderBy(
+    )
+      ..where(db.todoOfferingStatuses.offeringId.equalsExp(db.offerings.id))
+      ..orderBy(
         [
           OrderingTerm.asc(db.offerings.order),
         ],

@@ -14,7 +14,6 @@ class OfferingListWidget extends ConsumerWidget {
   final RecommendationID id;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-  
     //listen to error message when adding offering to todo to be done
     ref.listen(addOfferingTodoControllerProvider,
         (_, nxtState) => nxtState.showAlertDialogOnError(context: context));
@@ -25,12 +24,17 @@ class OfferingListWidget extends ConsumerWidget {
       value: offering,
       data: (data) => Padding(
         padding: const EdgeInsets.all(8.0),
-        child: TodoTileList(
-          todoTile: data
-              .map(
-                (offer) => AddOfferingToDoWidget(key: key, offer: offer),
-              )
-              .toList(),
+        child: Column(
+          children: [
+            TodoTileList(
+              todoTile: data
+                  .map(
+                    (offer) => AddOfferingToDoWidget(key: key, offer: offer),
+                  )
+                  .toList(),
+            ),
+            
+          ],
         ),
       ),
     );

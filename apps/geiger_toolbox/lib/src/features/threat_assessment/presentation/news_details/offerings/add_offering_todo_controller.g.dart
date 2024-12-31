@@ -7,7 +7,7 @@ part of 'add_offering_todo_controller.dart';
 // **************************************************************************
 
 String _$addOfferingTodoControllerHash() =>
-    r'd5b753b5e289b61523103330197464d4e981c103';
+    r'616edb9ae936a3ab0fc4fa44905784016aa7b71b';
 
 /// See also [AddOfferingTodoController].
 @ProviderFor(AddOfferingTodoController)
@@ -23,6 +23,23 @@ final addOfferingTodoControllerProvider =
 );
 
 typedef _$AddOfferingTodoController = AutoDisposeAsyncNotifier<void>;
+String _$toggleListOfferControllerHash() =>
+    r'3dd3f45af3f012b86dbde1afef5f4abb0752d440';
+
+/// See also [ToggleListOfferController].
+@ProviderFor(ToggleListOfferController)
+final toggleListOfferControllerProvider = AutoDisposeNotifierProvider<
+    ToggleListOfferController, List<OfferingStatus>>.internal(
+  ToggleListOfferController.new,
+  name: r'toggleListOfferControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$toggleListOfferControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ToggleListOfferController = AutoDisposeNotifier<List<OfferingStatus>>;
 String _$toggleOfferControllerHash() =>
     r'54936722e78cd93cc18c1405576c5cf492fa9d00';
 

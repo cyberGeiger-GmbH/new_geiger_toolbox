@@ -52,6 +52,7 @@ class AppButton extends StatelessWidget {
       {Key? key,
       required String label,
       VoidCallback? onPressed,
+      bool isloading = false,
       required BuildContext context}) {
     return AppButton._(
       key: key,
@@ -59,8 +60,33 @@ class AppButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           backgroundColor: _appColor(context).tertiary,
           overlayColor: _appColor(context).onTertiary),
-      child: AppText.labelLarge(
-          text: label, context: context, color: _appColor(context).onTertiary),
+      child: isloading
+          ? const CircularProgressIndicator()
+          : AppText.labelLarge(
+              text: label,
+              context: context,
+              color: _appColor(context).onTertiary),
+    );
+  }
+
+  factory AppButton.wideTertiary(
+      {Key? key,
+      required String label,
+      VoidCallback? onPressed,
+      required BuildContext context}) {
+    return AppButton._(
+      key: key,
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+          backgroundColor: _appColor(context).tertiary,
+          overlayColor: _appColor(context).onTertiary),
+      child: SizedBox(
+        width: double.infinity,
+        child: AppText.labelLarge(
+            text: label,
+            context: context,
+            color: _appColor(context).onTertiary),
+      ),
     );
   }
 

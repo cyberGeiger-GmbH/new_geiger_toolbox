@@ -1,4 +1,5 @@
 import 'package:core_ui/molecules/buttons/app_button.dart';
+import 'package:core_ui/molecules/buttons/app_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/alert_dialogs.dart';
@@ -16,10 +17,11 @@ class ClearDataButton extends ConsumerWidget {
     ref.listen(cleanDataControllerProvider,
         (_, nxt) => nxt.showAlertDialogOnError(context: context));
     final state = ref.watch(cleanDataControllerProvider);
-
-    return AppButton.delete(
+    final colors = Theme.of(context).colorScheme;
+    return AppIconButton.filled(
       context: context,
-      label: state.isLoading ? 'deleting' : "Clear Cache".hardcoded,
+      backgroundColor: colors.error,
+      iconData: state.isLoading ? Icons.timer : Icons.delete_forever,
       onPressed: state.isLoading
           ? null
           : () async {
