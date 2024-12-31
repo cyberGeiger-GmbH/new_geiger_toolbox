@@ -1,3 +1,13 @@
+## 1.3.0
+
+ - **REFACTOR**(geiger_toolbox,core_ui,conversational_agent_client): add detail new screen.
+ - **REFACTOR**(geiger_toolbox,conversational_agent_client): throw exception instead of returning null.
+ - **REFACTOR**(geiger_toolbox,conversational_agent_client): data flow logic.
+ - **FIX**(geiger_toolbox,conversational_agent_client): improve log handling and add analytics.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add log handling reporting.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): code optimization.
+ - **FEAT**(geiger_toolbox,conversational_agent_client,core_ui): fix issues.
+
 ## 1.2.1
 
  - **REFACTOR**(conversational_agent_client): refactor news object.
