@@ -1,23 +1,26 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_sembast_cache_repository.dart';
 
-import 'package:geiger_toolbox/src/utils/drift_storage/drift_database.dart';
+import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:drift/drift.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
 
-class NewsFeedDriftCacheRepository implements NewsFeedSembastCacheRepository {
-  NewsFeedDriftCacheRepository(this.ref);
-  @override
+part 'news_feed_cache_repository.g.dart';
+
+class NewsFeedCacheRepository {
+  NewsFeedCacheRepository(this.ref);
+
   final Ref ref;
 
-  @override
-  Future<void> synFromRemote({required List<News> data}) async {
-    try {
-      final db = ref.read(appDatabaseProvider);
+  AppDatabase get db => ref.read(appDatabaseProvider);
 
+  Future<void> synFromRemote({required List<News> data}) async {
+
+    try {
       await db.transaction(() async {
         var newsOrder = 1;
         var recomOrder = 1;
@@ -67,26 +70,22 @@ class NewsFeedDriftCacheRepository implements NewsFeedSembastCacheRepository {
     }
   }
 
-  @override
   Future<void> deleteNews() async {
     try {
-      final db = ref.read(appDatabaseProvider);
       await db.transaction(() async {
         await db.delete(db.newsInfo).go();
         await db.delete(db.recommendations).go();
         await db.delete(db.offerings).go();
+        await db.delete(db.todoOfferingStatuses).go();
       });
-  
     } catch (e) {
       throw DataBaseException();
     }
   }
 
 //get news object
-  @override
-  Stream<List<News>> watchNewsList() {
-    final db = ref.read(appDatabaseProvider);
 
+  Stream<List<News>> watchNewsList() {
     final newsWithRecoAndOffering = (db.select(db.newsInfo).join(
       [
         leftOuterJoin(
@@ -164,7 +163,6 @@ class NewsFeedDriftCacheRepository implements NewsFeedSembastCacheRepository {
     });
   }
 
-  @override
   Stream<News?> watchNewsByTitle({required String title}) {
     return watchNewsList()
         .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: title));
@@ -173,10 +171,18 @@ class NewsFeedDriftCacheRepository implements NewsFeedSembastCacheRepository {
   static News? _getNews(
       {required List<News> newsfeeds, required String newsTitle}) {
     try {
-      return newsfeeds.firstWhere(
+      final obj = newsfeeds.firstWhere(
           (news) => news.title.replaceSpacesWithHyphen == newsTitle);
+
+      return obj;
     } catch (e) {
-      return null;
+      rethrow;
+      //return null;
     }
   }
+}
+
+@riverpod
+NewsFeedCacheRepository newsFeedCacheRepository(Ref ref) {
+  return NewsFeedCacheRepository(ref);
 }

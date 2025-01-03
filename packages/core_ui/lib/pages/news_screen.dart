@@ -10,7 +10,7 @@ import '../molecules/cards/protection_tile.dart';
 import '../molecules/cards/todo_tile.dart';
 import '../organisms/list/protection_tile_list_view.dart';
 import '../organisms/list/todo_tile_list_view.dart';
-import '../organisms/show_model.dart';
+import '../organisms/show_bottom_sheet_modal.dart';
 import '../tokens/spacing.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -31,7 +31,7 @@ class NewsScreen extends StatelessWidget {
                 context: context,
                 title: value,
                 onPressed: () {
-                  showModal(context,
+                  showBottomSheetModal(context,
                       title: value, takeAction: _getTodoCheckList());
                 },
               ))

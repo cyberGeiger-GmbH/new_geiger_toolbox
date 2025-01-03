@@ -6,7 +6,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
 
-
+@Deprecated("don't use")
 class RecommendationWidget extends ConsumerWidget {
   const RecommendationWidget({
     super.key,

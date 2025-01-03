@@ -1,11 +1,12 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_screen.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/todos/add_todo_task_cache_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/news_details_widget.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
@@ -27,11 +28,11 @@ class NewsDetailsScreen extends StatelessWidget {
       ),
       body: Consumer(
         builder: (context, ref, _) {
-          //listen to error message when adding recommendation to task to be done
-          ref.listen(
-              addTodoTaskCacheControllerProvider,
-              (_, nxtState) =>
-                  nxtState.showAlertDialogOnError(context: context));
+          //listen for errors
+          if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
+            ref.listen(watchNewsFeedByTitleProvider(newsTitle: newsTitle),
+                (_, nxt) => nxt.showAlertDialogOnError(context: context));
+          }
 
           final newsFeed =
               ref.watch(watchNewsFeedByTitleProvider(newsTitle: newsTitle));

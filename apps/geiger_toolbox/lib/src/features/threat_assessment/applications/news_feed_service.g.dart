@@ -23,7 +23,7 @@ final newsFeedServiceProvider = AutoDisposeProvider<NewsFeedService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NewsFeedServiceRef = AutoDisposeProviderRef<NewsFeedService>;
-String _$watchNewsFeedsHash() => r'426955e0a8d222f05c0fcf22be829cf18def38e8';
+String _$watchNewsFeedsHash() => r'5b5c91d43b8d3a714b6712ae8b5dae16665384d9';
 
 /// See also [watchNewsFeeds].
 @ProviderFor(watchNewsFeeds)
@@ -41,7 +41,7 @@ final watchNewsFeedsProvider = AutoDisposeStreamProvider<List<News>>.internal(
 // ignore: unused_element
 typedef WatchNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
 String _$watchNewsFeedByTitleHash() =>
-    r'aa07006b198e2daf790d84f9f33262e5ac9cd799';
+    r'1c2315e05b2c61d8304e75c28e2640d7b576a0dd';
 
 /// Copied from Dart SDK
 class _SystemHash {
