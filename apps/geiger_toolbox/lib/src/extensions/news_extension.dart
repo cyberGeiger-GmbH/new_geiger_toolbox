@@ -4,7 +4,6 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
-
 extension NewsExtension on List<News> {
   /// Converts List<News> to a list of JSON maps
   List<Map<String, dynamic>> _toJsonList() {
@@ -25,13 +24,7 @@ extension NewsExtension on List<News> {
               ? AppButton.activeNews(
                   context: context,
                   title: value.value.title,
-                  onPressed: onPressed
-                  //??
-                  // () {
-                  //   debugPrint(
-                  //       " go to detail newsfeed screen => ${value.value.title.replaceSpacesWithHyphen}");
-                  // },
-                  )
+                  onPressed: onPressed)
               : AppButton.news(
                   context: context,
                   title: value.value.title,

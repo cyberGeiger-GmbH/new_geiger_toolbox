@@ -77,15 +77,14 @@ class AppButton extends StatelessWidget {
     return AppButton._(
       key: key,
       onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-          backgroundColor: _appColor(context).tertiary,
-          overlayColor: _appColor(context).onTertiary),
+      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
       child: SizedBox(
         width: double.infinity,
         child: AppText.labelLarge(
-            text: label,
-            context: context,
-            color: _appColor(context).onTertiary),
+          text: label,
+          context: context,
+          color: _appColor(context).onSurface,
+        ),
       ),
     );
   }

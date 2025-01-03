@@ -4,27 +4,25 @@ import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
-void showBottomSheetModal(BuildContext context,
-    {required String title,
-    required Widget takeAction,
-    Widget? stickyActionBar}) {
+void showWoltModalBottomSheet(BuildContext context,
+    {required String title, required Widget page, Widget? stickyActionBar}) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.bottomSheet(),
     context: context,
     barrierDismissible: false,
     pageListBuilder: (bottomSheetContext) {
       return [
-        takeActionSliverWolModalSheetPage(context,
-            title: title, widget: takeAction, stickyActionBar: stickyActionBar)
+        _takeActionSliverWolModalSheetPage(context,
+            title: title, mainContent: page, stickyActionBar: stickyActionBar)
       ];
     },
   );
 }
 
-SliverWoltModalSheetPage takeActionSliverWolModalSheetPage(
+SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     BuildContext modalSheetContext,
     {required String title,
-    required Widget widget,
+    required Widget mainContent,
     Widget? stickyActionBar}) {
   final appColors = Theme.of(modalSheetContext).colorScheme;
 
@@ -49,7 +47,7 @@ SliverWoltModalSheetPage takeActionSliverWolModalSheetPage(
     ),
     mainContentSliversBuilder: (bottomSheetContext) {
       return [
-        SliverToBoxAdapter(child: widget),
+        SliverToBoxAdapter(child: mainContent),
       ];
     },
     stickyActionBar: Padding(

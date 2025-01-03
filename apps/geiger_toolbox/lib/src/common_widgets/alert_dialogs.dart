@@ -65,10 +65,11 @@ Future<void> showExceptionAlertDialog({
       defaultActionText: 'OK'.hardcoded,
     );
 
-Future<void> showNotImplementedAlertDialog({required BuildContext context}) =>
+Future<void> showNotImplementedAlertDialog(
+        {required BuildContext context, String? title, String? content}) =>
     showAlertDialog(
         context: context,
-        title: 'Not implemented'.hardcoded,
-        content:
+        title: title ?? 'Not implemented'.hardcoded,
+        content: content ??
             "This feature is not quite ready yet.\n Thank you for your interest."
                 .hardcoded);
