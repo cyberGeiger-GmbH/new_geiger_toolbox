@@ -2,6 +2,7 @@
 
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 // Conditional import implementation based on the Drift Flutter web example:
@@ -10,61 +11,62 @@ import 'connection/connection.dart' as impl;
 
 part 'database_table.g.dart';
 
-@DataClassName('UserData')
-class Users extends Table {
+@UseRowClass(User)
+class UserProfile extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get name => text().withLength(min: 1, max: 255)();
-  TextColumn get email => text().withLength(min: 1, max: 255)();
-  TextColumn get locationId =>
-      text().withLength(min: 1, max: 8).references(Locations, #countryCode)();
-  @ReferenceName('deviceGroups') // Foreign key
-  IntColumn get mainDevice =>
-      integer().references(DeviceScores, #deviceId)(); // Foreign key
-  @ReferenceName('pairedDeviceGroups')
-  IntColumn get otherDevicesId =>
-      integer().references(Devices, #id)(); // Foreign key
+  TextColumn get companyName => text().withLength(min: 1, max: 255)();
+  TextColumn get location => text().withLength(min: 1, max: 255)();
+
+  // TextColumn get locationId =>
+  //     text().withLength(min: 1, max: 8).references(Locations, #countryCode)();
+  // @ReferenceName('deviceGroups') // Foreign key
+  // IntColumn get mainDevice =>
+  //     integer().references(DeviceScores, #deviceId)(); // Foreign key
+  // @ReferenceName('pairedDeviceGroups')
+  // IntColumn get otherDevicesId =>
+  //     integer().references(Devices, #id)(); // Foreign key
 }
 
-@DataClassName('BusinessProfileData')
-class BusinessProfiles extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  TextColumn get name => text().withLength(min: 1, max: 100)();
-  IntColumn get industryType => integer().references(Industries, #id)();
-  @ReferenceName("ownerGroups") // Foreign key
-  IntColumn get owner => integer().references(Users, #id)();
-  // Foreign key
-  @ReferenceName("pairedUserGroups")
-  IntColumn get employees => integer().references(Users, #id)(); // Foreign key
-}
+// @DataClassName('BusinessProfileData')
+// class BusinessProfiles extends Table {
+//   IntColumn get id => integer().autoIncrement()();
+//   TextColumn get name => text().withLength(min: 1, max: 100)();
+//   IntColumn get industryType => integer().references(Industries, #id)();
+//   @ReferenceName("ownerGroups") // Foreign key
+//   IntColumn get owner => integer().references(Users, #id)();
+//   // Foreign key
+//   @ReferenceName("pairedUserGroups")
+//   IntColumn get employees => integer().references(Users, #id)(); // Foreign key
+// }
 
-@DataClassName('DeviceScoreData')
-class DeviceScores extends Table {
-  IntColumn get deviceId => integer().references(Devices, #id)(); // Foreign key
-  IntColumn get score => integer().nullable()();
-  DateTimeColumn get lastUpdated =>
-      dateTime().withDefault(currentDateAndTime)();
-  DateTimeColumn get created => dateTime().withDefault(currentDateAndTime)();
-}
+// @DataClassName('DeviceScoreData')
+// class DeviceScores extends Table {
+//   IntColumn get deviceId => integer().references(Devices, #id)(); // Foreign key
+//   IntColumn get score => integer().nullable()();
+//   DateTimeColumn get lastUpdated =>
+//       dateTime().withDefault(currentDateAndTime)();
+//   DateTimeColumn get created => dateTime().withDefault(currentDateAndTime)();
+// }
 
-@DataClassName('DeviceData')
-class Devices extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  TextColumn get name => text().withLength(min: 1, max: 100)();
-  TextColumn get type => text().withLength(min: 1, max: 100)();
-}
+// @DataClassName('DeviceData')
+// class Devices extends Table {
+//   IntColumn get id => integer().autoIncrement()();
+//   TextColumn get name => text().withLength(min: 1, max: 100)();
+//   TextColumn get type => text().withLength(min: 1, max: 100)();
+// }
 
-@DataClassName('IndustryData')
-class Industries extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  TextColumn get name => text().withLength(min: 1, max: 255)();
-}
+// @DataClassName('IndustryData')
+// class Industries extends Table {
+//   IntColumn get id => integer().autoIncrement()();
+//   TextColumn get name => text().withLength(min: 1, max: 255)();
+// }
 
-@DataClassName('LocationData')
-class Locations extends Table {
-  TextColumn get countryCode => text().withLength(min: 2, max: 2)();
-  TextColumn get country => text().withLength(min: 1, max: 255)();
-  TextColumn get city => text().withLength(min: 1, max: 255)();
-}
+// @DataClassName('LocationData')
+// class Locations extends Table {
+//   TextColumn get countryCode => text().withLength(min: 2, max: 2)();
+//   TextColumn get country => text().withLength(min: 1, max: 255)();
+//   TextColumn get city => text().withLength(min: 1, max: 255)();
+// }
 
 @DataClassName('NewsData')
 class NewsInfo extends Table {
@@ -117,22 +119,22 @@ class TodoOfferingStatuses extends Table {
   Set<Column> get primaryKey => {offeringId};
 }
 
-@DataClassName('SmeProfileData')
-class SmeProfiles extends Table {
-  IntColumn get actor => integer().references(Users, #id)(); // Foreign key
-  TextColumn get verb => text().withLength(min: 1, max: 255)();
-  TextColumn get implRecoID => text().references(Recommendations, #id)();
-}
+// @DataClassName('SmeProfileData')
+// class SmeProfiles extends Table {
+//   IntColumn get actor => integer().references(Users, #id)(); // Foreign key
+//   TextColumn get verb => text().withLength(min: 1, max: 255)();
+//   TextColumn get implRecoID => text().references(Recommendations, #id)();
+// }
 
 @DriftDatabase(
   tables: [
-    Users,
-    BusinessProfiles,
-    DeviceScores,
-    Devices,
-    Industries,
-    Locations,
-    SmeProfiles,
+    UserProfile,
+    //BusinessProfiles,
+    // DeviceScores,
+    // Devices,
+    // Industries,
+    // Locations,
+    //SmeProfiles,
     TodoOfferingStatuses,
     NewsInfo,
     Recommendations,

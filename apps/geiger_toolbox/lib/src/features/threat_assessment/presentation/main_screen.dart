@@ -13,6 +13,8 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/welcome_widget.dart';
+import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:go_router/go_router.dart';
 
 //home screen
 class MainScreen extends ConsumerWidget {
@@ -32,7 +34,11 @@ class MainScreen extends ConsumerWidget {
     final newsFeedState = ref.watch(watchNewsFeedsProvider);
 
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        userProfile: () {
+          context.pushNamed(AppRouter.userprofile.name);
+        },
+      ),
       body: ((newsFeedState.isLoading || newsFeedState.value != null) &&
               (newsFeedState.value != null && newsFeedState.value!.isEmpty))
           ? WelcomeWidget()
