@@ -3,7 +3,7 @@ description: "A cybersecurity risk management tool designed for SMEs and their l
 
 publish_to: 'none' 
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: 3.5.4
@@ -35,6 +35,7 @@ dependencies:
   package_info_plus: 8.1.1
   
   shared_preferences: 2.3.3
+  intl: 0.19.0
   # error monitor
   sentry_flutter: 8.10.1
   # send feedback
@@ -46,7 +47,7 @@ dependencies:
   firebase_core: 3.6.0
   # mixpanel
   mixpanel_flutter: 2.3.3
-  intl: 0.19.0
+
 
 dev_dependencies:
   flutter_test:

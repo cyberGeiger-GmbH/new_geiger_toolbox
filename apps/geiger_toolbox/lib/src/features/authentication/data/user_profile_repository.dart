@@ -16,8 +16,7 @@ class UserProfileRepository {
   Future<void> createUserProfile({required User user}) async {
     try {
       final userProfile = UserProfileCompanion(
-          companyName: Value(user.companyName),
-          location: Value(user.companyName));
+          companyName: Value(user.companyName), location: Value(user.location));
       await db.into(db.userProfile).insert(userProfile);
     } catch (e) {
       rethrow;
