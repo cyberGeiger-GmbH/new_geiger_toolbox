@@ -1,12 +1,12 @@
-targets:
-  $default:
-    builders:
-      drift_dev:
-        options:
-          databases:
-            # Required: A name for the database and it's path
-            my_database: lib/src/utils/drift_storage/database_table.dart
+# targets:
+#   $default:
+#     builders:
+#       drift_dev:
+#         options:
+#           databases:
+#             # Required: A name for the database and it's path
+#             my_database: lib/src/utils/drift_storage/database_table.dart
 
-            # # Optional: Add more databases
-            # another_db: lib/database2.dart
+#             # # Optional: Add more databases
+#             # another_db: lib/database2.dart
             

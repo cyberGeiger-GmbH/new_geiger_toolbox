@@ -37,7 +37,7 @@ class NewsRepository {
       final Response response = await dio.getUri(uri,
           data: profile != null
               ? json.encode(profile.toJson())
-              : json.encode({"lang": "en"}),
+              : json.encode({"locale": "en"}),
           options: Options(headers: Base.headers));
 
       return response.newsParser(ref);

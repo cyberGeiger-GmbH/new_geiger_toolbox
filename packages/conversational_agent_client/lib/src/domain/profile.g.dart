@@ -10,15 +10,14 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
     _$ProfileImpl(
       locale: json['locale'] as String? ?? "en",
       location: json['location'] as String,
-      digitalInfrastructure: DigitalInfrastructure.fromJson(
-          json['digitalInfrastructure'] as Map<String, dynamic>),
+      companyName: json['companyName'] as String,
     );
 
 Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
     <String, dynamic>{
       'locale': instance.locale,
       'location': instance.location,
-      'digitalInfrastructure': instance.digitalInfrastructure,
+      'companyName': instance.companyName,
     };
 
 _$DigitalInfrastructureImpl _$$DigitalInfrastructureImplFromJson(

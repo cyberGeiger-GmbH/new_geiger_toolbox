@@ -1,6 +1,7 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
+import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -20,8 +21,14 @@ class NewsFeedService {
   Future<void> cacheNews() async {
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
-      //todo: read from sme profile repository
-      List<News> data = await remoteRepo.fetchNewsUpdate();
+      final user = await ref.read(fetchUserProvider.future);
+      Profile? profile;
+      if (user != null) {
+        profile =
+            Profile(location: user.location, companyName: user.companyName);
+      }
+
+      List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
       if (data.isNotEmpty) {
         await cache.synFromRemote(data: data);
       }

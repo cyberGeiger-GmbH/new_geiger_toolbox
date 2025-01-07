@@ -2,7 +2,6 @@
 
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 // Conditional import implementation based on the Drift Flutter web example:
@@ -11,7 +10,7 @@ import 'connection/connection.dart' as impl;
 
 part 'database_table.g.dart';
 
-@UseRowClass(User)
+@DataClassName('UserProfileData')
 class UserProfile extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get companyName => text().withLength(min: 1, max: 255)();

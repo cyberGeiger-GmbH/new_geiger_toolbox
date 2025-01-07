@@ -73,6 +73,7 @@ class AppButton extends StatelessWidget {
       {Key? key,
       required String label,
       VoidCallback? onPressed,
+      bool isLoading = false,
       required BuildContext context}) {
     return AppButton._(
       key: key,
@@ -80,11 +81,13 @@ class AppButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
       child: SizedBox(
         width: double.infinity,
-        child: AppText.labelLarge(
-          text: label,
-          context: context,
-          color: _appColor(context).onSurface,
-        ),
+        child: isLoading
+            ? const CircularProgressIndicator()
+            : AppText.labelLarge(
+                text: label,
+                context: context,
+                color: _appColor(context).onSurface,
+              ),
       ),
     );
   }

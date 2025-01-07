@@ -8,8 +8,9 @@ class Profile with _$Profile {
   const factory Profile({
     @Default("en") final String? locale,
     required String location,
-    required DigitalInfrastructure digitalInfrastructure,
+    required String companyName,
   }) = _Profile;
+
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
 }

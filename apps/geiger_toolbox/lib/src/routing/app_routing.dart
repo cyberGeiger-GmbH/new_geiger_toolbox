@@ -99,7 +99,9 @@ class AppRouting {
           path: AppRouter.userprofile.path,
           name: AppRouter.userprofile.name,
           pageBuilder: (context, state) => NoTransitionPage<void>(
-              child: UserProfileScreen(), key: state.pageKey, name: state.name),
+              child: UserProfileScreen(),
+              key: state.pageKey,
+              name: state.name),
         ),
 
         //for ui with bottom navigation

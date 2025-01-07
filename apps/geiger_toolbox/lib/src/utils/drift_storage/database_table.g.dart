@@ -4,7 +4,7 @@ part of 'database_table.dart';
 
 // ignore_for_file: type=lint
 class $UserProfileTable extends UserProfile
-    with TableInfo<$UserProfileTable, User> {
+    with TableInfo<$UserProfileTable, UserProfileData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -44,7 +44,7 @@ class $UserProfileTable extends UserProfile
   String get actualTableName => $name;
   static const String $name = 'user_profile';
   @override
-  VerificationContext validateIntegrity(Insertable<User> instance,
+  VerificationContext validateIntegrity(Insertable<UserProfileData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -71,9 +71,9 @@ class $UserProfileTable extends UserProfile
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  User map(Map<String, dynamic> data, {String? tablePrefix}) {
+  UserProfileData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return User(
+    return UserProfileData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       companyName: attachedDatabase.typeMapping
@@ -89,7 +89,85 @@ class $UserProfileTable extends UserProfile
   }
 }
 
-class UserProfileCompanion extends UpdateCompanion<User> {
+class UserProfileData extends DataClass implements Insertable<UserProfileData> {
+  final int id;
+  final String companyName;
+  final String location;
+  const UserProfileData(
+      {required this.id, required this.companyName, required this.location});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['company_name'] = Variable<String>(companyName);
+    map['location'] = Variable<String>(location);
+    return map;
+  }
+
+  UserProfileCompanion toCompanion(bool nullToAbsent) {
+    return UserProfileCompanion(
+      id: Value(id),
+      companyName: Value(companyName),
+      location: Value(location),
+    );
+  }
+
+  factory UserProfileData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UserProfileData(
+      id: serializer.fromJson<int>(json['id']),
+      companyName: serializer.fromJson<String>(json['companyName']),
+      location: serializer.fromJson<String>(json['location']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'companyName': serializer.toJson<String>(companyName),
+      'location': serializer.toJson<String>(location),
+    };
+  }
+
+  UserProfileData copyWith({int? id, String? companyName, String? location}) =>
+      UserProfileData(
+        id: id ?? this.id,
+        companyName: companyName ?? this.companyName,
+        location: location ?? this.location,
+      );
+  UserProfileData copyWithCompanion(UserProfileCompanion data) {
+    return UserProfileData(
+      id: data.id.present ? data.id.value : this.id,
+      companyName:
+          data.companyName.present ? data.companyName.value : this.companyName,
+      location: data.location.present ? data.location.value : this.location,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserProfileData(')
+          ..write('id: $id, ')
+          ..write('companyName: $companyName, ')
+          ..write('location: $location')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, companyName, location);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserProfileData &&
+          other.id == this.id &&
+          other.companyName == this.companyName &&
+          other.location == this.location);
+}
+
+class UserProfileCompanion extends UpdateCompanion<UserProfileData> {
   final Value<int> id;
   final Value<String> companyName;
   final Value<String> location;
@@ -104,7 +182,7 @@ class UserProfileCompanion extends UpdateCompanion<User> {
     required String location,
   })  : companyName = Value(companyName),
         location = Value(location);
-  static Insertable<User> custom({
+  static Insertable<UserProfileData> custom({
     Expression<int>? id,
     Expression<String>? companyName,
     Expression<String>? location,
@@ -1401,14 +1479,17 @@ class $$UserProfileTableAnnotationComposer
 class $$UserProfileTableTableManager extends RootTableManager<
     _$AppDatabase,
     $UserProfileTable,
-    User,
+    UserProfileData,
     $$UserProfileTableFilterComposer,
     $$UserProfileTableOrderingComposer,
     $$UserProfileTableAnnotationComposer,
     $$UserProfileTableCreateCompanionBuilder,
     $$UserProfileTableUpdateCompanionBuilder,
-    (User, BaseReferences<_$AppDatabase, $UserProfileTable, User>),
-    User,
+    (
+      UserProfileData,
+      BaseReferences<_$AppDatabase, $UserProfileTable, UserProfileData>
+    ),
+    UserProfileData,
     PrefetchHooks Function()> {
   $$UserProfileTableTableManager(_$AppDatabase db, $UserProfileTable table)
       : super(TableManagerState(
@@ -1450,14 +1531,17 @@ class $$UserProfileTableTableManager extends RootTableManager<
 typedef $$UserProfileTableProcessedTableManager = ProcessedTableManager<
     _$AppDatabase,
     $UserProfileTable,
-    User,
+    UserProfileData,
     $$UserProfileTableFilterComposer,
     $$UserProfileTableOrderingComposer,
     $$UserProfileTableAnnotationComposer,
     $$UserProfileTableCreateCompanionBuilder,
     $$UserProfileTableUpdateCompanionBuilder,
-    (User, BaseReferences<_$AppDatabase, $UserProfileTable, User>),
-    User,
+    (
+      UserProfileData,
+      BaseReferences<_$AppDatabase, $UserProfileTable, UserProfileData>
+    ),
+    UserProfileData,
     PrefetchHooks Function()>;
 typedef $$NewsInfoTableCreateCompanionBuilder = NewsInfoCompanion Function({
   required String id,
