@@ -12,6 +12,7 @@ class AppButton extends StatelessWidget {
     this.style,
   });
 
+//todo: wrap with Semantics for visual impair user
   factory AppButton.primary(
       {Key? key,
       required String label,
@@ -51,6 +52,7 @@ class AppButton extends StatelessWidget {
       {Key? key,
       required String label,
       VoidCallback? onPressed,
+      bool isloading = false,
       required BuildContext context}) {
     return AppButton._(
       key: key,
@@ -58,6 +60,49 @@ class AppButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           backgroundColor: _appColor(context).tertiary,
           overlayColor: _appColor(context).onTertiary),
+      child: isloading
+          ? const CircularProgressIndicator()
+          : AppText.labelLarge(
+              text: label,
+              context: context,
+              color: _appColor(context).onTertiary),
+    );
+  }
+
+  factory AppButton.wideTertiary(
+      {Key? key,
+      required String label,
+      VoidCallback? onPressed,
+      bool isLoading = false,
+      required BuildContext context}) {
+    return AppButton._(
+      key: key,
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
+      child: SizedBox(
+        width: double.infinity,
+        child: isLoading
+            ? const CircularProgressIndicator()
+            : AppText.labelLarge(
+                text: label,
+                context: context,
+                color: _appColor(context).onSurface,
+              ),
+      ),
+    );
+  }
+
+  factory AppButton.delete(
+      {Key? key,
+      required String label,
+      VoidCallback? onPressed,
+      required BuildContext context}) {
+    return AppButton._(
+      key: key,
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+          backgroundColor: _appColor(context).error,
+          overlayColor: _appColor(context).onError),
       child: AppText.labelLarge(
           text: label, context: context, color: _appColor(context).onTertiary),
     );

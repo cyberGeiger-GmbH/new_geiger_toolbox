@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-12-31
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`core_ui` - `v3.0.0`](#core_ui---v300)
+
+Packages with other changes:
+
+ - [`conversational_agent_client` - `v1.3.0`](#conversational_agent_client---v130)
+
+---
+
+#### `core_ui` - `v3.0.0`
+
+ - **REFACTOR**(core_ui,geiger_toolbox): refactor app theme.
+ - **REFACTOR**(geiger_toolbox,core_ui,conversational_agent_client): add detail new screen.
+ - **REFACTOR**(core_ui): introduce type safe widget.
+ - **REFACTOR**(core_ui): makes showModal reuseable.
+ - **FIX**(geiger_toolbox): add todos button.
+ - **FIX**(geiger_toolbox,core_ui): fix overflowing text issue.
+ - **FIX**(geiger_toolbox,core_ui): improve error reporting and refactoring.
+ - **FIX**(geiger_toolbox,core_ui): improve loading, mini fix in core_ui.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): code optimization.
+ - **FIX**(core_ui): improve content widget.
+ - **FIX**(core_ui): fix color.
+ - **FIX**(geiger_toolbox,core_ui): fix issue of checkbox override.
+ - **FIX**(geiger_toolbox,core_ui): refactor app, change bottomBar color in core_ui.
+ - **FIX**(core_ui): allow appBar to be customisable.
+ - **FIX**(geiger_toolbox,core_ui): improve news feed ui.
+ - **FIX**(geiger_toolbox,core_ui): structure toolbox main ui.
+ - **FEAT**(geiger_toolbox,conversational_agent_client,core_ui): fix issues.
+ - **FEAT**(geiger_toolbox): add logic for terms and condition screen.
+ - **FEAT**(geiger_toolbox,core_ui): added terms and condition logic.
+ - **FEAT**(geiger_toolbox,core_ui): show task if added.
+ - **FEAT**(core_ui): add new components and news test page.
+ - **BREAKING** **FIX**(core_ui): remove appBar.
+ - **BREAKING** **FEAT**(core_ui): add modal, refactor exist component to be easily reusable.
+
+#### `conversational_agent_client` - `v1.3.0`
+
+ - **REFACTOR**(geiger_toolbox,core_ui,conversational_agent_client): add detail new screen.
+ - **REFACTOR**(geiger_toolbox,conversational_agent_client): throw exception instead of returning null.
+ - **REFACTOR**(geiger_toolbox,conversational_agent_client): data flow logic.
+ - **FIX**(geiger_toolbox,conversational_agent_client): improve log handling and add analytics.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add log handling reporting.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): code optimization.
+ - **FEAT**(geiger_toolbox,conversational_agent_client,core_ui): fix issues.
+
+
 ## 2024-11-20
 
 ### Changes

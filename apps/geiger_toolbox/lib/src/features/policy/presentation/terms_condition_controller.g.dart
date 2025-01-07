@@ -7,7 +7,7 @@ part of 'terms_condition_controller.dart';
 // **************************************************************************
 
 String _$termsConditionControllerHash() =>
-    r'6229a5f612fc88191e9c3e2b230d67f98cd295a9';
+    r'daf4e148662e52e649f5c52ea1c467bb1013b76d';
 
 /// See also [TermsConditionController].
 @ProviderFor(TermsConditionController)

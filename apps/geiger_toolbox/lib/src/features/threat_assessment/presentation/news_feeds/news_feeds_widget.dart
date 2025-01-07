@@ -3,13 +3,17 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
+
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,6 +24,12 @@ class NewsFeedsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //listen for errors
+    if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
+      ref.listen(watchNewsFeedsProvider,
+          (_, nxt) => nxt.showAlertDialogOnError(context: context));
+    }
+
     final newsFeedValue = ref.watch(watchNewsFeedsProvider);
     final state = ref.watch(scanButtonControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);

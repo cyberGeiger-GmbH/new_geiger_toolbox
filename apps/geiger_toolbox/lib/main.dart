@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_ui/core_ui.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -6,12 +8,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/env.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/exceptions/async_error_logger.dart';
+
+
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/geiger_app.dart';
-import 'src/exceptions/error_logger.dart';
+import 'src/exceptions/app_logger.dart';
 
 Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,12 +43,17 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   // initialize firebase
   await Firebase.initializeApp(options: firebaseOptions);
 
+  // * riverpod container for observing container errors [ AsyncErrorLogger] and overriding default storage
+  final container = ProviderContainer(
+    observers: [AsyncErrorLogger()],
+  );
+
   //* Register error handler.For more info, see:
   // * https://docs.flutter.dev/testing/errors
-  final container = ProviderContainer(observers: [AsyncErrorLogger()]);
-  final errorLogger = container.read(errorLoggerProvider);
+  final errorLogger = container.read(appLoggerProvider);
   registerErroHandlers(errorLogger);
 
+  // * run app
   runApp(
     UncontrolledProviderScope(
       container: container,
@@ -53,7 +62,7 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   );
 }
 
-void registerErroHandlers(ErrorLogger errorLogger) {
+void registerErroHandlers(AppLogger errorLogger) {
   // * Show some error UI if any uncaught exception happens
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);

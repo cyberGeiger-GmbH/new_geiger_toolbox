@@ -112,34 +112,27 @@ class AppAssetsIcons extends StatelessWidget {
   }
 
   factory AppAssetsIcons.filledTonal(
-      {VoidCallback? desktop,
-      VoidCallback? todos,
-      VoidCallback? devices,
-      VoidCallback? wifi,
+      {VoidCallback? addDevices,
+      VoidCallback? addNetwork,
+      VoidCallback? checkPhishing,
       required BuildContext context,
       Color? backgroundColor}) {
     final icons = [
       AppIconButton.filledTonal(
-        iconData: Icons.desktop_mac,
-        onPressed: desktop,
+        iconData: Icons.devices_other,
+        onPressed: addDevices,
         backgroudColor: backgroundColor,
         context: context,
       ),
       AppIconButton.filledTonal(
-        iconData: Icons.list,
-        onPressed: todos,
+        iconData: Icons.wifi_find,
+        onPressed: addNetwork,
         backgroudColor: backgroundColor,
         context: context,
       ),
       AppIconButton.filledTonal(
-        iconData: Icons.devices,
-        onPressed: devices,
-        backgroudColor: backgroundColor,
-        context: context,
-      ),
-      AppIconButton.filledTonal(
-        iconData: Icons.wifi,
-        onPressed: wifi,
+        iconData: Icons.linked_camera_sharp,
+        onPressed: checkPhishing,
         backgroudColor: backgroundColor,
         context: context,
       )

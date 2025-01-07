@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ Future<bool?> showAlertDialog({
   String? content,
   String? cancelActionText,
   String defaultActionText = 'OK',
+  VoidCallback? trigger,
 }) async {
   return showDialog(
     context: context,
@@ -23,7 +23,7 @@ Future<bool?> showAlertDialog({
       title: Text(title),
       content: content != null ? Text(content) : null,
       // * Use [TextButton] or [CupertinoDialogAction] depending on the platform
-      actions: kIsWeb || defaultTargetPlatform == TargetPlatform.iOS
+      actions: kIsWeb || defaultTargetPlatform == TargetPlatform.android
           ? <Widget>[
               if (cancelActionText != null)
                 TextButton(
@@ -33,8 +33,8 @@ Future<bool?> showAlertDialog({
                 ),
               TextButton(
                 key: defaultDialogKey,
+                onPressed: trigger ?? () => Navigator.of(context).pop(true),
                 child: Text(defaultActionText),
-                onPressed: () => Navigator.of(context).pop(true),
               ),
             ]
           : <Widget>[
@@ -44,14 +44,13 @@ Future<bool?> showAlertDialog({
                   onPressed: () => Navigator.of(context).pop(false),
                 ),
               CupertinoDialogAction(
+                onPressed: trigger ?? () => Navigator.of(context).pop(true),
                 child: Text(defaultActionText),
-                onPressed: () => Navigator.of(context).pop(true),
               ),
             ],
     ),
   );
 }
-
 
 Future<void> showExceptionAlertDialog({
   required BuildContext context,
@@ -66,8 +65,11 @@ Future<void> showExceptionAlertDialog({
       defaultActionText: 'OK'.hardcoded,
     );
 
-Future<void> showNotImplementedAlertDialog({required BuildContext context}) =>
+Future<void> showNotImplementedAlertDialog(
+        {required BuildContext context, String? title, String? content}) =>
     showAlertDialog(
-      context: context,
-      title: 'Not implemented'.hardcoded,
-    );
+        context: context,
+        title: title ?? 'Not implemented'.hardcoded,
+        content: content ??
+            "This feature is not quite ready yet.\n Thank you for your interest."
+                .hardcoded);

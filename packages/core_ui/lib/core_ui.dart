@@ -26,7 +26,7 @@ export './organisms/empty_content.dart';
 export './organisms/error_message.dart';
 export './organisms/responsive_center.dart';
 export './organisms/responsive_scrollable_card.dart';
-export './organisms/show_model.dart';
+export 'organisms/show_bottom_sheet_modal.dart';
 
 //list widget
 export 'organisms/list/app_assets_icons.dart';

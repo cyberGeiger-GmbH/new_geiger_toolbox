@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
+
+import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
 
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
@@ -12,17 +18,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../features/threat_assessment/presentation/main_screen.dart';
-import '../features/threat_assessment/presentation/news_feed/news_feed_screen.dart';
+import '../features/threat_assessment/presentation/news_details/news_details_screen.dart';
 part 'app_routing.g.dart';
 
 // ignore: prefer-match-file-name
 enum AppRouter {
   main(path: "/", name: "main-screen"),
-  newsFeedDetails(path: "/newsfeed/:title", name: "title"),
+  newsFeedDetails(path: "/newsfeed/:news", name: "news"),
   community(path: "/community", name: "community"),
   calendar(path: "/calendar", name: "calendar"),
   settings(path: "/settings", name: "settings"),
   chat(path: "/chat", name: "chat"),
+  userprofile(path: "/user-profile", name: "user-profile"),
   termsAndCondition(
       path: "/terms-and-conditions", name: "terms-and-conditions-screen");
 
@@ -56,7 +63,11 @@ class AppRouting {
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
-        if (appFlavor == "dev" || appFlavor == "stg") SentryNavigatorObserver()
+        if (appFlavor == "dev" || appFlavor == "stg")
+          //tracking navigation events
+          SentryNavigatorObserver(),
+        //analytics
+        LoggerNavigatorObserver(ref),
       ],
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
@@ -78,23 +89,45 @@ class AppRouting {
         GoRoute(
           path: AppRouter.termsAndCondition.path,
           name: AppRouter.termsAndCondition.name,
-          pageBuilder: (context, state) =>
-              const NoTransitionPage(child: TermsConditionScreen()),
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+              child: TermsConditionScreen(),
+              key: state.pageKey,
+              name: state.name),
+        ),
+
+        GoRoute(
+          path: AppRouter.userprofile.path,
+          name: AppRouter.userprofile.name,
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+              child: UserProfileScreen(),
+              key: state.pageKey,
+              name: state.name),
         ),
 
         //for ui with bottom navigation
         StatefulShellRoute.indexedStack(
-          builder: (context, state, navigationShell) =>
-              ScaffoldWithNavigation(navigationShell: navigationShell),
+          builder: (context, state, navigationShell) => ScaffoldWithNavigation(
+            navigationShell: navigationShell,
+            feedbackButton:
+                (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
+                    ? TesterButtons()
+                    : null,
+          ),
           branches: [
             StatefulShellBranch(
               navigatorKey: _shellHomeNavKey,
+              observers: [
+                //analytics
+                LoggerNavigatorObserver(ref),
+              ],
               routes: [
                 GoRoute(
                   path: AppRouter.main.path,
                   name: AppRouter.main.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: MainScreen(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                   //nested route
                   routes: [
@@ -105,8 +138,14 @@ class AppRouting {
                         final title = state
                             .pathParameters[AppRouter.newsFeedDetails.name]!;
 
-                        return NoTransitionPage(
-                          child: NewsFeedScreen(newsTitle: title),
+                        return MaterialPage(
+                          //fullscreenDialog: true,
+                          child: NewsDetailsScreen(
+                            newsTitle: title,
+                            key: state.pageKey,
+                          ),
+                          key: state.pageKey,
+                          name: state.name,
                         );
                       },
                     ),
@@ -120,8 +159,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.community.path,
                   name: AppRouter.community.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: Community(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
@@ -132,8 +173,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.calendar.path,
                   name: AppRouter.calendar.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: Calendar(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
@@ -144,8 +187,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.chat.path,
                   name: AppRouter.chat.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
+                  pageBuilder: (context, state) => NoTransitionPage(
                     child: Chat(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
@@ -156,8 +201,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.settings.path,
                   name: AppRouter.settings.name,
-                  pageBuilder: (context, state) => const NoTransitionPage(
-                    child: Settings(),
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    child: SettingsScreen(),
+                    key: state.pageKey,
+                    name: state.name,
                   ),
                 )
               ],
@@ -206,17 +253,6 @@ class Community extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text("Community"),
-    );
-  }
-}
-
-class Settings extends StatelessWidget {
-  const Settings({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Settings"),
     );
   }
 }

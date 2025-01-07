@@ -1,23 +1,20 @@
 // ignore_for_file: avoid-non-null-assertion
 
 import 'package:core_ui/core_ui.dart';
-import 'package:feedback_sentry/feedback_sentry.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/dashboard_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/dashboard/recommendation_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/info_list_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/welcome_widget.dart';
-
-import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:go_router/go_router.dart';
 
 //home screen
 class MainScreen extends ConsumerWidget {
@@ -28,17 +25,22 @@ class MainScreen extends ConsumerWidget {
     //show error when scan button throw as exceptions
     ref.listen(
       scanButtonControllerProvider,
-      (_, nextState) => nextState.showAlertDialogOnError(context: context),
+      (_, nextState) {
+        return nextState.showAlertDialogOnError(context: context);
+      },
     );
 
     // final state = ref.watch(homeScreenControllerProvider);
     final newsFeedState = ref.watch(watchNewsFeedsProvider);
 
     return Scaffold(
-      appBar: CustomAppBar(),
-      body: (newsFeedState.hasValue &&
-              newsFeedState.value != null &&
-              newsFeedState.value!.isEmpty)
+      appBar: CustomAppBar(
+        userProfile: () {
+          context.pushNamed(AppRouter.userprofile.name);
+        },
+      ),
+      body: ((newsFeedState.isLoading || newsFeedState.value != null) &&
+              (newsFeedState.value != null && newsFeedState.value!.isEmpty))
           ? WelcomeWidget()
           : DataWidget(),
     );
@@ -52,39 +54,26 @@ class DataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //todo: use custom scrollable, with silvers
+    //
     return SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (appFlavor == "dev" || appFlavor == 'stg') SendFeedback(),
-            Spacing.gapH8,
-            ScanButtonWidget(),
-            Spacing.gapH16,
-            //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
-            NewsFeedsWidget(),
-            Spacing.gapH16,
-            AssetWidget(),
-            Spacing.gapH16,
-            appFlavor == "dev"
-                ? RecommendationWidget()
-                : DashboardWidget(),
-            Spacing.gapH12,
-          ],
-        ),
-      );
-  }
-}
-
-class SendFeedback extends StatelessWidget {
-  const SendFeedback({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: Text('Send feedback'.hardcoded),
-      onPressed: () {
-        BetterFeedback.of(context).showAndUploadToSentry();
-      },
+      padding: EdgeInsets.all(Spacing.p8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Spacing.gapH8,
+          ScanButtonWidget(),
+          Spacing.gapH16,
+          //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
+          NewsFeedsWidget(),
+          Spacing.gapH16,
+          AssetWidget(),
+          Spacing.gapH16,
+          // getFlavor() == Flavor.dev ? RecommendationWidget() :
+          InfoListWidget(),
+          Spacing.gapH12,
+        ],
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ void showSnackBar(
     {required BuildContext context,
     required String content,
     Color? backgroundColor}) {
-  final appText = AppText.bodyMedium(
+  final appText = AppText.labelLarge(
     text: content,
     context: context,
     textAlign: TextAlign.start,

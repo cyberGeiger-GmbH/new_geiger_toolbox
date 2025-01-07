@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ScaffoldWithNavigation extends StatelessWidget {
-  const ScaffoldWithNavigation({super.key, required this.navigationShell});
+  const ScaffoldWithNavigation({super.key, required this.navigationShell, this.feedbackButton});
 
   final StatefulNavigationShell navigationShell;
+  final Widget? feedbackButton;
 
   void _goBranch(int index) {
     navigationShell.goBranch(index,
@@ -16,13 +17,13 @@ class ScaffoldWithNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     //check device screen size
     return LayoutBuilder(builder: (context, constraint) {
       return constraint.isSmallDevice
           ? ScaffoldWithNavigationBar(
               body: navigationShell,
               selectedIndex: navigationShell.currentIndex,
+              feedback: feedbackButton,
               onDestinationSelected: _goBranch)
           : ScaffoldWithNaviagionRail(
               body: navigationShell,
