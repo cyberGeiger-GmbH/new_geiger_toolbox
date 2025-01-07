@@ -2,7 +2,6 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/main.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/offering_listing_widget.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
@@ -20,13 +19,14 @@ class RecommendationTileListWidget extends StatelessWidget {
     return ProtectionTileList(
       protectionTile: recommendations.map(
         (reco) {
+         
           return ProtectionTile.plain(
             context: context,
             title: reco.name,
             onPressed: () {
-              showBottomSheetModal(context,
+              showWoltModalBottomSheet(context,
                   title: reco.name,
-                  takeAction: OfferingListWidget(id: reco.id),
+                  page: OfferingListWidget(id: reco.id),
                   stickyActionBar: AddAllTodoWidget());
             },
           );

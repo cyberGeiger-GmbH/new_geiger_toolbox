@@ -7,12 +7,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todo_list_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/info_list_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/welcome_widget.dart';
+import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:go_router/go_router.dart';
 
 //home screen
 class MainScreen extends ConsumerWidget {
@@ -32,7 +34,11 @@ class MainScreen extends ConsumerWidget {
     final newsFeedState = ref.watch(watchNewsFeedsProvider);
 
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        userProfile: () {
+          context.pushNamed(AppRouter.userprofile.name);
+        },
+      ),
       body: ((newsFeedState.isLoading || newsFeedState.value != null) &&
               (newsFeedState.value != null && newsFeedState.value!.isEmpty))
           ? WelcomeWidget()
@@ -51,6 +57,7 @@ class DataWidget extends StatelessWidget {
     //todo: use custom scrollable, with silvers
     //
     return SingleChildScrollView(
+      padding: EdgeInsets.all(Spacing.p8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -63,7 +70,7 @@ class DataWidget extends StatelessWidget {
           AssetWidget(),
           Spacing.gapH16,
           // getFlavor() == Flavor.dev ? RecommendationWidget() :
-          TodoListWidget(),
+          InfoListWidget(),
           Spacing.gapH12,
         ],
       ),

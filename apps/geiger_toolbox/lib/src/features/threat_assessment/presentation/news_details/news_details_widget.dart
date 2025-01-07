@@ -13,6 +13,7 @@ class NewsDetailsWidget extends StatelessWidget {
   final News newsfeed;
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -50,5 +51,3 @@ class NewsDetailsWidget extends StatelessWidget {
     );
   }
 }
-
-

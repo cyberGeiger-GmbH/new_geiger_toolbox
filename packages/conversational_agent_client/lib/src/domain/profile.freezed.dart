@@ -22,8 +22,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 mixin _$Profile {
   String? get locale => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
-  DigitalInfrastructure get digitalInfrastructure =>
-      throw _privateConstructorUsedError;
+  String get companyName => throw _privateConstructorUsedError;
 
   /// Serializes this Profile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,12 +38,7 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
-  $Res call(
-      {String? locale,
-      String location,
-      DigitalInfrastructure digitalInfrastructure});
-
-  $DigitalInfrastructureCopyWith<$Res> get digitalInfrastructure;
+  $Res call({String? locale, String location, String companyName});
 }
 
 /// @nodoc
@@ -64,7 +58,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   $Res call({
     Object? locale = freezed,
     Object? location = null,
-    Object? digitalInfrastructure = null,
+    Object? companyName = null,
   }) {
     return _then(_value.copyWith(
       locale: freezed == locale
@@ -75,22 +69,11 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      digitalInfrastructure: null == digitalInfrastructure
-          ? _value.digitalInfrastructure
-          : digitalInfrastructure // ignore: cast_nullable_to_non_nullable
-              as DigitalInfrastructure,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
-  }
-
-  /// Create a copy of Profile
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DigitalInfrastructureCopyWith<$Res> get digitalInfrastructure {
-    return $DigitalInfrastructureCopyWith<$Res>(_value.digitalInfrastructure,
-        (value) {
-      return _then(_value.copyWith(digitalInfrastructure: value) as $Val);
-    });
   }
 }
 
@@ -101,13 +84,7 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       __$$ProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? locale,
-      String location,
-      DigitalInfrastructure digitalInfrastructure});
-
-  @override
-  $DigitalInfrastructureCopyWith<$Res> get digitalInfrastructure;
+  $Res call({String? locale, String location, String companyName});
 }
 
 /// @nodoc
@@ -125,7 +102,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
   $Res call({
     Object? locale = freezed,
     Object? location = null,
-    Object? digitalInfrastructure = null,
+    Object? companyName = null,
   }) {
     return _then(_$ProfileImpl(
       locale: freezed == locale
@@ -136,10 +113,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      digitalInfrastructure: null == digitalInfrastructure
-          ? _value.digitalInfrastructure
-          : digitalInfrastructure // ignore: cast_nullable_to_non_nullable
-              as DigitalInfrastructure,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -148,9 +125,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProfileImpl implements _Profile {
   const _$ProfileImpl(
-      {this.locale = "en",
-      required this.location,
-      required this.digitalInfrastructure});
+      {this.locale = "en", required this.location, required this.companyName});
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileImplFromJson(json);
@@ -161,11 +136,11 @@ class _$ProfileImpl implements _Profile {
   @override
   final String location;
   @override
-  final DigitalInfrastructure digitalInfrastructure;
+  final String companyName;
 
   @override
   String toString() {
-    return 'Profile(locale: $locale, location: $location, digitalInfrastructure: $digitalInfrastructure)';
+    return 'Profile(locale: $locale, location: $location, companyName: $companyName)';
   }
 
   @override
@@ -176,14 +151,13 @@ class _$ProfileImpl implements _Profile {
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.location, location) ||
                 other.location == location) &&
-            (identical(other.digitalInfrastructure, digitalInfrastructure) ||
-                other.digitalInfrastructure == digitalInfrastructure));
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, locale, location, digitalInfrastructure);
+  int get hashCode => Object.hash(runtimeType, locale, location, companyName);
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
@@ -203,10 +177,9 @@ class _$ProfileImpl implements _Profile {
 
 abstract class _Profile implements Profile {
   const factory _Profile(
-          {final String? locale,
-          required final String location,
-          required final DigitalInfrastructure digitalInfrastructure}) =
-      _$ProfileImpl;
+      {final String? locale,
+      required final String location,
+      required final String companyName}) = _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
@@ -215,7 +188,7 @@ abstract class _Profile implements Profile {
   @override
   String get location;
   @override
-  DigitalInfrastructure get digitalInfrastructure;
+  String get companyName;
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.

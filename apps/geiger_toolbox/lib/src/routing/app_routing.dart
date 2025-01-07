@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
@@ -28,6 +29,7 @@ enum AppRouter {
   calendar(path: "/calendar", name: "calendar"),
   settings(path: "/settings", name: "settings"),
   chat(path: "/chat", name: "chat"),
+  userprofile(path: "/user-profile", name: "user-profile"),
   termsAndCondition(
       path: "/terms-and-conditions", name: "terms-and-conditions-screen");
 
@@ -89,6 +91,15 @@ class AppRouting {
           name: AppRouter.termsAndCondition.name,
           pageBuilder: (context, state) => NoTransitionPage<void>(
               child: TermsConditionScreen(),
+              key: state.pageKey,
+              name: state.name),
+        ),
+
+        GoRoute(
+          path: AppRouter.userprofile.path,
+          name: AppRouter.userprofile.name,
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+              child: UserProfileScreen(),
               key: state.pageKey,
               name: state.name),
         ),

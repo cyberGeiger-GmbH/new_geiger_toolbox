@@ -22,21 +22,28 @@ class OfferingListWidget extends ConsumerWidget {
 
     return AsyncValueWidget(
       value: offering,
-      data: (data) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TodoTileList(
-              todoTile: data
-                  .map(
-                    (offer) => AddOfferingToDoWidget(key: key, offer: offer),
-                  )
-                  .toList(),
+      data: (data) => data.isEmpty
+          ? Center(
+              child: EmptyContent(
+                message: "No Offerings found",
+                title: "Info",
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  TodoTileList(
+                    todoTile: data
+                        .map(
+                          (offer) =>
+                              AddOfferingToDoWidget(key: key, offer: offer),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
             ),
-            
-          ],
-        ),
-      ),
     );
   }
 }

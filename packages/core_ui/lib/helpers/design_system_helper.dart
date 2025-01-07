@@ -215,10 +215,6 @@ class DesignSystemHelper {
             ),
             AppAssetsIcons.filledTonal(
               context: context,
-              desktop: () {},
-              wifi: () {},
-              todos: () {},
-              devices: () {},
             ),
             AppAssetsIcons.outlined(
               context: context,

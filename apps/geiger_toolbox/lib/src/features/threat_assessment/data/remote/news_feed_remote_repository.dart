@@ -8,7 +8,7 @@ class NewsFeedRemoteRepository {
   final Ref ref;
   NewsFeedRemoteRepository(this.ref);
 
-  Future<List<News>> fetchNewsUpdate({Profile? smeProfile}) async {
+  Future<List<News>> fetchNewsUpdate({final Profile? smeProfile}) async {
     final newsRepo = ref.read(newsRepositoryProvider);
     final data = await newsRepo.fetchNews(profile: smeProfile);
     debugPrint("News from remote total => ${data.length}");

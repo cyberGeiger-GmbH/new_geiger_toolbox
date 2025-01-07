@@ -24,4 +24,15 @@ extension AsyncValueExtension on AsyncValue {
           backgroundColor: appColor.primary);
     }
   }
+
+  void userProfileSuccessSnackBar({required BuildContext context}) {
+    final appColor = Theme.of(context).colorScheme;
+
+    if (!isLoading && !hasError) {
+      showSnackBar(
+          context: context,
+          content: "User Profile Created Successly".hardcoded,
+          backgroundColor: appColor.primary);
+    }
+  }
 }

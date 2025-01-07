@@ -31,8 +31,8 @@ class NewsScreen extends StatelessWidget {
                 context: context,
                 title: value,
                 onPressed: () {
-                  showBottomSheetModal(context,
-                      title: value, takeAction: _getTodoCheckList());
+                  showWoltModalBottomSheet(context,
+                      title: value, page: _getTodoCheckList());
                 },
               ))
           .toList(),
