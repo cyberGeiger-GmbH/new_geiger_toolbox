@@ -1,4 +1,5 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
@@ -27,7 +28,7 @@ class NewsFeedService {
         profile =
             Profile(location: user.location, companyName: user.companyName);
       }
-
+      debugPrint("user profile => $profile");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
       if (data.isNotEmpty) {
         await cache.synFromRemote(data: data);
