@@ -59,7 +59,7 @@ class ConversationRepository {
   ///return [Message]
   Future<Message?> chatWithCA({required Prompt prompt}) async {
     final client = ref.read(dioProvider);
-        final log = ref.read(logHandlerProvider("ChatWithCA"));
+    final log = ref.read(logHandlerProvider("ChatWithCA"));
 
     try {
       final Uri uri = Uri.https(
@@ -85,8 +85,7 @@ class ConversationRepository {
   /// return null if [UserNotFound] is found
   Future<List<Message>?> getChatHistory({required UserID userId}) async {
     Set<Message> messages = {};
-        final log = ref.read(logHandlerProvider("getChatHistory"));
-
+    final log = ref.read(logHandlerProvider("getChatHistory"));
 
     try {
       final client = ref.read(dioProvider);
@@ -108,7 +107,7 @@ class ConversationRepository {
       return messages.toList();
     } catch (e, s) {
       log.e("err => $e, stack => $s");
-      
+
       return null;
     }
   }

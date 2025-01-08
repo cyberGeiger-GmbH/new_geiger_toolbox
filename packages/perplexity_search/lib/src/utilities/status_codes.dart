@@ -1,6 +1,8 @@
-import 'package:conversational_agent_client/src/utilities/log_handling.dart';
+import 'package:perplexity_search/src/utilities/enums.dart';
+import 'package:perplexity_search/src/utilities/logging_handler.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'status_codes.g.dart';
 
 class StatusCodes {
@@ -8,9 +10,10 @@ class StatusCodes {
   const StatusCodes(this.ref);
 
   StatusCode? getStatus(int? statusCode) {
-    final log = ref.read(logHandlerProvider("🌎 =>"));
+    final log = ref.read(loggingHandlerProvider("Perplexity search 🌎"));
     if (statusCode == StatusCode.unauthorised.code) {
-      log.w("UNAUTHORISED: either no API key was provided or it wasn't valid");
+      log.w(
+          "UNAUTHORISED $statusCode: either no API key was provided or it wasn't valid");
 
       return StatusCode.unauthorised;
     } else if (statusCode == StatusCode.forbidden.code) {
@@ -18,38 +21,26 @@ class StatusCodes {
 
       return StatusCode.forbidden;
     } else if (statusCode == StatusCode.notFound.code) {
-      log.i("NOT FOUND: the account could not be found");
+      log.i("NOT FOUND $statusCode: the account could not be found");
 
       return StatusCode.notFound;
     } else if (statusCode == StatusCode.tooManyRequest.code) {
-      log.w("TOO MANY REQUEST: the rate limit has been exceeded");
+      log.w("TOO MANY REQUEST $statusCode: the rate limit has been exceeded");
 
       return StatusCode.tooManyRequest;
     } else if (statusCode == StatusCode.serviceUnavailable.code) {
-      log.w("SERVICE UNAVAILABLE: conversational_agent_client not available");
+      log.w(
+          "SERVICE UNAVAILABLE $statusCode: conversational_agent_client not available");
 
       return StatusCode.serviceUnavailable;
     } else if (statusCode == StatusCode.success.code) {
-      log.i("SUCCESS: conversational_agent_client, OK => $statusCode");
+      log.i("SUCCESS $statusCode=>");
 
       return StatusCode.success;
     } else {
       return null;
     }
   }
-}
-
-enum StatusCode {
-  success(200),
-  found(302),
-  unauthorised(401),
-  forbidden(403),
-  notFound(404),
-  tooManyRequest(429),
-  serviceUnavailable(503);
-
-  const StatusCode(this.code);
-  final int code;
 }
 
 @riverpod

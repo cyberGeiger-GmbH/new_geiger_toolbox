@@ -13,7 +13,6 @@ extension ResponseExtension<T> on Response {
     final StatusCode? code = statusCodes.getStatus(statusCode);
 
     if (code != null && code == StatusCode.success) {
-      
       return News.getNews(data);
     }
 
