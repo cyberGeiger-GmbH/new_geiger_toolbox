@@ -17,7 +17,7 @@ void main() {
           )
         : ProviderContainer();
     addTearDown(container.dispose);
-    
+
     return container;
   }
 
@@ -30,9 +30,11 @@ void main() {
       final container = getContainer();
       final newsRepo = container.read(newsRepositoryProvider);
       final profile = Profile(
-          location: "Zurich",
-          digitalInfrastructure: DigitalInfrastructure(
-              infoAbout: ["password", "teamView", "post finance"]));
+        location: "Zurich",
+        companyName: "cyberGeiger"
+        // digitalInfrastructure: DigitalInfrastructure(
+        //     infoAbout: ["password", "teamView", "post finance"]),
+      );
       final data = await newsRepo.fetchNews(profile: profile);
       print("news object => $data");
       expect(data, isNotEmpty);

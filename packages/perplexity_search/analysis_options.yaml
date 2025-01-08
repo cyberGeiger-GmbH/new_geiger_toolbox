@@ -1,0 +1,22 @@
+
+
+include: package:lints/recommended.yaml
+
+# Uncomment the following section to specify additional rules.
+
+# linter:
+#   rules:
+#     - camel_case_types
+
+analyzer:
+ plugins:
+ # enable riverpod_lint
+   - custom_lint
+#   exclude:
+#     - path/to/excluded/files/**
+
+ errors:
+    #fix json_serializable and freezed lint issues
+    invalid_annotation_target: ignore
+
+  

@@ -5,7 +5,7 @@ sealed class RemoteExceptions  {
 
   const RemoteExceptions({required this.code, required this.message});
   @override
-  String toString() => 'AppException(code: $code, message: $message)';
+  String toString() => 'RemoteExceptions(code: $code, message: $message)';
 }
 
 //
