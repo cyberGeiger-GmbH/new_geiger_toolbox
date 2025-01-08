@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:perplexity_search/env/env.dart';
 import 'package:perplexity_search/src/domain/description.dart';
 import 'package:perplexity_search/src/exceptions/perplexity_exception.dart';
 import 'package:perplexity_search/src/utilities/constants/base.dart';
@@ -16,7 +15,7 @@ class PerplexitySearchRepository {
   PerplexitySearchRepository(this.ref);
 
   Future<Description?> searchCompanyDescription(
-      {required String companyName, required String location}) async {
+      {required String companyName, required String location, required String apiKey}) async {
     final client = ref.read(dioClientProvider);
     final log = ref.read(loggingHandlerProvider("searchCompanyDescription"));
 
@@ -39,7 +38,7 @@ class PerplexitySearchRepository {
       };
 
       final Map<String, String> headers = {};
-      final authorization = {"Authorization": "Bearer ${Base.apiKey}"};
+      final authorization = {"Authorization": "Bearer $apiKey"};
 
       headers.addEntries(Base.contentType.entries);
       headers.addEntries(authorization.entries);

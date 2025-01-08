@@ -2,7 +2,7 @@ name: new_geiger_toolbox
 description: A new single code repository used for developing new tools within the GeigerToolbox Application.
 publish_to: "none"
 
-version: 0.0.1
+version: 1.0.0
 
 environment:
   #Dart SDK version that flutter project is compatible with
