@@ -4,4 +4,7 @@ class Env {
 
   static String get mixpanelProjectToken =>
       const String.fromEnvironment('MIXPANEL_PROJECT_TOKEN');
+
+  static String get perplexityApiToken =>
+      const String.fromEnvironment('PERPLEXITY_API');
 }
