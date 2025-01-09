@@ -5,7 +5,8 @@ part 'user.freezed.dart';
 class User with _$User {
   factory User(
       {required final String companyName,
-      required final String location}) = _User;
+      required final String location,
+      final String? description}) = _User;
 }
 
 @freezed

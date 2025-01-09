@@ -7,4 +7,6 @@ class Env {
 
   static String get perplexityApiToken =>
       const String.fromEnvironment('PERPLEXITY_API');
+
+  Env._();
 }

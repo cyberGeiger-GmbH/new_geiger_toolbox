@@ -1,27 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'scan_button_controller.dart';
+part of 'perplexity_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$scanButtonControllerHash() =>
-    r'54a8b11d8177f23a83be995dec86d4e7f1904a2a';
+String _$perplexityRepositoryHash() =>
+    r'46c5ce0e54fa6641176ba2332414845a1d4da27b';
 
-/// See also [ScanButtonController].
-@ProviderFor(ScanButtonController)
-final scanButtonControllerProvider =
-    AutoDisposeAsyncNotifierProvider<ScanButtonController, void>.internal(
-  ScanButtonController.new,
-  name: r'scanButtonControllerProvider',
+/// See also [perplexityRepository].
+@ProviderFor(perplexityRepository)
+final perplexityRepositoryProvider =
+    AutoDisposeProvider<PerplexityRepository>.internal(
+  perplexityRepository,
+  name: r'perplexityRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$scanButtonControllerHash,
+      : _$perplexityRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ScanButtonController = AutoDisposeAsyncNotifier<void>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef PerplexityRepositoryRef = AutoDisposeProviderRef<PerplexityRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

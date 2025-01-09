@@ -98,7 +98,7 @@ class ShowLimitedTodos extends StatelessWidget {
         for (var i = 0;
             i < (items.length > displayLimit ? displayLimit : items.length);
             i++) ...[
-          AppButton.wideTertiary(
+          AppButton.action(
             label: items[i].offering.name,
             context: context,
             onPressed: () {

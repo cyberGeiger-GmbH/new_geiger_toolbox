@@ -60,35 +60,41 @@ class AppButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           backgroundColor: _appColor(context).tertiary,
           overlayColor: _appColor(context).onTertiary),
-      child: isloading
-          ? const CircularProgressIndicator()
-          : AppText.labelLarge(
-              text: label,
-              context: context,
-              color: _appColor(context).onTertiary),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          isloading
+              ? const CircularProgressIndicator()
+              : AppText.labelLarge(
+                  text: label,
+                  context: context,
+                  color: _appColor(context).onTertiary)
+        ],
+      ),
     );
   }
 
-  factory AppButton.wideTertiary(
+  factory AppButton.action(
       {Key? key,
       required String label,
       VoidCallback? onPressed,
       bool isLoading = false,
+      Color? backgroundColor,
       required BuildContext context}) {
     return AppButton._(
       key: key,
       onPressed: onPressed,
-      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder()),
-      child: SizedBox(
-        width: double.infinity,
-        child: isLoading
+      style: ElevatedButton.styleFrom(
+          //shape: const RoundedRectangleBorder(),
+          backgroundColor: backgroundColor ?? _appColor(context).primary),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        isLoading
             ? const CircularProgressIndicator()
             : AppText.labelLarge(
                 text: label,
                 context: context,
-                color: _appColor(context).onSurface,
               ),
-      ),
+      ]),
     );
   }
 

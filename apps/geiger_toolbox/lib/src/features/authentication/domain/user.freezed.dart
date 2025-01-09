@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$User {
   String get companyName => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +31,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String companyName, String location});
+  $Res call({String companyName, String location, String? description});
 }
 
 /// @nodoc
@@ -50,6 +51,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? companyName = null,
     Object? location = null,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       companyName: null == companyName
@@ -60,6 +62,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -71,7 +77,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String companyName, String location});
+  $Res call({String companyName, String location, String? description});
 }
 
 /// @nodoc
@@ -88,6 +94,7 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? companyName = null,
     Object? location = null,
+    Object? description = freezed,
   }) {
     return _then(_$UserImpl(
       companyName: null == companyName
@@ -98,6 +105,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -105,16 +116,19 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserImpl implements _User {
-  _$UserImpl({required this.companyName, required this.location});
+  _$UserImpl(
+      {required this.companyName, required this.location, this.description});
 
   @override
   final String companyName;
   @override
   final String location;
+  @override
+  final String? description;
 
   @override
   String toString() {
-    return 'User(companyName: $companyName, location: $location)';
+    return 'User(companyName: $companyName, location: $location, description: $description)';
   }
 
   @override
@@ -125,11 +139,14 @@ class _$UserImpl implements _User {
             (identical(other.companyName, companyName) ||
                 other.companyName == companyName) &&
             (identical(other.location, location) ||
-                other.location == location));
+                other.location == location) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, companyName, location);
+  int get hashCode =>
+      Object.hash(runtimeType, companyName, location, description);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -143,12 +160,15 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   factory _User(
       {required final String companyName,
-      required final String location}) = _$UserImpl;
+      required final String location,
+      final String? description}) = _$UserImpl;
 
   @override
   String get companyName;
   @override
   String get location;
+  @override
+  String? get description;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

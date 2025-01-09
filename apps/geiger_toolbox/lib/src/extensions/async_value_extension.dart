@@ -25,14 +25,25 @@ extension AsyncValueExtension on AsyncValue {
     }
   }
 
-  void userProfileSuccessSnackBar({required BuildContext context}) {
+  void updateUserProfileSuccessSnackBar({required BuildContext context}) {
     final appColor = Theme.of(context).colorScheme;
 
     if (!isLoading && !hasError) {
       showSnackBar(
           context: context,
-          content: "User Profile Created Successly".hardcoded,
+          content: "User Profile Created!".hardcoded,
           backgroundColor: appColor.primary);
+    }
+  }
+
+  void deleteUserProfileSuccessSnackBar({required BuildContext context}) {
+    final appColor = Theme.of(context).colorScheme;
+
+    if (!isLoading && !hasError) {
+      showSnackBar(
+          context: context,
+          content: "User Profile Deleted".hardcoded,
+          backgroundColor: appColor.error);
     }
   }
 }

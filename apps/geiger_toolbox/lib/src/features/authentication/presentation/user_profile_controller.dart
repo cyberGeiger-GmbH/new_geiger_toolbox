@@ -29,3 +29,5 @@ class UserProfileController extends _$UserProfileController {
     return state.hasError == false;
   }
 }
+
+

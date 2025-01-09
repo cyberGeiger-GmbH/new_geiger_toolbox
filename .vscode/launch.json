@@ -74,7 +74,7 @@
         "flutterMode": "debug",
         "args": [
           "--flavor",
-          "prod"
+          "prod",  "--dart-define-from-file", "env.prod"
         ],
         "program": "apps/geiger_toolbox/lib/main_prod.dart"
       },
@@ -85,7 +85,7 @@
         "flutterMode": "profile",
         "args": [
           "--flavor",
-          "prod"
+          "prod", "--dart-define-from-file", "env.prod"
         ],
         "program": "apps/geiger_toolbox/lib/main_prod.dart"
       },
@@ -96,7 +96,7 @@
         "flutterMode": "release",
         "args": [
           "--flavor",
-          "prod"
+          "prod",  "--dart-define-from-file", "env.prod"
         ],
         "program": "apps/geiger_toolbox/lib/main_prod.dart"
       },
