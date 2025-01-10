@@ -28,13 +28,9 @@ class ScanButtonController extends _$ScanButtonController {
     final userProfile = await ref.read(fetchUserProvider.future);
 
     if (userProfile != null) {
-      unawaited(
-        (ref.read(analyticsFacadeProvider).trackScanWithProfile()),
-      );
+      ref.read(analyticsFacadeProvider).trackScanWithProfile();
     } else {
-      unawaited(
-        (ref.read(analyticsFacadeProvider).trackScanWithoutProfile()),
-      );
+      ref.read(analyticsFacadeProvider).trackScanWithoutProfile();
     }
   }
 }

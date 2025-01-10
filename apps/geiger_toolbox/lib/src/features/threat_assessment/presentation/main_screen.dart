@@ -4,9 +4,10 @@ import 'package:core_ui/core_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/asset_widget.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/info_list_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
@@ -31,7 +32,7 @@ class MainScreen extends ConsumerWidget {
     );
 
     // final state = ref.watch(homeScreenControllerProvider);
-    final newsFeedState = ref.watch(watchNewsFeedsProvider);
+    final ScrollController scrollController = ScrollController();
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -39,41 +40,64 @@ class MainScreen extends ConsumerWidget {
           context.pushNamed(AppRouter.userprofile.name);
         },
       ),
-      body: ((newsFeedState.isLoading || newsFeedState.value != null) &&
-              (newsFeedState.value != null && newsFeedState.value!.isEmpty))
-          ? WelcomeWidget()
-          : DataWidget(),
+      body: ResponsiveCenterScrollableWidget(
+        controller: scrollController,
+        child: FeatureListView(
+          onScanPressed: () {
+            ref.read(scanButtonControllerProvider.notifier).scan();
+          },
+        ),
+      ),
     );
   }
 }
 
-class DataWidget extends StatelessWidget {
-  const DataWidget({
+class FeatureListView extends ConsumerWidget {
+  const FeatureListView(
+      {super.key, this.scrollController, required this.onScanPressed});
+
+  final ScrollController? scrollController;
+  final VoidCallback onScanPressed;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final newsFeedValue = ref.watch(watchNewsFeedsProvider);
+
+    return AsyncValueWidget(
+      value: newsFeedValue,
+      data: (value) => value.isEmpty
+          ? WelcomeScanIntroWidget(onScanPressed: onScanPressed)
+          : SingleChildScrollView(
+              controller: scrollController,
+              child: FeatureList(onScanPressed: onScanPressed),
+            ),
+    );
+  }
+}
+
+class FeatureList extends StatelessWidget {
+  const FeatureList({
     super.key,
+    required this.onScanPressed,
   });
+
+  final VoidCallback onScanPressed;
 
   @override
   Widget build(BuildContext context) {
-    //todo: use custom scrollable, with silvers
-    //
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(Spacing.p8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacing.gapH8,
-          ScanButtonWidget(),
-          Spacing.gapH16,
-          //todo: when state is still loading show [NewsFeedWidgetShimmer, AssetWidgetShimmer, DashboardShimmer]
-          NewsFeedsWidget(),
-          Spacing.gapH16,
-          AssetWidget(),
-          Spacing.gapH16,
-          // getFlavor() == Flavor.dev ? RecommendationWidget() :
-          InfoListWidget(),
-          Spacing.gapH12,
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ScanButtonWidget(onScanPressed: onScanPressed),
+        Spacing.gapH16,
+        NewsFeedsWidget(),
+        Spacing.gapH16,
+        //AssetWidget(),
+        Spacing.gapH16,
+        // getFlavor() == Flavor.dev ? RecommendationWidget() :
+        InfoListWidget(),
+        Spacing.gapH12,
+      ],
     );
   }
 }
