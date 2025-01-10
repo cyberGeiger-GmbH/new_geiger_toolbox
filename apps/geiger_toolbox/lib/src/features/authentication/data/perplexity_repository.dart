@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/env.dart';
 import 'package:perplexity_search/perplexity_search.dart';
@@ -14,7 +13,7 @@ class PerplexityRepository {
         
     final repo = ref.read(perplexitySearchRepositoryProvider);
     final apiKey = Env.perplexityApiToken;
-    debugPrint("perplexity api_key $apiKey");
+    //debugPrint("perplexity api_key $apiKey");
     final data = await repo.searchCompanyDescription(
         companyName: companyName, location: location, apiKey: apiKey);
     return data?.description;

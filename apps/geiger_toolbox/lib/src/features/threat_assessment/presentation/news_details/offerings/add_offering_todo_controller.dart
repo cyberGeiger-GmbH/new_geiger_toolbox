@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/offering_status.dart';
-import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'add_offering_todo_controller.g.dart';

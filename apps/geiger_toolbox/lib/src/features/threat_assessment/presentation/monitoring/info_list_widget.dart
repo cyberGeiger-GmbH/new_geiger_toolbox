@@ -93,6 +93,7 @@ class ShowLimitedTodos extends StatelessWidget {
   final int displayLimit;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         for (var i = 0;
@@ -101,6 +102,7 @@ class ShowLimitedTodos extends StatelessWidget {
           AppButton.action(
             label: items[i].offering.name,
             context: context,
+            fontgroundColor: theme.colorScheme.onSurface,
             onPressed: () {
               showWoltModalBottomSheet(context,
                   title: items[i].offering.name,

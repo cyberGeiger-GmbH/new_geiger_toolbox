@@ -17,7 +17,7 @@ class UserProfileRepository {
   Future<void> createUserProfile({required User user}) async {
     try {
       final userProfile = UserProfileCompanion(
-          companyName: Value(user.companyName), location: Value(user.location));
+          companyName: Value(user.companyName), location: Value(user.location), description: Value(user.description));
       await _db.into(_db.userProfile).insert(userProfile);
     } catch (e) {
       rethrow;
@@ -26,12 +26,12 @@ class UserProfileRepository {
 
   Future<bool?> updateUserProfile(
       {required int userId, required User user}) async {
-    final userData = UserData(id: userId, user: user);
+    
     try {
       final userProfile = UserProfileCompanion(
-          id: Value(userData.id),
-          companyName: Value(userData.user.companyName),
-          location: Value(userData.user.location));
+          id: Value(userId),
+          companyName: Value(user.companyName),
+          location: Value(user.location), description: Value(user.description));
       return _db.update(_db.userProfile).replace(userProfile);
     } catch (e) {
       rethrow;
@@ -51,7 +51,7 @@ class UserProfileRepository {
       final query = _db.select(_db.userProfile);
       final row = await query.getSingle();
 
-      final user = User(companyName: row.companyName, location: row.location);
+      final user = User(companyName: row.companyName, location: row.location, description: row.description);
       return user;
     } catch (e) {
       return null;
@@ -68,7 +68,8 @@ class UserProfileRepository {
               id: userData.id,
               user: User(
                   companyName: userData.companyName,
-                  location: userData.location),
+                  location: userData.location,
+                  description: userData.description),
             )
           : null,
     );

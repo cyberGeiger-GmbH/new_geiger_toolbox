@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

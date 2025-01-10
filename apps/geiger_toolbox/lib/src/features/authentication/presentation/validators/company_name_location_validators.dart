@@ -1,4 +1,3 @@
-import 'package:geiger_toolbox/main.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/validators/string_validators.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 

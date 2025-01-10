@@ -7,8 +7,9 @@ part 'profile.g.dart';
 class Profile with _$Profile {
   const factory Profile({
     @Default("en") final String? locale,
-    required String location,
-    required String companyName,
+    required final String location,
+    required final String companyName,
+    final String? description,
   }) = _Profile;
 
   factory Profile.fromJson(Map<String, dynamic> json) =>

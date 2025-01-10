@@ -1,5 +1,4 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 

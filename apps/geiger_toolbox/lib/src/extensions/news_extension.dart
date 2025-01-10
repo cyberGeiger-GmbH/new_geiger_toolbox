@@ -5,12 +5,12 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 extension NewsExtension on List<News> {
-  /// Converts List<News> to a list of JSON maps
+  /// Converts [List<News>] to a list of JSON maps
   List<Map<String, dynamic>> _toJsonList() {
     return map((news) => news.toJson()).toList();
   }
 
-  /// Converts List<News> to a JSON string
+  /// Converts [List<News>] to a JSON string
   String toJsonString() {
     return json.encode(_toJsonList());
   }

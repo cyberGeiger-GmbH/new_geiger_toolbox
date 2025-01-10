@@ -11,6 +11,7 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       locale: json['locale'] as String? ?? "en",
       location: json['location'] as String,
       companyName: json['companyName'] as String,
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
@@ -18,6 +19,7 @@ Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
       'locale': instance.locale,
       'location': instance.location,
       'companyName': instance.companyName,
+      'description': instance.description,
     };
 
 _$DigitalInfrastructureImpl _$$DigitalInfrastructureImplFromJson(

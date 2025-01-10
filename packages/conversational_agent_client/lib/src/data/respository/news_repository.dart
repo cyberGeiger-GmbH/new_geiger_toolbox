@@ -1,6 +1,5 @@
 // ignore_for_file: avoid-throw-in-catch-block
 
-library conversational_agent_client;
 
 import 'dart:convert';
 import 'dart:io';

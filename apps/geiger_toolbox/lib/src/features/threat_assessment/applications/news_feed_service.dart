@@ -26,7 +26,7 @@ class NewsFeedService {
       Profile? profile;
       if (user != null) {
         profile =
-            Profile(location: user.location, companyName: user.companyName);
+            Profile(location: user.location, companyName: user.companyName,description: user.description);
       }
       debugPrint("user profile => $profile");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);

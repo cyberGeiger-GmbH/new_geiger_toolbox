@@ -1,6 +1,5 @@
 import 'package:core_ui/organisms/list/app_assets_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:geiger_toolbox/main.dart';
 import 'package:geiger_toolbox/src/common_widgets/alert_dialogs.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 

@@ -139,7 +139,7 @@ class Dot extends StatelessWidget {
               ? Colors.white
               : Colors.black)
           // ignore: no-magic-number
-          .withOpacity(current == next ? 0.9 : 0.4),
+          .withValues(alpha: current == next ? 0.9 : 0.4),
     );
   }
 }

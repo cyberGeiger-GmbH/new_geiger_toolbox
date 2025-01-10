@@ -15,6 +15,7 @@ class UserProfile extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get companyName => text().withLength(min: 1, max: 255)();
   TextColumn get location => text().withLength(min: 1, max: 255)();
+  TextColumn get description => text()();
 
   // TextColumn get locationId =>
   //     text().withLength(min: 1, max: 8).references(Locations, #countryCode)();

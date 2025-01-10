@@ -1,4 +1,3 @@
-library conversational_agent_client;
 
 import 'dart:convert';
 

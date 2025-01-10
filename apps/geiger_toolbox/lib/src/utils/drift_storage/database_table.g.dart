@@ -36,8 +36,15 @@ class $UserProfileTable extends UserProfile
           GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 255),
       type: DriftSqlType.string,
       requiredDuringInsert: true);
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
   @override
-  List<GeneratedColumn> get $columns => [id, companyName, location];
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, companyName, location, description];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -65,6 +72,14 @@ class $UserProfileTable extends UserProfile
     } else if (isInserting) {
       context.missing(_locationMeta);
     }
+    if (data.containsKey('description')) {
+      context.handle(
+          _descriptionMeta,
+          description.isAcceptableOrUnknown(
+              data['description']!, _descriptionMeta));
+    } else if (isInserting) {
+      context.missing(_descriptionMeta);
+    }
     return context;
   }
 
@@ -80,6 +95,8 @@ class $UserProfileTable extends UserProfile
           .read(DriftSqlType.string, data['${effectivePrefix}company_name'])!,
       location: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}location'])!,
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description'])!,
     );
   }
 
@@ -93,14 +110,19 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
   final int id;
   final String companyName;
   final String location;
+  final String description;
   const UserProfileData(
-      {required this.id, required this.companyName, required this.location});
+      {required this.id,
+      required this.companyName,
+      required this.location,
+      required this.description});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['company_name'] = Variable<String>(companyName);
     map['location'] = Variable<String>(location);
+    map['description'] = Variable<String>(description);
     return map;
   }
 
@@ -109,6 +131,7 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
       id: Value(id),
       companyName: Value(companyName),
       location: Value(location),
+      description: Value(description),
     );
   }
 
@@ -119,6 +142,7 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
       id: serializer.fromJson<int>(json['id']),
       companyName: serializer.fromJson<String>(json['companyName']),
       location: serializer.fromJson<String>(json['location']),
+      description: serializer.fromJson<String>(json['description']),
     );
   }
   @override
@@ -128,14 +152,20 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
       'id': serializer.toJson<int>(id),
       'companyName': serializer.toJson<String>(companyName),
       'location': serializer.toJson<String>(location),
+      'description': serializer.toJson<String>(description),
     };
   }
 
-  UserProfileData copyWith({int? id, String? companyName, String? location}) =>
+  UserProfileData copyWith(
+          {int? id,
+          String? companyName,
+          String? location,
+          String? description}) =>
       UserProfileData(
         id: id ?? this.id,
         companyName: companyName ?? this.companyName,
         location: location ?? this.location,
+        description: description ?? this.description,
       );
   UserProfileData copyWithCompanion(UserProfileCompanion data) {
     return UserProfileData(
@@ -143,6 +173,8 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
       companyName:
           data.companyName.present ? data.companyName.value : this.companyName,
       location: data.location.present ? data.location.value : this.location,
+      description:
+          data.description.present ? data.description.value : this.description,
     );
   }
 
@@ -151,55 +183,67 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
     return (StringBuffer('UserProfileData(')
           ..write('id: $id, ')
           ..write('companyName: $companyName, ')
-          ..write('location: $location')
+          ..write('location: $location, ')
+          ..write('description: $description')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, companyName, location);
+  int get hashCode => Object.hash(id, companyName, location, description);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is UserProfileData &&
           other.id == this.id &&
           other.companyName == this.companyName &&
-          other.location == this.location);
+          other.location == this.location &&
+          other.description == this.description);
 }
 
 class UserProfileCompanion extends UpdateCompanion<UserProfileData> {
   final Value<int> id;
   final Value<String> companyName;
   final Value<String> location;
+  final Value<String> description;
   const UserProfileCompanion({
     this.id = const Value.absent(),
     this.companyName = const Value.absent(),
     this.location = const Value.absent(),
+    this.description = const Value.absent(),
   });
   UserProfileCompanion.insert({
     this.id = const Value.absent(),
     required String companyName,
     required String location,
+    required String description,
   })  : companyName = Value(companyName),
-        location = Value(location);
+        location = Value(location),
+        description = Value(description);
   static Insertable<UserProfileData> custom({
     Expression<int>? id,
     Expression<String>? companyName,
     Expression<String>? location,
+    Expression<String>? description,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (companyName != null) 'company_name': companyName,
       if (location != null) 'location': location,
+      if (description != null) 'description': description,
     });
   }
 
   UserProfileCompanion copyWith(
-      {Value<int>? id, Value<String>? companyName, Value<String>? location}) {
+      {Value<int>? id,
+      Value<String>? companyName,
+      Value<String>? location,
+      Value<String>? description}) {
     return UserProfileCompanion(
       id: id ?? this.id,
       companyName: companyName ?? this.companyName,
       location: location ?? this.location,
+      description: description ?? this.description,
     );
   }
 
@@ -215,6 +259,9 @@ class UserProfileCompanion extends UpdateCompanion<UserProfileData> {
     if (location.present) {
       map['location'] = Variable<String>(location.value);
     }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
     return map;
   }
 
@@ -223,7 +270,8 @@ class UserProfileCompanion extends UpdateCompanion<UserProfileData> {
     return (StringBuffer('UserProfileCompanion(')
           ..write('id: $id, ')
           ..write('companyName: $companyName, ')
-          ..write('location: $location')
+          ..write('location: $location, ')
+          ..write('description: $description')
           ..write(')'))
         .toString();
   }
@@ -1411,12 +1459,14 @@ typedef $$UserProfileTableCreateCompanionBuilder = UserProfileCompanion
   Value<int> id,
   required String companyName,
   required String location,
+  required String description,
 });
 typedef $$UserProfileTableUpdateCompanionBuilder = UserProfileCompanion
     Function({
   Value<int> id,
   Value<String> companyName,
   Value<String> location,
+  Value<String> description,
 });
 
 class $$UserProfileTableFilterComposer
@@ -1436,6 +1486,9 @@ class $$UserProfileTableFilterComposer
 
   ColumnFilters<String> get location => $composableBuilder(
       column: $table.location, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
 }
 
 class $$UserProfileTableOrderingComposer
@@ -1455,6 +1508,9 @@ class $$UserProfileTableOrderingComposer
 
   ColumnOrderings<String> get location => $composableBuilder(
       column: $table.location, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
 }
 
 class $$UserProfileTableAnnotationComposer
@@ -1474,6 +1530,9 @@ class $$UserProfileTableAnnotationComposer
 
   GeneratedColumn<String> get location =>
       $composableBuilder(column: $table.location, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
 }
 
 class $$UserProfileTableTableManager extends RootTableManager<
@@ -1505,21 +1564,25 @@ class $$UserProfileTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> companyName = const Value.absent(),
             Value<String> location = const Value.absent(),
+            Value<String> description = const Value.absent(),
           }) =>
               UserProfileCompanion(
             id: id,
             companyName: companyName,
             location: location,
+            description: description,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String companyName,
             required String location,
+            required String description,
           }) =>
               UserProfileCompanion.insert(
             id: id,
             companyName: companyName,
             location: location,
+            description: description,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

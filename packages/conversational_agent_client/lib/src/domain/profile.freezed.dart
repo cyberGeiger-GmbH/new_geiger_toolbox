@@ -23,6 +23,7 @@ mixin _$Profile {
   String? get locale => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   String get companyName => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   /// Serializes this Profile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,11 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
-  $Res call({String? locale, String location, String companyName});
+  $Res call(
+      {String? locale,
+      String location,
+      String companyName,
+      String? description});
 }
 
 /// @nodoc
@@ -59,6 +64,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     Object? locale = freezed,
     Object? location = null,
     Object? companyName = null,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       locale: freezed == locale
@@ -73,6 +79,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -84,7 +94,11 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       __$$ProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? locale, String location, String companyName});
+  $Res call(
+      {String? locale,
+      String location,
+      String companyName,
+      String? description});
 }
 
 /// @nodoc
@@ -103,6 +117,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? locale = freezed,
     Object? location = null,
     Object? companyName = null,
+    Object? description = freezed,
   }) {
     return _then(_$ProfileImpl(
       locale: freezed == locale
@@ -117,6 +132,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -125,7 +144,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProfileImpl implements _Profile {
   const _$ProfileImpl(
-      {this.locale = "en", required this.location, required this.companyName});
+      {this.locale = "en",
+      required this.location,
+      required this.companyName,
+      this.description});
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileImplFromJson(json);
@@ -137,10 +159,12 @@ class _$ProfileImpl implements _Profile {
   final String location;
   @override
   final String companyName;
+  @override
+  final String? description;
 
   @override
   String toString() {
-    return 'Profile(locale: $locale, location: $location, companyName: $companyName)';
+    return 'Profile(locale: $locale, location: $location, companyName: $companyName, description: $description)';
   }
 
   @override
@@ -152,12 +176,15 @@ class _$ProfileImpl implements _Profile {
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+                other.companyName == companyName) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, locale, location, companyName);
+  int get hashCode =>
+      Object.hash(runtimeType, locale, location, companyName, description);
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
@@ -179,7 +206,8 @@ abstract class _Profile implements Profile {
   const factory _Profile(
       {final String? locale,
       required final String location,
-      required final String companyName}) = _$ProfileImpl;
+      required final String companyName,
+      final String? description}) = _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
@@ -189,6 +217,8 @@ abstract class _Profile implements Profile {
   String get location;
   @override
   String get companyName;
+  @override
+  String? get description;
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.

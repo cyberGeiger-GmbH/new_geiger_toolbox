@@ -1,4 +1,4 @@
-import 'package:core_ui/molecules/buttons/app_button.dart';
+// this Widget is for testing only
 import 'package:core_ui/molecules/buttons/app_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,8 +9,8 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:go_router/go_router.dart';
 
-class ClearDataButton extends ConsumerWidget {
-  const ClearDataButton({super.key});
+class ClearDataButtonWidget extends ConsumerWidget {
+  const ClearDataButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,9 +27,9 @@ class ClearDataButton extends ConsumerWidget {
           : () async {
               showAlertDialog(
                   context: context,
-                  title: "Alert".hardcoded,
+                  title: "Deletion Alert".hardcoded,
                   content:
-                      "Are you sure you want to delete clean? \n Note: This action can't be undone.",
+                      "Are you sure you want to delete data? \n Note: This action can't be undone.",
                   cancelActionText: 'Cancel'.hardcoded,
                   trigger: () {
                     ref

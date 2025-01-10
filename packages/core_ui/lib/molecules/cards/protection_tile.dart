@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:core_ui/molecules/buttons/app_icon_button.dart';
-import 'package:core_ui/molecules/texts/app_text.dart';
 
 import 'package:flutter/material.dart';
 
