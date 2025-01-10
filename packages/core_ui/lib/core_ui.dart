@@ -24,8 +24,8 @@ export 'molecules/buttons/app_button.dart';
 export "./organisms/empty_placeholder.dart";
 export './organisms/empty_content.dart';
 export './organisms/error_message.dart';
-export './organisms/responsive_center.dart';
-export './organisms/responsive_scrollable_card.dart';
+export './organisms/responsive_center_scrollable_widget.dart';
+export './organisms/responsive_center_widget.dart';
 export 'organisms/show_bottom_sheet_modal.dart';
 
 //list widget

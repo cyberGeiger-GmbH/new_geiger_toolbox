@@ -16,13 +16,8 @@ class UserProfileContentsWidget extends ConsumerWidget {
 
     return AsyncValueWidget<UserData?>(
       value: streamUser,
-      data: (userData) => SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: UserProfileFormWidget(
-            userData: userData,
-          ),
-        ),
+      data: (userData) => UserProfileFormWidget(
+        userData: userData,
       ),
     );
   }

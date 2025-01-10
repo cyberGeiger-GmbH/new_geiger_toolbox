@@ -67,7 +67,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
     return false;
   }
 
-  Future<void> createProfile() async {
+  Future<void> _createProfile() async {
     final controller = ref.read(userProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
     final user = User(
@@ -80,7 +80,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
     }
   }
 
-  Future<void> updateProfile() async {
+  Future<void> _updateProfile() async {
     final controller = ref.read(userProfileControllerProvider.notifier);
     if (widget.userData != null) {
       final user = User(
@@ -109,11 +109,11 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
     if (_validateAndSaveForm()) {
       if (widget.userData != null) {
         //update profile
-        await updateProfile();
+        await _updateProfile();
       }
       //create profile
       else {
-        await createProfile();
+        await _createProfile();
       }
     }
   }
@@ -129,7 +129,9 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
       _node.previousFocus();
       return;
     }
+
     _setCompanyDescription();
+    _node.unfocus();
   }
 
   @override
