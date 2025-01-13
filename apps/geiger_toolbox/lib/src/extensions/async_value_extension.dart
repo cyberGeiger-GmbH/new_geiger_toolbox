@@ -20,7 +20,7 @@ extension AsyncValueExtension on AsyncValue {
     if (!isLoading && !hasError) {
       showSnackBar(
           context: context,
-          content: "Added successfully".hardcoded,
+          content: "Todos updated".hardcoded,
           backgroundColor: appColor.primary);
     }
   }
