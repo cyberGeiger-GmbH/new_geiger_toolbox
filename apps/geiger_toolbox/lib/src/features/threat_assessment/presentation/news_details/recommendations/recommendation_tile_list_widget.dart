@@ -45,10 +45,10 @@ class AddAllTodoWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addOfferingTodoControllerProvider);
     final todos = ref.watch(toggleListOfferControllerProvider);
-    //debugPrint("todos added $todos");
+   // debugPrint("todos added $todos");
     return AppButton.tertiary(
       isloading: state.isLoading,
-      label: "Add to todo list".hardcoded,
+      label: "update todo list".hardcoded,
       context: context,
       onPressed: () async {
         await ref

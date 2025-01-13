@@ -23,7 +23,7 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
 
 // //reset toggle to false on error
     if (state.hasError == true) {
-      debugPrint("eeorr occurs");
+      debugPrint("error occurs");
       final toggle = ref.read(toggleOfferControllerProvider(status).notifier);
       toggle.onChange(status.copyWith(added: false));
     }
@@ -41,6 +41,7 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
   }
 }
 
+//add todo to a List
 @riverpod
 class ToggleListOfferController extends _$ToggleListOfferController {
   @override
@@ -49,15 +50,16 @@ class ToggleListOfferController extends _$ToggleListOfferController {
   }
 
   // Toggle the `completed` state of an item
-  
-  void addTodos(OfferingStatus item) {
+
+  void selectTodoItems(OfferingStatus item) {
     // If the item is already in the state, remove it
     if (state.any((i) => i.id == item.id)) {
       state = state.where((i) => i.id != item.id).toList();
     } else {
       // Otherwise, add it
-      state = [...state, item.copyWith(added: true)];
+      state = [...state, item];
     }
+    // debugPrint("todos items => $state");
   }
 }
 

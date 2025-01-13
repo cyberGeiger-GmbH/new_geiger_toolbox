@@ -127,13 +127,14 @@ class AppText extends StatelessWidget {
           required BuildContext context,
           TextAlign? textAlign,
           Color? color,
-          TextOverflow? textOverflow}) =>
+          TextOverflow? textOverflow,
+          bool textRemoved = false}) =>
       AppText._(
           key: key,
           text: text,
           textStyle: _appTextStyles(context).titleMedium!.copyWith(
-                color: color,
-              ),
+              color: color,
+              decoration: textRemoved ? TextDecoration.lineThrough : null),
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
 
@@ -159,13 +160,14 @@ class AppText extends StatelessWidget {
           required BuildContext context,
           Color? color,
           TextAlign? textAlign,
-          TextOverflow? textOverflow}) =>
+          TextOverflow? textOverflow,
+          bool textDeleted = false}) =>
       AppText._(
           key: key,
           text: text,
           textStyle: _appTextStyles(context).labelLarge!.copyWith(
-                color: color,
-              ),
+              color: color,
+              decoration: textDeleted ? TextDecoration.lineThrough : null),
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
 
@@ -239,13 +241,14 @@ class AppText extends StatelessWidget {
           required BuildContext context,
           TextAlign? textAlign,
           Color? color,
-          TextOverflow? textOverflow}) =>
+          TextOverflow? textOverflow,
+          bool textRemoved = false}) =>
       AppText._(
           key: key,
           text: text,
           textStyle: _appTextStyles(context).bodySmall!.copyWith(
-                color: color,
-              ),
+              color: color,
+              decoration: textRemoved ? TextDecoration.lineThrough : null),
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
 

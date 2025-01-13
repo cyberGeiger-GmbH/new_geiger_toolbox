@@ -74,9 +74,13 @@ class ShortList extends StatelessWidget {
             (item) => Card(
               child: ListTile(
                 title: AppText.titleMedium(
-                    text: item.offering.name, context: context),
+                    text: item.offering.name,
+                    context: context,
+                    textRemoved: !item.added!),
                 subtitle: AppText.bodySmall(
-                    text: item.offering.summary, context: context),
+                    text: item.offering.summary,
+                    textRemoved: !item.added!,
+                    context: context),
               ),
             ),
           )),
@@ -101,6 +105,7 @@ class ShowLimitedTodos extends StatelessWidget {
             i++) ...[
           AppButton.action(
             label: items[i].offering.name,
+            isItemDeleted: !items[i].added!,
             context: context,
             fontgroundColor: theme.colorScheme.onSurface,
             onPressed: () {

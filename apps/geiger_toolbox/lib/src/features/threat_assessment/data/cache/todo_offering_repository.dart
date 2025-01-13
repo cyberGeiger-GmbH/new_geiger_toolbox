@@ -34,6 +34,7 @@ class TodoOfferingRepository {
   //* add/update status of a given offerings
   Future<void> addOrUpdateTodoOfferingsStatus(
       {required List<OfferingStatus> offerData}) async {
+        if(offerData.isNotEmpty){
     await db.transaction(() async {
       for (var data in offerData) {
         final offeringStatus = TodoOfferingStatusesCompanion(
@@ -46,7 +47,7 @@ class TodoOfferingRepository {
             .into(db.todoOfferingStatuses)
             .insertOnConflictUpdate(offeringStatus);
       }
-    });
+    });}
   }
 
   //Get all Offers that has be added to the todoOfferingStatus

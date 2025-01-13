@@ -6,8 +6,8 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
-
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/news_details_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
@@ -28,6 +28,11 @@ class NewsDetailsScreen extends StatelessWidget {
       ),
       body: Consumer(
         builder: (context, ref, _) {
+          //show success snackBar alert when adding offering to todos
+          ref.listen(addOfferingTodoControllerProvider, (_, nxtValue) {
+            nxtValue.successAlertSnackBar(context: context);
+          });
+
           //listen for errors
           if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
             ref.listen(watchNewsFeedByTitleProvider(newsTitle: newsTitle),

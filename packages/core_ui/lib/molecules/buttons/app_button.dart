@@ -82,6 +82,7 @@ class AppButton extends StatelessWidget {
       Color? backgroundColor,
       Color? fontgroundColor,
       bool centeredContent = false,
+      bool isItemDeleted = false,
       required BuildContext context}) {
     return AppButton._(
       key: key,
@@ -100,6 +101,7 @@ class AppButton extends StatelessWidget {
                     text: label,
                     context: context,
                     color: fontgroundColor,
+                    textDeleted: isItemDeleted,
                   ),
           ]),
     );

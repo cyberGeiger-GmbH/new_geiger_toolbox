@@ -16,11 +16,6 @@ class AddOfferingToDoWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //show success snackBar alert when adding offering to todos
-    ref.listen(addOfferingTodoControllerProvider, (_, nxtValue) {
-      nxtValue.successAlertSnackBar(context: context);
-    });
-
     final state = ref.watch(toggleOfferControllerProvider(offer));
 
     return TodoTile.plain(
@@ -34,8 +29,10 @@ class AddOfferingToDoWidget extends ConsumerWidget {
               .read(toggleOfferControllerProvider(offer).notifier)
               .onChange(offer.copyWith(added: value));
 
-          //add to a list
-          ref.read(toggleListOfferControllerProvider.notifier).addTodos(state);
+          //add to a todo list
+          ref
+              .read(toggleListOfferControllerProvider.notifier)
+              .selectTodoItems(state.copyWith(added: value));
         });
   }
 }
