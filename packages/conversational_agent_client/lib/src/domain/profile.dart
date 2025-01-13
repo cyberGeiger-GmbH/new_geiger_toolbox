@@ -10,6 +10,9 @@ class Profile with _$Profile {
     required final String location,
     required final String companyName,
     final String? description,
+    final String? deviceType,
+    final String? version,
+    final String? deviceModel,
   }) = _Profile;
 
   factory Profile.fromJson(Map<String, dynamic> json) =>

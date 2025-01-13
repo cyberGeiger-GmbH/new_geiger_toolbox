@@ -3,7 +3,7 @@ description: "A cybersecurity risk management tool designed for SMEs and their l
 
 publish_to: 'none' 
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: 3.6.0
@@ -48,6 +48,7 @@ dependencies:
   firebase_core: 3.6.0
   # mixpanel
   mixpanel_flutter: 2.3.3
+  device_info_plus: 11.2.0
 
 
 dev_dependencies:

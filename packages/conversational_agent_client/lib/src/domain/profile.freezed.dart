@@ -24,6 +24,9 @@ mixin _$Profile {
   String get location => throw _privateConstructorUsedError;
   String get companyName => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get deviceType => throw _privateConstructorUsedError;
+  String? get version => throw _privateConstructorUsedError;
+  String? get deviceModel => throw _privateConstructorUsedError;
 
   /// Serializes this Profile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +46,10 @@ abstract class $ProfileCopyWith<$Res> {
       {String? locale,
       String location,
       String companyName,
-      String? description});
+      String? description,
+      String? deviceType,
+      String? version,
+      String? deviceModel});
 }
 
 /// @nodoc
@@ -65,6 +71,9 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     Object? location = null,
     Object? companyName = null,
     Object? description = freezed,
+    Object? deviceType = freezed,
+    Object? version = freezed,
+    Object? deviceModel = freezed,
   }) {
     return _then(_value.copyWith(
       locale: freezed == locale
@@ -83,6 +92,18 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      deviceType: freezed == deviceType
+          ? _value.deviceType
+          : deviceType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceModel: freezed == deviceModel
+          ? _value.deviceModel
+          : deviceModel // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -98,7 +119,10 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       {String? locale,
       String location,
       String companyName,
-      String? description});
+      String? description,
+      String? deviceType,
+      String? version,
+      String? deviceModel});
 }
 
 /// @nodoc
@@ -118,6 +142,9 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? location = null,
     Object? companyName = null,
     Object? description = freezed,
+    Object? deviceType = freezed,
+    Object? version = freezed,
+    Object? deviceModel = freezed,
   }) {
     return _then(_$ProfileImpl(
       locale: freezed == locale
@@ -136,6 +163,18 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      deviceType: freezed == deviceType
+          ? _value.deviceType
+          : deviceType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deviceModel: freezed == deviceModel
+          ? _value.deviceModel
+          : deviceModel // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -147,7 +186,10 @@ class _$ProfileImpl implements _Profile {
       {this.locale = "en",
       required this.location,
       required this.companyName,
-      this.description});
+      this.description,
+      this.deviceType,
+      this.version,
+      this.deviceModel});
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileImplFromJson(json);
@@ -161,10 +203,16 @@ class _$ProfileImpl implements _Profile {
   final String companyName;
   @override
   final String? description;
+  @override
+  final String? deviceType;
+  @override
+  final String? version;
+  @override
+  final String? deviceModel;
 
   @override
   String toString() {
-    return 'Profile(locale: $locale, location: $location, companyName: $companyName, description: $description)';
+    return 'Profile(locale: $locale, location: $location, companyName: $companyName, description: $description, deviceType: $deviceType, version: $version, deviceModel: $deviceModel)';
   }
 
   @override
@@ -178,13 +226,18 @@ class _$ProfileImpl implements _Profile {
             (identical(other.companyName, companyName) ||
                 other.companyName == companyName) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.deviceType, deviceType) ||
+                other.deviceType == deviceType) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.deviceModel, deviceModel) ||
+                other.deviceModel == deviceModel));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, locale, location, companyName, description);
+  int get hashCode => Object.hash(runtimeType, locale, location, companyName,
+      description, deviceType, version, deviceModel);
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
@@ -207,7 +260,10 @@ abstract class _Profile implements Profile {
       {final String? locale,
       required final String location,
       required final String companyName,
-      final String? description}) = _$ProfileImpl;
+      final String? description,
+      final String? deviceType,
+      final String? version,
+      final String? deviceModel}) = _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
@@ -219,6 +275,12 @@ abstract class _Profile implements Profile {
   String get companyName;
   @override
   String? get description;
+  @override
+  String? get deviceType;
+  @override
+  String? get version;
+  @override
+  String? get deviceModel;
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.

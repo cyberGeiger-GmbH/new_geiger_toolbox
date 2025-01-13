@@ -12,6 +12,9 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       location: json['location'] as String,
       companyName: json['companyName'] as String,
       description: json['description'] as String?,
+      deviceType: json['deviceType'] as String?,
+      version: json['version'] as String?,
+      deviceModel: json['deviceModel'] as String?,
     );
 
 Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
@@ -20,6 +23,9 @@ Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
       'location': instance.location,
       'companyName': instance.companyName,
       'description': instance.description,
+      'deviceType': instance.deviceType,
+      'version': instance.version,
+      'deviceModel': instance.deviceModel,
     };
 
 _$DigitalInfrastructureImpl _$$DigitalInfrastructureImplFromJson(
