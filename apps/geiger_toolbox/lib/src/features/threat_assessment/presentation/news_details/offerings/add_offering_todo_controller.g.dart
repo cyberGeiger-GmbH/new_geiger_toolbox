@@ -7,7 +7,7 @@ part of 'add_offering_todo_controller.dart';
 // **************************************************************************
 
 String _$addOfferingTodoControllerHash() =>
-    r'616edb9ae936a3ab0fc4fa44905784016aa7b71b';
+    r'f74fbf5a6be6aa89f5588e8d8601c5b911ea766f';
 
 /// See also [AddOfferingTodoController].
 @ProviderFor(AddOfferingTodoController)
@@ -24,7 +24,7 @@ final addOfferingTodoControllerProvider =
 
 typedef _$AddOfferingTodoController = AutoDisposeAsyncNotifier<void>;
 String _$toggleListOfferControllerHash() =>
-    r'3dd3f45af3f012b86dbde1afef5f4abb0752d440';
+    r'9391b7d62d76b3a3839dce9e9f9931062a0d7b29';
 
 /// See also [ToggleListOfferController].
 @ProviderFor(ToggleListOfferController)

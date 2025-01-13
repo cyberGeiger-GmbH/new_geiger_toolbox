@@ -29,12 +29,18 @@ void main() {
     test('news repository using default profile ', () async {
       final container = getContainer();
       final newsRepo = container.read(newsRepositoryProvider);
-      final profile = Profile(
-        location: "Zurich",
-        companyName: "cyberGeiger"
-        // digitalInfrastructure: DigitalInfrastructure(
-        //     infoAbout: ["password", "teamView", "post finance"]),
-      );
+      final profile = Profile.withDefaultTimestamp(
+          id: '',
+          actor: Actor(
+              companyName: "CyberGEIGER",
+              location: "Freiburg, Germany",
+              companyDescription: "startup",
+              assets: []),
+          verb: Verb(name: "created user profile on Geiger toolbox")
+
+          // digitalInfrastructure: DigitalInfrastructure(
+          //     infoAbout: ["password", "teamView", "post finance"]),
+          );
       final data = await newsRepo.fetchNews(profile: profile);
       print("news object => $data");
       expect(data, isNotEmpty);

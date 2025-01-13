@@ -17,7 +17,9 @@ class UserProfileRepository {
   Future<void> createUserProfile({required User user}) async {
     try {
       final userProfile = UserProfileCompanion(
-          companyName: Value(user.companyName), location: Value(user.location), description: Value(user.description));
+          companyName: Value(user.companyName),
+          location: Value(user.location),
+          description: Value(user.description));
       await _db.into(_db.userProfile).insert(userProfile);
     } catch (e) {
       rethrow;
@@ -26,12 +28,12 @@ class UserProfileRepository {
 
   Future<bool?> updateUserProfile(
       {required int userId, required User user}) async {
-    
     try {
       final userProfile = UserProfileCompanion(
           id: Value(userId),
           companyName: Value(user.companyName),
-          location: Value(user.location), description: Value(user.description));
+          location: Value(user.location),
+          description: Value(user.description));
       return _db.update(_db.userProfile).replace(userProfile);
     } catch (e) {
       rethrow;
@@ -51,8 +53,27 @@ class UserProfileRepository {
       final query = _db.select(_db.userProfile);
       final row = await query.getSingle();
 
-      final user = User(companyName: row.companyName, location: row.location, description: row.description);
+      final user = User(
+          companyName: row.companyName,
+          location: row.location,
+          description: row.description);
       return user;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<UserData?> fetchUserData() async {
+    try {
+      final query = _db.select(_db.userProfile);
+      final row = await query.getSingle();
+
+      final user = User(
+          companyName: row.companyName,
+          location: row.location,
+          description: row.description);
+      final data = UserData(id: row.id, user: user);
+      return data;
     } catch (e) {
       return null;
     }
@@ -92,4 +113,10 @@ Stream<UserData?> watchUser(Ref ref) {
 Future<User?> fetchUser(Ref ref) async {
   final repo = ref.read(userProfileRepositoryProvider);
   return repo.fetchUser();
+}
+
+@riverpod
+Future<UserData?> fetchUserData(Ref ref) async {
+  final repo = ref.read(userProfileRepositoryProvider);
+  return repo.fetchUserData();
 }

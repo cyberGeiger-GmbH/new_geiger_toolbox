@@ -25,17 +25,25 @@ class NewsFeedService {
   Future<void> cacheNews() async {
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
-      final user = await ref.read(fetchUserProvider.future);
+      final userData = await ref.read(fetchUserDataProvider.future);
 
       Profile? profile;
-      if (user != null) {
-        profile = Profile(
-            location: user.location,
-            companyName: user.companyName,
-            description: user.description,
-            version: _deviceType.version,
-            deviceModel: _deviceType.model,
-            deviceType: _deviceType.type);
+      if (userData != null) {
+        final user = userData.user;
+        profile = Profile.withDefaultTimestamp(
+            id: userData.id.toString(),
+            actor: Actor(
+                companyName: user.companyName,
+                location: user.location,
+                companyDescription: user.description,
+                assets: [
+                  Asset(
+                      type: _deviceType.type,
+                      version: _deviceType.version,
+                      model: _deviceType.model)
+                ]),
+            verb: Verb(name: "User profile created")
+            );
       }
       debugPrint("user profile => $profile");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);

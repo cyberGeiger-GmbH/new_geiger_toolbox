@@ -6,25 +6,117 @@ part 'profile.g.dart';
 @freezed
 class Profile with _$Profile {
   const factory Profile({
-    @Default("en") final String? locale,
-    required final String location,
-    required final String companyName,
-    final String? description,
-    final String? deviceType,
-    final String? version,
-    final String? deviceModel,
+    required String id,
+    required Actor actor,
+    required Verb verb,
+    final Acting? object,
+    final Result? result,
+    required DateTime timestamp,
   }) = _Profile;
+
+  ///Profile constructor to set a default value for createdAt
+  factory Profile.withDefaultTimestamp({
+    required String id,
+    required Actor actor,
+    required Verb verb,
+    Acting? object,
+    final Result? result,
+  }) {
+    return Profile(
+      id: id,
+      actor: actor,
+      verb: verb,
+      object: object,
+      result: result,
+      timestamp: DateTime.now(),
+    );
+  }
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
 }
 
 @freezed
-class DigitalInfrastructure with _$DigitalInfrastructure {
-  const factory DigitalInfrastructure({
-    required List<String> infoAbout,
-  }) = _DigitalInfrastructure;
+class Actor with _$Actor {
+  const factory Actor({
+    required String companyName,
+    required String location,
+    @Default("en") String? locale,
+    required String companyDescription,
+    @Default(true) bool? smeOwner,
+    required List<Asset> assets,
+  }) = _Actor;
 
-  factory DigitalInfrastructure.fromJson(Map<String, dynamic> json) =>
-      _$DigitalInfrastructureFromJson(json);
+  factory Actor.fromJson(Map<String, dynamic> json) => _$ActorFromJson(json);
+}
+
+@freezed
+class Asset with _$Asset {
+  const factory Asset({
+    required String type,
+    required String version,
+    required String model,
+  }) = _Asset;
+
+  factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
+}
+
+@freezed
+class Verb with _$Verb {
+  const factory Verb({
+    required String name,
+  }) = _Verb;
+  factory Verb.fromJson(Map<String, dynamic> json) => _$VerbFromJson(json);
+}
+
+@freezed
+class Acting with _$Acting {
+  const factory Acting({required Definition definition}) = _Acting;
+  factory Acting.fromJson(Map<String, dynamic> json) => _$ActingFromJson(json);
+}
+
+@freezed
+class Definition with _$Definition {
+  const factory Definition(
+      {required String id,
+      required String name,
+      required String description,
+      required String type,
+      required List<DefinitionExtension> extensions}) = _Definition;
+
+  factory Definition.fromJson(Map<String, dynamic> json) =>
+      _$DefinitionFromJson(json);
+}
+
+@freezed
+class DefinitionExtension with _$DefinitionExtension {
+  const factory DefinitionExtension({
+    required String name,
+    required String summary,
+  }) = _DefinitionExtension;
+
+  factory DefinitionExtension.fromJson(Map<String, dynamic> json) =>
+      _$DefinitionExtensionFromJson(json);
+}
+
+@freezed
+class Result with _$Result {
+  const factory Result({
+    required bool success,
+    required bool completions,
+    required ResultExtensions extensions,
+  }) = _Result;
+  factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
+}
+
+@freezed
+class ResultExtensions with _$ResultExtensions {
+  const factory ResultExtensions({
+    required String geigerScore,
+    required DateTime lastUpdated,
+    required List<String> reason,
+  }) = _ResultExtensions;
+
+  factory ResultExtensions.fromJson(Map<String, dynamic> json) =>
+      _$ResultExtensionsFromJson(json);
 }
