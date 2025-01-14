@@ -1,3 +1,12 @@
+## 1.4.0
+
+ - **FIX**(conversational_agent_client,geiger_toolbox): improve profile object.
+ - **FIX**(geiger_toolbox,conversational_agent_client): added device info to profile.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): improve onboard logic.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add profile ui,.
+ - **FEAT**(conversational_agent_client): add call to get geigerscore.
+ - **FEAT**(perplexity_search,conversational_agent_client): add search for business description,.
+
 ## 1.3.0
 
  - **REFACTOR**(geiger_toolbox,core_ui,conversational_agent_client): add detail new screen.

@@ -1,3 +1,13 @@
+## 1.3.1
+
+ - **FIX**(geiger_toolbox): fix add/removing of todos error.
+ - **FIX**(geiger_toolbox,core_ui): fix profile layour.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): improve onboard logic.
+ - **FIX**(geiger_toolbox,core_ui): show company info.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add profile ui,.
+ - **FIX**(geiger_toolbox): create user logic.
+ - **FIX**(geiger_toolbox,core_ui): show limited todos.
+
 ## 3.0.0
 
 > Note: This release has breaking changes.

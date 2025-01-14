@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-01-14
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`conversational_agent_client` - `v1.4.0`](#conversational_agent_client---v140)
+ - [`core_ui` - `v1.3.1`](#core_ui---v131)
+ - [`perplexity_search` - `v1.1.0`](#perplexity_search---v110)
+
+---
+
+#### `conversational_agent_client` - `v1.4.0`
+
+ - **FIX**(conversational_agent_client,geiger_toolbox): improve profile object.
+ - **FIX**(geiger_toolbox,conversational_agent_client): added device info to profile.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): improve onboard logic.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add profile ui,.
+ - **FEAT**(conversational_agent_client): add call to get geigerscore.
+ - **FEAT**(perplexity_search,conversational_agent_client): add search for business description,.
+
+#### `core_ui` - `v1.3.1`
+
+ - **FIX**(geiger_toolbox): fix add/removing of todos error.
+ - **FIX**(geiger_toolbox,core_ui): fix profile layour.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): improve onboard logic.
+ - **FIX**(geiger_toolbox,core_ui): show company info.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add profile ui,.
+ - **FIX**(geiger_toolbox): create user logic.
+ - **FIX**(geiger_toolbox,core_ui): show limited todos.
+
+#### `perplexity_search` - `v1.1.0`
+
+ - **FIX**(geiger_toolbox): fix add/removing of todos error.
+ - **FIX**(geiger_toolbox,conversational_agent_client): added device info to profile.
+ - **FIX**(geiger_toolbox): improve main screen layour.
+ - **FIX**(geiger_toolbox,core_ui): fix profile layour.
+ - **FIX**(geiger_toolbox,core_ui,conversational_agent_client): improve onboard logic.
+ - **FIX**(geiger_toolbox,core_ui): show company info.
+ - **FIX**(perplexity_search): require api key.
+ - **FEAT**(perplexity_search,conversational_agent_client): add search for business description,.
+
+
 ## 2024-12-31
 
 ### Changes
