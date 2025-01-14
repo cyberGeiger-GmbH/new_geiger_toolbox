@@ -1,4 +1,5 @@
 import 'package:conversational_agent_client/src/domain/conversation.dart';
+import 'package:conversational_agent_client/src/domain/geiger_score.dart';
 import 'package:conversational_agent_client/src/domain/message.dart';
 import 'package:conversational_agent_client/src/domain/news.dart';
 
@@ -17,6 +18,17 @@ extension ResponseExtension<T> on Response {
     }
 
     return [];
+  }
+
+  GeigerScore? geigerScoreParser(Ref ref) {
+    final statusCodes = ref.read(statusCodesProvider);
+    final StatusCode? code = statusCodes.getStatus(statusCode);
+
+    if (code != null && code == StatusCode.success) {
+      return GeigerScore.fromJson(data);
+    }
+
+    return null;
   }
 
   UserID? userIdParser(Ref ref) {

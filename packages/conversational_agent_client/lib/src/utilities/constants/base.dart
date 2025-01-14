@@ -13,6 +13,9 @@ class Base {
   //retrive previous chat history
   static const String chatHistory = "/messages";
 
+  //geiger score
+  static const String geigerScorePath = "/getGeigerScore";
+
   static const origin = {"origin": "toolbox"};
   static const headers = {"Content-Type": "application/json"};
 

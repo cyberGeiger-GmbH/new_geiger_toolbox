@@ -55,15 +55,9 @@ void main() {
     });
   });
 
-  //  test('news repository using wrong profile format ', () async {
-  //     final container = getContainer();
-  //     final newsRepo = container.read(newsRepositoryProvider);
-  //     final profile = Profile(
-  //         location: "Zurich",
-  //         digitalInfrastructure: DigitalInfrastructure(
-  //             infoAbout:  ["password", "teamView", "post finance"]));
-  //     final data = await newsRepo.fetchNews(profile: profile);
-  //     print("news object => $data");
-  //     expect(data, isNotEmpty);
-  //   });
+
+
+  
+
+
 }

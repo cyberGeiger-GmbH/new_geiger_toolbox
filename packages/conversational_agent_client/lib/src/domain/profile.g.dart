@@ -9,7 +9,9 @@ part of 'profile.dart';
 _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
     _$ProfileImpl(
       id: json['id'] as String,
-      actor: Actor.fromJson(json['actor'] as Map<String, dynamic>),
+      actor: json['actor'] == null
+          ? null
+          : Actor.fromJson(json['actor'] as Map<String, dynamic>),
       verb: Verb.fromJson(json['verb'] as Map<String, dynamic>),
       object: json['object'] == null
           ? null
@@ -74,8 +76,9 @@ Map<String, dynamic> _$$VerbImplToJson(_$VerbImpl instance) =>
     };
 
 _$ActingImpl _$$ActingImplFromJson(Map<String, dynamic> json) => _$ActingImpl(
-      definition:
-          Definition.fromJson(json['definition'] as Map<String, dynamic>),
+      definition: (json['definition'] as List<dynamic>)
+          .map((e) => Definition.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ActingImplToJson(_$ActingImpl instance) =>
@@ -108,6 +111,7 @@ _$DefinitionExtensionImpl _$$DefinitionExtensionImplFromJson(
     _$DefinitionExtensionImpl(
       name: json['name'] as String,
       summary: json['summary'] as String,
+      alreadyImplemented: json['alreadyImplemented'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$DefinitionExtensionImplToJson(
@@ -115,6 +119,7 @@ Map<String, dynamic> _$$DefinitionExtensionImplToJson(
     <String, dynamic>{
       'name': instance.name,
       'summary': instance.summary,
+      'alreadyImplemented': instance.alreadyImplemented,
     };
 
 _$ResultImpl _$$ResultImplFromJson(Map<String, dynamic> json) => _$ResultImpl(
@@ -135,15 +140,15 @@ _$ResultExtensionsImpl _$$ResultExtensionsImplFromJson(
         Map<String, dynamic> json) =>
     _$ResultExtensionsImpl(
       geigerScore: json['geigerScore'] as String,
+      reasons:
+          (json['reasons'] as List<dynamic>).map((e) => e as String).toList(),
       lastUpdated: DateTime.parse(json['lastUpdated'] as String),
-      reason:
-          (json['reason'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$ResultExtensionsImplToJson(
         _$ResultExtensionsImpl instance) =>
     <String, dynamic>{
       'geigerScore': instance.geigerScore,
+      'reasons': instance.reasons,
       'lastUpdated': instance.lastUpdated.toIso8601String(),
-      'reason': instance.reason,
     };

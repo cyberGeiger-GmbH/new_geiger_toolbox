@@ -16,6 +16,14 @@ class NewsFeedException extends RemoteExceptions {
             message: "Failed get recommendated news feed for this SME");
 }
 
+
+class GeigerScoreException extends RemoteExceptions {
+  GeigerScoreException()
+      : super(
+            code: 'geiger-score-errror',
+            message: "Fail to get score for this user");
+}
+
 class ConnectionTimeoutException extends RemoteExceptions {
   ConnectionTimeoutException()
       : super(code: 'connection-time-out', message: "Connection timeout");

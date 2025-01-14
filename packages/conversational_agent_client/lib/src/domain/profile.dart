@@ -7,7 +7,7 @@ part 'profile.g.dart';
 class Profile with _$Profile {
   const factory Profile({
     required String id,
-    required Actor actor,
+    Actor? actor,
     required Verb verb,
     final Acting? object,
     final Result? result,
@@ -25,6 +25,22 @@ class Profile with _$Profile {
     return Profile(
       id: id,
       actor: actor,
+      verb: verb,
+      object: object,
+      result: result,
+      timestamp: DateTime.now(),
+    );
+  }
+
+  ///Profile constructor to set a default value for createdAt
+  factory Profile.withNoCompanyProfile({
+    required String id,
+    required Verb verb,
+    Acting? object,
+    final Result? result,
+  }) {
+    return Profile(
+      id: id,
       verb: verb,
       object: object,
       result: result,
@@ -71,7 +87,7 @@ class Verb with _$Verb {
 
 @freezed
 class Acting with _$Acting {
-  const factory Acting({required Definition definition}) = _Acting;
+  const factory Acting({required List<Definition> definition}) = _Acting;
   factory Acting.fromJson(Map<String, dynamic> json) => _$ActingFromJson(json);
 }
 
@@ -93,6 +109,7 @@ class DefinitionExtension with _$DefinitionExtension {
   const factory DefinitionExtension({
     required String name,
     required String summary,
+    @Default(false) bool alreadyImplemented,
   }) = _DefinitionExtension;
 
   factory DefinitionExtension.fromJson(Map<String, dynamic> json) =>
@@ -113,9 +130,22 @@ class Result with _$Result {
 class ResultExtensions with _$ResultExtensions {
   const factory ResultExtensions({
     required String geigerScore,
+    required List<String> reasons,
     required DateTime lastUpdated,
-    required List<String> reason,
   }) = _ResultExtensions;
+
+  ///Profile constructor to set a default value for createdAt
+  factory ResultExtensions.withDefaultTimestamp({
+    required String geigerScore,
+    required List<String> reasons,
+    DateTime? lastUpdated,
+  }) {
+    return ResultExtensions(
+      geigerScore: "",
+      reasons: reasons,
+      lastUpdated: lastUpdated ?? DateTime.now(),
+    );
+  }
 
   factory ResultExtensions.fromJson(Map<String, dynamic> json) =>
       _$ResultExtensionsFromJson(json);

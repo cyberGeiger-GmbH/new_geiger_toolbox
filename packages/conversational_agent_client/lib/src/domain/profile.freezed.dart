@@ -21,7 +21,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Profile {
   String get id => throw _privateConstructorUsedError;
-  Actor get actor => throw _privateConstructorUsedError;
+  Actor? get actor => throw _privateConstructorUsedError;
   Verb get verb => throw _privateConstructorUsedError;
   Acting? get object => throw _privateConstructorUsedError;
   Result? get result => throw _privateConstructorUsedError;
@@ -43,13 +43,13 @@ abstract class $ProfileCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      Actor actor,
+      Actor? actor,
       Verb verb,
       Acting? object,
       Result? result,
       DateTime timestamp});
 
-  $ActorCopyWith<$Res> get actor;
+  $ActorCopyWith<$Res>? get actor;
   $VerbCopyWith<$Res> get verb;
   $ActingCopyWith<$Res>? get object;
   $ResultCopyWith<$Res>? get result;
@@ -71,7 +71,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   @override
   $Res call({
     Object? id = null,
-    Object? actor = null,
+    Object? actor = freezed,
     Object? verb = null,
     Object? object = freezed,
     Object? result = freezed,
@@ -82,10 +82,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      actor: null == actor
+      actor: freezed == actor
           ? _value.actor
           : actor // ignore: cast_nullable_to_non_nullable
-              as Actor,
+              as Actor?,
       verb: null == verb
           ? _value.verb
           : verb // ignore: cast_nullable_to_non_nullable
@@ -109,8 +109,12 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ActorCopyWith<$Res> get actor {
-    return $ActorCopyWith<$Res>(_value.actor, (value) {
+  $ActorCopyWith<$Res>? get actor {
+    if (_value.actor == null) {
+      return null;
+    }
+
+    return $ActorCopyWith<$Res>(_value.actor!, (value) {
       return _then(_value.copyWith(actor: value) as $Val);
     });
   }
@@ -163,14 +167,14 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      Actor actor,
+      Actor? actor,
       Verb verb,
       Acting? object,
       Result? result,
       DateTime timestamp});
 
   @override
-  $ActorCopyWith<$Res> get actor;
+  $ActorCopyWith<$Res>? get actor;
   @override
   $VerbCopyWith<$Res> get verb;
   @override
@@ -193,7 +197,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? actor = null,
+    Object? actor = freezed,
     Object? verb = null,
     Object? object = freezed,
     Object? result = freezed,
@@ -204,10 +208,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      actor: null == actor
+      actor: freezed == actor
           ? _value.actor
           : actor // ignore: cast_nullable_to_non_nullable
-              as Actor,
+              as Actor?,
       verb: null == verb
           ? _value.verb
           : verb // ignore: cast_nullable_to_non_nullable
@@ -233,7 +237,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
 class _$ProfileImpl implements _Profile {
   const _$ProfileImpl(
       {required this.id,
-      required this.actor,
+      this.actor,
       required this.verb,
       this.object,
       this.result,
@@ -245,7 +249,7 @@ class _$ProfileImpl implements _Profile {
   @override
   final String id;
   @override
-  final Actor actor;
+  final Actor? actor;
   @override
   final Verb verb;
   @override
@@ -298,7 +302,7 @@ class _$ProfileImpl implements _Profile {
 abstract class _Profile implements Profile {
   const factory _Profile(
       {required final String id,
-      required final Actor actor,
+      final Actor? actor,
       required final Verb verb,
       final Acting? object,
       final Result? result,
@@ -309,7 +313,7 @@ abstract class _Profile implements Profile {
   @override
   String get id;
   @override
-  Actor get actor;
+  Actor? get actor;
   @override
   Verb get verb;
   @override
@@ -926,7 +930,7 @@ Acting _$ActingFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Acting {
-  Definition get definition => throw _privateConstructorUsedError;
+  List<Definition> get definition => throw _privateConstructorUsedError;
 
   /// Serializes this Acting to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -942,9 +946,7 @@ abstract class $ActingCopyWith<$Res> {
   factory $ActingCopyWith(Acting value, $Res Function(Acting) then) =
       _$ActingCopyWithImpl<$Res, Acting>;
   @useResult
-  $Res call({Definition definition});
-
-  $DefinitionCopyWith<$Res> get definition;
+  $Res call({List<Definition> definition});
 }
 
 /// @nodoc
@@ -968,18 +970,8 @@ class _$ActingCopyWithImpl<$Res, $Val extends Acting>
       definition: null == definition
           ? _value.definition
           : definition // ignore: cast_nullable_to_non_nullable
-              as Definition,
+              as List<Definition>,
     ) as $Val);
-  }
-
-  /// Create a copy of Acting
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DefinitionCopyWith<$Res> get definition {
-    return $DefinitionCopyWith<$Res>(_value.definition, (value) {
-      return _then(_value.copyWith(definition: value) as $Val);
-    });
   }
 }
 
@@ -990,10 +982,7 @@ abstract class _$$ActingImplCopyWith<$Res> implements $ActingCopyWith<$Res> {
       __$$ActingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Definition definition});
-
-  @override
-  $DefinitionCopyWith<$Res> get definition;
+  $Res call({List<Definition> definition});
 }
 
 /// @nodoc
@@ -1013,9 +1002,9 @@ class __$$ActingImplCopyWithImpl<$Res>
   }) {
     return _then(_$ActingImpl(
       definition: null == definition
-          ? _value.definition
+          ? _value._definition
           : definition // ignore: cast_nullable_to_non_nullable
-              as Definition,
+              as List<Definition>,
     ));
   }
 }
@@ -1023,13 +1012,19 @@ class __$$ActingImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ActingImpl implements _Acting {
-  const _$ActingImpl({required this.definition});
+  const _$ActingImpl({required final List<Definition> definition})
+      : _definition = definition;
 
   factory _$ActingImpl.fromJson(Map<String, dynamic> json) =>
       _$$ActingImplFromJson(json);
 
+  final List<Definition> _definition;
   @override
-  final Definition definition;
+  List<Definition> get definition {
+    if (_definition is EqualUnmodifiableListView) return _definition;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_definition);
+  }
 
   @override
   String toString() {
@@ -1041,13 +1036,14 @@ class _$ActingImpl implements _Acting {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ActingImpl &&
-            (identical(other.definition, definition) ||
-                other.definition == definition));
+            const DeepCollectionEquality()
+                .equals(other._definition, _definition));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, definition);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_definition));
 
   /// Create a copy of Acting
   /// with the given fields replaced by the non-null parameter values.
@@ -1066,12 +1062,13 @@ class _$ActingImpl implements _Acting {
 }
 
 abstract class _Acting implements Acting {
-  const factory _Acting({required final Definition definition}) = _$ActingImpl;
+  const factory _Acting({required final List<Definition> definition}) =
+      _$ActingImpl;
 
   factory _Acting.fromJson(Map<String, dynamic> json) = _$ActingImpl.fromJson;
 
   @override
-  Definition get definition;
+  List<Definition> get definition;
 
   /// Create a copy of Acting
   /// with the given fields replaced by the non-null parameter values.
@@ -1332,6 +1329,7 @@ DefinitionExtension _$DefinitionExtensionFromJson(Map<String, dynamic> json) {
 mixin _$DefinitionExtension {
   String get name => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
+  bool get alreadyImplemented => throw _privateConstructorUsedError;
 
   /// Serializes this DefinitionExtension to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1349,7 +1347,7 @@ abstract class $DefinitionExtensionCopyWith<$Res> {
           DefinitionExtension value, $Res Function(DefinitionExtension) then) =
       _$DefinitionExtensionCopyWithImpl<$Res, DefinitionExtension>;
   @useResult
-  $Res call({String name, String summary});
+  $Res call({String name, String summary, bool alreadyImplemented});
 }
 
 /// @nodoc
@@ -1369,6 +1367,7 @@ class _$DefinitionExtensionCopyWithImpl<$Res, $Val extends DefinitionExtension>
   $Res call({
     Object? name = null,
     Object? summary = null,
+    Object? alreadyImplemented = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -1379,6 +1378,10 @@ class _$DefinitionExtensionCopyWithImpl<$Res, $Val extends DefinitionExtension>
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
+      alreadyImplemented: null == alreadyImplemented
+          ? _value.alreadyImplemented
+          : alreadyImplemented // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -1391,7 +1394,7 @@ abstract class _$$DefinitionExtensionImplCopyWith<$Res>
       __$$DefinitionExtensionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String summary});
+  $Res call({String name, String summary, bool alreadyImplemented});
 }
 
 /// @nodoc
@@ -1409,6 +1412,7 @@ class __$$DefinitionExtensionImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? summary = null,
+    Object? alreadyImplemented = null,
   }) {
     return _then(_$DefinitionExtensionImpl(
       name: null == name
@@ -1419,6 +1423,10 @@ class __$$DefinitionExtensionImplCopyWithImpl<$Res>
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
+      alreadyImplemented: null == alreadyImplemented
+          ? _value.alreadyImplemented
+          : alreadyImplemented // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1426,7 +1434,10 @@ class __$$DefinitionExtensionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$DefinitionExtensionImpl implements _DefinitionExtension {
-  const _$DefinitionExtensionImpl({required this.name, required this.summary});
+  const _$DefinitionExtensionImpl(
+      {required this.name,
+      required this.summary,
+      this.alreadyImplemented = false});
 
   factory _$DefinitionExtensionImpl.fromJson(Map<String, dynamic> json) =>
       _$$DefinitionExtensionImplFromJson(json);
@@ -1435,10 +1446,13 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
   final String name;
   @override
   final String summary;
+  @override
+  @JsonKey()
+  final bool alreadyImplemented;
 
   @override
   String toString() {
-    return 'DefinitionExtension(name: $name, summary: $summary)';
+    return 'DefinitionExtension(name: $name, summary: $summary, alreadyImplemented: $alreadyImplemented)';
   }
 
   @override
@@ -1447,12 +1461,15 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
         (other.runtimeType == runtimeType &&
             other is _$DefinitionExtensionImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.summary, summary) || other.summary == summary));
+            (identical(other.summary, summary) || other.summary == summary) &&
+            (identical(other.alreadyImplemented, alreadyImplemented) ||
+                other.alreadyImplemented == alreadyImplemented));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, summary);
+  int get hashCode =>
+      Object.hash(runtimeType, name, summary, alreadyImplemented);
 
   /// Create a copy of DefinitionExtension
   /// with the given fields replaced by the non-null parameter values.
@@ -1474,7 +1491,8 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
 abstract class _DefinitionExtension implements DefinitionExtension {
   const factory _DefinitionExtension(
       {required final String name,
-      required final String summary}) = _$DefinitionExtensionImpl;
+      required final String summary,
+      final bool alreadyImplemented}) = _$DefinitionExtensionImpl;
 
   factory _DefinitionExtension.fromJson(Map<String, dynamic> json) =
       _$DefinitionExtensionImpl.fromJson;
@@ -1483,6 +1501,8 @@ abstract class _DefinitionExtension implements DefinitionExtension {
   String get name;
   @override
   String get summary;
+  @override
+  bool get alreadyImplemented;
 
   /// Create a copy of DefinitionExtension
   /// with the given fields replaced by the non-null parameter values.
@@ -1700,8 +1720,8 @@ ResultExtensions _$ResultExtensionsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ResultExtensions {
   String get geigerScore => throw _privateConstructorUsedError;
+  List<String> get reasons => throw _privateConstructorUsedError;
   DateTime get lastUpdated => throw _privateConstructorUsedError;
-  List<String> get reason => throw _privateConstructorUsedError;
 
   /// Serializes this ResultExtensions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1719,7 +1739,7 @@ abstract class $ResultExtensionsCopyWith<$Res> {
           ResultExtensions value, $Res Function(ResultExtensions) then) =
       _$ResultExtensionsCopyWithImpl<$Res, ResultExtensions>;
   @useResult
-  $Res call({String geigerScore, DateTime lastUpdated, List<String> reason});
+  $Res call({String geigerScore, List<String> reasons, DateTime lastUpdated});
 }
 
 /// @nodoc
@@ -1738,22 +1758,22 @@ class _$ResultExtensionsCopyWithImpl<$Res, $Val extends ResultExtensions>
   @override
   $Res call({
     Object? geigerScore = null,
+    Object? reasons = null,
     Object? lastUpdated = null,
-    Object? reason = null,
   }) {
     return _then(_value.copyWith(
       geigerScore: null == geigerScore
           ? _value.geigerScore
           : geigerScore // ignore: cast_nullable_to_non_nullable
               as String,
+      reasons: null == reasons
+          ? _value.reasons
+          : reasons // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       lastUpdated: null == lastUpdated
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      reason: null == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ) as $Val);
   }
 }
@@ -1766,7 +1786,7 @@ abstract class _$$ResultExtensionsImplCopyWith<$Res>
       __$$ResultExtensionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String geigerScore, DateTime lastUpdated, List<String> reason});
+  $Res call({String geigerScore, List<String> reasons, DateTime lastUpdated});
 }
 
 /// @nodoc
@@ -1783,22 +1803,22 @@ class __$$ResultExtensionsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? geigerScore = null,
+    Object? reasons = null,
     Object? lastUpdated = null,
-    Object? reason = null,
   }) {
     return _then(_$ResultExtensionsImpl(
       geigerScore: null == geigerScore
           ? _value.geigerScore
           : geigerScore // ignore: cast_nullable_to_non_nullable
               as String,
+      reasons: null == reasons
+          ? _value._reasons
+          : reasons // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       lastUpdated: null == lastUpdated
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      reason: null == reason
-          ? _value._reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ));
   }
 }
@@ -1808,28 +1828,29 @@ class __$$ResultExtensionsImplCopyWithImpl<$Res>
 class _$ResultExtensionsImpl implements _ResultExtensions {
   const _$ResultExtensionsImpl(
       {required this.geigerScore,
-      required this.lastUpdated,
-      required final List<String> reason})
-      : _reason = reason;
+      required final List<String> reasons,
+      required this.lastUpdated})
+      : _reasons = reasons;
 
   factory _$ResultExtensionsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResultExtensionsImplFromJson(json);
 
   @override
   final String geigerScore;
+  final List<String> _reasons;
   @override
-  final DateTime lastUpdated;
-  final List<String> _reason;
-  @override
-  List<String> get reason {
-    if (_reason is EqualUnmodifiableListView) return _reason;
+  List<String> get reasons {
+    if (_reasons is EqualUnmodifiableListView) return _reasons;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reason);
+    return EqualUnmodifiableListView(_reasons);
   }
 
   @override
+  final DateTime lastUpdated;
+
+  @override
   String toString() {
-    return 'ResultExtensions(geigerScore: $geigerScore, lastUpdated: $lastUpdated, reason: $reason)';
+    return 'ResultExtensions(geigerScore: $geigerScore, reasons: $reasons, lastUpdated: $lastUpdated)';
   }
 
   @override
@@ -1839,15 +1860,15 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
             other is _$ResultExtensionsImpl &&
             (identical(other.geigerScore, geigerScore) ||
                 other.geigerScore == geigerScore) &&
+            const DeepCollectionEquality().equals(other._reasons, _reasons) &&
             (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated) &&
-            const DeepCollectionEquality().equals(other._reason, _reason));
+                other.lastUpdated == lastUpdated));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, geigerScore, lastUpdated,
-      const DeepCollectionEquality().hash(_reason));
+  int get hashCode => Object.hash(runtimeType, geigerScore,
+      const DeepCollectionEquality().hash(_reasons), lastUpdated);
 
   /// Create a copy of ResultExtensions
   /// with the given fields replaced by the non-null parameter values.
@@ -1869,8 +1890,8 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
 abstract class _ResultExtensions implements ResultExtensions {
   const factory _ResultExtensions(
       {required final String geigerScore,
-      required final DateTime lastUpdated,
-      required final List<String> reason}) = _$ResultExtensionsImpl;
+      required final List<String> reasons,
+      required final DateTime lastUpdated}) = _$ResultExtensionsImpl;
 
   factory _ResultExtensions.fromJson(Map<String, dynamic> json) =
       _$ResultExtensionsImpl.fromJson;
@@ -1878,9 +1899,9 @@ abstract class _ResultExtensions implements ResultExtensions {
   @override
   String get geigerScore;
   @override
-  DateTime get lastUpdated;
+  List<String> get reasons;
   @override
-  List<String> get reason;
+  DateTime get lastUpdated;
 
   /// Create a copy of ResultExtensions
   /// with the given fields replaced by the non-null parameter values.
