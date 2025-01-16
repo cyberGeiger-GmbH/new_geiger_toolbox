@@ -9,7 +9,9 @@ part of 'profile.dart';
 _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
     _$ProfileImpl(
       id: json['id'] as String,
-      actor: Actor.fromJson(json['actor'] as Map<String, dynamic>),
+      actor: json['actor'] == null
+          ? null
+          : Actor.fromJson(json['actor'] as Map<String, dynamic>),
       verb: Verb.fromJson(json['verb'] as Map<String, dynamic>),
       object: json['object'] == null
           ? null
@@ -31,10 +33,10 @@ Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
     };
 
 _$ActorImpl _$$ActorImplFromJson(Map<String, dynamic> json) => _$ActorImpl(
-      companyName: json['companyName'] as String,
-      location: json['location'] as String,
+      companyName: json['companyName'] as String?,
+      location: json['location'] as String?,
       locale: json['locale'] as String? ?? "en",
-      companyDescription: json['companyDescription'] as String,
+      companyDescription: json['companyDescription'] as String?,
       smeOwner: json['smeOwner'] as bool? ?? true,
       assets: (json['assets'] as List<dynamic>)
           .map((e) => Asset.fromJson(e as Map<String, dynamic>))

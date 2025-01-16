@@ -7,7 +7,7 @@ part 'profile.g.dart';
 class Profile with _$Profile {
   const factory Profile({
     required String id,
-    required Actor actor,
+    Actor? actor,
     required Verb verb,
     final Acting? object,
     final Result? result,
@@ -32,6 +32,23 @@ class Profile with _$Profile {
     );
   }
 
+  factory Profile.withoutActor({
+    required String id,
+    required Verb verb,
+    required List<Asset> assets,
+    Acting? object,
+    final Result? result,
+  }) {
+    return Profile(
+      id: id,
+      actor: Actor( assets: assets),
+      verb: verb,
+      object: object,
+      result: result,
+      timestamp: DateTime.now(),
+    );
+  }
+
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
 }
@@ -39,10 +56,10 @@ class Profile with _$Profile {
 @freezed
 class Actor with _$Actor {
   const factory Actor({
-    required String companyName,
-    required String location,
+     String? companyName,
+     String? location,
     @Default("en") String? locale,
-    required String companyDescription,
+     String? companyDescription,
     @Default(true) bool? smeOwner,
     required List<Asset> assets,
   }) = _Actor;
