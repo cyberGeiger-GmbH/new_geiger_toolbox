@@ -26,7 +26,10 @@ class NewsFeedService {
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
       final userData = await ref.read(fetchUserDataProvider.future);
-
+      final currentUserDeviceInfo = Asset(
+          type: _deviceType.type,
+          version: _deviceType.version,
+          model: _deviceType.model);
       Profile? profile;
       if (userData != null) {
         final user = userData.user;
@@ -36,15 +39,17 @@ class NewsFeedService {
                 companyName: user.companyName,
                 location: user.location,
                 companyDescription: user.description,
-                assets: [
-                  Asset(
-                      type: _deviceType.type,
-                      version: _deviceType.version,
-                      model: _deviceType.model)
-                ]),
-            verb: Verb(name: "User profile created")
-            );
+                userDevice: currentUserDeviceInfo,
+                assets: []),
+            verb: Verb(name: "User profile created"));
+      } else {
+        profile = Profile.withoutActor(
+          id: "",
+          verb: Verb(name: "initial scan without company profile"),
+          currentDevice: currentUserDeviceInfo,
+        );
       }
+
       debugPrint("user profile => $profile");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
       if (data.isNotEmpty) {

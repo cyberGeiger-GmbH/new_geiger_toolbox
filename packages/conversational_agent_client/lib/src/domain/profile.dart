@@ -32,15 +32,16 @@ class Profile with _$Profile {
     );
   }
 
-  ///Profile constructor to set a default value for createdAt
-  factory Profile.withNoCompanyProfile({
+  factory Profile.withoutActor({
     required String id,
     required Verb verb,
+    required Asset currentDevice,
     Acting? object,
     final Result? result,
   }) {
     return Profile(
       id: id,
+      actor: Actor(userDevice: currentDevice, assets: []),
       verb: verb,
       object: object,
       result: result,
@@ -55,10 +56,11 @@ class Profile with _$Profile {
 @freezed
 class Actor with _$Actor {
   const factory Actor({
-    required String companyName,
-    required String location,
+     String? companyName,
+     String? location,
+     required Asset userDevice,
     @Default("en") String? locale,
-    required String companyDescription,
+     String? companyDescription,
     @Default(true) bool? smeOwner,
     required List<Asset> assets,
   }) = _Actor;

@@ -51,8 +51,11 @@ class NewsFeedCacheRepository {
 
             // insert offering for each recommendation
             for (var offerData in recomData.offerings) {
+              //id = combination of offerings name and recom Id 
+              final id =
+                  "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
               final offer = OfferingsCompanion(
-                id: Value(offerData.name.replaceSpacesWithHyphen),
+                id: Value(id),
                 recommendationId: Value(recomData.id),
                 order: Value(offerOrder),
                 name: Value(offerData.name),

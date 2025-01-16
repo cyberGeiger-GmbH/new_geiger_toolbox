@@ -35,6 +35,7 @@ void main() {
               companyName: "CyberGEIGER",
               location: "Freiburg, Germany",
               companyDescription: "startup",
+              userDevice: Asset(type: "deskpto", version: "1.1.1", model: "mac"),
               assets: []),
           verb: Verb(name: "created user profile on Geiger toolbox")
 
