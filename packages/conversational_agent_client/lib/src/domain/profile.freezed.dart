@@ -339,6 +339,7 @@ Actor _$ActorFromJson(Map<String, dynamic> json) {
 mixin _$Actor {
   String? get companyName => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
+  Asset get userDevice => throw _privateConstructorUsedError;
   String? get locale => throw _privateConstructorUsedError;
   String? get companyDescription => throw _privateConstructorUsedError;
   bool? get smeOwner => throw _privateConstructorUsedError;
@@ -361,10 +362,13 @@ abstract class $ActorCopyWith<$Res> {
   $Res call(
       {String? companyName,
       String? location,
+      Asset userDevice,
       String? locale,
       String? companyDescription,
       bool? smeOwner,
       List<Asset> assets});
+
+  $AssetCopyWith<$Res> get userDevice;
 }
 
 /// @nodoc
@@ -384,6 +388,7 @@ class _$ActorCopyWithImpl<$Res, $Val extends Actor>
   $Res call({
     Object? companyName = freezed,
     Object? location = freezed,
+    Object? userDevice = null,
     Object? locale = freezed,
     Object? companyDescription = freezed,
     Object? smeOwner = freezed,
@@ -398,6 +403,10 @@ class _$ActorCopyWithImpl<$Res, $Val extends Actor>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String?,
+      userDevice: null == userDevice
+          ? _value.userDevice
+          : userDevice // ignore: cast_nullable_to_non_nullable
+              as Asset,
       locale: freezed == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -416,6 +425,16 @@ class _$ActorCopyWithImpl<$Res, $Val extends Actor>
               as List<Asset>,
     ) as $Val);
   }
+
+  /// Create a copy of Actor
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AssetCopyWith<$Res> get userDevice {
+    return $AssetCopyWith<$Res>(_value.userDevice, (value) {
+      return _then(_value.copyWith(userDevice: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -428,10 +447,14 @@ abstract class _$$ActorImplCopyWith<$Res> implements $ActorCopyWith<$Res> {
   $Res call(
       {String? companyName,
       String? location,
+      Asset userDevice,
       String? locale,
       String? companyDescription,
       bool? smeOwner,
       List<Asset> assets});
+
+  @override
+  $AssetCopyWith<$Res> get userDevice;
 }
 
 /// @nodoc
@@ -449,6 +472,7 @@ class __$$ActorImplCopyWithImpl<$Res>
   $Res call({
     Object? companyName = freezed,
     Object? location = freezed,
+    Object? userDevice = null,
     Object? locale = freezed,
     Object? companyDescription = freezed,
     Object? smeOwner = freezed,
@@ -463,6 +487,10 @@ class __$$ActorImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String?,
+      userDevice: null == userDevice
+          ? _value.userDevice
+          : userDevice // ignore: cast_nullable_to_non_nullable
+              as Asset,
       locale: freezed == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -489,6 +517,7 @@ class _$ActorImpl implements _Actor {
   const _$ActorImpl(
       {this.companyName,
       this.location,
+      required this.userDevice,
       this.locale = "en",
       this.companyDescription,
       this.smeOwner = true,
@@ -502,6 +531,8 @@ class _$ActorImpl implements _Actor {
   final String? companyName;
   @override
   final String? location;
+  @override
+  final Asset userDevice;
   @override
   @JsonKey()
   final String? locale;
@@ -520,7 +551,7 @@ class _$ActorImpl implements _Actor {
 
   @override
   String toString() {
-    return 'Actor(companyName: $companyName, location: $location, locale: $locale, companyDescription: $companyDescription, smeOwner: $smeOwner, assets: $assets)';
+    return 'Actor(companyName: $companyName, location: $location, userDevice: $userDevice, locale: $locale, companyDescription: $companyDescription, smeOwner: $smeOwner, assets: $assets)';
   }
 
   @override
@@ -532,6 +563,8 @@ class _$ActorImpl implements _Actor {
                 other.companyName == companyName) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.userDevice, userDevice) ||
+                other.userDevice == userDevice) &&
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.companyDescription, companyDescription) ||
                 other.companyDescription == companyDescription) &&
@@ -546,6 +579,7 @@ class _$ActorImpl implements _Actor {
       runtimeType,
       companyName,
       location,
+      userDevice,
       locale,
       companyDescription,
       smeOwner,
@@ -571,6 +605,7 @@ abstract class _Actor implements Actor {
   const factory _Actor(
       {final String? companyName,
       final String? location,
+      required final Asset userDevice,
       final String? locale,
       final String? companyDescription,
       final bool? smeOwner,
@@ -582,6 +617,8 @@ abstract class _Actor implements Actor {
   String? get companyName;
   @override
   String? get location;
+  @override
+  Asset get userDevice;
   @override
   String? get locale;
   @override

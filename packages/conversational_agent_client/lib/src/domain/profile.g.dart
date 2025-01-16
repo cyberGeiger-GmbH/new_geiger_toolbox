@@ -35,6 +35,7 @@ Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
 _$ActorImpl _$$ActorImplFromJson(Map<String, dynamic> json) => _$ActorImpl(
       companyName: json['companyName'] as String?,
       location: json['location'] as String?,
+      userDevice: Asset.fromJson(json['userDevice'] as Map<String, dynamic>),
       locale: json['locale'] as String? ?? "en",
       companyDescription: json['companyDescription'] as String?,
       smeOwner: json['smeOwner'] as bool? ?? true,
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$ActorImplToJson(_$ActorImpl instance) =>
     <String, dynamic>{
       'companyName': instance.companyName,
       'location': instance.location,
+      'userDevice': instance.userDevice,
       'locale': instance.locale,
       'companyDescription': instance.companyDescription,
       'smeOwner': instance.smeOwner,

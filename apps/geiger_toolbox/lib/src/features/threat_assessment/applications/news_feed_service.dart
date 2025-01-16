@@ -36,17 +36,18 @@ class NewsFeedService {
         profile = Profile.withDefaultTimestamp(
             id: userData.id.toString(),
             actor: Actor(
-              companyName: user.companyName,
-              location: user.location,
-              companyDescription: user.description,
-              assets: [currentUserDeviceInfo],
-            ),
+                companyName: user.companyName,
+                location: user.location,
+                companyDescription: user.description,
+                userDevice: currentUserDeviceInfo,
+                assets: []),
             verb: Verb(name: "User profile created"));
       } else {
         profile = Profile.withoutActor(
-            id: "",
-            verb: Verb(name: "initial scan without company profile"),
-            assets: [currentUserDeviceInfo]);
+          id: "",
+          verb: Verb(name: "initial scan without company profile"),
+          currentDevice: currentUserDeviceInfo,
+        );
       }
 
       debugPrint("user profile => $profile");

@@ -35,13 +35,13 @@ class Profile with _$Profile {
   factory Profile.withoutActor({
     required String id,
     required Verb verb,
-    required List<Asset> assets,
+    required Asset currentDevice,
     Acting? object,
     final Result? result,
   }) {
     return Profile(
       id: id,
-      actor: Actor( assets: assets),
+      actor: Actor(userDevice: currentDevice, assets: []),
       verb: verb,
       object: object,
       result: result,
@@ -58,6 +58,7 @@ class Actor with _$Actor {
   const factory Actor({
      String? companyName,
      String? location,
+     required Asset userDevice,
     @Default("en") String? locale,
      String? companyDescription,
     @Default(true) bool? smeOwner,
