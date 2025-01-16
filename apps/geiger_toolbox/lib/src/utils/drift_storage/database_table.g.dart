@@ -3,21 +3,788 @@
 part of 'database_table.dart';
 
 // ignore_for_file: type=lint
-class $UserProfileTable extends UserProfile
-    with TableInfo<$UserProfileTable, UserProfileData> {
+class $DevicesTable extends Devices with TableInfo<$DevicesTable, DeviceData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $UserProfileTable(this.attachedDatabase, [this._alias]);
+  $DevicesTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+      'type', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _versionMeta =
+      const VerificationMeta('version');
+  @override
+  late final GeneratedColumn<String> version = GeneratedColumn<String>(
+      'version', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _createdMeta =
+      const VerificationMeta('created');
+  @override
+  late final GeneratedColumn<DateTime> created = GeneratedColumn<DateTime>(
+      'created', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, name, type, version, created];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'devices';
+  @override
+  VerificationContext validateIntegrity(Insertable<DeviceData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    if (data.containsKey('version')) {
+      context.handle(_versionMeta,
+          version.isAcceptableOrUnknown(data['version']!, _versionMeta));
+    } else if (isInserting) {
+      context.missing(_versionMeta);
+    }
+    if (data.containsKey('created')) {
+      context.handle(_createdMeta,
+          created.isAcceptableOrUnknown(data['created']!, _createdMeta));
+    } else if (isInserting) {
+      context.missing(_createdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DeviceData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DeviceData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      type: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
+      version: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}version'])!,
+      created: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created'])!,
+    );
+  }
+
+  @override
+  $DevicesTable createAlias(String alias) {
+    return $DevicesTable(attachedDatabase, alias);
+  }
+}
+
+class DeviceData extends DataClass implements Insertable<DeviceData> {
+  final int id;
+  final String name;
+  final String type;
+  final String version;
+  final DateTime created;
+  const DeviceData(
+      {required this.id,
+      required this.name,
+      required this.type,
+      required this.version,
+      required this.created});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    map['type'] = Variable<String>(type);
+    map['version'] = Variable<String>(version);
+    map['created'] = Variable<DateTime>(created);
+    return map;
+  }
+
+  DevicesCompanion toCompanion(bool nullToAbsent) {
+    return DevicesCompanion(
+      id: Value(id),
+      name: Value(name),
+      type: Value(type),
+      version: Value(version),
+      created: Value(created),
+    );
+  }
+
+  factory DeviceData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DeviceData(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      type: serializer.fromJson<String>(json['type']),
+      version: serializer.fromJson<String>(json['version']),
+      created: serializer.fromJson<DateTime>(json['created']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'type': serializer.toJson<String>(type),
+      'version': serializer.toJson<String>(version),
+      'created': serializer.toJson<DateTime>(created),
+    };
+  }
+
+  DeviceData copyWith(
+          {int? id,
+          String? name,
+          String? type,
+          String? version,
+          DateTime? created}) =>
+      DeviceData(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        type: type ?? this.type,
+        version: version ?? this.version,
+        created: created ?? this.created,
+      );
+  DeviceData copyWithCompanion(DevicesCompanion data) {
+    return DeviceData(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      type: data.type.present ? data.type.value : this.type,
+      version: data.version.present ? data.version.value : this.version,
+      created: data.created.present ? data.created.value : this.created,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DeviceData(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('type: $type, ')
+          ..write('version: $version, ')
+          ..write('created: $created')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, type, version, created);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DeviceData &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.type == this.type &&
+          other.version == this.version &&
+          other.created == this.created);
+}
+
+class DevicesCompanion extends UpdateCompanion<DeviceData> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<String> type;
+  final Value<String> version;
+  final Value<DateTime> created;
+  const DevicesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.type = const Value.absent(),
+    this.version = const Value.absent(),
+    this.created = const Value.absent(),
+  });
+  DevicesCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    required String type,
+    required String version,
+    required DateTime created,
+  })  : name = Value(name),
+        type = Value(type),
+        version = Value(version),
+        created = Value(created);
+  static Insertable<DeviceData> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<String>? type,
+    Expression<String>? version,
+    Expression<DateTime>? created,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (type != null) 'type': type,
+      if (version != null) 'version': version,
+      if (created != null) 'created': created,
+    });
+  }
+
+  DevicesCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? name,
+      Value<String>? type,
+      Value<String>? version,
+      Value<DateTime>? created}) {
+    return DevicesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      version: version ?? this.version,
+      created: created ?? this.created,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    if (version.present) {
+      map['version'] = Variable<String>(version.value);
+    }
+    if (created.present) {
+      map['created'] = Variable<DateTime>(created.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DevicesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('type: $type, ')
+          ..write('version: $version, ')
+          ..write('created: $created')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $GeigerScoresTable extends GeigerScores
+    with TableInfo<$GeigerScoresTable, GeigerScoreData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GeigerScoresTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _scoreIdMeta =
+      const VerificationMeta('scoreId');
+  @override
+  late final GeneratedColumn<DateTime> scoreId = GeneratedColumn<DateTime>(
+      'score_id', aliasedName, false,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  static const VerificationMeta _scoreMeta = const VerificationMeta('score');
+  @override
+  late final GeneratedColumn<int> score = GeneratedColumn<int>(
+      'score', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _reasonsMeta =
+      const VerificationMeta('reasons');
+  @override
+  late final GeneratedColumn<String> reasons = GeneratedColumn<String>(
+      'reasons', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [scoreId, score, reasons];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'geiger_scores';
+  @override
+  VerificationContext validateIntegrity(Insertable<GeigerScoreData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('score_id')) {
+      context.handle(_scoreIdMeta,
+          scoreId.isAcceptableOrUnknown(data['score_id']!, _scoreIdMeta));
+    }
+    if (data.containsKey('score')) {
+      context.handle(
+          _scoreMeta, score.isAcceptableOrUnknown(data['score']!, _scoreMeta));
+    } else if (isInserting) {
+      context.missing(_scoreMeta);
+    }
+    if (data.containsKey('reasons')) {
+      context.handle(_reasonsMeta,
+          reasons.isAcceptableOrUnknown(data['reasons']!, _reasonsMeta));
+    } else if (isInserting) {
+      context.missing(_reasonsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {scoreId};
+  @override
+  GeigerScoreData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GeigerScoreData(
+      scoreId: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}score_id'])!,
+      score: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}score'])!,
+      reasons: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}reasons'])!,
+    );
+  }
+
+  @override
+  $GeigerScoresTable createAlias(String alias) {
+    return $GeigerScoresTable(attachedDatabase, alias);
+  }
+}
+
+class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
+  final DateTime scoreId;
+  final int score;
+  final String reasons;
+  const GeigerScoreData(
+      {required this.scoreId, required this.score, required this.reasons});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['score_id'] = Variable<DateTime>(scoreId);
+    map['score'] = Variable<int>(score);
+    map['reasons'] = Variable<String>(reasons);
+    return map;
+  }
+
+  GeigerScoresCompanion toCompanion(bool nullToAbsent) {
+    return GeigerScoresCompanion(
+      scoreId: Value(scoreId),
+      score: Value(score),
+      reasons: Value(reasons),
+    );
+  }
+
+  factory GeigerScoreData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GeigerScoreData(
+      scoreId: serializer.fromJson<DateTime>(json['scoreId']),
+      score: serializer.fromJson<int>(json['score']),
+      reasons: serializer.fromJson<String>(json['reasons']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'scoreId': serializer.toJson<DateTime>(scoreId),
+      'score': serializer.toJson<int>(score),
+      'reasons': serializer.toJson<String>(reasons),
+    };
+  }
+
+  GeigerScoreData copyWith({DateTime? scoreId, int? score, String? reasons}) =>
+      GeigerScoreData(
+        scoreId: scoreId ?? this.scoreId,
+        score: score ?? this.score,
+        reasons: reasons ?? this.reasons,
+      );
+  GeigerScoreData copyWithCompanion(GeigerScoresCompanion data) {
+    return GeigerScoreData(
+      scoreId: data.scoreId.present ? data.scoreId.value : this.scoreId,
+      score: data.score.present ? data.score.value : this.score,
+      reasons: data.reasons.present ? data.reasons.value : this.reasons,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GeigerScoreData(')
+          ..write('scoreId: $scoreId, ')
+          ..write('score: $score, ')
+          ..write('reasons: $reasons')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(scoreId, score, reasons);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GeigerScoreData &&
+          other.scoreId == this.scoreId &&
+          other.score == this.score &&
+          other.reasons == this.reasons);
+}
+
+class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
+  final Value<DateTime> scoreId;
+  final Value<int> score;
+  final Value<String> reasons;
+  final Value<int> rowid;
+  const GeigerScoresCompanion({
+    this.scoreId = const Value.absent(),
+    this.score = const Value.absent(),
+    this.reasons = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GeigerScoresCompanion.insert({
+    this.scoreId = const Value.absent(),
+    required int score,
+    required String reasons,
+    this.rowid = const Value.absent(),
+  })  : score = Value(score),
+        reasons = Value(reasons);
+  static Insertable<GeigerScoreData> custom({
+    Expression<DateTime>? scoreId,
+    Expression<int>? score,
+    Expression<String>? reasons,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (scoreId != null) 'score_id': scoreId,
+      if (score != null) 'score': score,
+      if (reasons != null) 'reasons': reasons,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GeigerScoresCompanion copyWith(
+      {Value<DateTime>? scoreId,
+      Value<int>? score,
+      Value<String>? reasons,
+      Value<int>? rowid}) {
+    return GeigerScoresCompanion(
+      scoreId: scoreId ?? this.scoreId,
+      score: score ?? this.score,
+      reasons: reasons ?? this.reasons,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (scoreId.present) {
+      map['score_id'] = Variable<DateTime>(scoreId.value);
+    }
+    if (score.present) {
+      map['score'] = Variable<int>(score.value);
+    }
+    if (reasons.present) {
+      map['reasons'] = Variable<String>(reasons.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GeigerScoresCompanion(')
+          ..write('scoreId: $scoreId, ')
+          ..write('score: $score, ')
+          ..write('reasons: $reasons, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DeviceScoresTable extends DeviceScores
+    with TableInfo<$DeviceScoresTable, DeviceScoreData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DeviceScoresTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _deviceIdMeta =
+      const VerificationMeta('deviceId');
+  @override
+  late final GeneratedColumn<String> deviceId = GeneratedColumn<String>(
+      'device_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
       defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+          GeneratedColumn.constraintIsAlways('REFERENCES devices (id)'));
+  static const VerificationMeta _scoreIdMeta =
+      const VerificationMeta('scoreId');
+  @override
+  late final GeneratedColumn<DateTime> scoreId = GeneratedColumn<DateTime>(
+      'score_id', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES geiger_scores (score_id)'));
+  static const VerificationMeta _lastUpdatedMeta =
+      const VerificationMeta('lastUpdated');
+  @override
+  late final GeneratedColumn<DateTime> lastUpdated = GeneratedColumn<DateTime>(
+      'last_updated', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns => [deviceId, scoreId, lastUpdated];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'device_scores';
+  @override
+  VerificationContext validateIntegrity(Insertable<DeviceScoreData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('device_id')) {
+      context.handle(_deviceIdMeta,
+          deviceId.isAcceptableOrUnknown(data['device_id']!, _deviceIdMeta));
+    } else if (isInserting) {
+      context.missing(_deviceIdMeta);
+    }
+    if (data.containsKey('score_id')) {
+      context.handle(_scoreIdMeta,
+          scoreId.isAcceptableOrUnknown(data['score_id']!, _scoreIdMeta));
+    } else if (isInserting) {
+      context.missing(_scoreIdMeta);
+    }
+    if (data.containsKey('last_updated')) {
+      context.handle(
+          _lastUpdatedMeta,
+          lastUpdated.isAcceptableOrUnknown(
+              data['last_updated']!, _lastUpdatedMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {deviceId, scoreId};
+  @override
+  DeviceScoreData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DeviceScoreData(
+      deviceId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}device_id'])!,
+      scoreId: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}score_id'])!,
+      lastUpdated: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}last_updated'])!,
+    );
+  }
+
+  @override
+  $DeviceScoresTable createAlias(String alias) {
+    return $DeviceScoresTable(attachedDatabase, alias);
+  }
+}
+
+class DeviceScoreData extends DataClass implements Insertable<DeviceScoreData> {
+  final String deviceId;
+  final DateTime scoreId;
+  final DateTime lastUpdated;
+  const DeviceScoreData(
+      {required this.deviceId,
+      required this.scoreId,
+      required this.lastUpdated});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['device_id'] = Variable<String>(deviceId);
+    map['score_id'] = Variable<DateTime>(scoreId);
+    map['last_updated'] = Variable<DateTime>(lastUpdated);
+    return map;
+  }
+
+  DeviceScoresCompanion toCompanion(bool nullToAbsent) {
+    return DeviceScoresCompanion(
+      deviceId: Value(deviceId),
+      scoreId: Value(scoreId),
+      lastUpdated: Value(lastUpdated),
+    );
+  }
+
+  factory DeviceScoreData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DeviceScoreData(
+      deviceId: serializer.fromJson<String>(json['deviceId']),
+      scoreId: serializer.fromJson<DateTime>(json['scoreId']),
+      lastUpdated: serializer.fromJson<DateTime>(json['lastUpdated']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'deviceId': serializer.toJson<String>(deviceId),
+      'scoreId': serializer.toJson<DateTime>(scoreId),
+      'lastUpdated': serializer.toJson<DateTime>(lastUpdated),
+    };
+  }
+
+  DeviceScoreData copyWith(
+          {String? deviceId, DateTime? scoreId, DateTime? lastUpdated}) =>
+      DeviceScoreData(
+        deviceId: deviceId ?? this.deviceId,
+        scoreId: scoreId ?? this.scoreId,
+        lastUpdated: lastUpdated ?? this.lastUpdated,
+      );
+  DeviceScoreData copyWithCompanion(DeviceScoresCompanion data) {
+    return DeviceScoreData(
+      deviceId: data.deviceId.present ? data.deviceId.value : this.deviceId,
+      scoreId: data.scoreId.present ? data.scoreId.value : this.scoreId,
+      lastUpdated:
+          data.lastUpdated.present ? data.lastUpdated.value : this.lastUpdated,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DeviceScoreData(')
+          ..write('deviceId: $deviceId, ')
+          ..write('scoreId: $scoreId, ')
+          ..write('lastUpdated: $lastUpdated')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(deviceId, scoreId, lastUpdated);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DeviceScoreData &&
+          other.deviceId == this.deviceId &&
+          other.scoreId == this.scoreId &&
+          other.lastUpdated == this.lastUpdated);
+}
+
+class DeviceScoresCompanion extends UpdateCompanion<DeviceScoreData> {
+  final Value<String> deviceId;
+  final Value<DateTime> scoreId;
+  final Value<DateTime> lastUpdated;
+  final Value<int> rowid;
+  const DeviceScoresCompanion({
+    this.deviceId = const Value.absent(),
+    this.scoreId = const Value.absent(),
+    this.lastUpdated = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DeviceScoresCompanion.insert({
+    required String deviceId,
+    required DateTime scoreId,
+    this.lastUpdated = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : deviceId = Value(deviceId),
+        scoreId = Value(scoreId);
+  static Insertable<DeviceScoreData> custom({
+    Expression<String>? deviceId,
+    Expression<DateTime>? scoreId,
+    Expression<DateTime>? lastUpdated,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (deviceId != null) 'device_id': deviceId,
+      if (scoreId != null) 'score_id': scoreId,
+      if (lastUpdated != null) 'last_updated': lastUpdated,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DeviceScoresCompanion copyWith(
+      {Value<String>? deviceId,
+      Value<DateTime>? scoreId,
+      Value<DateTime>? lastUpdated,
+      Value<int>? rowid}) {
+    return DeviceScoresCompanion(
+      deviceId: deviceId ?? this.deviceId,
+      scoreId: scoreId ?? this.scoreId,
+      lastUpdated: lastUpdated ?? this.lastUpdated,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (deviceId.present) {
+      map['device_id'] = Variable<String>(deviceId.value);
+    }
+    if (scoreId.present) {
+      map['score_id'] = Variable<DateTime>(scoreId.value);
+    }
+    if (lastUpdated.present) {
+      map['last_updated'] = Variable<DateTime>(lastUpdated.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DeviceScoresCompanion(')
+          ..write('deviceId: $deviceId, ')
+          ..write('scoreId: $scoreId, ')
+          ..write('lastUpdated: $lastUpdated, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UserProfilesTable extends UserProfiles
+    with TableInfo<$UserProfilesTable, UserProfileData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UserProfilesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _companyNameMeta =
       const VerificationMeta('companyName');
   @override
@@ -42,14 +809,23 @@ class $UserProfileTable extends UserProfile
   late final GeneratedColumn<String> description = GeneratedColumn<String>(
       'description', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _deviceScoreIdMeta =
+      const VerificationMeta('deviceScoreId');
+  @override
+  late final GeneratedColumn<int> deviceScoreId = GeneratedColumn<int>(
+      'device_score_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES device_scores (device_id)'));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, companyName, location, description];
+      [id, companyName, location, description, deviceScoreId];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'user_profile';
+  static const String $name = 'user_profiles';
   @override
   VerificationContext validateIntegrity(Insertable<UserProfileData> instance,
       {bool isInserting = false}) {
@@ -57,6 +833,8 @@ class $UserProfileTable extends UserProfile
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
     }
     if (data.containsKey('company_name')) {
       context.handle(
@@ -80,11 +858,19 @@ class $UserProfileTable extends UserProfile
     } else if (isInserting) {
       context.missing(_descriptionMeta);
     }
+    if (data.containsKey('device_score_id')) {
+      context.handle(
+          _deviceScoreIdMeta,
+          deviceScoreId.isAcceptableOrUnknown(
+              data['device_score_id']!, _deviceScoreIdMeta));
+    } else if (isInserting) {
+      context.missing(_deviceScoreIdMeta);
+    }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => const {};
   @override
   UserProfileData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -97,12 +883,14 @@ class $UserProfileTable extends UserProfile
           .read(DriftSqlType.string, data['${effectivePrefix}location'])!,
       description: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}description'])!,
+      deviceScoreId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}device_score_id'])!,
     );
   }
 
   @override
-  $UserProfileTable createAlias(String alias) {
-    return $UserProfileTable(attachedDatabase, alias);
+  $UserProfilesTable createAlias(String alias) {
+    return $UserProfilesTable(attachedDatabase, alias);
   }
 }
 
@@ -111,11 +899,13 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
   final String companyName;
   final String location;
   final String description;
+  final int deviceScoreId;
   const UserProfileData(
       {required this.id,
       required this.companyName,
       required this.location,
-      required this.description});
+      required this.description,
+      required this.deviceScoreId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -123,15 +913,17 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
     map['company_name'] = Variable<String>(companyName);
     map['location'] = Variable<String>(location);
     map['description'] = Variable<String>(description);
+    map['device_score_id'] = Variable<int>(deviceScoreId);
     return map;
   }
 
-  UserProfileCompanion toCompanion(bool nullToAbsent) {
-    return UserProfileCompanion(
+  UserProfilesCompanion toCompanion(bool nullToAbsent) {
+    return UserProfilesCompanion(
       id: Value(id),
       companyName: Value(companyName),
       location: Value(location),
       description: Value(description),
+      deviceScoreId: Value(deviceScoreId),
     );
   }
 
@@ -143,6 +935,7 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
       companyName: serializer.fromJson<String>(json['companyName']),
       location: serializer.fromJson<String>(json['location']),
       description: serializer.fromJson<String>(json['description']),
+      deviceScoreId: serializer.fromJson<int>(json['deviceScoreId']),
     );
   }
   @override
@@ -153,6 +946,7 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
       'companyName': serializer.toJson<String>(companyName),
       'location': serializer.toJson<String>(location),
       'description': serializer.toJson<String>(description),
+      'deviceScoreId': serializer.toJson<int>(deviceScoreId),
     };
   }
 
@@ -160,14 +954,16 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
           {int? id,
           String? companyName,
           String? location,
-          String? description}) =>
+          String? description,
+          int? deviceScoreId}) =>
       UserProfileData(
         id: id ?? this.id,
         companyName: companyName ?? this.companyName,
         location: location ?? this.location,
         description: description ?? this.description,
+        deviceScoreId: deviceScoreId ?? this.deviceScoreId,
       );
-  UserProfileData copyWithCompanion(UserProfileCompanion data) {
+  UserProfileData copyWithCompanion(UserProfilesCompanion data) {
     return UserProfileData(
       id: data.id.present ? data.id.value : this.id,
       companyName:
@@ -175,6 +971,9 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
       location: data.location.present ? data.location.value : this.location,
       description:
           data.description.present ? data.description.value : this.description,
+      deviceScoreId: data.deviceScoreId.present
+          ? data.deviceScoreId.value
+          : this.deviceScoreId,
     );
   }
 
@@ -184,13 +983,15 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
           ..write('id: $id, ')
           ..write('companyName: $companyName, ')
           ..write('location: $location, ')
-          ..write('description: $description')
+          ..write('description: $description, ')
+          ..write('deviceScoreId: $deviceScoreId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, companyName, location, description);
+  int get hashCode =>
+      Object.hash(id, companyName, location, description, deviceScoreId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -198,52 +999,69 @@ class UserProfileData extends DataClass implements Insertable<UserProfileData> {
           other.id == this.id &&
           other.companyName == this.companyName &&
           other.location == this.location &&
-          other.description == this.description);
+          other.description == this.description &&
+          other.deviceScoreId == this.deviceScoreId);
 }
 
-class UserProfileCompanion extends UpdateCompanion<UserProfileData> {
+class UserProfilesCompanion extends UpdateCompanion<UserProfileData> {
   final Value<int> id;
   final Value<String> companyName;
   final Value<String> location;
   final Value<String> description;
-  const UserProfileCompanion({
+  final Value<int> deviceScoreId;
+  final Value<int> rowid;
+  const UserProfilesCompanion({
     this.id = const Value.absent(),
     this.companyName = const Value.absent(),
     this.location = const Value.absent(),
     this.description = const Value.absent(),
+    this.deviceScoreId = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
-  UserProfileCompanion.insert({
-    this.id = const Value.absent(),
+  UserProfilesCompanion.insert({
+    required int id,
     required String companyName,
     required String location,
     required String description,
-  })  : companyName = Value(companyName),
+    required int deviceScoreId,
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        companyName = Value(companyName),
         location = Value(location),
-        description = Value(description);
+        description = Value(description),
+        deviceScoreId = Value(deviceScoreId);
   static Insertable<UserProfileData> custom({
     Expression<int>? id,
     Expression<String>? companyName,
     Expression<String>? location,
     Expression<String>? description,
+    Expression<int>? deviceScoreId,
+    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (companyName != null) 'company_name': companyName,
       if (location != null) 'location': location,
       if (description != null) 'description': description,
+      if (deviceScoreId != null) 'device_score_id': deviceScoreId,
+      if (rowid != null) 'rowid': rowid,
     });
   }
 
-  UserProfileCompanion copyWith(
+  UserProfilesCompanion copyWith(
       {Value<int>? id,
       Value<String>? companyName,
       Value<String>? location,
-      Value<String>? description}) {
-    return UserProfileCompanion(
+      Value<String>? description,
+      Value<int>? deviceScoreId,
+      Value<int>? rowid}) {
+    return UserProfilesCompanion(
       id: id ?? this.id,
       companyName: companyName ?? this.companyName,
       location: location ?? this.location,
       description: description ?? this.description,
+      deviceScoreId: deviceScoreId ?? this.deviceScoreId,
+      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -262,16 +1080,24 @@ class UserProfileCompanion extends UpdateCompanion<UserProfileData> {
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
+    if (deviceScoreId.present) {
+      map['device_score_id'] = Variable<int>(deviceScoreId.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('UserProfileCompanion(')
+    return (StringBuffer('UserProfilesCompanion(')
           ..write('id: $id, ')
           ..write('companyName: $companyName, ')
           ..write('location: $location, ')
-          ..write('description: $description')
+          ..write('description: $description, ')
+          ..write('deviceScoreId: $deviceScoreId, ')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -1439,7 +2265,10 @@ class TodoOfferingStatusesCompanion
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
-  late final $UserProfileTable userProfile = $UserProfileTable(this);
+  late final $DevicesTable devices = $DevicesTable(this);
+  late final $GeigerScoresTable geigerScores = $GeigerScoresTable(this);
+  late final $DeviceScoresTable deviceScores = $DeviceScoresTable(this);
+  late final $UserProfilesTable userProfiles = $UserProfilesTable(this);
   late final $NewsInfoTable newsInfo = $NewsInfoTable(this);
   late final $RecommendationsTable recommendations =
       $RecommendationsTable(this);
@@ -1450,28 +2279,658 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [userProfile, newsInfo, recommendations, offerings, todoOfferingStatuses];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        devices,
+        geigerScores,
+        deviceScores,
+        userProfiles,
+        newsInfo,
+        recommendations,
+        offerings,
+        todoOfferingStatuses
+      ];
 }
 
-typedef $$UserProfileTableCreateCompanionBuilder = UserProfileCompanion
-    Function({
+typedef $$DevicesTableCreateCompanionBuilder = DevicesCompanion Function({
   Value<int> id,
+  required String name,
+  required String type,
+  required String version,
+  required DateTime created,
+});
+typedef $$DevicesTableUpdateCompanionBuilder = DevicesCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<String> type,
+  Value<String> version,
+  Value<DateTime> created,
+});
+
+class $$DevicesTableFilterComposer
+    extends Composer<_$AppDatabase, $DevicesTable> {
+  $$DevicesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get version => $composableBuilder(
+      column: $table.version, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get created => $composableBuilder(
+      column: $table.created, builder: (column) => ColumnFilters(column));
+}
+
+class $$DevicesTableOrderingComposer
+    extends Composer<_$AppDatabase, $DevicesTable> {
+  $$DevicesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get version => $composableBuilder(
+      column: $table.version, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get created => $composableBuilder(
+      column: $table.created, builder: (column) => ColumnOrderings(column));
+}
+
+class $$DevicesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DevicesTable> {
+  $$DevicesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<String> get version =>
+      $composableBuilder(column: $table.version, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get created =>
+      $composableBuilder(column: $table.created, builder: (column) => column);
+}
+
+class $$DevicesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DevicesTable,
+    DeviceData,
+    $$DevicesTableFilterComposer,
+    $$DevicesTableOrderingComposer,
+    $$DevicesTableAnnotationComposer,
+    $$DevicesTableCreateCompanionBuilder,
+    $$DevicesTableUpdateCompanionBuilder,
+    (DeviceData, BaseReferences<_$AppDatabase, $DevicesTable, DeviceData>),
+    DeviceData,
+    PrefetchHooks Function()> {
+  $$DevicesTableTableManager(_$AppDatabase db, $DevicesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DevicesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DevicesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DevicesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> type = const Value.absent(),
+            Value<String> version = const Value.absent(),
+            Value<DateTime> created = const Value.absent(),
+          }) =>
+              DevicesCompanion(
+            id: id,
+            name: name,
+            type: type,
+            version: version,
+            created: created,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String name,
+            required String type,
+            required String version,
+            required DateTime created,
+          }) =>
+              DevicesCompanion.insert(
+            id: id,
+            name: name,
+            type: type,
+            version: version,
+            created: created,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$DevicesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DevicesTable,
+    DeviceData,
+    $$DevicesTableFilterComposer,
+    $$DevicesTableOrderingComposer,
+    $$DevicesTableAnnotationComposer,
+    $$DevicesTableCreateCompanionBuilder,
+    $$DevicesTableUpdateCompanionBuilder,
+    (DeviceData, BaseReferences<_$AppDatabase, $DevicesTable, DeviceData>),
+    DeviceData,
+    PrefetchHooks Function()>;
+typedef $$GeigerScoresTableCreateCompanionBuilder = GeigerScoresCompanion
+    Function({
+  Value<DateTime> scoreId,
+  required int score,
+  required String reasons,
+  Value<int> rowid,
+});
+typedef $$GeigerScoresTableUpdateCompanionBuilder = GeigerScoresCompanion
+    Function({
+  Value<DateTime> scoreId,
+  Value<int> score,
+  Value<String> reasons,
+  Value<int> rowid,
+});
+
+final class $$GeigerScoresTableReferences
+    extends BaseReferences<_$AppDatabase, $GeigerScoresTable, GeigerScoreData> {
+  $$GeigerScoresTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$DeviceScoresTable, List<DeviceScoreData>>
+      _deviceScoresRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.deviceScores,
+              aliasName: $_aliasNameGenerator(
+                  db.geigerScores.scoreId, db.deviceScores.scoreId));
+
+  $$DeviceScoresTableProcessedTableManager get deviceScoresRefs {
+    final manager = $$DeviceScoresTableTableManager($_db, $_db.deviceScores)
+        .filter((f) => f.scoreId.scoreId($_item.scoreId));
+
+    final cache = $_typedResult.readTableOrNull(_deviceScoresRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$GeigerScoresTableFilterComposer
+    extends Composer<_$AppDatabase, $GeigerScoresTable> {
+  $$GeigerScoresTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<DateTime> get scoreId => $composableBuilder(
+      column: $table.scoreId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get score => $composableBuilder(
+      column: $table.score, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get reasons => $composableBuilder(
+      column: $table.reasons, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> deviceScoresRefs(
+      Expression<bool> Function($$DeviceScoresTableFilterComposer f) f) {
+    final $$DeviceScoresTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.scoreId,
+        referencedTable: $db.deviceScores,
+        getReferencedColumn: (t) => t.scoreId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DeviceScoresTableFilterComposer(
+              $db: $db,
+              $table: $db.deviceScores,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$GeigerScoresTableOrderingComposer
+    extends Composer<_$AppDatabase, $GeigerScoresTable> {
+  $$GeigerScoresTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<DateTime> get scoreId => $composableBuilder(
+      column: $table.scoreId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get score => $composableBuilder(
+      column: $table.score, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get reasons => $composableBuilder(
+      column: $table.reasons, builder: (column) => ColumnOrderings(column));
+}
+
+class $$GeigerScoresTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GeigerScoresTable> {
+  $$GeigerScoresTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<DateTime> get scoreId =>
+      $composableBuilder(column: $table.scoreId, builder: (column) => column);
+
+  GeneratedColumn<int> get score =>
+      $composableBuilder(column: $table.score, builder: (column) => column);
+
+  GeneratedColumn<String> get reasons =>
+      $composableBuilder(column: $table.reasons, builder: (column) => column);
+
+  Expression<T> deviceScoresRefs<T extends Object>(
+      Expression<T> Function($$DeviceScoresTableAnnotationComposer a) f) {
+    final $$DeviceScoresTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.scoreId,
+        referencedTable: $db.deviceScores,
+        getReferencedColumn: (t) => t.scoreId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DeviceScoresTableAnnotationComposer(
+              $db: $db,
+              $table: $db.deviceScores,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$GeigerScoresTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GeigerScoresTable,
+    GeigerScoreData,
+    $$GeigerScoresTableFilterComposer,
+    $$GeigerScoresTableOrderingComposer,
+    $$GeigerScoresTableAnnotationComposer,
+    $$GeigerScoresTableCreateCompanionBuilder,
+    $$GeigerScoresTableUpdateCompanionBuilder,
+    (GeigerScoreData, $$GeigerScoresTableReferences),
+    GeigerScoreData,
+    PrefetchHooks Function({bool deviceScoresRefs})> {
+  $$GeigerScoresTableTableManager(_$AppDatabase db, $GeigerScoresTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GeigerScoresTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GeigerScoresTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GeigerScoresTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<DateTime> scoreId = const Value.absent(),
+            Value<int> score = const Value.absent(),
+            Value<String> reasons = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GeigerScoresCompanion(
+            scoreId: scoreId,
+            score: score,
+            reasons: reasons,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            Value<DateTime> scoreId = const Value.absent(),
+            required int score,
+            required String reasons,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GeigerScoresCompanion.insert(
+            scoreId: scoreId,
+            score: score,
+            reasons: reasons,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$GeigerScoresTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({deviceScoresRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (deviceScoresRefs) db.deviceScores],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (deviceScoresRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$GeigerScoresTableReferences
+                            ._deviceScoresRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$GeigerScoresTableReferences(db, table, p0)
+                                .deviceScoresRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.scoreId == item.scoreId),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$GeigerScoresTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $GeigerScoresTable,
+    GeigerScoreData,
+    $$GeigerScoresTableFilterComposer,
+    $$GeigerScoresTableOrderingComposer,
+    $$GeigerScoresTableAnnotationComposer,
+    $$GeigerScoresTableCreateCompanionBuilder,
+    $$GeigerScoresTableUpdateCompanionBuilder,
+    (GeigerScoreData, $$GeigerScoresTableReferences),
+    GeigerScoreData,
+    PrefetchHooks Function({bool deviceScoresRefs})>;
+typedef $$DeviceScoresTableCreateCompanionBuilder = DeviceScoresCompanion
+    Function({
+  required String deviceId,
+  required DateTime scoreId,
+  Value<DateTime> lastUpdated,
+  Value<int> rowid,
+});
+typedef $$DeviceScoresTableUpdateCompanionBuilder = DeviceScoresCompanion
+    Function({
+  Value<String> deviceId,
+  Value<DateTime> scoreId,
+  Value<DateTime> lastUpdated,
+  Value<int> rowid,
+});
+
+final class $$DeviceScoresTableReferences
+    extends BaseReferences<_$AppDatabase, $DeviceScoresTable, DeviceScoreData> {
+  $$DeviceScoresTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $GeigerScoresTable _scoreIdTable(_$AppDatabase db) =>
+      db.geigerScores.createAlias($_aliasNameGenerator(
+          db.deviceScores.scoreId, db.geigerScores.scoreId));
+
+  $$GeigerScoresTableProcessedTableManager? get scoreId {
+    if ($_item.scoreId == null) return null;
+    final manager = $$GeigerScoresTableTableManager($_db, $_db.geigerScores)
+        .filter((f) => f.scoreId($_item.scoreId!));
+    final item = $_typedResult.readTableOrNull(_scoreIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$DeviceScoresTableFilterComposer
+    extends Composer<_$AppDatabase, $DeviceScoresTable> {
+  $$DeviceScoresTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<DateTime> get lastUpdated => $composableBuilder(
+      column: $table.lastUpdated, builder: (column) => ColumnFilters(column));
+
+  $$GeigerScoresTableFilterComposer get scoreId {
+    final $$GeigerScoresTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.scoreId,
+        referencedTable: $db.geigerScores,
+        getReferencedColumn: (t) => t.scoreId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$GeigerScoresTableFilterComposer(
+              $db: $db,
+              $table: $db.geigerScores,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$DeviceScoresTableOrderingComposer
+    extends Composer<_$AppDatabase, $DeviceScoresTable> {
+  $$DeviceScoresTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<DateTime> get lastUpdated => $composableBuilder(
+      column: $table.lastUpdated, builder: (column) => ColumnOrderings(column));
+
+  $$GeigerScoresTableOrderingComposer get scoreId {
+    final $$GeigerScoresTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.scoreId,
+        referencedTable: $db.geigerScores,
+        getReferencedColumn: (t) => t.scoreId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$GeigerScoresTableOrderingComposer(
+              $db: $db,
+              $table: $db.geigerScores,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$DeviceScoresTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DeviceScoresTable> {
+  $$DeviceScoresTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<DateTime> get lastUpdated => $composableBuilder(
+      column: $table.lastUpdated, builder: (column) => column);
+
+  $$GeigerScoresTableAnnotationComposer get scoreId {
+    final $$GeigerScoresTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.scoreId,
+        referencedTable: $db.geigerScores,
+        getReferencedColumn: (t) => t.scoreId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$GeigerScoresTableAnnotationComposer(
+              $db: $db,
+              $table: $db.geigerScores,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$DeviceScoresTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DeviceScoresTable,
+    DeviceScoreData,
+    $$DeviceScoresTableFilterComposer,
+    $$DeviceScoresTableOrderingComposer,
+    $$DeviceScoresTableAnnotationComposer,
+    $$DeviceScoresTableCreateCompanionBuilder,
+    $$DeviceScoresTableUpdateCompanionBuilder,
+    (DeviceScoreData, $$DeviceScoresTableReferences),
+    DeviceScoreData,
+    PrefetchHooks Function({bool scoreId})> {
+  $$DeviceScoresTableTableManager(_$AppDatabase db, $DeviceScoresTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DeviceScoresTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DeviceScoresTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DeviceScoresTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> deviceId = const Value.absent(),
+            Value<DateTime> scoreId = const Value.absent(),
+            Value<DateTime> lastUpdated = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DeviceScoresCompanion(
+            deviceId: deviceId,
+            scoreId: scoreId,
+            lastUpdated: lastUpdated,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String deviceId,
+            required DateTime scoreId,
+            Value<DateTime> lastUpdated = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DeviceScoresCompanion.insert(
+            deviceId: deviceId,
+            scoreId: scoreId,
+            lastUpdated: lastUpdated,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$DeviceScoresTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({scoreId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (scoreId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.scoreId,
+                    referencedTable:
+                        $$DeviceScoresTableReferences._scoreIdTable(db),
+                    referencedColumn:
+                        $$DeviceScoresTableReferences._scoreIdTable(db).scoreId,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$DeviceScoresTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DeviceScoresTable,
+    DeviceScoreData,
+    $$DeviceScoresTableFilterComposer,
+    $$DeviceScoresTableOrderingComposer,
+    $$DeviceScoresTableAnnotationComposer,
+    $$DeviceScoresTableCreateCompanionBuilder,
+    $$DeviceScoresTableUpdateCompanionBuilder,
+    (DeviceScoreData, $$DeviceScoresTableReferences),
+    DeviceScoreData,
+    PrefetchHooks Function({bool scoreId})>;
+typedef $$UserProfilesTableCreateCompanionBuilder = UserProfilesCompanion
+    Function({
+  required int id,
   required String companyName,
   required String location,
   required String description,
+  required int deviceScoreId,
+  Value<int> rowid,
 });
-typedef $$UserProfileTableUpdateCompanionBuilder = UserProfileCompanion
+typedef $$UserProfilesTableUpdateCompanionBuilder = UserProfilesCompanion
     Function({
   Value<int> id,
   Value<String> companyName,
   Value<String> location,
   Value<String> description,
+  Value<int> deviceScoreId,
+  Value<int> rowid,
 });
 
-class $$UserProfileTableFilterComposer
-    extends Composer<_$AppDatabase, $UserProfileTable> {
-  $$UserProfileTableFilterComposer({
+class $$UserProfilesTableFilterComposer
+    extends Composer<_$AppDatabase, $UserProfilesTable> {
+  $$UserProfilesTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1491,9 +2950,9 @@ class $$UserProfileTableFilterComposer
       column: $table.description, builder: (column) => ColumnFilters(column));
 }
 
-class $$UserProfileTableOrderingComposer
-    extends Composer<_$AppDatabase, $UserProfileTable> {
-  $$UserProfileTableOrderingComposer({
+class $$UserProfilesTableOrderingComposer
+    extends Composer<_$AppDatabase, $UserProfilesTable> {
+  $$UserProfilesTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1513,9 +2972,9 @@ class $$UserProfileTableOrderingComposer
       column: $table.description, builder: (column) => ColumnOrderings(column));
 }
 
-class $$UserProfileTableAnnotationComposer
-    extends Composer<_$AppDatabase, $UserProfileTable> {
-  $$UserProfileTableAnnotationComposer({
+class $$UserProfilesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UserProfilesTable> {
+  $$UserProfilesTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
@@ -1535,54 +2994,62 @@ class $$UserProfileTableAnnotationComposer
       column: $table.description, builder: (column) => column);
 }
 
-class $$UserProfileTableTableManager extends RootTableManager<
+class $$UserProfilesTableTableManager extends RootTableManager<
     _$AppDatabase,
-    $UserProfileTable,
+    $UserProfilesTable,
     UserProfileData,
-    $$UserProfileTableFilterComposer,
-    $$UserProfileTableOrderingComposer,
-    $$UserProfileTableAnnotationComposer,
-    $$UserProfileTableCreateCompanionBuilder,
-    $$UserProfileTableUpdateCompanionBuilder,
+    $$UserProfilesTableFilterComposer,
+    $$UserProfilesTableOrderingComposer,
+    $$UserProfilesTableAnnotationComposer,
+    $$UserProfilesTableCreateCompanionBuilder,
+    $$UserProfilesTableUpdateCompanionBuilder,
     (
       UserProfileData,
-      BaseReferences<_$AppDatabase, $UserProfileTable, UserProfileData>
+      BaseReferences<_$AppDatabase, $UserProfilesTable, UserProfileData>
     ),
     UserProfileData,
     PrefetchHooks Function()> {
-  $$UserProfileTableTableManager(_$AppDatabase db, $UserProfileTable table)
+  $$UserProfilesTableTableManager(_$AppDatabase db, $UserProfilesTable table)
       : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$UserProfileTableFilterComposer($db: db, $table: table),
+              $$UserProfilesTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$UserProfileTableOrderingComposer($db: db, $table: table),
+              $$UserProfilesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$UserProfileTableAnnotationComposer($db: db, $table: table),
+              $$UserProfilesTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> companyName = const Value.absent(),
             Value<String> location = const Value.absent(),
             Value<String> description = const Value.absent(),
+            Value<int> deviceScoreId = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
           }) =>
-              UserProfileCompanion(
+              UserProfilesCompanion(
             id: id,
             companyName: companyName,
             location: location,
             description: description,
+            deviceScoreId: deviceScoreId,
+            rowid: rowid,
           ),
           createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
+            required int id,
             required String companyName,
             required String location,
             required String description,
+            required int deviceScoreId,
+            Value<int> rowid = const Value.absent(),
           }) =>
-              UserProfileCompanion.insert(
+              UserProfilesCompanion.insert(
             id: id,
             companyName: companyName,
             location: location,
             description: description,
+            deviceScoreId: deviceScoreId,
+            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -1591,18 +3058,18 @@ class $$UserProfileTableTableManager extends RootTableManager<
         ));
 }
 
-typedef $$UserProfileTableProcessedTableManager = ProcessedTableManager<
+typedef $$UserProfilesTableProcessedTableManager = ProcessedTableManager<
     _$AppDatabase,
-    $UserProfileTable,
+    $UserProfilesTable,
     UserProfileData,
-    $$UserProfileTableFilterComposer,
-    $$UserProfileTableOrderingComposer,
-    $$UserProfileTableAnnotationComposer,
-    $$UserProfileTableCreateCompanionBuilder,
-    $$UserProfileTableUpdateCompanionBuilder,
+    $$UserProfilesTableFilterComposer,
+    $$UserProfilesTableOrderingComposer,
+    $$UserProfilesTableAnnotationComposer,
+    $$UserProfilesTableCreateCompanionBuilder,
+    $$UserProfilesTableUpdateCompanionBuilder,
     (
       UserProfileData,
-      BaseReferences<_$AppDatabase, $UserProfileTable, UserProfileData>
+      BaseReferences<_$AppDatabase, $UserProfilesTable, UserProfileData>
     ),
     UserProfileData,
     PrefetchHooks Function()>;
@@ -2801,8 +4268,14 @@ typedef $$TodoOfferingStatusesTableProcessedTableManager
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
-  $$UserProfileTableTableManager get userProfile =>
-      $$UserProfileTableTableManager(_db, _db.userProfile);
+  $$DevicesTableTableManager get devices =>
+      $$DevicesTableTableManager(_db, _db.devices);
+  $$GeigerScoresTableTableManager get geigerScores =>
+      $$GeigerScoresTableTableManager(_db, _db.geigerScores);
+  $$DeviceScoresTableTableManager get deviceScores =>
+      $$DeviceScoresTableTableManager(_db, _db.deviceScores);
+  $$UserProfilesTableTableManager get userProfiles =>
+      $$UserProfilesTableTableManager(_db, _db.userProfiles);
   $$NewsInfoTableTableManager get newsInfo =>
       $$NewsInfoTableTableManager(_db, _db.newsInfo);
   $$RecommendationsTableTableManager get recommendations =>

@@ -56,11 +56,11 @@ class Profile with _$Profile {
 @freezed
 class Actor with _$Actor {
   const factory Actor({
-     String? companyName,
-     String? location,
-     required Asset userDevice,
+    String? companyName,
+    String? location,
+    required Asset userDevice,
     @Default("en") String? locale,
-     String? companyDescription,
+    String? companyDescription,
     @Default(true) bool? smeOwner,
     required List<Asset> assets,
   }) = _Actor;
@@ -108,11 +108,10 @@ class Definition with _$Definition {
 
 @freezed
 class DefinitionExtension with _$DefinitionExtension {
-  const factory DefinitionExtension({
-    required String name,
-    required String summary,
-    @Default(false) bool alreadyImplemented,
-  }) = _DefinitionExtension;
+  const factory DefinitionExtension(
+      {required String name,
+      required String summary,
+      required bool alreadyImplemented}) = _DefinitionExtension;
 
   factory DefinitionExtension.fromJson(Map<String, dynamic> json) =>
       _$DefinitionExtensionFromJson(json);
@@ -132,22 +131,18 @@ class Result with _$Result {
 class ResultExtensions with _$ResultExtensions {
   const factory ResultExtensions({
     required String geigerScore,
-    required List<String> reasons,
     required DateTime lastUpdated,
+    required List<String> reasons,
   }) = _ResultExtensions;
 
-  ///Profile constructor to set a default value for createdAt
   factory ResultExtensions.withDefaultTimestamp({
     required String geigerScore,
     required List<String> reasons,
-    DateTime? lastUpdated,
-  }) {
-    return ResultExtensions(
-      geigerScore: "",
-      reasons: reasons,
-      lastUpdated: lastUpdated ?? DateTime.now(),
-    );
-  }
+  }) =>
+      ResultExtensions(
+          geigerScore: geigerScore,
+          lastUpdated: DateTime.now(),
+          reasons: reasons);
 
   factory ResultExtensions.fromJson(Map<String, dynamic> json) =>
       _$ResultExtensionsFromJson(json);

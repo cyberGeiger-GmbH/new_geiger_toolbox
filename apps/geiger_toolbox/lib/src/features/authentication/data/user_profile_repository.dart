@@ -16,11 +16,11 @@ class UserProfileRepository {
 
   Future<void> createUserProfile({required User user}) async {
     try {
-      final userProfile = UserProfileCompanion(
+      final userProfile = UserProfilesCompanion(
           companyName: Value(user.companyName),
           location: Value(user.location),
           description: Value(user.description));
-      await _db.into(_db.userProfile).insert(userProfile);
+      await _db.into(_db.userProfiles).insert(userProfile);
     } catch (e) {
       rethrow;
     }
@@ -29,12 +29,12 @@ class UserProfileRepository {
   Future<bool?> updateUserProfile(
       {required int userId, required User user}) async {
     try {
-      final userProfile = UserProfileCompanion(
+      final userProfile = UserProfilesCompanion(
           id: Value(userId),
           companyName: Value(user.companyName),
           location: Value(user.location),
           description: Value(user.description));
-      return _db.update(_db.userProfile).replace(userProfile);
+      return _db.update(_db.userProfiles).replace(userProfile);
     } catch (e) {
       rethrow;
     }
@@ -42,7 +42,7 @@ class UserProfileRepository {
 
   Future<void> deleteProfile() async {
     try {
-      await _db.delete(_db.userProfile).go();
+      await _db.delete(_db.userProfiles).go();
     } catch (e) {
       throw DataBaseException();
     }
@@ -50,7 +50,7 @@ class UserProfileRepository {
 
   Future<User?> fetchUser() async {
     try {
-      final query = _db.select(_db.userProfile);
+      final query = _db.select(_db.userProfiles);
       final row = await query.getSingle();
 
       final user = User(
@@ -65,7 +65,7 @@ class UserProfileRepository {
 
   Future<UserData?> fetchUserData() async {
     try {
-      final query = _db.select(_db.userProfile);
+      final query = _db.select(_db.userProfiles);
       final row = await query.getSingle();
 
       final user = User(
@@ -80,7 +80,7 @@ class UserProfileRepository {
   }
 
   Stream<UserData?> watchUser() {
-    final query = _db.select(_db.userProfile);
+    final query = _db.select(_db.userProfiles);
     final row = query.watchSingleOrNull();
 
     return row.map(

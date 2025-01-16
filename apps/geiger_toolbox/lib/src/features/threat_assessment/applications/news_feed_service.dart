@@ -27,7 +27,7 @@ class NewsFeedService {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
       final userData = await ref.read(fetchUserDataProvider.future);
       final currentUserDeviceInfo = Asset(
-          type: _deviceType.type,
+          type: _deviceType.type.name,
           version: _deviceType.version,
           model: _deviceType.model);
       Profile? profile;

@@ -24,10 +24,12 @@ void main() {
     test('news repository using default profile ', () async {
       final container = getContainer();
       final scoreRepo = container.read(geigerScoreRepositoryProvider);
-      final profile = Profile.withNoCompanyProfile(
+      final profile = Profile.withoutActor(
           id: '',
-          verb: Verb(name: "scanning without profile and implemented recommendations"),
-          object: Acting(definition: [
+          currentDevice: Asset(type: "desktop", version: "1.1.0", model: "mac"),
+          verb: Verb(
+              name: "scanning without profile and implemented recommendations"),
+          object: Acting(definition:[ 
             Definition(
               id: "new1",
               name: "Threat: APT29 Targets High-Value Victims",
@@ -40,7 +42,7 @@ void main() {
                     summary:
                         "Provides tools to enable multi-factor authentication for enhanced security.",
                     alreadyImplemented: false),
-                     DefinitionExtension(
+                DefinitionExtension(
                     name: "Google",
                     summary:
                         "Offers two-step verification to protect accounts from unauthorized access.",

@@ -11,11 +11,13 @@ import 'connection/connection.dart' as impl;
 part 'database_table.g.dart';
 
 @DataClassName('UserProfileData')
-class UserProfile extends Table {
-  IntColumn get id => integer().autoIncrement()();
+class UserProfiles extends Table {
+  IntColumn get id => integer()();
   TextColumn get companyName => text().withLength(min: 1, max: 255)();
   TextColumn get location => text().withLength(min: 1, max: 255)();
   TextColumn get description => text()();
+  IntColumn get deviceScoreId =>
+      integer().references(DeviceScores, #deviceId)();
 
   // TextColumn get locationId =>
   //     text().withLength(min: 1, max: 8).references(Locations, #countryCode)();
@@ -39,21 +41,42 @@ class UserProfile extends Table {
 //   IntColumn get employees => integer().references(Users, #id)(); // Foreign key
 // }
 
-// @DataClassName('DeviceScoreData')
-// class DeviceScores extends Table {
-//   IntColumn get deviceId => integer().references(Devices, #id)(); // Foreign key
-//   IntColumn get score => integer().nullable()();
-//   DateTimeColumn get lastUpdated =>
-//       dateTime().withDefault(currentDateAndTime)();
-//   DateTimeColumn get created => dateTime().withDefault(currentDateAndTime)();
-// }
+@DataClassName('DeviceData')
+class Devices extends Table {
+  IntColumn get id => integer()();
+  TextColumn get name => text().withLength(min: 1, max: 100)();
+  TextColumn get type => text().withLength(min: 1, max: 100)();
+  TextColumn get version => text().withLength(min: 1, max: 100)();
+  DateTimeColumn get created => dateTime()();
 
-// @DataClassName('DeviceData')
-// class Devices extends Table {
-//   IntColumn get id => integer().autoIncrement()();
-//   TextColumn get name => text().withLength(min: 1, max: 100)();
-//   TextColumn get type => text().withLength(min: 1, max: 100)();
-// }
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DataClassName("GeigerScoreData")
+class GeigerScores extends Table {
+  DateTimeColumn get scoreId => dateTime().withDefault(currentDateAndTime)();
+  IntColumn get score => integer()();
+  TextColumn get reasons => text().references(Reasons, #reasson)();
+  @override
+  Set<Column> get primaryKey => {scoreId};
+}
+
+@DataClassName("ReasonData")
+class Reasons extends Table {
+  TextColumn get reason => text()();
+}
+
+@DataClassName('DeviceScoreData')
+class DeviceScores extends Table {
+  TextColumn get deviceId => text().references(Devices, #id)(); // Foreign key
+  DateTimeColumn get scoreId => dateTime().references(GeigerScores, #scoreId)();
+  DateTimeColumn get lastUpdated =>
+      dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {deviceId, scoreId};
+}
 
 // @DataClassName('IndustryData')
 // class Industries extends Table {
@@ -128,7 +151,7 @@ class TodoOfferingStatuses extends Table {
 
 @DriftDatabase(
   tables: [
-    UserProfile,
+    UserProfiles,
     //BusinessProfiles,
     // DeviceScores,
     // Devices,

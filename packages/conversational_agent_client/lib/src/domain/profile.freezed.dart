@@ -1474,7 +1474,7 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
   const _$DefinitionExtensionImpl(
       {required this.name,
       required this.summary,
-      this.alreadyImplemented = false});
+      required this.alreadyImplemented});
 
   factory _$DefinitionExtensionImpl.fromJson(Map<String, dynamic> json) =>
       _$$DefinitionExtensionImplFromJson(json);
@@ -1484,7 +1484,6 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
   @override
   final String summary;
   @override
-  @JsonKey()
   final bool alreadyImplemented;
 
   @override
@@ -1529,7 +1528,7 @@ abstract class _DefinitionExtension implements DefinitionExtension {
   const factory _DefinitionExtension(
       {required final String name,
       required final String summary,
-      final bool alreadyImplemented}) = _$DefinitionExtensionImpl;
+      required final bool alreadyImplemented}) = _$DefinitionExtensionImpl;
 
   factory _DefinitionExtension.fromJson(Map<String, dynamic> json) =
       _$DefinitionExtensionImpl.fromJson;
@@ -1757,8 +1756,8 @@ ResultExtensions _$ResultExtensionsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ResultExtensions {
   String get geigerScore => throw _privateConstructorUsedError;
-  List<String> get reasons => throw _privateConstructorUsedError;
   DateTime get lastUpdated => throw _privateConstructorUsedError;
+  List<String> get reasons => throw _privateConstructorUsedError;
 
   /// Serializes this ResultExtensions to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1776,7 +1775,7 @@ abstract class $ResultExtensionsCopyWith<$Res> {
           ResultExtensions value, $Res Function(ResultExtensions) then) =
       _$ResultExtensionsCopyWithImpl<$Res, ResultExtensions>;
   @useResult
-  $Res call({String geigerScore, List<String> reasons, DateTime lastUpdated});
+  $Res call({String geigerScore, DateTime lastUpdated, List<String> reasons});
 }
 
 /// @nodoc
@@ -1795,22 +1794,22 @@ class _$ResultExtensionsCopyWithImpl<$Res, $Val extends ResultExtensions>
   @override
   $Res call({
     Object? geigerScore = null,
-    Object? reasons = null,
     Object? lastUpdated = null,
+    Object? reasons = null,
   }) {
     return _then(_value.copyWith(
       geigerScore: null == geigerScore
           ? _value.geigerScore
           : geigerScore // ignore: cast_nullable_to_non_nullable
               as String,
-      reasons: null == reasons
-          ? _value.reasons
-          : reasons // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       lastUpdated: null == lastUpdated
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      reasons: null == reasons
+          ? _value.reasons
+          : reasons // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -1823,7 +1822,7 @@ abstract class _$$ResultExtensionsImplCopyWith<$Res>
       __$$ResultExtensionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String geigerScore, List<String> reasons, DateTime lastUpdated});
+  $Res call({String geigerScore, DateTime lastUpdated, List<String> reasons});
 }
 
 /// @nodoc
@@ -1840,22 +1839,22 @@ class __$$ResultExtensionsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? geigerScore = null,
-    Object? reasons = null,
     Object? lastUpdated = null,
+    Object? reasons = null,
   }) {
     return _then(_$ResultExtensionsImpl(
       geigerScore: null == geigerScore
           ? _value.geigerScore
           : geigerScore // ignore: cast_nullable_to_non_nullable
               as String,
-      reasons: null == reasons
-          ? _value._reasons
-          : reasons // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       lastUpdated: null == lastUpdated
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      reasons: null == reasons
+          ? _value._reasons
+          : reasons // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -1865,8 +1864,8 @@ class __$$ResultExtensionsImplCopyWithImpl<$Res>
 class _$ResultExtensionsImpl implements _ResultExtensions {
   const _$ResultExtensionsImpl(
       {required this.geigerScore,
-      required final List<String> reasons,
-      required this.lastUpdated})
+      required this.lastUpdated,
+      required final List<String> reasons})
       : _reasons = reasons;
 
   factory _$ResultExtensionsImpl.fromJson(Map<String, dynamic> json) =>
@@ -1874,6 +1873,8 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
 
   @override
   final String geigerScore;
+  @override
+  final DateTime lastUpdated;
   final List<String> _reasons;
   @override
   List<String> get reasons {
@@ -1883,11 +1884,8 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
   }
 
   @override
-  final DateTime lastUpdated;
-
-  @override
   String toString() {
-    return 'ResultExtensions(geigerScore: $geigerScore, reasons: $reasons, lastUpdated: $lastUpdated)';
+    return 'ResultExtensions(geigerScore: $geigerScore, lastUpdated: $lastUpdated, reasons: $reasons)';
   }
 
   @override
@@ -1897,15 +1895,15 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
             other is _$ResultExtensionsImpl &&
             (identical(other.geigerScore, geigerScore) ||
                 other.geigerScore == geigerScore) &&
-            const DeepCollectionEquality().equals(other._reasons, _reasons) &&
             (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated));
+                other.lastUpdated == lastUpdated) &&
+            const DeepCollectionEquality().equals(other._reasons, _reasons));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, geigerScore,
-      const DeepCollectionEquality().hash(_reasons), lastUpdated);
+  int get hashCode => Object.hash(runtimeType, geigerScore, lastUpdated,
+      const DeepCollectionEquality().hash(_reasons));
 
   /// Create a copy of ResultExtensions
   /// with the given fields replaced by the non-null parameter values.
@@ -1927,8 +1925,8 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
 abstract class _ResultExtensions implements ResultExtensions {
   const factory _ResultExtensions(
       {required final String geigerScore,
-      required final List<String> reasons,
-      required final DateTime lastUpdated}) = _$ResultExtensionsImpl;
+      required final DateTime lastUpdated,
+      required final List<String> reasons}) = _$ResultExtensionsImpl;
 
   factory _ResultExtensions.fromJson(Map<String, dynamic> json) =
       _$ResultExtensionsImpl.fromJson;
@@ -1936,9 +1934,9 @@ abstract class _ResultExtensions implements ResultExtensions {
   @override
   String get geigerScore;
   @override
-  List<String> get reasons;
-  @override
   DateTime get lastUpdated;
+  @override
+  List<String> get reasons;
 
   /// Create a copy of ResultExtensions
   /// with the given fields replaced by the non-null parameter values.

@@ -113,7 +113,7 @@ _$DefinitionExtensionImpl _$$DefinitionExtensionImplFromJson(
     _$DefinitionExtensionImpl(
       name: json['name'] as String,
       summary: json['summary'] as String,
-      alreadyImplemented: json['alreadyImplemented'] as bool? ?? false,
+      alreadyImplemented: json['alreadyImplemented'] as bool,
     );
 
 Map<String, dynamic> _$$DefinitionExtensionImplToJson(
@@ -142,15 +142,15 @@ _$ResultExtensionsImpl _$$ResultExtensionsImplFromJson(
         Map<String, dynamic> json) =>
     _$ResultExtensionsImpl(
       geigerScore: json['geigerScore'] as String,
+      lastUpdated: DateTime.parse(json['lastUpdated'] as String),
       reasons:
           (json['reasons'] as List<dynamic>).map((e) => e as String).toList(),
-      lastUpdated: DateTime.parse(json['lastUpdated'] as String),
     );
 
 Map<String, dynamic> _$$ResultExtensionsImplToJson(
         _$ResultExtensionsImpl instance) =>
     <String, dynamic>{
       'geigerScore': instance.geigerScore,
-      'reasons': instance.reasons,
       'lastUpdated': instance.lastUpdated.toIso8601String(),
+      'reasons': instance.reasons,
     };
