@@ -1,17 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user.freezed.dart';
 
-@freezed
-class User with _$User {
-  factory User({
-    required final String companyName,
-    required final String location,
-    required final String description,
-  }) = _User;
-}
+//* offeringId is the with hypen separated name of [Offering] name
+typedef UserID = String;
 
 @freezed
-class UserData with _$UserData {
-  factory UserData({required final int id, required final User user}) =
-      _UserData;
+class User with _$User {
+  factory User(
+      {required final String userId,
+      final String? name,
+      final String? email,
+      required bool owner,
+      final DateTime? createdAt}) = _User;
 }

@@ -4,7 +4,7 @@ import 'package:geiger_toolbox/src/common_widgets/alert_dialogs.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/profile/delete/delete_profile_controller.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/delete/delete_company_profile_controller.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,11 +18,11 @@ class DeleteUserProfileButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //for error in user controller
-    ref.listen(deleteProfileControllerProvider,
+    ref.listen(deleteCompanyProfileControllerProvider,
         (_, newState) => newState.showAlertDialogOnError(context: context));
 
     ref.listen(
-        deleteProfileControllerProvider,
+        deleteCompanyProfileControllerProvider,
         (_, newState) =>
             newState.deleteUserProfileSuccessSnackBar(context: context));
 
@@ -42,8 +42,8 @@ class DeleteUserProfileButton extends ConsumerWidget {
                     cancelActionText: 'Cancel'.hardcoded,
                     trigger: () {
                       final controller =
-                          ref.read(deleteProfileControllerProvider.notifier);
-                      controller.deleteProfile();
+                          ref.read(deleteCompanyProfileControllerProvider.notifier);
+                      controller.deleteCompleteProfile();
                       //pop alert
                       context.pop(true);
                     });

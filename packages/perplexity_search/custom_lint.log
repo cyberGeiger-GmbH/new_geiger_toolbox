@@ -3340,3 +3340,318 @@ at:
 #11     CustomLintServer._handleRequest (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:173:22)
 <asynchronous suspension>
 
+[IgnoreCode] 2025-01-20T13:33:04.099842 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/data/company_profile_repository.dart:
+[IgnoreCode] 2025-01-20T13:33:04.099842 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T13:33:04.099842
+[IgnoreCode] 2025-01-20T13:33:04.099842 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T13:33:04.099842 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T13:33:04.099842
+[IgnoreCode] 2025-01-20T13:33:04.116992 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/data/company_profile_repository.dart:
+[IgnoreCode] 2025-01-20T13:33:04.116992 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T13:33:04.116992
+[IgnoreCode] 2025-01-20T13:33:04.116992 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T13:33:04.116992 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T13:33:04.116992
+[IgnoreCode] 2025-01-20T13:51:15.447018 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/routing/app_start_up_widget.dart:
+[IgnoreCode] 2025-01-20T13:51:15.447018 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T13:51:15.447018
+[IgnoreCode] 2025-01-20T13:51:15.447018 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T13:51:15.447018 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T13:51:15.447018
+[IgnoreCode] 2025-01-20T13:51:15.462368 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/routing/app_start_up_widget.dart:
+[IgnoreCode] 2025-01-20T13:51:15.462368 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T13:51:15.462368
+[IgnoreCode] 2025-01-20T13:51:15.462368 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T13:51:15.462368 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T13:51:15.462368
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 Plugin NotifierExtendsFix threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/routing/app_start_up_widget.dart:
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #6      _rootRun (dart:async/zone.dart:1406:47)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #10     _rootRun (dart:async/zone.dart:1414:13)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[NotifierExtendsFix] 2025-01-20T13:51:15.462876
+[IgnoreCode] 2025-01-20T14:10:23.916609 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/company_profile_controller.dart:
+[IgnoreCode] 2025-01-20T14:10:23.916609 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T14:10:23.916609
+[IgnoreCode] 2025-01-20T14:10:23.916609 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T14:10:23.916609 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T14:10:23.916609
+[IgnoreCode] 2025-01-20T14:10:23.925708 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/company_profile_controller.dart:
+[IgnoreCode] 2025-01-20T14:10:23.925708 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T14:10:23.925708
+[IgnoreCode] 2025-01-20T14:10:23.925708 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T14:10:23.925708 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T14:10:23.925708
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 Plugin NotifierExtendsFix threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/company_profile_controller.dart:
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #6      _rootRun (dart:async/zone.dart:1406:47)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #10     _rootRun (dart:async/zone.dart:1414:13)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[NotifierExtendsFix] 2025-01-20T14:10:23.926392
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 Plugin WrapWithConsumer threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/company_profile_controller.dart:
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[WrapWithConsumer] 2025-01-20T14:10:24.953055
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #6      _rootRun (dart:async/zone.dart:1406:47)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #10     _rootRun (dart:async/zone.dart:1414:13)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[WrapWithConsumer] 2025-01-20T14:10:24.953055
+[IgnoreCode] 2025-01-20T14:10:25.171448 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/company_profile_controller.dart:
+[IgnoreCode] 2025-01-20T14:10:25.171448 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T14:10:25.171448
+[IgnoreCode] 2025-01-20T14:10:25.171448 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T14:10:25.171448 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T14:10:25.171448
+[IgnoreCode] 2025-01-20T14:10:25.172354 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/company_profile_controller.dart:
+[IgnoreCode] 2025-01-20T14:10:25.172354 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T14:10:25.172354
+[IgnoreCode] 2025-01-20T14:10:25.172354 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T14:10:25.172354 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T14:10:25.172354
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 Plugin NotifierExtendsFix threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/company_profile_controller.dart:
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #6      _rootRun (dart:async/zone.dart:1406:47)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #10     _rootRun (dart:async/zone.dart:1414:13)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[NotifierExtendsFix] 2025-01-20T14:10:25.172941
+[IgnoreCode] 2025-01-20T15:11:43.845335 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/profile/company_profile_controller.dart:
+[IgnoreCode] 2025-01-20T15:11:43.845335 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T15:11:43.845335
+[IgnoreCode] 2025-01-20T15:11:43.845335 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T15:11:43.845335 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T15:11:43.845335
+[IgnoreCode] 2025-01-20T15:11:43.852436 Plugin IgnoreCode threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/profile/company_profile_controller.dart:
+[IgnoreCode] 2025-01-20T15:11:43.852436 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[IgnoreCode] 2025-01-20T15:11:43.852436
+[IgnoreCode] 2025-01-20T15:11:43.852436 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #6      _rootRun (dart:async/zone.dart:1406:47)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #10     _rootRun (dart:async/zone.dart:1414:13)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[IgnoreCode] 2025-01-20T15:11:43.852436 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[IgnoreCode] 2025-01-20T15:11:43.852436
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 Plugin NotifierExtendsFix threw while analyzing /Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/lib/src/features/authentication/presentation/profile/company_profile_controller.dart:
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 InconsistentAnalysisException: Requested result might be inconsistent with previously returned results
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #0      AnalysisSessionImpl.checkConsistency (package:analyzer/src/dart/analysis/session.dart:58:7)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #1      AnalysisSessionImpl.getResolvedUnit (package:analyzer/src/dart/analysis/session.dart:133:5)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #2      ChangeBuilderImpl._createDartFileEditBuilder (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:287:33)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #3      ChangeBuilderImpl.addDartFileEdit (package:analyzer_plugin/src/utilities/change_builder/change_builder_core.dart:136:23)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #4      ChangeBuilderImpl.addDartFileEdit.<anonymous closure> (package:custom_lint_core/src/change_reporter.dart:241:35)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #5      new Future.<anonymous closure> (dart:async/future.dart:258:40)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #6      _rootRun (dart:async/zone.dart:1406:47)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #7      _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #8      _CustomZone.runGuarded (dart:async/zone.dart:1225:7)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #9      _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1265:23)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #10     _rootRun (dart:async/zone.dart:1414:13)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #11     _CustomZone.run (dart:async/zone.dart:1317:19)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #12     _CustomZone.bindCallback.<anonymous closure> (dart:async/zone.dart:1249:23)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #13     Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #14     _Timer._runTimers (dart:isolate-patch/timer_impl.dart:398:19)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #15     _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:429:5)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484 #16     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:184:12)
+[NotifierExtendsFix] 2025-01-20T15:11:43.855484

@@ -2,7 +2,8 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
-import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
+import 'package:geiger_toolbox/src/extensions/string_extension.dart';
+import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
 import 'package:geiger_toolbox/src/utils/device_info.dart';
 
@@ -25,20 +26,19 @@ class NewsFeedService {
   Future<void> cacheNews() async {
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
-      final userData = await ref.read(fetchUserDataProvider.future);
+      final company = await ref.read(fetchCompanyProvider.future);
       final currentUserDeviceInfo = Asset(
           type: _deviceType.type.name,
           version: _deviceType.version,
           model: _deviceType.model);
       Profile? profile;
-      if (userData != null) {
-        final user = userData.user;
+      if (company != null) {
         profile = Profile.withDefaultTimestamp(
-            id: userData.id.toString(),
+            id: company.companyName.replaceSpacesWithHyphen,
             actor: Actor(
-                companyName: user.companyName,
-                location: user.location,
-                companyDescription: user.description,
+                companyName: company.companyName,
+                location: company.location,
+                companyDescription: company.description,
                 userDevice: currentUserDeviceInfo,
                 assets: []),
             verb: Verb(name: "User profile created"));

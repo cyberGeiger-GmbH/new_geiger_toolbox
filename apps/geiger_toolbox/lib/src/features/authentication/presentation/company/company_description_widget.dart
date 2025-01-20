@@ -3,7 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/profile/company_profile_controller.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_description_controller.dart';
 
 class CompanyDescriptionWidget extends ConsumerWidget {
   const CompanyDescriptionWidget({

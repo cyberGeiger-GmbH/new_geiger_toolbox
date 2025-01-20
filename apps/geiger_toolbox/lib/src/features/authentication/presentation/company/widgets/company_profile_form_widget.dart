@@ -2,28 +2,31 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
+import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
-import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/profile/company_description_widget.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/profile/company_profile_controller.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/profile/confirmation_button_widget.dart';
+import 'package:geiger_toolbox/src/features/authentication/domain/company.dart';
+
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_description_controller.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_description_widget.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_profile_controller.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/widgets/confirmation_button_widget.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/validators/company_name_location_validators.dart';
 import 'package:geiger_toolbox/src/common_widgets/forms/custom_text_form_field.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_controller.dart';
+
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
 
-class UserProfileFormWidget extends ConsumerStatefulWidget {
-  const UserProfileFormWidget({super.key, this.onSubmit, this.userData});
+class CompanyProfileFormWidget extends ConsumerStatefulWidget {
+  const CompanyProfileFormWidget({super.key, this.onSubmit, this.companyData});
   final VoidCallback? onSubmit;
-  final UserData? userData;
+  final Company? companyData;
 
   @override
-  ConsumerState<UserProfileFormWidget> createState() =>
+  ConsumerState<CompanyProfileFormWidget> createState() =>
       _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
+class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
     with CompanyNameLocationValidators {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _node = FocusScopeNode();
@@ -51,10 +54,10 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
   }
 
   void _preLoadField() {
-    final data = widget.userData;
+    final data = widget.companyData;
     if (data != null) {
-      _companyTextController.text = data.user.companyName;
-      _locationTextController.text = data.user.location;
+      _companyTextController.text = data.companyName;
+      _locationTextController.text = data.location;
     }
   }
 
@@ -68,36 +71,37 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
   }
 
   Future<void> _createProfile() async {
-    final controller = ref.read(userProfileControllerProvider.notifier);
+    final controller = ref.read(companyProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
-    final user = User(
+    final company = Company(
         companyName: companyName,
         location: location,
         description: description!);
-    final success = await controller.createProfile(user: user);
+    final success = await controller.createCompanyProfile(company: company);
     if (success) {
       widget.onSubmit?.call();
     }
   }
 
   Future<void> _updateProfile() async {
-    final controller = ref.read(userProfileControllerProvider.notifier);
-    if (widget.userData != null) {
-      final user = User(
+    final controller = ref.read(companyProfileControllerProvider.notifier);
+    final description = await ref.read(getCompanyDescriptionProvider.future);
+
+  
+      final data = Company(
           companyName: companyName,
           location: location,
-          description: widget.userData!.user.description);
-      final userData = UserData(id: widget.userData!.id, user: user);
-      final success = await controller.updateProfile(userData: userData);
+          description: description!);
+      final success = await controller.updateCompanyProfile(company: data);
       if (success) {
         widget.onSubmit?.call();
       }
-    }
+    
   }
 
   //update company description
   Future<void> _setCompanyDescription() async {
-    final controller = ref.read(companyProfileControllerProvider.notifier);
+    final controller = ref.read(companyDescriptionControllerProvider.notifier);
 
     await controller.setCompanyDescription(
         companyName: companyName, location: location);
@@ -107,7 +111,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
     setState(() => _submitted = true);
     //only submit the form if validation passes
     if (_validateAndSaveForm()) {
-      if (widget.userData != null) {
+      if (widget.companyData != null) {
         //update profile
         await _updateProfile();
       }
@@ -137,10 +141,10 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
   @override
   Widget build(BuildContext context) {
     //listen for error in user controller
-    ref.listen(userProfileControllerProvider,
+    ref.listen(companyProfileControllerProvider,
         (_, newState) => newState.showAlertDialogOnError(context: context));
 
-    ref.listen(userProfileControllerProvider, (_, nxt) {
+    ref.listen(companyProfileControllerProvider, (_, nxt) {
       nxt.updateUserProfileSuccessSnackBar(context: context);
     });
 
@@ -150,7 +154,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
 
 //* testing purpose
 //update when form field when content is deleted
-    ref.listen(watchUserProvider, (_, nxtVal) {
+    ref.listen(watchCompanyProvider, (_, nxtVal) {
       final data = nxtVal.value;
       if (data == null) {
         _companyTextController.text = "";
@@ -158,7 +162,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileFormWidget>
       }
     });
 
-    final state = ref.watch(userProfileControllerProvider);
+    final state = ref.watch(companyProfileControllerProvider);
 
     return FocusScope(
       node: _node,

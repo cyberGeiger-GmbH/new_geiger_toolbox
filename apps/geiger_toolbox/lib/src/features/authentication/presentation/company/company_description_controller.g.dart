@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'company_profile_controller.dart';
+part of 'company_description_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
 String _$getCompanyDescriptionHash() =>
-    r'ccb235497f85f3c8cad25342d8c8fc4f8a239ee1';
+    r'30be6b6ab8a54847182be68417efe4b18582814b';
 
 /// See also [getCompanyDescription].
 @ProviderFor(getCompanyDescription)
@@ -25,22 +25,22 @@ final getCompanyDescriptionProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetCompanyDescriptionRef = AutoDisposeFutureProviderRef<String?>;
-String _$companyProfileControllerHash() =>
-    r'5bebbad9fa92a17119e06881ac3b0d81c137550d';
+String _$companyDescriptionControllerHash() =>
+    r'd91fa7e78d4f33d3f4d1676c5610ed49335c7363';
 
-/// See also [CompanyProfileController].
-@ProviderFor(CompanyProfileController)
-final companyProfileControllerProvider = AutoDisposeAsyncNotifierProvider<
-    CompanyProfileController, String?>.internal(
-  CompanyProfileController.new,
-  name: r'companyProfileControllerProvider',
+/// See also [CompanyDescriptionController].
+@ProviderFor(CompanyDescriptionController)
+final companyDescriptionControllerProvider = AutoDisposeAsyncNotifierProvider<
+    CompanyDescriptionController, String?>.internal(
+  CompanyDescriptionController.new,
+  name: r'companyDescriptionControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$companyProfileControllerHash,
+      : _$companyDescriptionControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CompanyProfileController = AutoDisposeAsyncNotifier<String?>;
+typedef _$CompanyDescriptionController = AutoDisposeAsyncNotifier<String?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

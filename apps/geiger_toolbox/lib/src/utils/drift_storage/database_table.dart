@@ -12,84 +12,43 @@ part 'database_table.g.dart';
 
 @DataClassName('UserProfileData')
 class UserProfiles extends Table {
-  IntColumn get id => integer()();
-  TextColumn get companyName => text().withLength(min: 1, max: 255)();
-  TextColumn get location => text().withLength(min: 1, max: 255)();
-  TextColumn get description => text()();
-  IntColumn get deviceScoreId =>
-      integer().references(DeviceScores, #deviceId)();
-
-  // TextColumn get locationId =>
-  //     text().withLength(min: 1, max: 8).references(Locations, #countryCode)();
-  // @ReferenceName('deviceGroups') // Foreign key
-  // IntColumn get mainDevice =>
-  //     integer().references(DeviceScores, #deviceId)(); // Foreign key
-  // @ReferenceName('pairedDeviceGroups')
-  // IntColumn get otherDevicesId =>
-  //     integer().references(Devices, #id)(); // Foreign key
-}
-
-// @DataClassName('BusinessProfileData')
-// class BusinessProfiles extends Table {
-//   IntColumn get id => integer().autoIncrement()();
-//   TextColumn get name => text().withLength(min: 1, max: 100)();
-//   IntColumn get industryType => integer().references(Industries, #id)();
-//   @ReferenceName("ownerGroups") // Foreign key
-//   IntColumn get owner => integer().references(Users, #id)();
-//   // Foreign key
-//   @ReferenceName("pairedUserGroups")
-//   IntColumn get employees => integer().references(Users, #id)(); // Foreign key
-// }
-
-@DataClassName('DeviceData')
-class Devices extends Table {
-  IntColumn get id => integer()();
-  TextColumn get name => text().withLength(min: 1, max: 100)();
-  TextColumn get type => text().withLength(min: 1, max: 100)();
-  TextColumn get version => text().withLength(min: 1, max: 100)();
-  DateTimeColumn get created => dateTime()();
+  TextColumn get userId => text().withLength(min: 36, max: 36)();
+  TextColumn get name => text().nullable()();
+  TextColumn get email => text().nullable()();
+  BoolColumn get owner => boolean().withDefault(const Constant(true))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 
   @override
-  Set<Column> get primaryKey => {id};
+  Set<Column> get primaryKey => {userId};
+}
+
+@DataClassName("CompanyProfileData")
+class CompanyProfiles extends Table {
+  TextColumn get companyName => text()();
+  TextColumn get userId => text().references(UserProfiles, #userId)();
+  TextColumn get location => text().withLength(min: 1, max: 255)();
+  TextColumn get description => text()();
+
+  @override
+  Set<Column> get primaryKey => {companyName};
 }
 
 @DataClassName("GeigerScoreData")
 class GeigerScores extends Table {
-  DateTimeColumn get scoreId => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get id => dateTime().withDefault(currentDateAndTime)();
+  TextColumn get userId => text().references(UserProfiles, #userId)();
   IntColumn get score => integer()();
-  TextColumn get reasons => text().references(Reasons, #reasson)();
+  TextColumn get reasons => text().references(Reasons, #reason)();
+  DateTimeColumn get lastUpdated =>
+      dateTime().withDefault(currentDateAndTime)();
   @override
-  Set<Column> get primaryKey => {scoreId};
+  Set<Column> get primaryKey => {id};
 }
 
 @DataClassName("ReasonData")
 class Reasons extends Table {
   TextColumn get reason => text()();
 }
-
-@DataClassName('DeviceScoreData')
-class DeviceScores extends Table {
-  TextColumn get deviceId => text().references(Devices, #id)(); // Foreign key
-  DateTimeColumn get scoreId => dateTime().references(GeigerScores, #scoreId)();
-  DateTimeColumn get lastUpdated =>
-      dateTime().withDefault(currentDateAndTime)();
-
-  @override
-  Set<Column> get primaryKey => {deviceId, scoreId};
-}
-
-// @DataClassName('IndustryData')
-// class Industries extends Table {
-//   IntColumn get id => integer().autoIncrement()();
-//   TextColumn get name => text().withLength(min: 1, max: 255)();
-// }
-
-// @DataClassName('LocationData')
-// class Locations extends Table {
-//   TextColumn get countryCode => text().withLength(min: 2, max: 2)();
-//   TextColumn get country => text().withLength(min: 1, max: 255)();
-//   TextColumn get city => text().withLength(min: 1, max: 255)();
-// }
 
 @DataClassName('NewsData')
 class NewsInfo extends Table {
@@ -142,6 +101,40 @@ class TodoOfferingStatuses extends Table {
   Set<Column> get primaryKey => {offeringId};
 }
 
+// TextColumn get locationId =>
+//     text().withLength(min: 1, max: 8).references(Locations, #countryCode)();
+// @ReferenceName('deviceGroups') // Foreign key
+// IntColumn get mainDevice =>
+//     integer().references(DeviceScores, #deviceId)(); // Foreign key
+// @ReferenceName('pairedDeviceGroups')
+// IntColumn get otherDevicesId =>
+//     integer().references(Devices, #id)(); // Foreign key
+
+// @DataClassName('BusinessProfileData')
+// class BusinessProfiles extends Table {
+//   IntColumn get id => integer().autoIncrement()();
+//   TextColumn get name => text().withLength(min: 1, max: 100)();
+//   IntColumn get industryType => integer().references(Industries, #id)();
+//   @ReferenceName("ownerGroups") // Foreign key
+//   IntColumn get owner => integer().references(Users, #id)();
+//   // Foreign key
+//   @ReferenceName("pairedUserGroups")
+//   IntColumn get employees => integer().references(Users, #id)(); // Foreign key
+// }
+
+// @DataClassName('IndustryData')
+// class Industries extends Table {
+//   IntColumn get id => integer().autoIncrement()();
+//   TextColumn get name => text().withLength(min: 1, max: 255)();
+// }
+
+// @DataClassName('LocationData')
+// class Locations extends Table {
+//   TextColumn get countryCode => text().withLength(min: 2, max: 2)();
+//   TextColumn get country => text().withLength(min: 1, max: 255)();
+//   TextColumn get city => text().withLength(min: 1, max: 255)();
+// }
+
 // @DataClassName('SmeProfileData')
 // class SmeProfiles extends Table {
 //   IntColumn get actor => integer().references(Users, #id)(); // Foreign key
@@ -152,21 +145,22 @@ class TodoOfferingStatuses extends Table {
 @DriftDatabase(
   tables: [
     UserProfiles,
-    //BusinessProfiles,
-    // DeviceScores,
-    // Devices,
-    // Industries,
-    // Locations,
-    //SmeProfiles,
-    TodoOfferingStatuses,
+    CompanyProfiles,
+    GeigerScores,
+    Reasons,
     NewsInfo,
     Recommendations,
     Offerings,
+    TodoOfferingStatuses,
+    //BusinessProfiles,
+    // Industries,
+    // Locations,
+    //SmeProfiles,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   AppDatabase() : super(impl.connect());
 }

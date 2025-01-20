@@ -1,8 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/profile/delete/delete_profile_widget.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/profile/user_profile_contents_widget.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/delete/delete_profile_widget.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/widgets/company_profile_contents_widget.dart';
 
 /// Shows the form for creating profile of the user
 
@@ -58,7 +58,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         slivers: [
           ResponsiveSliverCenterWidget(
             padding: EdgeInsets.all(Spacing.p16),
-            child: UserProfileContentsWidget(),
+            child: CompanyProfileContentsWidget(),
           ),
         ],
       ),

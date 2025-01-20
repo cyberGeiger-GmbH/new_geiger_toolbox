@@ -26,11 +26,11 @@ final userProfileRepositoryProvider =
 // ignore: unused_element
 typedef UserProfileRepositoryRef
     = AutoDisposeProviderRef<UserProfileRepository>;
-String _$watchUserHash() => r'3ef3da867f7c936d285dddb342a19945fbbe42f0';
+String _$watchUserHash() => r'd4e58e2911384cc248a7685d3385a0539860bce5';
 
 /// See also [watchUser].
 @ProviderFor(watchUser)
-final watchUserProvider = AutoDisposeStreamProvider<UserData?>.internal(
+final watchUserProvider = AutoDisposeStreamProvider<User?>.internal(
   watchUser,
   name: r'watchUserProvider',
   debugGetCreateSourceHash:
@@ -41,7 +41,7 @@ final watchUserProvider = AutoDisposeStreamProvider<UserData?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchUserRef = AutoDisposeStreamProviderRef<UserData?>;
+typedef WatchUserRef = AutoDisposeStreamProviderRef<User?>;
 String _$fetchUserHash() => r'9d0500607aea9027c03a3c4c2da93de12baaf158';
 
 /// See also [fetchUser].
@@ -58,22 +58,5 @@ final fetchUserProvider = AutoDisposeFutureProvider<User?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FetchUserRef = AutoDisposeFutureProviderRef<User?>;
-String _$fetchUserDataHash() => r'bc332facbc79426cdd5e07ff8712a9fe2d32dc96';
-
-/// See also [fetchUserData].
-@ProviderFor(fetchUserData)
-final fetchUserDataProvider = AutoDisposeFutureProvider<UserData?>.internal(
-  fetchUserData,
-  name: r'fetchUserDataProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchUserDataHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FetchUserDataRef = AutoDisposeFutureProviderRef<UserData?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

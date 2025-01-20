@@ -14,12 +14,15 @@ class UserProfileRepository {
 
   UserProfileRepository(this.ref);
 
+  //create user profile
   Future<void> createUserProfile({required User user}) async {
     try {
       final userProfile = UserProfilesCompanion(
-          companyName: Value(user.companyName),
-          location: Value(user.location),
-          description: Value(user.description));
+        userId: Value(user.userId),
+        name: Value(user.name),
+        email: Value(user.email),
+        owner: Value(user.owner),
+      );
       await _db.into(_db.userProfiles).insert(userProfile);
     } catch (e) {
       rethrow;
@@ -27,13 +30,13 @@ class UserProfileRepository {
   }
 
   Future<bool?> updateUserProfile(
-      {required int userId, required User user}) async {
+      {required UserID userId, required User user}) async {
     try {
       final userProfile = UserProfilesCompanion(
-          id: Value(userId),
-          companyName: Value(user.companyName),
-          location: Value(user.location),
-          description: Value(user.description));
+          name: Value(user.name),
+          email: Value(user.email),
+          owner: Value(user.owner),
+          createdAt: Value(user.createdAt!));
       return _db.update(_db.userProfiles).replace(userProfile);
     } catch (e) {
       rethrow;
@@ -54,43 +57,30 @@ class UserProfileRepository {
       final row = await query.getSingle();
 
       final user = User(
-          companyName: row.companyName,
-          location: row.location,
-          description: row.description);
+        userId: row.userId,
+        name: row.name,
+        email: row.email,
+        owner: row.owner,
+        createdAt: row.createdAt,
+      );
       return user;
     } catch (e) {
       return null;
     }
   }
 
-  Future<UserData?> fetchUserData() async {
-    try {
-      final query = _db.select(_db.userProfiles);
-      final row = await query.getSingle();
-
-      final user = User(
-          companyName: row.companyName,
-          location: row.location,
-          description: row.description);
-      final data = UserData(id: row.id, user: user);
-      return data;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  Stream<UserData?> watchUser() {
+  Stream<User?> watchUser() {
     final query = _db.select(_db.userProfiles);
     final row = query.watchSingleOrNull();
 
     return row.map(
-      (userData) => userData != null
-          ? UserData(
-              id: userData.id,
-              user: User(
-                  companyName: userData.companyName,
-                  location: userData.location,
-                  description: userData.description),
+      (user) => user != null
+          ? User(
+              userId: user.userId,
+              name: user.name,
+              email: user.email,
+              owner: user.owner,
+              createdAt: user.createdAt,
             )
           : null,
     );
@@ -103,7 +93,7 @@ UserProfileRepository userProfileRepository(Ref ref) {
 }
 
 @riverpod
-Stream<UserData?> watchUser(Ref ref) {
+Stream<User?> watchUser(Ref ref) {
   final repo = ref.read(userProfileRepositoryProvider);
 
   return repo.watchUser();
@@ -113,10 +103,4 @@ Stream<UserData?> watchUser(Ref ref) {
 Future<User?> fetchUser(Ref ref) async {
   final repo = ref.read(userProfileRepositoryProvider);
   return repo.fetchUser();
-}
-
-@riverpod
-Future<UserData?> fetchUserData(Ref ref) async {
-  final repo = ref.read(userProfileRepositoryProvider);
-  return repo.fetchUserData();
 }
