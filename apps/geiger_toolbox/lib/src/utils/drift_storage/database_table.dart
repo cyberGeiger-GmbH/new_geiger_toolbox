@@ -160,7 +160,7 @@ class TodoOfferingStatuses extends Table {
 )
 class AppDatabase extends _$AppDatabase {
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 1;
 
   AppDatabase() : super(impl.connect());
 }

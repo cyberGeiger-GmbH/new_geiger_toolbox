@@ -2,9 +2,10 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
-import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/news_feed_cache_repository.dart';
+import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/acting_object_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
 import 'package:geiger_toolbox/src/utils/device_info.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -16,7 +17,7 @@ part 'news_feed_service.g.dart';
 class NewsFeedService {
   final Ref ref;
 
-  NewsFeedCacheRepository get cache =>
+  LocalNewsFeedRepository get cache =>
       ref.read(newsFeedCacheRepositoryProvider);
 
   NewsFeedService(this.ref);
@@ -26,30 +27,7 @@ class NewsFeedService {
   Future<void> cacheNews() async {
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
-      final company = await ref.read(fetchCompanyProvider.future);
-      final currentUserDeviceInfo = Asset(
-          type: _deviceType.type.name,
-          version: _deviceType.version,
-          model: _deviceType.model);
-      Profile? profile;
-      if (company != null) {
-        profile = Profile.withDefaultTimestamp(
-            id: company.companyName.replaceSpacesWithHyphen,
-            actor: Actor(
-                companyName: company.companyName,
-                location: company.location,
-                companyDescription: company.description,
-                userDevice: currentUserDeviceInfo,
-                assets: []),
-            verb: Verb(name: "User profile created"));
-      } else {
-        profile = Profile.withoutActor(
-          id: "",
-          verb: Verb(name: "initial scan without company profile"),
-          currentDevice: currentUserDeviceInfo,
-        );
-      }
-
+      final profile = await _getProfileForNewsFeed();
       debugPrint("user profile => $profile");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
       if (data.isNotEmpty) {
@@ -65,12 +43,74 @@ class NewsFeedService {
     await cache.deleteNews();
   }
 
-  // void getDevice() async {
-  //   final devicePlugin = ref.read(deviceInfoProvider);
-  //   final deviceType = ref.read(deviceTypeProvider);
-  //   if(deviceType.)
+//get object that the user is working on
+
+  // Future<Acting> _getObject() async {
+  //   final todos = ref.read(provider)
+  //   final
 
   // }
+  Future<Profile?> _getProfileForNewsFeed() async {
+    final company = await ref.read(fetchCompanyProvider.future);
+    final user = await ref.read(fetchUserProvider.future);
+    final userId = user!.userId;
+    //final object = await ref.read(fetchActingObjectProvider.future);
+
+    final currentUserDeviceInfo = Asset(
+        type: _deviceType.type.name,
+        version: _deviceType.version,
+        model: _deviceType.model);
+    if (company != null) {
+      return Profile.withDefaultTimestamp(
+          id: userId,
+          actor: Actor(
+            companyName: company.companyName,
+            location: company.location,
+            companyDescription: company.description,
+            userDevice: currentUserDeviceInfo,
+            assets: [],
+          ),
+          verb: Verb(name: "User profile created"));
+    } else {
+      return Profile.withoutActor(
+        id: userId,
+        verb: Verb(name: "initial scan without company profile"),
+        currentDevice: currentUserDeviceInfo,
+      );
+    }
+  }
+
+  Future<Profile?> _getProfileForCalculateScore() async {
+    final company = await ref.read(fetchCompanyProvider.future);
+    final user = await ref.read(fetchUserProvider.future);
+    final userId = user!.userId;
+    final object = await ref.read(fetchActingObjectProvider.future);
+
+    final currentUserDeviceInfo = Asset(
+        type: _deviceType.type.name,
+        version: _deviceType.version,
+        model: _deviceType.model);
+    if (company != null) {
+      return Profile.withDefaultTimestamp(
+          id: userId,
+          actor: Actor(
+            companyName: company.companyName,
+            location: company.location,
+            companyDescription: company.description,
+            userDevice: currentUserDeviceInfo,
+            assets: [],
+          ),
+          object: object,
+          verb: Verb(name: "User profile created"));
+    } else {
+      return Profile.withoutActor(
+        id: userId,
+        object: object,
+        verb: Verb(name: "initial scan without company profile"),
+        currentDevice: currentUserDeviceInfo,
+      );
+    }
+  }
 }
 
 @riverpod

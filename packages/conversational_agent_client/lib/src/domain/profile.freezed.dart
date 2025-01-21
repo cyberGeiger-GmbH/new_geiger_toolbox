@@ -23,7 +23,7 @@ mixin _$Profile {
   String get id => throw _privateConstructorUsedError;
   Actor? get actor => throw _privateConstructorUsedError;
   Verb get verb => throw _privateConstructorUsedError;
-  Acting? get object => throw _privateConstructorUsedError;
+  ActingObject? get object => throw _privateConstructorUsedError;
   Result? get result => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
 
@@ -45,13 +45,13 @@ abstract class $ProfileCopyWith<$Res> {
       {String id,
       Actor? actor,
       Verb verb,
-      Acting? object,
+      ActingObject? object,
       Result? result,
       DateTime timestamp});
 
   $ActorCopyWith<$Res>? get actor;
   $VerbCopyWith<$Res> get verb;
-  $ActingCopyWith<$Res>? get object;
+  $ActingObjectCopyWith<$Res>? get object;
   $ResultCopyWith<$Res>? get result;
 }
 
@@ -93,7 +93,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
       object: freezed == object
           ? _value.object
           : object // ignore: cast_nullable_to_non_nullable
-              as Acting?,
+              as ActingObject?,
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
@@ -133,12 +133,12 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ActingCopyWith<$Res>? get object {
+  $ActingObjectCopyWith<$Res>? get object {
     if (_value.object == null) {
       return null;
     }
 
-    return $ActingCopyWith<$Res>(_value.object!, (value) {
+    return $ActingObjectCopyWith<$Res>(_value.object!, (value) {
       return _then(_value.copyWith(object: value) as $Val);
     });
   }
@@ -169,7 +169,7 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       {String id,
       Actor? actor,
       Verb verb,
-      Acting? object,
+      ActingObject? object,
       Result? result,
       DateTime timestamp});
 
@@ -178,7 +178,7 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   @override
   $VerbCopyWith<$Res> get verb;
   @override
-  $ActingCopyWith<$Res>? get object;
+  $ActingObjectCopyWith<$Res>? get object;
   @override
   $ResultCopyWith<$Res>? get result;
 }
@@ -219,7 +219,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
       object: freezed == object
           ? _value.object
           : object // ignore: cast_nullable_to_non_nullable
-              as Acting?,
+              as ActingObject?,
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
@@ -253,7 +253,7 @@ class _$ProfileImpl implements _Profile {
   @override
   final Verb verb;
   @override
-  final Acting? object;
+  final ActingObject? object;
   @override
   final Result? result;
   @override
@@ -304,7 +304,7 @@ abstract class _Profile implements Profile {
       {required final String id,
       final Actor? actor,
       required final Verb verb,
-      final Acting? object,
+      final ActingObject? object,
       final Result? result,
       required final DateTime timestamp}) = _$ProfileImpl;
 
@@ -317,7 +317,7 @@ abstract class _Profile implements Profile {
   @override
   Verb get verb;
   @override
-  Acting? get object;
+  ActingObject? get object;
   @override
   Result? get result;
   @override
@@ -961,42 +961,44 @@ abstract class _Verb implements Verb {
       throw _privateConstructorUsedError;
 }
 
-Acting _$ActingFromJson(Map<String, dynamic> json) {
-  return _Acting.fromJson(json);
+ActingObject _$ActingObjectFromJson(Map<String, dynamic> json) {
+  return _ActingObject.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Acting {
+mixin _$ActingObject {
   List<Definition> get definition => throw _privateConstructorUsedError;
 
-  /// Serializes this Acting to a JSON map.
+  /// Serializes this ActingObject to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Acting
+  /// Create a copy of ActingObject
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ActingCopyWith<Acting> get copyWith => throw _privateConstructorUsedError;
+  $ActingObjectCopyWith<ActingObject> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ActingCopyWith<$Res> {
-  factory $ActingCopyWith(Acting value, $Res Function(Acting) then) =
-      _$ActingCopyWithImpl<$Res, Acting>;
+abstract class $ActingObjectCopyWith<$Res> {
+  factory $ActingObjectCopyWith(
+          ActingObject value, $Res Function(ActingObject) then) =
+      _$ActingObjectCopyWithImpl<$Res, ActingObject>;
   @useResult
   $Res call({List<Definition> definition});
 }
 
 /// @nodoc
-class _$ActingCopyWithImpl<$Res, $Val extends Acting>
-    implements $ActingCopyWith<$Res> {
-  _$ActingCopyWithImpl(this._value, this._then);
+class _$ActingObjectCopyWithImpl<$Res, $Val extends ActingObject>
+    implements $ActingObjectCopyWith<$Res> {
+  _$ActingObjectCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Acting
+  /// Create a copy of ActingObject
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1013,31 +1015,32 @@ class _$ActingCopyWithImpl<$Res, $Val extends Acting>
 }
 
 /// @nodoc
-abstract class _$$ActingImplCopyWith<$Res> implements $ActingCopyWith<$Res> {
-  factory _$$ActingImplCopyWith(
-          _$ActingImpl value, $Res Function(_$ActingImpl) then) =
-      __$$ActingImplCopyWithImpl<$Res>;
+abstract class _$$ActingObjectImplCopyWith<$Res>
+    implements $ActingObjectCopyWith<$Res> {
+  factory _$$ActingObjectImplCopyWith(
+          _$ActingObjectImpl value, $Res Function(_$ActingObjectImpl) then) =
+      __$$ActingObjectImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Definition> definition});
 }
 
 /// @nodoc
-class __$$ActingImplCopyWithImpl<$Res>
-    extends _$ActingCopyWithImpl<$Res, _$ActingImpl>
-    implements _$$ActingImplCopyWith<$Res> {
-  __$$ActingImplCopyWithImpl(
-      _$ActingImpl _value, $Res Function(_$ActingImpl) _then)
+class __$$ActingObjectImplCopyWithImpl<$Res>
+    extends _$ActingObjectCopyWithImpl<$Res, _$ActingObjectImpl>
+    implements _$$ActingObjectImplCopyWith<$Res> {
+  __$$ActingObjectImplCopyWithImpl(
+      _$ActingObjectImpl _value, $Res Function(_$ActingObjectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Acting
+  /// Create a copy of ActingObject
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? definition = null,
   }) {
-    return _then(_$ActingImpl(
+    return _then(_$ActingObjectImpl(
       definition: null == definition
           ? _value._definition
           : definition // ignore: cast_nullable_to_non_nullable
@@ -1048,12 +1051,12 @@ class __$$ActingImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ActingImpl implements _Acting {
-  const _$ActingImpl({required final List<Definition> definition})
+class _$ActingObjectImpl implements _ActingObject {
+  const _$ActingObjectImpl({required final List<Definition> definition})
       : _definition = definition;
 
-  factory _$ActingImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ActingImplFromJson(json);
+  factory _$ActingObjectImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ActingObjectImplFromJson(json);
 
   final List<Definition> _definition;
   @override
@@ -1065,14 +1068,14 @@ class _$ActingImpl implements _Acting {
 
   @override
   String toString() {
-    return 'Acting(definition: $definition)';
+    return 'ActingObject(definition: $definition)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ActingImpl &&
+            other is _$ActingObjectImpl &&
             const DeepCollectionEquality()
                 .equals(other._definition, _definition));
   }
@@ -1082,36 +1085,37 @@ class _$ActingImpl implements _Acting {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_definition));
 
-  /// Create a copy of Acting
+  /// Create a copy of ActingObject
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ActingImplCopyWith<_$ActingImpl> get copyWith =>
-      __$$ActingImplCopyWithImpl<_$ActingImpl>(this, _$identity);
+  _$$ActingObjectImplCopyWith<_$ActingObjectImpl> get copyWith =>
+      __$$ActingObjectImplCopyWithImpl<_$ActingObjectImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ActingImplToJson(
+    return _$$ActingObjectImplToJson(
       this,
     );
   }
 }
 
-abstract class _Acting implements Acting {
-  const factory _Acting({required final List<Definition> definition}) =
-      _$ActingImpl;
+abstract class _ActingObject implements ActingObject {
+  const factory _ActingObject({required final List<Definition> definition}) =
+      _$ActingObjectImpl;
 
-  factory _Acting.fromJson(Map<String, dynamic> json) = _$ActingImpl.fromJson;
+  factory _ActingObject.fromJson(Map<String, dynamic> json) =
+      _$ActingObjectImpl.fromJson;
 
   @override
   List<Definition> get definition;
 
-  /// Create a copy of Acting
+  /// Create a copy of ActingObject
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ActingImplCopyWith<_$ActingImpl> get copyWith =>
+  _$$ActingObjectImplCopyWith<_$ActingObjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1124,7 +1128,6 @@ mixin _$Definition {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
   List<DefinitionExtension> get extensions =>
       throw _privateConstructorUsedError;
 
@@ -1148,7 +1151,6 @@ abstract class $DefinitionCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      String type,
       List<DefinitionExtension> extensions});
 }
 
@@ -1170,7 +1172,6 @@ class _$DefinitionCopyWithImpl<$Res, $Val extends Definition>
     Object? id = null,
     Object? name = null,
     Object? description = null,
-    Object? type = null,
     Object? extensions = null,
   }) {
     return _then(_value.copyWith(
@@ -1185,10 +1186,6 @@ class _$DefinitionCopyWithImpl<$Res, $Val extends Definition>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
               as String,
       extensions: null == extensions
           ? _value.extensions
@@ -1210,7 +1207,6 @@ abstract class _$$DefinitionImplCopyWith<$Res>
       {String id,
       String name,
       String description,
-      String type,
       List<DefinitionExtension> extensions});
 }
 
@@ -1230,7 +1226,6 @@ class __$$DefinitionImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? description = null,
-    Object? type = null,
     Object? extensions = null,
   }) {
     return _then(_$DefinitionImpl(
@@ -1245,10 +1240,6 @@ class __$$DefinitionImplCopyWithImpl<$Res>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
               as String,
       extensions: null == extensions
           ? _value._extensions
@@ -1265,7 +1256,6 @@ class _$DefinitionImpl implements _Definition {
       {required this.id,
       required this.name,
       required this.description,
-      required this.type,
       required final List<DefinitionExtension> extensions})
       : _extensions = extensions;
 
@@ -1278,8 +1268,6 @@ class _$DefinitionImpl implements _Definition {
   final String name;
   @override
   final String description;
-  @override
-  final String type;
   final List<DefinitionExtension> _extensions;
   @override
   List<DefinitionExtension> get extensions {
@@ -1290,7 +1278,7 @@ class _$DefinitionImpl implements _Definition {
 
   @override
   String toString() {
-    return 'Definition(id: $id, name: $name, description: $description, type: $type, extensions: $extensions)';
+    return 'Definition(id: $id, name: $name, description: $description, extensions: $extensions)';
   }
 
   @override
@@ -1302,14 +1290,13 @@ class _$DefinitionImpl implements _Definition {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality()
                 .equals(other._extensions, _extensions));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description, type,
+  int get hashCode => Object.hash(runtimeType, id, name, description,
       const DeepCollectionEquality().hash(_extensions));
 
   /// Create a copy of Definition
@@ -1333,7 +1320,6 @@ abstract class _Definition implements Definition {
       {required final String id,
       required final String name,
       required final String description,
-      required final String type,
       required final List<DefinitionExtension> extensions}) = _$DefinitionImpl;
 
   factory _Definition.fromJson(Map<String, dynamic> json) =
@@ -1345,8 +1331,6 @@ abstract class _Definition implements Definition {
   String get name;
   @override
   String get description;
-  @override
-  String get type;
   @override
   List<DefinitionExtension> get extensions;
 
@@ -1364,9 +1348,9 @@ DefinitionExtension _$DefinitionExtensionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DefinitionExtension {
-  String get name => throw _privateConstructorUsedError;
-  String get summary => throw _privateConstructorUsedError;
-  bool get alreadyImplemented => throw _privateConstructorUsedError;
+  String get recommendationType => throw _privateConstructorUsedError;
+  List<Implementation> get implementations =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this DefinitionExtension to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1384,7 +1368,7 @@ abstract class $DefinitionExtensionCopyWith<$Res> {
           DefinitionExtension value, $Res Function(DefinitionExtension) then) =
       _$DefinitionExtensionCopyWithImpl<$Res, DefinitionExtension>;
   @useResult
-  $Res call({String name, String summary, bool alreadyImplemented});
+  $Res call({String recommendationType, List<Implementation> implementations});
 }
 
 /// @nodoc
@@ -1402,23 +1386,18 @@ class _$DefinitionExtensionCopyWithImpl<$Res, $Val extends DefinitionExtension>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? summary = null,
-    Object? alreadyImplemented = null,
+    Object? recommendationType = null,
+    Object? implementations = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      recommendationType: null == recommendationType
+          ? _value.recommendationType
+          : recommendationType // ignore: cast_nullable_to_non_nullable
               as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      alreadyImplemented: null == alreadyImplemented
-          ? _value.alreadyImplemented
-          : alreadyImplemented // ignore: cast_nullable_to_non_nullable
-              as bool,
+      implementations: null == implementations
+          ? _value.implementations
+          : implementations // ignore: cast_nullable_to_non_nullable
+              as List<Implementation>,
     ) as $Val);
   }
 }
@@ -1431,7 +1410,7 @@ abstract class _$$DefinitionExtensionImplCopyWith<$Res>
       __$$DefinitionExtensionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String summary, bool alreadyImplemented});
+  $Res call({String recommendationType, List<Implementation> implementations});
 }
 
 /// @nodoc
@@ -1447,23 +1426,18 @@ class __$$DefinitionExtensionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? summary = null,
-    Object? alreadyImplemented = null,
+    Object? recommendationType = null,
+    Object? implementations = null,
   }) {
     return _then(_$DefinitionExtensionImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      recommendationType: null == recommendationType
+          ? _value.recommendationType
+          : recommendationType // ignore: cast_nullable_to_non_nullable
               as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      alreadyImplemented: null == alreadyImplemented
-          ? _value.alreadyImplemented
-          : alreadyImplemented // ignore: cast_nullable_to_non_nullable
-              as bool,
+      implementations: null == implementations
+          ? _value._implementations
+          : implementations // ignore: cast_nullable_to_non_nullable
+              as List<Implementation>,
     ));
   }
 }
@@ -1472,23 +1446,26 @@ class __$$DefinitionExtensionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DefinitionExtensionImpl implements _DefinitionExtension {
   const _$DefinitionExtensionImpl(
-      {required this.name,
-      required this.summary,
-      required this.alreadyImplemented});
+      {required this.recommendationType,
+      required final List<Implementation> implementations})
+      : _implementations = implementations;
 
   factory _$DefinitionExtensionImpl.fromJson(Map<String, dynamic> json) =>
       _$$DefinitionExtensionImplFromJson(json);
 
   @override
-  final String name;
+  final String recommendationType;
+  final List<Implementation> _implementations;
   @override
-  final String summary;
-  @override
-  final bool alreadyImplemented;
+  List<Implementation> get implementations {
+    if (_implementations is EqualUnmodifiableListView) return _implementations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_implementations);
+  }
 
   @override
   String toString() {
-    return 'DefinitionExtension(name: $name, summary: $summary, alreadyImplemented: $alreadyImplemented)';
+    return 'DefinitionExtension(recommendationType: $recommendationType, implementations: $implementations)';
   }
 
   @override
@@ -1496,16 +1473,16 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DefinitionExtensionImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.summary, summary) || other.summary == summary) &&
-            (identical(other.alreadyImplemented, alreadyImplemented) ||
-                other.alreadyImplemented == alreadyImplemented));
+            (identical(other.recommendationType, recommendationType) ||
+                other.recommendationType == recommendationType) &&
+            const DeepCollectionEquality()
+                .equals(other._implementations, _implementations));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, summary, alreadyImplemented);
+  int get hashCode => Object.hash(runtimeType, recommendationType,
+      const DeepCollectionEquality().hash(_implementations));
 
   /// Create a copy of DefinitionExtension
   /// with the given fields replaced by the non-null parameter values.
@@ -1526,25 +1503,210 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
 
 abstract class _DefinitionExtension implements DefinitionExtension {
   const factory _DefinitionExtension(
-      {required final String name,
-      required final String summary,
-      required final bool alreadyImplemented}) = _$DefinitionExtensionImpl;
+          {required final String recommendationType,
+          required final List<Implementation> implementations}) =
+      _$DefinitionExtensionImpl;
 
   factory _DefinitionExtension.fromJson(Map<String, dynamic> json) =
       _$DefinitionExtensionImpl.fromJson;
 
   @override
-  String get name;
+  String get recommendationType;
   @override
-  String get summary;
-  @override
-  bool get alreadyImplemented;
+  List<Implementation> get implementations;
 
   /// Create a copy of DefinitionExtension
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DefinitionExtensionImplCopyWith<_$DefinitionExtensionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Implementation _$ImplementationFromJson(Map<String, dynamic> json) {
+  return _Implementation.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Implementation {
+  String get name => throw _privateConstructorUsedError;
+  String get summary => throw _privateConstructorUsedError;
+  bool get implemented => throw _privateConstructorUsedError;
+
+  /// Serializes this Implementation to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Implementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ImplementationCopyWith<Implementation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ImplementationCopyWith<$Res> {
+  factory $ImplementationCopyWith(
+          Implementation value, $Res Function(Implementation) then) =
+      _$ImplementationCopyWithImpl<$Res, Implementation>;
+  @useResult
+  $Res call({String name, String summary, bool implemented});
+}
+
+/// @nodoc
+class _$ImplementationCopyWithImpl<$Res, $Val extends Implementation>
+    implements $ImplementationCopyWith<$Res> {
+  _$ImplementationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Implementation
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? summary = null,
+    Object? implemented = null,
+  }) {
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: null == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      implemented: null == implemented
+          ? _value.implemented
+          : implemented // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ImplementationImplCopyWith<$Res>
+    implements $ImplementationCopyWith<$Res> {
+  factory _$$ImplementationImplCopyWith(_$ImplementationImpl value,
+          $Res Function(_$ImplementationImpl) then) =
+      __$$ImplementationImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String name, String summary, bool implemented});
+}
+
+/// @nodoc
+class __$$ImplementationImplCopyWithImpl<$Res>
+    extends _$ImplementationCopyWithImpl<$Res, _$ImplementationImpl>
+    implements _$$ImplementationImplCopyWith<$Res> {
+  __$$ImplementationImplCopyWithImpl(
+      _$ImplementationImpl _value, $Res Function(_$ImplementationImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Implementation
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? summary = null,
+    Object? implemented = null,
+  }) {
+    return _then(_$ImplementationImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: null == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      implemented: null == implemented
+          ? _value.implemented
+          : implemented // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ImplementationImpl implements _Implementation {
+  const _$ImplementationImpl(
+      {required this.name, required this.summary, required this.implemented});
+
+  factory _$ImplementationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ImplementationImplFromJson(json);
+
+  @override
+  final String name;
+  @override
+  final String summary;
+  @override
+  final bool implemented;
+
+  @override
+  String toString() {
+    return 'Implementation(name: $name, summary: $summary, implemented: $implemented)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ImplementationImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.summary, summary) || other.summary == summary) &&
+            (identical(other.implemented, implemented) ||
+                other.implemented == implemented));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, summary, implemented);
+
+  /// Create a copy of Implementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ImplementationImplCopyWith<_$ImplementationImpl> get copyWith =>
+      __$$ImplementationImplCopyWithImpl<_$ImplementationImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ImplementationImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Implementation implements Implementation {
+  const factory _Implementation(
+      {required final String name,
+      required final String summary,
+      required final bool implemented}) = _$ImplementationImpl;
+
+  factory _Implementation.fromJson(Map<String, dynamic> json) =
+      _$ImplementationImpl.fromJson;
+
+  @override
+  String get name;
+  @override
+  String get summary;
+  @override
+  bool get implemented;
+
+  /// Create a copy of Implementation
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ImplementationImplCopyWith<_$ImplementationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

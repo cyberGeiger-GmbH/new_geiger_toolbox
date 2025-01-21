@@ -9,7 +9,7 @@ class Profile with _$Profile {
     required String id,
     Actor? actor,
     required Verb verb,
-    final Acting? object,
+    final ActingObject? object,
     final Result? result,
     required DateTime timestamp,
   }) = _Profile;
@@ -19,7 +19,7 @@ class Profile with _$Profile {
     required String id,
     required Actor actor,
     required Verb verb,
-    Acting? object,
+    ActingObject? object,
     final Result? result,
   }) {
     return Profile(
@@ -36,7 +36,7 @@ class Profile with _$Profile {
     required String id,
     required Verb verb,
     required Asset currentDevice,
-    Acting? object,
+    ActingObject? object,
     final Result? result,
   }) {
     return Profile(
@@ -88,9 +88,11 @@ class Verb with _$Verb {
 }
 
 @freezed
-class Acting with _$Acting {
-  const factory Acting({required List<Definition> definition}) = _Acting;
-  factory Acting.fromJson(Map<String, dynamic> json) => _$ActingFromJson(json);
+class ActingObject with _$ActingObject {
+  const factory ActingObject({required List<Definition> definition}) =
+      _ActingObject;
+  factory ActingObject.fromJson(Map<String, dynamic> json) =>
+      _$ActingObjectFromJson(json);
 }
 
 @freezed
@@ -99,7 +101,6 @@ class Definition with _$Definition {
       {required String id,
       required String name,
       required String description,
-      required String type,
       required List<DefinitionExtension> extensions}) = _Definition;
 
   factory Definition.fromJson(Map<String, dynamic> json) =>
@@ -109,12 +110,22 @@ class Definition with _$Definition {
 @freezed
 class DefinitionExtension with _$DefinitionExtension {
   const factory DefinitionExtension(
-      {required String name,
-      required String summary,
-      required bool alreadyImplemented}) = _DefinitionExtension;
+      {required String recommendationType,
+      required List<Implementation> implementations}) = _DefinitionExtension;
 
   factory DefinitionExtension.fromJson(Map<String, dynamic> json) =>
       _$DefinitionExtensionFromJson(json);
+}
+
+@freezed
+class Implementation with _$Implementation {
+  const factory Implementation(
+      {required String name,
+      required String summary,
+      required bool implemented}) = _Implementation;
+
+  factory Implementation.fromJson(Map<String, dynamic> json) =>
+      _$ImplementationFromJson(json);
 }
 
 @freezed

@@ -8,19 +8,19 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';
 
-part 'news_feed_cache_repository.g.dart';
+part 'local_news_feed_repository.g.dart';
 
-class NewsFeedCacheRepository {
-  NewsFeedCacheRepository(this.ref);
+class LocalNewsFeedRepository {
+  LocalNewsFeedRepository(this.ref);
 
   final Ref ref;
 
-  AppDatabase get db => ref.read(appDatabaseProvider);
+  AppDatabase get _db => ref.read(appDatabaseProvider);
 
   Future<void> synFromRemote({required List<News> data}) async {
     // debugPrint("news feed=> $data");
     try {
-      await db.transaction(() async {
+      await _db.transaction(() async {
         var newsOrder = 1;
         var recomOrder = 1;
         var offerOrder = 1;
@@ -35,7 +35,7 @@ class NewsFeedCacheRepository {
             imageUrl: Value(newsData.imageUrl),
             dateCreated: Value(newsData.dateCreated),
           );
-          await db.into(db.newsInfo).insertOnConflictUpdate(newsCompanion);
+          await _db.into(_db.newsInfo).insertOnConflictUpdate(newsCompanion);
           newsOrder++;
 
           //insert recommendations for each news
@@ -46,12 +46,12 @@ class NewsFeedCacheRepository {
               name: Value(recomData.name),
               order: Value(recomOrder),
             );
-            await db.into(db.recommendations).insertOnConflictUpdate(reco);
+            await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
             recomOrder++;
 
             // insert offering for each recommendation
             for (var offerData in recomData.offerings) {
-              //id = combination of offerings name and recom Id 
+              //id = combination of offerings name and recom Id
               final id =
                   "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
               final offer = OfferingsCompanion(
@@ -61,7 +61,7 @@ class NewsFeedCacheRepository {
                 name: Value(offerData.name),
                 summary: Value(offerData.summary),
               );
-              await db.into(db.offerings).insertOnConflictUpdate(offer);
+              await _db.into(_db.offerings).insertOnConflictUpdate(offer);
               offerOrder++;
             }
           }
@@ -74,11 +74,11 @@ class NewsFeedCacheRepository {
 
   Future<void> deleteNews() async {
     try {
-      await db.transaction(() async {
-        await db.delete(db.newsInfo).go();
-        await db.delete(db.recommendations).go();
-        await db.delete(db.offerings).go();
-        await db.delete(db.todoOfferingStatuses).go();
+      await _db.transaction(() async {
+        await _db.delete(_db.newsInfo).go();
+        await _db.delete(_db.recommendations).go();
+        await _db.delete(_db.offerings).go();
+        await _db.delete(_db.todoOfferingStatuses).go();
       });
     } catch (e) {
       throw DataBaseException();
@@ -88,22 +88,22 @@ class NewsFeedCacheRepository {
 //get news object
 
   Stream<List<News>> watchNewsList() {
-    final newsWithRecoAndOffering = (db.select(db.newsInfo).join(
+    final newsWithRecoAndOffering = (_db.select(_db.newsInfo).join(
       [
         leftOuterJoin(
-          db.recommendations,
-          db.recommendations.newsId.equalsExp(db.newsInfo.id),
+          _db.recommendations,
+          _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
         ),
         leftOuterJoin(
-          db.offerings,
-          db.offerings.recommendationId.equalsExp(db.recommendations.id),
+          _db.offerings,
+          _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
         )
       ],
     )..orderBy(
             [
-              OrderingTerm.asc(db.newsInfo.order),
-              OrderingTerm.asc(db.recommendations.order),
-              OrderingTerm.asc(db.offerings.order),
+              OrderingTerm.asc(_db.newsInfo.order),
+              OrderingTerm.asc(_db.recommendations.order),
+              OrderingTerm.asc(_db.offerings.order),
             ],
           ))
         .watch();
@@ -115,13 +115,13 @@ class NewsFeedCacheRepository {
 
     return newsWithRecoAndOffering.map((rows) {
       for (final row in rows) {
-        final newsEntry = row.readTable(db.newsInfo);
+        final newsEntry = row.readTable(_db.newsInfo);
         //read recommendation
-        final recommendationEntry = row.readTableOrNull(db.recommendations);
+        final recommendationEntry = row.readTableOrNull(_db.recommendations);
 
         // debugPrint("all recommendations table => $recommendationEntry");
         // read offering
-        final offeringEntry = row.readTableOrNull(db.offerings);
+        final offeringEntry = row.readTableOrNull(_db.offerings);
         // debugPrint("all news => $newsEntry");
         // debugPrint("all recommendations => $recommendationEntry");
 
@@ -165,6 +165,82 @@ class NewsFeedCacheRepository {
     });
   }
 
+  Future<List<News>> fetchNewsList() async {
+    final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
+      [
+        leftOuterJoin(
+          _db.recommendations,
+          _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
+        ),
+        leftOuterJoin(
+          _db.offerings,
+          _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
+        )
+      ],
+    )..orderBy(
+            [
+              OrderingTerm.asc(_db.newsInfo.order),
+              OrderingTerm.asc(_db.recommendations.order),
+              OrderingTerm.asc(_db.offerings.order),
+            ],
+          ))
+        .get();
+
+    //Tranfrom the query inot a list of News with their associated Recommendation and task;
+    final List<News> newsResult = [];
+    final Map<String, List<Recommendation>> recosMap = {};
+    final Map<String, List<Offering>> offerMap = {};
+
+    for (var rows in newsWithRecoAndOffering) {
+      final newsEntry = rows.readTable(_db.newsInfo);
+      //read recommendation
+      final recommendationEntry = rows.readTableOrNull(_db.recommendations);
+
+      // debugPrint("all recommendations table => $recommendationEntry");
+      // read offering
+      final offeringEntry = rows.readTableOrNull(_db.offerings);
+      // debugPrint("all news => $newsEntry");
+      // debugPrint("all recommendations => $recommendationEntry");
+
+      // add offfer to the corresponding list in offerMap
+      if (offeringEntry != null) {
+        final offer =
+            Offering(name: offeringEntry.name, summary: offeringEntry.summary);
+        offerMap
+            .putIfAbsent(offeringEntry.recommendationId, () => [])
+            .add(offer);
+      }
+
+      // if the recommendation is not yet in the list add it
+      if (recommendationEntry != null &&
+          !recosMap.entries
+              .any((value) => value.key == recommendationEntry.newsId)) {
+        final reco = Recommendation(
+            id: recommendationEntry.id,
+            name: recommendationEntry.name,
+            offerings: offerMap[recommendationEntry.id] ?? []);
+
+        recosMap.putIfAbsent(recommendationEntry.newsId, () => []).add(reco);
+      }
+
+      // if the news is not yet in the list add it
+      if (!newsResult.any((value) => value.id == newsEntry.id)) {
+        final news = News(
+            id: newsEntry.id,
+            title: newsEntry.title,
+            summary: newsEntry.summary,
+            articleUrl: "",
+            imageUrl: newsEntry.imageUrl,
+            dateCreated: newsEntry.dateCreated,
+            recommendations: recosMap[newsEntry.id] ?? []);
+
+        newsResult.add(news);
+      }
+    }
+
+    return newsResult;
+  }
+
   Stream<News?> watchNewsByTitle({required String title}) {
     return watchNewsList()
         .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: title));
@@ -185,6 +261,12 @@ class NewsFeedCacheRepository {
 }
 
 @riverpod
-NewsFeedCacheRepository newsFeedCacheRepository(Ref ref) {
-  return NewsFeedCacheRepository(ref);
+LocalNewsFeedRepository newsFeedCacheRepository(Ref ref) {
+  return LocalNewsFeedRepository(ref);
+}
+
+@riverpod
+Future<List<News>> fetchNewsList(Ref ref) {
+  final repo = ref.watch(newsFeedCacheRepositoryProvider);
+  return repo.fetchNewsList();
 }

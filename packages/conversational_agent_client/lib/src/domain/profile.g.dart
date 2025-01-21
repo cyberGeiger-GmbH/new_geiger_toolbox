@@ -15,7 +15,7 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       verb: Verb.fromJson(json['verb'] as Map<String, dynamic>),
       object: json['object'] == null
           ? null
-          : Acting.fromJson(json['object'] as Map<String, dynamic>),
+          : ActingObject.fromJson(json['object'] as Map<String, dynamic>),
       result: json['result'] == null
           ? null
           : Result.fromJson(json['result'] as Map<String, dynamic>),
@@ -77,13 +77,14 @@ Map<String, dynamic> _$$VerbImplToJson(_$VerbImpl instance) =>
       'name': instance.name,
     };
 
-_$ActingImpl _$$ActingImplFromJson(Map<String, dynamic> json) => _$ActingImpl(
+_$ActingObjectImpl _$$ActingObjectImplFromJson(Map<String, dynamic> json) =>
+    _$ActingObjectImpl(
       definition: (json['definition'] as List<dynamic>)
           .map((e) => Definition.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$ActingImplToJson(_$ActingImpl instance) =>
+Map<String, dynamic> _$$ActingObjectImplToJson(_$ActingObjectImpl instance) =>
     <String, dynamic>{
       'definition': instance.definition,
     };
@@ -93,7 +94,6 @@ _$DefinitionImpl _$$DefinitionImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
-      type: json['type'] as String,
       extensions: (json['extensions'] as List<dynamic>)
           .map((e) => DefinitionExtension.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -104,24 +104,38 @@ Map<String, dynamic> _$$DefinitionImplToJson(_$DefinitionImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'type': instance.type,
       'extensions': instance.extensions,
     };
 
 _$DefinitionExtensionImpl _$$DefinitionExtensionImplFromJson(
         Map<String, dynamic> json) =>
     _$DefinitionExtensionImpl(
-      name: json['name'] as String,
-      summary: json['summary'] as String,
-      alreadyImplemented: json['alreadyImplemented'] as bool,
+      recommendationType: json['recommendationType'] as String,
+      implementations: (json['implementations'] as List<dynamic>)
+          .map((e) => Implementation.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$DefinitionExtensionImplToJson(
         _$DefinitionExtensionImpl instance) =>
     <String, dynamic>{
+      'recommendationType': instance.recommendationType,
+      'implementations': instance.implementations,
+    };
+
+_$ImplementationImpl _$$ImplementationImplFromJson(Map<String, dynamic> json) =>
+    _$ImplementationImpl(
+      name: json['name'] as String,
+      summary: json['summary'] as String,
+      implemented: json['implemented'] as bool,
+    );
+
+Map<String, dynamic> _$$ImplementationImplToJson(
+        _$ImplementationImpl instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'summary': instance.summary,
-      'alreadyImplemented': instance.alreadyImplemented,
+      'implemented': instance.implemented,
     };
 
 _$ResultImpl _$$ResultImplFromJson(Map<String, dynamic> json) => _$ResultImpl(

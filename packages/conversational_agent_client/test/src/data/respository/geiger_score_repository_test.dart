@@ -29,24 +29,28 @@ void main() {
           currentDevice: Asset(type: "desktop", version: "1.1.0", model: "mac"),
           verb: Verb(
               name: "scanning without profile and implemented recommendations"),
-          object: Acting(definition:[ 
+          object: ActingObject(definition: [
             Definition(
               id: "new1",
               name: "Threat: APT29 Targets High-Value Victims",
               description:
                   "APT29, a Russia-linked threat actor, uses rogue Remote Desktop Protocol (RDP) servers to target high-value entities like governments and researchers. This threat is significant for users with sensitive data, as it can lead to data leakage and malware installation",
-              type: "Enable Multi-Factor Authentication",
               extensions: [
                 DefinitionExtension(
-                    name: "Microsoft",
-                    summary:
-                        "Provides tools to enable multi-factor authentication for enhanced security.",
-                    alreadyImplemented: false),
-                DefinitionExtension(
-                    name: "Google",
-                    summary:
-                        "Offers two-step verification to protect accounts from unauthorized access.",
-                    alreadyImplemented: false),
+                  recommendationType: "Enable Multi-Factor Authentication",
+                  implementations: [
+                    Implementation(
+                        name: "Microsof",
+                        summary:
+                            "Provides tools to enable multi-factor authentication for enhanced security.",
+                        implemented: false),
+                    Implementation(
+                        name: "Google",
+                        summary:
+                            "Offers two-step verification to protect accounts from unauthorized access.",
+                        implemented: false),
+                  ],
+                )
               ],
             ),
           ]),

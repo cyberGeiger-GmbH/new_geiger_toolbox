@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/data/cache/todo_offering_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/offering_status.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 

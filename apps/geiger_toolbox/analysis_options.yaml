@@ -10,7 +10,9 @@ linter:
 analyzer: 
   exclude:
   # exclude warnings in .g.dart
+    - "test/generated/**"
     - "**/*.g.dart"
+
   plugins: 
     # enable riverpod_lint
     - custom_lint
