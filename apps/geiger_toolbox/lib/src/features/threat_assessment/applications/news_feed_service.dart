@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/acting_object_repository.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
 import 'package:geiger_toolbox/src/utils/device_info.dart';
 
@@ -50,7 +50,7 @@ class NewsFeedService {
   //   final
 
   // }
-  Future<Profile?> _getProfileForNewsFeed() async {
+  Future<Profile> _getProfileForNewsFeed() async {
     final company = await ref.read(fetchCompanyProvider.future);
     final user = await ref.read(fetchUserProvider.future);
     final userId = user!.userId;
@@ -74,38 +74,6 @@ class NewsFeedService {
     } else {
       return Profile.withoutActor(
         id: userId,
-        verb: Verb(name: "initial scan without company profile"),
-        currentDevice: currentUserDeviceInfo,
-      );
-    }
-  }
-
-  Future<Profile?> _getProfileForCalculateScore() async {
-    final company = await ref.read(fetchCompanyProvider.future);
-    final user = await ref.read(fetchUserProvider.future);
-    final userId = user!.userId;
-    final object = await ref.read(fetchActingObjectProvider.future);
-
-    final currentUserDeviceInfo = Asset(
-        type: _deviceType.type.name,
-        version: _deviceType.version,
-        model: _deviceType.model);
-    if (company != null) {
-      return Profile.withDefaultTimestamp(
-          id: userId,
-          actor: Actor(
-            companyName: company.companyName,
-            location: company.location,
-            companyDescription: company.description,
-            userDevice: currentUserDeviceInfo,
-            assets: [],
-          ),
-          object: object,
-          verb: Verb(name: "User profile created"));
-    } else {
-      return Profile.withoutActor(
-        id: userId,
-        object: object,
         verb: Verb(name: "initial scan without company profile"),
         currentDevice: currentUserDeviceInfo,
       );

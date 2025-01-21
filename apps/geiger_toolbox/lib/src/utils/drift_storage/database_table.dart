@@ -3,6 +3,7 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'dart:convert';
 
 // Conditional import implementation based on the Drift Flutter web example:
 // https://github.com/simolus3/drift/tree/develop/examples/app
@@ -35,10 +36,10 @@ class CompanyProfiles extends Table {
 
 @DataClassName("GeigerScoreData")
 class GeigerScores extends Table {
-  DateTimeColumn get id => dateTime().withDefault(currentDateAndTime)();
+  IntColumn get id => integer().autoIncrement()();
   TextColumn get userId => text().references(UserProfiles, #userId)();
   IntColumn get score => integer()();
-  TextColumn get reasons => text().references(Reasons, #reason)();
+
   DateTimeColumn get lastUpdated =>
       dateTime().withDefault(currentDateAndTime)();
   @override
@@ -48,7 +49,21 @@ class GeigerScores extends Table {
 @DataClassName("ReasonData")
 class Reasons extends Table {
   TextColumn get reason => text()();
+  IntColumn get scoreId => integer().references(GeigerScores, #id)();
 }
+
+// class ReasonData extends TypeConverter<List<String>, String> {
+//   const ReasonData();
+//   @override
+//   List<String> fromSql(String fromDb) {
+//     return List<String>.from(json.decode(fromDb));
+//   }
+
+//   @override
+//   String toSql(List<String> value) {
+//     return json.encode(value); // Use json.encode
+//   }
+// }
 
 @DataClassName('NewsData')
 class NewsInfo extends Table {
