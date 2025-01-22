@@ -1917,7 +1917,7 @@ ResultExtensions _$ResultExtensionsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ResultExtensions {
-  String get geigerScore => throw _privateConstructorUsedError;
+  int get geigerScore => throw _privateConstructorUsedError;
   DateTime get lastUpdated => throw _privateConstructorUsedError;
   List<String> get reasons => throw _privateConstructorUsedError;
 
@@ -1937,7 +1937,7 @@ abstract class $ResultExtensionsCopyWith<$Res> {
           ResultExtensions value, $Res Function(ResultExtensions) then) =
       _$ResultExtensionsCopyWithImpl<$Res, ResultExtensions>;
   @useResult
-  $Res call({String geigerScore, DateTime lastUpdated, List<String> reasons});
+  $Res call({int geigerScore, DateTime lastUpdated, List<String> reasons});
 }
 
 /// @nodoc
@@ -1963,7 +1963,7 @@ class _$ResultExtensionsCopyWithImpl<$Res, $Val extends ResultExtensions>
       geigerScore: null == geigerScore
           ? _value.geigerScore
           : geigerScore // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       lastUpdated: null == lastUpdated
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
@@ -1984,7 +1984,7 @@ abstract class _$$ResultExtensionsImplCopyWith<$Res>
       __$$ResultExtensionsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String geigerScore, DateTime lastUpdated, List<String> reasons});
+  $Res call({int geigerScore, DateTime lastUpdated, List<String> reasons});
 }
 
 /// @nodoc
@@ -2008,7 +2008,7 @@ class __$$ResultExtensionsImplCopyWithImpl<$Res>
       geigerScore: null == geigerScore
           ? _value.geigerScore
           : geigerScore // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       lastUpdated: null == lastUpdated
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
@@ -2034,7 +2034,7 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
       _$$ResultExtensionsImplFromJson(json);
 
   @override
-  final String geigerScore;
+  final int geigerScore;
   @override
   final DateTime lastUpdated;
   final List<String> _reasons;
@@ -2086,7 +2086,7 @@ class _$ResultExtensionsImpl implements _ResultExtensions {
 
 abstract class _ResultExtensions implements ResultExtensions {
   const factory _ResultExtensions(
-      {required final String geigerScore,
+      {required final int geigerScore,
       required final DateTime lastUpdated,
       required final List<String> reasons}) = _$ResultExtensionsImpl;
 
@@ -2094,7 +2094,7 @@ abstract class _ResultExtensions implements ResultExtensions {
       _$ResultExtensionsImpl.fromJson;
 
   @override
-  String get geigerScore;
+  int get geigerScore;
   @override
   DateTime get lastUpdated;
   @override

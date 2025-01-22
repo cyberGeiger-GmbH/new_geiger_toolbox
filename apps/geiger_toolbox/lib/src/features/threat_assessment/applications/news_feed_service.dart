@@ -28,7 +28,7 @@ class NewsFeedService {
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
       final profile = await _getProfileForNewsFeed();
-      debugPrint("user profile => $profile");
+      debugPrint("sending xapi profile to newsFeed => $profile");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
       if (data.isNotEmpty) {
         await cache.synFromRemote(data: data);

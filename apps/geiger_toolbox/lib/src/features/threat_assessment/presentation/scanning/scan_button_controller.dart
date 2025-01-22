@@ -20,6 +20,7 @@ class ScanButtonController extends _$ScanButtonController {
     state = const AsyncLoading();
     state = await AsyncValue.guard(
         () => ref.read(newsFeedServiceProvider).cacheNews());
+    
     if (!state.isLoading && !state.hasError) {
       state = await AsyncValue.guard(
           () => ref.read(geigerScoreServiceProvider).cachedGeigerScore());

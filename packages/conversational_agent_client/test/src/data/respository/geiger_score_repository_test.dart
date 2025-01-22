@@ -24,9 +24,13 @@ void main() {
     test('news repository using default profile ', () async {
       final container = getContainer();
       final scoreRepo = container.read(geigerScoreRepositoryProvider);
-      final profile = Profile.withoutActor(
+      final userDevice = Asset(type: "desktop", version: "1.1.1", model: "mac");
+      final profile = Profile.withDefaultTimestamp(
           id: '',
-          currentDevice: Asset(type: "desktop", version: "1.1.0", model: "mac"),
+          actor: Actor(
+              userDevice: userDevice,
+              assets: [],
+              companyName: "testing company"),
           verb: Verb(
               name: "scanning without profile and implemented recommendations"),
           object: ActingObject(definition: [
@@ -58,12 +62,12 @@ void main() {
               success: false,
               completions: true,
               extensions: ResultExtensions.withDefaultTimestamp(
-                  geigerScore: "user does not have a score",
-                  reasons: ["profile has not be created yet by the user"]))
+                  geigerScore: 0, reasons: ["user has not geiger score"]))
           // digitalInfrastructure: DigitalInfrastructure(
           //     infoAbout: ["password", "teamView", "post finance"]),
           );
       final data = await scoreRepo.fetchGeigerScore(profile: profile);
+      print("xapi profile object $profile");
       print("geiger score object => $data");
       expect(data, isNotNull);
     });

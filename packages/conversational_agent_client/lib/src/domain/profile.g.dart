@@ -155,7 +155,7 @@ Map<String, dynamic> _$$ResultImplToJson(_$ResultImpl instance) =>
 _$ResultExtensionsImpl _$$ResultExtensionsImplFromJson(
         Map<String, dynamic> json) =>
     _$ResultExtensionsImpl(
-      geigerScore: json['geigerScore'] as String,
+      geigerScore: (json['geigerScore'] as num).toInt(),
       lastUpdated: DateTime.parse(json['lastUpdated'] as String),
       reasons:
           (json['reasons'] as List<dynamic>).map((e) => e as String).toList(),

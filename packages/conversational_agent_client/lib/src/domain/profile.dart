@@ -141,13 +141,13 @@ class Result with _$Result {
 @freezed
 class ResultExtensions with _$ResultExtensions {
   const factory ResultExtensions({
-    required String geigerScore,
+    required int geigerScore,
     required DateTime lastUpdated,
     required List<String> reasons,
   }) = _ResultExtensions;
 
   factory ResultExtensions.withDefaultTimestamp({
-    required String geigerScore,
+    required int geigerScore,
     required List<String> reasons,
   }) =>
       ResultExtensions(
