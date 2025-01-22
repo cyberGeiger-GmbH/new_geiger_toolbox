@@ -1060,8 +1060,6 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 8),
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'UNIQUE NOT NULL');
@@ -1420,10 +1418,7 @@ class $RecommendationsTable extends Recommendations
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 8),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _newsIdMeta = const VerificationMeta('newsId');
   @override
   late final GeneratedColumn<String> newsId = GeneratedColumn<String>(

@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:conversational_agent_client/conversational_agent_client.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
@@ -19,16 +22,19 @@ class LocalNewsFeedRepository {
 
   Future<void> synFromRemote({required List<News> data}) async {
     // debugPrint("news feed=> $data");
+    var random = Random();
+    var nxtValue = random.nextInt(20);
+    debugPrint("next Value => $nxtValue");
     try {
       await _db.transaction(() async {
-        var newsOrder = 1;
-        var recomOrder = 1;
-        var offerOrder = 1;
+        var newsOrder = nxtValue;
+        var recomOrder = nxtValue;
+        var offerOrder = nxtValue;
 
         for (var newsData in data) {
           //insert news
           final newsCompanion = NewsInfoCompanion(
-            id: Value(newsData.id),
+            id: Value(newsData.title.replaceSpacesWithHyphen),
             order: Value(newsOrder),
             title: Value(newsData.title),
             summary: Value(newsData.summary),
@@ -41,8 +47,8 @@ class LocalNewsFeedRepository {
           //insert recommendations for each news
           for (var recomData in newsData.recommendations) {
             final reco = RecommendationsCompanion(
-              id: Value(recomData.id),
-              newsId: Value(newsData.id),
+              id: Value(recomData.name.replaceSpacesWithHyphen),
+              newsId: Value(newsData.title.replaceSpacesWithHyphen),
               name: Value(recomData.name),
               order: Value(recomOrder),
             );
@@ -56,7 +62,7 @@ class LocalNewsFeedRepository {
                   "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
               final offer = OfferingsCompanion(
                 id: Value(id),
-                recommendationId: Value(recomData.id),
+                recommendationId: Value(recomData.name.replaceSpacesWithHyphen),
                 order: Value(offerOrder),
                 name: Value(offerData.name),
                 summary: Value(offerData.summary),

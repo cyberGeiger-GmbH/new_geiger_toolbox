@@ -2,8 +2,8 @@
 
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/utils/drift_storage/database_table.steps.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'dart:convert';
 
 // Conditional import implementation based on the Drift Flutter web example:
 // https://github.com/simolus3/drift/tree/develop/examples/app
@@ -42,8 +42,6 @@ class GeigerScores extends Table {
 
   DateTimeColumn get lastUpdated =>
       dateTime().withDefault(currentDateAndTime)();
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 @DataClassName("ReasonData")
@@ -67,8 +65,7 @@ class Reasons extends Table {
 
 @DataClassName('NewsData')
 class NewsInfo extends Table {
-  TextColumn get id =>
-      text().withLength(min: 1, max: 8).customConstraint('UNIQUE NOT NULL')();
+  TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
   IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
 
   TextColumn get title => text().withLength(min: 1, max: 255)();
@@ -82,7 +79,7 @@ class NewsInfo extends Table {
 
 @DataClassName('RecommendationData')
 class Recommendations extends Table {
-  TextColumn get id => text().withLength(min: 1, max: 8)();
+  TextColumn get id => text()();
   TextColumn get newsId => text().references(NewsInfo, #id)(); // Foreign key
   IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
   TextColumn get name => text().withLength(min: 1, max: 255)();
@@ -175,12 +172,26 @@ class TodoOfferingStatuses extends Table {
 )
 class AppDatabase extends _$AppDatabase {
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
-  AppDatabase() : super(impl.connect());
+  AppDatabase(super.connection);
+
+  factory AppDatabase.runDatabase() =>
+    AppDatabase(impl.connect());
+  
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      onUpgrade: stepByStep(from1To2: (m, schema) async {
+        // Write your migrations here
+        
+      }),
+    );
+  }
 }
 
 @Riverpod(keepAlive: true)
 AppDatabase appDatabase(Ref ref) {
-  return AppDatabase();
+  return AppDatabase.runDatabase();
 }
