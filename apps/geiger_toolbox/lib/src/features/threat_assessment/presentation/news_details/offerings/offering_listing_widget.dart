@@ -31,17 +31,12 @@ class OfferingListWidget extends ConsumerWidget {
             )
           : Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  TodoTileList(
-                    todoTile: data
-                        .map(
-                          (offer) =>
-                              AddOfferingToDoWidget(key: key, offer: offer),
-                        )
-                        .toList(),
-                  ),
-                ],
+              child: TodoTileList(
+                todoTile: data
+                    .map(
+                      (offer) => AddOfferingToDoWidget(key: key, offer: offer),
+                    )
+                    .toList(),
               ),
             ),
     );

@@ -19,15 +19,31 @@ void showWoltModalBottomSheet(BuildContext context,
   );
 }
 
+void showWoltAlertDialog(BuildContext context,
+    {required String title, required Widget page}) {
+  WoltModalSheet.show(
+    modalTypeBuilder: (context) => WoltModalType.alertDialog(),
+    context: context,
+    barrierDismissible: false,
+    pageListBuilder: (bottomSheetContext) {
+      return [
+        _takeActionSliverWolModalSheetPage(context,
+            title: title, mainContent: page, forceMaxHeight: false)
+      ];
+    },
+  );
+}
+
 SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     BuildContext modalSheetContext,
     {required String title,
     required Widget mainContent,
-    Widget? stickyActionBar}) {
+    Widget? stickyActionBar,
+    bool forceMaxHeight = true}) {
   final appColors = Theme.of(modalSheetContext).colorScheme;
 
   return SliverWoltModalSheetPage(
-    forceMaxHeight: true,
+    forceMaxHeight: forceMaxHeight,
     enableDrag: false,
 
     //  backgroundColor: appColors.surface,

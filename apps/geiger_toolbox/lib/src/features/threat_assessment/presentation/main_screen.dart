@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/info_list_widget.dart';
 
@@ -88,6 +89,8 @@ class FeatureList extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
+        ScoreWidget(),
+        Spacing.gapH12,
         ScanButtonWidget(onScanPressed: onScanPressed),
         Spacing.gapH16,
         NewsFeedsWidget(),
@@ -96,7 +99,7 @@ class FeatureList extends StatelessWidget {
         Spacing.gapH16,
         // getFlavor() == Flavor.dev ? RecommendationWidget() :
         InfoListWidget(),
-        Spacing.gapH12,
+        Spacing.gapH16,
       ],
     );
   }
