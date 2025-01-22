@@ -1,3 +1,11 @@
+## 1.4.1
+
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix issue while send previous score.
+ - **FIX**(geiger_toolbox,conversational_agent_client): pass user data to profile xapi schema.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix merge conflicts.
+ - **FIX**(geiger_toolbox,conversational_agent_client): improve profile structure.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add device info.
+
 ## 1.4.0
 
  - **FIX**(conversational_agent_client,geiger_toolbox): improve profile object.

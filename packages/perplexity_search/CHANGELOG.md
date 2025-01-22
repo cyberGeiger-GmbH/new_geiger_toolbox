@@ -1,3 +1,11 @@
+## 1.2.0
+
+ - **REFACTOR**(geiger_toolbox): refactor data model.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix issue while send previous score.
+ - **FIX**(geiger_toolbox,core_ui): show geiger score.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix merge conflicts.
+ - **FEAT**(geiger_toolbox): add calls to get geiger score.
+
 ## 1.1.0
 
  - **FIX**(geiger_toolbox): fix add/removing of todos error.

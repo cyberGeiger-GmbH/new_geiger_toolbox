@@ -1,3 +1,7 @@
+## 1.3.2
+
+ - **FIX**(geiger_toolbox,core_ui): show geiger score.
+
 ## 1.3.1
 
  - **FIX**(geiger_toolbox): fix add/removing of todos error.

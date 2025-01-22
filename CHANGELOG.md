@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-01-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`conversational_agent_client` - `v1.4.1`](#conversational_agent_client---v141)
+ - [`core_ui` - `v1.3.2`](#core_ui---v132)
+ - [`perplexity_search` - `v1.2.0`](#perplexity_search---v120)
+
+---
+
+#### `conversational_agent_client` - `v1.4.1`
+
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix issue while send previous score.
+ - **FIX**(geiger_toolbox,conversational_agent_client): pass user data to profile xapi schema.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix merge conflicts.
+ - **FIX**(geiger_toolbox,conversational_agent_client): improve profile structure.
+ - **FIX**(geiger_toolbox,conversational_agent_client): add device info.
+
+#### `core_ui` - `v1.3.2`
+
+ - **FIX**(geiger_toolbox,core_ui): show geiger score.
+
+#### `perplexity_search` - `v1.2.0`
+
+ - **REFACTOR**(geiger_toolbox): refactor data model.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix issue while send previous score.
+ - **FIX**(geiger_toolbox,core_ui): show geiger score.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix merge conflicts.
+ - **FEAT**(geiger_toolbox): add calls to get geiger score.
+
+
 ## 2025-01-14
 
 ### Changes
