@@ -134,11 +134,11 @@ class AppButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         backgroundColor: color ?? _appColor(context).primary,
-        minimumSize: const Size(150, 150),
+        minimumSize: const Size(130, 130),
         overlayColor: _appColor(context).onPrimary,
       ),
       onPressed: onPressed,
-      child: AppText.titleLarge(
+      child: AppText.labelLarge(
         text: label,
         context: context,
         color: color ?? _appColor(context).onPrimary,

@@ -93,7 +93,7 @@ class LocalGeigerScoreRepository {
       final reasonEntry = query.readTableOrNull(_db.reasons);
       if (reasonEntry != null) {
         // if the reasons  is not yet in the list add it
-        if (!reasons.any((value) => value.scoreId == scoreEntry.id)) {
+        if (!reasons.any((value) => value.scoreId == reasonEntry.scoreId)) {
           reasons.add(ScoreReason(
               scoreId: reasonEntry.scoreId, name: reasonEntry.reason));
         }
@@ -129,7 +129,8 @@ class LocalGeigerScoreRepository {
         final reasonEntry = row.readTableOrNull(_db.reasons);
 
         if (reasonEntry != null) {
-          if (!reasons.any((value) => value.scoreId == scoreEntry.id)) {
+           // if the reasons  is not yet in the list add it
+          if (!reasons.any((value) => value.scoreId == reasonEntry.scoreId)) {
             reasons.add(ScoreReason(
                 scoreId: reasonEntry.scoreId, name: reasonEntry.reason));
           }

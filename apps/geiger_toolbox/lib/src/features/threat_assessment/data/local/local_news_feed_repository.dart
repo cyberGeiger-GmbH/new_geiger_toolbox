@@ -23,8 +23,8 @@ class LocalNewsFeedRepository {
   Future<void> synFromRemote({required List<News> data}) async {
     // debugPrint("news feed=> $data");
     var random = Random();
-    var nxtValue = random.nextInt(100);
-    
+    var nxtValue = random.nextInt(1000);
+    debugPrint("random order value $nxtValue");
     try {
       await _db.transaction(() async {
         var newsOrder = nxtValue;

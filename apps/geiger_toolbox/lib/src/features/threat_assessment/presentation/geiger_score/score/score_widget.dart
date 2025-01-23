@@ -90,10 +90,11 @@ class _ScoreContent extends StatelessWidget {
     final textStyle = theme.textTheme.displayLarge!
         .copyWith(fontWeight: FontWeight.bold, color: color ?? Colors.black);
     return Padding(
-      padding: const EdgeInsets.only(top: 10, right: 10, left: 10, bottom: 0),
+      padding: const EdgeInsets.only(top: 15, right: 10, left: 10),
       child: Text(
         score,
         style: textStyle,
+        textAlign: TextAlign.center,
       ),
     );
   }

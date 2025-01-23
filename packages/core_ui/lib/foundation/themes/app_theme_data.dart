@@ -84,6 +84,7 @@ extension CustomThemeData on ThemeData {
         bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: TypoSize.bg),
         bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: TypoSize.md),
         bodySmall: textTheme.bodySmall?.copyWith(fontSize: TypoSize.sm),
+        labelLarge: textTheme.labelLarge?.copyWith(fontSize: TypoSize.md)
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
