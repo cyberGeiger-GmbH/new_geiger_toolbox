@@ -12,7 +12,7 @@ class ScanButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(scanButtonControllerProvider);
-    final newsFeedState = ref.watch(watchNewsFeedsProvider);
+    final newsFeedState = ref.watch(watchRecentNewsFeedsProvider);
 
     return AppButton.scan(
         label:

@@ -87,9 +87,16 @@ NewsFeedService newsFeedService(Ref ref) {
 }
 
 @riverpod
-Stream<List<News>> watchNewsFeeds(Ref ref) {
+Stream<List<News>> watchRecentNewsFeeds(Ref ref) {
   final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
   return cachedRepos.watchNewsList();
+}
+
+
+@riverpod
+Stream<List<News>> watchOldNewsFeeds(Ref ref) {
+  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  return cachedRepos.watchNewsList(sort: false);
 }
 
 @riverpod

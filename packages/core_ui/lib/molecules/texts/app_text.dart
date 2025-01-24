@@ -225,13 +225,14 @@ class AppText extends StatelessWidget {
           required BuildContext context,
           Color? color,
           TextAlign? textAlign,
-          TextOverflow? textOverflow}) =>
+          TextOverflow? textOverflow,
+          bool textRemoved = false}) =>
       AppText._(
           key: key,
           text: text,
           textStyle: _appTextStyles(context).bodyMedium!.copyWith(
-                color: color,
-              ),
+              color: color,
+              decoration: textRemoved ? TextDecoration.lineThrough : null),
           textAlign: textAlign ?? TextAlign.center,
           textOverflow: textOverflow);
 

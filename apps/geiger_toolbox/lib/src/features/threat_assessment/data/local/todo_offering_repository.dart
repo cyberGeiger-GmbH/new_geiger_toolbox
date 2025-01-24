@@ -62,20 +62,15 @@ class TodoOfferingRepository {
         ),
       ],
       //filter by offerings id
-    )
-      ..where(_db.todoOfferingStatuses.offeringId.equalsExp(_db.offerings.id))
-      ..orderBy(
-        [
-          OrderingTerm.asc(_db.offerings.order),
-        ],
-      );
+    )..where(_db.todoOfferingStatuses.offeringId.equalsExp(_db.offerings.id));
     // transform the query stream into a stream of [OfferingStatus] lists
     return query.watch().map((rows) {
       return rows.map((row) {
         // Read the offerings entry;
         final offeringEntry = row.readTable(_db.offerings);
         // Read the todo offering status entry or null if there is no match
-        final todoOfferingStatus = row.readTableOrNull(_db.todoOfferingStatuses);
+        final todoOfferingStatus =
+            row.readTableOrNull(_db.todoOfferingStatuses);
 
         return OfferingStatus(
             offering: Offering(
@@ -95,12 +90,7 @@ class TodoOfferingRepository {
           _db.todoOfferingStatuses.offeringId.equalsExp(_db.offerings.id))
     ])
       //filter by recommendationID
-      ..where(_db.offerings.recommendationId.equals(recommendationId))
-      ..orderBy(
-        [
-          OrderingTerm.asc(_db.offerings.order),
-        ],
-      );
+      ..where(_db.offerings.recommendationId.equals(recommendationId));
     final result = await query.get();
     List<OfferingStatus> statusList = [];
     for (var row in result) {
@@ -123,7 +113,8 @@ class TodoOfferingRepository {
     final query = _db.selectOnly(_db.todoOfferingStatuses)
       ..addColumns([_db.todoOfferingStatuses.offeringId.count()]);
     final result = await query
-        .map((row) => row.read<int>(_db.todoOfferingStatuses.offeringId.count()))
+        .map(
+            (row) => row.read<int>(_db.todoOfferingStatuses.offeringId.count()))
         .getSingle();
     return result == 0;
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../molecules/texts/app_text.dart';
@@ -18,8 +17,6 @@ class EmptyContent extends StatelessWidget {
   final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
-
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

@@ -20,3 +20,16 @@ String formattedDate(Ref ref, {required String inputDate}) {
     return formattedDate;
   }
 }
+
+@riverpod
+DateTime previousMonth(Ref ref, {int month = 6}) {
+  assert(month > 0, 'month must be greater than 0.');
+  // Get the date 6 months ago
+  final now = DateTime.now();
+  final date = DateTime(now.year, now.month - month, now.day);
+  // Assert that the calculated date is valid
+
+  assert(date.isBefore(now),
+      'Calculated date for $month months ago must be before the current date.');
+  return date;
+}

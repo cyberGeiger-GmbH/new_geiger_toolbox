@@ -23,23 +23,43 @@ final newsFeedServiceProvider = AutoDisposeProvider<NewsFeedService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NewsFeedServiceRef = AutoDisposeProviderRef<NewsFeedService>;
-String _$watchNewsFeedsHash() => r'5b5c91d43b8d3a714b6712ae8b5dae16665384d9';
+String _$watchRecentNewsFeedsHash() =>
+    r'b63f68060f86ea646b2b42cc27fa35136f4d4d25';
 
-/// See also [watchNewsFeeds].
-@ProviderFor(watchNewsFeeds)
-final watchNewsFeedsProvider = AutoDisposeStreamProvider<List<News>>.internal(
-  watchNewsFeeds,
-  name: r'watchNewsFeedsProvider',
+/// See also [watchRecentNewsFeeds].
+@ProviderFor(watchRecentNewsFeeds)
+final watchRecentNewsFeedsProvider =
+    AutoDisposeStreamProvider<List<News>>.internal(
+  watchRecentNewsFeeds,
+  name: r'watchRecentNewsFeedsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$watchNewsFeedsHash,
+      : _$watchRecentNewsFeedsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
+typedef WatchRecentNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
+String _$watchOldNewsFeedsHash() => r'29c4b8817adbb3027d787beb322334faf0b6a817';
+
+/// See also [watchOldNewsFeeds].
+@ProviderFor(watchOldNewsFeeds)
+final watchOldNewsFeedsProvider =
+    AutoDisposeStreamProvider<List<News>>.internal(
+  watchOldNewsFeeds,
+  name: r'watchOldNewsFeedsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$watchOldNewsFeedsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WatchOldNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
 String _$watchNewsFeedByTitleHash() =>
     r'1c2315e05b2c61d8304e75c28e2640d7b576a0dd';
 

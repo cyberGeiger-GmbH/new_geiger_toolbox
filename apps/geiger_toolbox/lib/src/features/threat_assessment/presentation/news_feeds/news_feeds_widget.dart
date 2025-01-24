@@ -15,69 +15,76 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:geiger_toolbox/src/utils/constants.dart';
 import 'package:go_router/go_router.dart';
 
 class NewsFeedsWidget extends ConsumerWidget {
-  NewsFeedsWidget({super.key});
-
+  NewsFeedsWidget({super.key, this.limitNewsFeedDisplay = 5});
+  final int limitNewsFeedDisplay;
   final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //listen for errors
     if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
-      ref.listen(watchNewsFeedsProvider,
+      ref.listen(watchRecentNewsFeedsProvider,
           (_, nxt) => nxt.showAlertDialogOnError(context: context));
     }
 
-    final newsFeedValue = ref.watch(watchNewsFeedsProvider);
+    final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
     final state = ref.watch(scanButtonControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);
 
     return AsyncValueWidget(
       value: newsFeedValue,
-      data: (news) => news.isEmpty
-          ? const SizedBox.shrink()
-          : Column(
-              children: [
-                CarouselSlider(
-                  items: news.toWidgetList(
-                    context: context,
-                    currentIndex: index,
-                    onPressed: state.isLoading
-                        ? null
-                        : () {
-                            final title = news[index].title;
-                            context.goNamed(
-                              AppRouter.newsFeedDetails.name,
-                              pathParameters: {
-                                AppRouter.newsFeedDetails.name:
-                                    title.replaceSpacesWithHyphen
-                              },
-                            );
-                          },
-                  ),
-                  controller: _controller,
-                  options: CarouselOptions(
-                    autoPlay: false,
-                    enlargeCenterPage: true,
-                    // ignore: no-magic-number
-                    enlargeFactor: 0.3,
-                    // ignore: no-magic-number
-                    height: 120,
-                    //aspectRatio: 4.0,
-                    disableCenter: true,
-                    //auto callback
-                    onPageChanged: (index, reason) {
-                      ref
-                          .read(newsFeedsControllerProvider.notifier)
-                          .update(index);
-                    },
-                  ),
+      data: (news) {
+        if (news.isEmpty) {
+          return const SizedBox.shrink();
+        } else {
+          final limitNews =
+              limitListLength(inputList: news, limit: limitNewsFeedDisplay);
+          return Column(
+            children: [
+              CarouselSlider(
+                items: limitNews.toWidgetList(
+                  context: context,
+                  currentIndex: index,
+                  onPressed: state.isLoading
+                      ? null
+                      : () {
+                          final title = news[index].title;
+                          context.goNamed(
+                            AppRouter.newsFeedDetails.name,
+                            pathParameters: {
+                              AppRouter.newsFeedDetails.name:
+                                  title.replaceSpacesWithHyphen
+                            },
+                          );
+                        },
                 ),
-                Indicator(data: news, current: index),
-              ],
-            ),
+                controller: _controller,
+                options: CarouselOptions(
+                  autoPlay: false,
+                  enlargeCenterPage: true,
+                  // ignore: no-magic-number
+                  enlargeFactor: 0.3,
+                  // ignore: no-magic-number
+                  height: 120,
+                  //aspectRatio: 4.0,
+                  disableCenter: true,
+                  //auto callback
+                  onPageChanged: (index, reason) {
+                    ref
+                        .read(newsFeedsControllerProvider.notifier)
+                        .update(index);
+                  },
+                ),
+              ),
+              Indicator(data: limitNews, current: index),
+            ],
+          );
+        }
+      },
     );
   }
 }

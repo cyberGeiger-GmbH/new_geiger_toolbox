@@ -2,7 +2,7 @@
 
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/utils/drift_storage/database_table.steps.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 // Conditional import implementation based on the Drift Flutter web example:
@@ -66,12 +66,11 @@ class Reasons extends Table {
 @DataClassName('NewsData')
 class NewsInfo extends Table {
   TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
-  IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
 
   TextColumn get title => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
   TextColumn get imageUrl => text()();
-  TextColumn get dateCreated => text().withLength(min: 1, max: 100)();
+  DateTimeColumn get dateCreated => dateTime()();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -81,7 +80,6 @@ class NewsInfo extends Table {
 class Recommendations extends Table {
   TextColumn get id => text()();
   TextColumn get newsId => text().references(NewsInfo, #id)(); // Foreign key
-  IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
   TextColumn get name => text().withLength(min: 1, max: 255)();
 
   @override
@@ -93,8 +91,6 @@ class Offerings extends Table {
   TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get recommendationId =>
       text().references(Recommendations, #id)(); // Foreign key
-
-  IntColumn get order => integer().customConstraint('UNIQUE NOT NULL')();
 
   TextColumn get name => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
@@ -172,23 +168,11 @@ class TodoOfferingStatuses extends Table {
 )
 class AppDatabase extends _$AppDatabase {
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 1;
 
   AppDatabase(super.connection);
 
-  factory AppDatabase.runDatabase() =>
-    AppDatabase(impl.connect());
-  
-
-  @override
-  MigrationStrategy get migration {
-    return MigrationStrategy(
-      onUpgrade: stepByStep(from1To2: (m, schema) async {
-        // Write your migrations here
-        
-      }),
-    );
-  }
+  factory AppDatabase.runDatabase() => AppDatabase(impl.connect());
 }
 
 @Riverpod(keepAlive: true)

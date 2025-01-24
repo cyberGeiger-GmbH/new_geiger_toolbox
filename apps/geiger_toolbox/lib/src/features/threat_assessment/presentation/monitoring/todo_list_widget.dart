@@ -6,9 +6,10 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/offering_status.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/utils/constants.dart';
 
-class InfoListWidget extends ConsumerWidget {
-  const InfoListWidget({
+class TodoListWidget extends ConsumerWidget {
+  const TodoListWidget({
     super.key,
   });
 
@@ -20,7 +21,7 @@ class InfoListWidget extends ConsumerWidget {
       value: todos,
       data: (data) => data.isEmpty
           ? const SizedBox.shrink()
-          : ShortList(
+          : ShortTodoList(
               items: data,
               displayLimit: 3,
             ),
@@ -28,8 +29,8 @@ class InfoListWidget extends ConsumerWidget {
   }
 }
 
-class ShortList extends StatelessWidget {
-  const ShortList({
+class ShortTodoList extends StatelessWidget {
+  const ShortTodoList({
     super.key,
     required this.items,
     required this.displayLimit,
@@ -44,7 +45,8 @@ class ShortList extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Label(
-            showAllTodos: () {
+            text: "Todos".hardcoded,
+            showAllItems: () {
               showAllTodos(context);
             },
           ),
@@ -53,8 +55,8 @@ class ShortList extends StatelessWidget {
             displayLimit: displayLimit,
           ),
           if (items.length > displayLimit)
-            ShowAll(
-              showAll: () {
+            SeeAllText(
+              seeAll: () {
                 showAllTodos(context);
               },
             ),
@@ -73,9 +75,10 @@ class ShortList extends StatelessWidget {
           tiles: (items.map(
             (item) => Card(
               child: ListTile(
-                title: AppText.titleMedium(
+                title: AppText.bodyMedium(
                     text: item.offering.name,
                     context: context,
+                    textAlign: TextAlign.start,
                     textRemoved: !item.added!),
                 subtitle: AppText.bodySmall(
                     text: item.offering.summary,
@@ -97,28 +100,11 @@ class ShowLimitedTodos extends StatelessWidget {
   final int displayLimit;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final limit = limitListLength(inputList: items, limit: displayLimit).length;
     return Column(
       children: [
-        for (var i = 0;
-            i < (items.length > displayLimit ? displayLimit : items.length);
-            i++) ...[
-          AppButton.action(
-            label: items[i].offering.name,
-            isItemDeleted: !items[i].added!,
-            context: context,
-            fontgroundColor: theme.colorScheme.onSurface,
-            onPressed: () {
-              showWoltModalBottomSheet(context,
-                  title: items[i].offering.name,
-                  page: Column(
-                    children: [
-                      AppText.bodySmall(
-                          text: items[i].offering.summary, context: context),
-                    ],
-                  ));
-            },
-          ),
+        for (var i = 0; i < limit; i++) ...[
+          TodoWidget(item: items[i]),
           if (i <
               (items.length > displayLimit
                   ? displayLimit - 1
@@ -132,9 +118,62 @@ class ShowLimitedTodos extends StatelessWidget {
   }
 }
 
-class ShowAll extends StatelessWidget {
-  const ShowAll({super.key, required this.showAll});
-  final VoidCallback showAll;
+class TodoWidget extends StatelessWidget {
+  const TodoWidget({
+    super.key,
+    required this.item,
+  });
+
+  final OfferingStatus item;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+        leading: AppText.bodyMedium(
+          text: item.offering.name,
+          context: context,
+          textRemoved: !item.added!,
+        ),
+        trailing: Icon(Icons.chevron_right),
+        onTap: () {
+          showWoltModalBottomSheet(context,
+              title: item.offering.name,
+              page: Column(
+                children: [
+                  AppText.bodySmall(
+                      text: item.offering.summary, context: context),
+                ],
+              ));
+        });
+  }
+}
+
+class Label extends StatelessWidget {
+  const Label({super.key, required this.showAllItems, required this.text});
+  final VoidCallback showAllItems;
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(left: Spacing.p16, top: Spacing.p8),
+      child: GestureDetector(
+        onTap: showAllItems,
+        child: Row(
+          children: [
+            AppText.bodySmall(
+                text: text, context: context, color: theme.hintColor),
+            Icon(Icons.chevron_right, color: theme.hintColor)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SeeAllText extends StatelessWidget {
+  const SeeAllText({super.key, required this.seeAll});
+  final VoidCallback seeAll;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -145,34 +184,10 @@ class ShowAll extends StatelessWidget {
         ),
         AppTextButton.primary(
           context: context,
-          label: "See All",
-          onTap: showAll,
+          label: "See All".hardcoded,
+          onTap: seeAll,
         ),
       ],
-    );
-  }
-}
-
-class Label extends StatelessWidget {
-  const Label({super.key, required this.showAllTodos});
-  final VoidCallback showAllTodos;
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.only(left: Spacing.p16, top: Spacing.p8),
-      child: GestureDetector(
-        onTap: showAllTodos,
-        child: Row(
-          children: [
-            AppText.bodySmall(
-                text: "Todos".hardcoded,
-                context: context,
-                color: theme.hintColor),
-            Icon(Icons.chevron_right, color: theme.hintColor)
-          ],
-        ),
-      ),
     );
   }
 }

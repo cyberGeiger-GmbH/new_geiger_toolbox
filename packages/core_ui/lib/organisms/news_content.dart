@@ -19,14 +19,14 @@ class NewsContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText.titleLarge(
+        AppText.headlineMedium(
           text: title,
           context: context,
         ),
         Spacing.gapH4,
         EmptyContent(textAlign: TextAlign.justify, message: summary),
         Spacing.gapH4,
-        _HorizontalTitleContent(
+        HorizontalTitleContent(
             key: key,
             title: lastUpdatedLabel ?? "last updated",
             source: lastedUpdated),
@@ -35,8 +35,8 @@ class NewsContent extends StatelessWidget {
   }
 }
 
-class _HorizontalTitleContent extends StatelessWidget {
-  const _HorizontalTitleContent(
+class HorizontalTitleContent extends StatelessWidget {
+  const HorizontalTitleContent(
       {super.key, required this.title, required this.source});
   final String title;
   final String source;
@@ -48,7 +48,7 @@ class _HorizontalTitleContent extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: "$title: ", // Title in bold
-        style: theme.textTheme.labelLarge!.copyWith(color: color),
+        style: theme.textTheme.bodySmall!.copyWith(color: color),
         children: [
           TextSpan(text: source, style: theme.textTheme.bodySmall
               // Message in normal style

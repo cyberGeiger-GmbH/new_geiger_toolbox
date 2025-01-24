@@ -30,14 +30,7 @@ class ActingObjectRepository {
           _db.todoOfferingStatuses.offeringId.equalsExp(_db.offerings.id),
         )
       ],
-    )..orderBy(
-            [
-              OrderingTerm.asc(_db.newsInfo.order),
-              OrderingTerm.asc(_db.recommendations.order),
-              OrderingTerm.asc(_db.offerings.order),
-            ],
-          ))
-        .get();
+    )).get();
     //Tranfrom the query inot a list of News with their associated Recommendation and task;
     final List<Definition> newsObj = [];
     final Map<String, List<DefinitionExtension>> recoObjMap = {};

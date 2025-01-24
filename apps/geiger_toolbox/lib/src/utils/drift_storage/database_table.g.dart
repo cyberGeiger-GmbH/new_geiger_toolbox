@@ -1063,13 +1063,6 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'UNIQUE NOT NULL');
-  static const VerificationMeta _orderMeta = const VerificationMeta('order');
-  @override
-  late final GeneratedColumn<int> order = GeneratedColumn<int>(
-      'order', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'UNIQUE NOT NULL');
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
@@ -1093,15 +1086,12 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
   static const VerificationMeta _dateCreatedMeta =
       const VerificationMeta('dateCreated');
   @override
-  late final GeneratedColumn<String> dateCreated = GeneratedColumn<String>(
+  late final GeneratedColumn<DateTime> dateCreated = GeneratedColumn<DateTime>(
       'date_created', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 100),
-      type: DriftSqlType.string,
-      requiredDuringInsert: true);
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, order, title, summary, imageUrl, dateCreated];
+      [id, title, summary, imageUrl, dateCreated];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1116,12 +1106,6 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     } else if (isInserting) {
       context.missing(_idMeta);
-    }
-    if (data.containsKey('order')) {
-      context.handle(
-          _orderMeta, order.isAcceptableOrUnknown(data['order']!, _orderMeta));
-    } else if (isInserting) {
-      context.missing(_orderMeta);
     }
     if (data.containsKey('title')) {
       context.handle(
@@ -1160,8 +1144,6 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
     return NewsData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      order: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}order'])!,
       title: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       summary: attachedDatabase.typeMapping
@@ -1169,7 +1151,7 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
       imageUrl: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}image_url'])!,
       dateCreated: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}date_created'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_created'])!,
     );
   }
 
@@ -1181,14 +1163,12 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
 
 class NewsData extends DataClass implements Insertable<NewsData> {
   final String id;
-  final int order;
   final String title;
   final String summary;
   final String imageUrl;
-  final String dateCreated;
+  final DateTime dateCreated;
   const NewsData(
       {required this.id,
-      required this.order,
       required this.title,
       required this.summary,
       required this.imageUrl,
@@ -1197,18 +1177,16 @@ class NewsData extends DataClass implements Insertable<NewsData> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
-    map['order'] = Variable<int>(order);
     map['title'] = Variable<String>(title);
     map['summary'] = Variable<String>(summary);
     map['image_url'] = Variable<String>(imageUrl);
-    map['date_created'] = Variable<String>(dateCreated);
+    map['date_created'] = Variable<DateTime>(dateCreated);
     return map;
   }
 
   NewsInfoCompanion toCompanion(bool nullToAbsent) {
     return NewsInfoCompanion(
       id: Value(id),
-      order: Value(order),
       title: Value(title),
       summary: Value(summary),
       imageUrl: Value(imageUrl),
@@ -1221,11 +1199,10 @@ class NewsData extends DataClass implements Insertable<NewsData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return NewsData(
       id: serializer.fromJson<String>(json['id']),
-      order: serializer.fromJson<int>(json['order']),
       title: serializer.fromJson<String>(json['title']),
       summary: serializer.fromJson<String>(json['summary']),
       imageUrl: serializer.fromJson<String>(json['imageUrl']),
-      dateCreated: serializer.fromJson<String>(json['dateCreated']),
+      dateCreated: serializer.fromJson<DateTime>(json['dateCreated']),
     );
   }
   @override
@@ -1233,24 +1210,21 @@ class NewsData extends DataClass implements Insertable<NewsData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
-      'order': serializer.toJson<int>(order),
       'title': serializer.toJson<String>(title),
       'summary': serializer.toJson<String>(summary),
       'imageUrl': serializer.toJson<String>(imageUrl),
-      'dateCreated': serializer.toJson<String>(dateCreated),
+      'dateCreated': serializer.toJson<DateTime>(dateCreated),
     };
   }
 
   NewsData copyWith(
           {String? id,
-          int? order,
           String? title,
           String? summary,
           String? imageUrl,
-          String? dateCreated}) =>
+          DateTime? dateCreated}) =>
       NewsData(
         id: id ?? this.id,
-        order: order ?? this.order,
         title: title ?? this.title,
         summary: summary ?? this.summary,
         imageUrl: imageUrl ?? this.imageUrl,
@@ -1259,7 +1233,6 @@ class NewsData extends DataClass implements Insertable<NewsData> {
   NewsData copyWithCompanion(NewsInfoCompanion data) {
     return NewsData(
       id: data.id.present ? data.id.value : this.id,
-      order: data.order.present ? data.order.value : this.order,
       title: data.title.present ? data.title.value : this.title,
       summary: data.summary.present ? data.summary.value : this.summary,
       imageUrl: data.imageUrl.present ? data.imageUrl.value : this.imageUrl,
@@ -1272,7 +1245,6 @@ class NewsData extends DataClass implements Insertable<NewsData> {
   String toString() {
     return (StringBuffer('NewsData(')
           ..write('id: $id, ')
-          ..write('order: $order, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
           ..write('imageUrl: $imageUrl, ')
@@ -1282,14 +1254,12 @@ class NewsData extends DataClass implements Insertable<NewsData> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, order, title, summary, imageUrl, dateCreated);
+  int get hashCode => Object.hash(id, title, summary, imageUrl, dateCreated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is NewsData &&
           other.id == this.id &&
-          other.order == this.order &&
           other.title == this.title &&
           other.summary == this.summary &&
           other.imageUrl == this.imageUrl &&
@@ -1298,15 +1268,13 @@ class NewsData extends DataClass implements Insertable<NewsData> {
 
 class NewsInfoCompanion extends UpdateCompanion<NewsData> {
   final Value<String> id;
-  final Value<int> order;
   final Value<String> title;
   final Value<String> summary;
   final Value<String> imageUrl;
-  final Value<String> dateCreated;
+  final Value<DateTime> dateCreated;
   final Value<int> rowid;
   const NewsInfoCompanion({
     this.id = const Value.absent(),
-    this.order = const Value.absent(),
     this.title = const Value.absent(),
     this.summary = const Value.absent(),
     this.imageUrl = const Value.absent(),
@@ -1315,30 +1283,26 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
   });
   NewsInfoCompanion.insert({
     required String id,
-    required int order,
     required String title,
     required String summary,
     required String imageUrl,
-    required String dateCreated,
+    required DateTime dateCreated,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
-        order = Value(order),
         title = Value(title),
         summary = Value(summary),
         imageUrl = Value(imageUrl),
         dateCreated = Value(dateCreated);
   static Insertable<NewsData> custom({
     Expression<String>? id,
-    Expression<int>? order,
     Expression<String>? title,
     Expression<String>? summary,
     Expression<String>? imageUrl,
-    Expression<String>? dateCreated,
+    Expression<DateTime>? dateCreated,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (order != null) 'order': order,
       if (title != null) 'title': title,
       if (summary != null) 'summary': summary,
       if (imageUrl != null) 'image_url': imageUrl,
@@ -1349,15 +1313,13 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
 
   NewsInfoCompanion copyWith(
       {Value<String>? id,
-      Value<int>? order,
       Value<String>? title,
       Value<String>? summary,
       Value<String>? imageUrl,
-      Value<String>? dateCreated,
+      Value<DateTime>? dateCreated,
       Value<int>? rowid}) {
     return NewsInfoCompanion(
       id: id ?? this.id,
-      order: order ?? this.order,
       title: title ?? this.title,
       summary: summary ?? this.summary,
       imageUrl: imageUrl ?? this.imageUrl,
@@ -1372,9 +1334,6 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     if (id.present) {
       map['id'] = Variable<String>(id.value);
     }
-    if (order.present) {
-      map['order'] = Variable<int>(order.value);
-    }
     if (title.present) {
       map['title'] = Variable<String>(title.value);
     }
@@ -1385,7 +1344,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
       map['image_url'] = Variable<String>(imageUrl.value);
     }
     if (dateCreated.present) {
-      map['date_created'] = Variable<String>(dateCreated.value);
+      map['date_created'] = Variable<DateTime>(dateCreated.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -1397,7 +1356,6 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
   String toString() {
     return (StringBuffer('NewsInfoCompanion(')
           ..write('id: $id, ')
-          ..write('order: $order, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
           ..write('imageUrl: $imageUrl, ')
@@ -1427,13 +1385,6 @@ class $RecommendationsTable extends Recommendations
       requiredDuringInsert: true,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('REFERENCES news_info (id)'));
-  static const VerificationMeta _orderMeta = const VerificationMeta('order');
-  @override
-  late final GeneratedColumn<int> order = GeneratedColumn<int>(
-      'order', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'UNIQUE NOT NULL');
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -1443,7 +1394,7 @@ class $RecommendationsTable extends Recommendations
       type: DriftSqlType.string,
       requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [id, newsId, order, name];
+  List<GeneratedColumn> get $columns => [id, newsId, name];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1465,12 +1416,6 @@ class $RecommendationsTable extends Recommendations
     } else if (isInserting) {
       context.missing(_newsIdMeta);
     }
-    if (data.containsKey('order')) {
-      context.handle(
-          _orderMeta, order.isAcceptableOrUnknown(data['order']!, _orderMeta));
-    } else if (isInserting) {
-      context.missing(_orderMeta);
-    }
     if (data.containsKey('name')) {
       context.handle(
           _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
@@ -1490,8 +1435,6 @@ class $RecommendationsTable extends Recommendations
           .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
       newsId: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}news_id'])!,
-      order: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}order'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
     );
@@ -1507,19 +1450,14 @@ class RecommendationData extends DataClass
     implements Insertable<RecommendationData> {
   final String id;
   final String newsId;
-  final int order;
   final String name;
   const RecommendationData(
-      {required this.id,
-      required this.newsId,
-      required this.order,
-      required this.name});
+      {required this.id, required this.newsId, required this.name});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
     map['news_id'] = Variable<String>(newsId);
-    map['order'] = Variable<int>(order);
     map['name'] = Variable<String>(name);
     return map;
   }
@@ -1528,7 +1466,6 @@ class RecommendationData extends DataClass
     return RecommendationsCompanion(
       id: Value(id),
       newsId: Value(newsId),
-      order: Value(order),
       name: Value(name),
     );
   }
@@ -1539,7 +1476,6 @@ class RecommendationData extends DataClass
     return RecommendationData(
       id: serializer.fromJson<String>(json['id']),
       newsId: serializer.fromJson<String>(json['newsId']),
-      order: serializer.fromJson<int>(json['order']),
       name: serializer.fromJson<String>(json['name']),
     );
   }
@@ -1549,24 +1485,20 @@ class RecommendationData extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'newsId': serializer.toJson<String>(newsId),
-      'order': serializer.toJson<int>(order),
       'name': serializer.toJson<String>(name),
     };
   }
 
-  RecommendationData copyWith(
-          {String? id, String? newsId, int? order, String? name}) =>
+  RecommendationData copyWith({String? id, String? newsId, String? name}) =>
       RecommendationData(
         id: id ?? this.id,
         newsId: newsId ?? this.newsId,
-        order: order ?? this.order,
         name: name ?? this.name,
       );
   RecommendationData copyWithCompanion(RecommendationsCompanion data) {
     return RecommendationData(
       id: data.id.present ? data.id.value : this.id,
       newsId: data.newsId.present ? data.newsId.value : this.newsId,
-      order: data.order.present ? data.order.value : this.order,
       name: data.name.present ? data.name.value : this.name,
     );
   }
@@ -1576,58 +1508,50 @@ class RecommendationData extends DataClass
     return (StringBuffer('RecommendationData(')
           ..write('id: $id, ')
           ..write('newsId: $newsId, ')
-          ..write('order: $order, ')
           ..write('name: $name')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, newsId, order, name);
+  int get hashCode => Object.hash(id, newsId, name);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is RecommendationData &&
           other.id == this.id &&
           other.newsId == this.newsId &&
-          other.order == this.order &&
           other.name == this.name);
 }
 
 class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
   final Value<String> id;
   final Value<String> newsId;
-  final Value<int> order;
   final Value<String> name;
   final Value<int> rowid;
   const RecommendationsCompanion({
     this.id = const Value.absent(),
     this.newsId = const Value.absent(),
-    this.order = const Value.absent(),
     this.name = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   RecommendationsCompanion.insert({
     required String id,
     required String newsId,
-    required int order,
     required String name,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         newsId = Value(newsId),
-        order = Value(order),
         name = Value(name);
   static Insertable<RecommendationData> custom({
     Expression<String>? id,
     Expression<String>? newsId,
-    Expression<int>? order,
     Expression<String>? name,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (newsId != null) 'news_id': newsId,
-      if (order != null) 'order': order,
       if (name != null) 'name': name,
       if (rowid != null) 'rowid': rowid,
     });
@@ -1636,13 +1560,11 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
   RecommendationsCompanion copyWith(
       {Value<String>? id,
       Value<String>? newsId,
-      Value<int>? order,
       Value<String>? name,
       Value<int>? rowid}) {
     return RecommendationsCompanion(
       id: id ?? this.id,
       newsId: newsId ?? this.newsId,
-      order: order ?? this.order,
       name: name ?? this.name,
       rowid: rowid ?? this.rowid,
     );
@@ -1656,9 +1578,6 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
     }
     if (newsId.present) {
       map['news_id'] = Variable<String>(newsId.value);
-    }
-    if (order.present) {
-      map['order'] = Variable<int>(order.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -1674,7 +1593,6 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
     return (StringBuffer('RecommendationsCompanion(')
           ..write('id: $id, ')
           ..write('newsId: $newsId, ')
-          ..write('order: $order, ')
           ..write('name: $name, ')
           ..write('rowid: $rowid')
           ..write(')'))
@@ -1704,13 +1622,6 @@ class $OfferingsTable extends Offerings
       requiredDuringInsert: true,
       defaultConstraints: GeneratedColumn.constraintIsAlways(
           'REFERENCES recommendations (id)'));
-  static const VerificationMeta _orderMeta = const VerificationMeta('order');
-  @override
-  late final GeneratedColumn<int> order = GeneratedColumn<int>(
-      'order', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      $customConstraints: 'UNIQUE NOT NULL');
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -1726,8 +1637,7 @@ class $OfferingsTable extends Offerings
       'summary', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, recommendationId, order, name, summary];
+  List<GeneratedColumn> get $columns => [id, recommendationId, name, summary];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1750,12 +1660,6 @@ class $OfferingsTable extends Offerings
               data['recommendation_id']!, _recommendationIdMeta));
     } else if (isInserting) {
       context.missing(_recommendationIdMeta);
-    }
-    if (data.containsKey('order')) {
-      context.handle(
-          _orderMeta, order.isAcceptableOrUnknown(data['order']!, _orderMeta));
-    } else if (isInserting) {
-      context.missing(_orderMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -1782,8 +1686,6 @@ class $OfferingsTable extends Offerings
           .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
       recommendationId: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}recommendation_id'])!,
-      order: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}order'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       summary: attachedDatabase.typeMapping
@@ -1800,13 +1702,11 @@ class $OfferingsTable extends Offerings
 class OfferingData extends DataClass implements Insertable<OfferingData> {
   final String id;
   final String recommendationId;
-  final int order;
   final String name;
   final String summary;
   const OfferingData(
       {required this.id,
       required this.recommendationId,
-      required this.order,
       required this.name,
       required this.summary});
   @override
@@ -1814,7 +1714,6 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
     map['recommendation_id'] = Variable<String>(recommendationId);
-    map['order'] = Variable<int>(order);
     map['name'] = Variable<String>(name);
     map['summary'] = Variable<String>(summary);
     return map;
@@ -1824,7 +1723,6 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
     return OfferingsCompanion(
       id: Value(id),
       recommendationId: Value(recommendationId),
-      order: Value(order),
       name: Value(name),
       summary: Value(summary),
     );
@@ -1836,7 +1734,6 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
     return OfferingData(
       id: serializer.fromJson<String>(json['id']),
       recommendationId: serializer.fromJson<String>(json['recommendationId']),
-      order: serializer.fromJson<int>(json['order']),
       name: serializer.fromJson<String>(json['name']),
       summary: serializer.fromJson<String>(json['summary']),
     );
@@ -1847,7 +1744,6 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'recommendationId': serializer.toJson<String>(recommendationId),
-      'order': serializer.toJson<int>(order),
       'name': serializer.toJson<String>(name),
       'summary': serializer.toJson<String>(summary),
     };
@@ -1856,13 +1752,11 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
   OfferingData copyWith(
           {String? id,
           String? recommendationId,
-          int? order,
           String? name,
           String? summary}) =>
       OfferingData(
         id: id ?? this.id,
         recommendationId: recommendationId ?? this.recommendationId,
-        order: order ?? this.order,
         name: name ?? this.name,
         summary: summary ?? this.summary,
       );
@@ -1872,7 +1766,6 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
       recommendationId: data.recommendationId.present
           ? data.recommendationId.value
           : this.recommendationId,
-      order: data.order.present ? data.order.value : this.order,
       name: data.name.present ? data.name.value : this.name,
       summary: data.summary.present ? data.summary.value : this.summary,
     );
@@ -1883,7 +1776,6 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
     return (StringBuffer('OfferingData(')
           ..write('id: $id, ')
           ..write('recommendationId: $recommendationId, ')
-          ..write('order: $order, ')
           ..write('name: $name, ')
           ..write('summary: $summary')
           ..write(')'))
@@ -1891,14 +1783,13 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
   }
 
   @override
-  int get hashCode => Object.hash(id, recommendationId, order, name, summary);
+  int get hashCode => Object.hash(id, recommendationId, name, summary);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is OfferingData &&
           other.id == this.id &&
           other.recommendationId == this.recommendationId &&
-          other.order == this.order &&
           other.name == this.name &&
           other.summary == this.summary);
 }
@@ -1906,14 +1797,12 @@ class OfferingData extends DataClass implements Insertable<OfferingData> {
 class OfferingsCompanion extends UpdateCompanion<OfferingData> {
   final Value<String> id;
   final Value<String> recommendationId;
-  final Value<int> order;
   final Value<String> name;
   final Value<String> summary;
   final Value<int> rowid;
   const OfferingsCompanion({
     this.id = const Value.absent(),
     this.recommendationId = const Value.absent(),
-    this.order = const Value.absent(),
     this.name = const Value.absent(),
     this.summary = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -1921,19 +1810,16 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
   OfferingsCompanion.insert({
     required String id,
     required String recommendationId,
-    required int order,
     required String name,
     required String summary,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         recommendationId = Value(recommendationId),
-        order = Value(order),
         name = Value(name),
         summary = Value(summary);
   static Insertable<OfferingData> custom({
     Expression<String>? id,
     Expression<String>? recommendationId,
-    Expression<int>? order,
     Expression<String>? name,
     Expression<String>? summary,
     Expression<int>? rowid,
@@ -1941,7 +1827,6 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (recommendationId != null) 'recommendation_id': recommendationId,
-      if (order != null) 'order': order,
       if (name != null) 'name': name,
       if (summary != null) 'summary': summary,
       if (rowid != null) 'rowid': rowid,
@@ -1951,14 +1836,12 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
   OfferingsCompanion copyWith(
       {Value<String>? id,
       Value<String>? recommendationId,
-      Value<int>? order,
       Value<String>? name,
       Value<String>? summary,
       Value<int>? rowid}) {
     return OfferingsCompanion(
       id: id ?? this.id,
       recommendationId: recommendationId ?? this.recommendationId,
-      order: order ?? this.order,
       name: name ?? this.name,
       summary: summary ?? this.summary,
       rowid: rowid ?? this.rowid,
@@ -1973,9 +1856,6 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
     }
     if (recommendationId.present) {
       map['recommendation_id'] = Variable<String>(recommendationId.value);
-    }
-    if (order.present) {
-      map['order'] = Variable<int>(order.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -1994,7 +1874,6 @@ class OfferingsCompanion extends UpdateCompanion<OfferingData> {
     return (StringBuffer('OfferingsCompanion(')
           ..write('id: $id, ')
           ..write('recommendationId: $recommendationId, ')
-          ..write('order: $order, ')
           ..write('name: $name, ')
           ..write('summary: $summary, ')
           ..write('rowid: $rowid')
@@ -3375,20 +3254,18 @@ typedef $$ReasonsTableProcessedTableManager = ProcessedTableManager<
     PrefetchHooks Function({bool scoreId})>;
 typedef $$NewsInfoTableCreateCompanionBuilder = NewsInfoCompanion Function({
   required String id,
-  required int order,
   required String title,
   required String summary,
   required String imageUrl,
-  required String dateCreated,
+  required DateTime dateCreated,
   Value<int> rowid,
 });
 typedef $$NewsInfoTableUpdateCompanionBuilder = NewsInfoCompanion Function({
   Value<String> id,
-  Value<int> order,
   Value<String> title,
   Value<String> summary,
   Value<String> imageUrl,
-  Value<String> dateCreated,
+  Value<DateTime> dateCreated,
   Value<int> rowid,
 });
 
@@ -3426,9 +3303,6 @@ class $$NewsInfoTableFilterComposer
   ColumnFilters<String> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<int> get order => $composableBuilder(
-      column: $table.order, builder: (column) => ColumnFilters(column));
-
   ColumnFilters<String> get title => $composableBuilder(
       column: $table.title, builder: (column) => ColumnFilters(column));
 
@@ -3438,7 +3312,7 @@ class $$NewsInfoTableFilterComposer
   ColumnFilters<String> get imageUrl => $composableBuilder(
       column: $table.imageUrl, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get dateCreated => $composableBuilder(
+  ColumnFilters<DateTime> get dateCreated => $composableBuilder(
       column: $table.dateCreated, builder: (column) => ColumnFilters(column));
 
   Expression<bool> recommendationsRefs(
@@ -3475,9 +3349,6 @@ class $$NewsInfoTableOrderingComposer
   ColumnOrderings<String> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get order => $composableBuilder(
-      column: $table.order, builder: (column) => ColumnOrderings(column));
-
   ColumnOrderings<String> get title => $composableBuilder(
       column: $table.title, builder: (column) => ColumnOrderings(column));
 
@@ -3487,7 +3358,7 @@ class $$NewsInfoTableOrderingComposer
   ColumnOrderings<String> get imageUrl => $composableBuilder(
       column: $table.imageUrl, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get dateCreated => $composableBuilder(
+  ColumnOrderings<DateTime> get dateCreated => $composableBuilder(
       column: $table.dateCreated, builder: (column) => ColumnOrderings(column));
 }
 
@@ -3503,9 +3374,6 @@ class $$NewsInfoTableAnnotationComposer
   GeneratedColumn<String> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
-  GeneratedColumn<int> get order =>
-      $composableBuilder(column: $table.order, builder: (column) => column);
-
   GeneratedColumn<String> get title =>
       $composableBuilder(column: $table.title, builder: (column) => column);
 
@@ -3515,7 +3383,7 @@ class $$NewsInfoTableAnnotationComposer
   GeneratedColumn<String> get imageUrl =>
       $composableBuilder(column: $table.imageUrl, builder: (column) => column);
 
-  GeneratedColumn<String> get dateCreated => $composableBuilder(
+  GeneratedColumn<DateTime> get dateCreated => $composableBuilder(
       column: $table.dateCreated, builder: (column) => column);
 
   Expression<T> recommendationsRefs<T extends Object>(
@@ -3564,16 +3432,14 @@ class $$NewsInfoTableTableManager extends RootTableManager<
               $$NewsInfoTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
-            Value<int> order = const Value.absent(),
             Value<String> title = const Value.absent(),
             Value<String> summary = const Value.absent(),
             Value<String> imageUrl = const Value.absent(),
-            Value<String> dateCreated = const Value.absent(),
+            Value<DateTime> dateCreated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               NewsInfoCompanion(
             id: id,
-            order: order,
             title: title,
             summary: summary,
             imageUrl: imageUrl,
@@ -3582,16 +3448,14 @@ class $$NewsInfoTableTableManager extends RootTableManager<
           ),
           createCompanionCallback: ({
             required String id,
-            required int order,
             required String title,
             required String summary,
             required String imageUrl,
-            required String dateCreated,
+            required DateTime dateCreated,
             Value<int> rowid = const Value.absent(),
           }) =>
               NewsInfoCompanion.insert(
             id: id,
-            order: order,
             title: title,
             summary: summary,
             imageUrl: imageUrl,
@@ -3646,7 +3510,6 @@ typedef $$RecommendationsTableCreateCompanionBuilder = RecommendationsCompanion
     Function({
   required String id,
   required String newsId,
-  required int order,
   required String name,
   Value<int> rowid,
 });
@@ -3654,7 +3517,6 @@ typedef $$RecommendationsTableUpdateCompanionBuilder = RecommendationsCompanion
     Function({
   Value<String> id,
   Value<String> newsId,
-  Value<int> order,
   Value<String> name,
   Value<int> rowid,
 });
@@ -3705,9 +3567,6 @@ class $$RecommendationsTableFilterComposer
   });
   ColumnFilters<String> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<int> get order => $composableBuilder(
-      column: $table.order, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnFilters(column));
@@ -3766,9 +3625,6 @@ class $$RecommendationsTableOrderingComposer
   ColumnOrderings<String> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get order => $composableBuilder(
-      column: $table.order, builder: (column) => ColumnOrderings(column));
-
   ColumnOrderings<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnOrderings(column));
 
@@ -3804,9 +3660,6 @@ class $$RecommendationsTableAnnotationComposer
   });
   GeneratedColumn<String> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<int> get order =>
-      $composableBuilder(column: $table.order, builder: (column) => column);
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
@@ -3879,28 +3732,24 @@ class $$RecommendationsTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String> newsId = const Value.absent(),
-            Value<int> order = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationsCompanion(
             id: id,
             newsId: newsId,
-            order: order,
             name: name,
             rowid: rowid,
           ),
           createCompanionCallback: ({
             required String id,
             required String newsId,
-            required int order,
             required String name,
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationsCompanion.insert(
             id: id,
             newsId: newsId,
-            order: order,
             name: name,
             rowid: rowid,
           ),
@@ -3976,7 +3825,6 @@ typedef $$RecommendationsTableProcessedTableManager = ProcessedTableManager<
 typedef $$OfferingsTableCreateCompanionBuilder = OfferingsCompanion Function({
   required String id,
   required String recommendationId,
-  required int order,
   required String name,
   required String summary,
   Value<int> rowid,
@@ -3984,7 +3832,6 @@ typedef $$OfferingsTableCreateCompanionBuilder = OfferingsCompanion Function({
 typedef $$OfferingsTableUpdateCompanionBuilder = OfferingsCompanion Function({
   Value<String> id,
   Value<String> recommendationId,
-  Value<int> order,
   Value<String> name,
   Value<String> summary,
   Value<int> rowid,
@@ -4040,9 +3887,6 @@ class $$OfferingsTableFilterComposer
   });
   ColumnFilters<String> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<int> get order => $composableBuilder(
-      column: $table.order, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnFilters(column));
@@ -4105,9 +3949,6 @@ class $$OfferingsTableOrderingComposer
   ColumnOrderings<String> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get order => $composableBuilder(
-      column: $table.order, builder: (column) => ColumnOrderings(column));
-
   ColumnOrderings<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnOrderings(column));
 
@@ -4146,9 +3987,6 @@ class $$OfferingsTableAnnotationComposer
   });
   GeneratedColumn<String> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<int> get order =>
-      $composableBuilder(column: $table.order, builder: (column) => column);
 
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
@@ -4226,7 +4064,6 @@ class $$OfferingsTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String> recommendationId = const Value.absent(),
-            Value<int> order = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String> summary = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -4234,7 +4071,6 @@ class $$OfferingsTableTableManager extends RootTableManager<
               OfferingsCompanion(
             id: id,
             recommendationId: recommendationId,
-            order: order,
             name: name,
             summary: summary,
             rowid: rowid,
@@ -4242,7 +4078,6 @@ class $$OfferingsTableTableManager extends RootTableManager<
           createCompanionCallback: ({
             required String id,
             required String recommendationId,
-            required int order,
             required String name,
             required String summary,
             Value<int> rowid = const Value.absent(),
@@ -4250,7 +4085,6 @@ class $$OfferingsTableTableManager extends RootTableManager<
               OfferingsCompanion.insert(
             id: id,
             recommendationId: recommendationId,
-            order: order,
             name: name,
             summary: summary,
             rowid: rowid,

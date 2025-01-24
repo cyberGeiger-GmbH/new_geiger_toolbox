@@ -12,7 +12,7 @@ class CleanDataController extends _$CleanDataController {
 
   Future<void> deleteNewsData() async {
     state = const AsyncLoading();
-    final data = ref.read(watchNewsFeedsProvider);
+    final data = ref.read(watchRecentNewsFeedsProvider);
     state = await AsyncValue.guard(() {
       data.valueOrNull!.clear();
       return ref.read(newsFeedServiceProvider).cleanNewsCache();

@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
@@ -22,27 +19,20 @@ class LocalNewsFeedRepository {
 
   Future<void> synFromRemote({required List<News> data}) async {
     // debugPrint("news feed=> $data");
-    var random = Random();
-    var nxtValue = random.nextInt(1000);
-    debugPrint("random order value $nxtValue");
+
     try {
       await _db.transaction(() async {
-        var newsOrder = nxtValue;
-        var recomOrder = nxtValue;
-        var offerOrder = nxtValue;
-
         for (var newsData in data) {
           //insert news
+          final dateCreated = DateTime.parse(newsData.dateCreated);
           final newsCompanion = NewsInfoCompanion(
             id: Value(newsData.title.replaceSpacesWithHyphen),
-            order: Value(newsOrder),
             title: Value(newsData.title),
             summary: Value(newsData.summary),
             imageUrl: Value(newsData.imageUrl),
-            dateCreated: Value(newsData.dateCreated),
+            dateCreated: Value(dateCreated),
           );
           await _db.into(_db.newsInfo).insertOnConflictUpdate(newsCompanion);
-          newsOrder++;
 
           //insert recommendations for each news
           for (var recomData in newsData.recommendations) {
@@ -50,10 +40,8 @@ class LocalNewsFeedRepository {
               id: Value(recomData.name.replaceSpacesWithHyphen),
               newsId: Value(newsData.title.replaceSpacesWithHyphen),
               name: Value(recomData.name),
-              order: Value(recomOrder),
             );
             await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
-            recomOrder++;
 
             // insert offering for each recommendation
             for (var offerData in recomData.offerings) {
@@ -63,12 +51,10 @@ class LocalNewsFeedRepository {
               final offer = OfferingsCompanion(
                 id: Value(id),
                 recommendationId: Value(recomData.name.replaceSpacesWithHyphen),
-                order: Value(offerOrder),
                 name: Value(offerData.name),
                 summary: Value(offerData.summary),
               );
               await _db.into(_db.offerings).insertOnConflictUpdate(offer);
-              offerOrder++;
             }
           }
         }
@@ -92,9 +78,11 @@ class LocalNewsFeedRepository {
   }
 
 //get news object
+//sort by recent news and
+  Stream<List<TypedResult>> _sortNewsInfo({bool sort = true}) {
+    final newsInfoQuery = _db.select(_db.newsInfo);
 
-  Stream<List<News>> watchNewsList() {
-    final newsWithRecoAndOffering = (_db.select(_db.newsInfo).join(
+    final joint = newsInfoQuery.join(
       [
         leftOuterJoin(
           _db.recommendations,
@@ -105,15 +93,41 @@ class LocalNewsFeedRepository {
           _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
         )
       ],
-    )..orderBy(
-            [
-              OrderingTerm.asc(_db.newsInfo.order),
-              OrderingTerm.asc(_db.recommendations.order),
-              OrderingTerm.asc(_db.offerings.order),
-            ],
-          ))
-        .watch();
+    );
+    if (sort) {
+      joint.orderBy([OrderingTerm.desc(_db.newsInfo.dateCreated)]);
+    } else {
+      joint.orderBy([OrderingTerm.asc(_db.newsInfo.dateCreated)]);
+    }
+    return joint.watch();
+  }
 
+//get older news
+  Stream<List<TypedResult>> _olderNewsInfo({required DateTime older}) {
+    return (_db.select(_db.newsInfo).join(
+      [
+        leftOuterJoin(
+          _db.recommendations,
+          _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
+        ),
+        leftOuterJoin(
+          _db.offerings,
+          _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
+        )
+      ],
+    )
+          ..where(_db.newsInfo.dateCreated.isSmallerOrEqualValue(older))
+          ..orderBy([
+            OrderingTerm.desc(_db.newsInfo.dateCreated),
+          ]))
+        .watch();
+  }
+
+  Stream<List<News>> watchNewsList({bool sort = true}) {
+    //final da = ref.read(previousMonthProvider(month: 1));
+    // final newsWithRecoAndOffering =
+    //     olderNews == null ? _sortNewsInfo() : _olderNewsInfo(older: da);
+    final newsWithRecoAndOffering = _sortNewsInfo(sort: sort);
     //Tranfrom the query inot a list of News with their associated Recommendation and task;
     final List<News> newsResult = [];
     final Map<String, List<Recommendation>> recosMap = {};
@@ -160,7 +174,7 @@ class LocalNewsFeedRepository {
               summary: newsEntry.summary,
               articleUrl: "",
               imageUrl: newsEntry.imageUrl,
-              dateCreated: newsEntry.dateCreated,
+              dateCreated: "${newsEntry.dateCreated}",
               recommendations: recosMap[newsEntry.id] ?? []);
 
           newsResult.add(news);
@@ -183,14 +197,7 @@ class LocalNewsFeedRepository {
           _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
         )
       ],
-    )..orderBy(
-            [
-              OrderingTerm.asc(_db.newsInfo.order),
-              OrderingTerm.asc(_db.recommendations.order),
-              OrderingTerm.asc(_db.offerings.order),
-            ],
-          ))
-        .get();
+    )).get();
 
     //Tranfrom the query inot a list of News with their associated Recommendation and task;
     final List<News> newsResult = [];
@@ -237,7 +244,7 @@ class LocalNewsFeedRepository {
             summary: newsEntry.summary,
             articleUrl: "",
             imageUrl: newsEntry.imageUrl,
-            dateCreated: newsEntry.dateCreated,
+            dateCreated: "${newsEntry.dateCreated}",
             recommendations: recosMap[newsEntry.id] ?? []);
 
         newsResult.add(news);

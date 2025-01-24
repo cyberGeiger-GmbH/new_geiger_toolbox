@@ -15,7 +15,7 @@ class RecommendationWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final newsFeedIndex = ref.watch(newsFeedsControllerProvider);
-    final newsFeedValue = ref.watch(watchNewsFeedsProvider);
+    final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

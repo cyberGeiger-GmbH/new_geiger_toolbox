@@ -47,9 +47,7 @@ class ProtectionTileListWithTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title,
-            style: appTextStyle.titleMedium!
-                .copyWith(fontWeight: FontWeight.bold)),
+        Text(title, style: appTextStyle.titleMedium!.copyWith()),
         Spacing.gapH8,
         protectionTileList
       ],

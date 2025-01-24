@@ -156,5 +156,135 @@ class _FormattedDateProviderElement extends AutoDisposeProviderElement<String>
   @override
   String get inputDate => (origin as FormattedDateProvider).inputDate;
 }
+
+String _$previousMonthHash() => r'6103e97e804fe99e3282f7bd70e4bbedfc09e3e9';
+
+/// See also [previousMonth].
+@ProviderFor(previousMonth)
+const previousMonthProvider = PreviousMonthFamily();
+
+/// See also [previousMonth].
+class PreviousMonthFamily extends Family<DateTime> {
+  /// See also [previousMonth].
+  const PreviousMonthFamily();
+
+  /// See also [previousMonth].
+  PreviousMonthProvider call({
+    int month = 6,
+  }) {
+    return PreviousMonthProvider(
+      month: month,
+    );
+  }
+
+  @override
+  PreviousMonthProvider getProviderOverride(
+    covariant PreviousMonthProvider provider,
+  ) {
+    return call(
+      month: provider.month,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'previousMonthProvider';
+}
+
+/// See also [previousMonth].
+class PreviousMonthProvider extends AutoDisposeProvider<DateTime> {
+  /// See also [previousMonth].
+  PreviousMonthProvider({
+    int month = 6,
+  }) : this._internal(
+          (ref) => previousMonth(
+            ref as PreviousMonthRef,
+            month: month,
+          ),
+          from: previousMonthProvider,
+          name: r'previousMonthProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$previousMonthHash,
+          dependencies: PreviousMonthFamily._dependencies,
+          allTransitiveDependencies:
+              PreviousMonthFamily._allTransitiveDependencies,
+          month: month,
+        );
+
+  PreviousMonthProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.month,
+  }) : super.internal();
+
+  final int month;
+
+  @override
+  Override overrideWith(
+    DateTime Function(PreviousMonthRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: PreviousMonthProvider._internal(
+        (ref) => create(ref as PreviousMonthRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        month: month,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<DateTime> createElement() {
+    return _PreviousMonthProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PreviousMonthProvider && other.month == month;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, month.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin PreviousMonthRef on AutoDisposeProviderRef<DateTime> {
+  /// The parameter `month` of this provider.
+  int get month;
+}
+
+class _PreviousMonthProviderElement extends AutoDisposeProviderElement<DateTime>
+    with PreviousMonthRef {
+  _PreviousMonthProviderElement(super.provider);
+
+  @override
+  int get month => (origin as PreviousMonthProvider).month;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

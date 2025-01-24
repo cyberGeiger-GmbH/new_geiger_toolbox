@@ -8,8 +8,9 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score/score_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/other_news_list_widget.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/info_list_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todo_list_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
@@ -61,7 +62,7 @@ class FeatureListView extends ConsumerWidget {
   final VoidCallback onScanPressed;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newsFeedValue = ref.watch(watchNewsFeedsProvider);
+    final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
 
     return AsyncValueWidget(
       value: newsFeedValue,
@@ -98,8 +99,9 @@ class FeatureList extends StatelessWidget {
         //AssetWidget(),
         Spacing.gapH12,
         // getFlavor() == Flavor.dev ? RecommendationWidget() :
-        InfoListWidget(),
-        Spacing.gapH16,
+        TodoListWidget(),
+        Spacing.gapH12,
+        PreviousNewsWidget()
       ],
     );
   }
