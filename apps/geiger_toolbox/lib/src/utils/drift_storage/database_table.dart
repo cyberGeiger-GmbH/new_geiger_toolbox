@@ -78,7 +78,7 @@ class NewsInfo extends Table {
 
 @DataClassName('RecommendationData')
 class Recommendations extends Table {
-  TextColumn get id => text()();
+  TextColumn get id =>  text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get newsId => text().references(NewsInfo, #id)(); // Foreign key
   TextColumn get name => text().withLength(min: 1, max: 255)();
 

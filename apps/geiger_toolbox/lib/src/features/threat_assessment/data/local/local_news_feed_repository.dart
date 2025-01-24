@@ -1,4 +1,5 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
@@ -155,15 +156,18 @@ class LocalNewsFeedRepository {
         }
 
         // if the recommendation is not yet in the list add it
-        if (recommendationEntry != null &&
-            !recosMap.entries
-                .any((value) => value.key == recommendationEntry.newsId)) {
+        if (recommendationEntry != null) {
+          if(recosMap.entries.any((value) => value.key == recommendationEntry.newsId)){
+             debugPrint("all recom => $recosMap");
+          }
           final reco = Recommendation(
               id: recommendationEntry.id,
               name: recommendationEntry.name,
               offerings: offerMap[recommendationEntry.id] ?? []);
 
           recosMap.putIfAbsent(recommendationEntry.newsId, () => []).add(reco);
+
+          //  debugPrint("all recom => $recosMap");
         }
 
         // if the news is not yet in the list add it

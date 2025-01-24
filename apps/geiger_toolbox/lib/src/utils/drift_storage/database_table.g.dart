@@ -1376,7 +1376,9 @@ class $RecommendationsTable extends Recommendations
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: 'UNIQUE NOT NULL');
   static const VerificationMeta _newsIdMeta = const VerificationMeta('newsId');
   @override
   late final GeneratedColumn<String> newsId = GeneratedColumn<String>(

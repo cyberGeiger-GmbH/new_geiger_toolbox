@@ -24,7 +24,7 @@ class PreviousNewsWidget extends ConsumerWidget {
       value: newsValue,
       data: (value) => value.isEmpty || value.length <= limitView
           ? const SizedBox.shrink()
-          : OlderNewsList(limit: 3, items: value),
+          : OlderNewsList(limit: 4, items: value),
     );
   }
 }

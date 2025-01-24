@@ -22,6 +22,20 @@ String formattedDate(Ref ref, {required String inputDate}) {
 }
 
 @riverpod
+DateTime stringToDate(Ref ref, {required String inputDate}) {
+  try {
+    // when [inputeDate] formate is YYYY-MM-DD
+    DateTime parsedDate = DateTime.parse(inputDate);
+
+    return parsedDate;
+  } catch (e) {
+    // Manually parse the date in "YYYY/MM/DD" format
+    DateTime parsedDate = DateFormat("yyyy/MM/dd").parse(inputDate);
+    return parsedDate;
+  }
+}
+
+@riverpod
 DateTime previousMonth(Ref ref, {int month = 6}) {
   assert(month > 0, 'month must be greater than 0.');
   // Get the date 6 months ago

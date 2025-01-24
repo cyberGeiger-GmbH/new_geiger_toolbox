@@ -157,6 +157,136 @@ class _FormattedDateProviderElement extends AutoDisposeProviderElement<String>
   String get inputDate => (origin as FormattedDateProvider).inputDate;
 }
 
+String _$stringToDateHash() => r'd1211c33d60036b409f81ff67eaa03c911f5e4e4';
+
+/// See also [stringToDate].
+@ProviderFor(stringToDate)
+const stringToDateProvider = StringToDateFamily();
+
+/// See also [stringToDate].
+class StringToDateFamily extends Family<DateTime> {
+  /// See also [stringToDate].
+  const StringToDateFamily();
+
+  /// See also [stringToDate].
+  StringToDateProvider call({
+    required String inputDate,
+  }) {
+    return StringToDateProvider(
+      inputDate: inputDate,
+    );
+  }
+
+  @override
+  StringToDateProvider getProviderOverride(
+    covariant StringToDateProvider provider,
+  ) {
+    return call(
+      inputDate: provider.inputDate,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'stringToDateProvider';
+}
+
+/// See also [stringToDate].
+class StringToDateProvider extends AutoDisposeProvider<DateTime> {
+  /// See also [stringToDate].
+  StringToDateProvider({
+    required String inputDate,
+  }) : this._internal(
+          (ref) => stringToDate(
+            ref as StringToDateRef,
+            inputDate: inputDate,
+          ),
+          from: stringToDateProvider,
+          name: r'stringToDateProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$stringToDateHash,
+          dependencies: StringToDateFamily._dependencies,
+          allTransitiveDependencies:
+              StringToDateFamily._allTransitiveDependencies,
+          inputDate: inputDate,
+        );
+
+  StringToDateProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.inputDate,
+  }) : super.internal();
+
+  final String inputDate;
+
+  @override
+  Override overrideWith(
+    DateTime Function(StringToDateRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: StringToDateProvider._internal(
+        (ref) => create(ref as StringToDateRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        inputDate: inputDate,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<DateTime> createElement() {
+    return _StringToDateProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is StringToDateProvider && other.inputDate == inputDate;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, inputDate.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin StringToDateRef on AutoDisposeProviderRef<DateTime> {
+  /// The parameter `inputDate` of this provider.
+  String get inputDate;
+}
+
+class _StringToDateProviderElement extends AutoDisposeProviderElement<DateTime>
+    with StringToDateRef {
+  _StringToDateProviderElement(super.provider);
+
+  @override
+  String get inputDate => (origin as StringToDateProvider).inputDate;
+}
+
 String _$previousMonthHash() => r'6103e97e804fe99e3282f7bd70e4bbedfc09e3e9';
 
 /// See also [previousMonth].

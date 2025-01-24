@@ -92,7 +92,6 @@ Stream<List<News>> watchRecentNewsFeeds(Ref ref) {
   return cachedRepos.watchNewsList();
 }
 
-
 @riverpod
 Stream<List<News>> watchOldNewsFeeds(Ref ref) {
   final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);

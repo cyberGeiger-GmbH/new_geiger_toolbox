@@ -16,6 +16,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scann
 
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
+import 'package:geiger_toolbox/src/utils/date_formater.dart';
 import 'package:go_router/go_router.dart';
 
 class NewsFeedsWidget extends ConsumerWidget {
@@ -41,6 +42,13 @@ class NewsFeedsWidget extends ConsumerWidget {
         if (news.isEmpty) {
           return const SizedBox.shrink();
         } else {
+          // news.sort((a, b) {
+          //   final formatterA =
+          //       ref.read(stringToDateProvider(inputDate: a.dateCreated));
+          //   final formatterB =
+          //       ref.read(stringToDateProvider(inputDate: b.dateCreated));
+          //   return formatterA.compareTo(formatterB);
+          // });
           final limitNews =
               limitListLength(inputList: news, limit: limitNewsFeedDisplay);
           return Column(
