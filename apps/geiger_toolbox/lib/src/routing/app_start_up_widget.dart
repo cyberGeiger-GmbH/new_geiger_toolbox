@@ -5,6 +5,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/background_with_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
 
@@ -85,13 +86,14 @@ class AppStartUpWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appStartupState = ref.watch(appStartUpProvider);
 
-    return appStartupState.when(
+    return AsyncValueWidget(
+      value: appStartupState,
       data: (_) => onLoaded(context),
       error: (e, s) => AppStartUpErrorWidget(
         message: e.toString(),
         onRetry: () => ref.invalidate(appStartUpProvider),
       ),
-      loading: () => const AppStartUpLoadingWidget(),
+      loadingWidget:  const AppStartUpLoadingWidget(),
     );
   }
 }

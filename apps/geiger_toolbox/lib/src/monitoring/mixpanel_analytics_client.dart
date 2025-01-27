@@ -58,5 +58,6 @@ Future<MixpanelAnalyticsClient> mixpanelAnalyticsClient(Ref ref) async {
     Env.mixpanelProjectToken,
     trackAutomaticEvents: true,
   );
+  
   return MixpanelAnalyticsClient(mixpanel);
 }

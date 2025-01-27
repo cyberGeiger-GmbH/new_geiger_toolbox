@@ -1,6 +1,5 @@
 #!/bin/bash
 # Script to generate Firebase configuration files for different environments/flavors
-# Feel free to reuse and adapt this script for your own projects
  
 if [[ $# -eq 0 ]]; then
   echo "Error: No environment specified. Use 'dev' or 'stg'."
@@ -26,9 +25,19 @@ case $1 in
       --android-package-name=com.cybergeiger.toolbox.stg \
       --android-out=android/app/src/stg/google-services.json
     ;;
+
+   prod)
+    flutterfire config \
+      --project=geiger-toolbox-prod \
+      --out=lib/firebase_options_prod.dart \
+      --ios-bundle-id=com.cybergeiger.toolbox \
+      --ios-out=ios/flavors/prod/GoogleService-Info.plist \
+      --android-package-name=com.cybergeiger.toolbox \
+      --android-out=android/app/src/prod/google-services.json
+    ;;
  
   *)
-    echo "Error: Invalid environment specified. Use 'dev' or 'stg'."
+    echo "Error: Invalid environment specified. Use 'dev' or 'stg'. or 'prod'. "
     exit 1
     ;;
 esac

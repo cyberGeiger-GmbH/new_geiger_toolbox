@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/monitoring/analytics_facade.dart';
 import 'package:geiger_toolbox/src/utils/shared_preference.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,7 +19,12 @@ class CollectUsageStatisticsStore extends _$CollectUsageStatisticsStore {
 
   @override
   bool build() {
-    return _sharedPreferences.getBool(key) ?? true;
+    //disable analytics in prod
+    if (getFlavor() == Flavor.prod) {
+      return _sharedPreferences.getBool(key) ?? false;
+    } else {
+      return _sharedPreferences.getBool(key) ?? true;
+    }
   }
 
   Future<void> setCollectUsageStatistics(bool value) async {

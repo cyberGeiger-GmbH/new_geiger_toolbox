@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/monitoring/analytics_client.dart';
 import 'package:geiger_toolbox/src/monitoring/firebase_analytics_client.dart';
 import 'package:geiger_toolbox/src/monitoring/logger_analytics_client.dart';
@@ -53,16 +54,33 @@ class AnalyticsFacade implements AnalyticsClient {
 AnalyticsFacade analyticsFacade(Ref ref) {
   final mixpanelAnalyticsClient =
       ref.watch(mixpanelAnalyticsClientProvider).requireValue;
+
   final firebaseAnalyticsClient = ref.watch(firebaseAnalyticsClientProvider);
 
-  return AnalyticsFacade(
-    kReleaseMode
-        ? [
-            mixpanelAnalyticsClient,
-            firebaseAnalyticsClient,
-          ]
-        : [
-            LoggerAnalyticsClient(ref),
-          ],
-  );
+  if (getFlavor() == Flavor.prod) {
+    //disable analytics in prod
+    mixpanelAnalyticsClient.setAnalyticsCollectionEnabled(false);
+    firebaseAnalyticsClient.setAnalyticsCollectionEnabled(false);
+    return AnalyticsFacade(
+      kReleaseMode
+          ? [
+              mixpanelAnalyticsClient,
+              firebaseAnalyticsClient,
+            ]
+          : [
+              LoggerAnalyticsClient(ref),
+            ],
+    );
+  } else {
+    return AnalyticsFacade(
+      kReleaseMode
+          ? [
+              mixpanelAnalyticsClient,
+              firebaseAnalyticsClient,
+            ]
+          : [
+              LoggerAnalyticsClient(ref),
+            ],
+    );
+  }
 }
