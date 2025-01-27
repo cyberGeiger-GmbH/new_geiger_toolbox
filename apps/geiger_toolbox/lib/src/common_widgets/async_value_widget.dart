@@ -24,7 +24,7 @@ class AsyncValueWidget<T> extends StatelessWidget {
                 ),
               ),
       loading: () =>
-          loadingWidget ?? const ResponsiveCenterWidget(child: CircularProgressIndicator()),
+          loadingWidget ?? const Center(child: CircularProgressIndicator()),
     );
   }
 }

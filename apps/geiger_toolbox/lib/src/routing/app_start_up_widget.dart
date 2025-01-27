@@ -93,7 +93,7 @@ class AppStartUpWidget extends ConsumerWidget {
         message: e.toString(),
         onRetry: () => ref.invalidate(appStartUpProvider),
       ),
-      loadingWidget:  const AppStartUpLoadingWidget(),
+      loadingWidget: const AppStartUpLoadingWidget(),
     );
   }
 }

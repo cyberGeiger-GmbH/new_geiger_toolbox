@@ -2,7 +2,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:feedback_sentry/feedback_sentry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/monitoring/collect_usage_statistics_store.dart';
 
@@ -15,8 +14,7 @@ class SettingsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
-          const CollectUsageStatisticsListTile(),
+        const CollectUsageStatisticsListTile(),
         const SendFeedListTile()
       ],
     );
@@ -52,14 +50,12 @@ class SendFeedListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: AppTextButton.primary(
-        context: context,
-        label: 'Send feedback'.hardcoded,
-        onTap: () {
-          BetterFeedback.of(context).showAndUploadToSentry();
-        },
-      ),
+    return AppTextButton.primary(
+      context: context,
+      label: 'Send feedback'.hardcoded,
+      onTap: () {
+        BetterFeedback.of(context).showAndUploadToSentry();
+      },
     );
   }
 }

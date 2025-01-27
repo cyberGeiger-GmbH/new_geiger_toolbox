@@ -1,27 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'analytics_facade.dart';
+part of 'firebase_remote_config_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyticsFacadeHash() => r'fbb5986f3884d121077f4917c4408e14a6b54c13';
+String _$firebaseRemoteConfigHash() =>
+    r'51bf4729b7e37fa9d48876d3ffb5cbc22528f7d5';
 
-/// See also [analyticsFacade].
-@ProviderFor(analyticsFacade)
-final analyticsFacadeProvider = Provider<AnalyticsFacade>.internal(
-  analyticsFacade,
-  name: r'analyticsFacadeProvider',
+/// See also [firebaseRemoteConfig].
+@ProviderFor(firebaseRemoteConfig)
+final firebaseRemoteConfigProvider =
+    FutureProvider<FirebaseRemoteConfig>.internal(
+  firebaseRemoteConfig,
+  name: r'firebaseRemoteConfigProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$analyticsFacadeHash,
+      : _$firebaseRemoteConfigHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AnalyticsFacadeRef = ProviderRef<AnalyticsFacade>;
+typedef FirebaseRemoteConfigRef = FutureProviderRef<FirebaseRemoteConfig>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

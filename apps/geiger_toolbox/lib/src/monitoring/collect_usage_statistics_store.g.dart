@@ -7,7 +7,7 @@ part of 'collect_usage_statistics_store.dart';
 // **************************************************************************
 
 String _$collectUsageStatisticsStoreHash() =>
-    r'b8432a08695251683f250fbf893e4954404e200e';
+    r'e24e4e47dfcda874afd6d60cc127c2c1e12754be';
 
 /// See also [CollectUsageStatisticsStore].
 @ProviderFor(CollectUsageStatisticsStore)
