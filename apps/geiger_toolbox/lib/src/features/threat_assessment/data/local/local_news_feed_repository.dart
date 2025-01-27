@@ -1,5 +1,4 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 
@@ -137,16 +136,11 @@ class LocalNewsFeedRepository {
     return newsWithRecoAndOffering.map((rows) {
       for (final row in rows) {
         final newsEntry = row.readTable(_db.newsInfo);
-        //read recommendation
-        final recommendationEntry = row.readTableOrNull(_db.recommendations);
 
-        // debugPrint("all recommendations table => $recommendationEntry");
-        // read offering
+        final recommendationEntry = row.readTable(_db.recommendations);
         final offeringEntry = row.readTableOrNull(_db.offerings);
-        // debugPrint("all news => $newsEntry");
-        // debugPrint("all recommendations => $recommendationEntry");
 
-        // add offfer to the corresponding list in offerMap
+      // Add offerings to the corresponding list in offerMap
         if (offeringEntry != null) {
           final offer = Offering(
               name: offeringEntry.name, summary: offeringEntry.summary);
@@ -155,19 +149,20 @@ class LocalNewsFeedRepository {
               .add(offer);
         }
 
-        // if the recommendation is not yet in the list add it
-        if (recommendationEntry != null) {
-          if(recosMap.entries.any((value) => value.key == recommendationEntry.newsId)){
-             debugPrint("all recom => $recosMap");
-          }
-          final reco = Recommendation(
-              id: recommendationEntry.id,
-              name: recommendationEntry.name,
-              offerings: offerMap[recommendationEntry.id] ?? []);
+           // Create or update recommendations for the current newsId
+        final reco = Recommendation(
+            id: recommendationEntry.id,
+            name: recommendationEntry.name,
+            offerings: offerMap[recommendationEntry.id] ?? []);
 
-          recosMap.putIfAbsent(recommendationEntry.newsId, () => []).add(reco);
-
-          //  debugPrint("all recom => $recosMap");
+        // Ensure the recommendation is added only once for a specific newsId
+        if (!recosMap.containsKey(recommendationEntry.newsId)) {
+          recosMap[recommendationEntry.newsId] = [];
+        }
+        // Only add the recommendation if it's not already in the list for the specific newsId
+        if (!recosMap[recommendationEntry.newsId]!
+            .any((rec) => rec.id == reco.id)) {
+          recosMap[recommendationEntry.newsId]!.add(reco);
         }
 
         // if the news is not yet in the list add it

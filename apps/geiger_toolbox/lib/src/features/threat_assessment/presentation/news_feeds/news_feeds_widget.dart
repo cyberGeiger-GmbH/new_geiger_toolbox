@@ -16,7 +16,6 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scann
 
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
-import 'package:geiger_toolbox/src/utils/date_formater.dart';
 import 'package:go_router/go_router.dart';
 
 class NewsFeedsWidget extends ConsumerWidget {
