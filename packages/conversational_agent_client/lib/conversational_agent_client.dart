@@ -16,3 +16,5 @@ export 'src/domain/geiger_score.dart';
 
 //log_handling
 export 'src/utilities/log_handling.dart';
+
+export 'package:dio/src/dio_exception.dart';

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/env.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/exceptions/async_error_logger.dart';
-
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/feedback_widget.dart';
@@ -27,13 +27,23 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
       options
         ..considerInAppFramesByDefault = false
         ..addInAppInclude('geiger_toolbox')
-        ..addInAppInclude('conversational_agent_client');
+        ..addInAppInclude('core_ui')
+        ..addInAppInclude('conversational_agent_client')
+        ..addInAppInclude('perplexity_search');
 
       options.beforeSend = (SentryEvent event, Hint hint) async {
         // Ignore events that are not from release builds
         if (!kReleaseMode) {
           return null;
         }
+        // If there was no response, it means that a connection error occurred
+        // Do not log this to Sentry
+        final exception = event.throwable;
+        if (exception is DioException && exception.response == null) {
+          return null;
+        }
+
+        // For all other events, return the event as is
 
         return event;
       };
