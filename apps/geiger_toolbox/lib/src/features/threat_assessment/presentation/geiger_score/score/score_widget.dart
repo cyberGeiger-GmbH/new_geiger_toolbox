@@ -1,9 +1,10 @@
 import 'package:core_ui/organisms/show_bottom_sheet_modal.dart';
+import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/geiger_score_info.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message.dart';
 
 class ScoreWidget extends ConsumerWidget {
   const ScoreWidget({super.key});
@@ -17,12 +18,16 @@ class ScoreWidget extends ConsumerWidget {
           ? _ScoreWithInfo(
               score: "${data.geigerScore}",
               key: key,
+              //todo: change font color base the score range
               showinfo: () {
                 showWoltAlertDialog(
                   context,
                   title: "Geiger Score!",
-                  page: ShowScoreReason(
-                    reasons: data.reasons,
+                  page: Padding(
+                    padding: const EdgeInsets.all(Spacing.p8),
+                    child: ShowScoreReason(
+                      reasons: data.reasons,
+                    ),
                   ),
                 );
               },
@@ -32,30 +37,11 @@ class ScoreWidget extends ConsumerWidget {
   }
 }
 
-class ShowScoreReason extends StatelessWidget {
-  const ShowScoreReason({super.key, required this.reasons});
-  final List<ScoreReason> reasons;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: ListTile.divideTiles(
-        context: context,
-        tiles: reasons.map(
-          (data) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(data.name),
-          ),
-        ),
-      ).toList(),
-    );
-  }
-}
-
 class _ScoreWithInfo extends StatelessWidget {
   const _ScoreWithInfo(
-      {super.key, required this.score, required this.showinfo, this.color});
+      {super.key, required this.score, required this.showinfo, this.fontColor});
   final String score;
-  final Color? color;
+  final Color? fontColor;
   final VoidCallback showinfo;
   @override
   Widget build(BuildContext context) {
@@ -64,7 +50,7 @@ class _ScoreWithInfo extends StatelessWidget {
       children: [
         _ScoreContent(
           score: score,
-          color: color,
+          color: fontColor,
           key: key,
         ),
         Positioned(

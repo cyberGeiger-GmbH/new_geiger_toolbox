@@ -47,7 +47,7 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     enableDrag: false,
 
     //  backgroundColor: appColors.surface,
-    topBarTitle: AppText.bodyLarge(
+    topBarTitle: AppText.headlineSmall(
       text: title,
       context: modalSheetContext,
       textAlign: TextAlign.center,
