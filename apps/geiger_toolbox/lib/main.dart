@@ -42,9 +42,7 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
         if (exception is DioException && exception.response == null) {
           return null;
         }
-
         // For all other events, return the event as is
-
         return event;
       };
     },

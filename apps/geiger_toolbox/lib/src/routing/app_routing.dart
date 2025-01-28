@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
+import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
+
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
@@ -29,7 +31,7 @@ enum AppRouter {
   calendar(path: "/calendar", name: "calendar"),
   settings(path: "/settings", name: "settings"),
   chat(path: "/chat", name: "chat"),
-  userprofile(path: "/user-profile", name: "user-profile"),
+  createProfile(path: "/create-profile", name: "create-profile"),
   termsAndCondition(
       path: "/terms-and-conditions", name: "terms-and-conditions-screen");
 
@@ -71,11 +73,26 @@ class AppRouting {
       ],
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
+
+        final companyProfileState = ref.read(fetchCompanyProvider).requireValue;
+        final skipProfile = ref.read(skipProfileCreationProvider);
+
         final path = state.uri.path;
+
+        debugPrint("comanyState => $companyProfileState");
 
         if (!termsConditionState) {
           if (path != AppRouter.termsAndCondition.path) {
             return AppRouter.termsAndCondition.path;
+          }
+
+          return null;
+        }
+
+        //redirect to main screen when profile is null
+        if (companyProfileState == null && !skipProfile) {
+          if (path != AppRouter.createProfile.path) {
+            return AppRouter.createProfile.path;
           }
 
           return null;
@@ -96,10 +113,19 @@ class AppRouting {
         ),
 
         GoRoute(
-          path: AppRouter.userprofile.path,
-          name: AppRouter.userprofile.name,
-          pageBuilder: (context, state) => NoTransitionPage<void>(
-              child: UserProfileScreen(), key: state.pageKey, name: state.name),
+          path: AppRouter.createProfile.path,
+          name: AppRouter.createProfile.name,
+          pageBuilder: (context, state) => MaterialPage<void>(
+              fullscreenDialog: true,
+              child: CreateProfileScreen(
+                onCloseProfile: () {
+                 ref.read(skipProfileCreationProvider.notifier).skip();
+
+                  context.goNamed(AppRouter.main.name);
+                },
+              ),
+              key: state.pageKey,
+              name: state.name),
         ),
 
         //for ui with bottom navigation
@@ -218,6 +244,18 @@ class AppRouting {
 GoRouter goRouter(Ref ref) {
   //rebuild
   return AppRouting.goRouter(ref);
+}
+
+@riverpod
+class SkipProfileCreation extends _$SkipProfileCreation {
+  @override
+  bool build() {
+    return false;
+  }
+
+  void skip() {
+    state = true;
+  }
 }
 
 //todo: move to their respective domain

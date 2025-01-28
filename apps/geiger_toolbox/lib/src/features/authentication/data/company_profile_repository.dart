@@ -112,7 +112,7 @@ Stream<Company?> watchCompany(Ref ref) {
   return repo.watchCompany();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<Company?> fetchCompany(Ref ref) async {
   final repo = ref.read(companyProfileRepositoryProvider);
   return repo.fetchCompany();

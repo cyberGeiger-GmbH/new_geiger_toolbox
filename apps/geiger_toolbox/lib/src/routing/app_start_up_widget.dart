@@ -6,6 +6,7 @@ import 'package:core_ui/molecules/background_with_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
 
@@ -42,6 +43,8 @@ class AppStartUp extends _$AppStartUp {
     await ref.read(packageInfoProvider.future);
     await ref.read(sharedPreferencesProvider.future);
     await ref.read(deviceTypeProvider.future);
+    //
+    await ref.read(fetchCompanyProvider.future);
     // * Preload MixpanelAnalyticsClient, so we can make unawaited analytics calls
     await ref.read(mixpanelAnalyticsClientProvider.future);
   }
@@ -68,22 +71,12 @@ class AppStartUp extends _$AppStartUp {
   }
 }
 
-// Future<void> appStartUp(Ref ref) async {
-//   ref.onDispose(() {
-//     //ensure we invalidate all the providers we depend on
-//     ref.invalidate(packageInfoProvider);
-//     ref.invalidate(sharedPreferencesProvider);
-//     ref.invalidate(deviceTypeProvider);
-//     ref.invalidate(mixpanelAnalyticsClientProvider);
-//   });
-
-// }
-
 class AppStartUpWidget extends ConsumerWidget {
   const AppStartUpWidget({super.key, required this.onLoaded});
   final WidgetBuilder onLoaded;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // 1. eagerly initialize appStartupProvider (and all the providers it depends on)
     final appStartupState = ref.watch(appStartUpProvider);
 
     return AsyncValueWidget(

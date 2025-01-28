@@ -86,16 +86,14 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
     final controller = ref.read(companyProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
 
-  
-      final data = Company(
-          companyName: companyName,
-          location: location,
-          description: description!);
-      final success = await controller.updateCompanyProfile(company: data);
-      if (success) {
-        widget.onSubmit?.call();
-      }
-    
+    final data = Company(
+        companyName: companyName,
+        location: location,
+        description: description!);
+    final success = await controller.updateCompanyProfile(company: data);
+    if (success) {
+      widget.onSubmit?.call();
+    }
   }
 
   //update company description
@@ -174,7 +172,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
           //mainAxisSize: MainAxisSize.min,
           children: [
             CustomTextFormField(
-              key: UserProfileScreen.companyKey,
+              key: CreateProfileScreen.companyKey,
               textEditingController: _companyTextController,
               label: "Comany Name",
               hint: 'for example "CyberGeiger"',
@@ -187,7 +185,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
             ),
             Spacing.gapH8,
             CustomTextFormField(
-              key: UserProfileScreen.locationKey,
+              key: CreateProfileScreen.locationKey,
               textEditingController: _locationTextController,
               label: "Company Location",
               hint: 'for example "Freiburg, Germany"',

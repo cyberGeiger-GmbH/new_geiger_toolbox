@@ -42,11 +42,11 @@ final watchCompanyProvider = AutoDisposeStreamProvider<Company?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchCompanyRef = AutoDisposeStreamProviderRef<Company?>;
-String _$fetchCompanyHash() => r'60baa0c999fb2ea88931a2659067ade88ed4f226';
+String _$fetchCompanyHash() => r'ac74d76cc1675a5e7399c639c33bfdfc9646e9c2';
 
 /// See also [fetchCompany].
 @ProviderFor(fetchCompany)
-final fetchCompanyProvider = AutoDisposeFutureProvider<Company?>.internal(
+final fetchCompanyProvider = FutureProvider<Company?>.internal(
   fetchCompany,
   name: r'fetchCompanyProvider',
   debugGetCreateSourceHash:
@@ -57,6 +57,6 @@ final fetchCompanyProvider = AutoDisposeFutureProvider<Company?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FetchCompanyRef = AutoDisposeFutureProviderRef<Company?>;
+typedef FetchCompanyRef = FutureProviderRef<Company?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

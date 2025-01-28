@@ -22,5 +22,22 @@ final goRouterProvider = AutoDisposeProvider<GoRouter>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GoRouterRef = AutoDisposeProviderRef<GoRouter>;
+String _$skipProfileCreationHash() =>
+    r'ebfa0d3ca9b54cd6079de851277477b5c645aeab';
+
+/// See also [SkipProfileCreation].
+@ProviderFor(SkipProfileCreation)
+final skipProfileCreationProvider =
+    AutoDisposeNotifierProvider<SkipProfileCreation, bool>.internal(
+  SkipProfileCreation.new,
+  name: r'skipProfileCreationProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$skipProfileCreationHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SkipProfileCreation = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

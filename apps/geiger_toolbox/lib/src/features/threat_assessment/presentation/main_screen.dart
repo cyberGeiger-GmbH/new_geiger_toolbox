@@ -41,7 +41,7 @@ class MainScreen extends ConsumerWidget {
     return Scaffold(
       appBar: CustomAppBar(
         userProfile: () {
-          context.pushNamed(AppRouter.userprofile.name);
+          context.pushNamed(AppRouter.createProfile.name);
         },
       ),
       body: ResponsiveCenterScrollableWidget(

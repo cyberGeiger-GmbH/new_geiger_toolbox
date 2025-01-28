@@ -5,11 +5,16 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar(
-      {super.key, this.height = kToolbarHeight, this.title, this.userProfile});
+      {super.key,
+      this.height = kToolbarHeight,
+      this.title,
+      this.userProfile,
+      this.onCloseProfile});
 
   final double height;
   final String? title;
   final VoidCallback? userProfile;
+  final VoidCallback? onCloseProfile;
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).colorScheme;
@@ -26,7 +31,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: AppAssetImageData.logoIcon().image,
               )
-            : null,
+            : onCloseProfile != null
+                ? IconButton(
+                    onPressed: onCloseProfile, icon: const Icon(Icons.close))
+                : null,
         actions: [
           Padding(
             padding: const EdgeInsets.all(Spacing.p8),
