@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
+import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
 import 'package:geiger_toolbox/src/monitoring/analytics_facade.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,19 +22,19 @@ class ScanButtonController extends _$ScanButtonController {
     state = await AsyncValue.guard(
         () => ref.read(newsFeedServiceProvider).cacheNews());
     
-    if (!state.isLoading && !state.hasError) {
+    
       state = await AsyncValue.guard(
           () => ref.read(geigerScoreServiceProvider).cachedGeigerScore());
-    }
+    
 
 //analytics
     unawaited(_trackScanning());
   }
 
   Future<void> _trackScanning() async {
-    final userProfile = await ref.read(fetchUserProvider.future);
+    final compProfile = await ref.read(fetchCompanyProvider.future);
 
-    if (userProfile != null) {
+    if (compProfile != null) {
       ref.read(analyticsFacadeProvider).trackScanWithProfile();
     } else {
       ref.read(analyticsFacadeProvider).trackScanWithoutProfile();

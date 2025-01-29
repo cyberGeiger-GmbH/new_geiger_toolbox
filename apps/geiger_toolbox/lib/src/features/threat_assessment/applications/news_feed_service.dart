@@ -25,16 +25,23 @@ class NewsFeedService {
   Device get _deviceType => ref.watch(deviceTypeProvider).requireValue;
 
   Future<void> cacheNews() async {
+      final log = ref.read(logHandlerProvider("NewsFeed"));
     try {
+     
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
       final profile = await _getProfileForNewsFeed();
-      debugPrint("sending xapi profile to newsFeed => $profile");
+      log.i("sending company profile in xapi formate => $profile");
+       log.i("Getting News from Server...");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
+     
       if (data.isNotEmpty) {
+         log.i("storing newsfeed locally...");
         await cache.synFromRemote(data: data);
       }
+       log.i("success");
     } catch (e, s) {
       ref.read(appLoggerProvider).logError(e, s);
+      log.e("error => $e");
       rethrow;
     }
   }

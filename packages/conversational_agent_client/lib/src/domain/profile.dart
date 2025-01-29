@@ -111,6 +111,7 @@ class Definition with _$Definition {
 class DefinitionExtension with _$DefinitionExtension {
   const factory DefinitionExtension(
       {required String recommendationType,
+      required String id,
       required List<Implementation> implementations}) = _DefinitionExtension;
 
   factory DefinitionExtension.fromJson(Map<String, dynamic> json) =>

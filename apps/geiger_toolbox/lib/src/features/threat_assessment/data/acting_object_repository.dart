@@ -57,15 +57,22 @@ class ActingObjectRepository {
             .add(imp);
       }
 
-      // if the recommendation is not yet in the list add it
-      if (recommendationEntry != null &&
-          !recoObjMap.entries
-              .any((value) => value.key == recommendationEntry.newsId)) {
+      if (recommendationEntry != null) {
         final ext = DefinitionExtension(
             recommendationType: recommendationEntry.name,
+            id: recommendationEntry.id,
             implementations: offerStatusMap[recommendationEntry.id] ?? []);
 
-        recoObjMap.putIfAbsent(recommendationEntry.newsId, () => []).add(ext);
+        // Ensure the recommendation is added only once for a specific newsId
+        if (!recoObjMap.containsKey(recommendationEntry.newsId)) {
+          recoObjMap[recommendationEntry.newsId] = [];
+        }
+        // Only add the recommendation if
+        // it's not already in the list for the specific newsId
+        if (!recoObjMap[recommendationEntry.newsId]!
+            .any((rec) => rec.id == ext.id)) {
+          recoObjMap[recommendationEntry.newsId]!.add(ext);
+        }
       }
 
       // if the news is not yet in the list add it

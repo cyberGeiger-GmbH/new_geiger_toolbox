@@ -1349,6 +1349,7 @@ DefinitionExtension _$DefinitionExtensionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DefinitionExtension {
   String get recommendationType => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   List<Implementation> get implementations =>
       throw _privateConstructorUsedError;
 
@@ -1368,7 +1369,10 @@ abstract class $DefinitionExtensionCopyWith<$Res> {
           DefinitionExtension value, $Res Function(DefinitionExtension) then) =
       _$DefinitionExtensionCopyWithImpl<$Res, DefinitionExtension>;
   @useResult
-  $Res call({String recommendationType, List<Implementation> implementations});
+  $Res call(
+      {String recommendationType,
+      String id,
+      List<Implementation> implementations});
 }
 
 /// @nodoc
@@ -1387,12 +1391,17 @@ class _$DefinitionExtensionCopyWithImpl<$Res, $Val extends DefinitionExtension>
   @override
   $Res call({
     Object? recommendationType = null,
+    Object? id = null,
     Object? implementations = null,
   }) {
     return _then(_value.copyWith(
       recommendationType: null == recommendationType
           ? _value.recommendationType
           : recommendationType // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       implementations: null == implementations
           ? _value.implementations
@@ -1410,7 +1419,10 @@ abstract class _$$DefinitionExtensionImplCopyWith<$Res>
       __$$DefinitionExtensionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String recommendationType, List<Implementation> implementations});
+  $Res call(
+      {String recommendationType,
+      String id,
+      List<Implementation> implementations});
 }
 
 /// @nodoc
@@ -1427,12 +1439,17 @@ class __$$DefinitionExtensionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? recommendationType = null,
+    Object? id = null,
     Object? implementations = null,
   }) {
     return _then(_$DefinitionExtensionImpl(
       recommendationType: null == recommendationType
           ? _value.recommendationType
           : recommendationType // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       implementations: null == implementations
           ? _value._implementations
@@ -1447,6 +1464,7 @@ class __$$DefinitionExtensionImplCopyWithImpl<$Res>
 class _$DefinitionExtensionImpl implements _DefinitionExtension {
   const _$DefinitionExtensionImpl(
       {required this.recommendationType,
+      required this.id,
       required final List<Implementation> implementations})
       : _implementations = implementations;
 
@@ -1455,6 +1473,8 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
 
   @override
   final String recommendationType;
+  @override
+  final String id;
   final List<Implementation> _implementations;
   @override
   List<Implementation> get implementations {
@@ -1465,7 +1485,7 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
 
   @override
   String toString() {
-    return 'DefinitionExtension(recommendationType: $recommendationType, implementations: $implementations)';
+    return 'DefinitionExtension(recommendationType: $recommendationType, id: $id, implementations: $implementations)';
   }
 
   @override
@@ -1475,13 +1495,14 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
             other is _$DefinitionExtensionImpl &&
             (identical(other.recommendationType, recommendationType) ||
                 other.recommendationType == recommendationType) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._implementations, _implementations));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, recommendationType,
+  int get hashCode => Object.hash(runtimeType, recommendationType, id,
       const DeepCollectionEquality().hash(_implementations));
 
   /// Create a copy of DefinitionExtension
@@ -1504,6 +1525,7 @@ class _$DefinitionExtensionImpl implements _DefinitionExtension {
 abstract class _DefinitionExtension implements DefinitionExtension {
   const factory _DefinitionExtension(
           {required final String recommendationType,
+          required final String id,
           required final List<Implementation> implementations}) =
       _$DefinitionExtensionImpl;
 
@@ -1512,6 +1534,8 @@ abstract class _DefinitionExtension implements DefinitionExtension {
 
   @override
   String get recommendationType;
+  @override
+  String get id;
   @override
   List<Implementation> get implementations;
 

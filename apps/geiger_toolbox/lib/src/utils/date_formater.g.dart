@@ -6,7 +6,7 @@ part of 'date_formater.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$formattedDateHash() => r'f40ce6e854b559eae576fa03ff1f8c77f6131f11';
+String _$formattedDateHash() => r'682656c4dc02726e520da756592e474529d42c5f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -157,7 +157,7 @@ class _FormattedDateProviderElement extends AutoDisposeProviderElement<String>
   String get inputDate => (origin as FormattedDateProvider).inputDate;
 }
 
-String _$stringToDateHash() => r'd1211c33d60036b409f81ff67eaa03c911f5e4e4';
+String _$stringToDateHash() => r'7706e5fec3f0b8255821a4d2e6fe1fc576e72936';
 
 /// See also [stringToDate].
 @ProviderFor(stringToDate)

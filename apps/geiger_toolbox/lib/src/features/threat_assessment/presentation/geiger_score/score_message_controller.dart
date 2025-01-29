@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'score_controller_message.g.dart';
+part 'score_message_controller.g.dart';
 
 @riverpod
 class ScoreControllerMessage extends _$ScoreControllerMessage {

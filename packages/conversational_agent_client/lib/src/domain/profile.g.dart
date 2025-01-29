@@ -111,6 +111,7 @@ _$DefinitionExtensionImpl _$$DefinitionExtensionImplFromJson(
         Map<String, dynamic> json) =>
     _$DefinitionExtensionImpl(
       recommendationType: json['recommendationType'] as String,
+      id: json['id'] as String,
       implementations: (json['implementations'] as List<dynamic>)
           .map((e) => Implementation.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -120,6 +121,7 @@ Map<String, dynamic> _$$DefinitionExtensionImplToJson(
         _$DefinitionExtensionImpl instance) =>
     <String, dynamic>{
       'recommendationType': instance.recommendationType,
+      'id': instance.id,
       'implementations': instance.implementations,
     };
 

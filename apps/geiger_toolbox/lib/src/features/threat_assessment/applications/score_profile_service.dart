@@ -17,6 +17,7 @@ class ResultRepository {
   ResultRepository(this.ref);
 
   Future<Profile> getProfileForCalculateScore({required bool goodScore}) async {
+    final log = ref.read(logHandlerProvider("xApiProfile"));
     final company = await ref.read(fetchCompanyProvider.future);
 
     final object = await ref.read(fetchActingObjectProvider.future);
@@ -27,6 +28,7 @@ class ResultRepository {
         model: _deviceType.model);
     final result = await _fetchPreviousScore(success: goodScore);
 
+    log.i("the object part $object");
     if (company != null) {
       return Profile.withDefaultTimestamp(
           id: userId,
@@ -44,8 +46,7 @@ class ResultRepository {
       return Profile.withoutActor(
           id: userId,
           object: object,
-          verb:
-              Verb(name: "requesting recalculations base with company profile"),
+          verb: Verb(name: "requesting recalculations without company profile"),
           currentDevice: currentUserDeviceInfo,
           result: result);
     }

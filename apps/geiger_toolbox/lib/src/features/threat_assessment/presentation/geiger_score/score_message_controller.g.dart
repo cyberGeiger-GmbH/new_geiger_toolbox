@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'score_controller_message.dart';
+part of 'score_message_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator

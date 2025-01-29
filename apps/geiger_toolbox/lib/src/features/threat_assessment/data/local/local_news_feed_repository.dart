@@ -147,7 +147,7 @@ class LocalNewsFeedRepository {
       for (final row in rows) {
         final newsEntry = row.readTable(_db.newsInfo);
 
-        final recommendationEntry = row.readTable(_db.recommendations);
+        final recommendationEntry = row.readTableOrNull(_db.recommendations);
         final offeringEntry = row.readTableOrNull(_db.offerings);
 
         // Add offerings to the corresponding list in offerMap
@@ -160,21 +160,22 @@ class LocalNewsFeedRepository {
         }
 
         // Create or update recommendations for the current newsId
-        final reco = Recommendation(
-            id: recommendationEntry.id,
-            name: recommendationEntry.name,
-            offerings: offerMap[recommendationEntry.id] ?? []);
+        if (recommendationEntry != null) {
+          final reco = Recommendation(
+              id: recommendationEntry.id,
+              name: recommendationEntry.name,
+              offerings: offerMap[recommendationEntry.id] ?? []);
 
-        // Ensure the recommendation is added only once for a specific newsId
-        if (!recosMap.containsKey(recommendationEntry.newsId)) {
-          recosMap[recommendationEntry.newsId] = [];
+          // Ensure the recommendation is added only once for a specific newsId
+          if (!recosMap.containsKey(recommendationEntry.newsId)) {
+            recosMap[recommendationEntry.newsId] = [];
+          }
+          // Only add the recommendation if it's not already in the list for the specific newsId
+          if (!recosMap[recommendationEntry.newsId]!
+              .any((rec) => rec.id == reco.id)) {
+            recosMap[recommendationEntry.newsId]!.add(reco);
+          }
         }
-        // Only add the recommendation if it's not already in the list for the specific newsId
-        if (!recosMap[recommendationEntry.newsId]!
-            .any((rec) => rec.id == reco.id)) {
-          recosMap[recommendationEntry.newsId]!.add(reco);
-        }
-
         // if the news is not yet in the list add it
         if (!newsResult.any((value) => value.id == newsEntry.id)) {
           final news = News(
@@ -233,17 +234,23 @@ class LocalNewsFeedRepository {
             .add(offer);
       }
 
-      // if the recommendation is not yet in the list add it
-      if (recommendationEntry != null &&
-          !recosMap.entries
-              .any((value) => value.key == recommendationEntry.newsId)) {
-        final reco = Recommendation(
-            id: recommendationEntry.id,
-            name: recommendationEntry.name,
-            offerings: offerMap[recommendationEntry.id] ?? []);
+      // Create or update recommendations for the current newsId
+        if (recommendationEntry != null) {
+          final reco = Recommendation(
+              id: recommendationEntry.id,
+              name: recommendationEntry.name,
+              offerings: offerMap[recommendationEntry.id] ?? []);
 
-        recosMap.putIfAbsent(recommendationEntry.newsId, () => []).add(reco);
-      }
+          // Ensure the recommendation is added only once for a specific newsId
+          if (!recosMap.containsKey(recommendationEntry.newsId)) {
+            recosMap[recommendationEntry.newsId] = [];
+          }
+          // Only add the recommendation if it's not already in the list for the specific newsId
+          if (!recosMap[recommendationEntry.newsId]!
+              .any((rec) => rec.id == reco.id)) {
+            recosMap[recommendationEntry.newsId]!.add(reco);
+          }
+        }
 
       // if the news is not yet in the list add it
       if (!newsResult.any((value) => value.id == newsEntry.id)) {

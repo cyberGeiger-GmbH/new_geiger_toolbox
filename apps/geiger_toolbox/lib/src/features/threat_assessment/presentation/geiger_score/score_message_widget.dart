@@ -6,10 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/geiger_score_info.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score/score_controller_message.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_controller.dart';
 
-class ScoreMessage extends ConsumerWidget {
-  const ScoreMessage({super.key});
+class ScoreMessageWidget extends ConsumerWidget {
+  const ScoreMessageWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
