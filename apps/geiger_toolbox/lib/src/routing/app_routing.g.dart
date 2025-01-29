@@ -23,7 +23,7 @@ final goRouterProvider = AutoDisposeProvider<GoRouter>.internal(
 // ignore: unused_element
 typedef GoRouterRef = AutoDisposeProviderRef<GoRouter>;
 String _$skipProfileCreationHash() =>
-    r'ebfa0d3ca9b54cd6079de851277477b5c645aeab';
+    r'eaed847652f38e649db6676623d6339e2bdb59d3';
 
 /// See also [SkipProfileCreation].
 @ProviderFor(SkipProfileCreation)

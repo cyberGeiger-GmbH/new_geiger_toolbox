@@ -11,6 +11,7 @@ import 'package:geiger_toolbox/src/features/authentication/data/user_profile_rep
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
 
+
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/monitoring/mixpanel_analytics_client.dart';
 import 'package:geiger_toolbox/src/utils/device_info.dart';
@@ -44,10 +45,11 @@ class AppStartUp extends _$AppStartUp {
     await ref.read(packageInfoProvider.future);
     await ref.read(sharedPreferencesProvider.future);
     await ref.read(deviceTypeProvider.future);
-    // for check if company profile has been created
+    // * check if company profile has been created
     await ref.read(fetchCompanyProvider.future);
-    // for check if news feed is empty
+    // * check if news feed is empty
     await ref.read(isNewsTableEmptyProvider.future);
+ 
     // * Preload MixpanelAnalyticsClient, so we can make unawaited analytics calls
     await ref.read(mixpanelAnalyticsClientProvider.future);
   }

@@ -31,6 +31,19 @@ class NewsFeedsWidget extends ConsumerWidget {
           (_, nxt) => nxt.showAlertDialogOnError(context: context));
     }
 
+// // update profile skip
+//     ref.listen(watchRecentNewsFeedsProvider, (_, newV) {
+//       if (!newV.isLoading && !newV.hasError) {
+//         //set skip profile to false
+//         // debugPrint("new todo list, update skip");
+//         if (newV.value!.isNotEmpty) {
+//           // final skip = ref.read(skipProfileCreationProvider);
+//           // if(skip){}
+//           ref.read(skipProfileCreationProvider.notifier).skip(false);
+//         }
+//       }
+//     });
+
     final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
     final state = ref.watch(scanButtonControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);

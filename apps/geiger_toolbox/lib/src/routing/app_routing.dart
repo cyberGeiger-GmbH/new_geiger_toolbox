@@ -8,17 +8,22 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/user_pro
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
 
 import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
+import 'package:geiger_toolbox/src/routing/go_router_refresh_stream.dart';
 
 import 'package:geiger_toolbox/src/routing/navigation/scaffold_with_navigation.dart';
 import 'package:geiger_toolbox/src/routing/not_found_screen.dart';
+import 'package:geiger_toolbox/src/utils/shared_preference.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/threat_assessment/presentation/main_screen.dart';
 import '../features/threat_assessment/presentation/news_details/news_details_screen.dart';
@@ -58,7 +63,6 @@ class AppRouting {
 
   AppRouting._();
   static GoRouter goRouter(Ref ref) {
-    //rebuild GoRouter when app startup state changes
 
     return GoRouter(
       navigatorKey: _rootNavKey,
@@ -74,12 +78,14 @@ class AppRouting {
       ],
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
-        final isNewsFeedState = ref.read(isNewsTableEmptyProvider).requireValue;
-        final companyProfileState = ref.read(fetchCompanyProvider).requireValue;
+        final isNewsFeedEmpty = ref.read(isNewsTableEmptyProvider).requireValue;
+        final companyProfileState =
+            ref.read(fetchCompanyProvider).requireValue == null;
+
         final skipProfile = ref.read(skipProfileCreationProvider);
 
         final path = state.uri.path;
-
+        // redirect to [TermAndConditionsScreen]
         if (!termsConditionState) {
           if (path != AppRouter.termsAndCondition.path) {
             return AppRouter.termsAndCondition.path;
@@ -88,17 +94,19 @@ class AppRouting {
           return null;
         }
 
-        //redirect to profile screen when profile is null and news feed is not empty
-        if (companyProfileState == null && !skipProfile && !isNewsFeedState) {
+        //redirect to profile screen when profile is null, skip is false and news feed is not empty
+        if (companyProfileState && !skipProfile && !isNewsFeedEmpty ) {
           if (path != AppRouter.createProfile.path) {
             return AppRouter.createProfile.path;
           }
 
-          return null;
+          return null; // No redirect needed
         }
 
         return null;
       },
+      // refreshListenable:
+      //     GoRouterRefreshStream(d),
       routes: [
         //for ui without bottom navigation
 
@@ -118,7 +126,7 @@ class AppRouting {
               fullscreenDialog: true,
               child: CreateProfileScreen(
                 onCloseProfile: () {
-                  ref.read(skipProfileCreationProvider.notifier).skip();
+                  ref.read(skipProfileCreationProvider.notifier).skip(true);
 
                   context.goNamed(AppRouter.main.name);
                 },
@@ -247,13 +255,19 @@ GoRouter goRouter(Ref ref) {
 
 @riverpod
 class SkipProfileCreation extends _$SkipProfileCreation {
+  SharedPreferences get _sharedPreferences =>
+      ref.watch(sharedPreferencesProvider).requireValue;
+
   @override
   bool build() {
-    return false;
+    final skip = _sharedPreferences.getBool(SharedPreference.skipProfileKey);
+    return skip ?? false;
   }
 
-  void skip() {
-    state = true;
+  void skip(bool value) {
+    _sharedPreferences.setBool(SharedPreference.skipProfileKey, value);
+    // invalidate to ensure listeners rebuild when the value changes
+    ref.invalidateSelf();
   }
 }
 
