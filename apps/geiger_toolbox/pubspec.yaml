@@ -15,7 +15,7 @@ dependencies:
   conversational_agent_client: 1.4.1
   perplexity_search: 1.2.0
   cupertino_icons: 1.0.8
-  go_router: 14.6.0
+  go_router: 14.7.2
   flutter_riverpod: 2.6.1
   riverpod_annotation: 2.6.1
   custom_lint: 0.7.0
