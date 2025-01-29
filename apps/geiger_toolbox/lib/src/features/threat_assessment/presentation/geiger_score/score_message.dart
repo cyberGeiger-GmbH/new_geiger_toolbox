@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/buttons/app_icon_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
@@ -47,6 +48,16 @@ class AlertMessageBox extends StatelessWidget {
   final List<ScoreReason> reasons;
   final VoidCallback? onClose;
   final IconData? icons;
+
+//for debugging purpose
+// to show custom properties in the devTools
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<List<ScoreReason>>("reasons", reasons));
+    // properties.add(Diagnosti)
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(

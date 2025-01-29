@@ -8,6 +8,7 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/user_pro
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
 
 import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
@@ -65,7 +66,7 @@ class AppRouting {
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
-        if (appFlavor == "dev" || appFlavor == "stg")
+        if (appFlavor == Flavor.dev.name || appFlavor == Flavor.stg.name)
           //tracking navigation events
           SentryNavigatorObserver(),
         //analytics
@@ -73,13 +74,11 @@ class AppRouting {
       ],
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
-
+        final isNewsFeedState = ref.read(isNewsTableEmptyProvider).requireValue;
         final companyProfileState = ref.read(fetchCompanyProvider).requireValue;
         final skipProfile = ref.read(skipProfileCreationProvider);
 
         final path = state.uri.path;
-
-        debugPrint("comanyState => $companyProfileState");
 
         if (!termsConditionState) {
           if (path != AppRouter.termsAndCondition.path) {
@@ -89,8 +88,8 @@ class AppRouting {
           return null;
         }
 
-        //redirect to main screen when profile is null
-        if (companyProfileState == null && !skipProfile) {
+        //redirect to profile screen when profile is null and news feed is not empty
+        if (companyProfileState == null && !skipProfile && !isNewsFeedState) {
           if (path != AppRouter.createProfile.path) {
             return AppRouter.createProfile.path;
           }
@@ -119,7 +118,7 @@ class AppRouting {
               fullscreenDialog: true,
               child: CreateProfileScreen(
                 onCloseProfile: () {
-                 ref.read(skipProfileCreationProvider.notifier).skip();
+                  ref.read(skipProfileCreationProvider.notifier).skip();
 
                   context.goNamed(AppRouter.main.name);
                 },

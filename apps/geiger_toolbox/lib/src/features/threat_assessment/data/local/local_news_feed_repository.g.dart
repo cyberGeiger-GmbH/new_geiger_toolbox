@@ -43,5 +43,22 @@ final fetchNewsListProvider = AutoDisposeFutureProvider<List<News>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FetchNewsListRef = AutoDisposeFutureProviderRef<List<News>>;
+String _$isNewsTableEmptyHash() => r'ea060e0a63644fe56646f54dde884825ea0ebb90';
+
+/// See also [isNewsTableEmpty].
+@ProviderFor(isNewsTableEmpty)
+final isNewsTableEmptyProvider = FutureProvider<bool>.internal(
+  isNewsTableEmpty,
+  name: r'isNewsTableEmptyProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$isNewsTableEmptyHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef IsNewsTableEmptyRef = FutureProviderRef<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

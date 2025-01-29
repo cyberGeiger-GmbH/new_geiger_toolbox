@@ -77,6 +77,16 @@ class LocalNewsFeedRepository {
     }
   }
 
+  ///check if news table is empty (used by app startup logic)
+  Future<bool> isNewsTableEmpty() async {
+    final query = _db.selectOnly(_db.newsInfo)
+      ..addColumns([_db.newsInfo.id.count()]);
+    final result = await query
+        .map((row) => row.read<int>(_db.newsInfo.id.count()))
+        .getSingle();
+    return result == 0;
+  }
+
 //get news object
 //sort by recent news and
   Stream<List<TypedResult>> _sortNewsInfo({bool sort = true}) {
@@ -140,7 +150,7 @@ class LocalNewsFeedRepository {
         final recommendationEntry = row.readTable(_db.recommendations);
         final offeringEntry = row.readTableOrNull(_db.offerings);
 
-      // Add offerings to the corresponding list in offerMap
+        // Add offerings to the corresponding list in offerMap
         if (offeringEntry != null) {
           final offer = Offering(
               name: offeringEntry.name, summary: offeringEntry.summary);
@@ -149,7 +159,7 @@ class LocalNewsFeedRepository {
               .add(offer);
         }
 
-           // Create or update recommendations for the current newsId
+        // Create or update recommendations for the current newsId
         final reco = Recommendation(
             id: recommendationEntry.id,
             name: recommendationEntry.name,
@@ -281,4 +291,10 @@ LocalNewsFeedRepository newsFeedCacheRepository(Ref ref) {
 Future<List<News>> fetchNewsList(Ref ref) {
   final repo = ref.watch(newsFeedCacheRepositoryProvider);
   return repo.fetchNewsList();
+}
+
+@Riverpod(keepAlive: true)
+Future<bool> isNewsTableEmpty(Ref ref) async {
+  final repo = ref.watch(newsFeedCacheRepositoryProvider);
+  return repo.isNewsTableEmpty();
 }
