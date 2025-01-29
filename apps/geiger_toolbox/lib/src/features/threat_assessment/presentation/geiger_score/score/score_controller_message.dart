@@ -8,13 +8,7 @@ class ScoreControllerMessage extends _$ScoreControllerMessage {
     return false;
   }
 
-  void dismissableMessage() {
-    // invalidate to ensure listeners rebuild when the value changes
-
-    ref.invalidateSelf();
-  }
-
-  void showMessage() {
-    state = true;
+  void dismissableMessage(bool value) {
+    state = value;
   }
 }

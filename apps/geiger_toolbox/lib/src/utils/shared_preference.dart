@@ -7,6 +7,7 @@ part 'shared_preference.g.dart';
 class SharedPreference {
   static const termsConditionKey = 'app_terms_condition';
   static const skipProfileKey = "skip_profile_creation";
+  static const closeScoreMessage = "close_score_message";
 
   SharedPreference._();
 }

@@ -16,25 +16,27 @@ class ScoreMessage extends ConsumerWidget {
     final scoreValue = ref.watch(watchGeigerScoreProvider);
     final state = ref.watch(scoreControllerMessageProvider);
 
-//show message when provider has value
+//show message when [watchGeigerScoreListProvider] has value
     ref.listen(watchGeigerScoreListProvider, (_, value) {
       if (!value.isLoading && !value.hasError) {
         if (value.value != null) {
-          ref.read(scoreControllerMessageProvider.notifier).showMessage();
+          ref
+              .read(scoreControllerMessageProvider.notifier)
+              .dismissableMessage(false);
         }
       }
     });
 
     return AsyncValueWidget(
       value: scoreValue,
-      data: (data) => data != null && state
+      data: (data) => data != null && !state
           ? AlertMessageBox(
               reasons: data.reasons,
               icons: Icons.message,
               onClose: () {
                 ref
                     .read(scoreControllerMessageProvider.notifier)
-                    .dismissableMessage();
+                    .dismissableMessage(true);
               },
             )
           : SizedBox.shrink(),

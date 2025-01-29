@@ -7,7 +7,7 @@ part of 'score_controller_message.dart';
 // **************************************************************************
 
 String _$scoreControllerMessageHash() =>
-    r'be3c431e26e11bdcaf3dd25255b9ca69d8c42641';
+    r'554c376ba06ec10d4908d0454dcc21fb5c19aabc';
 
 /// See also [ScoreControllerMessage].
 @ProviderFor(ScoreControllerMessage)
