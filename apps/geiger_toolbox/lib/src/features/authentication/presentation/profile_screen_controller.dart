@@ -1,18 +1,16 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/utils/shared_preference.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'skip_profile_creation_service.g.dart';
+part 'profile_screen_controller.g.dart';
 
-class SkipProfileCreation {
-  final Ref ref;
+@riverpod
+class ProfileScreenController extends _$ProfileScreenController {
   SharedPreferences get _sharedPreferences =>
       ref.watch(sharedPreferencesProvider).requireValue;
 
-  SkipProfileCreation(this.ref);
-
-  bool getValue() {
+  @override
+  bool build() {
     final skip = _sharedPreferences.getBool(SharedPreference.skipProfileKey);
     return skip ?? false;
   }
@@ -22,9 +20,4 @@ class SkipProfileCreation {
     // invalidate to ensure listeners rebuild when the value changes
     ref.invalidateSelf();
   }
-}
-
-@riverpod
-SkipProfileCreation skipProfileCreation(Ref ref) {
-  return SkipProfileCreation(ref);
 }

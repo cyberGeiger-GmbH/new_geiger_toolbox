@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
-import 'package:geiger_toolbox/src/features/authentication/application/skip_profile_creation_service.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/profile_screen_controller.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
@@ -80,7 +80,7 @@ class AppRouting {
         final companyProfileState =
             ref.read(fetchCompanyProvider).requireValue == null;
 
-        final skipProfile = ref.read(skipProfileCreationProvider).getValue();
+        final skipProfile = ref.read(profileScreenControllerProvider);
 
         final path = state.uri.path;
         // redirect to [TermAndConditionsScreen]
@@ -124,7 +124,7 @@ class AppRouting {
               fullscreenDialog: true,
               child: CreateProfileScreen(
                 onCloseProfile: () {
-                  ref.read(skipProfileCreationProvider).skip(true);
+                  ref.read(profileScreenControllerProvider.notifier).skip(true);
 
                   context.goNamed(AppRouter.main.name);
                 },
