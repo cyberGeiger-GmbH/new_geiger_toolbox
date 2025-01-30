@@ -1,5 +1,4 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 
@@ -17,32 +16,34 @@ part 'geiger_score_service.g.dart';
 class GeigerScoreService {
   final Ref ref;
 
+ Logger get _log => ref.read(logHandlerProvider("GeigerScoreService"));
+
   GeigerScoreService(this.ref);
 
   Future<void> cachedGeigerScore() async {
-    final log = ref.read(logHandlerProvider("GeigerScore"));
+   
     try {
-      log.i("Calculation has started...");
+      _log.i("Calculation has started...");
       final repo = ref.read(localGeigerScoreRepoProvider);
 
 //todo: check the range of score and update the goodScore parameter
       final previousScoreProfile =
           await ref.read(getScoreProfileProvider(goodScore: false).future);
 
-      log.i(
-          "sending company profile in xapi format}");
+      _log.i(
+          "sending company profile in xapi format");
 
       final geigerScore = await ref.read(
           getGeigerScoreProvider(userProfile: previousScoreProfile).future);
-      log.i("Received Score from Server");
+      _log.i("Received Score from Server");
       if (geigerScore != null) {
-        log.i("Storing score locally}");
+        _log.i("Storing score locally}");
         repo.storeGeigerScore(score: geigerScore, userId: await _userId());
-        log.i("store successfuly stored}");
+        _log.i("store successfuly stored}");
       }
     } catch (e, s) {
       ref.read(appLoggerProvider).logError(e, s);
-      log.e("error encountered: $e");
+      _log.e("error encountered: $e");
       rethrow;
     }
   }

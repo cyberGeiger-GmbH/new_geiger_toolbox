@@ -14,23 +14,32 @@ class ResultRepository {
 
   Device get _deviceType => ref.watch(deviceTypeProvider).requireValue;
 
+  Logger get _log => ref.read(logHandlerProvider("ScoreProfileService"));
+
   ResultRepository(this.ref);
 
   Future<Profile> getProfileForCalculateScore({required bool goodScore}) async {
-    final log = ref.read(logHandlerProvider("xApiProfile"));
+    _log.i("Preparing profile xapi");
+    final userId = await _userId();
+
     final company = await ref.read(fetchCompanyProvider.future);
 
+    final verb =
+        Verb(name: "requesting recalculations base on company profile");
+
     final object = await ref.read(fetchActingObjectProvider.future);
-    final userId = await _userId();
+
     final currentUserDeviceInfo = Asset(
         type: _deviceType.type.name,
         version: _deviceType.version,
         model: _deviceType.model);
+
     final result = await _fetchPreviousScore(success: goodScore);
 
-    log.i("the object part $object");
+    
     if (company != null) {
-      return Profile.withDefaultTimestamp(
+      _log.i("profile with company profile");
+     return Profile.withDefaultTimestamp(
           id: userId,
           actor: Actor(
             companyName: company.companyName,
@@ -40,9 +49,11 @@ class ResultRepository {
             assets: [],
           ),
           object: object,
-          verb: Verb(name: "requesting recalculations base on company profile"),
+          verb: verb,
           result: result);
+     
     } else {
+            _log.i("profile without company profile");
       return Profile.withoutActor(
           id: userId,
           object: object,

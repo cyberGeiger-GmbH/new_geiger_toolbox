@@ -11,6 +11,8 @@ part 'scan_button_controller.g.dart';
 
 @riverpod
 class ScanButtonController extends _$ScanButtonController {
+
+  
   @override
   // ignore: no-empty-block
   FutureOr<void> build() {
@@ -18,6 +20,7 @@ class ScanButtonController extends _$ScanButtonController {
   }
 
   Future<void> scan() async {
+
     state = const AsyncLoading();
     state = await AsyncValue.guard(
         () => ref.read(newsFeedServiceProvider).cacheNews());

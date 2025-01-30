@@ -13,27 +13,38 @@ class LocalGeigerScoreRepository {
   AppDatabase get _db => ref.read(appDatabaseProvider);
   LocalGeigerScoreRepository(this.ref);
 
+  Logger get _log => ref.read(logHandlerProvider("LocalGeigerScoreRepository"));
+
   //create score
   Future<void> storeGeigerScore(
       {required GeigerScore score, required UserID userId}) async {
-    await _db.transaction(() async {
-      final geigerData = GeigerScoresCompanion(
-        score: Value(score.geigerScore),
-        userId: Value(userId),
-      );
-      final scoreId = await _db.into(_db.geigerScores).insert(geigerData);
+    try {
+      _log.i("storing geigerScore .. ");
+      await _db.transaction(() async {
+        final geigerData = GeigerScoresCompanion(
+          score: Value(score.geigerScore),
+          userId: Value(userId),
+        );
+        final scoreId = await _db.into(_db.geigerScores).insert(geigerData);
 
-      if (score.reasons.isNotEmpty) {
-        for (var reason in score.reasons) {
-          final data =
-              ReasonsCompanion(reason: Value(reason), scoreId: Value(scoreId));
-          await _db.into(_db.reasons).insert(data);
+        if (score.reasons.isNotEmpty) {
+          for (var reason in score.reasons) {
+            final data = ReasonsCompanion(
+                reason: Value(reason), scoreId: Value(scoreId));
+            await _db.into(_db.reasons).insert(data);
+          }
         }
-      }
-    });
+      });
+    } catch (e) {
+      _log.e(e);
+      rethrow;
+    }
   }
 
-  Stream<GeigerScoreInfo?> watchGeigerScore() {
+  Stream<GeigerScoreInfo?> watchGeigerScore()
+ 
+   {
+     _log.i("watching GeigerScore...");
     final query = (_db.select(_db.geigerScores).join([
       leftOuterJoin(
         _db.reasons,
@@ -72,6 +83,7 @@ class LocalGeigerScoreRepository {
   }
 
   Future<GeigerScoreInfo?> fetchGeigerScore() async {
+    _log.i("fetching GeigerScore...");
     final query = await (_db.select(_db.geigerScores).join([
       leftOuterJoin(
         _db.reasons,
@@ -108,6 +120,7 @@ class LocalGeigerScoreRepository {
   }
 
   Stream<List<GeigerScoreInfo>> watchGeigerScoreList() {
+    _log.i("watching List<GeigerScore>...");
     final query = _db.select(_db.geigerScores).join(
       [
         leftOuterJoin(
@@ -129,7 +142,7 @@ class LocalGeigerScoreRepository {
         final reasonEntry = row.readTableOrNull(_db.reasons);
 
         if (reasonEntry != null) {
-           // if the reasons  is not yet in the list add it
+          // if the reasons  is not yet in the list add it
           if (!reasons.any((value) => value.scoreId == reasonEntry.scoreId)) {
             reasons.add(ScoreReason(
                 scoreId: reasonEntry.scoreId, name: reasonEntry.reason));

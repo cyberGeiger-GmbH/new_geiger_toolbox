@@ -17,10 +17,13 @@ class LocalNewsFeedRepository {
 
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
+  Logger get _log => ref.read(logHandlerProvider("LocalNewsFeedRepository"));
+
   Future<void> synFromRemote({required List<News> data}) async {
     // debugPrint("news feed=> $data");
 
     try {
+      _log.i("storing news locally...");
       await _db.transaction(() async {
         for (var newsData in data) {
           //insert news
@@ -59,20 +62,25 @@ class LocalNewsFeedRepository {
           }
         }
       });
+      _log.i("finished storing");
     } catch (e, s) {
+      _log.e(e);
       throw DataBaseException(error: e.toString(), stack: s.toString());
     }
   }
 
   Future<void> deleteNews() async {
     try {
+      _log.i("deletign news...");
       await _db.transaction(() async {
         await _db.delete(_db.newsInfo).go();
         await _db.delete(_db.recommendations).go();
         await _db.delete(_db.offerings).go();
         await _db.delete(_db.todoOfferingStatuses).go();
       });
+      _log.i("news deleted");
     } catch (e) {
+      _log.e(e);
       throw DataBaseException();
     }
   }
@@ -134,6 +142,7 @@ class LocalNewsFeedRepository {
   }
 
   Stream<List<News>> watchNewsList({bool sort = true}) {
+    _log.i("watching List<News> ...");
     //final da = ref.read(previousMonthProvider(month: 1));
     // final newsWithRecoAndOffering =
     //     olderNews == null ? _sortNewsInfo() : _olderNewsInfo(older: da);
@@ -196,6 +205,7 @@ class LocalNewsFeedRepository {
   }
 
   Future<List<News>> fetchNewsList() async {
+     _log.i("fetching List<News> ...");
     final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
       [
         leftOuterJoin(
@@ -235,22 +245,22 @@ class LocalNewsFeedRepository {
       }
 
       // Create or update recommendations for the current newsId
-        if (recommendationEntry != null) {
-          final reco = Recommendation(
-              id: recommendationEntry.id,
-              name: recommendationEntry.name,
-              offerings: offerMap[recommendationEntry.id] ?? []);
+      if (recommendationEntry != null) {
+        final reco = Recommendation(
+            id: recommendationEntry.id,
+            name: recommendationEntry.name,
+            offerings: offerMap[recommendationEntry.id] ?? []);
 
-          // Ensure the recommendation is added only once for a specific newsId
-          if (!recosMap.containsKey(recommendationEntry.newsId)) {
-            recosMap[recommendationEntry.newsId] = [];
-          }
-          // Only add the recommendation if it's not already in the list for the specific newsId
-          if (!recosMap[recommendationEntry.newsId]!
-              .any((rec) => rec.id == reco.id)) {
-            recosMap[recommendationEntry.newsId]!.add(reco);
-          }
+        // Ensure the recommendation is added only once for a specific newsId
+        if (!recosMap.containsKey(recommendationEntry.newsId)) {
+          recosMap[recommendationEntry.newsId] = [];
         }
+        // Only add the recommendation if it's not already in the list for the specific newsId
+        if (!recosMap[recommendationEntry.newsId]!
+            .any((rec) => rec.id == reco.id)) {
+          recosMap[recommendationEntry.newsId]!.add(reco);
+        }
+      }
 
       // if the news is not yet in the list add it
       if (!newsResult.any((value) => value.id == newsEntry.id)) {
@@ -271,6 +281,7 @@ class LocalNewsFeedRepository {
   }
 
   Stream<News?> watchNewsByTitle({required String title}) {
+     _log.i("by title");
     return watchNewsList()
         .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: title));
   }

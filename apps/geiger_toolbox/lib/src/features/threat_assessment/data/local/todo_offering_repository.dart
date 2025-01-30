@@ -14,6 +14,7 @@ class TodoOfferingRepository {
 
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
+  Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
   TodoOfferingRepository(this.ref);
 
   //add/update status of a given offering
@@ -34,6 +35,7 @@ class TodoOfferingRepository {
   //* add/update status of a given offerings
   Future<void> addOrUpdateTodoOfferingsStatus(
       {required List<OfferingStatus> offerData}) async {
+    _log.i("add offer to todos $offerData");
     if (offerData.isNotEmpty) {
       await _db.transaction(() async {
         for (var data in offerData) {
@@ -53,6 +55,7 @@ class TodoOfferingRepository {
 
   //Get all Offers that has be added to the todoOfferingStatus
   Stream<List<OfferingStatus>> watchTodoOfferingStatus() {
+    _log.i("watch List<offeringStatus>");
     //create a join query that include TodoOfferingStatusesTable and OfferingsTable
     final query = _db.select(_db.offerings).join(
       [

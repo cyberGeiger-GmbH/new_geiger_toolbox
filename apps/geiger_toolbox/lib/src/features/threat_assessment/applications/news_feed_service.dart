@@ -1,5 +1,4 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
@@ -20,28 +19,30 @@ class NewsFeedService {
   LocalNewsFeedRepository get cache =>
       ref.read(newsFeedCacheRepositoryProvider);
 
+ Logger get _log => ref.read(logHandlerProvider("NewsFeedService"));
+
   NewsFeedService(this.ref);
 
   Device get _deviceType => ref.watch(deviceTypeProvider).requireValue;
 
   Future<void> cacheNews() async {
-      final log = ref.read(logHandlerProvider("NewsFeed"));
+   
     try {
      
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
       final profile = await _getProfileForNewsFeed();
-      log.i("sending company profile in xapi formate => $profile");
-       log.i("Getting News from Server...");
+      _log.i("sending company profile in xapi formate => $profile");
+       _log.i("Getting News from Server...");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
      
       if (data.isNotEmpty) {
-         log.i("storing newsfeed locally...");
+         _log.i("storing newsfeed locally...");
         await cache.synFromRemote(data: data);
       }
-       log.i("success");
+       _log.i("success");
     } catch (e, s) {
       ref.read(appLoggerProvider).logError(e, s);
-      log.e("error => $e");
+      _log.e("error => $e");
       rethrow;
     }
   }
