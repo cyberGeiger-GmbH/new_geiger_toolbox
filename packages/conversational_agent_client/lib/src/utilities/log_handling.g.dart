@@ -6,7 +6,7 @@ part of 'log_handling.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$logHandlerHash() => r'deb98cb0355b11aac7817c9f80cbeb8182ae5769';
+String _$logHandlerHash() => r'7dfda107ea11d2b6b810b3f7199fc1477cfe73f9';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -40,10 +40,12 @@ class LogHandlerFamily extends Family<Logger> {
 
   /// See also [logHandler].
   LogHandlerProvider call(
-    String source,
-  ) {
+    String source, {
+    String? packageName,
+  }) {
     return LogHandlerProvider(
       source,
+      packageName: packageName,
     );
   }
 
@@ -53,6 +55,7 @@ class LogHandlerFamily extends Family<Logger> {
   ) {
     return call(
       provider.source,
+      packageName: provider.packageName,
     );
   }
 
@@ -75,11 +78,13 @@ class LogHandlerFamily extends Family<Logger> {
 class LogHandlerProvider extends AutoDisposeProvider<Logger> {
   /// See also [logHandler].
   LogHandlerProvider(
-    String source,
-  ) : this._internal(
+    String source, {
+    String? packageName,
+  }) : this._internal(
           (ref) => logHandler(
             ref as LogHandlerRef,
             source,
+            packageName: packageName,
           ),
           from: logHandlerProvider,
           name: r'logHandlerProvider',
@@ -91,6 +96,7 @@ class LogHandlerProvider extends AutoDisposeProvider<Logger> {
           allTransitiveDependencies:
               LogHandlerFamily._allTransitiveDependencies,
           source: source,
+          packageName: packageName,
         );
 
   LogHandlerProvider._internal(
@@ -101,9 +107,11 @@ class LogHandlerProvider extends AutoDisposeProvider<Logger> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.source,
+    required this.packageName,
   }) : super.internal();
 
   final String source;
+  final String? packageName;
 
   @override
   Override overrideWith(
@@ -119,6 +127,7 @@ class LogHandlerProvider extends AutoDisposeProvider<Logger> {
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         source: source,
+        packageName: packageName,
       ),
     );
   }
@@ -130,13 +139,16 @@ class LogHandlerProvider extends AutoDisposeProvider<Logger> {
 
   @override
   bool operator ==(Object other) {
-    return other is LogHandlerProvider && other.source == source;
+    return other is LogHandlerProvider &&
+        other.source == source &&
+        other.packageName == packageName;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, source.hashCode);
+    hash = _SystemHash.combine(hash, packageName.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -147,6 +159,9 @@ class LogHandlerProvider extends AutoDisposeProvider<Logger> {
 mixin LogHandlerRef on AutoDisposeProviderRef<Logger> {
   /// The parameter `source` of this provider.
   String get source;
+
+  /// The parameter `packageName` of this provider.
+  String? get packageName;
 }
 
 class _LogHandlerProviderElement extends AutoDisposeProviderElement<Logger>
@@ -155,6 +170,8 @@ class _LogHandlerProviderElement extends AutoDisposeProviderElement<Logger>
 
   @override
   String get source => (origin as LogHandlerProvider).source;
+  @override
+  String? get packageName => (origin as LogHandlerProvider).packageName;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

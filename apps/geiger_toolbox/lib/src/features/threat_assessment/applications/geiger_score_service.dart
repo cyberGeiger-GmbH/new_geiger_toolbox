@@ -16,12 +16,11 @@ part 'geiger_score_service.g.dart';
 class GeigerScoreService {
   final Ref ref;
 
- Logger get _log => ref.read(logHandlerProvider("GeigerScoreService"));
+  Logger get _log => ref.read(logHandlerProvider("GeigerScoreService"));
 
   GeigerScoreService(this.ref);
 
   Future<void> cachedGeigerScore() async {
-   
     try {
       _log.i("Calculation has started...");
       final repo = ref.read(localGeigerScoreRepoProvider);
@@ -30,14 +29,13 @@ class GeigerScoreService {
       final previousScoreProfile =
           await ref.read(getScoreProfileProvider(goodScore: false).future);
 
-      _log.i(
-          "sending company profile in xapi format");
+      _log.i("Sending company profile in xapi format");
 
       final geigerScore = await ref.read(
           getGeigerScoreProvider(userProfile: previousScoreProfile).future);
       _log.i("Received Score from Server");
       if (geigerScore != null) {
-        _log.i("Storing score locally}");
+        _log.i("Storing score locally....}");
         repo.storeGeigerScore(score: geigerScore, userId: await _userId());
         _log.i("store successfuly stored}");
       }

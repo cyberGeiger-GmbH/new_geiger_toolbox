@@ -48,7 +48,7 @@ class AppStartUp extends _$AppStartUp {
     // * check if company profile has been created
     await ref.read(fetchCompanyProvider.future);
     // * check if news feed is empty
-    await ref.read(isNewsTableEmptyProvider.future);
+   // await ref.read(isNewsTableEmptyProvider.future);
  
     // * Preload MixpanelAnalyticsClient, so we can make unawaited analytics calls
     await ref.read(mixpanelAnalyticsClientProvider.future);

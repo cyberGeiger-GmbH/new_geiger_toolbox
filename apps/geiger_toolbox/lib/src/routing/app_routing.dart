@@ -76,7 +76,7 @@ class AppRouting {
       ],
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
-        final isNewsFeedEmpty = ref.read(isNewsTableEmptyProvider).requireValue;
+        //final isNewsFeedEmpty = ref.read(isNewsTableEmptyProvider).requireValue;
         final companyProfileState =
             ref.read(fetchCompanyProvider).requireValue == null;
 
@@ -93,7 +93,8 @@ class AppRouting {
         }
 
         //redirect to profile screen when profile is null, skip is false and news feed table is not empty
-        if (companyProfileState && !skipProfile && !isNewsFeedEmpty) {
+        // if (companyProfileState && !skipProfile && !isNewsFeedEmpty) {
+        if (companyProfileState && !skipProfile) {
           if (path != AppRouter.createProfile.path) {
             return AppRouter.createProfile.path;
           }
@@ -103,7 +104,7 @@ class AppRouting {
 
         return null;
       },
-      //todo: add refreshListen 
+      //todo: add refreshListen
       // refreshListenable:  GoRouterRefreshStream(d),
       routes: [
         //for ui without bottom navigation

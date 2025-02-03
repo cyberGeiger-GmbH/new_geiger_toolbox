@@ -1,12 +1,31 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/organisms/show_bottom_sheet_modal.dart';
-import 'package:core_ui/tokens/spacing.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
+
+class CalculatingScoreStatus extends ConsumerWidget {
+  const CalculatingScoreStatus({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(scanButtonControllerProvider, (_, newV) {
+      ref
+          .read(geigerScoreControllerProvider.notifier)
+          .onScanComplete(state: newV);
+    });
+
+    final state = ref.watch(geigerScoreControllerProvider);
+
+    return state.isLoading
+        ? AppText.titleMedium(text: "Calculating Score....", context: context)
+        : const GeigerScoreWidget();
+  }
+}
 
 class GeigerScoreWidget extends ConsumerWidget {
   const GeigerScoreWidget({super.key});
@@ -14,33 +33,30 @@ class GeigerScoreWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scoreValue = ref.watch(watchGeigerScoreProvider);
-    final scanState = ref.watch(scanButtonControllerProvider);
 
-    return !scanState.isLoading
-        ? AsyncValueWidget(
-            value: scoreValue,
-            data: (data) => data != null
-                ? _ScoreWithInfo(
-                    score: "${data.geigerScore}",
-                    key: key,
-                    //todo: change font color base the score range
-                    showinfo: () {
-                      showWoltAlertDialog(
-                        context,
-                        title: "Geiger Score!",
-                        page: Padding(
-                          padding: const EdgeInsets.all(Spacing.p8),
-                          child: ShowScoreReason(
-                            reasons: data.reasons,
-                          ),
-                        ),
-                      );
-                    },
-                  )
-                : SizedBox.shrink(),
-          )
-        : AppText.labelLarge(
-            text: "Recalculate Geiger Score...", context: context);
+    return AsyncValueWidget(
+      value: scoreValue,
+      data: (data) => data != null
+          ? _ScoreWithInfo(
+              score: "${data.geigerScore}",
+              key: key,
+              //todo: change font color base the score range
+              showinfo: () {
+                showWoltAlertDialog(
+                  context,
+                  title: "Geiger Score!",
+                  page: Padding(
+                    padding: const EdgeInsets.all(Spacing.p8),
+                    child: ShowScoreReason(
+                      reasons: data.reasons,
+                    ),
+                  ),
+                );
+              },
+            )
+          : SizedBox.shrink(),
+    );
+    //: AppText.titleSmall(text: "RecalCulating score", context: context);
   }
 }
 

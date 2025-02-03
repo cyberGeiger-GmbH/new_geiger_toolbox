@@ -31,19 +31,6 @@ class NewsFeedsWidget extends ConsumerWidget {
           (_, nxt) => nxt.showAlertDialogOnError(context: context));
     }
 
-// // update profile skip
-//     ref.listen(watchRecentNewsFeedsProvider, (_, newV) {
-//       if (!newV.isLoading && !newV.hasError) {
-//         //set skip profile to false
-//         // debugPrint("new todo list, update skip");
-//         if (newV.value!.isNotEmpty) {
-//           // final skip = ref.read(skipProfileCreationProvider);
-//           // if(skip){}
-//           ref.read(skipProfileCreationProvider.notifier).skip(false);
-//         }
-//       }
-//     });
-
     final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
     final state = ref.watch(scanButtonControllerProvider);
     final index = ref.watch(newsFeedsControllerProvider);
@@ -54,13 +41,6 @@ class NewsFeedsWidget extends ConsumerWidget {
         if (news.isEmpty) {
           return const SizedBox.shrink();
         } else {
-          // news.sort((a, b) {
-          //   final formatterA =
-          //       ref.read(stringToDateProvider(inputDate: a.dateCreated));
-          //   final formatterB =
-          //       ref.read(stringToDateProvider(inputDate: b.dateCreated));
-          //   return formatterA.compareTo(formatterB);
-          // });
           final limitNews =
               limitListLength(inputList: news, limit: limitNewsFeedDisplay);
           return Column(

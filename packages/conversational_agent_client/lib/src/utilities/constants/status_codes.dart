@@ -8,7 +8,8 @@ class StatusCodes {
   const StatusCodes(this.ref);
 
   StatusCode? getStatus(int? statusCode) {
-    final log = ref.read(logHandlerProvider("🌎 =>"));
+    final log = ref.read(logHandlerProvider("StatusCode 🌎", packageName: "Conversational_agent_client"));
+    
     if (statusCode == StatusCode.unauthorised.code) {
       log.w("UNAUTHORISED: either no API key was provided or it wasn't valid");
 
@@ -30,7 +31,7 @@ class StatusCodes {
 
       return StatusCode.serviceUnavailable;
     } else if (statusCode == StatusCode.success.code) {
-      log.i("SUCCESS: conversational_agent_client, OK => $statusCode");
+      log.i("$statusCode");
 
       return StatusCode.success;
     } else {

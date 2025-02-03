@@ -41,6 +41,7 @@ void main() {
                   "APT29, a Russia-linked threat actor, uses rogue Remote Desktop Protocol (RDP) servers to target high-value entities like governments and researchers. This threat is significant for users with sensitive data, as it can lead to data leakage and malware installation",
               extensions: [
                 DefinitionExtension(
+                  id: "1",
                   recommendationType: "Enable Multi-Factor Authentication",
                   implementations: [
                     Implementation(

@@ -25,7 +25,7 @@ class NewsRepository {
 
   Future<List<News>> fetchNews({Profile? profile}) async {
     final dio = ref.read(dioProvider);
-    final log = ref.read(logHandlerProvider("fetchNews:"));
+    final log = ref.read(logHandlerProvider("FetchNews"));
 
     try {
       final Uri uri = Uri.https(
