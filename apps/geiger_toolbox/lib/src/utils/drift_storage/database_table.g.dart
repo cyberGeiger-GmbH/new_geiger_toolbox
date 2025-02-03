@@ -620,6 +620,11 @@ class $GeigerScoresTable extends GeigerScores
       requiredDuringInsert: true,
       defaultConstraints: GeneratedColumn.constraintIsAlways(
           'REFERENCES user_profiles (user_id)'));
+  static const VerificationMeta _reasonMeta = const VerificationMeta('reason');
+  @override
+  late final GeneratedColumn<String> reason = GeneratedColumn<String>(
+      'reason', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _scoreMeta = const VerificationMeta('score');
   @override
   late final GeneratedColumn<int> score = GeneratedColumn<int>(
@@ -634,7 +639,8 @@ class $GeigerScoresTable extends GeigerScores
       requiredDuringInsert: false,
       defaultValue: currentDateAndTime);
   @override
-  List<GeneratedColumn> get $columns => [id, userId, score, lastUpdated];
+  List<GeneratedColumn> get $columns =>
+      [id, userId, reason, score, lastUpdated];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -653,6 +659,12 @@ class $GeigerScoresTable extends GeigerScores
           userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
     } else if (isInserting) {
       context.missing(_userIdMeta);
+    }
+    if (data.containsKey('reason')) {
+      context.handle(_reasonMeta,
+          reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta));
+    } else if (isInserting) {
+      context.missing(_reasonMeta);
     }
     if (data.containsKey('score')) {
       context.handle(
@@ -679,6 +691,8 @@ class $GeigerScoresTable extends GeigerScores
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       userId: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
+      reason: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}reason'])!,
       score: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}score'])!,
       lastUpdated: attachedDatabase.typeMapping
@@ -695,11 +709,13 @@ class $GeigerScoresTable extends GeigerScores
 class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
   final int id;
   final String userId;
+  final String reason;
   final int score;
   final DateTime lastUpdated;
   const GeigerScoreData(
       {required this.id,
       required this.userId,
+      required this.reason,
       required this.score,
       required this.lastUpdated});
   @override
@@ -707,6 +723,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['user_id'] = Variable<String>(userId);
+    map['reason'] = Variable<String>(reason);
     map['score'] = Variable<int>(score);
     map['last_updated'] = Variable<DateTime>(lastUpdated);
     return map;
@@ -716,6 +733,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
     return GeigerScoresCompanion(
       id: Value(id),
       userId: Value(userId),
+      reason: Value(reason),
       score: Value(score),
       lastUpdated: Value(lastUpdated),
     );
@@ -727,6 +745,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
     return GeigerScoreData(
       id: serializer.fromJson<int>(json['id']),
       userId: serializer.fromJson<String>(json['userId']),
+      reason: serializer.fromJson<String>(json['reason']),
       score: serializer.fromJson<int>(json['score']),
       lastUpdated: serializer.fromJson<DateTime>(json['lastUpdated']),
     );
@@ -737,16 +756,22 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'userId': serializer.toJson<String>(userId),
+      'reason': serializer.toJson<String>(reason),
       'score': serializer.toJson<int>(score),
       'lastUpdated': serializer.toJson<DateTime>(lastUpdated),
     };
   }
 
   GeigerScoreData copyWith(
-          {int? id, String? userId, int? score, DateTime? lastUpdated}) =>
+          {int? id,
+          String? userId,
+          String? reason,
+          int? score,
+          DateTime? lastUpdated}) =>
       GeigerScoreData(
         id: id ?? this.id,
         userId: userId ?? this.userId,
+        reason: reason ?? this.reason,
         score: score ?? this.score,
         lastUpdated: lastUpdated ?? this.lastUpdated,
       );
@@ -754,6 +779,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
     return GeigerScoreData(
       id: data.id.present ? data.id.value : this.id,
       userId: data.userId.present ? data.userId.value : this.userId,
+      reason: data.reason.present ? data.reason.value : this.reason,
       score: data.score.present ? data.score.value : this.score,
       lastUpdated:
           data.lastUpdated.present ? data.lastUpdated.value : this.lastUpdated,
@@ -765,6 +791,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
     return (StringBuffer('GeigerScoreData(')
           ..write('id: $id, ')
           ..write('userId: $userId, ')
+          ..write('reason: $reason, ')
           ..write('score: $score, ')
           ..write('lastUpdated: $lastUpdated')
           ..write(')'))
@@ -772,13 +799,14 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
   }
 
   @override
-  int get hashCode => Object.hash(id, userId, score, lastUpdated);
+  int get hashCode => Object.hash(id, userId, reason, score, lastUpdated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is GeigerScoreData &&
           other.id == this.id &&
           other.userId == this.userId &&
+          other.reason == this.reason &&
           other.score == this.score &&
           other.lastUpdated == this.lastUpdated);
 }
@@ -786,30 +814,36 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
 class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
   final Value<int> id;
   final Value<String> userId;
+  final Value<String> reason;
   final Value<int> score;
   final Value<DateTime> lastUpdated;
   const GeigerScoresCompanion({
     this.id = const Value.absent(),
     this.userId = const Value.absent(),
+    this.reason = const Value.absent(),
     this.score = const Value.absent(),
     this.lastUpdated = const Value.absent(),
   });
   GeigerScoresCompanion.insert({
     this.id = const Value.absent(),
     required String userId,
+    required String reason,
     required int score,
     this.lastUpdated = const Value.absent(),
   })  : userId = Value(userId),
+        reason = Value(reason),
         score = Value(score);
   static Insertable<GeigerScoreData> custom({
     Expression<int>? id,
     Expression<String>? userId,
+    Expression<String>? reason,
     Expression<int>? score,
     Expression<DateTime>? lastUpdated,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (userId != null) 'user_id': userId,
+      if (reason != null) 'reason': reason,
       if (score != null) 'score': score,
       if (lastUpdated != null) 'last_updated': lastUpdated,
     });
@@ -818,11 +852,13 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
   GeigerScoresCompanion copyWith(
       {Value<int>? id,
       Value<String>? userId,
+      Value<String>? reason,
       Value<int>? score,
       Value<DateTime>? lastUpdated}) {
     return GeigerScoresCompanion(
       id: id ?? this.id,
       userId: userId ?? this.userId,
+      reason: reason ?? this.reason,
       score: score ?? this.score,
       lastUpdated: lastUpdated ?? this.lastUpdated,
     );
@@ -836,6 +872,9 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
     }
     if (userId.present) {
       map['user_id'] = Variable<String>(userId.value);
+    }
+    if (reason.present) {
+      map['reason'] = Variable<String>(reason.value);
     }
     if (score.present) {
       map['score'] = Variable<int>(score.value);
@@ -851,201 +890,9 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
     return (StringBuffer('GeigerScoresCompanion(')
           ..write('id: $id, ')
           ..write('userId: $userId, ')
+          ..write('reason: $reason, ')
           ..write('score: $score, ')
           ..write('lastUpdated: $lastUpdated')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $ReasonsTable extends Reasons with TableInfo<$ReasonsTable, ReasonData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $ReasonsTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _reasonMeta = const VerificationMeta('reason');
-  @override
-  late final GeneratedColumn<String> reason = GeneratedColumn<String>(
-      'reason', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _scoreIdMeta =
-      const VerificationMeta('scoreId');
-  @override
-  late final GeneratedColumn<int> scoreId = GeneratedColumn<int>(
-      'score_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES geiger_scores (id)'));
-  @override
-  List<GeneratedColumn> get $columns => [reason, scoreId];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'reasons';
-  @override
-  VerificationContext validateIntegrity(Insertable<ReasonData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('reason')) {
-      context.handle(_reasonMeta,
-          reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta));
-    } else if (isInserting) {
-      context.missing(_reasonMeta);
-    }
-    if (data.containsKey('score_id')) {
-      context.handle(_scoreIdMeta,
-          scoreId.isAcceptableOrUnknown(data['score_id']!, _scoreIdMeta));
-    } else if (isInserting) {
-      context.missing(_scoreIdMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => const {};
-  @override
-  ReasonData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ReasonData(
-      reason: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}reason'])!,
-      scoreId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}score_id'])!,
-    );
-  }
-
-  @override
-  $ReasonsTable createAlias(String alias) {
-    return $ReasonsTable(attachedDatabase, alias);
-  }
-}
-
-class ReasonData extends DataClass implements Insertable<ReasonData> {
-  final String reason;
-  final int scoreId;
-  const ReasonData({required this.reason, required this.scoreId});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['reason'] = Variable<String>(reason);
-    map['score_id'] = Variable<int>(scoreId);
-    return map;
-  }
-
-  ReasonsCompanion toCompanion(bool nullToAbsent) {
-    return ReasonsCompanion(
-      reason: Value(reason),
-      scoreId: Value(scoreId),
-    );
-  }
-
-  factory ReasonData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ReasonData(
-      reason: serializer.fromJson<String>(json['reason']),
-      scoreId: serializer.fromJson<int>(json['scoreId']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'reason': serializer.toJson<String>(reason),
-      'scoreId': serializer.toJson<int>(scoreId),
-    };
-  }
-
-  ReasonData copyWith({String? reason, int? scoreId}) => ReasonData(
-        reason: reason ?? this.reason,
-        scoreId: scoreId ?? this.scoreId,
-      );
-  ReasonData copyWithCompanion(ReasonsCompanion data) {
-    return ReasonData(
-      reason: data.reason.present ? data.reason.value : this.reason,
-      scoreId: data.scoreId.present ? data.scoreId.value : this.scoreId,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('ReasonData(')
-          ..write('reason: $reason, ')
-          ..write('scoreId: $scoreId')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(reason, scoreId);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is ReasonData &&
-          other.reason == this.reason &&
-          other.scoreId == this.scoreId);
-}
-
-class ReasonsCompanion extends UpdateCompanion<ReasonData> {
-  final Value<String> reason;
-  final Value<int> scoreId;
-  final Value<int> rowid;
-  const ReasonsCompanion({
-    this.reason = const Value.absent(),
-    this.scoreId = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  ReasonsCompanion.insert({
-    required String reason,
-    required int scoreId,
-    this.rowid = const Value.absent(),
-  })  : reason = Value(reason),
-        scoreId = Value(scoreId);
-  static Insertable<ReasonData> custom({
-    Expression<String>? reason,
-    Expression<int>? scoreId,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (reason != null) 'reason': reason,
-      if (scoreId != null) 'score_id': scoreId,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  ReasonsCompanion copyWith(
-      {Value<String>? reason, Value<int>? scoreId, Value<int>? rowid}) {
-    return ReasonsCompanion(
-      reason: reason ?? this.reason,
-      scoreId: scoreId ?? this.scoreId,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (reason.present) {
-      map['reason'] = Variable<String>(reason.value);
-    }
-    if (scoreId.present) {
-      map['score_id'] = Variable<int>(scoreId.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('ReasonsCompanion(')
-          ..write('reason: $reason, ')
-          ..write('scoreId: $scoreId, ')
-          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -2093,7 +1940,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $CompanyProfilesTable companyProfiles =
       $CompanyProfilesTable(this);
   late final $GeigerScoresTable geigerScores = $GeigerScoresTable(this);
-  late final $ReasonsTable reasons = $ReasonsTable(this);
   late final $NewsInfoTable newsInfo = $NewsInfoTable(this);
   late final $RecommendationsTable recommendations =
       $RecommendationsTable(this);
@@ -2108,7 +1954,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         userProfiles,
         companyProfiles,
         geigerScores,
-        reasons,
         newsInfo,
         recommendations,
         offerings,
@@ -2711,6 +2556,7 @@ typedef $$GeigerScoresTableCreateCompanionBuilder = GeigerScoresCompanion
     Function({
   Value<int> id,
   required String userId,
+  required String reason,
   required int score,
   Value<DateTime> lastUpdated,
 });
@@ -2718,6 +2564,7 @@ typedef $$GeigerScoresTableUpdateCompanionBuilder = GeigerScoresCompanion
     Function({
   Value<int> id,
   Value<String> userId,
+  Value<String> reason,
   Value<int> score,
   Value<DateTime> lastUpdated,
 });
@@ -2739,21 +2586,6 @@ final class $$GeigerScoresTableReferences
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: [item]));
   }
-
-  static MultiTypedResultKey<$ReasonsTable, List<ReasonData>> _reasonsRefsTable(
-          _$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(db.reasons,
-          aliasName:
-              $_aliasNameGenerator(db.geigerScores.id, db.reasons.scoreId));
-
-  $$ReasonsTableProcessedTableManager get reasonsRefs {
-    final manager = $$ReasonsTableTableManager($_db, $_db.reasons)
-        .filter((f) => f.scoreId.id($_item.id));
-
-    final cache = $_typedResult.readTableOrNull(_reasonsRefsTable($_db));
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
-  }
 }
 
 class $$GeigerScoresTableFilterComposer
@@ -2767,6 +2599,9 @@ class $$GeigerScoresTableFilterComposer
   });
   ColumnFilters<int> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get reason => $composableBuilder(
+      column: $table.reason, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get score => $composableBuilder(
       column: $table.score, builder: (column) => ColumnFilters(column));
@@ -2793,27 +2628,6 @@ class $$GeigerScoresTableFilterComposer
             ));
     return composer;
   }
-
-  Expression<bool> reasonsRefs(
-      Expression<bool> Function($$ReasonsTableFilterComposer f) f) {
-    final $$ReasonsTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.reasons,
-        getReferencedColumn: (t) => t.scoreId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$ReasonsTableFilterComposer(
-              $db: $db,
-              $table: $db.reasons,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return f(composer);
-  }
 }
 
 class $$GeigerScoresTableOrderingComposer
@@ -2827,6 +2641,9 @@ class $$GeigerScoresTableOrderingComposer
   });
   ColumnOrderings<int> get id => $composableBuilder(
       column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get reason => $composableBuilder(
+      column: $table.reason, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get score => $composableBuilder(
       column: $table.score, builder: (column) => ColumnOrderings(column));
@@ -2867,6 +2684,9 @@ class $$GeigerScoresTableAnnotationComposer
   GeneratedColumn<int> get id =>
       $composableBuilder(column: $table.id, builder: (column) => column);
 
+  GeneratedColumn<String> get reason =>
+      $composableBuilder(column: $table.reason, builder: (column) => column);
+
   GeneratedColumn<int> get score =>
       $composableBuilder(column: $table.score, builder: (column) => column);
 
@@ -2892,27 +2712,6 @@ class $$GeigerScoresTableAnnotationComposer
             ));
     return composer;
   }
-
-  Expression<T> reasonsRefs<T extends Object>(
-      Expression<T> Function($$ReasonsTableAnnotationComposer a) f) {
-    final $$ReasonsTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.reasons,
-        getReferencedColumn: (t) => t.scoreId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$ReasonsTableAnnotationComposer(
-              $db: $db,
-              $table: $db.reasons,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return f(composer);
-  }
 }
 
 class $$GeigerScoresTableTableManager extends RootTableManager<
@@ -2926,7 +2725,7 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
     $$GeigerScoresTableUpdateCompanionBuilder,
     (GeigerScoreData, $$GeigerScoresTableReferences),
     GeigerScoreData,
-    PrefetchHooks Function({bool userId, bool reasonsRefs})> {
+    PrefetchHooks Function({bool userId})> {
   $$GeigerScoresTableTableManager(_$AppDatabase db, $GeigerScoresTable table)
       : super(TableManagerState(
           db: db,
@@ -2940,24 +2739,28 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> userId = const Value.absent(),
+            Value<String> reason = const Value.absent(),
             Value<int> score = const Value.absent(),
             Value<DateTime> lastUpdated = const Value.absent(),
           }) =>
               GeigerScoresCompanion(
             id: id,
             userId: userId,
+            reason: reason,
             score: score,
             lastUpdated: lastUpdated,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String userId,
+            required String reason,
             required int score,
             Value<DateTime> lastUpdated = const Value.absent(),
           }) =>
               GeigerScoresCompanion.insert(
             id: id,
             userId: userId,
+            reason: reason,
             score: score,
             lastUpdated: lastUpdated,
           ),
@@ -2967,10 +2770,10 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
                     $$GeigerScoresTableReferences(db, table, e)
                   ))
               .toList(),
-          prefetchHooksCallback: ({userId = false, reasonsRefs = false}) {
+          prefetchHooksCallback: ({userId = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [if (reasonsRefs) db.reasons],
+              explicitlyWatchedTables: [],
               addJoins: <
                   T extends TableManagerState<
                       dynamic,
@@ -2998,20 +2801,7 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
                 return state;
               },
               getPrefetchedDataCallback: (items) async {
-                return [
-                  if (reasonsRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable:
-                            $$GeigerScoresTableReferences._reasonsRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$GeigerScoresTableReferences(db, table, p0)
-                                .reasonsRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.scoreId == item.id),
-                        typedResults: items)
-                ];
+                return [];
               },
             );
           },
@@ -3029,231 +2819,7 @@ typedef $$GeigerScoresTableProcessedTableManager = ProcessedTableManager<
     $$GeigerScoresTableUpdateCompanionBuilder,
     (GeigerScoreData, $$GeigerScoresTableReferences),
     GeigerScoreData,
-    PrefetchHooks Function({bool userId, bool reasonsRefs})>;
-typedef $$ReasonsTableCreateCompanionBuilder = ReasonsCompanion Function({
-  required String reason,
-  required int scoreId,
-  Value<int> rowid,
-});
-typedef $$ReasonsTableUpdateCompanionBuilder = ReasonsCompanion Function({
-  Value<String> reason,
-  Value<int> scoreId,
-  Value<int> rowid,
-});
-
-final class $$ReasonsTableReferences
-    extends BaseReferences<_$AppDatabase, $ReasonsTable, ReasonData> {
-  $$ReasonsTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static $GeigerScoresTable _scoreIdTable(_$AppDatabase db) =>
-      db.geigerScores.createAlias(
-          $_aliasNameGenerator(db.reasons.scoreId, db.geigerScores.id));
-
-  $$GeigerScoresTableProcessedTableManager? get scoreId {
-    if ($_item.scoreId == null) return null;
-    final manager = $$GeigerScoresTableTableManager($_db, $_db.geigerScores)
-        .filter((f) => f.id($_item.scoreId!));
-    final item = $_typedResult.readTableOrNull(_scoreIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
-  }
-}
-
-class $$ReasonsTableFilterComposer
-    extends Composer<_$AppDatabase, $ReasonsTable> {
-  $$ReasonsTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<String> get reason => $composableBuilder(
-      column: $table.reason, builder: (column) => ColumnFilters(column));
-
-  $$GeigerScoresTableFilterComposer get scoreId {
-    final $$GeigerScoresTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.scoreId,
-        referencedTable: $db.geigerScores,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$GeigerScoresTableFilterComposer(
-              $db: $db,
-              $table: $db.geigerScores,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$ReasonsTableOrderingComposer
-    extends Composer<_$AppDatabase, $ReasonsTable> {
-  $$ReasonsTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<String> get reason => $composableBuilder(
-      column: $table.reason, builder: (column) => ColumnOrderings(column));
-
-  $$GeigerScoresTableOrderingComposer get scoreId {
-    final $$GeigerScoresTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.scoreId,
-        referencedTable: $db.geigerScores,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$GeigerScoresTableOrderingComposer(
-              $db: $db,
-              $table: $db.geigerScores,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$ReasonsTableAnnotationComposer
-    extends Composer<_$AppDatabase, $ReasonsTable> {
-  $$ReasonsTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<String> get reason =>
-      $composableBuilder(column: $table.reason, builder: (column) => column);
-
-  $$GeigerScoresTableAnnotationComposer get scoreId {
-    final $$GeigerScoresTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.scoreId,
-        referencedTable: $db.geigerScores,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$GeigerScoresTableAnnotationComposer(
-              $db: $db,
-              $table: $db.geigerScores,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
-    return composer;
-  }
-}
-
-class $$ReasonsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $ReasonsTable,
-    ReasonData,
-    $$ReasonsTableFilterComposer,
-    $$ReasonsTableOrderingComposer,
-    $$ReasonsTableAnnotationComposer,
-    $$ReasonsTableCreateCompanionBuilder,
-    $$ReasonsTableUpdateCompanionBuilder,
-    (ReasonData, $$ReasonsTableReferences),
-    ReasonData,
-    PrefetchHooks Function({bool scoreId})> {
-  $$ReasonsTableTableManager(_$AppDatabase db, $ReasonsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$ReasonsTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$ReasonsTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$ReasonsTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> reason = const Value.absent(),
-            Value<int> scoreId = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              ReasonsCompanion(
-            reason: reason,
-            scoreId: scoreId,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String reason,
-            required int scoreId,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              ReasonsCompanion.insert(
-            reason: reason,
-            scoreId: scoreId,
-            rowid: rowid,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) =>
-                  (e.readTable(table), $$ReasonsTableReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: ({scoreId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
-                if (scoreId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.scoreId,
-                    referencedTable: $$ReasonsTableReferences._scoreIdTable(db),
-                    referencedColumn:
-                        $$ReasonsTableReferences._scoreIdTable(db).id,
-                  ) as T;
-                }
-
-                return state;
-              },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
-        ));
-}
-
-typedef $$ReasonsTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $ReasonsTable,
-    ReasonData,
-    $$ReasonsTableFilterComposer,
-    $$ReasonsTableOrderingComposer,
-    $$ReasonsTableAnnotationComposer,
-    $$ReasonsTableCreateCompanionBuilder,
-    $$ReasonsTableUpdateCompanionBuilder,
-    (ReasonData, $$ReasonsTableReferences),
-    ReasonData,
-    PrefetchHooks Function({bool scoreId})>;
+    PrefetchHooks Function({bool userId})>;
 typedef $$NewsInfoTableCreateCompanionBuilder = NewsInfoCompanion Function({
   required String id,
   required String title,
@@ -4410,8 +3976,6 @@ class $AppDatabaseManager {
       $$CompanyProfilesTableTableManager(_db, _db.companyProfiles);
   $$GeigerScoresTableTableManager get geigerScores =>
       $$GeigerScoresTableTableManager(_db, _db.geigerScores);
-  $$ReasonsTableTableManager get reasons =>
-      $$ReasonsTableTableManager(_db, _db.reasons);
   $$NewsInfoTableTableManager get newsInfo =>
       $$NewsInfoTableTableManager(_db, _db.newsInfo);
   $$RecommendationsTableTableManager get recommendations =>

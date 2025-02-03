@@ -142,7 +142,7 @@ class LocalNewsFeedRepository {
   }
 
   Stream<List<News>> watchNewsList({bool sort = true}) {
-    _log.i("watching List<News> ...");
+    _log.i("watching ${sort ? 'Recent' : 'Old'} List<News> ...");
     //final da = ref.read(previousMonthProvider(month: 1));
     // final newsWithRecoAndOffering =
     //     olderNews == null ? _sortNewsInfo() : _olderNewsInfo(older: da);
@@ -205,7 +205,7 @@ class LocalNewsFeedRepository {
   }
 
   Future<List<News>> fetchNewsList() async {
-     _log.i("fetching List<News> ...");
+    _log.i("fetching List<News> ...");
     final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
       [
         leftOuterJoin(
@@ -281,7 +281,7 @@ class LocalNewsFeedRepository {
   }
 
   Stream<News?> watchNewsByTitle({required String title}) {
-     _log.i("by title");
+    _log.i("by title");
     return watchNewsList()
         .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: title));
   }

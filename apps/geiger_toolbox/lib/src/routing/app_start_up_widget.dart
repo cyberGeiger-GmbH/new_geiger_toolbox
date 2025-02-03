@@ -9,7 +9,7 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
+
 
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';

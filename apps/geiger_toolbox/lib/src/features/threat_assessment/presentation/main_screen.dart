@@ -8,7 +8,7 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_status_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/other_news_list_widget.dart';
 
@@ -92,11 +92,11 @@ class FeatureList extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const CalculatingScoreStatus(),
+        const ScoreStatusWidget(),
         Spacing.gapH12,
         ScanButtonWidget(onScanPressed: onScanPressed),
         Spacing.gapH12,
-         NewsFeedsWidget(),
+        NewsFeedsWidget(),
         Spacing.gapH12,
         //AssetWidget(),
         const ScoreMessageWidget(),

@@ -7,11 +7,5 @@ class GeigerScoreInfo with _$GeigerScoreInfo {
       {required int id,
       required int geigerScore,
       required DateTime lastUpdate,
-      required List<ScoreReason> reasons}) = _GeigerScoreInfo;
-}
-
-@freezed
-class ScoreReason with _$ScoreReason {
-  const factory ScoreReason({required int scoreId, required String name}) =
-      _ScoreReason;
+      required String reason}) = _GeigerScoreInfo;
 }

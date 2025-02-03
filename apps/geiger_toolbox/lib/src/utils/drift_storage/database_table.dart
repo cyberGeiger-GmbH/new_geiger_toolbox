@@ -38,16 +38,11 @@ class CompanyProfiles extends Table {
 class GeigerScores extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get userId => text().references(UserProfiles, #userId)();
+  TextColumn get reason => text()();
   IntColumn get score => integer()();
 
   DateTimeColumn get lastUpdated =>
       dateTime().withDefault(currentDateAndTime)();
-}
-
-@DataClassName("ReasonData")
-class Reasons extends Table {
-  TextColumn get reason => text()();
-  IntColumn get scoreId => integer().references(GeigerScores, #id)();
 }
 
 // class ReasonData extends TypeConverter<List<String>, String> {
@@ -78,7 +73,7 @@ class NewsInfo extends Table {
 
 @DataClassName('RecommendationData')
 class Recommendations extends Table {
-  TextColumn get id =>  text().customConstraint('UNIQUE NOT NULL')();
+  TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get newsId => text().references(NewsInfo, #id)(); // Foreign key
   TextColumn get name => text().withLength(min: 1, max: 255)();
 
@@ -155,7 +150,6 @@ class TodoOfferingStatuses extends Table {
     UserProfiles,
     CompanyProfiles,
     GeigerScores,
-    Reasons,
     NewsInfo,
     Recommendations,
     Offerings,

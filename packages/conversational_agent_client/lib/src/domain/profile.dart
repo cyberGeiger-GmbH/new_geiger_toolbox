@@ -10,7 +10,7 @@ class Profile with _$Profile {
     Actor? actor,
     required Verb verb,
     final ActingObject? object,
-    final Result? result,
+    required final List<Result> result,
     required DateTime timestamp,
   }) = _Profile;
 
@@ -20,14 +20,14 @@ class Profile with _$Profile {
     required Actor actor,
     required Verb verb,
     ActingObject? object,
-    final Result? result,
+    final List<Result>? result,
   }) {
     return Profile(
       id: id,
       actor: actor,
       verb: verb,
       object: object,
-      result: result,
+      result: result ?? [],
       timestamp: DateTime.now(),
     );
   }
@@ -37,14 +37,14 @@ class Profile with _$Profile {
     required Verb verb,
     required Asset currentDevice,
     ActingObject? object,
-    final Result? result,
+    final List<Result>? result,
   }) {
     return Profile(
       id: id,
       actor: Actor(userDevice: currentDevice, assets: []),
       verb: verb,
       object: object,
-      result: result,
+      result: result ?? [],
       timestamp: DateTime.now(),
     );
   }
@@ -132,6 +132,7 @@ class Implementation with _$Implementation {
 @freezed
 class Result with _$Result {
   const factory Result({
+    required int id,
     required bool success,
     required bool completions,
     required ResultExtensions extensions,
@@ -144,12 +145,12 @@ class ResultExtensions with _$ResultExtensions {
   const factory ResultExtensions({
     required int geigerScore,
     required DateTime lastUpdated,
-    required List<String> reasons,
+    required String reasons,
   }) = _ResultExtensions;
 
   factory ResultExtensions.withDefaultTimestamp({
     required int geigerScore,
-    required List<String> reasons,
+    required String reasons,
   }) =>
       ResultExtensions(
           geigerScore: geigerScore,

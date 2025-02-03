@@ -11,11 +11,11 @@ part 'scan_button_controller.g.dart';
 
 @riverpod
 class ScanButtonController extends _$ScanButtonController {
-  Logger get _log => ref.read(logHandlerProvider("ScannButtonController"));
+  Logger get _log => ref.read(logHandlerProvider("ScanButtonController"));
 
   @override
-  // ignore: no-empty-block
-  FutureOr<void> build() {
+  FutureOr<void> build() async {
+    return;
     //nothing to do
   }
 

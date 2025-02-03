@@ -24,16 +24,9 @@ class LocalGeigerScoreRepository {
         final geigerData = GeigerScoresCompanion(
           score: Value(score.geigerScore),
           userId: Value(userId),
+          reason: Value(score.reasons),
         );
-        final scoreId = await _db.into(_db.geigerScores).insert(geigerData);
-
-        if (score.reasons.isNotEmpty) {
-          for (var reason in score.reasons) {
-            final data = ReasonsCompanion(
-                reason: Value(reason), scoreId: Value(scoreId));
-            await _db.into(_db.reasons).insert(data);
-          }
-        }
+        await _db.into(_db.geigerScores).insert(geigerData);
       });
     } catch (e) {
       _log.e(e);
@@ -41,42 +34,24 @@ class LocalGeigerScoreRepository {
     }
   }
 
-  Stream<GeigerScoreInfo?> watchGeigerScore()
- 
-   {
-     _log.i("watching GeigerScore...");
-    final query = (_db.select(_db.geigerScores).join([
-      leftOuterJoin(
-        _db.reasons,
-        _db.reasons.scoreId.equalsExp(_db.geigerScores.id),
-      )
-    ])
+  Stream<GeigerScoreInfo?> watchGeigerScore() {
+    _log.i("watching GeigerScore...");
+    final query = (_db.select(_db.geigerScores)
           ..orderBy([
-            OrderingTerm.desc(
-              _db.geigerScores.lastUpdated,
-            )
+            (n) => OrderingTerm.desc(
+                  n.lastUpdated,
+                )
           ])
           ..limit(1))
         .watchSingleOrNull(); //only fetch the most recent update
 
-    final List<ScoreReason> reasons = [];
-
     return query.map((row) {
       if (row != null) {
-        final scoreEntry = row.readTable(_db.geigerScores);
-        final reasonEntry = row.readTableOrNull(_db.reasons);
-        if (reasonEntry != null) {
-          // if the reasons  is not yet in the list add it
-          if (!reasons.any((value) => value.scoreId == scoreEntry.id)) {
-            reasons.add(ScoreReason(
-                scoreId: reasonEntry.scoreId, name: reasonEntry.reason));
-          }
-        }
         return GeigerScoreInfo(
-            id: scoreEntry.id,
-            geigerScore: scoreEntry.score,
-            lastUpdate: scoreEntry.lastUpdated,
-            reasons: reasons);
+            id: row.id,
+            geigerScore: row.score,
+            lastUpdate: row.lastUpdated,
+            reason: row.reason);
       }
       return null;
     });
@@ -84,78 +59,69 @@ class LocalGeigerScoreRepository {
 
   Future<GeigerScoreInfo?> fetchGeigerScore() async {
     _log.i("fetching GeigerScore...");
-    final query = await (_db.select(_db.geigerScores).join([
-      leftOuterJoin(
-        _db.reasons,
-        _db.reasons.scoreId.equalsExp(_db.geigerScores.id),
-      )
-    ])
+    final query = await (_db.select(_db.geigerScores)
           ..orderBy([
-            OrderingTerm.desc(
-              _db.geigerScores.lastUpdated,
-            )
+            (n) => OrderingTerm.desc(
+                  n.lastUpdated,
+                )
           ])
           ..limit(1))
         .getSingleOrNull(); //only fetch the most recent update
 
-    final List<ScoreReason> reasons = [];
-
     if (query != null) {
-      final scoreEntry = query.readTable(_db.geigerScores);
-      final reasonEntry = query.readTableOrNull(_db.reasons);
-      if (reasonEntry != null) {
-        // if the reasons  is not yet in the list add it
-        if (!reasons.any((value) => value.scoreId == reasonEntry.scoreId)) {
-          reasons.add(ScoreReason(
-              scoreId: reasonEntry.scoreId, name: reasonEntry.reason));
-        }
-      }
+      // if the reasons  is not yet in the list add it
+
       return GeigerScoreInfo(
-          id: scoreEntry.id,
-          geigerScore: scoreEntry.score,
-          lastUpdate: scoreEntry.lastUpdated,
-          reasons: reasons);
+          id: query.id,
+          geigerScore: query.score,
+          lastUpdate: query.lastUpdated,
+          reason: query.reason);
     }
     return null;
   }
 
   Stream<List<GeigerScoreInfo>> watchGeigerScoreList() {
     _log.i("watching List<GeigerScore>...");
-    final query = _db.select(_db.geigerScores).join(
-      [
-        leftOuterJoin(
-          _db.reasons,
-          _db.reasons.scoreId.equalsExp(_db.geigerScores.id),
-        )
-      ],
-    )..orderBy([
-        OrderingTerm.desc(
-          _db.geigerScores.lastUpdated,
-        )
+    final query = _db.select(_db.geigerScores)
+      ..orderBy([
+        (n) => OrderingTerm.desc(
+              n.lastUpdated,
+            )
       ]); //only fetch the most recent update
-
-    final List<ScoreReason> reasons = [];
 
     return query.watch().map((rows) {
       return rows.map((row) {
-        final scoreEntry = row.readTable(_db.geigerScores);
-        final reasonEntry = row.readTableOrNull(_db.reasons);
-
-        if (reasonEntry != null) {
-          // if the reasons  is not yet in the list add it
-          if (!reasons.any((value) => value.scoreId == reasonEntry.scoreId)) {
-            reasons.add(ScoreReason(
-                scoreId: reasonEntry.scoreId, name: reasonEntry.reason));
-          }
-        }
-
         return GeigerScoreInfo(
-            id: scoreEntry.id,
-            geigerScore: scoreEntry.score,
-            lastUpdate: scoreEntry.lastUpdated,
-            reasons: reasons);
+            id: row.id,
+            geigerScore: row.score,
+            lastUpdate: row.lastUpdated,
+            reason: row.reason);
       }).toList();
     });
+  }
+
+  Future<List<GeigerScoreInfo>> fetchGeigerScoreList() async {
+    _log.i("fechting List<GeigerScore>...");
+    final query = await (_db.select(_db.geigerScores)
+          ..orderBy([
+            (n) => OrderingTerm.desc(
+                  n.lastUpdated,
+                )
+          ]))
+        .get(); //only fetch the most recent update
+
+    final List<GeigerScoreInfo> scoreList = [];
+    for (var row in query) {
+      if (!scoreList.any((value) => value.id == row.id)) {
+        final data = GeigerScoreInfo(
+            id: row.id,
+            geigerScore: row.score,
+            lastUpdate: row.lastUpdated,
+            reason: row.reason);
+        scoreList.add(data);
+      }
+    }
+    return scoreList;
   }
 }
 

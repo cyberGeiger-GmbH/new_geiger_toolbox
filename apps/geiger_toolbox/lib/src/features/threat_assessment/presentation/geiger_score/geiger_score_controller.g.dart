@@ -7,7 +7,7 @@ part of 'geiger_score_controller.dart';
 // **************************************************************************
 
 String _$geigerScoreControllerHash() =>
-    r'ecef084f9ab21944430beca7ba951aeddd71610d';
+    r'992819ef8b4c8d727101f74d6b08d6907fcd8c4a';
 
 /// See also [GeigerScoreController].
 @ProviderFor(GeigerScoreController)

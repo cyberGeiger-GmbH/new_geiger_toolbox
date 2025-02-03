@@ -59,11 +59,14 @@ void main() {
               ],
             ),
           ]),
-          result: Result(
-              success: false,
-              completions: true,
-              extensions: ResultExtensions.withDefaultTimestamp(
-                  geigerScore: 0, reasons: ["user has not geiger score"]))
+          result: [
+            Result(
+                id: 1,
+                success: false,
+                completions: true,
+                extensions: ResultExtensions.withDefaultTimestamp(
+                    geigerScore: 0, reasons: "user has not geiger score"))
+          ]
           // digitalInfrastructure: DigitalInfrastructure(
           //     infoAbout: ["password", "teamView", "post finance"]),
           );

@@ -57,8 +57,8 @@ DateTime previousMonth(Ref ref, {int month = 6}) {
 String? _convertToStandard(String inputDate) {
   // Remove " GMT" to make it compatible with DateTime.parse
 
-  if (inputDate.endsWith(" GMT")) {
-    final dateString = inputDate.replaceAll(" GMT", "");
+  if (inputDate.trim().endsWith(" GMT")) {
+    final dateString = inputDate.replaceAll(" GMT", "Z");
     return dateString;
   }
   return null;

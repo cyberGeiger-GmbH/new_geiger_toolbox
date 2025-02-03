@@ -8,15 +8,15 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geige
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 
-class CalculatingScoreStatus extends ConsumerWidget {
-  const CalculatingScoreStatus({super.key});
+class ScoreStatusWidget extends ConsumerWidget {
+  const ScoreStatusWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(scanButtonControllerProvider, (_, newV) {
       ref
           .read(geigerScoreControllerProvider.notifier)
-          .onScanComplete(state: newV);
+          .onScanComplete(scanPressState: newV);
     });
 
     final state = ref.watch(geigerScoreControllerProvider);
@@ -48,7 +48,7 @@ class GeigerScoreWidget extends ConsumerWidget {
                   page: Padding(
                     padding: const EdgeInsets.all(Spacing.p8),
                     child: ShowScoreReason(
-                      reasons: data.reasons,
+                      reason: data.reason,
                     ),
                   ),
                 );

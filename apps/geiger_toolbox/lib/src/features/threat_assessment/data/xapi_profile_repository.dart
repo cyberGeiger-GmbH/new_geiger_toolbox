@@ -7,25 +7,23 @@ import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_g
 
 import 'package:geiger_toolbox/src/utils/device_info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'score_profile_service.g.dart';
 
-class ResultRepository {
+part "xapi_profile_repository.g.dart";
+
+class XapiProfileRepository {
   final Ref ref;
 
   Device get _deviceType => ref.watch(deviceTypeProvider).requireValue;
 
   Logger get _log => ref.read(logHandlerProvider("ScoreProfileService"));
 
-  ResultRepository(this.ref);
+  XapiProfileRepository(this.ref);
 
-  Future<Profile> getProfileForCalculateScore({required bool goodScore}) async {
+  Future<Profile> getXapiProfile({required bool goodScore, Verb? verb}) async {
     _log.i("Preparing profile xapi");
     final userId = await _userId();
 
     final company = await ref.read(fetchCompanyProvider.future);
-
-    final verb =
-        Verb(name: "requesting recalculations base on company profile");
 
     final object = await ref.read(fetchActingObjectProvider.future);
 
@@ -36,10 +34,12 @@ class ResultRepository {
 
     final result = await _fetchPreviousScore(success: goodScore);
 
-    
     if (company != null) {
       _log.i("profile with company profile");
-     return Profile.withDefaultTimestamp(
+      final action =
+          Verb(name: "requesting recalculations base on company profile");
+
+      return Profile.withDefaultTimestamp(
           id: userId,
           actor: Actor(
             companyName: company.companyName,
@@ -49,36 +49,44 @@ class ResultRepository {
             assets: [],
           ),
           object: object,
-          verb: verb,
+          verb: verb ?? action,
           result: result);
-     
     } else {
-            _log.i("profile without company profile");
+      _log.i("profile without company profile");
       return Profile.withoutActor(
           id: userId,
           object: object,
-          verb: Verb(name: "requesting recalculations without company profile"),
+          verb: verb ??
+              Verb(name: "requesting recalculations without company profile"),
           currentDevice: currentUserDeviceInfo,
           result: result);
     }
   }
 
-  Future<Result?> _fetchPreviousScore({required bool success}) async {
+  Future<List<Result>> _fetchPreviousScore({required bool success}) async {
     final repoScore = ref.read(localGeigerScoreRepoProvider);
-    final score = await repoScore.fetchGeigerScore();
-    if (score != null) {
-      final List<String> reasons = [];
-      for (var data in score.reasons) {
-        reasons.add(data.name);
-      }
-      final ext = ResultExtensions(
-          geigerScore: score.geigerScore,
-          lastUpdated: score.lastUpdate,
-          reasons: reasons);
+    final score = await repoScore.fetchGeigerScoreList();
+    final List<Result> result = [];
+    if (score.isNotEmpty) {
 
-      return Result(completions: true, success: success, extensions: ext);
+      for (var data in score) {
+       
+
+        if (!result.any((value) => value.id == data.id)) {
+          final ext = ResultExtensions(
+              geigerScore: data.geigerScore,
+              lastUpdated: data.lastUpdate,
+              reasons: data.reason);
+
+          result.add(Result(
+              success: success,
+              completions: true,
+              extensions: ext,
+              id: data.id));
+        }
+      }
     }
-    return null;
+    return result;
   }
 
   Future<String> _userId() async {
@@ -89,7 +97,8 @@ class ResultRepository {
 }
 
 @riverpod
-Future<Profile> getScoreProfile(Ref ref, {required bool goodScore}) async {
-  final repo = ResultRepository(ref);
-  return repo.getProfileForCalculateScore(goodScore: goodScore);
+Future<Profile> getResult(Ref ref,
+    {required bool goodScore, Verb? verb}) async {
+  final repo = XapiProfileRepository(ref);
+  return repo.getXapiProfile(goodScore: goodScore, verb: verb);
 }

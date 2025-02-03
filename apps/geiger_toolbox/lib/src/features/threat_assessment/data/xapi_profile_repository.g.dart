@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'score_profile_service.dart';
+part of 'xapi_profile_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getScoreProfileHash() => r'ba4c580409763f0ca60a091240de8c04fd8404f1';
+String _$getResultHash() => r'2a8e711b1aa57b29e0793518318862e12f51cc70';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,30 +29,33 @@ class _SystemHash {
   }
 }
 
-/// See also [getScoreProfile].
-@ProviderFor(getScoreProfile)
-const getScoreProfileProvider = GetScoreProfileFamily();
+/// See also [getResult].
+@ProviderFor(getResult)
+const getResultProvider = GetResultFamily();
 
-/// See also [getScoreProfile].
-class GetScoreProfileFamily extends Family<AsyncValue<Profile>> {
-  /// See also [getScoreProfile].
-  const GetScoreProfileFamily();
+/// See also [getResult].
+class GetResultFamily extends Family<AsyncValue<Profile>> {
+  /// See also [getResult].
+  const GetResultFamily();
 
-  /// See also [getScoreProfile].
-  GetScoreProfileProvider call({
+  /// See also [getResult].
+  GetResultProvider call({
     required bool goodScore,
+    Verb? verb,
   }) {
-    return GetScoreProfileProvider(
+    return GetResultProvider(
       goodScore: goodScore,
+      verb: verb,
     );
   }
 
   @override
-  GetScoreProfileProvider getProviderOverride(
-    covariant GetScoreProfileProvider provider,
+  GetResultProvider getProviderOverride(
+    covariant GetResultProvider provider,
   ) {
     return call(
       goodScore: provider.goodScore,
+      verb: provider.verb,
     );
   }
 
@@ -68,32 +71,34 @@ class GetScoreProfileFamily extends Family<AsyncValue<Profile>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'getScoreProfileProvider';
+  String? get name => r'getResultProvider';
 }
 
-/// See also [getScoreProfile].
-class GetScoreProfileProvider extends AutoDisposeFutureProvider<Profile> {
-  /// See also [getScoreProfile].
-  GetScoreProfileProvider({
+/// See also [getResult].
+class GetResultProvider extends AutoDisposeFutureProvider<Profile> {
+  /// See also [getResult].
+  GetResultProvider({
     required bool goodScore,
+    Verb? verb,
   }) : this._internal(
-          (ref) => getScoreProfile(
-            ref as GetScoreProfileRef,
+          (ref) => getResult(
+            ref as GetResultRef,
             goodScore: goodScore,
+            verb: verb,
           ),
-          from: getScoreProfileProvider,
-          name: r'getScoreProfileProvider',
+          from: getResultProvider,
+          name: r'getResultProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getScoreProfileHash,
-          dependencies: GetScoreProfileFamily._dependencies,
-          allTransitiveDependencies:
-              GetScoreProfileFamily._allTransitiveDependencies,
+                  : _$getResultHash,
+          dependencies: GetResultFamily._dependencies,
+          allTransitiveDependencies: GetResultFamily._allTransitiveDependencies,
           goodScore: goodScore,
+          verb: verb,
         );
 
-  GetScoreProfileProvider._internal(
+  GetResultProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -101,42 +106,48 @@ class GetScoreProfileProvider extends AutoDisposeFutureProvider<Profile> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.goodScore,
+    required this.verb,
   }) : super.internal();
 
   final bool goodScore;
+  final Verb? verb;
 
   @override
   Override overrideWith(
-    FutureOr<Profile> Function(GetScoreProfileRef provider) create,
+    FutureOr<Profile> Function(GetResultRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: GetScoreProfileProvider._internal(
-        (ref) => create(ref as GetScoreProfileRef),
+      override: GetResultProvider._internal(
+        (ref) => create(ref as GetResultRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         goodScore: goodScore,
+        verb: verb,
       ),
     );
   }
 
   @override
   AutoDisposeFutureProviderElement<Profile> createElement() {
-    return _GetScoreProfileProviderElement(this);
+    return _GetResultProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GetScoreProfileProvider && other.goodScore == goodScore;
+    return other is GetResultProvider &&
+        other.goodScore == goodScore &&
+        other.verb == verb;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, goodScore.hashCode);
+    hash = _SystemHash.combine(hash, verb.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -144,17 +155,22 @@ class GetScoreProfileProvider extends AutoDisposeFutureProvider<Profile> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin GetScoreProfileRef on AutoDisposeFutureProviderRef<Profile> {
+mixin GetResultRef on AutoDisposeFutureProviderRef<Profile> {
   /// The parameter `goodScore` of this provider.
   bool get goodScore;
+
+  /// The parameter `verb` of this provider.
+  Verb? get verb;
 }
 
-class _GetScoreProfileProviderElement
-    extends AutoDisposeFutureProviderElement<Profile> with GetScoreProfileRef {
-  _GetScoreProfileProviderElement(super.provider);
+class _GetResultProviderElement
+    extends AutoDisposeFutureProviderElement<Profile> with GetResultRef {
+  _GetResultProviderElement(super.provider);
 
   @override
-  bool get goodScore => (origin as GetScoreProfileProvider).goodScore;
+  bool get goodScore => (origin as GetResultProvider).goodScore;
+  @override
+  Verb? get verb => (origin as GetResultProvider).verb;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

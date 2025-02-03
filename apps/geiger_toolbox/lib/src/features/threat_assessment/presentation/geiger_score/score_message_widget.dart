@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/geiger_score_info.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_controller.dart';
 
 class ScoreMessageWidget extends ConsumerWidget {
@@ -17,7 +17,7 @@ class ScoreMessageWidget extends ConsumerWidget {
     final state = ref.watch(scoreControllerMessageProvider);
 
 //show message when [watchGeigerScoreListProvider] has value
-    ref.listen(watchGeigerScoreListProvider, (_, value) {
+    ref.listen(watchGeigerScoreProvider, (_, value) {
       if (!value.isLoading && !value.hasError) {
         if (value.value != null) {
           ref
@@ -31,7 +31,7 @@ class ScoreMessageWidget extends ConsumerWidget {
       value: scoreValue,
       data: (data) => data != null && !state
           ? AlertMessageBox(
-              reasons: data.reasons,
+              reason: data.reason,
               icons: Icons.message,
               onClose: () {
                 ref
@@ -46,8 +46,8 @@ class ScoreMessageWidget extends ConsumerWidget {
 
 class AlertMessageBox extends StatelessWidget {
   const AlertMessageBox(
-      {super.key, required this.reasons, this.onClose, this.icons});
-  final List<ScoreReason> reasons;
+      {super.key, required this.reason, this.onClose, this.icons});
+  final String reason;
   final VoidCallback? onClose;
   final IconData? icons;
 
@@ -56,7 +56,7 @@ class AlertMessageBox extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<List<ScoreReason>>("reasons", reasons));
+    properties.add(DiagnosticsProperty<String>("reasons", reason));
     // properties.add(Diagnosti)
   }
 
@@ -76,7 +76,7 @@ class AlertMessageBox extends StatelessWidget {
             ),
             Spacing.gapH8,
             ShowScoreReason(
-              reasons: reasons,
+              reason: reason,
               align: TextAlign.center,
             ),
           ],
@@ -133,22 +133,15 @@ class IconTitle extends StatelessWidget {
 }
 
 class ShowScoreReason extends StatelessWidget {
-  const ShowScoreReason({super.key, required this.reasons, this.align});
-  final List<ScoreReason> reasons;
+  const ShowScoreReason({super.key, required this.reason, this.align});
+  final String reason;
   final TextAlign? align;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: ListTile.divideTiles(
-        context: context,
-        tiles: reasons.map(
-          (data) => AppText.bodyMedium(
-            text: data.name,
-            context: context,
-            textAlign: align ?? TextAlign.start,
-          ),
-        ),
-      ).toList(),
+    return AppText.bodyMedium(
+      text: reason,
+      context: context,
+      textAlign: align ?? TextAlign.start,
     );
   }
 }

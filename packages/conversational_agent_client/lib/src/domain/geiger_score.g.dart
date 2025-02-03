@@ -9,8 +9,7 @@ part of 'geiger_score.dart';
 _$GeigerScoreImpl _$$GeigerScoreImplFromJson(Map<String, dynamic> json) =>
     _$GeigerScoreImpl(
       geigerScore: (json['geigerScore'] as num).toInt(),
-      reasons:
-          (json['reasons'] as List<dynamic>).map((e) => e as String).toList(),
+      reasons: json['reasons'] as String,
     );
 
 Map<String, dynamic> _$$GeigerScoreImplToJson(_$GeigerScoreImpl instance) =>

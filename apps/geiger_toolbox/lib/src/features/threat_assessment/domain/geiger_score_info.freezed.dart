@@ -19,7 +19,7 @@ mixin _$GeigerScoreInfo {
   int get id => throw _privateConstructorUsedError;
   int get geigerScore => throw _privateConstructorUsedError;
   DateTime get lastUpdate => throw _privateConstructorUsedError;
-  List<ScoreReason> get reasons => throw _privateConstructorUsedError;
+  String get reason => throw _privateConstructorUsedError;
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -34,11 +34,7 @@ abstract class $GeigerScoreInfoCopyWith<$Res> {
           GeigerScoreInfo value, $Res Function(GeigerScoreInfo) then) =
       _$GeigerScoreInfoCopyWithImpl<$Res, GeigerScoreInfo>;
   @useResult
-  $Res call(
-      {int id,
-      int geigerScore,
-      DateTime lastUpdate,
-      List<ScoreReason> reasons});
+  $Res call({int id, int geigerScore, DateTime lastUpdate, String reason});
 }
 
 /// @nodoc
@@ -59,7 +55,7 @@ class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo>
     Object? id = null,
     Object? geigerScore = null,
     Object? lastUpdate = null,
-    Object? reasons = null,
+    Object? reason = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -74,10 +70,10 @@ class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo>
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      reasons: null == reasons
-          ? _value.reasons
-          : reasons // ignore: cast_nullable_to_non_nullable
-              as List<ScoreReason>,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -90,11 +86,7 @@ abstract class _$$GeigerScoreInfoImplCopyWith<$Res>
       __$$GeigerScoreInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      int geigerScore,
-      DateTime lastUpdate,
-      List<ScoreReason> reasons});
+  $Res call({int id, int geigerScore, DateTime lastUpdate, String reason});
 }
 
 /// @nodoc
@@ -113,7 +105,7 @@ class __$$GeigerScoreInfoImplCopyWithImpl<$Res>
     Object? id = null,
     Object? geigerScore = null,
     Object? lastUpdate = null,
-    Object? reasons = null,
+    Object? reason = null,
   }) {
     return _then(_$GeigerScoreInfoImpl(
       id: null == id
@@ -128,10 +120,10 @@ class __$$GeigerScoreInfoImplCopyWithImpl<$Res>
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      reasons: null == reasons
-          ? _value._reasons
-          : reasons // ignore: cast_nullable_to_non_nullable
-              as List<ScoreReason>,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -143,8 +135,7 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
       {required this.id,
       required this.geigerScore,
       required this.lastUpdate,
-      required final List<ScoreReason> reasons})
-      : _reasons = reasons;
+      required this.reason});
 
   @override
   final int id;
@@ -152,17 +143,12 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
   final int geigerScore;
   @override
   final DateTime lastUpdate;
-  final List<ScoreReason> _reasons;
   @override
-  List<ScoreReason> get reasons {
-    if (_reasons is EqualUnmodifiableListView) return _reasons;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reasons);
-  }
+  final String reason;
 
   @override
   String toString() {
-    return 'GeigerScoreInfo(id: $id, geigerScore: $geigerScore, lastUpdate: $lastUpdate, reasons: $reasons)';
+    return 'GeigerScoreInfo(id: $id, geigerScore: $geigerScore, lastUpdate: $lastUpdate, reason: $reason)';
   }
 
   @override
@@ -175,12 +161,12 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
                 other.geigerScore == geigerScore) &&
             (identical(other.lastUpdate, lastUpdate) ||
                 other.lastUpdate == lastUpdate) &&
-            const DeepCollectionEquality().equals(other._reasons, _reasons));
+            (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, geigerScore, lastUpdate,
-      const DeepCollectionEquality().hash(_reasons));
+  int get hashCode =>
+      Object.hash(runtimeType, id, geigerScore, lastUpdate, reason);
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -197,7 +183,7 @@ abstract class _GeigerScoreInfo implements GeigerScoreInfo {
       {required final int id,
       required final int geigerScore,
       required final DateTime lastUpdate,
-      required final List<ScoreReason> reasons}) = _$GeigerScoreInfoImpl;
+      required final String reason}) = _$GeigerScoreInfoImpl;
 
   @override
   int get id;
@@ -206,158 +192,12 @@ abstract class _GeigerScoreInfo implements GeigerScoreInfo {
   @override
   DateTime get lastUpdate;
   @override
-  List<ScoreReason> get reasons;
+  String get reason;
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeigerScoreInfoImplCopyWith<_$GeigerScoreInfoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$ScoreReason {
-  int get scoreId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-
-  /// Create a copy of ScoreReason
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ScoreReasonCopyWith<ScoreReason> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ScoreReasonCopyWith<$Res> {
-  factory $ScoreReasonCopyWith(
-          ScoreReason value, $Res Function(ScoreReason) then) =
-      _$ScoreReasonCopyWithImpl<$Res, ScoreReason>;
-  @useResult
-  $Res call({int scoreId, String name});
-}
-
-/// @nodoc
-class _$ScoreReasonCopyWithImpl<$Res, $Val extends ScoreReason>
-    implements $ScoreReasonCopyWith<$Res> {
-  _$ScoreReasonCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ScoreReason
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? scoreId = null,
-    Object? name = null,
-  }) {
-    return _then(_value.copyWith(
-      scoreId: null == scoreId
-          ? _value.scoreId
-          : scoreId // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ScoreReasonImplCopyWith<$Res>
-    implements $ScoreReasonCopyWith<$Res> {
-  factory _$$ScoreReasonImplCopyWith(
-          _$ScoreReasonImpl value, $Res Function(_$ScoreReasonImpl) then) =
-      __$$ScoreReasonImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int scoreId, String name});
-}
-
-/// @nodoc
-class __$$ScoreReasonImplCopyWithImpl<$Res>
-    extends _$ScoreReasonCopyWithImpl<$Res, _$ScoreReasonImpl>
-    implements _$$ScoreReasonImplCopyWith<$Res> {
-  __$$ScoreReasonImplCopyWithImpl(
-      _$ScoreReasonImpl _value, $Res Function(_$ScoreReasonImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ScoreReason
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? scoreId = null,
-    Object? name = null,
-  }) {
-    return _then(_$ScoreReasonImpl(
-      scoreId: null == scoreId
-          ? _value.scoreId
-          : scoreId // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ScoreReasonImpl implements _ScoreReason {
-  const _$ScoreReasonImpl({required this.scoreId, required this.name});
-
-  @override
-  final int scoreId;
-  @override
-  final String name;
-
-  @override
-  String toString() {
-    return 'ScoreReason(scoreId: $scoreId, name: $name)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ScoreReasonImpl &&
-            (identical(other.scoreId, scoreId) || other.scoreId == scoreId) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, scoreId, name);
-
-  /// Create a copy of ScoreReason
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ScoreReasonImplCopyWith<_$ScoreReasonImpl> get copyWith =>
-      __$$ScoreReasonImplCopyWithImpl<_$ScoreReasonImpl>(this, _$identity);
-}
-
-abstract class _ScoreReason implements ScoreReason {
-  const factory _ScoreReason(
-      {required final int scoreId,
-      required final String name}) = _$ScoreReasonImpl;
-
-  @override
-  int get scoreId;
-  @override
-  String get name;
-
-  /// Create a copy of ScoreReason
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ScoreReasonImplCopyWith<_$ScoreReasonImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

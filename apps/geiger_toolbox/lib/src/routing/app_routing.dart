@@ -10,7 +10,7 @@ import 'package:geiger_toolbox/src/features/policy/presentation/settings/setting
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
+
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
 

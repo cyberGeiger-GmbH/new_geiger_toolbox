@@ -16,9 +16,9 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       object: json['object'] == null
           ? null
           : ActingObject.fromJson(json['object'] as Map<String, dynamic>),
-      result: json['result'] == null
-          ? null
-          : Result.fromJson(json['result'] as Map<String, dynamic>),
+      result: (json['result'] as List<dynamic>)
+          .map((e) => Result.fromJson(e as Map<String, dynamic>))
+          .toList(),
       timestamp: DateTime.parse(json['timestamp'] as String),
     );
 
@@ -141,6 +141,7 @@ Map<String, dynamic> _$$ImplementationImplToJson(
     };
 
 _$ResultImpl _$$ResultImplFromJson(Map<String, dynamic> json) => _$ResultImpl(
+      id: (json['id'] as num).toInt(),
       success: json['success'] as bool,
       completions: json['completions'] as bool,
       extensions:
@@ -149,6 +150,7 @@ _$ResultImpl _$$ResultImplFromJson(Map<String, dynamic> json) => _$ResultImpl(
 
 Map<String, dynamic> _$$ResultImplToJson(_$ResultImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'success': instance.success,
       'completions': instance.completions,
       'extensions': instance.extensions,
@@ -159,8 +161,7 @@ _$ResultExtensionsImpl _$$ResultExtensionsImplFromJson(
     _$ResultExtensionsImpl(
       geigerScore: (json['geigerScore'] as num).toInt(),
       lastUpdated: DateTime.parse(json['lastUpdated'] as String),
-      reasons:
-          (json['reasons'] as List<dynamic>).map((e) => e as String).toList(),
+      reasons: json['reasons'] as String,
     );
 
 Map<String, dynamic> _$$ResultExtensionsImplToJson(

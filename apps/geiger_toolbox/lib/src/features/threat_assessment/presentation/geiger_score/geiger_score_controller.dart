@@ -18,9 +18,9 @@ class GeigerScoreController extends _$GeigerScoreController {
         () => ref.read(geigerScoreServiceProvider).cachedGeigerScore());
   }
 
-  void onScanComplete({required AsyncValue<void> state}) async{
-    if (!state.isLoading && !state.hasError) {
-      _log.i("Recalculating geiger scores...");
+  void onScanComplete({required AsyncValue<void> scanPressState}) async {
+    if (!scanPressState.isLoading && !scanPressState.hasError) {
+      _log.i("Recalculating geiger score...");
       await _calculateGeigerScore();
       _log.i("finished recalculating geiger score");
     }
