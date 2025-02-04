@@ -123,6 +123,10 @@ class LocalGeigerScoreRepository {
     }
     return scoreList;
   }
+
+  Future<void> deleteScoreData() async {
+    await _db.delete(_db.geigerScores).go();
+  }
 }
 
 @riverpod

@@ -1,0 +1,70 @@
+version 1
+==========
+You receive a user profile in JSON format. 
+
+About the user:
+- the user is characterised by the user profile.
+- the user is a layperson and has little technological knowledge.
+
+Data model (be strict):
+- an article is in the news category of a cyber threat or a protection capability, nothing else.
+- a has one or several recommendations.
+- for a cyber threat, a recommendation is a countermeasure the user can take to improve the protection against the threat.
+- for a capability, a recommendation is something the user can do to take advantage of the capability.
+- a recommendation has a rationale that explains why it is pertinent to the given user in the context of the article.
+- a recommendation can be implemented with one or several offerings.
+- an offering is an action, a setting, a tool, a training, or a service.
+- an offering has an image linked to it with a URL.
+- a vendor provides one or several offerings.
+
+Search your storage to select the 5 most recent articles with excellent pertinence to the specific user profile. For an article in general, better pertinence means that the articles are from news providers geographically closer to the user than less close or from unspecified online sources. For a cyber threat specifically, better pertinence means the user is less protected than for less pertinent cyber threats. For a capability specifically, better pertinence means that the user benefits more from the capability-offered protection than less pertinent capabilities. Select at least two cyber threats and at least one capability.
+
+For each selected article, propose 1 to 5 recommendations with excellent pertinence. Do not propose any recommendation with just good or worse pertinence (be strict). For a recommendation, better pertinence means the recommendation is easier for the user to implement and is more valuable than less pertinent recommendations. 
+
+For each proposed recommendation, propose 2 to 5 offerings with very good pertinence. Do not propose any offering with just good or worse pertinence (be strict). For an offering, better pertinence means the offering is easier for the user to implement, is more cost-efficient, and is more valuable than less pertinent offerings. If known, consider also the location of the user and the offering.
+
+JSON structure for the results: fill in the following JSON for each article and return the array containing all the relevant articles.
+[
+    {
+        "id": "",
+        "title": "",
+        "summary": "",
+       "article_url": "",
+        "image_url": "",
+       "news_category":"",
+        "date_created": "",
+        "recommendations": [
+            {
+                "id": "",
+                "name": "",
+                "rationale":"",
+                "specific_offerings": [
+                    {
+                        "name": "",
+                        "summary": "",
+                        "offering_image_url": ""
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+Always translate every field, even titles, to the language given in the user profile if it is provided.
+
+Constraints on the JSON fields:
+- title: State the specific threat or capability, nothing else. Maximum 7 words. If a cyber threat: focus on the threat and what it applies to. If a protection capability: focus on the capability and its benefits.
+- article summary: explain the threat or capability and what it means specifically for the specific user. Write for laypeople. Spell out all abbreviations (be strict). About 40 words.
+- article_url: the original URL of the article. If the URL is not known: keep empty.
+- image_url: an image pertinent for the article embedded in the original URL.
+- date_created: use standard date time string
+- recommendation name: spell out (no abbreviations). Maximum 25 characters (be strict).
+- offering name: state the name of the vendor.
+- offering summary: describe the offering.
+
+Ensure the URLs you take from the articles (article_url and image_url) are exact!.
+ONLY RETURN A JSON AND NO OTHER TEXT.
+
+============
+version 2
+============

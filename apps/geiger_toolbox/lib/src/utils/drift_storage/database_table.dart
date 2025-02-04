@@ -76,17 +76,18 @@ class Recommendations extends Table {
   TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get newsId => text().references(NewsInfo, #id)(); // Foreign key
   TextColumn get name => text().withLength(min: 1, max: 255)();
+  DateTimeColumn get dateRecommendated =>
+      dateTime().withDefault(currentDateAndTime)();
 
   @override
   Set<Column> get primaryKey => {id};
 }
 
-@DataClassName('OfferingData')
-class Offerings extends Table {
+@DataClassName('RecommendationOfferingData')
+class RecommendationOfferings extends Table {
   TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get recommendationId =>
       text().references(Recommendations, #id)(); // Foreign key
-
   TextColumn get name => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
 
@@ -94,12 +95,25 @@ class Offerings extends Table {
   Set<Column> get primaryKey => {id};
 }
 
-@DataClassName('TodoOfferingStatusData')
-class TodoOfferingStatuses extends Table {
-  TextColumn get offeringId => text().references(Offerings, #id)();
+@DataClassName('TodoOfferingData')
+class TodoOfferings extends Table {
+  TextColumn get offeringId =>
+      text().references(RecommendationOfferings, #id)();
 // Foreign key
   BoolColumn get added => boolean().withDefault(const Constant(false))();
+  DateTimeColumn get datePlanned => dateTime().withDefault(currentDate)();
+  @override
+  Set<Column> get primaryKey => {offeringId};
+}
 
+@DataClassName('StatusTodoOfferingData')
+class StatusTodoOfferings extends Table {
+  TextColumn get offeringId =>
+      text().references(RecommendationOfferings, #id)();
+// Foreign key
+  BoolColumn get status => boolean()();
+  DateTimeColumn get dateCancelled => dateTime().nullable()();
+  DateTimeColumn get dateCompleted => dateTime().nullable()();
   @override
   Set<Column> get primaryKey => {offeringId};
 }
@@ -152,8 +166,9 @@ class TodoOfferingStatuses extends Table {
     GeigerScores,
     NewsInfo,
     Recommendations,
-    Offerings,
-    TodoOfferingStatuses,
+    RecommendationOfferings,
+    TodoOfferings,
+    StatusTodoOfferings
     //BusinessProfiles,
     // Industries,
     // Locations,

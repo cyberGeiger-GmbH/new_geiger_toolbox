@@ -48,12 +48,13 @@ void main() {
                         name: "Microsof",
                         summary:
                             "Provides tools to enable multi-factor authentication for enhanced security.",
-                        implemented: false),
+                        planned: false,
+                        firstPlanned: DateTime.now()),
                     Implementation(
                         name: "Google",
                         summary:
                             "Offers two-step verification to protect accounts from unauthorized access.",
-                        implemented: false),
+                        planned: false, firstPlanned: DateTime.now()),
                   ],
                 )
               ],

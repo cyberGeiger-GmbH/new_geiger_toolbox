@@ -22,12 +22,14 @@ class ActingObjectRepository {
           _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
         ),
         leftOuterJoin(
-          _db.offerings,
-          _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
+          _db.recommendationOfferings,
+          _db.recommendationOfferings.recommendationId
+              .equalsExp(_db.recommendations.id),
         ),
         leftOuterJoin(
-          _db.todoOfferingStatuses,
-          _db.todoOfferingStatuses.offeringId.equalsExp(_db.offerings.id),
+          _db.todoOfferings,
+          _db.todoOfferings.offeringId
+              .equalsExp(_db.recommendationOfferings.id),
         )
       ],
     )).get();
@@ -41,17 +43,19 @@ class ActingObjectRepository {
       //read recommendation
       final recommendationEntry = rows.readTableOrNull(_db.recommendations);
 
-      final offeringEntry = rows.readTableOrNull(_db.offerings);
+      final offeringEntry = rows.readTableOrNull(_db.recommendationOfferings);
 
-      final todoOfferingStatus = rows.readTableOrNull(_db.todoOfferingStatuses);
-
+      final todoOffering = rows.readTableOrNull(_db.todoOfferings);
+      
       // add offfer to the corresponding list in offerMap
       if (offeringEntry != null) {
         // final offer =
+
         final imp = Implementation(
             name: offeringEntry.name,
             summary: offeringEntry.summary,
-            implemented: todoOfferingStatus?.added ?? false);
+            planned: todoOffering?.added??false,
+            firstPlanned: todoOffering?.datePlanned);
         offerStatusMap
             .putIfAbsent(offeringEntry.recommendationId, () => [])
             .add(imp);

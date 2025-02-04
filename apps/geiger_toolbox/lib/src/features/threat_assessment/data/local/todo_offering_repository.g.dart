@@ -24,7 +24,7 @@ final todoOfferingRepoProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef TodoOfferingRepoRef = AutoDisposeProviderRef<TodoOfferingRepository>;
-String _$fetchOfferStatusHash() => r'35c72b6299402eba02f3449664545c9e6cddd542';
+String _$fetchOfferStatusHash() => r'05f6825b57316a0d89c533f37386996e6b25307e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -52,7 +52,7 @@ class _SystemHash {
 const fetchOfferStatusProvider = FetchOfferStatusFamily();
 
 /// See also [fetchOfferStatus].
-class FetchOfferStatusFamily extends Family<AsyncValue<List<OfferingStatus>>> {
+class FetchOfferStatusFamily extends Family<AsyncValue<List<TodoOffing>>> {
   /// See also [fetchOfferStatus].
   const FetchOfferStatusFamily();
 
@@ -91,7 +91,7 @@ class FetchOfferStatusFamily extends Family<AsyncValue<List<OfferingStatus>>> {
 
 /// See also [fetchOfferStatus].
 class FetchOfferStatusProvider
-    extends AutoDisposeFutureProvider<List<OfferingStatus>> {
+    extends AutoDisposeFutureProvider<List<TodoOffing>> {
   /// See also [fetchOfferStatus].
   FetchOfferStatusProvider({
     required String id,
@@ -126,8 +126,7 @@ class FetchOfferStatusProvider
 
   @override
   Override overrideWith(
-    FutureOr<List<OfferingStatus>> Function(FetchOfferStatusRef provider)
-        create,
+    FutureOr<List<TodoOffing>> Function(FetchOfferStatusRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -144,7 +143,7 @@ class FetchOfferStatusProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<OfferingStatus>> createElement() {
+  AutoDisposeFutureProviderElement<List<TodoOffing>> createElement() {
     return _FetchOfferStatusProviderElement(this);
   }
 
@@ -164,14 +163,13 @@ class FetchOfferStatusProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin FetchOfferStatusRef
-    on AutoDisposeFutureProviderRef<List<OfferingStatus>> {
+mixin FetchOfferStatusRef on AutoDisposeFutureProviderRef<List<TodoOffing>> {
   /// The parameter `id` of this provider.
   String get id;
 }
 
 class _FetchOfferStatusProviderElement
-    extends AutoDisposeFutureProviderElement<List<OfferingStatus>>
+    extends AutoDisposeFutureProviderElement<List<TodoOffing>>
     with FetchOfferStatusRef {
   _FetchOfferStatusProviderElement(super.provider);
 
@@ -179,12 +177,11 @@ class _FetchOfferStatusProviderElement
   String get id => (origin as FetchOfferStatusProvider).id;
 }
 
-String _$watchTodosHash() => r'85f2dbfeeb857515552b3a9c58a8c7590a412866';
+String _$watchTodosHash() => r'68e3ede75238d58d1c5a77293af8f4c1bdf578b9';
 
 /// See also [watchTodos].
 @ProviderFor(watchTodos)
-final watchTodosProvider =
-    AutoDisposeStreamProvider<List<OfferingStatus>>.internal(
+final watchTodosProvider = AutoDisposeStreamProvider<List<TodoOffing>>.internal(
   watchTodos,
   name: r'watchTodosProvider',
   debugGetCreateSourceHash:
@@ -195,6 +192,6 @@ final watchTodosProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchTodosRef = AutoDisposeStreamProviderRef<List<OfferingStatus>>;
+typedef WatchTodosRef = AutoDisposeStreamProviderRef<List<TodoOffing>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

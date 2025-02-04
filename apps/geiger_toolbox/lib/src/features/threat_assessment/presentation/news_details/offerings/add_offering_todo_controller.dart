@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/offering_status.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'add_offering_todo_controller.g.dart';
@@ -13,7 +13,7 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
   FutureOr<void> build() {}
 
   /// add single OfferingStatus
-  Future<void> addOrUpdate({required OfferingStatus status}) async {
+  Future<void> addOrUpdate({required TodoOffing status}) async {
     final repo = ref.read(todoOfferingRepoProvider);
     state = const AsyncLoading<void>();
 
@@ -31,13 +31,13 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
 
 // add has a list
   Future<void> addOrUpdateStatuses(
-      {required List<OfferingStatus> offeringsStatus}) async {
+      {required List<TodoOffing> offeringsStatus}) async {
     final repo = ref.read(todoOfferingRepoProvider);
     state = const AsyncLoading<void>();
 
     //store the todoTask in cache
     state = await AsyncValue.guard(
-        () => repo.addOrUpdateTodoOfferingsStatus(offerData: offeringsStatus));
+        () => repo.addOrUpdateTodoOfferings(offerData: offeringsStatus));
   }
 }
 
@@ -45,13 +45,13 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
 @riverpod
 class ToggleListOfferController extends _$ToggleListOfferController {
   @override
-  List<OfferingStatus> build() {
+  List<TodoOffing> build() {
     return [];
   }
 
   // Toggle the `completed` state of an item
 
-  void selectTodoItems(OfferingStatus item) {
+  void selectTodoItems(TodoOffing item) {
     // If the item is already in the state, remove it
     if (state.any((i) => i.id == item.id)) {
       state = state.where((i) => i.id != item.id).toList();
@@ -67,11 +67,11 @@ class ToggleListOfferController extends _$ToggleListOfferController {
 //update the checkbox state
 class ToggleOfferController extends _$ToggleOfferController {
   @override
-  OfferingStatus build(OfferingStatus value) {
+  TodoOffing build(TodoOffing value) {
     return value;
   }
 
-  void onChange(OfferingStatus value) {
+  void onChange(TodoOffing value) {
     state = value;
   }
 }

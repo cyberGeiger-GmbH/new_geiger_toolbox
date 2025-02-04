@@ -1,7 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/offering_status.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 
@@ -11,7 +11,7 @@ class AddOfferingToDoWidget extends ConsumerWidget {
     required this.offer,
   });
 
-  final OfferingStatus offer;
+  final TodoOffing offer;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -129,7 +129,10 @@ _$ImplementationImpl _$$ImplementationImplFromJson(Map<String, dynamic> json) =>
     _$ImplementationImpl(
       name: json['name'] as String,
       summary: json['summary'] as String,
-      implemented: json['implemented'] as bool,
+      planned: json['planned'] as bool,
+      firstPlanned: json['firstPlanned'] == null
+          ? null
+          : DateTime.parse(json['firstPlanned'] as String),
     );
 
 Map<String, dynamic> _$$ImplementationImplToJson(
@@ -137,7 +140,8 @@ Map<String, dynamic> _$$ImplementationImplToJson(
     <String, dynamic>{
       'name': instance.name,
       'summary': instance.summary,
-      'implemented': instance.implemented,
+      'planned': instance.planned,
+      'firstPlanned': instance.firstPlanned?.toIso8601String(),
     };
 
 _$ResultImpl _$$ResultImplFromJson(Map<String, dynamic> json) => _$ResultImpl(

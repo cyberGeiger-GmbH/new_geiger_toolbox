@@ -7,7 +7,7 @@ part of 'add_offering_todo_controller.dart';
 // **************************************************************************
 
 String _$addOfferingTodoControllerHash() =>
-    r'f74fbf5a6be6aa89f5588e8d8601c5b911ea766f';
+    r'75fa394f897574b85b7987aa5d7e19dfb19de014';
 
 /// See also [AddOfferingTodoController].
 @ProviderFor(AddOfferingTodoController)
@@ -24,12 +24,12 @@ final addOfferingTodoControllerProvider =
 
 typedef _$AddOfferingTodoController = AutoDisposeAsyncNotifier<void>;
 String _$toggleListOfferControllerHash() =>
-    r'9391b7d62d76b3a3839dce9e9f9931062a0d7b29';
+    r'037e85a19b33328d5d7114d09e5aaf0b77ba206b';
 
 /// See also [ToggleListOfferController].
 @ProviderFor(ToggleListOfferController)
 final toggleListOfferControllerProvider = AutoDisposeNotifierProvider<
-    ToggleListOfferController, List<OfferingStatus>>.internal(
+    ToggleListOfferController, List<TodoOffing>>.internal(
   ToggleListOfferController.new,
   name: r'toggleListOfferControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -39,9 +39,9 @@ final toggleListOfferControllerProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$ToggleListOfferController = AutoDisposeNotifier<List<OfferingStatus>>;
+typedef _$ToggleListOfferController = AutoDisposeNotifier<List<TodoOffing>>;
 String _$toggleOfferControllerHash() =>
-    r'54936722e78cd93cc18c1405576c5cf492fa9d00';
+    r'080b0290f47a57c1d70a53c82074523ae38c1bd6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -65,11 +65,11 @@ class _SystemHash {
 }
 
 abstract class _$ToggleOfferController
-    extends BuildlessAutoDisposeNotifier<OfferingStatus> {
-  late final OfferingStatus value;
+    extends BuildlessAutoDisposeNotifier<TodoOffing> {
+  late final TodoOffing value;
 
-  OfferingStatus build(
-    OfferingStatus value,
+  TodoOffing build(
+    TodoOffing value,
   );
 }
 
@@ -78,13 +78,13 @@ abstract class _$ToggleOfferController
 const toggleOfferControllerProvider = ToggleOfferControllerFamily();
 
 /// See also [ToggleOfferController].
-class ToggleOfferControllerFamily extends Family<OfferingStatus> {
+class ToggleOfferControllerFamily extends Family<TodoOffing> {
   /// See also [ToggleOfferController].
   const ToggleOfferControllerFamily();
 
   /// See also [ToggleOfferController].
   ToggleOfferControllerProvider call(
-    OfferingStatus value,
+    TodoOffing value,
   ) {
     return ToggleOfferControllerProvider(
       value,
@@ -116,11 +116,11 @@ class ToggleOfferControllerFamily extends Family<OfferingStatus> {
 }
 
 /// See also [ToggleOfferController].
-class ToggleOfferControllerProvider extends AutoDisposeNotifierProviderImpl<
-    ToggleOfferController, OfferingStatus> {
+class ToggleOfferControllerProvider
+    extends AutoDisposeNotifierProviderImpl<ToggleOfferController, TodoOffing> {
   /// See also [ToggleOfferController].
   ToggleOfferControllerProvider(
-    OfferingStatus value,
+    TodoOffing value,
   ) : this._internal(
           () => ToggleOfferController()..value = value,
           from: toggleOfferControllerProvider,
@@ -145,10 +145,10 @@ class ToggleOfferControllerProvider extends AutoDisposeNotifierProviderImpl<
     required this.value,
   }) : super.internal();
 
-  final OfferingStatus value;
+  final TodoOffing value;
 
   @override
-  OfferingStatus runNotifierBuild(
+  TodoOffing runNotifierBuild(
     covariant ToggleOfferController notifier,
   ) {
     return notifier.build(
@@ -173,7 +173,7 @@ class ToggleOfferControllerProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeNotifierProviderElement<ToggleOfferController, OfferingStatus>
+  AutoDisposeNotifierProviderElement<ToggleOfferController, TodoOffing>
       createElement() {
     return _ToggleOfferControllerProviderElement(this);
   }
@@ -194,19 +194,18 @@ class ToggleOfferControllerProvider extends AutoDisposeNotifierProviderImpl<
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ToggleOfferControllerRef
-    on AutoDisposeNotifierProviderRef<OfferingStatus> {
+mixin ToggleOfferControllerRef on AutoDisposeNotifierProviderRef<TodoOffing> {
   /// The parameter `value` of this provider.
-  OfferingStatus get value;
+  TodoOffing get value;
 }
 
 class _ToggleOfferControllerProviderElement
     extends AutoDisposeNotifierProviderElement<ToggleOfferController,
-        OfferingStatus> with ToggleOfferControllerRef {
+        TodoOffing> with ToggleOfferControllerRef {
   _ToggleOfferControllerProviderElement(super.provider);
 
   @override
-  OfferingStatus get value => (origin as ToggleOfferControllerProvider).value;
+  TodoOffing get value => (origin as ToggleOfferControllerProvider).value;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

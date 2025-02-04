@@ -123,7 +123,8 @@ class Implementation with _$Implementation {
   const factory Implementation(
       {required String name,
       required String summary,
-      required bool implemented}) = _Implementation;
+      required bool planned,
+      DateTime? firstPlanned}) = _Implementation;
 
   factory Implementation.fromJson(Map<String, dynamic> json) =>
       _$ImplementationFromJson(json);

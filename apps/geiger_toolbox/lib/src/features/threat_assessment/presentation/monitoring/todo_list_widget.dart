@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/offering_status.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
 
@@ -15,7 +15,6 @@ class TodoListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-  
     final todos = ref.watch(watchTodosProvider);
 
     return AsyncValueWidget(
@@ -36,7 +35,7 @@ class ShortTodoList extends StatelessWidget {
     required this.items,
     required this.displayLimit,
   });
-  final List<OfferingStatus> items;
+  final List<TodoOffing> items;
   final int displayLimit;
 
   @override
@@ -97,7 +96,7 @@ class ShortTodoList extends StatelessWidget {
 class ShowLimitedTodos extends StatelessWidget {
   const ShowLimitedTodos(
       {super.key, required this.items, required this.displayLimit});
-  final List<OfferingStatus> items;
+  final List<TodoOffing> items;
   final int displayLimit;
   @override
   Widget build(BuildContext context) {
@@ -125,7 +124,7 @@ class TodoWidget extends StatelessWidget {
     required this.item,
   });
 
-  final OfferingStatus item;
+  final TodoOffing item;
 
   @override
   Widget build(BuildContext context) {

@@ -44,9 +44,7 @@ class NewsFeedService {
     }
   }
 
-  Future<void> cleanNewsCache() async {
-    await cache.deleteNews();
-  }
+
 
   Future<Profile> _getProfileForNewsFeed() async {
     final company = await ref.read(fetchCompanyProvider.future);

@@ -23,45 +23,53 @@ class LocalNewsFeedRepository {
     // debugPrint("news feed=> $data");
 
     try {
-      _log.i("storing news locally...");
-      await _db.transaction(() async {
-        for (var newsData in data) {
-          //insert news
-          final dateCreated = DateTime.parse(newsData.dateCreated);
-          final newsCompanion = NewsInfoCompanion(
-            id: Value(newsData.title.replaceSpacesWithHyphen),
-            title: Value(newsData.title),
-            summary: Value(newsData.summary),
-            imageUrl: Value(newsData.imageUrl),
-            dateCreated: Value(dateCreated),
-          );
-          await _db.into(_db.newsInfo).insertOnConflictUpdate(newsCompanion);
-
-          //insert recommendations for each news
-          for (var recomData in newsData.recommendations) {
-            final reco = RecommendationsCompanion(
-              id: Value(recomData.name.replaceSpacesWithHyphen),
-              newsId: Value(newsData.title.replaceSpacesWithHyphen),
-              name: Value(recomData.name),
+      final uniqueNews = await _uniqueNews(newObj: data);
+      if (uniqueNews.isEmpty) {
+        _log.w("news feed data already existing");
+        _log.w("Not caching it again");
+      } else {
+        _log.i("storing news locally...");
+        await _db.transaction(() async {
+          for (var newsData in uniqueNews) {
+            //insert news
+            final dateCreated = DateTime.parse(newsData.dateCreated);
+            final newsCompanion = NewsInfoCompanion(
+              id: Value(newsData.id),
+              title: Value(newsData.title),
+              summary: Value(newsData.summary),
+              imageUrl: Value(newsData.imageUrl),
+              dateCreated: Value(dateCreated),
             );
-            await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
+            await _db.into(_db.newsInfo).insertOnConflictUpdate(newsCompanion);
 
-            // insert offering for each recommendation
-            for (var offerData in recomData.offerings) {
-              //id = combination of offerings name and recom Id
-              final id =
-                  "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
-              final offer = OfferingsCompanion(
-                id: Value(id),
-                recommendationId: Value(recomData.name.replaceSpacesWithHyphen),
-                name: Value(offerData.name),
-                summary: Value(offerData.summary),
+            //insert recommendations for each news
+            for (var recomData in newsData.recommendations) {
+              final reco = RecommendationsCompanion(
+                id: Value(recomData.id),
+                newsId: Value(newsData.id),
+                name: Value(recomData.name),
               );
-              await _db.into(_db.offerings).insertOnConflictUpdate(offer);
+              await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
+
+              // insert offering for each recommendation
+              for (var offerData in recomData.offerings) {
+                //id = combination of offerings name and recom Id
+                final id =
+                    "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
+                final offer = RecommendationOfferingsCompanion(
+                  id: Value(id),
+                  recommendationId: Value(recomData.id),
+                  name: Value(offerData.name),
+                  summary: Value(offerData.summary),
+                );
+                await _db
+                    .into(_db.recommendationOfferings)
+                    .insertOnConflictUpdate(offer);
+              }
             }
           }
-        }
-      });
+        });
+      }
       _log.i("finished storing");
     } catch (e, s) {
       _log.e(e);
@@ -69,14 +77,44 @@ class LocalNewsFeedRepository {
     }
   }
 
+  //filter unique news by title
+  Future<List<News>> _uniqueNews({required List<News> newObj}) async {
+    try {
+      if (newObj.isNotEmpty) {
+        final prev = await fetchNewsList();
+
+        List<News> combinedList = prev + newObj;
+
+        // Count occurrences using a Map
+        Map<String, int> countMap = {};
+
+        for (var news in combinedList) {
+          countMap[news.title] = (countMap[news.title] ?? 0) + 1;
+        }
+
+        // Filter out users that appear more than once
+        List<News> uniqueUsers = combinedList
+            .where((data) => countMap[data.title] == 1)
+            .toList(); // Keep only unique ones
+
+        return uniqueUsers;
+      }
+      return [];
+    } catch (e, s) {
+      _log.e("$e, $s");
+      rethrow;
+    }
+  }
+
+// for testing purpose
   Future<void> deleteNews() async {
     try {
       _log.i("deletign news...");
       await _db.transaction(() async {
         await _db.delete(_db.newsInfo).go();
         await _db.delete(_db.recommendations).go();
-        await _db.delete(_db.offerings).go();
-        await _db.delete(_db.todoOfferingStatuses).go();
+        await _db.delete(_db.recommendationOfferings).go();
+        await _db.delete(_db.todoOfferings).go();
       });
       _log.i("news deleted");
     } catch (e) {
@@ -107,8 +145,9 @@ class LocalNewsFeedRepository {
           _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
         ),
         leftOuterJoin(
-          _db.offerings,
-          _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
+          _db.recommendationOfferings,
+          _db.recommendationOfferings.recommendationId
+              .equalsExp(_db.recommendations.id),
         )
       ],
     );
@@ -129,8 +168,9 @@ class LocalNewsFeedRepository {
           _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
         ),
         leftOuterJoin(
-          _db.offerings,
-          _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
+          _db.recommendationOfferings,
+          _db.recommendationOfferings.recommendationId
+              .equalsExp(_db.recommendations.id),
         )
       ],
     )
@@ -157,7 +197,7 @@ class LocalNewsFeedRepository {
         final newsEntry = row.readTable(_db.newsInfo);
 
         final recommendationEntry = row.readTableOrNull(_db.recommendations);
-        final offeringEntry = row.readTableOrNull(_db.offerings);
+        final offeringEntry = row.readTableOrNull(_db.recommendationOfferings);
 
         // Add offerings to the corresponding list in offerMap
         if (offeringEntry != null) {
@@ -213,8 +253,9 @@ class LocalNewsFeedRepository {
           _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
         ),
         leftOuterJoin(
-          _db.offerings,
-          _db.offerings.recommendationId.equalsExp(_db.recommendations.id),
+          _db.recommendationOfferings,
+          _db.recommendationOfferings.recommendationId
+              .equalsExp(_db.recommendations.id),
         )
       ],
     )).get();
@@ -231,7 +272,7 @@ class LocalNewsFeedRepository {
 
       // debugPrint("all recommendations table => $recommendationEntry");
       // read offering
-      final offeringEntry = rows.readTableOrNull(_db.offerings);
+      final offeringEntry = rows.readTableOrNull(_db.recommendationOfferings);
       // debugPrint("all news => $newsEntry");
       // debugPrint("all recommendations => $recommendationEntry");
 

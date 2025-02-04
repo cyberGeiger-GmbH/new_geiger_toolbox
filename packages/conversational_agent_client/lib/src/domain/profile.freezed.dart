@@ -1545,7 +1545,8 @@ Implementation _$ImplementationFromJson(Map<String, dynamic> json) {
 mixin _$Implementation {
   String get name => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
-  bool get implemented => throw _privateConstructorUsedError;
+  bool get planned => throw _privateConstructorUsedError;
+  DateTime? get firstPlanned => throw _privateConstructorUsedError;
 
   /// Serializes this Implementation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1563,7 +1564,8 @@ abstract class $ImplementationCopyWith<$Res> {
           Implementation value, $Res Function(Implementation) then) =
       _$ImplementationCopyWithImpl<$Res, Implementation>;
   @useResult
-  $Res call({String name, String summary, bool implemented});
+  $Res call(
+      {String name, String summary, bool planned, DateTime? firstPlanned});
 }
 
 /// @nodoc
@@ -1583,7 +1585,8 @@ class _$ImplementationCopyWithImpl<$Res, $Val extends Implementation>
   $Res call({
     Object? name = null,
     Object? summary = null,
-    Object? implemented = null,
+    Object? planned = null,
+    Object? firstPlanned = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -1594,10 +1597,14 @@ class _$ImplementationCopyWithImpl<$Res, $Val extends Implementation>
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
-      implemented: null == implemented
-          ? _value.implemented
-          : implemented // ignore: cast_nullable_to_non_nullable
+      planned: null == planned
+          ? _value.planned
+          : planned // ignore: cast_nullable_to_non_nullable
               as bool,
+      firstPlanned: freezed == firstPlanned
+          ? _value.firstPlanned
+          : firstPlanned // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -1610,7 +1617,8 @@ abstract class _$$ImplementationImplCopyWith<$Res>
       __$$ImplementationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String summary, bool implemented});
+  $Res call(
+      {String name, String summary, bool planned, DateTime? firstPlanned});
 }
 
 /// @nodoc
@@ -1628,7 +1636,8 @@ class __$$ImplementationImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? summary = null,
-    Object? implemented = null,
+    Object? planned = null,
+    Object? firstPlanned = freezed,
   }) {
     return _then(_$ImplementationImpl(
       name: null == name
@@ -1639,10 +1648,14 @@ class __$$ImplementationImplCopyWithImpl<$Res>
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
-      implemented: null == implemented
-          ? _value.implemented
-          : implemented // ignore: cast_nullable_to_non_nullable
+      planned: null == planned
+          ? _value.planned
+          : planned // ignore: cast_nullable_to_non_nullable
               as bool,
+      firstPlanned: freezed == firstPlanned
+          ? _value.firstPlanned
+          : firstPlanned // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -1651,7 +1664,10 @@ class __$$ImplementationImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ImplementationImpl implements _Implementation {
   const _$ImplementationImpl(
-      {required this.name, required this.summary, required this.implemented});
+      {required this.name,
+      required this.summary,
+      required this.planned,
+      this.firstPlanned});
 
   factory _$ImplementationImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImplementationImplFromJson(json);
@@ -1661,11 +1677,13 @@ class _$ImplementationImpl implements _Implementation {
   @override
   final String summary;
   @override
-  final bool implemented;
+  final bool planned;
+  @override
+  final DateTime? firstPlanned;
 
   @override
   String toString() {
-    return 'Implementation(name: $name, summary: $summary, implemented: $implemented)';
+    return 'Implementation(name: $name, summary: $summary, planned: $planned, firstPlanned: $firstPlanned)';
   }
 
   @override
@@ -1675,13 +1693,15 @@ class _$ImplementationImpl implements _Implementation {
             other is _$ImplementationImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.summary, summary) || other.summary == summary) &&
-            (identical(other.implemented, implemented) ||
-                other.implemented == implemented));
+            (identical(other.planned, planned) || other.planned == planned) &&
+            (identical(other.firstPlanned, firstPlanned) ||
+                other.firstPlanned == firstPlanned));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, summary, implemented);
+  int get hashCode =>
+      Object.hash(runtimeType, name, summary, planned, firstPlanned);
 
   /// Create a copy of Implementation
   /// with the given fields replaced by the non-null parameter values.
@@ -1704,7 +1724,8 @@ abstract class _Implementation implements Implementation {
   const factory _Implementation(
       {required final String name,
       required final String summary,
-      required final bool implemented}) = _$ImplementationImpl;
+      required final bool planned,
+      final DateTime? firstPlanned}) = _$ImplementationImpl;
 
   factory _Implementation.fromJson(Map<String, dynamic> json) =
       _$ImplementationImpl.fromJson;
@@ -1714,7 +1735,9 @@ abstract class _Implementation implements Implementation {
   @override
   String get summary;
   @override
-  bool get implemented;
+  bool get planned;
+  @override
+  DateTime? get firstPlanned;
 
   /// Create a copy of Implementation
   /// with the given fields replaced by the non-null parameter values.
