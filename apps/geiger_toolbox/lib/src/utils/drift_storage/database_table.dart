@@ -95,25 +95,24 @@ class RecommendationOfferings extends Table {
   Set<Column> get primaryKey => {id};
 }
 
-@DataClassName('TodoOfferingData')
-class TodoOfferings extends Table {
+@DataClassName('ActiveTodoOfferingData')
+class ActiveTodoOfferings extends Table {
   TextColumn get offeringId =>
       text().references(RecommendationOfferings, #id)();
 // Foreign key
   BoolColumn get added => boolean().withDefault(const Constant(false))();
-  DateTimeColumn get datePlanned => dateTime().withDefault(currentDate)();
+  DateTimeColumn get dateAdded => dateTime().nullable()();
+  DateTimeColumn get dateCompleted => dateTime().nullable()();
+  DateTimeColumn get dateReactivated => dateTime().nullable()();
+
   @override
   Set<Column> get primaryKey => {offeringId};
 }
 
-@DataClassName('StatusTodoOfferingData')
-class StatusTodoOfferings extends Table {
-  TextColumn get offeringId =>
-      text().references(RecommendationOfferings, #id)();
-// Foreign key
-  BoolColumn get status => boolean()();
-  DateTimeColumn get dateCancelled => dateTime().nullable()();
-  DateTimeColumn get dateCompleted => dateTime().nullable()();
+@DataClassName('InActiveTodoOfferingData')
+class InActiveTodoOfferings extends Table {
+  TextColumn get offeringId => text().references(RecommendationOfferings, #id)();
+  DateTimeColumn get dateCancelled => dateTime().withDefault(currentDateAndTime)();
   @override
   Set<Column> get primaryKey => {offeringId};
 }
@@ -167,8 +166,8 @@ class StatusTodoOfferings extends Table {
     NewsInfo,
     Recommendations,
     RecommendationOfferings,
-    TodoOfferings,
-    StatusTodoOfferings
+    ActiveTodoOfferings,
+    InActiveTodoOfferings,
     //BusinessProfiles,
     // Industries,
     // Locations,

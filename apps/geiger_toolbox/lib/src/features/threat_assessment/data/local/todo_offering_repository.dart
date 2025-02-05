@@ -20,13 +20,13 @@ class TodoOfferingRepository {
   //add/update status of a given offering
   Future<void> addOrUpdateTodoOfferingStatus(
       {required OfferingId id, required bool isAdded}) async {
-    final offeringStatus = TodoOfferingsCompanion(
+    final offeringStatus = ActiveTodoOfferingsCompanion(
       offeringId: Value(id),
       added: Value(isAdded),
     );
 
     /// insert or update the todoOffer status
-    await _db.into(_db.todoOfferings).insertOnConflictUpdate(offeringStatus);
+    await _db.into(_db.activeTodoOfferings).insertOnConflictUpdate(offeringStatus);
   }
 
   //* add/update status of a given offerings
@@ -36,14 +36,14 @@ class TodoOfferingRepository {
     if (offerData.isNotEmpty) {
       await _db.transaction(() async {
         for (var data in offerData) {
-          final offeringStatus = TodoOfferingsCompanion(
+          final offeringStatus = ActiveTodoOfferingsCompanion(
             offeringId: Value(data.id),
             added: Value(data.added),
           );
 
           /// insert or update the todoOffer status
           await _db
-              .into(_db.todoOfferings)
+              .into(_db.activeTodoOfferings)
               .insertOnConflictUpdate(offeringStatus);
         }
       });
@@ -71,21 +71,21 @@ class TodoOfferingRepository {
     final query = _db.select(_db.recommendationOfferings).join(
       [
         leftOuterJoin(
-          _db.todoOfferings,
-          _db.todoOfferings.offeringId
+          _db.activeTodoOfferings,
+          _db.activeTodoOfferings.offeringId
               .equalsExp(_db.recommendationOfferings.id),
         ),
       ],
       //filter by offerings id
     )..where(
-        _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id));
+        _db.activeTodoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id));
     // transform the query stream into a stream of [OfferingStatus] lists
     return query.watch().map((rows) {
       return rows.map((row) {
         // Read the offerings entry;
         final offeringEntry = row.readTable(_db.recommendationOfferings);
         // Read the todo offering status entry or null if there is no match
-        final todoOfferingStatus = row.readTableOrNull(_db.todoOfferings);
+        final todoOfferingStatus = row.readTableOrNull(_db.activeTodoOfferings);
 
         final offering =
             Offering(name: offeringEntry.name, summary: offeringEntry.summary);
@@ -94,7 +94,7 @@ class TodoOfferingRepository {
             offering: offering,
             id: todoOfferingStatus!.offeringId,
             added: todoOfferingStatus.added,
-            datePlanned: todoOfferingStatus.datePlanned);
+            datePlanned: todoOfferingStatus.dateAdded);
       }).toList();
     });
   }
@@ -105,8 +105,8 @@ class TodoOfferingRepository {
     //create a join query that include TodoOfferingStatusesTable and OfferingsTable
     final query = _db.select(_db.recommendationOfferings).join([
       leftOuterJoin(
-          _db.todoOfferings,
-          _db.todoOfferings.offeringId
+          _db.activeTodoOfferings,
+          _db.activeTodoOfferings.offeringId
               .equalsExp(_db.recommendationOfferings.id))
     ])
       //filter by recommendationID
@@ -118,7 +118,7 @@ class TodoOfferingRepository {
       // Read the offerings entry;
       final offeringEntry = row.readTable(_db.recommendationOfferings);
       // Read the todo offering status entry or null if there is no match
-      final todoOfferingStatus = row.readTableOrNull(_db.todoOfferings);
+      final todoOfferingStatus = row.readTableOrNull(_db.activeTodoOfferings);
       final offering =
           Offering(name: offeringEntry.name, summary: offeringEntry.summary);
 
@@ -132,10 +132,10 @@ class TodoOfferingRepository {
 
   /// Check if the todo offer Status table is empty
   Future<bool> isTodOfferingStatusTableEmpty() async {
-    final query = _db.selectOnly(_db.todoOfferings)
-      ..addColumns([_db.todoOfferings.offeringId.count()]);
+    final query = _db.selectOnly(_db.activeTodoOfferings)
+      ..addColumns([_db.activeTodoOfferings.offeringId.count()]);
     final result = await query
-        .map((row) => row.read<int>(_db.todoOfferings.offeringId.count()))
+        .map((row) => row.read<int>(_db.activeTodoOfferings.offeringId.count()))
         .getSingle();
     return result == 0;
   }

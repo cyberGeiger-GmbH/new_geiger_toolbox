@@ -114,7 +114,7 @@ class LocalNewsFeedRepository {
         await _db.delete(_db.newsInfo).go();
         await _db.delete(_db.recommendations).go();
         await _db.delete(_db.recommendationOfferings).go();
-        await _db.delete(_db.todoOfferings).go();
+        await _db.delete(_db.activeTodoOfferings).go();
       });
       _log.i("news deleted");
     } catch (e) {
