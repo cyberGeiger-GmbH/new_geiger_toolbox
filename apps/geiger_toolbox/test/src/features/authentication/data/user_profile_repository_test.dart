@@ -32,9 +32,6 @@ void main() {
 
   tester.setUpAll(() async {
     container = getDataBaseContainer();
-
-    //delete previous data
-    container.read(userProfileRepositoryProvider).deleteProfile();
   });
 
   tester.tearDownAll(() {
@@ -43,15 +40,22 @@ void main() {
   });
 
   tester.group('test userProfileRepository', () {
+    tester.test('when user has not be created, throw Null', () async {
+      final userRepo = container.read(userProfileRepositoryProvider);
+
+      //fetch user
+      final result = await userRepo.fetchUser();
+
+      tester.expect(result, tester.isNull);
+    });
+
     tester.test(
         'Stream emits null initially and then the user objct after insertion',
         () async {
       final uuid = container.read(getUuidProvider);
-
-      final userRepo = container.read(userProfileRepositoryProvider);
-
       final User user = User(
           userId: uuid, owner: true, name: "tester", email: "tester@gmail.com");
+      final userRepo = container.read(userProfileRepositoryProvider);
 
       //stream user
       final Stream<User?> stream = userRepo.watchUser();
@@ -74,15 +78,14 @@ void main() {
       await expectation;
     });
 
-    tester.test('fetch user', () async {
+    tester.test('when user has been created throw not error', () async {
       final userRepo = container.read(userProfileRepositoryProvider);
 
       //fetch user
       final result = await userRepo.fetchUser();
 
       tester.expect(result, tester.isNotNull);
-
-      tester.expect(result!.name, "tester");
+      tester.expect(result!.name, 'tester');
     });
   });
 }

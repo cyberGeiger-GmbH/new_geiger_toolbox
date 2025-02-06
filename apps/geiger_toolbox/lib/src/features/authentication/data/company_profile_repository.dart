@@ -111,7 +111,7 @@ class CompanyProfileRepository {
   }
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 CompanyProfileRepository companyProfileRepository(Ref ref) {
   return CompanyProfileRepository(ref);
 }
@@ -120,10 +120,4 @@ CompanyProfileRepository companyProfileRepository(Ref ref) {
 Stream<Company?> watchCompany(Ref ref) {
   final repo = ref.read(companyProfileRepositoryProvider);
   return repo.watchCompany();
-}
-
-@Riverpod(keepAlive: true)
-Future<Company?> fetchCompany(Ref ref) async {
-  final repo = ref.read(companyProfileRepositoryProvider);
-  return repo.fetchCompany();
 }

@@ -31,7 +31,8 @@ class ScanButtonController extends _$ScanButtonController {
   }
 
   Future<void> _trackScanning() async {
-    final compProfile = await ref.read(fetchCompanyProvider.future);
+    final compRepo = ref.read(companyProfileRepositoryProvider);
+    final compProfile = await compRepo.fetchCompany();
 
     if (compProfile != null) {
       ref.read(analyticsFacadeProvider).trackScanWithProfile();

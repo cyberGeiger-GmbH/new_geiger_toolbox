@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/profile_screen_controller.dart';
-import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
@@ -77,9 +76,7 @@ class AppRouting {
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
         //final isNewsFeedEmpty = ref.read(isNewsTableEmptyProvider).requireValue;
-        final companyProfileState =
-            ref.read(fetchCompanyProvider).requireValue == null;
-
+        
         final skipProfile = ref.read(profileScreenControllerProvider);
 
         final path = state.uri.path;
@@ -94,7 +91,7 @@ class AppRouting {
 
         //redirect to profile screen when profile is null, skip is false and news feed table is not empty
         // if (companyProfileState && !skipProfile && !isNewsFeedEmpty) {
-        if (companyProfileState && !skipProfile) {
+        if (!skipProfile) {
           if (path != AppRouter.createProfile.path) {
             return AppRouter.createProfile.path;
           }

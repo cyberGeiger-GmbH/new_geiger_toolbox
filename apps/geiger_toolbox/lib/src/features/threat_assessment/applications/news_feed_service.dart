@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 
-
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/xapi_profile_repository.dart';
 
@@ -22,7 +21,6 @@ class NewsFeedService {
   Logger get _log => ref.read(logHandlerProvider("NewsFeedService"));
 
   NewsFeedService(this.ref);
-
 
   Future<void> cacheNews() async {
     try {
@@ -44,10 +42,9 @@ class NewsFeedService {
     }
   }
 
-
-
   Future<Profile> _getProfileForNewsFeed() async {
-    final company = await ref.read(fetchCompanyProvider.future);
+    final compRepo = ref.read(companyProfileRepositoryProvider);
+    final company = await compRepo.fetchCompany();
     Verb? verb;
     if (company != null) {
       verb = Verb(name: "User profile created");
