@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:conversational_agent_client/src/domain/geiger_score.dart';
-import 'package:conversational_agent_client/src/domain/profile.dart';
+import 'package:conversational_agent_client/src/domain/user_profile_model.dart';
 import 'package:conversational_agent_client/src/exception/remote_exceptions.dart';
 
 import 'package:conversational_agent_client/src/utilities/constants/base.dart';
@@ -22,7 +22,7 @@ class GeigerScoreRepository {
 
   GeigerScoreRepository(this._ref);
 
-  Future<GeigerScore?> fetchGeigerScore({required Profile profile}) async {
+  Future<GeigerScore?> fetchGeigerScore({required UserProfileModel userProfile}) async {
     final dio = _ref.read(dioProvider);
     final log = _ref.read(logHandlerProvider("fetchGeigerScore:"));
 
@@ -33,7 +33,7 @@ class GeigerScoreRepository {
       );
 
       final Response response = await dio.getUri(uri,
-          data: json.encode(profile.toJson()),
+          data: json.encode(userProfile.toJson()),
           options: Options(headers: Base.headers));
 
       return response.geigerScoreParser(_ref);
@@ -52,7 +52,7 @@ class GeigerScoreRepository {
       }
       throw DioException(
           requestOptions: RequestOptions(
-            data: profile,
+            data: userProfile,
           ),
           error: e);
     } catch (e, s) {

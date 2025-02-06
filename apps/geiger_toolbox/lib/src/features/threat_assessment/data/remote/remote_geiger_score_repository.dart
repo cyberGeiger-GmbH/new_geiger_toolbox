@@ -11,7 +11,7 @@ class RemoteGeigerScoreRepository {
 
   Future<GeigerScore?> geigerScore({required Profile profile}) async {
     final scoreRepo = ref.read(geigerScoreRepositoryProvider);
-    final data = await scoreRepo.fetchGeigerScore(profile: profile);
+    final data = await scoreRepo.fetchGeigerScore(userProfile: profile);
     return data;
   }
 }

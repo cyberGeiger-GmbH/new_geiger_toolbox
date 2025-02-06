@@ -1,6 +1,5 @@
 // ignore_for_file: avoid-dynamic
 
-
 import 'dart:convert';
 
 import 'package:conversational_agent_client/src/domain/recommendation.dart';
@@ -13,10 +12,11 @@ part 'news.g.dart';
 class News with _$News {
   const News._();
 
-  factory News(
+  const factory News(
       {required final String id,
       required final String title,
       required final String summary,
+      @JsonKey(name: 'news_category') required final String newsCategory,
       @JsonKey(name: 'article_url') required final String articleUrl,
       @JsonKey(name: 'image_url') required final String imageUrl,
       @JsonKey(name: 'date_created') required final String dateCreated,

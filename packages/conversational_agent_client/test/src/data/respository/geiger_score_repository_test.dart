@@ -1,77 +1,52 @@
 import 'package:conversational_agent_client/src/data/respository/geiger_score_repository.dart';
-import 'package:conversational_agent_client/src/domain/profile.dart';
+import 'package:conversational_agent_client/src/domain/user_profile_model.dart';
 import 'package:conversational_agent_client/src/utilities/providers/dio_client_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 void main() {
-  //todo mock client
-  ProviderContainer getContainer({Dio? client}) {
-    final container = client != null
-        ? ProviderContainer(
-            overrides: [
-              dioProvider.overrideWithValue(client),
-            ],
-          )
-        : ProviderContainer();
-    addTearDown(container.dispose);
-
-    return container;
+  ProviderContainer getContainer() {
+    return ProviderContainer(
+      overrides: [
+        dioProvider.overrideWithValue(Dio()),
+      ],
+    );
   }
 
-  group("new repository....", () {
-    test('news repository using default profile ', () async {
-      final container = getContainer();
+  final container = getContainer();
+
+  tearDown(container.dispose);
+
+  group("GeigerScoreRepository....", () {
+    test(
+        'test calcuation of score using only current profile with score, company name and location ',
+        timeout: Timeout(Duration(minutes: 1)), () async {
       final scoreRepo = container.read(geigerScoreRepositoryProvider);
       final userDevice = Asset(type: "desktop", version: "1.1.1", model: "mac");
-      final profile = Profile.withDefaultTimestamp(
-          id: '',
-          actor: Actor(
-              userDevice: userDevice,
-              assets: [],
-              companyName: "testing company"),
-          verb: Verb(
-              name: "scanning without profile and implemented recommendations"),
-          object: ActingObject(definition: [
-            Definition(
-              id: "new1",
-              name: "Threat: APT29 Targets High-Value Victims",
-              description:
-                  "APT29, a Russia-linked threat actor, uses rogue Remote Desktop Protocol (RDP) servers to target high-value entities like governments and researchers. This threat is significant for users with sensitive data, as it can lead to data leakage and malware installation",
-              extensions: [
-                DefinitionExtension(
-                  id: "1",
-                  recommendationType: "Enable Multi-Factor Authentication",
-                  implementations: [
-                    Implementation(
-                        name: "Microsof",
-                        summary:
-                            "Provides tools to enable multi-factor authentication for enhanced security.",
-                        planned: false,
-                        firstPlanned: DateTime.now()),
-                    Implementation(
-                        name: "Google",
-                        summary:
-                            "Offers two-step verification to protect accounts from unauthorized access.",
-                        planned: false, firstPlanned: DateTime.now()),
-                  ],
-                )
-              ],
-            ),
-          ]),
-          result: [
-            Result(
-                id: 1,
-                success: false,
-                completions: true,
-                extensions: ResultExtensions.withDefaultTimestamp(
-                    geigerScore: 0, reasons: "user has not geiger score"))
-          ]
-          // digitalInfrastructure: DigitalInfrastructure(
-          //     infoAbout: ["password", "teamView", "post finance"]),
-          );
-      final data = await scoreRepo.fetchGeigerScore(profile: profile);
+      final currentProfile = Profile(
+          id: "test124",
+          actor: Actor(userDevice: userDevice, locale: "en", assets: []),
+          news: [
+            NewsActicle(
+                id: "joint-advisory-warns-of-prc-backed",
+                name: "PRC-Backed Cyber Espionage on Telecom",
+                description:
+                    "A joint advisory warns of cyber espionage by PRC-affiliated actors targeting telecom networks. This threat exploits existing weaknesses, posing risks to user privacy and data security.",
+                type: "threat",
+                protection: [
+                  Protection(
+                      name: "Cynet",
+                      summary:
+                          "Cynet offers an all-in-one cybersecurity platform with 100% detection and protection capabilities.",
+                      status: ProtectionStatus.recommended),
+                ])
+          ]);
+
+      final profile = UserProfileModel(
+        currentUserProfile: currentProfile,
+      );
+      final data = await scoreRepo.fetchGeigerScore(userProfile: profile);
       print("xapi profile object $profile");
       print("geiger score object => $data");
       expect(data, isNotNull);

@@ -23,6 +23,8 @@ mixin _$News {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
+  @JsonKey(name: 'news_category')
+  String get newsCategory => throw _privateConstructorUsedError;
   @JsonKey(name: 'article_url')
   String get articleUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_url')
@@ -50,6 +52,7 @@ abstract class $NewsCopyWith<$Res> {
       {String id,
       String title,
       String summary,
+      @JsonKey(name: 'news_category') String newsCategory,
       @JsonKey(name: 'article_url') String articleUrl,
       @JsonKey(name: 'image_url') String imageUrl,
       @JsonKey(name: 'date_created') String dateCreated,
@@ -74,6 +77,7 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
     Object? id = null,
     Object? title = null,
     Object? summary = null,
+    Object? newsCategory = null,
     Object? articleUrl = null,
     Object? imageUrl = null,
     Object? dateCreated = null,
@@ -91,6 +95,10 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
       summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      newsCategory: null == newsCategory
+          ? _value.newsCategory
+          : newsCategory // ignore: cast_nullable_to_non_nullable
               as String,
       articleUrl: null == articleUrl
           ? _value.articleUrl
@@ -123,6 +131,7 @@ abstract class _$$NewsImplCopyWith<$Res> implements $NewsCopyWith<$Res> {
       {String id,
       String title,
       String summary,
+      @JsonKey(name: 'news_category') String newsCategory,
       @JsonKey(name: 'article_url') String articleUrl,
       @JsonKey(name: 'image_url') String imageUrl,
       @JsonKey(name: 'date_created') String dateCreated,
@@ -144,6 +153,7 @@ class __$$NewsImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? summary = null,
+    Object? newsCategory = null,
     Object? articleUrl = null,
     Object? imageUrl = null,
     Object? dateCreated = null,
@@ -161,6 +171,10 @@ class __$$NewsImplCopyWithImpl<$Res>
       summary: null == summary
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
+              as String,
+      newsCategory: null == newsCategory
+          ? _value.newsCategory
+          : newsCategory // ignore: cast_nullable_to_non_nullable
               as String,
       articleUrl: null == articleUrl
           ? _value.articleUrl
@@ -185,10 +199,11 @@ class __$$NewsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NewsImpl extends _News {
-  _$NewsImpl(
+  const _$NewsImpl(
       {required this.id,
       required this.title,
       required this.summary,
+      @JsonKey(name: 'news_category') required this.newsCategory,
       @JsonKey(name: 'article_url') required this.articleUrl,
       @JsonKey(name: 'image_url') required this.imageUrl,
       @JsonKey(name: 'date_created') required this.dateCreated,
@@ -205,6 +220,9 @@ class _$NewsImpl extends _News {
   final String title;
   @override
   final String summary;
+  @override
+  @JsonKey(name: 'news_category')
+  final String newsCategory;
   @override
   @JsonKey(name: 'article_url')
   final String articleUrl;
@@ -224,7 +242,7 @@ class _$NewsImpl extends _News {
 
   @override
   String toString() {
-    return 'News(id: $id, title: $title, summary: $summary, articleUrl: $articleUrl, imageUrl: $imageUrl, dateCreated: $dateCreated, recommendations: $recommendations)';
+    return 'News(id: $id, title: $title, summary: $summary, newsCategory: $newsCategory, articleUrl: $articleUrl, imageUrl: $imageUrl, dateCreated: $dateCreated, recommendations: $recommendations)';
   }
 
   @override
@@ -235,6 +253,8 @@ class _$NewsImpl extends _News {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.summary, summary) || other.summary == summary) &&
+            (identical(other.newsCategory, newsCategory) ||
+                other.newsCategory == newsCategory) &&
             (identical(other.articleUrl, articleUrl) ||
                 other.articleUrl == articleUrl) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -252,6 +272,7 @@ class _$NewsImpl extends _News {
       id,
       title,
       summary,
+      newsCategory,
       articleUrl,
       imageUrl,
       dateCreated,
@@ -274,15 +295,16 @@ class _$NewsImpl extends _News {
 }
 
 abstract class _News extends News {
-  factory _News(
+  const factory _News(
       {required final String id,
       required final String title,
       required final String summary,
+      @JsonKey(name: 'news_category') required final String newsCategory,
       @JsonKey(name: 'article_url') required final String articleUrl,
       @JsonKey(name: 'image_url') required final String imageUrl,
       @JsonKey(name: 'date_created') required final String dateCreated,
       required final List<Recommendation> recommendations}) = _$NewsImpl;
-  _News._() : super._();
+  const _News._() : super._();
 
   factory _News.fromJson(Map<String, dynamic> json) = _$NewsImpl.fromJson;
 
@@ -292,6 +314,9 @@ abstract class _News extends News {
   String get title;
   @override
   String get summary;
+  @override
+  @JsonKey(name: 'news_category')
+  String get newsCategory;
   @override
   @JsonKey(name: 'article_url')
   String get articleUrl;

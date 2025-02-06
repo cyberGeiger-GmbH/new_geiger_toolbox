@@ -9,7 +9,7 @@ export 'src/data/respository/geiger_score_repository.dart';
 
 //domain
 export 'src/domain/news.dart';
-export 'src/domain/profile.dart';
+export 'src/domain/user_profile_model.dart';
 export 'src/domain/recommendation.dart';
 export 'src/domain/offering.dart';
 export 'src/domain/geiger_score.dart';

@@ -1,9 +1,8 @@
 // ignore_for_file: avoid-throw-in-catch-block
 
-
 import 'dart:convert';
 import 'dart:io';
-import 'package:conversational_agent_client/src/domain/profile.dart';
+import 'package:conversational_agent_client/src/domain/user_profile_model.dart';
 import 'package:conversational_agent_client/src/domain/news.dart';
 import 'package:conversational_agent_client/src/exception/remote_exceptions.dart';
 
@@ -23,7 +22,7 @@ class NewsRepository {
 
   NewsRepository(this.ref);
 
-  Future<List<News>> fetchNews({Profile? profile}) async {
+  Future<List<News>> fetchNews({required UserProfileModel userProfile}) async {
     final dio = ref.read(dioProvider);
     final log = ref.read(logHandlerProvider("FetchNews"));
 
@@ -34,9 +33,7 @@ class NewsRepository {
       );
 
       final Response response = await dio.getUri(uri,
-          data: profile != null
-              ? json.encode(profile.toJson())
-              : json.encode({"locale": "en"}),
+          data: json.encode(userProfile.toJson()),
           options: Options(headers: Base.headers));
 
       return response.newsParser(ref);
@@ -56,7 +53,7 @@ class NewsRepository {
       }
       throw DioException(
           requestOptions: RequestOptions(
-            data: profile,
+            data: userProfile,
           ),
           error: e);
     } catch (e, s) {
