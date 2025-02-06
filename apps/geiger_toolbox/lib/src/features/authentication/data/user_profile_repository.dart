@@ -15,7 +15,7 @@ class UserProfileRepository {
   UserProfileRepository(this.ref);
 
   //create user profile
-  Future<void> createUserProfile({required User user}) async {
+  Future<int> createUserProfile({required User user}) async {
     try {
       final userProfile = UserProfilesCompanion(
         userId: Value(user.userId),
@@ -23,7 +23,7 @@ class UserProfileRepository {
         email: Value(user.email),
         owner: Value(user.owner),
       );
-      await _db.into(_db.userProfiles).insert(userProfile);
+      return await _db.into(_db.userProfiles).insert(userProfile);
     } catch (e) {
       rethrow;
     }

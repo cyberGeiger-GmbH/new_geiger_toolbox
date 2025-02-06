@@ -79,10 +79,10 @@ class ShortTodoList extends StatelessWidget {
                     text: item.offering.name,
                     context: context,
                     textAlign: TextAlign.start,
-                    textRemoved: !item.added!),
+                    textRemoved: !item.added),
                 subtitle: AppText.bodySmall(
                     text: item.offering.summary,
-                    textRemoved: !item.added!,
+                    textRemoved: !item.added,
                     context: context),
               ),
             ),
@@ -128,23 +128,33 @@ class TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-        leading: AppText.bodyMedium(
-          text: item.offering.name,
-          context: context,
-          textRemoved: !item.added!,
-        ),
-        trailing: Icon(Icons.chevron_right),
-        onTap: () {
-          showWoltModalBottomSheet(context,
-              title: item.offering.name,
-              page: Column(
-                children: [
-                  AppText.bodySmall(
-                      text: item.offering.summary, context: context),
-                ],
-              ));
-        });
+    return Dismissible(
+      key: Key(item.id),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        color: Colors.red,
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
+      onDismissed: null,
+      child: ListTile(
+          leading: AppText.bodyMedium(
+            text: item.offering.name,
+            context: context,
+          ),
+          trailing: Icon(Icons.chevron_right),
+          onTap: () {
+            showWoltModalBottomSheet(context,
+                title: item.offering.name,
+                page: Column(
+                  children: [
+                    AppText.bodySmall(
+                        text: item.offering.summary, context: context),
+                  ],
+                ));
+          }),
+    );
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/company/
 /// Shows the form for creating profile of the user
 
 class CreateProfileScreen extends StatefulWidget {
+  
   const CreateProfileScreen({super.key, this.onCloseProfile});
   // * Keys for testing using find.byKey()
   static const companyKey = Key('companyName');

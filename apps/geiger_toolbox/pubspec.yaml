@@ -3,7 +3,7 @@ description: "A cybersecurity risk management tool designed for SMEs and their l
 
 publish_to: 'none' 
 
-version: 1.0.0+9
+version: 1.0.0+11
 
 environment:
   sdk: 3.6.0

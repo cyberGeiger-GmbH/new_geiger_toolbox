@@ -6,7 +6,7 @@ part of 'xapi_profile_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getResultHash() => r'2a8e711b1aa57b29e0793518318862e12f51cc70';
+String _$getXapiProfileHash() => r'd6788887eb9aab163e22fdf8e605def17a9e6f17';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,29 +29,29 @@ class _SystemHash {
   }
 }
 
-/// See also [getResult].
-@ProviderFor(getResult)
-const getResultProvider = GetResultFamily();
+/// See also [getXapiProfile].
+@ProviderFor(getXapiProfile)
+const getXapiProfileProvider = GetXapiProfileFamily();
 
-/// See also [getResult].
-class GetResultFamily extends Family<AsyncValue<Profile>> {
-  /// See also [getResult].
-  const GetResultFamily();
+/// See also [getXapiProfile].
+class GetXapiProfileFamily extends Family<AsyncValue<Profile>> {
+  /// See also [getXapiProfile].
+  const GetXapiProfileFamily();
 
-  /// See also [getResult].
-  GetResultProvider call({
+  /// See also [getXapiProfile].
+  GetXapiProfileProvider call({
     required bool goodScore,
     Verb? verb,
   }) {
-    return GetResultProvider(
+    return GetXapiProfileProvider(
       goodScore: goodScore,
       verb: verb,
     );
   }
 
   @override
-  GetResultProvider getProviderOverride(
-    covariant GetResultProvider provider,
+  GetXapiProfileProvider getProviderOverride(
+    covariant GetXapiProfileProvider provider,
   ) {
     return call(
       goodScore: provider.goodScore,
@@ -71,34 +71,35 @@ class GetResultFamily extends Family<AsyncValue<Profile>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'getResultProvider';
+  String? get name => r'getXapiProfileProvider';
 }
 
-/// See also [getResult].
-class GetResultProvider extends AutoDisposeFutureProvider<Profile> {
-  /// See also [getResult].
-  GetResultProvider({
+/// See also [getXapiProfile].
+class GetXapiProfileProvider extends AutoDisposeFutureProvider<Profile> {
+  /// See also [getXapiProfile].
+  GetXapiProfileProvider({
     required bool goodScore,
     Verb? verb,
   }) : this._internal(
-          (ref) => getResult(
-            ref as GetResultRef,
+          (ref) => getXapiProfile(
+            ref as GetXapiProfileRef,
             goodScore: goodScore,
             verb: verb,
           ),
-          from: getResultProvider,
-          name: r'getResultProvider',
+          from: getXapiProfileProvider,
+          name: r'getXapiProfileProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getResultHash,
-          dependencies: GetResultFamily._dependencies,
-          allTransitiveDependencies: GetResultFamily._allTransitiveDependencies,
+                  : _$getXapiProfileHash,
+          dependencies: GetXapiProfileFamily._dependencies,
+          allTransitiveDependencies:
+              GetXapiProfileFamily._allTransitiveDependencies,
           goodScore: goodScore,
           verb: verb,
         );
 
-  GetResultProvider._internal(
+  GetXapiProfileProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -114,12 +115,12 @@ class GetResultProvider extends AutoDisposeFutureProvider<Profile> {
 
   @override
   Override overrideWith(
-    FutureOr<Profile> Function(GetResultRef provider) create,
+    FutureOr<Profile> Function(GetXapiProfileRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: GetResultProvider._internal(
-        (ref) => create(ref as GetResultRef),
+      override: GetXapiProfileProvider._internal(
+        (ref) => create(ref as GetXapiProfileRef),
         from: from,
         name: null,
         dependencies: null,
@@ -133,12 +134,12 @@ class GetResultProvider extends AutoDisposeFutureProvider<Profile> {
 
   @override
   AutoDisposeFutureProviderElement<Profile> createElement() {
-    return _GetResultProviderElement(this);
+    return _GetXapiProfileProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GetResultProvider &&
+    return other is GetXapiProfileProvider &&
         other.goodScore == goodScore &&
         other.verb == verb;
   }
@@ -155,7 +156,7 @@ class GetResultProvider extends AutoDisposeFutureProvider<Profile> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin GetResultRef on AutoDisposeFutureProviderRef<Profile> {
+mixin GetXapiProfileRef on AutoDisposeFutureProviderRef<Profile> {
   /// The parameter `goodScore` of this provider.
   bool get goodScore;
 
@@ -163,14 +164,14 @@ mixin GetResultRef on AutoDisposeFutureProviderRef<Profile> {
   Verb? get verb;
 }
 
-class _GetResultProviderElement
-    extends AutoDisposeFutureProviderElement<Profile> with GetResultRef {
-  _GetResultProviderElement(super.provider);
+class _GetXapiProfileProviderElement
+    extends AutoDisposeFutureProviderElement<Profile> with GetXapiProfileRef {
+  _GetXapiProfileProviderElement(super.provider);
 
   @override
-  bool get goodScore => (origin as GetResultProvider).goodScore;
+  bool get goodScore => (origin as GetXapiProfileProvider).goodScore;
   @override
-  Verb? get verb => (origin as GetResultProvider).verb;
+  Verb? get verb => (origin as GetXapiProfileProvider).verb;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

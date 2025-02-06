@@ -60,7 +60,7 @@ class NewsRepository {
           ),
           error: e);
     } catch (e, s) {
-      log.e("failed to get => $e, stack => $s");
+      log.e("failed $e, stack => $s");
       throw NewsFeedException();
     }
   }

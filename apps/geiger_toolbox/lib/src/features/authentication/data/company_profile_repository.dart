@@ -1,3 +1,4 @@
+import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
@@ -13,10 +14,12 @@ class CompanyProfileRepository {
 
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
+  Logger get _log => ref.read(logHandlerProvider("CompanyProfileRepository"));
+
   CompanyProfileRepository(this.ref);
 
   // create company profile
-  Future<void> createCompanyProfile(
+  Future<int> createCompanyProfile(
       {required UserID userId, required Company companyInfo}) async {
     try {
       final companyProfile = CompanyProfilesCompanion(
@@ -25,7 +28,7 @@ class CompanyProfileRepository {
         location: Value(companyInfo.location),
         description: Value(companyInfo.description),
       );
-      await _db.into(_db.companyProfiles).insert(companyProfile);
+      return await _db.into(_db.companyProfiles).insert(companyProfile);
     } catch (e) {
       rethrow;
     }
@@ -47,49 +50,56 @@ class CompanyProfileRepository {
 
   Future<Company?> fetchCompany() async {
     try {
-      final query = _db.select(_db.companyProfiles).join([
+      final query = await (_db.select(_db.companyProfiles).join([
+        leftOuterJoin(_db.userProfiles,
+            _db.userProfiles.userId.equalsExp(_db.companyProfiles.userId))
+      ])
+            ..where(_db.companyProfiles.userId
+                .equalsExp(_db.companyProfiles.userId))
+            ..orderBy([OrderingTerm.desc(_db.userProfiles.createdAt)]))
+          .getSingleOrNull();
+
+      if (query != null) {
+        final data = query.readTable(_db.companyProfiles);
+        return Company(
+            companyName: data.companyName,
+            location: data.location,
+            description: data.description);
+      }
+    } catch (e) {
+      rethrow;
+    }
+    return null;
+  }
+
+  Stream<Company?> watchCompany() {
+    try {
+      final company = _db.select(_db.companyProfiles);
+
+      final query = company.join([
         leftOuterJoin(_db.userProfiles,
             _db.userProfiles.userId.equalsExp(_db.companyProfiles.userId))
       ])
         ..where(
             _db.companyProfiles.userId.equalsExp(_db.companyProfiles.userId));
+      final row = query.watchSingleOrNull();
 
-      final row = await query.getSingleOrNull();
-
-      if (row != null) {
-        final data = row.readTable(_db.companyProfiles);
-        return Company(
-            companyName: data.companyName,
-            location: data.location,
-            description: data.description);
-      } else {
-        return null;
-      }
-    } catch (e) {
+      return row.map((value) {
+        if (value != null) {
+          final data = value.readTable(_db.companyProfiles);
+          final company = Company(
+              companyName: data.companyName,
+              location: data.location,
+              description: data.description);
+          return company;
+        } else {
+          return null;
+        }
+      });
+    } catch (e, s) {
+      _log.i("error=>$e, stack => $s");
       rethrow;
     }
-  }
-
-  Stream<Company?> watchCompany() {
-    final query = _db.select(_db.companyProfiles).join([
-      leftOuterJoin(_db.userProfiles,
-          _db.userProfiles.userId.equalsExp(_db.companyProfiles.userId))
-    ])
-      ..where(_db.companyProfiles.userId.equalsExp(_db.companyProfiles.userId));
-    final row = query.watchSingleOrNull();
-
-    return row.map((value) {
-      if (value != null) {
-        final data = value.readTable(_db.companyProfiles);
-        final company = Company(
-            companyName: data.companyName,
-            location: data.location,
-            description: data.description);
-        return company;
-      } else {
-        return null;
-      }
-    });
   }
 
   Future<void> deleteCompanyProfile() async {
@@ -101,7 +111,7 @@ class CompanyProfileRepository {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 CompanyProfileRepository companyProfileRepository(Ref ref) {
   return CompanyProfileRepository(ref);
 }

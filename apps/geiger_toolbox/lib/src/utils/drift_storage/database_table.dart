@@ -111,8 +111,10 @@ class ActiveTodoOfferings extends Table {
 
 @DataClassName('InActiveTodoOfferingData')
 class InActiveTodoOfferings extends Table {
-  TextColumn get offeringId => text().references(RecommendationOfferings, #id)();
-  DateTimeColumn get dateCancelled => dateTime().withDefault(currentDateAndTime)();
+  TextColumn get offeringId =>
+      text().references(RecommendationOfferings, #id)();
+  DateTimeColumn get dateCancelled =>
+      dateTime().withDefault(currentDateAndTime)();
   @override
   Set<Column> get primaryKey => {offeringId};
 }
@@ -185,5 +187,9 @@ class AppDatabase extends _$AppDatabase {
 
 @Riverpod(keepAlive: true)
 AppDatabase appDatabase(Ref ref) {
-  return AppDatabase.runDatabase();
+  final database = AppDatabase.runDatabase();
+  ref.onDispose(() async {
+    await database.close();
+  });
+  return database;
 }

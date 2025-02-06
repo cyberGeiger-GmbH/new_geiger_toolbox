@@ -7,12 +7,12 @@ part of 'company_profile_repository.dart';
 // **************************************************************************
 
 String _$companyProfileRepositoryHash() =>
-    r'9c809ded181e52e69abfc2062df716fe3e1e485a';
+    r'10e72e0ef4625caf97459ba5af3cb93ecbffbbe5';
 
 /// See also [companyProfileRepository].
 @ProviderFor(companyProfileRepository)
 final companyProfileRepositoryProvider =
-    AutoDisposeProvider<CompanyProfileRepository>.internal(
+    Provider<CompanyProfileRepository>.internal(
   companyProfileRepository,
   name: r'companyProfileRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -24,8 +24,7 @@ final companyProfileRepositoryProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef CompanyProfileRepositoryRef
-    = AutoDisposeProviderRef<CompanyProfileRepository>;
+typedef CompanyProfileRepositoryRef = ProviderRef<CompanyProfileRepository>;
 String _$watchCompanyHash() => r'd3a7d97739b6c267348b8339b4ae08c8d3f9eb34';
 
 /// See also [watchCompany].

@@ -27,7 +27,7 @@ class GeigerScoreService {
 
 //todo: check the range of score and update the goodScore parameter
       final previousScoreProfile =
-          await ref.read(getResultProvider(goodScore: false).future);
+          await ref.read(getXapiProfileProvider(goodScore: false).future);
 
       _log.i("Sending company profile in xapi format");
 

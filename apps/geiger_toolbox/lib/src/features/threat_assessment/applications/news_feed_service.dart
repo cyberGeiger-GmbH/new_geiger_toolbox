@@ -55,7 +55,7 @@ class NewsFeedService {
       // todo
     }
     return await ref
-        .read(getResultProvider(goodScore: false, verb: verb).future);
+        .read(getXapiProfileProvider(goodScore: false, verb: verb).future);
   }
 }
 

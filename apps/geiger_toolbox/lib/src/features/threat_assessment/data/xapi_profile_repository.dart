@@ -15,7 +15,7 @@ class XapiProfileRepository {
 
   Device get _deviceType => ref.watch(deviceTypeProvider).requireValue;
 
-  Logger get _log => ref.read(logHandlerProvider("ScoreProfileService"));
+  Logger get _log => ref.read(logHandlerProvider("XapiProfileRepository"));
 
   XapiProfileRepository(this.ref);
 
@@ -23,7 +23,9 @@ class XapiProfileRepository {
     _log.i("Preparing profile xapi");
     final userId = await _userId();
 
-    final company = await ref.read(fetchCompanyProvider.future);
+    final compRepo = ref.read(companyProfileRepositoryProvider);
+
+    final company = await compRepo.fetchCompany();
 
     final object = await ref.read(fetchActingObjectProvider.future);
 
@@ -35,7 +37,7 @@ class XapiProfileRepository {
     final result = await _fetchPreviousScore(success: goodScore);
 
     if (company != null) {
-      _log.i("profile with company profile");
+      _log.i("profile with company profile => $company");
       final action =
           Verb(name: "requesting recalculations base on company profile");
 
@@ -68,10 +70,7 @@ class XapiProfileRepository {
     final score = await repoScore.fetchGeigerScoreList();
     final List<Result> result = [];
     if (score.isNotEmpty) {
-
       for (var data in score) {
-       
-
         if (!result.any((value) => value.id == data.id)) {
           final ext = ResultExtensions(
               geigerScore: data.geigerScore,
@@ -97,7 +96,7 @@ class XapiProfileRepository {
 }
 
 @riverpod
-Future<Profile> getResult(Ref ref,
+Future<Profile> getXapiProfile(Ref ref,
     {required bool goodScore, Verb? verb}) async {
   final repo = XapiProfileRepository(ref);
   return repo.getXapiProfile(goodScore: goodScore, verb: verb);

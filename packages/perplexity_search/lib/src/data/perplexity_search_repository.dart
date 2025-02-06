@@ -15,7 +15,9 @@ class PerplexitySearchRepository {
   PerplexitySearchRepository(this.ref);
 
   Future<Description?> searchCompanyDescription(
-      {required String companyName, required String location, required String apiKey}) async {
+      {required String companyName,
+      required String location,
+      required String apiKey}) async {
     final client = ref.read(dioClientProvider);
     final log = ref.read(loggingHandlerProvider("searchCompanyDescription"));
 
@@ -30,10 +32,7 @@ class PerplexitySearchRepository {
                 "you are a search enginer. what company does base on the name and the location provided. the result show be short",
             "role": "system"
           },
-          {
-            "role": "user",
-            "content": "who is $companyName from Freiburg, $location"
-          }
+          {"role": "user", "content": "who is $companyName in $location"}
         ]
       };
 

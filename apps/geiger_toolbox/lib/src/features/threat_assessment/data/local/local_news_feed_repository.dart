@@ -1,6 +1,7 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
+import 'package:geiger_toolbox/src/utils/date_formater.dart';
 
 import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:drift/drift.dart';
@@ -32,7 +33,8 @@ class LocalNewsFeedRepository {
         await _db.transaction(() async {
           for (var newsData in uniqueNews) {
             //insert news
-            final dateCreated = DateTime.parse(newsData.dateCreated);
+            final dateCreated =
+                ref.read(stringToDateProvider(inputDate: newsData.dateCreated));
             final newsCompanion = NewsInfoCompanion(
               id: Value(newsData.id),
               title: Value(newsData.title),
