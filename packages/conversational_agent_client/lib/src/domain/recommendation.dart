@@ -9,6 +9,7 @@ class Recommendation with _$Recommendation {
   factory Recommendation(
       {required final String id,
       required String name,
+      required String rationale,
       @JsonKey(name: "specific_offerings")
       required List<Offering> offerings}) = _Recommendation;
 

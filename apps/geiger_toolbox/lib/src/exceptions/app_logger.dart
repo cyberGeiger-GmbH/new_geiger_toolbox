@@ -10,7 +10,7 @@ class AppLogger {
 
   final Ref ref;
   FutureOr<void> logError(Object error, StackTrace? stackTrace) async {
-    final log = ref.read(logHandlerProvider("Error: "));
+    final log = ref.read(logHandlerProvider("AppLogger "));
     await Sentry.captureException(error, stackTrace: stackTrace);
     log.e(' $error, $stackTrace');
   }

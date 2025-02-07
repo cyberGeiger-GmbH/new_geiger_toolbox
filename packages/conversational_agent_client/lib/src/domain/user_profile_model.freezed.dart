@@ -1156,7 +1156,7 @@ Protection _$ProtectionFromJson(Map<String, dynamic> json) {
 mixin _$Protection {
   String get name => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
-  ProtectionStatus get status => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
 
   /// Serializes this Protection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1174,7 +1174,7 @@ abstract class $ProtectionCopyWith<$Res> {
           Protection value, $Res Function(Protection) then) =
       _$ProtectionCopyWithImpl<$Res, Protection>;
   @useResult
-  $Res call({String name, String summary, ProtectionStatus status});
+  $Res call({String name, String summary, String status});
 }
 
 /// @nodoc
@@ -1208,7 +1208,7 @@ class _$ProtectionCopyWithImpl<$Res, $Val extends Protection>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ProtectionStatus,
+              as String,
     ) as $Val);
   }
 }
@@ -1221,7 +1221,7 @@ abstract class _$$ProtectionImplCopyWith<$Res>
       __$$ProtectionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String summary, ProtectionStatus status});
+  $Res call({String name, String summary, String status});
 }
 
 /// @nodoc
@@ -1253,7 +1253,7 @@ class __$$ProtectionImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ProtectionStatus,
+              as String,
     ));
   }
 }
@@ -1272,7 +1272,7 @@ class _$ProtectionImpl implements _Protection {
   @override
   final String summary;
   @override
-  final ProtectionStatus status;
+  final String status;
 
   @override
   String toString() {
@@ -1313,7 +1313,7 @@ abstract class _Protection implements Protection {
   const factory _Protection(
       {required final String name,
       required final String summary,
-      required final ProtectionStatus status}) = _$ProtectionImpl;
+      required final String status}) = _$ProtectionImpl;
 
   factory _Protection.fromJson(Map<String, dynamic> json) =
       _$ProtectionImpl.fromJson;
@@ -1323,7 +1323,7 @@ abstract class _Protection implements Protection {
   @override
   String get summary;
   @override
-  ProtectionStatus get status;
+  String get status;
 
   /// Create a copy of Protection
   /// with the given fields replaced by the non-null parameter values.

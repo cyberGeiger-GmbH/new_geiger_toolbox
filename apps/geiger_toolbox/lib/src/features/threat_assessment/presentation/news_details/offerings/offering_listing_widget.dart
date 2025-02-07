@@ -5,12 +5,11 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_widget.dart';
-
-class OfferingListWidget extends ConsumerWidget {
-  const OfferingListWidget({super.key, required this.id});
+class RecommendedTodoListWidget extends ConsumerWidget {
+  const RecommendedTodoListWidget({super.key, required this.id});
   final RecommendationID id;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,11 +33,43 @@ class OfferingListWidget extends ConsumerWidget {
               child: TodoTileList(
                 todoTile: data
                     .map(
-                      (offer) => AddOfferingToDoWidget(key: key, offer: offer),
+                      (offer) => RecommendedTodoWidget(key: key, offer: offer),
                     )
                     .toList(),
               ),
             ),
     );
+  }
+}
+
+class RecommendedTodoWidget extends ConsumerWidget {
+  const RecommendedTodoWidget({
+    super.key,
+    required this.offer,
+  });
+
+  final TodoOffering offer;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    
+    final state = ref.watch(toggleOfferControllerProvider(offer));
+
+    return TodoTile.plain(
+        key: key,
+        summary: offer.offering.summary,
+        title: offer.offering.name,
+        done: state.status == Status.planned,
+        onChange: (value) async {
+          //to update the ui
+          ref
+              .read(toggleOfferControllerProvider(offer).notifier)
+              .onChange(offer.copyWith(status: Status.planned));
+
+          //add to a todo list
+          ref
+              .read(toggleListOfferControllerProvider.notifier)
+              .selectTodoItems(state.copyWith(status: Status.planned));
+        }); // only all to activeTodo
   }
 }

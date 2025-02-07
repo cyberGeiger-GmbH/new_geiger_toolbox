@@ -9,7 +9,7 @@ class RemoteGeigerScoreRepository {
 
   RemoteGeigerScoreRepository(this.ref);
 
-  Future<GeigerScore?> geigerScore({required Profile profile}) async {
+  Future<GeigerScore?> geigerScore({required UserProfileModel profile}) async {
     final scoreRepo = ref.read(geigerScoreRepositoryProvider);
     final data = await scoreRepo.fetchGeigerScore(userProfile: profile);
     return data;
@@ -17,7 +17,7 @@ class RemoteGeigerScoreRepository {
 }
 
 @riverpod
-Future<GeigerScore?> getGeigerScore(Ref ref, {required Profile userProfile}) {
+Future<GeigerScore?> getGeigerScore(Ref ref, {required UserProfileModel userProfile}) {
   final instance = RemoteGeigerScoreRepository(ref);
   return instance.geigerScore(profile: userProfile);
 }

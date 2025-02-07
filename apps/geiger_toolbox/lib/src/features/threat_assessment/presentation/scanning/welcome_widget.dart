@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_status_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
 
@@ -15,7 +15,7 @@ class WelcomeScanIntroWidget extends ConsumerWidget {
         //crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          const ScoreStatusWidget(),
+          const GeigerScoreWidget(),
           ScanButtonWidget(
             onScanPressed: onScanPressed,
           )

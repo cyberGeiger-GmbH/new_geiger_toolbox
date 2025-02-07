@@ -22,6 +22,7 @@ Recommendation _$RecommendationFromJson(Map<String, dynamic> json) {
 mixin _$Recommendation {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get rationale => throw _privateConstructorUsedError;
   @JsonKey(name: "specific_offerings")
   List<Offering> get offerings => throw _privateConstructorUsedError;
 
@@ -44,6 +45,7 @@ abstract class $RecommendationCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      String rationale,
       @JsonKey(name: "specific_offerings") List<Offering> offerings});
 }
 
@@ -64,6 +66,7 @@ class _$RecommendationCopyWithImpl<$Res, $Val extends Recommendation>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? rationale = null,
     Object? offerings = null,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +77,10 @@ class _$RecommendationCopyWithImpl<$Res, $Val extends Recommendation>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      rationale: null == rationale
+          ? _value.rationale
+          : rationale // ignore: cast_nullable_to_non_nullable
               as String,
       offerings: null == offerings
           ? _value.offerings
@@ -94,6 +101,7 @@ abstract class _$$RecommendationImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
+      String rationale,
       @JsonKey(name: "specific_offerings") List<Offering> offerings});
 }
 
@@ -112,6 +120,7 @@ class __$$RecommendationImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? rationale = null,
     Object? offerings = null,
   }) {
     return _then(_$RecommendationImpl(
@@ -122,6 +131,10 @@ class __$$RecommendationImplCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      rationale: null == rationale
+          ? _value.rationale
+          : rationale // ignore: cast_nullable_to_non_nullable
               as String,
       offerings: null == offerings
           ? _value._offerings
@@ -137,6 +150,7 @@ class _$RecommendationImpl implements _Recommendation {
   _$RecommendationImpl(
       {required this.id,
       required this.name,
+      required this.rationale,
       @JsonKey(name: "specific_offerings")
       required final List<Offering> offerings})
       : _offerings = offerings;
@@ -148,6 +162,8 @@ class _$RecommendationImpl implements _Recommendation {
   final String id;
   @override
   final String name;
+  @override
+  final String rationale;
   final List<Offering> _offerings;
   @override
   @JsonKey(name: "specific_offerings")
@@ -159,7 +175,7 @@ class _$RecommendationImpl implements _Recommendation {
 
   @override
   String toString() {
-    return 'Recommendation(id: $id, name: $name, offerings: $offerings)';
+    return 'Recommendation(id: $id, name: $name, rationale: $rationale, offerings: $offerings)';
   }
 
   @override
@@ -169,14 +185,16 @@ class _$RecommendationImpl implements _Recommendation {
             other is _$RecommendationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.rationale, rationale) ||
+                other.rationale == rationale) &&
             const DeepCollectionEquality()
                 .equals(other._offerings, _offerings));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(_offerings));
+  int get hashCode => Object.hash(runtimeType, id, name, rationale,
+      const DeepCollectionEquality().hash(_offerings));
 
   /// Create a copy of Recommendation
   /// with the given fields replaced by the non-null parameter values.
@@ -199,6 +217,7 @@ abstract class _Recommendation implements Recommendation {
   factory _Recommendation(
       {required final String id,
       required final String name,
+      required final String rationale,
       @JsonKey(name: "specific_offerings")
       required final List<Offering> offerings}) = _$RecommendationImpl;
 
@@ -209,6 +228,8 @@ abstract class _Recommendation implements Recommendation {
   String get id;
   @override
   String get name;
+  @override
+  String get rationale;
   @override
   @JsonKey(name: "specific_offerings")
   List<Offering> get offerings;

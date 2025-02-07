@@ -24,6 +24,7 @@ class LocalGeigerScoreRepository {
         final geigerData = GeigerScoresCompanion(
           score: Value(score.geigerScore),
           userId: Value(userId),
+          interpretation: Value(score.interpretation),
           reason: Value(score.reasons),
         );
         await _db.into(_db.geigerScores).insert(geigerData);

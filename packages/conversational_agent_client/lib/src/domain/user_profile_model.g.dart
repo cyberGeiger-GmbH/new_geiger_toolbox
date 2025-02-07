@@ -100,18 +100,12 @@ _$ProtectionImpl _$$ProtectionImplFromJson(Map<String, dynamic> json) =>
     _$ProtectionImpl(
       name: json['name'] as String,
       summary: json['summary'] as String,
-      status: $enumDecode(_$ProtectionStatusEnumMap, json['status']),
+      status: json['status'] as String,
     );
 
 Map<String, dynamic> _$$ProtectionImplToJson(_$ProtectionImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'summary': instance.summary,
-      'status': _$ProtectionStatusEnumMap[instance.status]!,
+      'status': instance.status,
     };
-
-const _$ProtectionStatusEnumMap = {
-  ProtectionStatus.recommended: 'recommended',
-  ProtectionStatus.planned: 'planned',
-  ProtectionStatus.done: 'done',
-};

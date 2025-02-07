@@ -6,11 +6,14 @@ part 'todo_offering.freezed.dart';
 //* offeringId is the with hypen separated name of [Offering] name
 typedef OfferingId = String;
 
+enum Status { recommended, planned, done }
+
 @freezed
-class TodoOffing with _$TodoOffing {
-  factory TodoOffing(
+class TodoOffering with _$TodoOffering {
+  const factory TodoOffering(
       {required OfferingId id,
-      required Offering offering,
-      required bool added,
-      final DateTime? datePlanned}) = _OfferingStatus;
+      required Status status,
+      required DateTime dateRecommendated,
+      DateTime? lastUpdated,
+      required Offering offering}) = _TodoOffering;
 }

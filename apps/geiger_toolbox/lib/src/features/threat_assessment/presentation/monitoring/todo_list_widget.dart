@@ -35,7 +35,7 @@ class ShortTodoList extends StatelessWidget {
     required this.items,
     required this.displayLimit,
   });
-  final List<TodoOffing> items;
+  final List<TodoOffering> items;
   final int displayLimit;
 
   @override
@@ -76,14 +76,12 @@ class ShortTodoList extends StatelessWidget {
             (item) => Card(
               child: ListTile(
                 title: AppText.bodyMedium(
-                    text: item.offering.name,
-                    context: context,
-                    textAlign: TextAlign.start,
-                    textRemoved: !item.added),
+                  text: item.offering.name,
+                  context: context,
+                  textAlign: TextAlign.start,
+                ),
                 subtitle: AppText.bodySmall(
-                    text: item.offering.summary,
-                    textRemoved: !item.added,
-                    context: context),
+                    text: item.offering.summary, context: context),
               ),
             ),
           )),
@@ -96,7 +94,7 @@ class ShortTodoList extends StatelessWidget {
 class ShowLimitedTodos extends StatelessWidget {
   const ShowLimitedTodos(
       {super.key, required this.items, required this.displayLimit});
-  final List<TodoOffing> items;
+  final List<TodoOffering> items;
   final int displayLimit;
   @override
   Widget build(BuildContext context) {
@@ -124,7 +122,7 @@ class TodoWidget extends StatelessWidget {
     required this.item,
   });
 
-  final TodoOffing item;
+  final TodoOffering item;
 
   @override
   Widget build(BuildContext context) {

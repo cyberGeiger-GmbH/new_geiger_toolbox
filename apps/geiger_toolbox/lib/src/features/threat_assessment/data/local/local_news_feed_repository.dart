@@ -39,6 +39,7 @@ class LocalNewsFeedRepository {
               id: Value(newsData.id),
               title: Value(newsData.title),
               summary: Value(newsData.summary),
+              newsCategorg: Value(newsData.newsCategory),
               imageUrl: Value(newsData.imageUrl),
               dateCreated: Value(dateCreated),
             );
@@ -47,10 +48,10 @@ class LocalNewsFeedRepository {
             //insert recommendations for each news
             for (var recomData in newsData.recommendations) {
               final reco = RecommendationsCompanion(
-                id: Value(recomData.id),
-                newsId: Value(newsData.id),
-                name: Value(recomData.name),
-              );
+                  id: Value(recomData.id),
+                  newsId: Value(newsData.id),
+                  name: Value(recomData.name),
+                  rationale: Value(recomData.rationale));
               await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
 
               // insert offering for each recommendation
@@ -72,9 +73,9 @@ class LocalNewsFeedRepository {
           }
         });
       }
-      _log.i("finished storing");
+      _log.i("done storing");
     } catch (e, s) {
-      _log.e(e);
+      _log.e("error:$e, stack:$s");
       throw DataBaseException(error: e.toString(), stack: s.toString());
     }
   }
@@ -116,7 +117,7 @@ class LocalNewsFeedRepository {
         await _db.delete(_db.newsInfo).go();
         await _db.delete(_db.recommendations).go();
         await _db.delete(_db.recommendationOfferings).go();
-        await _db.delete(_db.activeTodoOfferings).go();
+        await _db.delete(_db.todoOfferings).go();
       });
       _log.i("news deleted");
     } catch (e) {
@@ -204,7 +205,10 @@ class LocalNewsFeedRepository {
         // Add offerings to the corresponding list in offerMap
         if (offeringEntry != null) {
           final offer = Offering(
-              name: offeringEntry.name, summary: offeringEntry.summary);
+            name: offeringEntry.name,
+            summary: offeringEntry.summary,
+          );
+
           offerMap
               .putIfAbsent(offeringEntry.recommendationId, () => [])
               .add(offer);
@@ -214,6 +218,7 @@ class LocalNewsFeedRepository {
         if (recommendationEntry != null) {
           final reco = Recommendation(
               id: recommendationEntry.id,
+              rationale: recommendationEntry.rationale,
               name: recommendationEntry.name,
               offerings: offerMap[recommendationEntry.id] ?? []);
 
@@ -233,6 +238,7 @@ class LocalNewsFeedRepository {
               id: newsEntry.id,
               title: newsEntry.title,
               summary: newsEntry.summary,
+              newsCategory: newsEntry.newsCategorg,
               articleUrl: "",
               imageUrl: newsEntry.imageUrl,
               dateCreated: "${newsEntry.dateCreated}",
@@ -280,8 +286,10 @@ class LocalNewsFeedRepository {
 
       // add offfer to the corresponding list in offerMap
       if (offeringEntry != null) {
-        final offer =
-            Offering(name: offeringEntry.name, summary: offeringEntry.summary);
+        final offer = Offering(
+          name: offeringEntry.name,
+          summary: offeringEntry.summary,
+        );
         offerMap
             .putIfAbsent(offeringEntry.recommendationId, () => [])
             .add(offer);
@@ -292,6 +300,7 @@ class LocalNewsFeedRepository {
         final reco = Recommendation(
             id: recommendationEntry.id,
             name: recommendationEntry.name,
+            rationale: recommendationEntry.rationale,
             offerings: offerMap[recommendationEntry.id] ?? []);
 
         // Ensure the recommendation is added only once for a specific newsId
@@ -310,6 +319,7 @@ class LocalNewsFeedRepository {
         final news = News(
             id: newsEntry.id,
             title: newsEntry.title,
+            newsCategory: newsEntry.newsCategorg,
             summary: newsEntry.summary,
             articleUrl: "",
             imageUrl: newsEntry.imageUrl,

@@ -2,7 +2,7 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/acting_object_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/news_object_log_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_geiger_score_repository.dart';
 
 import 'package:geiger_toolbox/src/utils/device_info.dart';
@@ -19,73 +19,35 @@ class XapiProfileRepository {
 
   XapiProfileRepository(this.ref);
 
-  Future<Profile> getXapiProfile({required bool goodScore, Verb? verb}) async {
+  Future<UserProfileModel> getXapiProfile() async {
     _log.i("Preparing profile xapi");
     final userId = await _userId();
 
     final compRepo = ref.read(companyProfileRepositoryProvider);
+    final scoreRepo = ref.read(localGeigerScoreRepoProvider);
 
     final company = await compRepo.fetchCompany();
 
-    final object = await ref.read(fetchActingObjectProvider.future);
+    final object = await ref.read(fetchNewsObjectLogProvider.future);
 
-    final currentUserDeviceInfo = Asset(
+    final currentUserDevice = Asset(
         type: _deviceType.type.name,
         version: _deviceType.version,
         model: _deviceType.model);
 
-    final result = await _fetchPreviousScore(success: goodScore);
+    final score = await scoreRepo.fetchGeigerScore();
 
-    if (company != null) {
-      _log.i("profile with company profile => $company");
-      final action =
-          Verb(name: "requesting recalculations base on company profile");
+    final actor = Actor(
+        userDevice: currentUserDevice,
+        companyDescription: company!.description,
+        location: company.location,
+        companyName: company.companyName,
+        locale: "en",
+        assets: [],
+        score: score?.geigerScore.toString());
 
-      return Profile.withDefaultTimestamp(
-          id: userId,
-          actor: Actor(
-            companyName: company.companyName,
-            location: company.location,
-            companyDescription: company.description,
-            userDevice: currentUserDeviceInfo,
-            assets: [],
-          ),
-          object: object,
-          verb: verb ?? action,
-          result: result);
-    } else {
-      _log.i("profile without company profile");
-      return Profile.withoutActor(
-          id: userId,
-          object: object,
-          verb: verb ??
-              Verb(name: "requesting recalculations without company profile"),
-          currentDevice: currentUserDeviceInfo,
-          result: result);
-    }
-  }
-
-  Future<List<Result>> _fetchPreviousScore({required bool success}) async {
-    final repoScore = ref.read(localGeigerScoreRepoProvider);
-    final score = await repoScore.fetchGeigerScoreList();
-    final List<Result> result = [];
-    if (score.isNotEmpty) {
-      for (var data in score) {
-        if (!result.any((value) => value.id == data.id)) {
-          final ext = ResultExtensions(
-              geigerScore: data.geigerScore,
-              lastUpdated: data.lastUpdate,
-              reasons: data.reason);
-
-          result.add(Result(
-              success: success,
-              completions: true,
-              extensions: ext,
-              id: data.id));
-        }
-      }
-    }
-    return result;
+    final currentProfile = Profile(id: userId, actor: actor, news: object);
+    return UserProfileModel(currentUserProfile: currentProfile);
   }
 
   Future<String> _userId() async {
@@ -96,8 +58,9 @@ class XapiProfileRepository {
 }
 
 @riverpod
-Future<Profile> getXapiProfile(Ref ref,
-    {required bool goodScore, Verb? verb}) async {
+Future<UserProfileModel> getXapiProfile(
+  Ref ref,
+) async {
   final repo = XapiProfileRepository(ref);
-  return repo.getXapiProfile(goodScore: goodScore, verb: verb);
+  return repo.getXapiProfile();
 }

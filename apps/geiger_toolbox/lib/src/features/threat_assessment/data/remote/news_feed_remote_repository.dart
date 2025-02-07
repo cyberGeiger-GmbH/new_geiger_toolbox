@@ -9,10 +9,10 @@ class NewsFeedRemoteRepository {
     Logger get _log => ref.read(logHandlerProvider("$NewsFeedRemoteRepository"));
   NewsFeedRemoteRepository(this.ref);
 
-  Future<List<News>> fetchNewsUpdate({final Profile? smeProfile}) async {
+  Future<List<News>> fetchNewsUpdate({required UserProfileModel smeProfile}) async {
     
     final newsRepo = ref.read(newsRepositoryProvider);
-    final data = await newsRepo.fetchNews(profile: smeProfile);
+    final data = await newsRepo.fetchNews(userProfile: smeProfile);
     _log.i("total news received > ${data.length}");
 
     return data;

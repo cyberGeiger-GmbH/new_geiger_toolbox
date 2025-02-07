@@ -625,6 +625,12 @@ class $GeigerScoresTable extends GeigerScores
   late final GeneratedColumn<String> reason = GeneratedColumn<String>(
       'reason', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _interpretationMeta =
+      const VerificationMeta('interpretation');
+  @override
+  late final GeneratedColumn<String> interpretation = GeneratedColumn<String>(
+      'interpretation', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _scoreMeta = const VerificationMeta('score');
   @override
   late final GeneratedColumn<int> score = GeneratedColumn<int>(
@@ -640,7 +646,7 @@ class $GeigerScoresTable extends GeigerScores
       defaultValue: currentDateAndTime);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, userId, reason, score, lastUpdated];
+      [id, userId, reason, interpretation, score, lastUpdated];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -665,6 +671,14 @@ class $GeigerScoresTable extends GeigerScores
           reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta));
     } else if (isInserting) {
       context.missing(_reasonMeta);
+    }
+    if (data.containsKey('interpretation')) {
+      context.handle(
+          _interpretationMeta,
+          interpretation.isAcceptableOrUnknown(
+              data['interpretation']!, _interpretationMeta));
+    } else if (isInserting) {
+      context.missing(_interpretationMeta);
     }
     if (data.containsKey('score')) {
       context.handle(
@@ -693,6 +707,8 @@ class $GeigerScoresTable extends GeigerScores
           .read(DriftSqlType.string, data['${effectivePrefix}user_id'])!,
       reason: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}reason'])!,
+      interpretation: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}interpretation'])!,
       score: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}score'])!,
       lastUpdated: attachedDatabase.typeMapping
@@ -710,12 +726,14 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
   final int id;
   final String userId;
   final String reason;
+  final String interpretation;
   final int score;
   final DateTime lastUpdated;
   const GeigerScoreData(
       {required this.id,
       required this.userId,
       required this.reason,
+      required this.interpretation,
       required this.score,
       required this.lastUpdated});
   @override
@@ -724,6 +742,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
     map['id'] = Variable<int>(id);
     map['user_id'] = Variable<String>(userId);
     map['reason'] = Variable<String>(reason);
+    map['interpretation'] = Variable<String>(interpretation);
     map['score'] = Variable<int>(score);
     map['last_updated'] = Variable<DateTime>(lastUpdated);
     return map;
@@ -734,6 +753,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
       id: Value(id),
       userId: Value(userId),
       reason: Value(reason),
+      interpretation: Value(interpretation),
       score: Value(score),
       lastUpdated: Value(lastUpdated),
     );
@@ -746,6 +766,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
       id: serializer.fromJson<int>(json['id']),
       userId: serializer.fromJson<String>(json['userId']),
       reason: serializer.fromJson<String>(json['reason']),
+      interpretation: serializer.fromJson<String>(json['interpretation']),
       score: serializer.fromJson<int>(json['score']),
       lastUpdated: serializer.fromJson<DateTime>(json['lastUpdated']),
     );
@@ -757,6 +778,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
       'id': serializer.toJson<int>(id),
       'userId': serializer.toJson<String>(userId),
       'reason': serializer.toJson<String>(reason),
+      'interpretation': serializer.toJson<String>(interpretation),
       'score': serializer.toJson<int>(score),
       'lastUpdated': serializer.toJson<DateTime>(lastUpdated),
     };
@@ -766,12 +788,14 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
           {int? id,
           String? userId,
           String? reason,
+          String? interpretation,
           int? score,
           DateTime? lastUpdated}) =>
       GeigerScoreData(
         id: id ?? this.id,
         userId: userId ?? this.userId,
         reason: reason ?? this.reason,
+        interpretation: interpretation ?? this.interpretation,
         score: score ?? this.score,
         lastUpdated: lastUpdated ?? this.lastUpdated,
       );
@@ -780,6 +804,9 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
       id: data.id.present ? data.id.value : this.id,
       userId: data.userId.present ? data.userId.value : this.userId,
       reason: data.reason.present ? data.reason.value : this.reason,
+      interpretation: data.interpretation.present
+          ? data.interpretation.value
+          : this.interpretation,
       score: data.score.present ? data.score.value : this.score,
       lastUpdated:
           data.lastUpdated.present ? data.lastUpdated.value : this.lastUpdated,
@@ -792,6 +819,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
           ..write('id: $id, ')
           ..write('userId: $userId, ')
           ..write('reason: $reason, ')
+          ..write('interpretation: $interpretation, ')
           ..write('score: $score, ')
           ..write('lastUpdated: $lastUpdated')
           ..write(')'))
@@ -799,7 +827,8 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
   }
 
   @override
-  int get hashCode => Object.hash(id, userId, reason, score, lastUpdated);
+  int get hashCode =>
+      Object.hash(id, userId, reason, interpretation, score, lastUpdated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -807,6 +836,7 @@ class GeigerScoreData extends DataClass implements Insertable<GeigerScoreData> {
           other.id == this.id &&
           other.userId == this.userId &&
           other.reason == this.reason &&
+          other.interpretation == this.interpretation &&
           other.score == this.score &&
           other.lastUpdated == this.lastUpdated);
 }
@@ -815,12 +845,14 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
   final Value<int> id;
   final Value<String> userId;
   final Value<String> reason;
+  final Value<String> interpretation;
   final Value<int> score;
   final Value<DateTime> lastUpdated;
   const GeigerScoresCompanion({
     this.id = const Value.absent(),
     this.userId = const Value.absent(),
     this.reason = const Value.absent(),
+    this.interpretation = const Value.absent(),
     this.score = const Value.absent(),
     this.lastUpdated = const Value.absent(),
   });
@@ -828,15 +860,18 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
     this.id = const Value.absent(),
     required String userId,
     required String reason,
+    required String interpretation,
     required int score,
     this.lastUpdated = const Value.absent(),
   })  : userId = Value(userId),
         reason = Value(reason),
+        interpretation = Value(interpretation),
         score = Value(score);
   static Insertable<GeigerScoreData> custom({
     Expression<int>? id,
     Expression<String>? userId,
     Expression<String>? reason,
+    Expression<String>? interpretation,
     Expression<int>? score,
     Expression<DateTime>? lastUpdated,
   }) {
@@ -844,6 +879,7 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
       if (id != null) 'id': id,
       if (userId != null) 'user_id': userId,
       if (reason != null) 'reason': reason,
+      if (interpretation != null) 'interpretation': interpretation,
       if (score != null) 'score': score,
       if (lastUpdated != null) 'last_updated': lastUpdated,
     });
@@ -853,12 +889,14 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
       {Value<int>? id,
       Value<String>? userId,
       Value<String>? reason,
+      Value<String>? interpretation,
       Value<int>? score,
       Value<DateTime>? lastUpdated}) {
     return GeigerScoresCompanion(
       id: id ?? this.id,
       userId: userId ?? this.userId,
       reason: reason ?? this.reason,
+      interpretation: interpretation ?? this.interpretation,
       score: score ?? this.score,
       lastUpdated: lastUpdated ?? this.lastUpdated,
     );
@@ -876,6 +914,9 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
     if (reason.present) {
       map['reason'] = Variable<String>(reason.value);
     }
+    if (interpretation.present) {
+      map['interpretation'] = Variable<String>(interpretation.value);
+    }
     if (score.present) {
       map['score'] = Variable<int>(score.value);
     }
@@ -891,6 +932,7 @@ class GeigerScoresCompanion extends UpdateCompanion<GeigerScoreData> {
           ..write('id: $id, ')
           ..write('userId: $userId, ')
           ..write('reason: $reason, ')
+          ..write('interpretation: $interpretation, ')
           ..write('score: $score, ')
           ..write('lastUpdated: $lastUpdated')
           ..write(')'))
@@ -924,6 +966,12 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
   late final GeneratedColumn<String> summary = GeneratedColumn<String>(
       'summary', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _newsCategorgMeta =
+      const VerificationMeta('newsCategorg');
+  @override
+  late final GeneratedColumn<String> newsCategorg = GeneratedColumn<String>(
+      'news_categorg', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _imageUrlMeta =
       const VerificationMeta('imageUrl');
   @override
@@ -938,7 +986,7 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, title, summary, imageUrl, dateCreated];
+      [id, title, summary, newsCategorg, imageUrl, dateCreated];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -965,6 +1013,14 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
           summary.isAcceptableOrUnknown(data['summary']!, _summaryMeta));
     } else if (isInserting) {
       context.missing(_summaryMeta);
+    }
+    if (data.containsKey('news_categorg')) {
+      context.handle(
+          _newsCategorgMeta,
+          newsCategorg.isAcceptableOrUnknown(
+              data['news_categorg']!, _newsCategorgMeta));
+    } else if (isInserting) {
+      context.missing(_newsCategorgMeta);
     }
     if (data.containsKey('image_url')) {
       context.handle(_imageUrlMeta,
@@ -995,6 +1051,8 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       summary: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}summary'])!,
+      newsCategorg: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}news_categorg'])!,
       imageUrl: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}image_url'])!,
       dateCreated: attachedDatabase.typeMapping
@@ -1012,12 +1070,14 @@ class NewsData extends DataClass implements Insertable<NewsData> {
   final String id;
   final String title;
   final String summary;
+  final String newsCategorg;
   final String imageUrl;
   final DateTime dateCreated;
   const NewsData(
       {required this.id,
       required this.title,
       required this.summary,
+      required this.newsCategorg,
       required this.imageUrl,
       required this.dateCreated});
   @override
@@ -1026,6 +1086,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
     map['id'] = Variable<String>(id);
     map['title'] = Variable<String>(title);
     map['summary'] = Variable<String>(summary);
+    map['news_categorg'] = Variable<String>(newsCategorg);
     map['image_url'] = Variable<String>(imageUrl);
     map['date_created'] = Variable<DateTime>(dateCreated);
     return map;
@@ -1036,6 +1097,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       id: Value(id),
       title: Value(title),
       summary: Value(summary),
+      newsCategorg: Value(newsCategorg),
       imageUrl: Value(imageUrl),
       dateCreated: Value(dateCreated),
     );
@@ -1048,6 +1110,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       id: serializer.fromJson<String>(json['id']),
       title: serializer.fromJson<String>(json['title']),
       summary: serializer.fromJson<String>(json['summary']),
+      newsCategorg: serializer.fromJson<String>(json['newsCategorg']),
       imageUrl: serializer.fromJson<String>(json['imageUrl']),
       dateCreated: serializer.fromJson<DateTime>(json['dateCreated']),
     );
@@ -1059,6 +1122,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       'id': serializer.toJson<String>(id),
       'title': serializer.toJson<String>(title),
       'summary': serializer.toJson<String>(summary),
+      'newsCategorg': serializer.toJson<String>(newsCategorg),
       'imageUrl': serializer.toJson<String>(imageUrl),
       'dateCreated': serializer.toJson<DateTime>(dateCreated),
     };
@@ -1068,12 +1132,14 @@ class NewsData extends DataClass implements Insertable<NewsData> {
           {String? id,
           String? title,
           String? summary,
+          String? newsCategorg,
           String? imageUrl,
           DateTime? dateCreated}) =>
       NewsData(
         id: id ?? this.id,
         title: title ?? this.title,
         summary: summary ?? this.summary,
+        newsCategorg: newsCategorg ?? this.newsCategorg,
         imageUrl: imageUrl ?? this.imageUrl,
         dateCreated: dateCreated ?? this.dateCreated,
       );
@@ -1082,6 +1148,9 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       id: data.id.present ? data.id.value : this.id,
       title: data.title.present ? data.title.value : this.title,
       summary: data.summary.present ? data.summary.value : this.summary,
+      newsCategorg: data.newsCategorg.present
+          ? data.newsCategorg.value
+          : this.newsCategorg,
       imageUrl: data.imageUrl.present ? data.imageUrl.value : this.imageUrl,
       dateCreated:
           data.dateCreated.present ? data.dateCreated.value : this.dateCreated,
@@ -1094,6 +1163,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
           ..write('id: $id, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
+          ..write('newsCategorg: $newsCategorg, ')
           ..write('imageUrl: $imageUrl, ')
           ..write('dateCreated: $dateCreated')
           ..write(')'))
@@ -1101,7 +1171,8 @@ class NewsData extends DataClass implements Insertable<NewsData> {
   }
 
   @override
-  int get hashCode => Object.hash(id, title, summary, imageUrl, dateCreated);
+  int get hashCode =>
+      Object.hash(id, title, summary, newsCategorg, imageUrl, dateCreated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1109,6 +1180,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
           other.id == this.id &&
           other.title == this.title &&
           other.summary == this.summary &&
+          other.newsCategorg == this.newsCategorg &&
           other.imageUrl == this.imageUrl &&
           other.dateCreated == this.dateCreated);
 }
@@ -1117,6 +1189,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
   final Value<String> id;
   final Value<String> title;
   final Value<String> summary;
+  final Value<String> newsCategorg;
   final Value<String> imageUrl;
   final Value<DateTime> dateCreated;
   final Value<int> rowid;
@@ -1124,6 +1197,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     this.id = const Value.absent(),
     this.title = const Value.absent(),
     this.summary = const Value.absent(),
+    this.newsCategorg = const Value.absent(),
     this.imageUrl = const Value.absent(),
     this.dateCreated = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -1132,18 +1206,21 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     required String id,
     required String title,
     required String summary,
+    required String newsCategorg,
     required String imageUrl,
     required DateTime dateCreated,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         title = Value(title),
         summary = Value(summary),
+        newsCategorg = Value(newsCategorg),
         imageUrl = Value(imageUrl),
         dateCreated = Value(dateCreated);
   static Insertable<NewsData> custom({
     Expression<String>? id,
     Expression<String>? title,
     Expression<String>? summary,
+    Expression<String>? newsCategorg,
     Expression<String>? imageUrl,
     Expression<DateTime>? dateCreated,
     Expression<int>? rowid,
@@ -1152,6 +1229,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
       if (id != null) 'id': id,
       if (title != null) 'title': title,
       if (summary != null) 'summary': summary,
+      if (newsCategorg != null) 'news_categorg': newsCategorg,
       if (imageUrl != null) 'image_url': imageUrl,
       if (dateCreated != null) 'date_created': dateCreated,
       if (rowid != null) 'rowid': rowid,
@@ -1162,6 +1240,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
       {Value<String>? id,
       Value<String>? title,
       Value<String>? summary,
+      Value<String>? newsCategorg,
       Value<String>? imageUrl,
       Value<DateTime>? dateCreated,
       Value<int>? rowid}) {
@@ -1169,6 +1248,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
       id: id ?? this.id,
       title: title ?? this.title,
       summary: summary ?? this.summary,
+      newsCategorg: newsCategorg ?? this.newsCategorg,
       imageUrl: imageUrl ?? this.imageUrl,
       dateCreated: dateCreated ?? this.dateCreated,
       rowid: rowid ?? this.rowid,
@@ -1186,6 +1266,9 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     }
     if (summary.present) {
       map['summary'] = Variable<String>(summary.value);
+    }
+    if (newsCategorg.present) {
+      map['news_categorg'] = Variable<String>(newsCategorg.value);
     }
     if (imageUrl.present) {
       map['image_url'] = Variable<String>(imageUrl.value);
@@ -1205,6 +1288,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
           ..write('id: $id, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
+          ..write('newsCategorg: $newsCategorg, ')
           ..write('imageUrl: $imageUrl, ')
           ..write('dateCreated: $dateCreated, ')
           ..write('rowid: $rowid')
@@ -1242,16 +1326,14 @@ class $RecommendationsTable extends Recommendations
           GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 255),
       type: DriftSqlType.string,
       requiredDuringInsert: true);
-  static const VerificationMeta _dateRecommendatedMeta =
-      const VerificationMeta('dateRecommendated');
+  static const VerificationMeta _rationaleMeta =
+      const VerificationMeta('rationale');
   @override
-  late final GeneratedColumn<DateTime> dateRecommendated =
-      GeneratedColumn<DateTime>('date_recommendated', aliasedName, false,
-          type: DriftSqlType.dateTime,
-          requiredDuringInsert: false,
-          defaultValue: currentDateAndTime);
+  late final GeneratedColumn<String> rationale = GeneratedColumn<String>(
+      'rationale', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [id, newsId, name, dateRecommendated];
+  List<GeneratedColumn> get $columns => [id, newsId, name, rationale];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1279,11 +1361,11 @@ class $RecommendationsTable extends Recommendations
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('date_recommendated')) {
-      context.handle(
-          _dateRecommendatedMeta,
-          dateRecommendated.isAcceptableOrUnknown(
-              data['date_recommendated']!, _dateRecommendatedMeta));
+    if (data.containsKey('rationale')) {
+      context.handle(_rationaleMeta,
+          rationale.isAcceptableOrUnknown(data['rationale']!, _rationaleMeta));
+    } else if (isInserting) {
+      context.missing(_rationaleMeta);
     }
     return context;
   }
@@ -1300,8 +1382,8 @@ class $RecommendationsTable extends Recommendations
           .read(DriftSqlType.string, data['${effectivePrefix}news_id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      dateRecommendated: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}date_recommendated'])!,
+      rationale: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}rationale'])!,
     );
   }
 
@@ -1316,19 +1398,19 @@ class RecommendationData extends DataClass
   final String id;
   final String newsId;
   final String name;
-  final DateTime dateRecommendated;
+  final String rationale;
   const RecommendationData(
       {required this.id,
       required this.newsId,
       required this.name,
-      required this.dateRecommendated});
+      required this.rationale});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
     map['news_id'] = Variable<String>(newsId);
     map['name'] = Variable<String>(name);
-    map['date_recommendated'] = Variable<DateTime>(dateRecommendated);
+    map['rationale'] = Variable<String>(rationale);
     return map;
   }
 
@@ -1337,7 +1419,7 @@ class RecommendationData extends DataClass
       id: Value(id),
       newsId: Value(newsId),
       name: Value(name),
-      dateRecommendated: Value(dateRecommendated),
+      rationale: Value(rationale),
     );
   }
 
@@ -1348,8 +1430,7 @@ class RecommendationData extends DataClass
       id: serializer.fromJson<String>(json['id']),
       newsId: serializer.fromJson<String>(json['newsId']),
       name: serializer.fromJson<String>(json['name']),
-      dateRecommendated:
-          serializer.fromJson<DateTime>(json['dateRecommendated']),
+      rationale: serializer.fromJson<String>(json['rationale']),
     );
   }
   @override
@@ -1359,29 +1440,24 @@ class RecommendationData extends DataClass
       'id': serializer.toJson<String>(id),
       'newsId': serializer.toJson<String>(newsId),
       'name': serializer.toJson<String>(name),
-      'dateRecommendated': serializer.toJson<DateTime>(dateRecommendated),
+      'rationale': serializer.toJson<String>(rationale),
     };
   }
 
   RecommendationData copyWith(
-          {String? id,
-          String? newsId,
-          String? name,
-          DateTime? dateRecommendated}) =>
+          {String? id, String? newsId, String? name, String? rationale}) =>
       RecommendationData(
         id: id ?? this.id,
         newsId: newsId ?? this.newsId,
         name: name ?? this.name,
-        dateRecommendated: dateRecommendated ?? this.dateRecommendated,
+        rationale: rationale ?? this.rationale,
       );
   RecommendationData copyWithCompanion(RecommendationsCompanion data) {
     return RecommendationData(
       id: data.id.present ? data.id.value : this.id,
       newsId: data.newsId.present ? data.newsId.value : this.newsId,
       name: data.name.present ? data.name.value : this.name,
-      dateRecommendated: data.dateRecommendated.present
-          ? data.dateRecommendated.value
-          : this.dateRecommendated,
+      rationale: data.rationale.present ? data.rationale.value : this.rationale,
     );
   }
 
@@ -1391,13 +1467,13 @@ class RecommendationData extends DataClass
           ..write('id: $id, ')
           ..write('newsId: $newsId, ')
           ..write('name: $name, ')
-          ..write('dateRecommendated: $dateRecommendated')
+          ..write('rationale: $rationale')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, newsId, name, dateRecommendated);
+  int get hashCode => Object.hash(id, newsId, name, rationale);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1405,43 +1481,44 @@ class RecommendationData extends DataClass
           other.id == this.id &&
           other.newsId == this.newsId &&
           other.name == this.name &&
-          other.dateRecommendated == this.dateRecommendated);
+          other.rationale == this.rationale);
 }
 
 class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
   final Value<String> id;
   final Value<String> newsId;
   final Value<String> name;
-  final Value<DateTime> dateRecommendated;
+  final Value<String> rationale;
   final Value<int> rowid;
   const RecommendationsCompanion({
     this.id = const Value.absent(),
     this.newsId = const Value.absent(),
     this.name = const Value.absent(),
-    this.dateRecommendated = const Value.absent(),
+    this.rationale = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   RecommendationsCompanion.insert({
     required String id,
     required String newsId,
     required String name,
-    this.dateRecommendated = const Value.absent(),
+    required String rationale,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         newsId = Value(newsId),
-        name = Value(name);
+        name = Value(name),
+        rationale = Value(rationale);
   static Insertable<RecommendationData> custom({
     Expression<String>? id,
     Expression<String>? newsId,
     Expression<String>? name,
-    Expression<DateTime>? dateRecommendated,
+    Expression<String>? rationale,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (newsId != null) 'news_id': newsId,
       if (name != null) 'name': name,
-      if (dateRecommendated != null) 'date_recommendated': dateRecommendated,
+      if (rationale != null) 'rationale': rationale,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -1450,13 +1527,13 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
       {Value<String>? id,
       Value<String>? newsId,
       Value<String>? name,
-      Value<DateTime>? dateRecommendated,
+      Value<String>? rationale,
       Value<int>? rowid}) {
     return RecommendationsCompanion(
       id: id ?? this.id,
       newsId: newsId ?? this.newsId,
       name: name ?? this.name,
-      dateRecommendated: dateRecommendated ?? this.dateRecommendated,
+      rationale: rationale ?? this.rationale,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1473,8 +1550,8 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
-    if (dateRecommendated.present) {
-      map['date_recommendated'] = Variable<DateTime>(dateRecommendated.value);
+    if (rationale.present) {
+      map['rationale'] = Variable<String>(rationale.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -1488,7 +1565,7 @@ class RecommendationsCompanion extends UpdateCompanion<RecommendationData> {
           ..write('id: $id, ')
           ..write('newsId: $newsId, ')
           ..write('name: $name, ')
-          ..write('dateRecommendated: $dateRecommendated, ')
+          ..write('rationale: $rationale, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -1531,8 +1608,17 @@ class $RecommendationOfferingsTable extends RecommendationOfferings
   late final GeneratedColumn<String> summary = GeneratedColumn<String>(
       'summary', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _dateRecommendatedMeta =
+      const VerificationMeta('dateRecommendated');
   @override
-  List<GeneratedColumn> get $columns => [id, recommendationId, name, summary];
+  late final GeneratedColumn<DateTime> dateRecommendated =
+      GeneratedColumn<DateTime>('date_recommendated', aliasedName, false,
+          type: DriftSqlType.dateTime,
+          requiredDuringInsert: false,
+          defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, recommendationId, name, summary, dateRecommendated];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1569,6 +1655,12 @@ class $RecommendationOfferingsTable extends RecommendationOfferings
     } else if (isInserting) {
       context.missing(_summaryMeta);
     }
+    if (data.containsKey('date_recommendated')) {
+      context.handle(
+          _dateRecommendatedMeta,
+          dateRecommendated.isAcceptableOrUnknown(
+              data['date_recommendated']!, _dateRecommendatedMeta));
+    }
     return context;
   }
 
@@ -1587,6 +1679,8 @@ class $RecommendationOfferingsTable extends RecommendationOfferings
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       summary: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}summary'])!,
+      dateRecommendated: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}date_recommendated'])!,
     );
   }
 
@@ -1602,11 +1696,13 @@ class RecommendationOfferingData extends DataClass
   final String recommendationId;
   final String name;
   final String summary;
+  final DateTime dateRecommendated;
   const RecommendationOfferingData(
       {required this.id,
       required this.recommendationId,
       required this.name,
-      required this.summary});
+      required this.summary,
+      required this.dateRecommendated});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1614,6 +1710,7 @@ class RecommendationOfferingData extends DataClass
     map['recommendation_id'] = Variable<String>(recommendationId);
     map['name'] = Variable<String>(name);
     map['summary'] = Variable<String>(summary);
+    map['date_recommendated'] = Variable<DateTime>(dateRecommendated);
     return map;
   }
 
@@ -1623,6 +1720,7 @@ class RecommendationOfferingData extends DataClass
       recommendationId: Value(recommendationId),
       name: Value(name),
       summary: Value(summary),
+      dateRecommendated: Value(dateRecommendated),
     );
   }
 
@@ -1634,6 +1732,8 @@ class RecommendationOfferingData extends DataClass
       recommendationId: serializer.fromJson<String>(json['recommendationId']),
       name: serializer.fromJson<String>(json['name']),
       summary: serializer.fromJson<String>(json['summary']),
+      dateRecommendated:
+          serializer.fromJson<DateTime>(json['dateRecommendated']),
     );
   }
   @override
@@ -1644,6 +1744,7 @@ class RecommendationOfferingData extends DataClass
       'recommendationId': serializer.toJson<String>(recommendationId),
       'name': serializer.toJson<String>(name),
       'summary': serializer.toJson<String>(summary),
+      'dateRecommendated': serializer.toJson<DateTime>(dateRecommendated),
     };
   }
 
@@ -1651,12 +1752,14 @@ class RecommendationOfferingData extends DataClass
           {String? id,
           String? recommendationId,
           String? name,
-          String? summary}) =>
+          String? summary,
+          DateTime? dateRecommendated}) =>
       RecommendationOfferingData(
         id: id ?? this.id,
         recommendationId: recommendationId ?? this.recommendationId,
         name: name ?? this.name,
         summary: summary ?? this.summary,
+        dateRecommendated: dateRecommendated ?? this.dateRecommendated,
       );
   RecommendationOfferingData copyWithCompanion(
       RecommendationOfferingsCompanion data) {
@@ -1667,6 +1770,9 @@ class RecommendationOfferingData extends DataClass
           : this.recommendationId,
       name: data.name.present ? data.name.value : this.name,
       summary: data.summary.present ? data.summary.value : this.summary,
+      dateRecommendated: data.dateRecommendated.present
+          ? data.dateRecommendated.value
+          : this.dateRecommendated,
     );
   }
 
@@ -1676,13 +1782,15 @@ class RecommendationOfferingData extends DataClass
           ..write('id: $id, ')
           ..write('recommendationId: $recommendationId, ')
           ..write('name: $name, ')
-          ..write('summary: $summary')
+          ..write('summary: $summary, ')
+          ..write('dateRecommendated: $dateRecommendated')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, recommendationId, name, summary);
+  int get hashCode =>
+      Object.hash(id, recommendationId, name, summary, dateRecommendated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1690,7 +1798,8 @@ class RecommendationOfferingData extends DataClass
           other.id == this.id &&
           other.recommendationId == this.recommendationId &&
           other.name == this.name &&
-          other.summary == this.summary);
+          other.summary == this.summary &&
+          other.dateRecommendated == this.dateRecommendated);
 }
 
 class RecommendationOfferingsCompanion
@@ -1699,12 +1808,14 @@ class RecommendationOfferingsCompanion
   final Value<String> recommendationId;
   final Value<String> name;
   final Value<String> summary;
+  final Value<DateTime> dateRecommendated;
   final Value<int> rowid;
   const RecommendationOfferingsCompanion({
     this.id = const Value.absent(),
     this.recommendationId = const Value.absent(),
     this.name = const Value.absent(),
     this.summary = const Value.absent(),
+    this.dateRecommendated = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   RecommendationOfferingsCompanion.insert({
@@ -1712,6 +1823,7 @@ class RecommendationOfferingsCompanion
     required String recommendationId,
     required String name,
     required String summary,
+    this.dateRecommendated = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         recommendationId = Value(recommendationId),
@@ -1722,6 +1834,7 @@ class RecommendationOfferingsCompanion
     Expression<String>? recommendationId,
     Expression<String>? name,
     Expression<String>? summary,
+    Expression<DateTime>? dateRecommendated,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -1729,6 +1842,7 @@ class RecommendationOfferingsCompanion
       if (recommendationId != null) 'recommendation_id': recommendationId,
       if (name != null) 'name': name,
       if (summary != null) 'summary': summary,
+      if (dateRecommendated != null) 'date_recommendated': dateRecommendated,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -1738,12 +1852,14 @@ class RecommendationOfferingsCompanion
       Value<String>? recommendationId,
       Value<String>? name,
       Value<String>? summary,
+      Value<DateTime>? dateRecommendated,
       Value<int>? rowid}) {
     return RecommendationOfferingsCompanion(
       id: id ?? this.id,
       recommendationId: recommendationId ?? this.recommendationId,
       name: name ?? this.name,
       summary: summary ?? this.summary,
+      dateRecommendated: dateRecommendated ?? this.dateRecommendated,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1763,6 +1879,9 @@ class RecommendationOfferingsCompanion
     if (summary.present) {
       map['summary'] = Variable<String>(summary.value);
     }
+    if (dateRecommendated.present) {
+      map['date_recommendated'] = Variable<DateTime>(dateRecommendated.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -1776,18 +1895,19 @@ class RecommendationOfferingsCompanion
           ..write('recommendationId: $recommendationId, ')
           ..write('name: $name, ')
           ..write('summary: $summary, ')
+          ..write('dateRecommendated: $dateRecommendated, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
 }
 
-class $ActiveTodoOfferingsTable extends ActiveTodoOfferings
-    with TableInfo<$ActiveTodoOfferingsTable, ActiveTodoOfferingData> {
+class $TodoOfferingsTable extends TodoOfferings
+    with TableInfo<$TodoOfferingsTable, TodoOfferingData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $ActiveTodoOfferingsTable(this.attachedDatabase, [this._alias]);
+  $TodoOfferingsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _offeringIdMeta =
       const VerificationMeta('offeringId');
   @override
@@ -1797,44 +1917,33 @@ class $ActiveTodoOfferingsTable extends ActiveTodoOfferings
       requiredDuringInsert: true,
       defaultConstraints: GeneratedColumn.constraintIsAlways(
           'REFERENCES recommendation_offerings (id)'));
-  static const VerificationMeta _addedMeta = const VerificationMeta('added');
+  static const VerificationMeta _offeringStatusMeta =
+      const VerificationMeta('offeringStatus');
   @override
-  late final GeneratedColumn<bool> added = GeneratedColumn<bool>(
-      'added', aliasedName, false,
-      type: DriftSqlType.bool,
+  late final GeneratedColumnWithTypeConverter<OfferingStatus, int>
+      offeringStatus = GeneratedColumn<int>(
+              'offering_status', aliasedName, false,
+              type: DriftSqlType.int, requiredDuringInsert: true)
+          .withConverter<OfferingStatus>(
+              $TodoOfferingsTable.$converterofferingStatus);
+  static const VerificationMeta _lastUpdatedMeta =
+      const VerificationMeta('lastUpdated');
+  @override
+  late final GeneratedColumn<DateTime> lastUpdated = GeneratedColumn<DateTime>(
+      'last_updated', aliasedName, false,
+      type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("added" IN (0, 1))'),
-      defaultValue: const Constant(false));
-  static const VerificationMeta _dateAddedMeta =
-      const VerificationMeta('dateAdded');
-  @override
-  late final GeneratedColumn<DateTime> dateAdded = GeneratedColumn<DateTime>(
-      'date_added', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _dateCompletedMeta =
-      const VerificationMeta('dateCompleted');
-  @override
-  late final GeneratedColumn<DateTime> dateCompleted =
-      GeneratedColumn<DateTime>('date_completed', aliasedName, true,
-          type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _dateReactivatedMeta =
-      const VerificationMeta('dateReactivated');
-  @override
-  late final GeneratedColumn<DateTime> dateReactivated =
-      GeneratedColumn<DateTime>('date_reactivated', aliasedName, true,
-          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+      defaultValue: currentDateAndTime);
   @override
   List<GeneratedColumn> get $columns =>
-      [offeringId, added, dateAdded, dateCompleted, dateReactivated];
+      [offeringId, offeringStatus, lastUpdated];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'active_todo_offerings';
+  static const String $name = 'todo_offerings';
   @override
-  VerificationContext validateIntegrity(
-      Insertable<ActiveTodoOfferingData> instance,
+  VerificationContext validateIntegrity(Insertable<TodoOfferingData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -1846,25 +1955,12 @@ class $ActiveTodoOfferingsTable extends ActiveTodoOfferings
     } else if (isInserting) {
       context.missing(_offeringIdMeta);
     }
-    if (data.containsKey('added')) {
+    context.handle(_offeringStatusMeta, const VerificationResult.success());
+    if (data.containsKey('last_updated')) {
       context.handle(
-          _addedMeta, added.isAcceptableOrUnknown(data['added']!, _addedMeta));
-    }
-    if (data.containsKey('date_added')) {
-      context.handle(_dateAddedMeta,
-          dateAdded.isAcceptableOrUnknown(data['date_added']!, _dateAddedMeta));
-    }
-    if (data.containsKey('date_completed')) {
-      context.handle(
-          _dateCompletedMeta,
-          dateCompleted.isAcceptableOrUnknown(
-              data['date_completed']!, _dateCompletedMeta));
-    }
-    if (data.containsKey('date_reactivated')) {
-      context.handle(
-          _dateReactivatedMeta,
-          dateReactivated.isAcceptableOrUnknown(
-              data['date_reactivated']!, _dateReactivatedMeta));
+          _lastUpdatedMeta,
+          lastUpdated.isAcceptableOrUnknown(
+              data['last_updated']!, _lastUpdatedMeta));
     }
     return context;
   }
@@ -1872,83 +1968,65 @@ class $ActiveTodoOfferingsTable extends ActiveTodoOfferings
   @override
   Set<GeneratedColumn> get $primaryKey => {offeringId};
   @override
-  ActiveTodoOfferingData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  TodoOfferingData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ActiveTodoOfferingData(
+    return TodoOfferingData(
       offeringId: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}offering_id'])!,
-      added: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}added'])!,
-      dateAdded: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_added']),
-      dateCompleted: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}date_completed']),
-      dateReactivated: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}date_reactivated']),
+      offeringStatus: $TodoOfferingsTable.$converterofferingStatus.fromSql(
+          attachedDatabase.typeMapping.read(
+              DriftSqlType.int, data['${effectivePrefix}offering_status'])!),
+      lastUpdated: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}last_updated'])!,
     );
   }
 
   @override
-  $ActiveTodoOfferingsTable createAlias(String alias) {
-    return $ActiveTodoOfferingsTable(attachedDatabase, alias);
+  $TodoOfferingsTable createAlias(String alias) {
+    return $TodoOfferingsTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<OfferingStatus, int> $converterofferingStatus =
+      const TodoOfferingStatusConverter();
 }
 
-class ActiveTodoOfferingData extends DataClass
-    implements Insertable<ActiveTodoOfferingData> {
+class TodoOfferingData extends DataClass
+    implements Insertable<TodoOfferingData> {
   final String offeringId;
-  final bool added;
-  final DateTime? dateAdded;
-  final DateTime? dateCompleted;
-  final DateTime? dateReactivated;
-  const ActiveTodoOfferingData(
+  final OfferingStatus offeringStatus;
+  final DateTime lastUpdated;
+  const TodoOfferingData(
       {required this.offeringId,
-      required this.added,
-      this.dateAdded,
-      this.dateCompleted,
-      this.dateReactivated});
+      required this.offeringStatus,
+      required this.lastUpdated});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['offering_id'] = Variable<String>(offeringId);
-    map['added'] = Variable<bool>(added);
-    if (!nullToAbsent || dateAdded != null) {
-      map['date_added'] = Variable<DateTime>(dateAdded);
+    {
+      map['offering_status'] = Variable<int>(
+          $TodoOfferingsTable.$converterofferingStatus.toSql(offeringStatus));
     }
-    if (!nullToAbsent || dateCompleted != null) {
-      map['date_completed'] = Variable<DateTime>(dateCompleted);
-    }
-    if (!nullToAbsent || dateReactivated != null) {
-      map['date_reactivated'] = Variable<DateTime>(dateReactivated);
-    }
+    map['last_updated'] = Variable<DateTime>(lastUpdated);
     return map;
   }
 
-  ActiveTodoOfferingsCompanion toCompanion(bool nullToAbsent) {
-    return ActiveTodoOfferingsCompanion(
+  TodoOfferingsCompanion toCompanion(bool nullToAbsent) {
+    return TodoOfferingsCompanion(
       offeringId: Value(offeringId),
-      added: Value(added),
-      dateAdded: dateAdded == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dateAdded),
-      dateCompleted: dateCompleted == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dateCompleted),
-      dateReactivated: dateReactivated == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dateReactivated),
+      offeringStatus: Value(offeringStatus),
+      lastUpdated: Value(lastUpdated),
     );
   }
 
-  factory ActiveTodoOfferingData.fromJson(Map<String, dynamic> json,
+  factory TodoOfferingData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ActiveTodoOfferingData(
+    return TodoOfferingData(
       offeringId: serializer.fromJson<String>(json['offeringId']),
-      added: serializer.fromJson<bool>(json['added']),
-      dateAdded: serializer.fromJson<DateTime?>(json['dateAdded']),
-      dateCompleted: serializer.fromJson<DateTime?>(json['dateCompleted']),
-      dateReactivated: serializer.fromJson<DateTime?>(json['dateReactivated']),
+      offeringStatus:
+          serializer.fromJson<OfferingStatus>(json['offeringStatus']),
+      lastUpdated: serializer.fromJson<DateTime>(json['lastUpdated']),
     );
   }
   @override
@@ -1956,125 +2034,94 @@ class ActiveTodoOfferingData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'offeringId': serializer.toJson<String>(offeringId),
-      'added': serializer.toJson<bool>(added),
-      'dateAdded': serializer.toJson<DateTime?>(dateAdded),
-      'dateCompleted': serializer.toJson<DateTime?>(dateCompleted),
-      'dateReactivated': serializer.toJson<DateTime?>(dateReactivated),
+      'offeringStatus': serializer.toJson<OfferingStatus>(offeringStatus),
+      'lastUpdated': serializer.toJson<DateTime>(lastUpdated),
     };
   }
 
-  ActiveTodoOfferingData copyWith(
+  TodoOfferingData copyWith(
           {String? offeringId,
-          bool? added,
-          Value<DateTime?> dateAdded = const Value.absent(),
-          Value<DateTime?> dateCompleted = const Value.absent(),
-          Value<DateTime?> dateReactivated = const Value.absent()}) =>
-      ActiveTodoOfferingData(
+          OfferingStatus? offeringStatus,
+          DateTime? lastUpdated}) =>
+      TodoOfferingData(
         offeringId: offeringId ?? this.offeringId,
-        added: added ?? this.added,
-        dateAdded: dateAdded.present ? dateAdded.value : this.dateAdded,
-        dateCompleted:
-            dateCompleted.present ? dateCompleted.value : this.dateCompleted,
-        dateReactivated: dateReactivated.present
-            ? dateReactivated.value
-            : this.dateReactivated,
+        offeringStatus: offeringStatus ?? this.offeringStatus,
+        lastUpdated: lastUpdated ?? this.lastUpdated,
       );
-  ActiveTodoOfferingData copyWithCompanion(ActiveTodoOfferingsCompanion data) {
-    return ActiveTodoOfferingData(
+  TodoOfferingData copyWithCompanion(TodoOfferingsCompanion data) {
+    return TodoOfferingData(
       offeringId:
           data.offeringId.present ? data.offeringId.value : this.offeringId,
-      added: data.added.present ? data.added.value : this.added,
-      dateAdded: data.dateAdded.present ? data.dateAdded.value : this.dateAdded,
-      dateCompleted: data.dateCompleted.present
-          ? data.dateCompleted.value
-          : this.dateCompleted,
-      dateReactivated: data.dateReactivated.present
-          ? data.dateReactivated.value
-          : this.dateReactivated,
+      offeringStatus: data.offeringStatus.present
+          ? data.offeringStatus.value
+          : this.offeringStatus,
+      lastUpdated:
+          data.lastUpdated.present ? data.lastUpdated.value : this.lastUpdated,
     );
   }
 
   @override
   String toString() {
-    return (StringBuffer('ActiveTodoOfferingData(')
+    return (StringBuffer('TodoOfferingData(')
           ..write('offeringId: $offeringId, ')
-          ..write('added: $added, ')
-          ..write('dateAdded: $dateAdded, ')
-          ..write('dateCompleted: $dateCompleted, ')
-          ..write('dateReactivated: $dateReactivated')
+          ..write('offeringStatus: $offeringStatus, ')
+          ..write('lastUpdated: $lastUpdated')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(offeringId, added, dateAdded, dateCompleted, dateReactivated);
+  int get hashCode => Object.hash(offeringId, offeringStatus, lastUpdated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is ActiveTodoOfferingData &&
+      (other is TodoOfferingData &&
           other.offeringId == this.offeringId &&
-          other.added == this.added &&
-          other.dateAdded == this.dateAdded &&
-          other.dateCompleted == this.dateCompleted &&
-          other.dateReactivated == this.dateReactivated);
+          other.offeringStatus == this.offeringStatus &&
+          other.lastUpdated == this.lastUpdated);
 }
 
-class ActiveTodoOfferingsCompanion
-    extends UpdateCompanion<ActiveTodoOfferingData> {
+class TodoOfferingsCompanion extends UpdateCompanion<TodoOfferingData> {
   final Value<String> offeringId;
-  final Value<bool> added;
-  final Value<DateTime?> dateAdded;
-  final Value<DateTime?> dateCompleted;
-  final Value<DateTime?> dateReactivated;
+  final Value<OfferingStatus> offeringStatus;
+  final Value<DateTime> lastUpdated;
   final Value<int> rowid;
-  const ActiveTodoOfferingsCompanion({
+  const TodoOfferingsCompanion({
     this.offeringId = const Value.absent(),
-    this.added = const Value.absent(),
-    this.dateAdded = const Value.absent(),
-    this.dateCompleted = const Value.absent(),
-    this.dateReactivated = const Value.absent(),
+    this.offeringStatus = const Value.absent(),
+    this.lastUpdated = const Value.absent(),
     this.rowid = const Value.absent(),
   });
-  ActiveTodoOfferingsCompanion.insert({
+  TodoOfferingsCompanion.insert({
     required String offeringId,
-    this.added = const Value.absent(),
-    this.dateAdded = const Value.absent(),
-    this.dateCompleted = const Value.absent(),
-    this.dateReactivated = const Value.absent(),
+    required OfferingStatus offeringStatus,
+    this.lastUpdated = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : offeringId = Value(offeringId);
-  static Insertable<ActiveTodoOfferingData> custom({
+  })  : offeringId = Value(offeringId),
+        offeringStatus = Value(offeringStatus);
+  static Insertable<TodoOfferingData> custom({
     Expression<String>? offeringId,
-    Expression<bool>? added,
-    Expression<DateTime>? dateAdded,
-    Expression<DateTime>? dateCompleted,
-    Expression<DateTime>? dateReactivated,
+    Expression<int>? offeringStatus,
+    Expression<DateTime>? lastUpdated,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (offeringId != null) 'offering_id': offeringId,
-      if (added != null) 'added': added,
-      if (dateAdded != null) 'date_added': dateAdded,
-      if (dateCompleted != null) 'date_completed': dateCompleted,
-      if (dateReactivated != null) 'date_reactivated': dateReactivated,
+      if (offeringStatus != null) 'offering_status': offeringStatus,
+      if (lastUpdated != null) 'last_updated': lastUpdated,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
-  ActiveTodoOfferingsCompanion copyWith(
+  TodoOfferingsCompanion copyWith(
       {Value<String>? offeringId,
-      Value<bool>? added,
-      Value<DateTime?>? dateAdded,
-      Value<DateTime?>? dateCompleted,
-      Value<DateTime?>? dateReactivated,
+      Value<OfferingStatus>? offeringStatus,
+      Value<DateTime>? lastUpdated,
       Value<int>? rowid}) {
-    return ActiveTodoOfferingsCompanion(
+    return TodoOfferingsCompanion(
       offeringId: offeringId ?? this.offeringId,
-      added: added ?? this.added,
-      dateAdded: dateAdded ?? this.dateAdded,
-      dateCompleted: dateCompleted ?? this.dateCompleted,
-      dateReactivated: dateReactivated ?? this.dateReactivated,
+      offeringStatus: offeringStatus ?? this.offeringStatus,
+      lastUpdated: lastUpdated ?? this.lastUpdated,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -2085,17 +2132,13 @@ class ActiveTodoOfferingsCompanion
     if (offeringId.present) {
       map['offering_id'] = Variable<String>(offeringId.value);
     }
-    if (added.present) {
-      map['added'] = Variable<bool>(added.value);
+    if (offeringStatus.present) {
+      map['offering_status'] = Variable<int>($TodoOfferingsTable
+          .$converterofferingStatus
+          .toSql(offeringStatus.value));
     }
-    if (dateAdded.present) {
-      map['date_added'] = Variable<DateTime>(dateAdded.value);
-    }
-    if (dateCompleted.present) {
-      map['date_completed'] = Variable<DateTime>(dateCompleted.value);
-    }
-    if (dateReactivated.present) {
-      map['date_reactivated'] = Variable<DateTime>(dateReactivated.value);
+    if (lastUpdated.present) {
+      map['last_updated'] = Variable<DateTime>(lastUpdated.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -2105,223 +2148,10 @@ class ActiveTodoOfferingsCompanion
 
   @override
   String toString() {
-    return (StringBuffer('ActiveTodoOfferingsCompanion(')
+    return (StringBuffer('TodoOfferingsCompanion(')
           ..write('offeringId: $offeringId, ')
-          ..write('added: $added, ')
-          ..write('dateAdded: $dateAdded, ')
-          ..write('dateCompleted: $dateCompleted, ')
-          ..write('dateReactivated: $dateReactivated, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class $InActiveTodoOfferingsTable extends InActiveTodoOfferings
-    with TableInfo<$InActiveTodoOfferingsTable, InActiveTodoOfferingData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $InActiveTodoOfferingsTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _offeringIdMeta =
-      const VerificationMeta('offeringId');
-  @override
-  late final GeneratedColumn<String> offeringId = GeneratedColumn<String>(
-      'offering_id', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES recommendation_offerings (id)'));
-  static const VerificationMeta _dateCancelledMeta =
-      const VerificationMeta('dateCancelled');
-  @override
-  late final GeneratedColumn<DateTime> dateCancelled =
-      GeneratedColumn<DateTime>('date_cancelled', aliasedName, false,
-          type: DriftSqlType.dateTime,
-          requiredDuringInsert: false,
-          defaultValue: currentDateAndTime);
-  @override
-  List<GeneratedColumn> get $columns => [offeringId, dateCancelled];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'in_active_todo_offerings';
-  @override
-  VerificationContext validateIntegrity(
-      Insertable<InActiveTodoOfferingData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('offering_id')) {
-      context.handle(
-          _offeringIdMeta,
-          offeringId.isAcceptableOrUnknown(
-              data['offering_id']!, _offeringIdMeta));
-    } else if (isInserting) {
-      context.missing(_offeringIdMeta);
-    }
-    if (data.containsKey('date_cancelled')) {
-      context.handle(
-          _dateCancelledMeta,
-          dateCancelled.isAcceptableOrUnknown(
-              data['date_cancelled']!, _dateCancelledMeta));
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {offeringId};
-  @override
-  InActiveTodoOfferingData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return InActiveTodoOfferingData(
-      offeringId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}offering_id'])!,
-      dateCancelled: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}date_cancelled'])!,
-    );
-  }
-
-  @override
-  $InActiveTodoOfferingsTable createAlias(String alias) {
-    return $InActiveTodoOfferingsTable(attachedDatabase, alias);
-  }
-}
-
-class InActiveTodoOfferingData extends DataClass
-    implements Insertable<InActiveTodoOfferingData> {
-  final String offeringId;
-  final DateTime dateCancelled;
-  const InActiveTodoOfferingData(
-      {required this.offeringId, required this.dateCancelled});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['offering_id'] = Variable<String>(offeringId);
-    map['date_cancelled'] = Variable<DateTime>(dateCancelled);
-    return map;
-  }
-
-  InActiveTodoOfferingsCompanion toCompanion(bool nullToAbsent) {
-    return InActiveTodoOfferingsCompanion(
-      offeringId: Value(offeringId),
-      dateCancelled: Value(dateCancelled),
-    );
-  }
-
-  factory InActiveTodoOfferingData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return InActiveTodoOfferingData(
-      offeringId: serializer.fromJson<String>(json['offeringId']),
-      dateCancelled: serializer.fromJson<DateTime>(json['dateCancelled']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'offeringId': serializer.toJson<String>(offeringId),
-      'dateCancelled': serializer.toJson<DateTime>(dateCancelled),
-    };
-  }
-
-  InActiveTodoOfferingData copyWith(
-          {String? offeringId, DateTime? dateCancelled}) =>
-      InActiveTodoOfferingData(
-        offeringId: offeringId ?? this.offeringId,
-        dateCancelled: dateCancelled ?? this.dateCancelled,
-      );
-  InActiveTodoOfferingData copyWithCompanion(
-      InActiveTodoOfferingsCompanion data) {
-    return InActiveTodoOfferingData(
-      offeringId:
-          data.offeringId.present ? data.offeringId.value : this.offeringId,
-      dateCancelled: data.dateCancelled.present
-          ? data.dateCancelled.value
-          : this.dateCancelled,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('InActiveTodoOfferingData(')
-          ..write('offeringId: $offeringId, ')
-          ..write('dateCancelled: $dateCancelled')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(offeringId, dateCancelled);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is InActiveTodoOfferingData &&
-          other.offeringId == this.offeringId &&
-          other.dateCancelled == this.dateCancelled);
-}
-
-class InActiveTodoOfferingsCompanion
-    extends UpdateCompanion<InActiveTodoOfferingData> {
-  final Value<String> offeringId;
-  final Value<DateTime> dateCancelled;
-  final Value<int> rowid;
-  const InActiveTodoOfferingsCompanion({
-    this.offeringId = const Value.absent(),
-    this.dateCancelled = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  InActiveTodoOfferingsCompanion.insert({
-    required String offeringId,
-    this.dateCancelled = const Value.absent(),
-    this.rowid = const Value.absent(),
-  }) : offeringId = Value(offeringId);
-  static Insertable<InActiveTodoOfferingData> custom({
-    Expression<String>? offeringId,
-    Expression<DateTime>? dateCancelled,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (offeringId != null) 'offering_id': offeringId,
-      if (dateCancelled != null) 'date_cancelled': dateCancelled,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  InActiveTodoOfferingsCompanion copyWith(
-      {Value<String>? offeringId,
-      Value<DateTime>? dateCancelled,
-      Value<int>? rowid}) {
-    return InActiveTodoOfferingsCompanion(
-      offeringId: offeringId ?? this.offeringId,
-      dateCancelled: dateCancelled ?? this.dateCancelled,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (offeringId.present) {
-      map['offering_id'] = Variable<String>(offeringId.value);
-    }
-    if (dateCancelled.present) {
-      map['date_cancelled'] = Variable<DateTime>(dateCancelled.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('InActiveTodoOfferingsCompanion(')
-          ..write('offeringId: $offeringId, ')
-          ..write('dateCancelled: $dateCancelled, ')
+          ..write('offeringStatus: $offeringStatus, ')
+          ..write('lastUpdated: $lastUpdated, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -2340,10 +2170,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $RecommendationsTable(this);
   late final $RecommendationOfferingsTable recommendationOfferings =
       $RecommendationOfferingsTable(this);
-  late final $ActiveTodoOfferingsTable activeTodoOfferings =
-      $ActiveTodoOfferingsTable(this);
-  late final $InActiveTodoOfferingsTable inActiveTodoOfferings =
-      $InActiveTodoOfferingsTable(this);
+  late final $TodoOfferingsTable todoOfferings = $TodoOfferingsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2355,8 +2182,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         newsInfo,
         recommendations,
         recommendationOfferings,
-        activeTodoOfferings,
-        inActiveTodoOfferings
+        todoOfferings
       ];
 }
 
@@ -2956,6 +2782,7 @@ typedef $$GeigerScoresTableCreateCompanionBuilder = GeigerScoresCompanion
   Value<int> id,
   required String userId,
   required String reason,
+  required String interpretation,
   required int score,
   Value<DateTime> lastUpdated,
 });
@@ -2964,6 +2791,7 @@ typedef $$GeigerScoresTableUpdateCompanionBuilder = GeigerScoresCompanion
   Value<int> id,
   Value<String> userId,
   Value<String> reason,
+  Value<String> interpretation,
   Value<int> score,
   Value<DateTime> lastUpdated,
 });
@@ -3001,6 +2829,10 @@ class $$GeigerScoresTableFilterComposer
 
   ColumnFilters<String> get reason => $composableBuilder(
       column: $table.reason, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get interpretation => $composableBuilder(
+      column: $table.interpretation,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get score => $composableBuilder(
       column: $table.score, builder: (column) => ColumnFilters(column));
@@ -3044,6 +2876,10 @@ class $$GeigerScoresTableOrderingComposer
   ColumnOrderings<String> get reason => $composableBuilder(
       column: $table.reason, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get interpretation => $composableBuilder(
+      column: $table.interpretation,
+      builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<int> get score => $composableBuilder(
       column: $table.score, builder: (column) => ColumnOrderings(column));
 
@@ -3085,6 +2921,9 @@ class $$GeigerScoresTableAnnotationComposer
 
   GeneratedColumn<String> get reason =>
       $composableBuilder(column: $table.reason, builder: (column) => column);
+
+  GeneratedColumn<String> get interpretation => $composableBuilder(
+      column: $table.interpretation, builder: (column) => column);
 
   GeneratedColumn<int> get score =>
       $composableBuilder(column: $table.score, builder: (column) => column);
@@ -3139,6 +2978,7 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> userId = const Value.absent(),
             Value<String> reason = const Value.absent(),
+            Value<String> interpretation = const Value.absent(),
             Value<int> score = const Value.absent(),
             Value<DateTime> lastUpdated = const Value.absent(),
           }) =>
@@ -3146,6 +2986,7 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
             id: id,
             userId: userId,
             reason: reason,
+            interpretation: interpretation,
             score: score,
             lastUpdated: lastUpdated,
           ),
@@ -3153,6 +2994,7 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required String userId,
             required String reason,
+            required String interpretation,
             required int score,
             Value<DateTime> lastUpdated = const Value.absent(),
           }) =>
@@ -3160,6 +3002,7 @@ class $$GeigerScoresTableTableManager extends RootTableManager<
             id: id,
             userId: userId,
             reason: reason,
+            interpretation: interpretation,
             score: score,
             lastUpdated: lastUpdated,
           ),
@@ -3223,6 +3066,7 @@ typedef $$NewsInfoTableCreateCompanionBuilder = NewsInfoCompanion Function({
   required String id,
   required String title,
   required String summary,
+  required String newsCategorg,
   required String imageUrl,
   required DateTime dateCreated,
   Value<int> rowid,
@@ -3231,6 +3075,7 @@ typedef $$NewsInfoTableUpdateCompanionBuilder = NewsInfoCompanion Function({
   Value<String> id,
   Value<String> title,
   Value<String> summary,
+  Value<String> newsCategorg,
   Value<String> imageUrl,
   Value<DateTime> dateCreated,
   Value<int> rowid,
@@ -3275,6 +3120,9 @@ class $$NewsInfoTableFilterComposer
 
   ColumnFilters<String> get summary => $composableBuilder(
       column: $table.summary, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get newsCategorg => $composableBuilder(
+      column: $table.newsCategorg, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get imageUrl => $composableBuilder(
       column: $table.imageUrl, builder: (column) => ColumnFilters(column));
@@ -3322,6 +3170,10 @@ class $$NewsInfoTableOrderingComposer
   ColumnOrderings<String> get summary => $composableBuilder(
       column: $table.summary, builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get newsCategorg => $composableBuilder(
+      column: $table.newsCategorg,
+      builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<String> get imageUrl => $composableBuilder(
       column: $table.imageUrl, builder: (column) => ColumnOrderings(column));
 
@@ -3346,6 +3198,9 @@ class $$NewsInfoTableAnnotationComposer
 
   GeneratedColumn<String> get summary =>
       $composableBuilder(column: $table.summary, builder: (column) => column);
+
+  GeneratedColumn<String> get newsCategorg => $composableBuilder(
+      column: $table.newsCategorg, builder: (column) => column);
 
   GeneratedColumn<String> get imageUrl =>
       $composableBuilder(column: $table.imageUrl, builder: (column) => column);
@@ -3401,6 +3256,7 @@ class $$NewsInfoTableTableManager extends RootTableManager<
             Value<String> id = const Value.absent(),
             Value<String> title = const Value.absent(),
             Value<String> summary = const Value.absent(),
+            Value<String> newsCategorg = const Value.absent(),
             Value<String> imageUrl = const Value.absent(),
             Value<DateTime> dateCreated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -3409,6 +3265,7 @@ class $$NewsInfoTableTableManager extends RootTableManager<
             id: id,
             title: title,
             summary: summary,
+            newsCategorg: newsCategorg,
             imageUrl: imageUrl,
             dateCreated: dateCreated,
             rowid: rowid,
@@ -3417,6 +3274,7 @@ class $$NewsInfoTableTableManager extends RootTableManager<
             required String id,
             required String title,
             required String summary,
+            required String newsCategorg,
             required String imageUrl,
             required DateTime dateCreated,
             Value<int> rowid = const Value.absent(),
@@ -3425,6 +3283,7 @@ class $$NewsInfoTableTableManager extends RootTableManager<
             id: id,
             title: title,
             summary: summary,
+            newsCategorg: newsCategorg,
             imageUrl: imageUrl,
             dateCreated: dateCreated,
             rowid: rowid,
@@ -3478,7 +3337,7 @@ typedef $$RecommendationsTableCreateCompanionBuilder = RecommendationsCompanion
   required String id,
   required String newsId,
   required String name,
-  Value<DateTime> dateRecommendated,
+  required String rationale,
   Value<int> rowid,
 });
 typedef $$RecommendationsTableUpdateCompanionBuilder = RecommendationsCompanion
@@ -3486,7 +3345,7 @@ typedef $$RecommendationsTableUpdateCompanionBuilder = RecommendationsCompanion
   Value<String> id,
   Value<String> newsId,
   Value<String> name,
-  Value<DateTime> dateRecommendated,
+  Value<String> rationale,
   Value<int> rowid,
 });
 
@@ -3544,9 +3403,8 @@ class $$RecommendationsTableFilterComposer
   ColumnFilters<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get dateRecommendated => $composableBuilder(
-      column: $table.dateRecommendated,
-      builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get rationale => $composableBuilder(
+      column: $table.rationale, builder: (column) => ColumnFilters(column));
 
   $$NewsInfoTableFilterComposer get newsId {
     final $$NewsInfoTableFilterComposer composer = $composerBuilder(
@@ -3607,9 +3465,8 @@ class $$RecommendationsTableOrderingComposer
   ColumnOrderings<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get dateRecommendated => $composableBuilder(
-      column: $table.dateRecommendated,
-      builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get rationale => $composableBuilder(
+      column: $table.rationale, builder: (column) => ColumnOrderings(column));
 
   $$NewsInfoTableOrderingComposer get newsId {
     final $$NewsInfoTableOrderingComposer composer = $composerBuilder(
@@ -3647,8 +3504,8 @@ class $$RecommendationsTableAnnotationComposer
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
 
-  GeneratedColumn<DateTime> get dateRecommendated => $composableBuilder(
-      column: $table.dateRecommendated, builder: (column) => column);
+  GeneratedColumn<String> get rationale =>
+      $composableBuilder(column: $table.rationale, builder: (column) => column);
 
   $$NewsInfoTableAnnotationComposer get newsId {
     final $$NewsInfoTableAnnotationComposer composer = $composerBuilder(
@@ -3721,28 +3578,28 @@ class $$RecommendationsTableTableManager extends RootTableManager<
             Value<String> id = const Value.absent(),
             Value<String> newsId = const Value.absent(),
             Value<String> name = const Value.absent(),
-            Value<DateTime> dateRecommendated = const Value.absent(),
+            Value<String> rationale = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationsCompanion(
             id: id,
             newsId: newsId,
             name: name,
-            dateRecommendated: dateRecommendated,
+            rationale: rationale,
             rowid: rowid,
           ),
           createCompanionCallback: ({
             required String id,
             required String newsId,
             required String name,
-            Value<DateTime> dateRecommendated = const Value.absent(),
+            required String rationale,
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationsCompanion.insert(
             id: id,
             newsId: newsId,
             name: name,
-            dateRecommendated: dateRecommendated,
+            rationale: rationale,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
@@ -3823,6 +3680,7 @@ typedef $$RecommendationOfferingsTableCreateCompanionBuilder
   required String recommendationId,
   required String name,
   required String summary,
+  Value<DateTime> dateRecommendated,
   Value<int> rowid,
 });
 typedef $$RecommendationOfferingsTableUpdateCompanionBuilder
@@ -3831,6 +3689,7 @@ typedef $$RecommendationOfferingsTableUpdateCompanionBuilder
   Value<String> recommendationId,
   Value<String> name,
   Value<String> summary,
+  Value<DateTime> dateRecommendated,
   Value<int> rowid,
 });
 
@@ -3854,39 +3713,17 @@ final class $$RecommendationOfferingsTableReferences extends BaseReferences<
         manager.$state.copyWith(prefetchedData: [item]));
   }
 
-  static MultiTypedResultKey<$ActiveTodoOfferingsTable,
-      List<ActiveTodoOfferingData>> _activeTodoOfferingsRefsTable(
-          _$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(db.activeTodoOfferings,
-          aliasName: $_aliasNameGenerator(db.recommendationOfferings.id,
-              db.activeTodoOfferings.offeringId));
+  static MultiTypedResultKey<$TodoOfferingsTable, List<TodoOfferingData>>
+      _todoOfferingsRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.todoOfferings,
+              aliasName: $_aliasNameGenerator(
+                  db.recommendationOfferings.id, db.todoOfferings.offeringId));
 
-  $$ActiveTodoOfferingsTableProcessedTableManager get activeTodoOfferingsRefs {
-    final manager =
-        $$ActiveTodoOfferingsTableTableManager($_db, $_db.activeTodoOfferings)
-            .filter((f) => f.offeringId.id($_item.id));
-
-    final cache =
-        $_typedResult.readTableOrNull(_activeTodoOfferingsRefsTable($_db));
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
-  }
-
-  static MultiTypedResultKey<$InActiveTodoOfferingsTable,
-      List<InActiveTodoOfferingData>> _inActiveTodoOfferingsRefsTable(
-          _$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(db.inActiveTodoOfferings,
-          aliasName: $_aliasNameGenerator(db.recommendationOfferings.id,
-              db.inActiveTodoOfferings.offeringId));
-
-  $$InActiveTodoOfferingsTableProcessedTableManager
-      get inActiveTodoOfferingsRefs {
-    final manager = $$InActiveTodoOfferingsTableTableManager(
-            $_db, $_db.inActiveTodoOfferings)
+  $$TodoOfferingsTableProcessedTableManager get todoOfferingsRefs {
+    final manager = $$TodoOfferingsTableTableManager($_db, $_db.todoOfferings)
         .filter((f) => f.offeringId.id($_item.id));
 
-    final cache =
-        $_typedResult.readTableOrNull(_inActiveTodoOfferingsRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(_todoOfferingsRefsTable($_db));
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: cache));
   }
@@ -3910,6 +3747,10 @@ class $$RecommendationOfferingsTableFilterComposer
   ColumnFilters<String> get summary => $composableBuilder(
       column: $table.summary, builder: (column) => ColumnFilters(column));
 
+  ColumnFilters<DateTime> get dateRecommendated => $composableBuilder(
+      column: $table.dateRecommendated,
+      builder: (column) => ColumnFilters(column));
+
   $$RecommendationsTableFilterComposer get recommendationId {
     final $$RecommendationsTableFilterComposer composer = $composerBuilder(
         composer: this,
@@ -3930,47 +3771,24 @@ class $$RecommendationOfferingsTableFilterComposer
     return composer;
   }
 
-  Expression<bool> activeTodoOfferingsRefs(
-      Expression<bool> Function($$ActiveTodoOfferingsTableFilterComposer f) f) {
-    final $$ActiveTodoOfferingsTableFilterComposer composer = $composerBuilder(
+  Expression<bool> todoOfferingsRefs(
+      Expression<bool> Function($$TodoOfferingsTableFilterComposer f) f) {
+    final $$TodoOfferingsTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.id,
-        referencedTable: $db.activeTodoOfferings,
+        referencedTable: $db.todoOfferings,
         getReferencedColumn: (t) => t.offeringId,
         builder: (joinBuilder,
                 {$addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer}) =>
-            $$ActiveTodoOfferingsTableFilterComposer(
+            $$TodoOfferingsTableFilterComposer(
               $db: $db,
-              $table: $db.activeTodoOfferings,
+              $table: $db.todoOfferings,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
               $removeJoinBuilderFromRootComposer:
                   $removeJoinBuilderFromRootComposer,
             ));
-    return f(composer);
-  }
-
-  Expression<bool> inActiveTodoOfferingsRefs(
-      Expression<bool> Function($$InActiveTodoOfferingsTableFilterComposer f)
-          f) {
-    final $$InActiveTodoOfferingsTableFilterComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.inActiveTodoOfferings,
-            getReferencedColumn: (t) => t.offeringId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$InActiveTodoOfferingsTableFilterComposer(
-                  $db: $db,
-                  $table: $db.inActiveTodoOfferings,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
     return f(composer);
   }
 }
@@ -3992,6 +3810,10 @@ class $$RecommendationOfferingsTableOrderingComposer
 
   ColumnOrderings<String> get summary => $composableBuilder(
       column: $table.summary, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get dateRecommendated => $composableBuilder(
+      column: $table.dateRecommendated,
+      builder: (column) => ColumnOrderings(column));
 
   $$RecommendationsTableOrderingComposer get recommendationId {
     final $$RecommendationsTableOrderingComposer composer = $composerBuilder(
@@ -4032,6 +3854,9 @@ class $$RecommendationOfferingsTableAnnotationComposer
   GeneratedColumn<String> get summary =>
       $composableBuilder(column: $table.summary, builder: (column) => column);
 
+  GeneratedColumn<DateTime> get dateRecommendated => $composableBuilder(
+      column: $table.dateRecommendated, builder: (column) => column);
+
   $$RecommendationsTableAnnotationComposer get recommendationId {
     final $$RecommendationsTableAnnotationComposer composer = $composerBuilder(
         composer: this,
@@ -4052,49 +3877,24 @@ class $$RecommendationOfferingsTableAnnotationComposer
     return composer;
   }
 
-  Expression<T> activeTodoOfferingsRefs<T extends Object>(
-      Expression<T> Function($$ActiveTodoOfferingsTableAnnotationComposer a)
-          f) {
-    final $$ActiveTodoOfferingsTableAnnotationComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.activeTodoOfferings,
-            getReferencedColumn: (t) => t.offeringId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$ActiveTodoOfferingsTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.activeTodoOfferings,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return f(composer);
-  }
-
-  Expression<T> inActiveTodoOfferingsRefs<T extends Object>(
-      Expression<T> Function($$InActiveTodoOfferingsTableAnnotationComposer a)
-          f) {
-    final $$InActiveTodoOfferingsTableAnnotationComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.inActiveTodoOfferings,
-            getReferencedColumn: (t) => t.offeringId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$InActiveTodoOfferingsTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.inActiveTodoOfferings,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
+  Expression<T> todoOfferingsRefs<T extends Object>(
+      Expression<T> Function($$TodoOfferingsTableAnnotationComposer a) f) {
+    final $$TodoOfferingsTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.todoOfferings,
+        getReferencedColumn: (t) => t.offeringId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$TodoOfferingsTableAnnotationComposer(
+              $db: $db,
+              $table: $db.todoOfferings,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 }
@@ -4110,10 +3910,7 @@ class $$RecommendationOfferingsTableTableManager extends RootTableManager<
     $$RecommendationOfferingsTableUpdateCompanionBuilder,
     (RecommendationOfferingData, $$RecommendationOfferingsTableReferences),
     RecommendationOfferingData,
-    PrefetchHooks Function(
-        {bool recommendationId,
-        bool activeTodoOfferingsRefs,
-        bool inActiveTodoOfferingsRefs})> {
+    PrefetchHooks Function({bool recommendationId, bool todoOfferingsRefs})> {
   $$RecommendationOfferingsTableTableManager(
       _$AppDatabase db, $RecommendationOfferingsTable table)
       : super(TableManagerState(
@@ -4133,6 +3930,7 @@ class $$RecommendationOfferingsTableTableManager extends RootTableManager<
             Value<String> recommendationId = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String> summary = const Value.absent(),
+            Value<DateTime> dateRecommendated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationOfferingsCompanion(
@@ -4140,6 +3938,7 @@ class $$RecommendationOfferingsTableTableManager extends RootTableManager<
             recommendationId: recommendationId,
             name: name,
             summary: summary,
+            dateRecommendated: dateRecommendated,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -4147,6 +3946,7 @@ class $$RecommendationOfferingsTableTableManager extends RootTableManager<
             required String recommendationId,
             required String name,
             required String summary,
+            Value<DateTime> dateRecommendated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               RecommendationOfferingsCompanion.insert(
@@ -4154,6 +3954,7 @@ class $$RecommendationOfferingsTableTableManager extends RootTableManager<
             recommendationId: recommendationId,
             name: name,
             summary: summary,
+            dateRecommendated: dateRecommendated,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
@@ -4163,14 +3964,11 @@ class $$RecommendationOfferingsTableTableManager extends RootTableManager<
                   ))
               .toList(),
           prefetchHooksCallback: (
-              {recommendationId = false,
-              activeTodoOfferingsRefs = false,
-              inActiveTodoOfferingsRefs = false}) {
+              {recommendationId = false, todoOfferingsRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
-                if (activeTodoOfferingsRefs) db.activeTodoOfferings,
-                if (inActiveTodoOfferingsRefs) db.inActiveTodoOfferings
+                if (todoOfferingsRefs) db.todoOfferings
               ],
               addJoins: <
                   T extends TableManagerState<
@@ -4201,30 +3999,16 @@ class $$RecommendationOfferingsTableTableManager extends RootTableManager<
               },
               getPrefetchedDataCallback: (items) async {
                 return [
-                  if (activeTodoOfferingsRefs)
+                  if (todoOfferingsRefs)
                     await $_getPrefetchedData(
                         currentTable: table,
                         referencedTable:
                             $$RecommendationOfferingsTableReferences
-                                ._activeTodoOfferingsRefsTable(db),
+                                ._todoOfferingsRefsTable(db),
                         managerFromTypedResult: (p0) =>
                             $$RecommendationOfferingsTableReferences(
                                     db, table, p0)
-                                .activeTodoOfferingsRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.offeringId == item.id),
-                        typedResults: items),
-                  if (inActiveTodoOfferingsRefs)
-                    await $_getPrefetchedData(
-                        currentTable: table,
-                        referencedTable:
-                            $$RecommendationOfferingsTableReferences
-                                ._inActiveTodoOfferingsRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$RecommendationOfferingsTableReferences(
-                                    db, table, p0)
-                                .inActiveTodoOfferingsRefs,
+                                .todoOfferingsRefs,
                         referencedItemsForCurrentItem:
                             (item, referencedItems) => referencedItems
                                 .where((e) => e.offeringId == item.id),
@@ -4249,36 +4033,30 @@ typedef $$RecommendationOfferingsTableProcessedTableManager
         (RecommendationOfferingData, $$RecommendationOfferingsTableReferences),
         RecommendationOfferingData,
         PrefetchHooks Function(
-            {bool recommendationId,
-            bool activeTodoOfferingsRefs,
-            bool inActiveTodoOfferingsRefs})>;
-typedef $$ActiveTodoOfferingsTableCreateCompanionBuilder
-    = ActiveTodoOfferingsCompanion Function({
+            {bool recommendationId, bool todoOfferingsRefs})>;
+typedef $$TodoOfferingsTableCreateCompanionBuilder = TodoOfferingsCompanion
+    Function({
   required String offeringId,
-  Value<bool> added,
-  Value<DateTime?> dateAdded,
-  Value<DateTime?> dateCompleted,
-  Value<DateTime?> dateReactivated,
+  required OfferingStatus offeringStatus,
+  Value<DateTime> lastUpdated,
   Value<int> rowid,
 });
-typedef $$ActiveTodoOfferingsTableUpdateCompanionBuilder
-    = ActiveTodoOfferingsCompanion Function({
+typedef $$TodoOfferingsTableUpdateCompanionBuilder = TodoOfferingsCompanion
+    Function({
   Value<String> offeringId,
-  Value<bool> added,
-  Value<DateTime?> dateAdded,
-  Value<DateTime?> dateCompleted,
-  Value<DateTime?> dateReactivated,
+  Value<OfferingStatus> offeringStatus,
+  Value<DateTime> lastUpdated,
   Value<int> rowid,
 });
 
-final class $$ActiveTodoOfferingsTableReferences extends BaseReferences<
-    _$AppDatabase, $ActiveTodoOfferingsTable, ActiveTodoOfferingData> {
-  $$ActiveTodoOfferingsTableReferences(
+final class $$TodoOfferingsTableReferences extends BaseReferences<_$AppDatabase,
+    $TodoOfferingsTable, TodoOfferingData> {
+  $$TodoOfferingsTableReferences(
       super.$_db, super.$_table, super.$_typedResult);
 
   static $RecommendationOfferingsTable _offeringIdTable(_$AppDatabase db) =>
       db.recommendationOfferings.createAlias($_aliasNameGenerator(
-          db.activeTodoOfferings.offeringId, db.recommendationOfferings.id));
+          db.todoOfferings.offeringId, db.recommendationOfferings.id));
 
   $$RecommendationOfferingsTableProcessedTableManager? get offeringId {
     if ($_item.offeringId == null) return null;
@@ -4292,27 +4070,22 @@ final class $$ActiveTodoOfferingsTableReferences extends BaseReferences<
   }
 }
 
-class $$ActiveTodoOfferingsTableFilterComposer
-    extends Composer<_$AppDatabase, $ActiveTodoOfferingsTable> {
-  $$ActiveTodoOfferingsTableFilterComposer({
+class $$TodoOfferingsTableFilterComposer
+    extends Composer<_$AppDatabase, $TodoOfferingsTable> {
+  $$TodoOfferingsTableFilterComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<bool> get added => $composableBuilder(
-      column: $table.added, builder: (column) => ColumnFilters(column));
+  ColumnWithTypeConverterFilters<OfferingStatus, OfferingStatus, int>
+      get offeringStatus => $composableBuilder(
+          column: $table.offeringStatus,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<DateTime> get dateAdded => $composableBuilder(
-      column: $table.dateAdded, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<DateTime> get dateCompleted => $composableBuilder(
-      column: $table.dateCompleted, builder: (column) => ColumnFilters(column));
-
-  ColumnFilters<DateTime> get dateReactivated => $composableBuilder(
-      column: $table.dateReactivated,
-      builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get lastUpdated => $composableBuilder(
+      column: $table.lastUpdated, builder: (column) => ColumnFilters(column));
 
   $$RecommendationOfferingsTableFilterComposer get offeringId {
     final $$RecommendationOfferingsTableFilterComposer composer =
@@ -4336,28 +4109,21 @@ class $$ActiveTodoOfferingsTableFilterComposer
   }
 }
 
-class $$ActiveTodoOfferingsTableOrderingComposer
-    extends Composer<_$AppDatabase, $ActiveTodoOfferingsTable> {
-  $$ActiveTodoOfferingsTableOrderingComposer({
+class $$TodoOfferingsTableOrderingComposer
+    extends Composer<_$AppDatabase, $TodoOfferingsTable> {
+  $$TodoOfferingsTableOrderingComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<bool> get added => $composableBuilder(
-      column: $table.added, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<DateTime> get dateAdded => $composableBuilder(
-      column: $table.dateAdded, builder: (column) => ColumnOrderings(column));
-
-  ColumnOrderings<DateTime> get dateCompleted => $composableBuilder(
-      column: $table.dateCompleted,
+  ColumnOrderings<int> get offeringStatus => $composableBuilder(
+      column: $table.offeringStatus,
       builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get dateReactivated => $composableBuilder(
-      column: $table.dateReactivated,
-      builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<DateTime> get lastUpdated => $composableBuilder(
+      column: $table.lastUpdated, builder: (column) => ColumnOrderings(column));
 
   $$RecommendationOfferingsTableOrderingComposer get offeringId {
     final $$RecommendationOfferingsTableOrderingComposer composer =
@@ -4381,26 +4147,21 @@ class $$ActiveTodoOfferingsTableOrderingComposer
   }
 }
 
-class $$ActiveTodoOfferingsTableAnnotationComposer
-    extends Composer<_$AppDatabase, $ActiveTodoOfferingsTable> {
-  $$ActiveTodoOfferingsTableAnnotationComposer({
+class $$TodoOfferingsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $TodoOfferingsTable> {
+  $$TodoOfferingsTableAnnotationComposer({
     required super.$db,
     required super.$table,
     super.joinBuilder,
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<bool> get added =>
-      $composableBuilder(column: $table.added, builder: (column) => column);
+  GeneratedColumnWithTypeConverter<OfferingStatus, int> get offeringStatus =>
+      $composableBuilder(
+          column: $table.offeringStatus, builder: (column) => column);
 
-  GeneratedColumn<DateTime> get dateAdded =>
-      $composableBuilder(column: $table.dateAdded, builder: (column) => column);
-
-  GeneratedColumn<DateTime> get dateCompleted => $composableBuilder(
-      column: $table.dateCompleted, builder: (column) => column);
-
-  GeneratedColumn<DateTime> get dateReactivated => $composableBuilder(
-      column: $table.dateReactivated, builder: (column) => column);
+  GeneratedColumn<DateTime> get lastUpdated => $composableBuilder(
+      column: $table.lastUpdated, builder: (column) => column);
 
   $$RecommendationOfferingsTableAnnotationComposer get offeringId {
     final $$RecommendationOfferingsTableAnnotationComposer composer =
@@ -4424,67 +4185,56 @@ class $$ActiveTodoOfferingsTableAnnotationComposer
   }
 }
 
-class $$ActiveTodoOfferingsTableTableManager extends RootTableManager<
+class $$TodoOfferingsTableTableManager extends RootTableManager<
     _$AppDatabase,
-    $ActiveTodoOfferingsTable,
-    ActiveTodoOfferingData,
-    $$ActiveTodoOfferingsTableFilterComposer,
-    $$ActiveTodoOfferingsTableOrderingComposer,
-    $$ActiveTodoOfferingsTableAnnotationComposer,
-    $$ActiveTodoOfferingsTableCreateCompanionBuilder,
-    $$ActiveTodoOfferingsTableUpdateCompanionBuilder,
-    (ActiveTodoOfferingData, $$ActiveTodoOfferingsTableReferences),
-    ActiveTodoOfferingData,
+    $TodoOfferingsTable,
+    TodoOfferingData,
+    $$TodoOfferingsTableFilterComposer,
+    $$TodoOfferingsTableOrderingComposer,
+    $$TodoOfferingsTableAnnotationComposer,
+    $$TodoOfferingsTableCreateCompanionBuilder,
+    $$TodoOfferingsTableUpdateCompanionBuilder,
+    (TodoOfferingData, $$TodoOfferingsTableReferences),
+    TodoOfferingData,
     PrefetchHooks Function({bool offeringId})> {
-  $$ActiveTodoOfferingsTableTableManager(
-      _$AppDatabase db, $ActiveTodoOfferingsTable table)
+  $$TodoOfferingsTableTableManager(_$AppDatabase db, $TodoOfferingsTable table)
       : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
-              $$ActiveTodoOfferingsTableFilterComposer($db: db, $table: table),
+              $$TodoOfferingsTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
-              $$ActiveTodoOfferingsTableOrderingComposer(
-                  $db: db, $table: table),
+              $$TodoOfferingsTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
-              $$ActiveTodoOfferingsTableAnnotationComposer(
-                  $db: db, $table: table),
+              $$TodoOfferingsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> offeringId = const Value.absent(),
-            Value<bool> added = const Value.absent(),
-            Value<DateTime?> dateAdded = const Value.absent(),
-            Value<DateTime?> dateCompleted = const Value.absent(),
-            Value<DateTime?> dateReactivated = const Value.absent(),
+            Value<OfferingStatus> offeringStatus = const Value.absent(),
+            Value<DateTime> lastUpdated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
-              ActiveTodoOfferingsCompanion(
+              TodoOfferingsCompanion(
             offeringId: offeringId,
-            added: added,
-            dateAdded: dateAdded,
-            dateCompleted: dateCompleted,
-            dateReactivated: dateReactivated,
+            offeringStatus: offeringStatus,
+            lastUpdated: lastUpdated,
             rowid: rowid,
           ),
           createCompanionCallback: ({
             required String offeringId,
-            Value<bool> added = const Value.absent(),
-            Value<DateTime?> dateAdded = const Value.absent(),
-            Value<DateTime?> dateCompleted = const Value.absent(),
-            Value<DateTime?> dateReactivated = const Value.absent(),
+            required OfferingStatus offeringStatus,
+            Value<DateTime> lastUpdated = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
-              ActiveTodoOfferingsCompanion.insert(
+              TodoOfferingsCompanion.insert(
             offeringId: offeringId,
-            added: added,
-            dateAdded: dateAdded,
-            dateCompleted: dateCompleted,
-            dateReactivated: dateReactivated,
+            offeringStatus: offeringStatus,
+            lastUpdated: lastUpdated,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (
                     e.readTable(table),
-                    $$ActiveTodoOfferingsTableReferences(db, table, e)
+                    $$TodoOfferingsTableReferences(db, table, e)
                   ))
               .toList(),
           prefetchHooksCallback: ({offeringId = false}) {
@@ -4508,11 +4258,10 @@ class $$ActiveTodoOfferingsTableTableManager extends RootTableManager<
                   state = state.withJoin(
                     currentTable: table,
                     currentColumn: table.offeringId,
-                    referencedTable: $$ActiveTodoOfferingsTableReferences
-                        ._offeringIdTable(db),
-                    referencedColumn: $$ActiveTodoOfferingsTableReferences
-                        ._offeringIdTable(db)
-                        .id,
+                    referencedTable:
+                        $$TodoOfferingsTableReferences._offeringIdTable(db),
+                    referencedColumn:
+                        $$TodoOfferingsTableReferences._offeringIdTable(db).id,
                   ) as T;
                 }
 
@@ -4526,259 +4275,18 @@ class $$ActiveTodoOfferingsTableTableManager extends RootTableManager<
         ));
 }
 
-typedef $$ActiveTodoOfferingsTableProcessedTableManager = ProcessedTableManager<
+typedef $$TodoOfferingsTableProcessedTableManager = ProcessedTableManager<
     _$AppDatabase,
-    $ActiveTodoOfferingsTable,
-    ActiveTodoOfferingData,
-    $$ActiveTodoOfferingsTableFilterComposer,
-    $$ActiveTodoOfferingsTableOrderingComposer,
-    $$ActiveTodoOfferingsTableAnnotationComposer,
-    $$ActiveTodoOfferingsTableCreateCompanionBuilder,
-    $$ActiveTodoOfferingsTableUpdateCompanionBuilder,
-    (ActiveTodoOfferingData, $$ActiveTodoOfferingsTableReferences),
-    ActiveTodoOfferingData,
+    $TodoOfferingsTable,
+    TodoOfferingData,
+    $$TodoOfferingsTableFilterComposer,
+    $$TodoOfferingsTableOrderingComposer,
+    $$TodoOfferingsTableAnnotationComposer,
+    $$TodoOfferingsTableCreateCompanionBuilder,
+    $$TodoOfferingsTableUpdateCompanionBuilder,
+    (TodoOfferingData, $$TodoOfferingsTableReferences),
+    TodoOfferingData,
     PrefetchHooks Function({bool offeringId})>;
-typedef $$InActiveTodoOfferingsTableCreateCompanionBuilder
-    = InActiveTodoOfferingsCompanion Function({
-  required String offeringId,
-  Value<DateTime> dateCancelled,
-  Value<int> rowid,
-});
-typedef $$InActiveTodoOfferingsTableUpdateCompanionBuilder
-    = InActiveTodoOfferingsCompanion Function({
-  Value<String> offeringId,
-  Value<DateTime> dateCancelled,
-  Value<int> rowid,
-});
-
-final class $$InActiveTodoOfferingsTableReferences extends BaseReferences<
-    _$AppDatabase, $InActiveTodoOfferingsTable, InActiveTodoOfferingData> {
-  $$InActiveTodoOfferingsTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
-
-  static $RecommendationOfferingsTable _offeringIdTable(_$AppDatabase db) =>
-      db.recommendationOfferings.createAlias($_aliasNameGenerator(
-          db.inActiveTodoOfferings.offeringId, db.recommendationOfferings.id));
-
-  $$RecommendationOfferingsTableProcessedTableManager? get offeringId {
-    if ($_item.offeringId == null) return null;
-    final manager = $$RecommendationOfferingsTableTableManager(
-            $_db, $_db.recommendationOfferings)
-        .filter((f) => f.id($_item.offeringId!));
-    final item = $_typedResult.readTableOrNull(_offeringIdTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
-  }
-}
-
-class $$InActiveTodoOfferingsTableFilterComposer
-    extends Composer<_$AppDatabase, $InActiveTodoOfferingsTable> {
-  $$InActiveTodoOfferingsTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<DateTime> get dateCancelled => $composableBuilder(
-      column: $table.dateCancelled, builder: (column) => ColumnFilters(column));
-
-  $$RecommendationOfferingsTableFilterComposer get offeringId {
-    final $$RecommendationOfferingsTableFilterComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.offeringId,
-            referencedTable: $db.recommendationOfferings,
-            getReferencedColumn: (t) => t.id,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$RecommendationOfferingsTableFilterComposer(
-                  $db: $db,
-                  $table: $db.recommendationOfferings,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return composer;
-  }
-}
-
-class $$InActiveTodoOfferingsTableOrderingComposer
-    extends Composer<_$AppDatabase, $InActiveTodoOfferingsTable> {
-  $$InActiveTodoOfferingsTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<DateTime> get dateCancelled => $composableBuilder(
-      column: $table.dateCancelled,
-      builder: (column) => ColumnOrderings(column));
-
-  $$RecommendationOfferingsTableOrderingComposer get offeringId {
-    final $$RecommendationOfferingsTableOrderingComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.offeringId,
-            referencedTable: $db.recommendationOfferings,
-            getReferencedColumn: (t) => t.id,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$RecommendationOfferingsTableOrderingComposer(
-                  $db: $db,
-                  $table: $db.recommendationOfferings,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return composer;
-  }
-}
-
-class $$InActiveTodoOfferingsTableAnnotationComposer
-    extends Composer<_$AppDatabase, $InActiveTodoOfferingsTable> {
-  $$InActiveTodoOfferingsTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<DateTime> get dateCancelled => $composableBuilder(
-      column: $table.dateCancelled, builder: (column) => column);
-
-  $$RecommendationOfferingsTableAnnotationComposer get offeringId {
-    final $$RecommendationOfferingsTableAnnotationComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.offeringId,
-            referencedTable: $db.recommendationOfferings,
-            getReferencedColumn: (t) => t.id,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$RecommendationOfferingsTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.recommendationOfferings,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
-    return composer;
-  }
-}
-
-class $$InActiveTodoOfferingsTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $InActiveTodoOfferingsTable,
-    InActiveTodoOfferingData,
-    $$InActiveTodoOfferingsTableFilterComposer,
-    $$InActiveTodoOfferingsTableOrderingComposer,
-    $$InActiveTodoOfferingsTableAnnotationComposer,
-    $$InActiveTodoOfferingsTableCreateCompanionBuilder,
-    $$InActiveTodoOfferingsTableUpdateCompanionBuilder,
-    (InActiveTodoOfferingData, $$InActiveTodoOfferingsTableReferences),
-    InActiveTodoOfferingData,
-    PrefetchHooks Function({bool offeringId})> {
-  $$InActiveTodoOfferingsTableTableManager(
-      _$AppDatabase db, $InActiveTodoOfferingsTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$InActiveTodoOfferingsTableFilterComposer(
-                  $db: db, $table: table),
-          createOrderingComposer: () =>
-              $$InActiveTodoOfferingsTableOrderingComposer(
-                  $db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$InActiveTodoOfferingsTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> offeringId = const Value.absent(),
-            Value<DateTime> dateCancelled = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              InActiveTodoOfferingsCompanion(
-            offeringId: offeringId,
-            dateCancelled: dateCancelled,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String offeringId,
-            Value<DateTime> dateCancelled = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              InActiveTodoOfferingsCompanion.insert(
-            offeringId: offeringId,
-            dateCancelled: dateCancelled,
-            rowid: rowid,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$InActiveTodoOfferingsTableReferences(db, table, e)
-                  ))
-              .toList(),
-          prefetchHooksCallback: ({offeringId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
-                if (offeringId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.offeringId,
-                    referencedTable: $$InActiveTodoOfferingsTableReferences
-                        ._offeringIdTable(db),
-                    referencedColumn: $$InActiveTodoOfferingsTableReferences
-                        ._offeringIdTable(db)
-                        .id,
-                  ) as T;
-                }
-
-                return state;
-              },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
-        ));
-}
-
-typedef $$InActiveTodoOfferingsTableProcessedTableManager
-    = ProcessedTableManager<
-        _$AppDatabase,
-        $InActiveTodoOfferingsTable,
-        InActiveTodoOfferingData,
-        $$InActiveTodoOfferingsTableFilterComposer,
-        $$InActiveTodoOfferingsTableOrderingComposer,
-        $$InActiveTodoOfferingsTableAnnotationComposer,
-        $$InActiveTodoOfferingsTableCreateCompanionBuilder,
-        $$InActiveTodoOfferingsTableUpdateCompanionBuilder,
-        (InActiveTodoOfferingData, $$InActiveTodoOfferingsTableReferences),
-        InActiveTodoOfferingData,
-        PrefetchHooks Function({bool offeringId})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4796,10 +4304,8 @@ class $AppDatabaseManager {
   $$RecommendationOfferingsTableTableManager get recommendationOfferings =>
       $$RecommendationOfferingsTableTableManager(
           _db, _db.recommendationOfferings);
-  $$ActiveTodoOfferingsTableTableManager get activeTodoOfferings =>
-      $$ActiveTodoOfferingsTableTableManager(_db, _db.activeTodoOfferings);
-  $$InActiveTodoOfferingsTableTableManager get inActiveTodoOfferings =>
-      $$InActiveTodoOfferingsTableTableManager(_db, _db.inActiveTodoOfferings);
+  $$TodoOfferingsTableTableManager get todoOfferings =>
+      $$TodoOfferingsTableTableManager(_db, _db.todoOfferings);
 }
 
 // **************************************************************************

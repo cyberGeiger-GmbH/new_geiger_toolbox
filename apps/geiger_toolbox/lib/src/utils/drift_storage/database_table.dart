@@ -39,6 +39,7 @@ class GeigerScores extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get userId => text().references(UserProfiles, #userId)();
   TextColumn get reason => text()();
+  TextColumn get interpretation => text()();
   IntColumn get score => integer()();
 
   DateTimeColumn get lastUpdated =>
@@ -64,6 +65,7 @@ class NewsInfo extends Table {
 
   TextColumn get title => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
+  TextColumn get newsCategorg => text()();
   TextColumn get imageUrl => text()();
   DateTimeColumn get dateCreated => dateTime()();
 
@@ -76,8 +78,7 @@ class Recommendations extends Table {
   TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
   TextColumn get newsId => text().references(NewsInfo, #id)(); // Foreign key
   TextColumn get name => text().withLength(min: 1, max: 255)();
-  DateTimeColumn get dateRecommendated =>
-      dateTime().withDefault(currentDateAndTime)();
+  TextColumn get rationale => text()();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -91,30 +92,38 @@ class RecommendationOfferings extends Table {
   TextColumn get name => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
 
+  DateTimeColumn get dateRecommendated =>
+      dateTime().withDefault(currentDateAndTime)();
+
   @override
   Set<Column> get primaryKey => {id};
 }
 
-@DataClassName('ActiveTodoOfferingData')
-class ActiveTodoOfferings extends Table {
+enum OfferingStatus { recommended, planned, done }
+
+class TodoOfferingStatusConverter extends TypeConverter<OfferingStatus, int> {
+  const TodoOfferingStatusConverter();
+  @override
+  OfferingStatus fromSql(int fromDb) {
+    return OfferingStatus.values[fromDb]; // Convert int to enum
+  }
+
+  @override
+  int toSql(OfferingStatus value) {
+    return value.index; // Convert enum to int
+  }
+}
+
+@DataClassName('TodoOfferingData')
+class TodoOfferings extends Table {
   TextColumn get offeringId =>
       text().references(RecommendationOfferings, #id)();
 // Foreign key
-  BoolColumn get added => boolean().withDefault(const Constant(false))();
-  DateTimeColumn get dateAdded => dateTime().nullable()();
-  DateTimeColumn get dateCompleted => dateTime().nullable()();
-  DateTimeColumn get dateReactivated => dateTime().nullable()();
-
-  @override
-  Set<Column> get primaryKey => {offeringId};
-}
-
-@DataClassName('InActiveTodoOfferingData')
-class InActiveTodoOfferings extends Table {
-  TextColumn get offeringId =>
-      text().references(RecommendationOfferings, #id)();
-  DateTimeColumn get dateCancelled =>
+  IntColumn get offeringStatus =>
+      integer().map(const TodoOfferingStatusConverter())();
+  DateTimeColumn get lastUpdated =>
       dateTime().withDefault(currentDateAndTime)();
+
   @override
   Set<Column> get primaryKey => {offeringId};
 }
@@ -168,8 +177,8 @@ class InActiveTodoOfferings extends Table {
     NewsInfo,
     Recommendations,
     RecommendationOfferings,
-    ActiveTodoOfferings,
-    InActiveTodoOfferings,
+    TodoOfferings,
+
     //BusinessProfiles,
     // Industries,
     // Locations,

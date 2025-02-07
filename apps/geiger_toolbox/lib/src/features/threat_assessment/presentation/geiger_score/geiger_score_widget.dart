@@ -8,54 +8,44 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geige
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 
-class ScoreStatusWidget extends ConsumerWidget {
-  const ScoreStatusWidget({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(scanButtonControllerProvider, (_, newV) {
-      ref
-          .read(geigerScoreControllerProvider.notifier)
-          .onScanComplete(scanPressState: newV);
-    });
-
-    final state = ref.watch(geigerScoreControllerProvider);
-
-    return state.isLoading
-        ? AppText.titleMedium(text: "Calculating Score....", context: context)
-        : const GeigerScoreWidget();
-  }
-}
-
 class GeigerScoreWidget extends ConsumerWidget {
   const GeigerScoreWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scoreValue = ref.watch(watchGeigerScoreProvider);
+    final state = ref.watch(geigerScoreControllerProvider);
 
-    return AsyncValueWidget(
-      value: scoreValue,
-      data: (data) => data != null
-          ? _ScoreWithInfo(
-              score: "${data.geigerScore}",
-              key: key,
-              //todo: change font color base the score range
-              showinfo: () {
-                showWoltAlertDialog(
-                  context,
-                  title: "Geiger Score!",
-                  page: Padding(
-                    padding: const EdgeInsets.all(Spacing.p8),
-                    child: ShowScoreReason(
-                      reason: data.reason,
-                    ),
-                  ),
-                );
-              },
-            )
-          : SizedBox.shrink(),
-    );
+    ref.listen(scanButtonControllerProvider, (_, newV) {
+      ref
+          .read(geigerScoreControllerProvider.notifier)
+          .onScanComplete(scanPressState: newV);
+    });
+
+    return state.isLoading
+        ? AppText.titleMedium(text: "Calculating Score....", context: context)
+        : AsyncValueWidget(
+            value: scoreValue,
+            data: (data) => data != null
+                ? _ScoreWithInfo(
+                    score: "${data.geigerScore}",
+                    key: key,
+                    //todo: change font color base the score range
+                    showinfo: () {
+                      showWoltAlertDialog(
+                        context,
+                        title: "Geiger Score!",
+                        page: Padding(
+                          padding: const EdgeInsets.all(Spacing.p8),
+                          child: ShowScoreReason(
+                            reason: data.reason,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                : SizedBox.shrink(),
+          );
     //: AppText.titleSmall(text: "RecalCulating score", context: context);
   }
 }

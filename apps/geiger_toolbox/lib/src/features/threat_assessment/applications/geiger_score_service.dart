@@ -26,13 +26,13 @@ class GeigerScoreService {
       final repo = ref.read(localGeigerScoreRepoProvider);
 
 //todo: check the range of score and update the goodScore parameter
-      final previousScoreProfile =
-          await ref.read(getXapiProfileProvider(goodScore: false).future);
+
+      final profile = await ref.read(getXapiProfileProvider.future);
 
       _log.i("Sending company profile in xapi format");
 
-      final geigerScore = await ref.read(
-          getGeigerScoreProvider(userProfile: previousScoreProfile).future);
+      final geigerScore =
+          await ref.read(getGeigerScoreProvider(userProfile: profile).future);
       _log.i("Received Score from Server");
       if (geigerScore != null) {
         _log.i("Storing score locally....}");

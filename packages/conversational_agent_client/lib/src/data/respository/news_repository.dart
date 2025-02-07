@@ -24,7 +24,7 @@ class NewsRepository {
 
   Future<List<News>> fetchNews({required UserProfileModel userProfile}) async {
     final dio = ref.read(dioProvider);
-    final log = ref.read(logHandlerProvider("FetchNews"));
+    final log = ref.read(logHandlerProvider("FetchNews", packageName: "Conversational_agent_client"));
 
     try {
       final Uri uri = Uri.https(

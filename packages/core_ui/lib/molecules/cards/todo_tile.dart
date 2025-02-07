@@ -16,7 +16,7 @@ class TodoTile extends StatelessWidget {
       {Key? key,
       required String title,
       required String summary,
-      ValueChanged? onChange,
+      ValueChanged<bool?>? onChange,
       bool done = false}) {
     return TodoTile._(
       key: key,
@@ -31,7 +31,7 @@ class TodoTile extends StatelessWidget {
       {Key? key,
       required String title,
       required String summary,
-      ValueChanged? onChange,
+      ValueChanged<bool?>? onChange,
       required BuildContext context,
       bool done = false}) {
     final appColors = Theme.of(context).colorScheme;
@@ -49,7 +49,7 @@ class TodoTile extends StatelessWidget {
   final String title;
   final String summary;
   final bool done;
-  final ValueChanged? onChange;
+  final ValueChanged<bool?>? onChange;
   final BoxDecoration? decoration;
 
   @override
@@ -73,7 +73,7 @@ class _ContentWidget extends StatelessWidget {
   const _ContentWidget({
     super.key,
     required this.title,
- this.appColors,
+    this.appColors,
     required this.summary,
     required this.done,
     this.onChange,
@@ -83,7 +83,7 @@ class _ContentWidget extends StatelessWidget {
   final ColorScheme? appColors;
   final String summary;
   final bool done;
-  final ValueChanged? onChange;
+  final ValueChanged<bool?>? onChange;
 
   @override
   Widget build(BuildContext context) {

@@ -19,14 +19,13 @@ class RecommendationTileListWidget extends StatelessWidget {
     return ProtectionTileList(
       protectionTile: recommendations.map(
         (reco) {
-         
           return ProtectionTile.plain(
             context: context,
             title: reco.name,
             onPressed: () {
               showWoltModalBottomSheet(context,
                   title: reco.name,
-                  page: OfferingListWidget(id: reco.id),
+                  page: RecommendedTodoListWidget(id: reco.id),
                   stickyActionBar: AddAllTodoWidget());
             },
           );
@@ -45,7 +44,7 @@ class AddAllTodoWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addOfferingTodoControllerProvider);
     final todos = ref.watch(toggleListOfferControllerProvider);
-   // debugPrint("todos added $todos");
+    // debugPrint("todos added $todos");
     return AppButton.tertiary(
       isloading: state.isLoading,
       label: "update todo list".hardcoded,
@@ -53,7 +52,7 @@ class AddAllTodoWidget extends ConsumerWidget {
       onPressed: () async {
         await ref
             .read(addOfferingTodoControllerProvider.notifier)
-            .addOrUpdateStatuses(offeringsStatus: todos);
+            .addToActiveTodo(offeringsStatus: todos);
       },
     );
   }

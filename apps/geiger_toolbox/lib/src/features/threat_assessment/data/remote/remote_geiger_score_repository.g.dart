@@ -6,7 +6,7 @@ part of 'remote_geiger_score_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getGeigerScoreHash() => r'53d9ecee72fde61bae99a42eacb3f8d4193b329d';
+String _$getGeigerScoreHash() => r'682e4e79b4fff671e199de3ee94eb77f058e3963';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -40,7 +40,7 @@ class GetGeigerScoreFamily extends Family<AsyncValue<GeigerScore?>> {
 
   /// See also [getGeigerScore].
   GetGeigerScoreProvider call({
-    required Profile userProfile,
+    required UserProfileModel userProfile,
   }) {
     return GetGeigerScoreProvider(
       userProfile: userProfile,
@@ -75,7 +75,7 @@ class GetGeigerScoreFamily extends Family<AsyncValue<GeigerScore?>> {
 class GetGeigerScoreProvider extends AutoDisposeFutureProvider<GeigerScore?> {
   /// See also [getGeigerScore].
   GetGeigerScoreProvider({
-    required Profile userProfile,
+    required UserProfileModel userProfile,
   }) : this._internal(
           (ref) => getGeigerScore(
             ref as GetGeigerScoreRef,
@@ -103,7 +103,7 @@ class GetGeigerScoreProvider extends AutoDisposeFutureProvider<GeigerScore?> {
     required this.userProfile,
   }) : super.internal();
 
-  final Profile userProfile;
+  final UserProfileModel userProfile;
 
   @override
   Override overrideWith(
@@ -146,7 +146,7 @@ class GetGeigerScoreProvider extends AutoDisposeFutureProvider<GeigerScore?> {
 // ignore: unused_element
 mixin GetGeigerScoreRef on AutoDisposeFutureProviderRef<GeigerScore?> {
   /// The parameter `userProfile` of this provider.
-  Profile get userProfile;
+  UserProfileModel get userProfile;
 }
 
 class _GetGeigerScoreProviderElement
@@ -155,7 +155,8 @@ class _GetGeigerScoreProviderElement
   _GetGeigerScoreProviderElement(super.provider);
 
   @override
-  Profile get userProfile => (origin as GetGeigerScoreProvider).userProfile;
+  UserProfileModel get userProfile =>
+      (origin as GetGeigerScoreProvider).userProfile;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

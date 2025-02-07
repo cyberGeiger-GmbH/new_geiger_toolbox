@@ -65,14 +65,12 @@ class NewsActicle with _$NewsActicle {
       _$NewsActicleFromJson(json);
 }
 
-enum ProtectionStatus { recommended, planned, done }
-
 @freezed
 class Protection with _$Protection {
   const factory Protection({
     required String name,
     required String summary,
-    required ProtectionStatus status,
+    required String status,
   }) = _Protection;
 
   factory Protection.fromJson(Map<String, dynamic> json) =>

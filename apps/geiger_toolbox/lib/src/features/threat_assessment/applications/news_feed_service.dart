@@ -25,8 +25,9 @@ class NewsFeedService {
   Future<void> cacheNews() async {
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
-      final profile = await _getProfileForNewsFeed();
-      _log.i("sending company profile in xapi formate => $profile");
+      final profile = await ref.read(getXapiProfileProvider.future);
+      _log.i(
+          "sending company profile in xapi formate}");
       _log.i("Getting News from Server...");
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
 
@@ -37,22 +38,9 @@ class NewsFeedService {
       _log.i("success");
     } catch (e, s) {
       ref.read(appLoggerProvider).logError(e, s);
-      _log.e("error => $e");
+      _log.e("error => $e, $s");
       rethrow;
     }
-  }
-
-  Future<Profile> _getProfileForNewsFeed() async {
-    final compRepo = ref.read(companyProfileRepositoryProvider);
-    final company = await compRepo.fetchCompany();
-    Verb? verb;
-    if (company != null) {
-      verb = Verb(name: "User profile created");
-    } else {
-      // todo
-    }
-    return await ref
-        .read(getXapiProfileProvider(goodScore: false, verb: verb).future);
   }
 }
 

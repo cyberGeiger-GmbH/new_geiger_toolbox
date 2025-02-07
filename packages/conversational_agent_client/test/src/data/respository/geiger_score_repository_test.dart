@@ -39,7 +39,7 @@ void main() {
                       name: "Cynet",
                       summary:
                           "Cynet offers an all-in-one cybersecurity platform with 100% detection and protection capabilities.",
-                      status: ProtectionStatus.recommended),
+                      status: "recommended"),
                 ])
           ]);
 

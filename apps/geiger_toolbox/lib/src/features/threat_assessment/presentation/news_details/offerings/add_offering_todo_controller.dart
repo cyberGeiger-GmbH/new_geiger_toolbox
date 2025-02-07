@@ -13,31 +13,31 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
   FutureOr<void> build() {}
 
   /// add single OfferingStatus
-  Future<void> addOrUpdate({required TodoOffing status}) async {
-    final repo = ref.read(todoOfferingRepoProvider);
-    state = const AsyncLoading<void>();
-
-    //store the todoTask in cache
-    state = await AsyncValue.guard(() => repo.addOrUpdateTodoOfferingStatus(
-        id: status.id, isAdded: status.added ?? false));
-
-// //reset toggle to false on error
-    if (state.hasError == true) {
-      debugPrint("error occurs");
-      final toggle = ref.read(toggleOfferControllerProvider(status).notifier);
-      toggle.onChange(status.copyWith(added: false));
-    }
-  }
-
-// add has a list
-  Future<void> addOrUpdateStatuses(
-      {required List<TodoOffing> offeringsStatus}) async {
+  Future<void> addOrUpdate({required TodoOffering status}) async {
     final repo = ref.read(todoOfferingRepoProvider);
     state = const AsyncLoading<void>();
 
     //store the todoTask in cache
     state = await AsyncValue.guard(
-        () => repo.addOrUpdateTodoOfferings(offerData: offeringsStatus));
+        () => repo.addOrUpdateActiveTodo(id: status.id, status: status.status));
+
+// //reset toggle to false on error
+    if (state.hasError == true) {
+      debugPrint("error occurs");
+      final toggle = ref.read(toggleOfferControllerProvider(status).notifier);
+      toggle.onChange(status.copyWith(status: Status.recommended));
+    }
+  }
+
+// add has a list
+  Future<void> addToActiveTodo(
+      {required List<TodoOffering> offeringsStatus}) async {
+    final repo = ref.read(todoOfferingRepoProvider);
+    state = const AsyncLoading<void>();
+
+    //store the todoTask in cache
+    state = await AsyncValue.guard(
+        () => repo.addUpdateTodoList(offerData: offeringsStatus));
   }
 }
 
@@ -45,13 +45,13 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
 @riverpod
 class ToggleListOfferController extends _$ToggleListOfferController {
   @override
-  List<TodoOffing> build() {
+  List<TodoOffering> build() {
     return [];
   }
 
   // Toggle the `completed` state of an item
 
-  void selectTodoItems(TodoOffing item) {
+  void selectTodoItems(TodoOffering item) {
     // If the item is already in the state, remove it
     if (state.any((i) => i.id == item.id)) {
       state = state.where((i) => i.id != item.id).toList();
@@ -67,11 +67,11 @@ class ToggleListOfferController extends _$ToggleListOfferController {
 //update the checkbox state
 class ToggleOfferController extends _$ToggleOfferController {
   @override
-  TodoOffing build(TodoOffing value) {
+  TodoOffering build(TodoOffering value) {
     return value;
   }
 
-  void onChange(TodoOffing value) {
+  void onChange(TodoOffering value) {
     state = value;
   }
 }
