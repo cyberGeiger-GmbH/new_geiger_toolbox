@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/utils/date_formater.dart';
 
-import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:drift/drift.dart';
+import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../exceptions/app_exception.dart';

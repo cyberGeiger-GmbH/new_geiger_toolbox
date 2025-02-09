@@ -1,20 +1,22 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 
-import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart'
-    as db;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'news_object_log_repository.g.dart';
+part 'news_article_repository.g.dart';
 
-class NewsObjectLogRepository {
+//This class logs the curretent state of the [News] object made by the user
+
+class NewsArticleRepository {
   final Ref ref;
 
-  db.AppDatabase get _db => ref.read(db.appDatabaseProvider);
+  AppDatabase get _db => ref.read(appDatabaseProvider);
+
   Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
 
-  NewsObjectLogRepository(this.ref);
+  NewsArticleRepository(this.ref);
 
   Future<List<NewsActicle>> getObject() async {
     final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
@@ -38,8 +40,6 @@ class NewsObjectLogRepository {
     //Tranfrom the query inot a list of News with their associated Recommendation and task;
     final List<NewsActicle> newsObj = [];
     final Map<String, List<Protection>> proObjMap = {};
-
-  
 
     for (var rows in newsWithRecoAndOffering) {
       final newsEntry = rows.readTable(_db.newsInfo);
@@ -84,7 +84,7 @@ class NewsObjectLogRepository {
 }
 
 @riverpod
-Future<List<NewsActicle>> fetchNewsObjectLog(Ref ref) async {
-  final obj = NewsObjectLogRepository(ref);
+Future<List<NewsActicle>> fetchNewsArticle(Ref ref) async {
+  final obj = NewsArticleRepository(ref);
   return obj.getObject();
 }

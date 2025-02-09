@@ -16,12 +16,13 @@ class TodoOfferingRepository {
 
   Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
 
+//enum to database
   OfferingStatus _getOfferingStatus(Status status) => switch (status) {
         Status.recommended => OfferingStatus.recommended,
         Status.planned => OfferingStatus.planned,
         Status.done => OfferingStatus.done
       };
-
+//enum from database
   Status _getStatus(OfferingStatus? status) => switch (status) {
         OfferingStatus.recommended => Status.recommended,
         OfferingStatus.planned => Status.planned,

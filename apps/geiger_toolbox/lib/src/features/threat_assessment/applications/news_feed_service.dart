@@ -1,10 +1,10 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
-import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/applications/user_profile_model_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/xapi_profile_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/local/user_profile_model_repository.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -23,12 +23,23 @@ class NewsFeedService {
   NewsFeedService(this.ref);
 
   Future<void> cacheNews() async {
+    _log.i("calls to cache news from server");
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
-      final profile = await ref.read(getXapiProfileProvider.future);
-      _log.i(
-          "sending company profile in xapi formate}");
+      final userServiceRepo = ref.read(userProfileSerivceProvider);
+      final profileServiceReop = ref.read(userProfileSerivceProvider);
+      final storeRepo = ref.read(userProfileModelRepositoryProvider);
+
+      _log.i("getting current user profile");
+      final currentUserProfile = await userServiceRepo.fetchCurrentUser();
+
+      _log.i("storing current user profile");
+      await storeRepo.storeUserProfile(currentUserProfile: currentUserProfile);
+
+      _log.i("sending userProfile model");
+      final profile = await profileServiceReop.fetchUserProfileModel();
       _log.i("Getting News from Server...");
+
       List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
 
       if (data.isNotEmpty) {

@@ -3,8 +3,8 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/company.dart';
-import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
+import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'company_profile_repository.g.dart';

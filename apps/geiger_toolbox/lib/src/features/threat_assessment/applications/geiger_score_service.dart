@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/xapi_profile_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/applications/user_profile_model_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_geiger_score_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/remote/remote_geiger_score_repository.dart';
@@ -24,12 +24,11 @@ class GeigerScoreService {
     try {
       _log.i("Calculation has started...");
       final repo = ref.read(localGeigerScoreRepoProvider);
+      final profileServiceRepo = ref.read(userProfileSerivceProvider);
 
-//todo: check the range of score and update the goodScore parameter
+      final profile = await profileServiceRepo.fetchUserProfileModel();
 
-      final profile = await ref.read(getXapiProfileProvider.future);
-
-      _log.i("Sending company profile in xapi format");
+      _log.i("sending userProfile model");
 
       final geigerScore =
           await ref.read(getGeigerScoreProvider(userProfile: profile).future);

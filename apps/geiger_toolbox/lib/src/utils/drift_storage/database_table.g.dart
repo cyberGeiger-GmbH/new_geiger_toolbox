@@ -2158,6 +2158,199 @@ class TodoOfferingsCompanion extends UpdateCompanion<TodoOfferingData> {
   }
 }
 
+class $PreviousUserProfilesTable extends PreviousUserProfiles
+    with TableInfo<$PreviousUserProfilesTable, PreviousUserProfileData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PreviousUserProfilesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _previousProfileMeta =
+      const VerificationMeta('previousProfile');
+  @override
+  late final GeneratedColumnWithTypeConverter<Profile, String> previousProfile =
+      GeneratedColumn<String>('previous_profile', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
+          .withConverter<Profile>(
+              $PreviousUserProfilesTable.$converterpreviousProfile);
+  @override
+  List<GeneratedColumn> get $columns => [id, previousProfile];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'previous_user_profiles';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<PreviousUserProfileData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    context.handle(_previousProfileMeta, const VerificationResult.success());
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PreviousUserProfileData map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PreviousUserProfileData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      previousProfile: $PreviousUserProfilesTable.$converterpreviousProfile
+          .fromSql(attachedDatabase.typeMapping.read(DriftSqlType.string,
+              data['${effectivePrefix}previous_profile'])!),
+    );
+  }
+
+  @override
+  $PreviousUserProfilesTable createAlias(String alias) {
+    return $PreviousUserProfilesTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<Profile, String> $converterpreviousProfile =
+      const PreviousProfileConverter();
+}
+
+class PreviousUserProfileData extends DataClass
+    implements Insertable<PreviousUserProfileData> {
+  final int id;
+  final Profile previousProfile;
+  const PreviousUserProfileData(
+      {required this.id, required this.previousProfile});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    {
+      map['previous_profile'] = Variable<String>($PreviousUserProfilesTable
+          .$converterpreviousProfile
+          .toSql(previousProfile));
+    }
+    return map;
+  }
+
+  PreviousUserProfilesCompanion toCompanion(bool nullToAbsent) {
+    return PreviousUserProfilesCompanion(
+      id: Value(id),
+      previousProfile: Value(previousProfile),
+    );
+  }
+
+  factory PreviousUserProfileData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PreviousUserProfileData(
+      id: serializer.fromJson<int>(json['id']),
+      previousProfile: serializer.fromJson<Profile>(json['previousProfile']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'previousProfile': serializer.toJson<Profile>(previousProfile),
+    };
+  }
+
+  PreviousUserProfileData copyWith({int? id, Profile? previousProfile}) =>
+      PreviousUserProfileData(
+        id: id ?? this.id,
+        previousProfile: previousProfile ?? this.previousProfile,
+      );
+  PreviousUserProfileData copyWithCompanion(
+      PreviousUserProfilesCompanion data) {
+    return PreviousUserProfileData(
+      id: data.id.present ? data.id.value : this.id,
+      previousProfile: data.previousProfile.present
+          ? data.previousProfile.value
+          : this.previousProfile,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PreviousUserProfileData(')
+          ..write('id: $id, ')
+          ..write('previousProfile: $previousProfile')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, previousProfile);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PreviousUserProfileData &&
+          other.id == this.id &&
+          other.previousProfile == this.previousProfile);
+}
+
+class PreviousUserProfilesCompanion
+    extends UpdateCompanion<PreviousUserProfileData> {
+  final Value<int> id;
+  final Value<Profile> previousProfile;
+  const PreviousUserProfilesCompanion({
+    this.id = const Value.absent(),
+    this.previousProfile = const Value.absent(),
+  });
+  PreviousUserProfilesCompanion.insert({
+    this.id = const Value.absent(),
+    required Profile previousProfile,
+  }) : previousProfile = Value(previousProfile);
+  static Insertable<PreviousUserProfileData> custom({
+    Expression<int>? id,
+    Expression<String>? previousProfile,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (previousProfile != null) 'previous_profile': previousProfile,
+    });
+  }
+
+  PreviousUserProfilesCompanion copyWith(
+      {Value<int>? id, Value<Profile>? previousProfile}) {
+    return PreviousUserProfilesCompanion(
+      id: id ?? this.id,
+      previousProfile: previousProfile ?? this.previousProfile,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (previousProfile.present) {
+      map['previous_profile'] = Variable<String>($PreviousUserProfilesTable
+          .$converterpreviousProfile
+          .toSql(previousProfile.value));
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PreviousUserProfilesCompanion(')
+          ..write('id: $id, ')
+          ..write('previousProfile: $previousProfile')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2171,6 +2364,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $RecommendationOfferingsTable recommendationOfferings =
       $RecommendationOfferingsTable(this);
   late final $TodoOfferingsTable todoOfferings = $TodoOfferingsTable(this);
+  late final $PreviousUserProfilesTable previousUserProfiles =
+      $PreviousUserProfilesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2182,7 +2377,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         newsInfo,
         recommendations,
         recommendationOfferings,
-        todoOfferings
+        todoOfferings,
+        previousUserProfiles
       ];
 }
 
@@ -4287,6 +4483,138 @@ typedef $$TodoOfferingsTableProcessedTableManager = ProcessedTableManager<
     (TodoOfferingData, $$TodoOfferingsTableReferences),
     TodoOfferingData,
     PrefetchHooks Function({bool offeringId})>;
+typedef $$PreviousUserProfilesTableCreateCompanionBuilder
+    = PreviousUserProfilesCompanion Function({
+  Value<int> id,
+  required Profile previousProfile,
+});
+typedef $$PreviousUserProfilesTableUpdateCompanionBuilder
+    = PreviousUserProfilesCompanion Function({
+  Value<int> id,
+  Value<Profile> previousProfile,
+});
+
+class $$PreviousUserProfilesTableFilterComposer
+    extends Composer<_$AppDatabase, $PreviousUserProfilesTable> {
+  $$PreviousUserProfilesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnWithTypeConverterFilters<Profile, Profile, String>
+      get previousProfile => $composableBuilder(
+          column: $table.previousProfile,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+}
+
+class $$PreviousUserProfilesTableOrderingComposer
+    extends Composer<_$AppDatabase, $PreviousUserProfilesTable> {
+  $$PreviousUserProfilesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get previousProfile => $composableBuilder(
+      column: $table.previousProfile,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$PreviousUserProfilesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PreviousUserProfilesTable> {
+  $$PreviousUserProfilesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<Profile, String> get previousProfile =>
+      $composableBuilder(
+          column: $table.previousProfile, builder: (column) => column);
+}
+
+class $$PreviousUserProfilesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $PreviousUserProfilesTable,
+    PreviousUserProfileData,
+    $$PreviousUserProfilesTableFilterComposer,
+    $$PreviousUserProfilesTableOrderingComposer,
+    $$PreviousUserProfilesTableAnnotationComposer,
+    $$PreviousUserProfilesTableCreateCompanionBuilder,
+    $$PreviousUserProfilesTableUpdateCompanionBuilder,
+    (
+      PreviousUserProfileData,
+      BaseReferences<_$AppDatabase, $PreviousUserProfilesTable,
+          PreviousUserProfileData>
+    ),
+    PreviousUserProfileData,
+    PrefetchHooks Function()> {
+  $$PreviousUserProfilesTableTableManager(
+      _$AppDatabase db, $PreviousUserProfilesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$PreviousUserProfilesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$PreviousUserProfilesTableOrderingComposer(
+                  $db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$PreviousUserProfilesTableAnnotationComposer(
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<Profile> previousProfile = const Value.absent(),
+          }) =>
+              PreviousUserProfilesCompanion(
+            id: id,
+            previousProfile: previousProfile,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required Profile previousProfile,
+          }) =>
+              PreviousUserProfilesCompanion.insert(
+            id: id,
+            previousProfile: previousProfile,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$PreviousUserProfilesTableProcessedTableManager
+    = ProcessedTableManager<
+        _$AppDatabase,
+        $PreviousUserProfilesTable,
+        PreviousUserProfileData,
+        $$PreviousUserProfilesTableFilterComposer,
+        $$PreviousUserProfilesTableOrderingComposer,
+        $$PreviousUserProfilesTableAnnotationComposer,
+        $$PreviousUserProfilesTableCreateCompanionBuilder,
+        $$PreviousUserProfilesTableUpdateCompanionBuilder,
+        (
+          PreviousUserProfileData,
+          BaseReferences<_$AppDatabase, $PreviousUserProfilesTable,
+              PreviousUserProfileData>
+        ),
+        PreviousUserProfileData,
+        PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4306,6 +4634,8 @@ class $AppDatabaseManager {
           _db, _db.recommendationOfferings);
   $$TodoOfferingsTableTableManager get todoOfferings =>
       $$TodoOfferingsTableTableManager(_db, _db.todoOfferings);
+  $$PreviousUserProfilesTableTableManager get previousUserProfiles =>
+      $$PreviousUserProfilesTableTableManager(_db, _db.previousUserProfiles);
 }
 
 // **************************************************************************

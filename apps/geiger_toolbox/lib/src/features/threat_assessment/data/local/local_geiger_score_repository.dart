@@ -2,8 +2,8 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
-import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/geiger_score_info.dart';
+import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'local_geiger_score_repository.g.dart';
 

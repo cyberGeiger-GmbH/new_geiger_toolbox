@@ -1,13 +1,14 @@
-// ignore_for_file: prefer-match-file-name, no-magic-number
+import 'dart:convert';
 
+import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 // Conditional import implementation based on the Drift Flutter web example:
 // https://github.com/simolus3/drift/tree/develop/examples/app
-import 'connection/connection.dart' as impl;
+import 'package:geiger_toolbox/src/utils/drift_storage/connection/connection.dart'
+    as impl;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'database_table.g.dart';
 
@@ -128,6 +129,31 @@ class TodoOfferings extends Table {
   Set<Column> get primaryKey => {offeringId};
 }
 
+class PreviousProfileConverter extends TypeConverter<Profile, String> {
+  const PreviousProfileConverter();
+
+  @override
+  Profile fromSql(String fromDb) {
+    final Map<String, dynamic> json = jsonDecode(fromDb);
+    return Profile.fromJson(json);
+  }
+
+  @override
+  String toSql(Profile value) {
+    return jsonEncode(value.toJson());
+  }
+}
+
+@DataClassName("PreviousUserProfileData")
+class PreviousUserProfiles extends Table {
+  IntColumn get id => integer()();
+  TextColumn get previousProfile =>
+      text().map(const PreviousProfileConverter())();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 // TextColumn get locationId =>
 //     text().withLength(min: 1, max: 8).references(Locations, #countryCode)();
 // @ReferenceName('deviceGroups') // Foreign key
@@ -178,6 +204,7 @@ class TodoOfferings extends Table {
     Recommendations,
     RecommendationOfferings,
     TodoOfferings,
+    PreviousUserProfiles
 
     //BusinessProfiles,
     // Industries,
