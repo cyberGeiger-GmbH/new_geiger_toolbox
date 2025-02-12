@@ -7,7 +7,7 @@ import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/extensions/news_extension.dart';
-import 'package:geiger_toolbox/src/extensions/string_extension.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
@@ -56,8 +56,7 @@ class NewsFeedsWidget extends ConsumerWidget {
                           context.goNamed(
                             AppRouter.newsFeedDetails.name,
                             pathParameters: {
-                              AppRouter.newsFeedDetails.name:
-                                  title.replaceSpacesWithHyphen
+                              AppRouter.newsFeedDetails.name: title
                             },
                           );
                         },

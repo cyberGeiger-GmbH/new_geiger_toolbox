@@ -5,18 +5,18 @@ import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'news_article_repository.g.dart';
+part 'news_article_log_repository.g.dart';
 
 //This class logs the curretent state of the [News] object made by the user
 
-class NewsArticleRepository {
+class NewsArticleLogRepository {
   final Ref ref;
 
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
   Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
 
-  NewsArticleRepository(this.ref);
+  NewsArticleLogRepository(this.ref);
 
   Future<List<NewsActicle>> getObject() async {
     final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
@@ -85,6 +85,6 @@ class NewsArticleRepository {
 
 @riverpod
 Future<List<NewsActicle>> fetchNewsArticle(Ref ref) async {
-  final obj = NewsArticleRepository(ref);
+  final obj = NewsArticleLogRepository(ref);
   return obj.getObject();
 }

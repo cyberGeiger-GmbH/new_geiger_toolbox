@@ -40,7 +40,7 @@ class NewsDetailsScreen extends StatelessWidget {
           }
 
           final newsFeed =
-              ref.watch(watchNewsFeedByTitleProvider(newsTitle: newsTitle));
+              ref.watch(fetchNewsFeedByTitleProvider(newsTitle: newsTitle));
 
           return AsyncValueWidget(
             value: newsFeed,

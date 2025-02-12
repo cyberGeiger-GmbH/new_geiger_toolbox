@@ -6,27 +6,27 @@ part of 'local_news_feed_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$newsFeedCacheRepositoryHash() =>
-    r'5196053d44dc308c44eb943b7dfbe8749f186638';
+String _$localNewsFeedRepositoryHash() =>
+    r'4162c0b981a2281f442e59d89fe1148e97480087';
 
-/// See also [newsFeedCacheRepository].
-@ProviderFor(newsFeedCacheRepository)
-final newsFeedCacheRepositoryProvider =
+/// See also [localNewsFeedRepository].
+@ProviderFor(localNewsFeedRepository)
+final localNewsFeedRepositoryProvider =
     AutoDisposeProvider<LocalNewsFeedRepository>.internal(
-  newsFeedCacheRepository,
-  name: r'newsFeedCacheRepositoryProvider',
+  localNewsFeedRepository,
+  name: r'localNewsFeedRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$newsFeedCacheRepositoryHash,
+      : _$localNewsFeedRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef NewsFeedCacheRepositoryRef
+typedef LocalNewsFeedRepositoryRef
     = AutoDisposeProviderRef<LocalNewsFeedRepository>;
-String _$fetchNewsListHash() => r'ced51939e1dc54768cb35eea05e05d9e26e607e8';
+String _$fetchNewsListHash() => r'c178446d262c011ffcad6504ba7b32afcfaf9447';
 
 /// See also [fetchNewsList].
 @ProviderFor(fetchNewsList)
@@ -43,7 +43,7 @@ final fetchNewsListProvider = AutoDisposeFutureProvider<List<News>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FetchNewsListRef = AutoDisposeFutureProviderRef<List<News>>;
-String _$isNewsTableEmptyHash() => r'ea060e0a63644fe56646f54dde884825ea0ebb90';
+String _$isNewsTableEmptyHash() => r'dfe706c17a39e192ca9977928ae56b36325fcdd8';
 
 /// See also [isNewsTableEmpty].
 @ProviderFor(isNewsTableEmpty)

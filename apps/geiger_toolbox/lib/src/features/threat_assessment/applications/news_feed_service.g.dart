@@ -24,7 +24,7 @@ final newsFeedServiceProvider = AutoDisposeProvider<NewsFeedService>.internal(
 // ignore: unused_element
 typedef NewsFeedServiceRef = AutoDisposeProviderRef<NewsFeedService>;
 String _$watchRecentNewsFeedsHash() =>
-    r'b63f68060f86ea646b2b42cc27fa35136f4d4d25';
+    r'6d4546e44d5bede6bf7db53a24a969980d2b362a';
 
 /// See also [watchRecentNewsFeeds].
 @ProviderFor(watchRecentNewsFeeds)
@@ -42,7 +42,7 @@ final watchRecentNewsFeedsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchRecentNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
-String _$watchOldNewsFeedsHash() => r'29c4b8817adbb3027d787beb322334faf0b6a817';
+String _$watchOldNewsFeedsHash() => r'26136c7275956c2931ab9235a9e274b12545afa7';
 
 /// See also [watchOldNewsFeeds].
 @ProviderFor(watchOldNewsFeeds)
@@ -61,7 +61,7 @@ final watchOldNewsFeedsProvider =
 // ignore: unused_element
 typedef WatchOldNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
 String _$watchNewsFeedByTitleHash() =>
-    r'1c2315e05b2c61d8304e75c28e2640d7b576a0dd';
+    r'0139414cdbf4078205724bb36bc977a596fdf926';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -212,6 +212,139 @@ class _WatchNewsFeedByTitleProviderElement
 
   @override
   String get newsTitle => (origin as WatchNewsFeedByTitleProvider).newsTitle;
+}
+
+String _$fetchNewsFeedByTitleHash() =>
+    r'9327a925062623ad64c197b1836766eb862e9b44';
+
+/// See also [fetchNewsFeedByTitle].
+@ProviderFor(fetchNewsFeedByTitle)
+const fetchNewsFeedByTitleProvider = FetchNewsFeedByTitleFamily();
+
+/// See also [fetchNewsFeedByTitle].
+class FetchNewsFeedByTitleFamily extends Family<AsyncValue<News?>> {
+  /// See also [fetchNewsFeedByTitle].
+  const FetchNewsFeedByTitleFamily();
+
+  /// See also [fetchNewsFeedByTitle].
+  FetchNewsFeedByTitleProvider call({
+    required String newsTitle,
+  }) {
+    return FetchNewsFeedByTitleProvider(
+      newsTitle: newsTitle,
+    );
+  }
+
+  @override
+  FetchNewsFeedByTitleProvider getProviderOverride(
+    covariant FetchNewsFeedByTitleProvider provider,
+  ) {
+    return call(
+      newsTitle: provider.newsTitle,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'fetchNewsFeedByTitleProvider';
+}
+
+/// See also [fetchNewsFeedByTitle].
+class FetchNewsFeedByTitleProvider extends AutoDisposeFutureProvider<News?> {
+  /// See also [fetchNewsFeedByTitle].
+  FetchNewsFeedByTitleProvider({
+    required String newsTitle,
+  }) : this._internal(
+          (ref) => fetchNewsFeedByTitle(
+            ref as FetchNewsFeedByTitleRef,
+            newsTitle: newsTitle,
+          ),
+          from: fetchNewsFeedByTitleProvider,
+          name: r'fetchNewsFeedByTitleProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$fetchNewsFeedByTitleHash,
+          dependencies: FetchNewsFeedByTitleFamily._dependencies,
+          allTransitiveDependencies:
+              FetchNewsFeedByTitleFamily._allTransitiveDependencies,
+          newsTitle: newsTitle,
+        );
+
+  FetchNewsFeedByTitleProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.newsTitle,
+  }) : super.internal();
+
+  final String newsTitle;
+
+  @override
+  Override overrideWith(
+    FutureOr<News?> Function(FetchNewsFeedByTitleRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: FetchNewsFeedByTitleProvider._internal(
+        (ref) => create(ref as FetchNewsFeedByTitleRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        newsTitle: newsTitle,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<News?> createElement() {
+    return _FetchNewsFeedByTitleProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is FetchNewsFeedByTitleProvider &&
+        other.newsTitle == newsTitle;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, newsTitle.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin FetchNewsFeedByTitleRef on AutoDisposeFutureProviderRef<News?> {
+  /// The parameter `newsTitle` of this provider.
+  String get newsTitle;
+}
+
+class _FetchNewsFeedByTitleProviderElement
+    extends AutoDisposeFutureProviderElement<News?>
+    with FetchNewsFeedByTitleRef {
+  _FetchNewsFeedByTitleProviderElement(super.provider);
+
+  @override
+  String get newsTitle => (origin as FetchNewsFeedByTitleProvider).newsTitle;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

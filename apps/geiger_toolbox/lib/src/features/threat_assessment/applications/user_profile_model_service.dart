@@ -2,7 +2,7 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/local/news_article_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/local/news_article_log_repository.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_geiger_score_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/user_profile_model_repository.dart';

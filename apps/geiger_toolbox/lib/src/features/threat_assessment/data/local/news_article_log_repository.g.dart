@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'news_article_repository.dart';
+part of 'news_article_log_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchNewsArticleHash() => r'5311259ebd1777dc3524b293b0cbdaf3dfac740e';
+String _$fetchNewsArticleHash() => r'1b133be886e2ea661f5b804741d20308942507c6';
 
 /// See also [fetchNewsArticle].
 @ProviderFor(fetchNewsArticle)

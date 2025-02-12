@@ -27,9 +27,9 @@ class LocalNewsFeedRepository {
       final uniqueNews = await _uniqueNews(newObj: data);
       if (uniqueNews.isEmpty) {
         _log.w("news feed data already existing");
-        _log.w("Not caching it again");
+        _log.w("Not storing it again");
       } else {
-        _log.i("storing news locally...");
+        _log.i("storing new news locally...");
         await _db.transaction(() async {
           for (var newsData in uniqueNews) {
             //insert news
@@ -76,8 +76,9 @@ class LocalNewsFeedRepository {
       _log.i("done storing");
     } catch (e, s) {
       _log.e("error:$e, stack:$s");
-      throw DataBaseException(error: e.toString(), stack: s.toString());
+      throw DataBaseException(error: "failed to syn news feed $e", stack: "$s");
     }
+    return;
   }
 
   //filter unique news by title
@@ -253,7 +254,6 @@ class LocalNewsFeedRepository {
   }
 
   Future<List<News>> fetchNewsList() async {
-    _log.i("fetching List<News> ...");
     final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
       [
         leftOuterJoin(
@@ -333,39 +333,40 @@ class LocalNewsFeedRepository {
     return newsResult;
   }
 
-  Stream<News?> watchNewsByTitle({required String title}) {
-    _log.i("by title");
-    return watchNewsList()
-        .map((newsfeed) => _getNews(newsfeeds: newsfeed, newsTitle: title));
+  Future<News> fetchNewsByTitle({required String title}) async {
+    _log.i("fetching news by title");
+    final data = await fetchNewsList();
+
+    return _getNews(newsfeeds: data, newsTitle: title.replaceSpacesWithHyphen);
   }
 
-  static News? _getNews(
+  static News _getNews(
       {required List<News> newsfeeds, required String newsTitle}) {
     try {
       final obj = newsfeeds.firstWhere(
           (news) => news.title.replaceSpacesWithHyphen == newsTitle);
-
       return obj;
+    } on StateError {
+      throw StateError("No news found with title: $newsTitle,");
     } catch (e) {
       rethrow;
-      //return null;
     }
   }
 }
 
 @riverpod
-LocalNewsFeedRepository newsFeedCacheRepository(Ref ref) {
+LocalNewsFeedRepository localNewsFeedRepository(Ref ref) {
   return LocalNewsFeedRepository(ref);
 }
 
 @riverpod
 Future<List<News>> fetchNewsList(Ref ref) {
-  final repo = ref.watch(newsFeedCacheRepositoryProvider);
+  final repo = ref.watch(localNewsFeedRepositoryProvider);
   return repo.fetchNewsList();
 }
 
 @Riverpod(keepAlive: true)
 Future<bool> isNewsTableEmpty(Ref ref) async {
-  final repo = ref.watch(newsFeedCacheRepositoryProvider);
+  final repo = ref.watch(localNewsFeedRepositoryProvider);
   return repo.isNewsTableEmpty();
 }

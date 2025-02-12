@@ -1,0 +1,88 @@
+
+[
+    {
+        "id": "Critical-RCE-Flaw-in-GFI-KerioControl",
+        "title": "GFI KerioControl RCE Flaw",
+        "summary": "A security flaw in GFI KerioControl firewalls allows remote code execution. This is critical for Accelerator GmbH as it could lead to unauthorized access and data breaches. Immediate action is required to secure systems.",
+        "article_url": "https://thehackernews.com/2025/01/critical-rce-flaw-in-gfi-keriocontrol.html",
+        "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjunIfQFH4Bbh4G7ZlmeDYZ9hKZ2oJBvVP9hmRVt8X6Y-t9UpVGCirikcmYn4RQ1cbqbKPFML73wb9P-0h_pmHq8evdIt5ZBd8Xvd6faqLXMSyFss1wb9qypw-vYmA2RBeOEgt21RgJEoxrHxGJoMLZZQbNVN8uYQVyqUzNXvx3NkUMqYIjpothYI_m-koF/s1600/kerio.png",
+        "news_category": "cyber threat",
+        "date_created": "2025-01-09T15:05:00Z",
+        "recommendations": [
+            {
+                "id": "Update GFI KerioControl",
+                "name": "Update GFI KerioControl",
+                "rationale": "Updating the firewall to the latest version is crucial to patch the vulnerability and prevent unauthorized access.",
+                "specific_offerings": [
+                    {
+                        "name": "GFI Software",
+                        "summary": "Provides the latest patches and updates for GFI KerioControl.",
+                        "offering_image_url": "https://example.com/gfi-software-image.png"
+                    },
+                    {
+                        "name": "CyberGEIGER",
+                        "summary": "Offers training on maintaining and updating firewall systems.",
+                        "offering_image_url": "https://example.com/cybergeiger-image.png"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "Verschluesselungs-Trojaner-greifen-Schweizer-KMUs-an",
+        "title": "Encryption Trojans Swiss SMEs",
+        "summary": "Encryption trojans are targeting Swiss SMEs, including Accelerator GmbH, by exploiting weak server protections. This can lead to data encryption and ransom demands.",
+        "article_url": "",
+        "image_url": "",
+        "news_category": "cyber threat",
+        "date_created": "2025-01-03T00:00:00Z",
+        "recommendations": [
+            {
+                "id": "Implement Data Backups",
+                "name": "Implement Data Backups",
+                "rationale": "Regular data backups ensure that data can be restored in case of encryption by trojans, minimizing the impact of potential ransom demands.",
+                "specific_offerings": [
+                    {
+                        "name": "Backupify",
+                        "summary": "Provides automated, secure backups for critical data.",
+                        "offering_image_url": "https://example.com/backupify-image.png"
+                    },
+                    {
+                        "name": "DigiComp",
+                        "summary": "Offers training on data protection and backup strategies.",
+                        "offering_image_url": "https://example.com/digicomp-image.png"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "Defensible-Security-Architecture-and-Engineering",
+        "title": "Defensible Security Architecture",
+        "summary": "Implementing a defensible security architecture can protect against evolving cyber threats. This is crucial for Accelerator GmbH to maintain robust security.",
+        "article_url": "",
+        "image_url": "",
+        "news_category": "protection capability",
+        "date_created": "2025-01-03T00:00:00Z",
+        "recommendations": [
+            {
+                "id": "Adopt Zero Trust Model",
+                "name": "Adopt Zero Trust Model",
+                "rationale": "A zero trust model enhances security by ensuring that no user or system is trusted by default, reducing the risk of unauthorized access.",
+                "specific_offerings": [
+                    {
+                        "name": "CyberGEIGER",
+                        "summary": "Offers tools and guidance for implementing zero trust architectures.",
+                        "offering_image_url": "https://example.com/cybergeiger-image.png"
+                    },
+                    {
+                        "name": "Elisity",
+                        "summary": "Provides identity-based microsegmentation and zero trust solutions.",
+                        "offering_image_url": "https://example.com/elisity-image.png"
+                    }
+                ]
+            }
+        ]
+    }
+]
+    

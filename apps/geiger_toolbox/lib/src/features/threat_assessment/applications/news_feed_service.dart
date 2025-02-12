@@ -15,8 +15,8 @@ part 'news_feed_service.g.dart';
 class NewsFeedService {
   final Ref ref;
 
-  LocalNewsFeedRepository get cache =>
-      ref.read(newsFeedCacheRepositoryProvider);
+  LocalNewsFeedRepository get _cache =>
+      ref.read(localNewsFeedRepositoryProvider);
 
   Logger get _log => ref.read(logHandlerProvider("NewsFeedService"));
 
@@ -44,7 +44,7 @@ class NewsFeedService {
 
       if (data.isNotEmpty) {
         _log.i("storing newsfeed locally...");
-        await cache.synFromRemote(data: data);
+        await _cache.synFromRemote(data: data);
       }
       _log.i("success");
     } catch (e, s) {
@@ -62,18 +62,18 @@ NewsFeedService newsFeedService(Ref ref) {
 
 @riverpod
 Stream<List<News>> watchRecentNewsFeeds(Ref ref) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  final cachedRepos = ref.watch(localNewsFeedRepositoryProvider);
   return cachedRepos.watchNewsList();
 }
 
 @riverpod
 Stream<List<News>> watchOldNewsFeeds(Ref ref) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
+  final cachedRepos = ref.watch(localNewsFeedRepositoryProvider);
   return cachedRepos.watchNewsList(sort: false);
 }
 
 @riverpod
-Stream<News?> watchNewsFeedByTitle(Ref ref, {required String newsTitle}) {
-  final cachedRepos = ref.watch(newsFeedCacheRepositoryProvider);
-  return cachedRepos.watchNewsByTitle(title: newsTitle);
+Future<News?> fetchNewsFeedByTitle(Ref ref, {required String newsTitle}) async {
+  final cachedRepos = ref.watch(localNewsFeedRepositoryProvider);
+  return await cachedRepos.fetchNewsByTitle(title: newsTitle);
 }
