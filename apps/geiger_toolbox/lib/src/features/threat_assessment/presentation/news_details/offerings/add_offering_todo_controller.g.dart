@@ -7,7 +7,7 @@ part of 'add_offering_todo_controller.dart';
 // **************************************************************************
 
 String _$addOfferingTodoControllerHash() =>
-    r'388826030190a5b2a2df3ddcce1fa334eaf1f219';
+    r'e066a51184be3c2cfa579d099fd0259ffbf1011a';
 
 /// See also [AddOfferingTodoController].
 @ProviderFor(AddOfferingTodoController)

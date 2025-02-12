@@ -35,7 +35,7 @@ class NewsDetailsScreen extends StatelessWidget {
 
           //listen for errors
           if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
-            ref.listen(watchNewsFeedByTitleProvider(newsTitle: newsTitle),
+            ref.listen(fetchNewsFeedByTitleProvider(newsTitle: newsTitle),
                 (_, nxt) => nxt.showAlertDialogOnError(context: context));
           }
 

@@ -13,13 +13,12 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
   FutureOr<void> build() {}
 
   /// add single OfferingStatus
-  Future<void> addOrUpdate({required TodoOffering status}) async {
+  Future<void> addTodo({required TodoOffering status}) async {
     final repo = ref.read(todoOfferingRepoProvider);
     state = const AsyncLoading<void>();
 
     //store the todoTask in cache
-    state = await AsyncValue.guard(
-        () => repo.addOrUpdateActiveTodo(id: status.id, status: status.status));
+    state = await AsyncValue.guard(() => repo.addTodo(todo: status));
 
 // //reset toggle to false on error
     if (state.hasError == true) {
@@ -37,7 +36,7 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
 
     //store the todoTask in cache
     state = await AsyncValue.guard(
-        () => repo.addUpdateTodoList(offerData: offeringsStatus));
+        () => repo.addListTodo(offerData: offeringsStatus));
   }
 }
 

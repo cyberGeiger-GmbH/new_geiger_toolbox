@@ -1,6 +1,7 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,13 +18,13 @@ class TodoOfferingRepository {
   Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
 
 //enum to database
-  OfferingStatus _getOfferingStatus(Status status) => switch (status) {
+  OfferingStatus todoToOfferingStatus(Status status) => switch (status) {
         Status.recommended => OfferingStatus.recommended,
         Status.planned => OfferingStatus.planned,
         Status.done => OfferingStatus.done
       };
 //enum from database
-  Status _getStatus(OfferingStatus? status) => switch (status) {
+  Status offeringToTodoStatus(OfferingStatus? status) => switch (status) {
         OfferingStatus.recommended => Status.recommended,
         OfferingStatus.planned => Status.planned,
         OfferingStatus.done => Status.done,
@@ -32,28 +33,47 @@ class TodoOfferingRepository {
 
   TodoOfferingRepository(this.ref);
 
-  //add/update status of a given offering
-  Future<int> addOrUpdateActiveTodo(
-      {required OfferingId id, required Status status}) async {
+  //add status of a given offering
+  Future<void> addTodo({required TodoOffering todo}) async {
     final todoOffer = TodoOfferingsCompanion(
-      offeringId: Value(id),
-      offeringStatus: Value(_getOfferingStatus(status)),
+      offeringId: Value(todo.id),
+      offeringStatus: Value(todoToOfferingStatus(todo.status)),
     );
 
     /// insert or update the todoOffer status
-    return await _db.into(_db.todoOfferings).insertOnConflictUpdate(todoOffer);
+    await _db.into(_db.todoOfferings).insertOnConflictUpdate(todoOffer);
+  }
+
+  Future<int> updateTodoStatus(
+      {required OfferingId id, required Status status}) async {
+    try {
+      final todoOffer = TodoOfferingsCompanion(
+        offeringId: Value(id),
+        offeringStatus: Value(todoToOfferingStatus(status)),
+      );
+
+      /// update the todoOffer status
+      final result = await (_db.update(_db.todoOfferings)
+            ..where((t) => t.offeringId.equals(id)))
+          .write(todoOffer);
+      if (result == 0) {
+        throw DataBaseException(error: "No todo offering found");
+      }
+      return result;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   //* add/update status of a given offerings
-  Future<void> addUpdateTodoList(
-      {required List<TodoOffering> offerData}) async {
-    _log.i("add offer to todos $offerData");
+  Future<void> addListTodo({required List<TodoOffering> offerData}) async {
+   // _log.i("add offer to todos $offerData");
     if (offerData.isNotEmpty) {
       await _db.transaction(() async {
         for (var data in offerData) {
           final todoOffer = TodoOfferingsCompanion(
             offeringId: Value(data.id),
-            offeringStatus: Value(_getOfferingStatus(data.status)),
+            offeringStatus: Value(todoToOfferingStatus(data.status)),
           );
 
           /// insert or update the todoOffer status
@@ -104,7 +124,7 @@ class TodoOfferingRepository {
           name: offeringEntry.name,
           summary: offeringEntry.summary,
         );
-        final status = _getStatus(todofferingEntry!.offeringStatus);
+        final status = offeringToTodoStatus(todofferingEntry!.offeringStatus);
 
         return TodoOffering(
           id: offeringEntry.id,
@@ -145,7 +165,7 @@ class TodoOfferingRepository {
         summary: offeringEntry.summary,
       );
 
-      final status = _getStatus(todoOfferingEntry?.offeringStatus);
+      final status = offeringToTodoStatus(todoOfferingEntry?.offeringStatus);
 
       statusList.add(
         TodoOffering(

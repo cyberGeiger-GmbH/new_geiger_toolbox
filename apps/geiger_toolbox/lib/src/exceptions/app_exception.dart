@@ -63,7 +63,7 @@ class DataBaseException extends AppException {
   DataBaseException({this.error, this.stack})
       : super(
             code: error ?? "database-exception",
-            message: stack ?? "Data Exception");
+            message: stack ?? "DataBase Exception");
 
   final String? error;
   final String? stack;

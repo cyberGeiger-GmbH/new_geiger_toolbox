@@ -60,8 +60,8 @@ final watchOldNewsFeedsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchOldNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
-String _$watchNewsFeedByTitleHash() =>
-    r'0139414cdbf4078205724bb36bc977a596fdf926';
+String _$fetchNewsFeedByTitleHash() =>
+    r'9327a925062623ad64c197b1836766eb862e9b44';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -83,139 +83,6 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
-
-/// See also [watchNewsFeedByTitle].
-@ProviderFor(watchNewsFeedByTitle)
-const watchNewsFeedByTitleProvider = WatchNewsFeedByTitleFamily();
-
-/// See also [watchNewsFeedByTitle].
-class WatchNewsFeedByTitleFamily extends Family<AsyncValue<News?>> {
-  /// See also [watchNewsFeedByTitle].
-  const WatchNewsFeedByTitleFamily();
-
-  /// See also [watchNewsFeedByTitle].
-  WatchNewsFeedByTitleProvider call({
-    required String newsTitle,
-  }) {
-    return WatchNewsFeedByTitleProvider(
-      newsTitle: newsTitle,
-    );
-  }
-
-  @override
-  WatchNewsFeedByTitleProvider getProviderOverride(
-    covariant WatchNewsFeedByTitleProvider provider,
-  ) {
-    return call(
-      newsTitle: provider.newsTitle,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'watchNewsFeedByTitleProvider';
-}
-
-/// See also [watchNewsFeedByTitle].
-class WatchNewsFeedByTitleProvider extends AutoDisposeStreamProvider<News?> {
-  /// See also [watchNewsFeedByTitle].
-  WatchNewsFeedByTitleProvider({
-    required String newsTitle,
-  }) : this._internal(
-          (ref) => watchNewsFeedByTitle(
-            ref as WatchNewsFeedByTitleRef,
-            newsTitle: newsTitle,
-          ),
-          from: watchNewsFeedByTitleProvider,
-          name: r'watchNewsFeedByTitleProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$watchNewsFeedByTitleHash,
-          dependencies: WatchNewsFeedByTitleFamily._dependencies,
-          allTransitiveDependencies:
-              WatchNewsFeedByTitleFamily._allTransitiveDependencies,
-          newsTitle: newsTitle,
-        );
-
-  WatchNewsFeedByTitleProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.newsTitle,
-  }) : super.internal();
-
-  final String newsTitle;
-
-  @override
-  Override overrideWith(
-    Stream<News?> Function(WatchNewsFeedByTitleRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: WatchNewsFeedByTitleProvider._internal(
-        (ref) => create(ref as WatchNewsFeedByTitleRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        newsTitle: newsTitle,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeStreamProviderElement<News?> createElement() {
-    return _WatchNewsFeedByTitleProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is WatchNewsFeedByTitleProvider &&
-        other.newsTitle == newsTitle;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, newsTitle.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin WatchNewsFeedByTitleRef on AutoDisposeStreamProviderRef<News?> {
-  /// The parameter `newsTitle` of this provider.
-  String get newsTitle;
-}
-
-class _WatchNewsFeedByTitleProviderElement
-    extends AutoDisposeStreamProviderElement<News?>
-    with WatchNewsFeedByTitleRef {
-  _WatchNewsFeedByTitleProviderElement(super.provider);
-
-  @override
-  String get newsTitle => (origin as WatchNewsFeedByTitleProvider).newsTitle;
-}
-
-String _$fetchNewsFeedByTitleHash() =>
-    r'9327a925062623ad64c197b1836766eb862e9b44';
 
 /// See also [fetchNewsFeedByTitle].
 @ProviderFor(fetchNewsFeedByTitle)
