@@ -5,10 +5,9 @@ import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/profile_screen_controller.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/intro/intro_widget.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
-import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_controller.dart';
-import 'package:geiger_toolbox/src/features/policy/presentation/terms_condition_screen.dart';
-
+import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_condition_controller.dart';
 
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
@@ -36,8 +35,7 @@ enum AppRouter {
   settings(path: "/settings", name: "settings"),
   chat(path: "/chat", name: "chat"),
   createProfile(path: "/create-profile", name: "create-profile"),
-  termsAndCondition(
-      path: "/terms-and-conditions", name: "terms-and-conditions-screen");
+  introdution(path: "/intro", name: "intro-screen");
 
   const AppRouter({required this.path, required this.name});
   final String path;
@@ -76,14 +74,14 @@ class AppRouting {
       redirect: (context, state) {
         final termsConditionState = ref.read(termsConditionControllerProvider);
         //final isNewsFeedEmpty = ref.read(isNewsTableEmptyProvider).requireValue;
-        
+
         final skipProfile = ref.read(profileScreenControllerProvider);
 
         final path = state.uri.path;
         // redirect to [TermAndConditionsScreen]
         if (!termsConditionState) {
-          if (path != AppRouter.termsAndCondition.path) {
-            return AppRouter.termsAndCondition.path;
+          if (path != AppRouter.introdution.path) {
+            return AppRouter.introdution.path;
           }
 
           return null;
@@ -107,12 +105,10 @@ class AppRouting {
         //for ui without bottom navigation
 
         GoRoute(
-          path: AppRouter.termsAndCondition.path,
-          name: AppRouter.termsAndCondition.name,
+          path: AppRouter.introdution.path,
+          name: AppRouter.introdution.name,
           pageBuilder: (context, state) => NoTransitionPage<void>(
-              child: TermsConditionScreen(),
-              key: state.pageKey,
-              name: state.name),
+              child: IntroScreen(), key: state.pageKey, name: state.name),
         ),
 
         GoRoute(

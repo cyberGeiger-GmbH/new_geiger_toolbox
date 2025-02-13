@@ -1,5 +1,6 @@
 import 'package:core_ui/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class AppText extends StatelessWidget {
   const AppText._(
@@ -63,12 +64,14 @@ class AppText extends StatelessWidget {
           required BuildContext context,
           Color? color,
           TextAlign? textAlign,
+          FontWeight? fontWeight,
           TextOverflow? textOverflow}) =>
       AppText._(
           key: key,
           text: text,
           textStyle: _appTextStyles(context).headlineLarge!.copyWith(
                 color: color,
+                fontWeight: fontWeight,
               ),
           textAlign: textAlign ?? TextAlign.start,
           textOverflow: textOverflow);
@@ -263,7 +266,7 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
         key: key,
         text,
         textAlign: textAlign,

@@ -36,7 +36,7 @@ class GeigerSvgImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(name,
-        width: width ?? 100, // Adjust as needed
-        height: height ?? 100);
+        width: width , // Adjust as needed
+        height: height);
   }
 }
