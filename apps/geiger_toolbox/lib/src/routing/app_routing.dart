@@ -131,10 +131,10 @@ class AppRouting {
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) => ScaffoldWithNavigation(
             navigationShell: navigationShell,
-            feedbackButton:
-                (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
-                    ? TesterButtons()
-                    : null,
+            // feedbackButton:
+            //     (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
+            //         ? TesterButtons()
+            //         : null,
           ),
           branches: [
             StatefulShellBranch(

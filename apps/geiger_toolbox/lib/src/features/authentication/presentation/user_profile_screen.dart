@@ -52,8 +52,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     return Scaffold(
       appBar: CustomAppBar(
           title: "User Profile", onCloseProfile: widget.onCloseProfile),
-      floatingActionButton:
-          getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
+    //  floatingActionButton:
+          // getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
