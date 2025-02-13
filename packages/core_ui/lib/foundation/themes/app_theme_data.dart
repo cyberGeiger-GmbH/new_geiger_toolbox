@@ -72,20 +72,19 @@ extension CustomThemeData on ThemeData {
     // An updated theme with bigger text sizes
     return copyWith(
       textTheme: TextTheme(
-        headlineLarge:
-            textTheme.headlineLarge?.copyWith(fontSize: TypoSize.xdp),
-        headlineMedium:
-            textTheme.headlineMedium?.copyWith(fontSize: TypoSize.dp),
-        headlineSmall:
-            textTheme.headlineSmall?.copyWith(fontSize: TypoSize.xlg),
-        titleLarge: textTheme.titleLarge?.copyWith(fontSize: TypoSize.lg),
-        titleMedium: textTheme.titleMedium?.copyWith(fontSize: TypoSize.md),
-        titleSmall: textTheme.titleMedium?.copyWith(fontSize: TypoSize.sm),
-        bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: TypoSize.bg),
-        bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: TypoSize.md),
-        bodySmall: textTheme.bodySmall?.copyWith(fontSize: TypoSize.sm),
-        labelLarge: textTheme.labelLarge?.copyWith(fontSize: TypoSize.md)
-      ),
+          headlineLarge:
+              textTheme.headlineLarge?.copyWith(fontSize: TypoSize.xdp),
+          headlineMedium:
+              textTheme.headlineMedium?.copyWith(fontSize: TypoSize.dp),
+          headlineSmall:
+              textTheme.headlineSmall?.copyWith(fontSize: TypoSize.xlg),
+          titleLarge: textTheme.titleLarge?.copyWith(fontSize: TypoSize.lg),
+          titleMedium: textTheme.titleMedium?.copyWith(fontSize: TypoSize.md),
+          titleSmall: textTheme.titleMedium?.copyWith(fontSize: TypoSize.sm),
+          bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: TypoSize.bg),
+          bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: TypoSize.md),
+          bodySmall: textTheme.bodySmall?.copyWith(fontSize: TypoSize.sm),
+          labelLarge: textTheme.labelLarge?.copyWith(fontSize: TypoSize.md)),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(Spacing.p16),
@@ -99,11 +98,6 @@ extension CustomThemeData on ThemeData {
           textStyle: const TextStyle(fontSize: 18),
         ),
       ),
-      iconTheme: AppIconsTheme.main(),
     );
   }
-}
-
-extension ThemeDataExtended on IconThemeData {
-  AppIconsTheme get appIcons => AppIconsTheme.main();
 }

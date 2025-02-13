@@ -1,3 +1,5 @@
+
+import 'package:core_ui/atoms/geiger_svg_images.dart';
 import 'package:core_ui/core_ui.dart';
 
 import 'package:core_ui/helpers/design_system_helper.dart';
@@ -19,11 +21,12 @@ class DesignSystem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              Theme.of(context).iconTheme.appIcons.appIcon.character.search,
-              style: TextStyle(
-                  fontSize:
-                      Theme.of(context).iconTheme.appIcons.appIcon.sizes.large),
+            Row(
+              children: [
+                GeigerSvgImages.magnifyingGlass(),
+                GeigerSvgImages.trickGood(),
+                GeigerSvgImages.measure()
+              ],
             ),
             Spacing.gapH8,
             Row(

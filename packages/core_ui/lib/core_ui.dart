@@ -4,11 +4,10 @@ library core_ui;
 
 export './tokens/spacing.dart';
 
-//themes
-export './foundation/themes/app_icons_theme.dart';
 export './foundation/themes/app_theme_data.dart';
 
-//icons
+//svg
+export './atoms/geiger_svg_images.dart';
 
 ///export molecules
 export 'molecules/bars/custom_app_bar.dart';

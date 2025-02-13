@@ -35,6 +35,7 @@ class ScanButtonController extends _$ScanButtonController {
     final compProfile = await compRepo.fetchCompany();
 
     if (compProfile != null) {
+      
       ref.read(analyticsFacadeProvider).trackScanWithProfile();
     } else {
       ref.read(analyticsFacadeProvider).trackScanWithoutProfile();

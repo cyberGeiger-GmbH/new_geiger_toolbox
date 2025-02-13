@@ -24,12 +24,33 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [appIcon, circlesBg];
 }
 
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/cG_magnifying_glass.svg
+  String get cGMagnifyingGlass =>
+      'packages/core_ui/assets/svg/cG_magnifying_glass.svg';
+
+  /// File path: assets/svg/cG_measure.svg
+  String get cGMeasure => 'packages/core_ui/assets/svg/cG_measure.svg';
+
+  /// File path: assets/svg/cG_tick.svg
+  String get cGTick => 'packages/core_ui/assets/svg/cG_tick.svg';
+
+  /// File path: assets/svg/cG_trophy.svg
+  String get cGTrophy => 'packages/core_ui/assets/svg/cG_trophy.svg';
+
+  /// List of all assets
+  List<String> get values => [cGMagnifyingGlass, cGMeasure, cGTick, cGTrophy];
+}
+
 class Assets {
   Assets._();
 
   static const String package = 'core_ui';
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {

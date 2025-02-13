@@ -18,6 +18,7 @@ dependencies:
   json_annotation: 4.9.0
   shimmer: 3.0.0
   wolt_modal_sheet: 0.10.0
+  flutter_svg: 2.0.17
 
 
 dev_dependencies:
@@ -29,7 +30,6 @@ dev_dependencies:
   json_serializable: 6.8.0
   flutter_gen_runner: 5.8.0
   golden_toolkit: 0.15.0
-
 #for auto generating referece class for assets
 flutter_gen:
   assets:
@@ -46,15 +46,14 @@ flutter_gen:
 flutter:
   assets:
     - assets/images/
+    - assets/svg/
 
   fonts:
     - family: ttNorms
       fonts:
         - asset: assets/fonts/TT-Norms-Fonts/TTNorms-Regular.otf
         - asset: assets/fonts/TT-Norms-Fonts/TTNorms-Bold.otf
-    - family: geiger_icons
-      fonts:
-        - asset: assets/fonts/geiger_icons/geiger_icons.ttf
+    
     #used for Golden Image tests
     - family: Roboto
       fonts:
