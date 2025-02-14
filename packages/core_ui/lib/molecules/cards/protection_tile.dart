@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:core_ui/molecules/buttons/app_icon_button.dart';
+import 'package:core_ui/tokens/spacing.dart';
 
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class ProtectionTile extends StatelessWidget {
     return ProtectionTile._(
       key: key,
       title: title,
-      trailing: AppIconButton.filled(
+      trailing: AppIconButton.defaultStyle(
         context: context,
         iconData: Icons.chevron_right,
         iconColor: appColors.onPrimary,
@@ -86,8 +87,12 @@ class _ContentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ListTile(
-        leading: AutoSizeText(
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: Spacing.p8, vertical: Spacing.p8), // Adjust padding
+
+        title: AutoSizeText(
           title,
+          overflow: TextOverflow.ellipsis,
           style: theme.textTheme.labelLarge!
               .copyWith(color: theme.colorScheme.scrim),
         ),

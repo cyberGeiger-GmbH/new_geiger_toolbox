@@ -182,15 +182,16 @@ class AppButton extends StatelessWidget {
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
+        elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: AppRadius.main().asBorderRadius.regular,
-          side: BorderSide(color: _appColor(context).primary),
+          side: BorderSide(color: _appColor(context).primary, width: 2),
         ),
         maximumSize: const Size(100, 100),
         minimumSize: const Size(90, 90),
         backgroundColor: color ?? _appColor(context).surface,
         padding: const EdgeInsets.all(Spacing.p12),
-        overlayColor: _appColor(context).onSurface,
+        overlayColor: _appColor(context).primary,
       ),
       onPressed: onPressed,
       child: AppText.titleMedium(

@@ -9,7 +9,6 @@ import 'package:geiger_toolbox/src/features/policy/presentation/intro/intro_widg
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_condition_controller.dart';
 
-
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
 
 import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
@@ -131,10 +130,10 @@ class AppRouting {
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) => ScaffoldWithNavigation(
             navigationShell: navigationShell,
-            // feedbackButton:
-            //     (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
-            //         ? TesterButtons()
-            //         : null,
+            feedbackButton:
+                (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
+                    ? TesterButtons()
+                    : null,
           ),
           branches: [
             StatefulShellBranch(

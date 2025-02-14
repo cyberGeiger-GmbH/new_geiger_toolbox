@@ -81,8 +81,8 @@ class CarouselWidget extends StatelessWidget {
           autoPlay: true,
           enlargeCenterPage: true,
           // aspectRatio: 16 / 9,
-          height: MediaQuery.of(context).size.height *
-              0.4, // Use 50% of screen height
+          height: MediaQuery.sizeOf(context).height *
+              0.4, // Use 40% of screen height
           viewportFraction: 1,
           autoPlayInterval: Duration(seconds: slidingSpeed ?? 3),
           onPageChanged: onPageChanged,

@@ -7,7 +7,7 @@ part of 'scan_button_controller.dart';
 // **************************************************************************
 
 String _$scanButtonControllerHash() =>
-    r'5eccebb9136a8892a7eb61f04d6a6da901ab7831';
+    r'7a16292f9f1c2f701055dfc856e80650cb0ef7a5';
 
 /// See also [ScanButtonController].
 @ProviderFor(ScanButtonController)

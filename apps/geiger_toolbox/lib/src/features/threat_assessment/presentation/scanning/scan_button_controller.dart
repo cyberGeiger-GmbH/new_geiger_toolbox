@@ -21,13 +21,15 @@ class ScanButtonController extends _$ScanButtonController {
 
   Future<void> scan() async {
     _log.i("scanButton pressed");
+//analytics
+    unawaited(_trackScanning());
     state = const AsyncLoading();
+
     state = await AsyncValue.guard(
         () => ref.read(newsFeedServiceProvider).cacheNews());
     _log.i("scanning completed ");
 
-//analytics
-    unawaited(_trackScanning());
+
   }
 
   Future<void> _trackScanning() async {

@@ -7,7 +7,6 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/company/
 /// Shows the form for creating profile of the user
 
 class CreateProfileScreen extends StatefulWidget {
-  
   const CreateProfileScreen({super.key, this.onCloseProfile});
   // * Keys for testing using find.byKey()
   static const companyKey = Key('companyName');
@@ -52,8 +51,8 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     return Scaffold(
       appBar: CustomAppBar(
           title: "User Profile", onCloseProfile: widget.onCloseProfile),
-    //  floatingActionButton:
-          // getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
+      floatingActionButton:
+          getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [

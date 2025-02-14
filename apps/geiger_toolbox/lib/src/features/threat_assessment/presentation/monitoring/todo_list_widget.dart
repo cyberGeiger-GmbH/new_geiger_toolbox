@@ -183,15 +183,19 @@ class TodoListTileCard extends StatelessWidget {
       ),
       trailing: Icon(Icons.chevron_right),
       onTap: () {
-        showWoltAlertDialog(context,
+        showWoltModalBottomSheet(context,
             title: item.offering.name,
+            forceMaxHeight: false,
             page: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(Spacing.p16),
-                  child: AppText.bodySmall(
-                      text: item.offering.summary, context: context),
-                ),
+                SizedBox(
+                    height: MediaQuery.sizeOf(context).height *
+                        0.3, // Use 40% of screen height
+                    child: Padding(
+                      padding: const EdgeInsets.all(Spacing.p16),
+                      child: AppText.bodySmall(
+                          text: item.offering.summary, context: context),
+                    )),
               ],
             ));
       },

@@ -1,7 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+// import 'package:go_router/go_router.dart';
+// import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 void showSnackBar(
     {required BuildContext context,
@@ -14,12 +14,12 @@ void showSnackBar(
   );
   final snackBar = SnackBar(
     content: appText,
-    action: SnackBarAction(
-      label: "Dismiss".hardcoded,
-      onPressed: () {
-        context.pop();
-      },
-    ),
+    // action: SnackBarAction(
+    //   label: "Dismiss".hardcoded,
+    //   onPressed: () {
+    //     context.pop();
+    //   },
+    // ),
     backgroundColor: backgroundColor,
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);

@@ -19,7 +19,7 @@ class RecommendationTileListWidget extends StatelessWidget {
     return ProtectionTileList(
       protectionTile: recommendations.map(
         (reco) {
-          return ProtectionTile.plain(
+          return ProtectionTile.outlined(
             context: context,
             title: reco.name,
             onPressed: () {

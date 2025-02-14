@@ -10,12 +10,15 @@ class NewsFeedRemoteRepository {
   NewsFeedRemoteRepository(this.ref);
 
   Future<List<News>> fetchNewsUpdate({required UserProfileModel smeProfile}) async {
-    
-    final newsRepo = ref.read(newsRepositoryProvider);
-    final data = await newsRepo.fetchNews(userProfile: smeProfile);
-    _log.i("total news received > ${data.length}");
+      try {
+      final newsRepo = ref.read(newsRepositoryProvider);
+      final data = await newsRepo.fetchNews(userProfile: smeProfile);
+      _log.i("total news received > ${data.length}");
 
-    return data;
+      return data;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 

@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 void showWoltModalBottomSheet(BuildContext context,
-    {required String title, required Widget page, Widget? stickyActionBar}) {
+    {required String title,
+    required Widget page,
+    Widget? stickyActionBar,
+    bool forceMaxHeight = true}) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.bottomSheet(),
     context: context,
@@ -13,14 +16,17 @@ void showWoltModalBottomSheet(BuildContext context,
     pageListBuilder: (bottomSheetContext) {
       return [
         _takeActionSliverWolModalSheetPage(context,
-            title: title, mainContent: page, stickyActionBar: stickyActionBar)
+            title: title,
+            mainContent: page,
+            stickyActionBar: stickyActionBar,
+            forceMaxHeight: forceMaxHeight)
       ];
     },
   );
 }
 
 void showWoltAlertDialog(BuildContext context,
-    {required String title, required Widget page}) {
+    {required String title, required Widget page, bool forceMaxHeight = true}) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.alertDialog(),
     context: context,
@@ -28,7 +34,7 @@ void showWoltAlertDialog(BuildContext context,
     pageListBuilder: (bottomSheetContext) {
       return [
         _takeActionSliverWolModalSheetPage(context,
-            title: title, mainContent: page, forceMaxHeight: false)
+            title: title, mainContent: page, forceMaxHeight: forceMaxHeight)
       ];
     },
   );
