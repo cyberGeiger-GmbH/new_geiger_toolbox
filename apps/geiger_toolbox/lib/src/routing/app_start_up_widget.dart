@@ -5,11 +5,11 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/background_with_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
-
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/monitoring/mixpanel_analytics_client.dart';
@@ -44,7 +44,7 @@ class AppStartUp extends _$AppStartUp {
     await ref.read(packageInfoProvider.future);
     await ref.read(sharedPreferencesProvider.future);
     await ref.read(deviceTypeProvider.future);
-   
+
     // * check if news feed is empty
     // await ref.read(isNewsTableEmptyProvider.future);
 
@@ -100,17 +100,16 @@ class AppStartUpLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(Spacing.p16),
-        child: BackgroundWithImage(
-            child: Column(
+      body: ResponsiveCenterWidget(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppAssetImageData.geigerLogo().image,
-            CircularProgressIndicator(),
+            Spacing.gapH22,
+            const CircularProgressIndicator(),
           ],
-        )),
+        ),
       ),
     );
   }
