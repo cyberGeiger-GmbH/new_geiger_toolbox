@@ -5,7 +5,7 @@ import 'package:geiger_toolbox/src/features/authentication/data/user_profile_rep
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/news_article_log_repository.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_geiger_score_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/local/user_profile_model_repository.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/data/local/previous_user_state_repository.dart';
 
 import 'package:geiger_toolbox/src/utils/device_info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,18 +17,32 @@ class UserProfileModelService {
 
   Device get _deviceType => ref.watch(deviceTypeProvider).requireValue;
 
-  Logger get _log => ref.read(logHandlerProvider("XapiProfileRepository"));
+  Logger get _log => ref.read(logHandlerProvider("UserProfileModelService"));
 
   UserProfileModelService(this.ref);
 
-  Future<Profile> fetchCurrentUser() async {
+  // store current user profile state in local db as previous user profile state
+  Future<void> storePreviousUserProfileState() async {
+    _log.i("Caching current user profile state");
+
+    final userProfileStateRepo = ref.read(previousUserStateRepoProvider);
+    final currentUserProfile = await _fetchCurrentUser();
+    _log.i("fetching current user profile");
+    await userProfileStateRepo.storeUserProfileState(
+        currentUserProfile: currentUserProfile);
+    _log.i("DONE Caching current user profile state");
+  }
+
+  Future<Profile> _fetchCurrentUser() async {
     final userId = await _userId();
 
     final compRepo = ref.read(companyProfileRepositoryProvider);
     final scoreRepo = ref.read(localGeigerScoreRepoProvider);
 
-    final company = await compRepo.fetchCompany();
-    final object = await ref.read(fetchNewsArticleProvider.future);
+    final companyInfo = await compRepo.fetchCompany();
+    final currentNewsState =
+        await ref.read(fetchCurrentNewsStateProvider.future);
+
     final currentUserDevice = Asset(
         type: _deviceType.type.name,
         version: _deviceType.version,
@@ -38,23 +52,23 @@ class UserProfileModelService {
 
     final actor = Actor(
         userDevice: currentUserDevice,
-        companyDescription: company!.description,
-        location: company.location,
-        companyName: company.companyName,
+        companyDescription: companyInfo?.description,
+        location: companyInfo?.location,
+        companyName: companyInfo?.companyName,
+        //todo: get locale from device or user profile
         locale: "en",
         assets: [],
         score: "${score?.geigerScore}");
-    final currentProfile = Profile(id: userId, actor: actor, news: object);
+    final currentProfile =
+        Profile(id: userId, actor: actor, news: currentNewsState);
     return currentProfile;
   }
 
   Future<UserProfileModel> fetchUserProfileModel() async {
-    _log.i("Preparing profile xapi");
-
     final prevProfile = await ref
-        .read(userProfileModelRepositoryProvider)
+        .read(previousUserStateRepoProvider)
         .fetchPreviousUserProfile();
-    final currentProfile = await fetchCurrentUser();
+    final currentProfile = await _fetchCurrentUser();
 
     return UserProfileModel(
         currentUserProfile: currentProfile, previousUserProfile: prevProfile);
@@ -68,6 +82,6 @@ class UserProfileModelService {
 }
 
 @riverpod
-UserProfileModelService userProfileSerivce(Ref ref) {
+UserProfileModelService userProfileModelSerivce(Ref ref) {
   return UserProfileModelService(ref);
 }

@@ -7,6 +7,7 @@ part 'geiger_score_controller.g.dart';
 class GeigerScoreController extends _$GeigerScoreController {
   @override
   FutureOr<void> build() async {
+    _log.i("initializing geiger score controller");
     return;
   }
 
@@ -15,7 +16,8 @@ class GeigerScoreController extends _$GeigerScoreController {
   Future<void> _calculateGeigerScore() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
-        () => ref.read(geigerScoreServiceProvider).cachedGeigerScore());
+      () => ref.read(geigerScoreServiceProvider).cachedGeigerScore(),
+    );
   }
 
   void onScanComplete({required AsyncValue<void> scanPressState}) async {

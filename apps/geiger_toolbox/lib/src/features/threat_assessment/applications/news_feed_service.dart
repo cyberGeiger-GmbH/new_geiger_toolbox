@@ -4,7 +4,6 @@ import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/user_profile_model_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/data/local/user_profile_model_repository.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -26,25 +25,20 @@ class NewsFeedService {
     _log.i("calls to cache news from server");
     try {
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
-      final userServiceRepo = ref.read(userProfileSerivceProvider);
-      final profileServiceReop = ref.read(userProfileSerivceProvider);
-      final storeRepo = ref.read(userProfileModelRepositoryProvider);
 
-      _log.i("getting current user profile");
-      final currentUserProfile = await userServiceRepo.fetchCurrentUser();
-
-      _log.i("storing current user profile");
-      await storeRepo.storeUserProfile(currentUserProfile: currentUserProfile);
+      final userProfileModel = ref.read(userProfileModelSerivceProvider);
 
       _log.i("sending userProfile model");
-      final profile = await profileServiceReop.fetchUserProfileModel();
+      final userProfileState = await userProfileModel.fetchUserProfileModel();
       _log.i("Getting News from Server...");
 
-      List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: profile);
+      List<News> data =
+          await remoteRepo.fetchNewsUpdate(smeProfile: userProfileState);
 
       if (data.isNotEmpty) {
         _log.i("storing newsfeed locally...");
         await _cache.synFromRemote(data: data);
+        await userProfileModel.storePreviousUserProfileState();
       }
       _log.i("success");
     } catch (e, s) {

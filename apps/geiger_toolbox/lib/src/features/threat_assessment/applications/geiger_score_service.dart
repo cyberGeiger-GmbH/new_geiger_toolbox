@@ -24,7 +24,7 @@ class GeigerScoreService {
     try {
       _log.i("Calculation has started...");
       final repo = ref.read(localGeigerScoreRepoProvider);
-      final profileServiceRepo = ref.read(userProfileSerivceProvider);
+      final profileServiceRepo = ref.read(userProfileModelSerivceProvider);
 
       final profile = await profileServiceRepo.fetchUserProfileModel();
 

@@ -7,5 +7,6 @@ class GeigerScoreInfo with _$GeigerScoreInfo {
       {required int id,
       required int geigerScore,
       required DateTime lastUpdate,
+      required String status,
       required String reason}) = _GeigerScoreInfo;
 }

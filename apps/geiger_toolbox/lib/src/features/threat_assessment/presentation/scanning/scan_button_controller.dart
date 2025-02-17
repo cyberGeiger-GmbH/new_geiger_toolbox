@@ -23,6 +23,7 @@ class ScanButtonController extends _$ScanButtonController {
     _log.i("scanButton pressed");
 //analytics
     unawaited(_trackScanning());
+    
     state = const AsyncLoading();
 
     state = await AsyncValue.guard(

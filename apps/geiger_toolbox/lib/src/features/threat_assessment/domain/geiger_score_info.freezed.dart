@@ -19,6 +19,7 @@ mixin _$GeigerScoreInfo {
   int get id => throw _privateConstructorUsedError;
   int get geigerScore => throw _privateConstructorUsedError;
   DateTime get lastUpdate => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
   String get reason => throw _privateConstructorUsedError;
 
   /// Create a copy of GeigerScoreInfo
@@ -34,7 +35,12 @@ abstract class $GeigerScoreInfoCopyWith<$Res> {
           GeigerScoreInfo value, $Res Function(GeigerScoreInfo) then) =
       _$GeigerScoreInfoCopyWithImpl<$Res, GeigerScoreInfo>;
   @useResult
-  $Res call({int id, int geigerScore, DateTime lastUpdate, String reason});
+  $Res call(
+      {int id,
+      int geigerScore,
+      DateTime lastUpdate,
+      String status,
+      String reason});
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo>
     Object? id = null,
     Object? geigerScore = null,
     Object? lastUpdate = null,
+    Object? status = null,
     Object? reason = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +77,10 @@ class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo>
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
       reason: null == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
@@ -86,7 +97,12 @@ abstract class _$$GeigerScoreInfoImplCopyWith<$Res>
       __$$GeigerScoreInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int geigerScore, DateTime lastUpdate, String reason});
+  $Res call(
+      {int id,
+      int geigerScore,
+      DateTime lastUpdate,
+      String status,
+      String reason});
 }
 
 /// @nodoc
@@ -105,6 +121,7 @@ class __$$GeigerScoreInfoImplCopyWithImpl<$Res>
     Object? id = null,
     Object? geigerScore = null,
     Object? lastUpdate = null,
+    Object? status = null,
     Object? reason = null,
   }) {
     return _then(_$GeigerScoreInfoImpl(
@@ -120,6 +137,10 @@ class __$$GeigerScoreInfoImplCopyWithImpl<$Res>
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
       reason: null == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
@@ -135,6 +156,7 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
       {required this.id,
       required this.geigerScore,
       required this.lastUpdate,
+      required this.status,
       required this.reason});
 
   @override
@@ -144,11 +166,13 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
   @override
   final DateTime lastUpdate;
   @override
+  final String status;
+  @override
   final String reason;
 
   @override
   String toString() {
-    return 'GeigerScoreInfo(id: $id, geigerScore: $geigerScore, lastUpdate: $lastUpdate, reason: $reason)';
+    return 'GeigerScoreInfo(id: $id, geigerScore: $geigerScore, lastUpdate: $lastUpdate, status: $status, reason: $reason)';
   }
 
   @override
@@ -161,12 +185,13 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
                 other.geigerScore == geigerScore) &&
             (identical(other.lastUpdate, lastUpdate) ||
                 other.lastUpdate == lastUpdate) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, geigerScore, lastUpdate, reason);
+      Object.hash(runtimeType, id, geigerScore, lastUpdate, status, reason);
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -183,6 +208,7 @@ abstract class _GeigerScoreInfo implements GeigerScoreInfo {
       {required final int id,
       required final int geigerScore,
       required final DateTime lastUpdate,
+      required final String status,
       required final String reason}) = _$GeigerScoreInfoImpl;
 
   @override
@@ -191,6 +217,8 @@ abstract class _GeigerScoreInfo implements GeigerScoreInfo {
   int get geigerScore;
   @override
   DateTime get lastUpdate;
+  @override
+  String get status;
   @override
   String get reason;
 

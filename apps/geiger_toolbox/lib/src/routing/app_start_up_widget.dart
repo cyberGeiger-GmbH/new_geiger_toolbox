@@ -10,6 +10,7 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
 
+
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/monitoring/mixpanel_analytics_client.dart';
 import 'package:geiger_toolbox/src/utils/device_info.dart';
@@ -43,7 +44,7 @@ class AppStartUp extends _$AppStartUp {
     await ref.read(packageInfoProvider.future);
     await ref.read(sharedPreferencesProvider.future);
     await ref.read(deviceTypeProvider.future);
-
+   
     // * check if news feed is empty
     // await ref.read(isNewsTableEmptyProvider.future);
 

@@ -14,7 +14,6 @@ class NewsArticleLogRepository {
 
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
-  Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
 
   NewsArticleLogRepository(this.ref);
 
@@ -84,7 +83,7 @@ class NewsArticleLogRepository {
 }
 
 @riverpod
-Future<List<NewsActicle>> fetchNewsArticle(Ref ref) async {
+Future<List<NewsActicle>> fetchCurrentNewsState(Ref ref) async {
   final obj = NewsArticleLogRepository(ref);
   return obj.getObject();
 }

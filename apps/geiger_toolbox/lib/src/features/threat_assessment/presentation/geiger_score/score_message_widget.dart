@@ -32,6 +32,7 @@ class ScoreMessageWidget extends ConsumerWidget {
       data: (data) => data != null && !state
           ? AlertMessageBox(
               reason: data.reason,
+              status: data.status,
               icons: Icons.message,
               onClose: () {
                 ref
@@ -46,10 +47,15 @@ class ScoreMessageWidget extends ConsumerWidget {
 
 class AlertMessageBox extends StatelessWidget {
   const AlertMessageBox(
-      {super.key, required this.reason, this.onClose, this.icons});
+      {super.key,
+      required this.reason,
+      required this.status,
+      this.onClose,
+      this.icons});
   final String reason;
   final VoidCallback? onClose;
   final IconData? icons;
+  final String status;
 
 //for debugging purpose
 // to show custom properties in the devTools
@@ -78,6 +84,7 @@ class AlertMessageBox extends StatelessWidget {
             ShowScoreReason(
               reason: reason,
               align: TextAlign.center,
+              status: status,
             ),
           ],
         ),
@@ -108,7 +115,7 @@ class HorizontalContent extends StatelessWidget {
           iconData: Icons.close,
           context: context,
           onPressed: onClose,
-          backgroudColor: theme.colorScheme.errorContainer,
+          backgroudColor: theme.colorScheme.surface,
         ),
       ],
     );
@@ -133,15 +140,38 @@ class IconTitle extends StatelessWidget {
 }
 
 class ShowScoreReason extends StatelessWidget {
-  const ShowScoreReason({super.key, required this.reason, this.align});
+  const ShowScoreReason(
+      {super.key,
+      required this.reason,
+      this.height,
+      required this.status,
+      this.width,
+      this.align});
   final String reason;
+  final String status;
+  final double? height;
+  final double? width;
   final TextAlign? align;
   @override
   Widget build(BuildContext context) {
-    return AppText.bodyMedium(
-      text: reason,
-      context: context,
-      textAlign: align ?? TextAlign.start,
+    return SizedBox(
+      height: height,
+      width: height,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppText.bodyLarge(
+            text: reason,
+            context: context,
+            textAlign: align ?? TextAlign.start,
+          ),
+          Chip(
+            label: Text(
+              status,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

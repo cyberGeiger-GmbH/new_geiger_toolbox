@@ -7,7 +7,7 @@ part of 'clear_data_controller.dart';
 // **************************************************************************
 
 String _$cleanDataControllerHash() =>
-    r'2a2486ec5f07f5577107a9c8b85faca9c5d50f4b';
+    r'68bb2687c758fa2a8176c968693f2996775d56c4';
 
 /// See also [CleanDataController].
 @ProviderFor(CleanDataController)

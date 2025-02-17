@@ -1,6 +1,7 @@
 // ignore_for_file: avoid-non-null-assertion
 
 import 'package:core_ui/core_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:force_update_helper/force_update_helper.dart';
@@ -52,9 +53,13 @@ class ForceUpdateWidgetWrapper extends ConsumerWidget {
         navigatorKey: router.routerDelegate.navigatorKey,
         forceUpdateClient: ForceUpdateClient(
           fetchRequiredVersion: () async {
-            final remoteConfig =
-                await ref.read(firebaseRemoteConfigProvider.future);
-            return remoteConfig.getString('required_version');
+            // * only fetch from remote config in release mode
+            if (kReleaseMode) {
+              final remoteConfig =
+                  await ref.read(firebaseRemoteConfigProvider.future);
+              return remoteConfig.getString('required_version');
+            }
+            return "1.0.0";
           },
           // TODO: Set APP_STORE_ID in the .env files
           iosAppStoreId: Env.appStoreId,

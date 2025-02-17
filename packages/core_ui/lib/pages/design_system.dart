@@ -1,5 +1,4 @@
 
-import 'package:core_ui/atoms/geiger_svg_images.dart';
 import 'package:core_ui/core_ui.dart';
 
 import 'package:core_ui/helpers/design_system_helper.dart';

@@ -62,16 +62,18 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     isTopBarLayerAlwaysVisible: true,
 
     trailingNavBarWidget: AppIconButton.filledTonal(
-      backgroudColor: appColors.errorContainer,
+      backgroudColor: appColors.surface,
       iconData: Icons.close,
       context: modalSheetContext,
       onPressed: Navigator.of(modalSheetContext).pop,
     ),
+
     mainContentSliversBuilder: (bottomSheetContext) {
       return [
         SliverToBoxAdapter(child: mainContent),
       ];
     },
+
     stickyActionBar: Padding(
       padding: const EdgeInsets.only(bottom: Spacing.p22),
       child: stickyActionBar,

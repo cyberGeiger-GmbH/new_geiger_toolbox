@@ -52,6 +52,7 @@ class LocalGeigerScoreRepository {
             id: row.id,
             geigerScore: row.score,
             lastUpdate: row.lastUpdated,
+            status: row.interpretation,
             reason: row.reason);
       }
       return null;
@@ -76,6 +77,7 @@ class LocalGeigerScoreRepository {
           id: query.id,
           geigerScore: query.score,
           lastUpdate: query.lastUpdated,
+          status: query.interpretation,
           reason: query.reason);
     }
     return null;
@@ -96,6 +98,7 @@ class LocalGeigerScoreRepository {
             id: row.id,
             geigerScore: row.score,
             lastUpdate: row.lastUpdated,
+            status: row.interpretation,
             reason: row.reason);
       }).toList();
     });
@@ -118,6 +121,7 @@ class LocalGeigerScoreRepository {
             id: row.id,
             geigerScore: row.score,
             lastUpdate: row.lastUpdated,
+            status: row.interpretation,
             reason: row.reason);
         scoreList.add(data);
       }

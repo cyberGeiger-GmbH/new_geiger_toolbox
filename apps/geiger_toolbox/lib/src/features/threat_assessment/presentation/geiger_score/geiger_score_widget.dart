@@ -30,15 +30,19 @@ class GeigerScoreWidget extends ConsumerWidget {
                 ? _ScoreWithInfo(
                     score: "${data.geigerScore}",
                     key: key,
-                    //todo: change font color base the score range
+                    //Todo: change font color base the score range
                     showinfo: () {
                       showWoltAlertDialog(
                         context,
                         title: "Geiger Score!",
+                        forceMaxHeight: false,
                         page: Padding(
                           padding: const EdgeInsets.all(Spacing.p8),
                           child: ShowScoreReason(
+                            align: TextAlign.center,
+                            height: 170,
                             reason: data.reason,
+                            status: data.status,
                           ),
                         ),
                       );
