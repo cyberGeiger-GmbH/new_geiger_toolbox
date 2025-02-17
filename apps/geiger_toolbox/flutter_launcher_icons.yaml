@@ -12,11 +12,12 @@ flutter_launcher_icons:
   ios: true
   image_path_ios: "assets/prod/app-icon.png"
   remove_alpha_channel_ios: true
-  image_path_ios_dark_transparent: "assets/ios/ios-app-icon-transparent.png"
+  image_path_ios_dark_transparent: "assets/ios/app-icon-transparent.png"
   # image_path_ios_tinted_grayscale: "assets/icon/icon_tinted.png"
   # desaturate_tinted_to_grayscale_ios: true
 
   # web:
+  
   #   generate: true
   #   image_path: "path/to/image.png"
   #   background_color: "#hexcode"
