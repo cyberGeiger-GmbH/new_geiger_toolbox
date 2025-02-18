@@ -6,18 +6,14 @@ part of 'geiger_score_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$geigerScoreControllerHash() =>
-    r'e5e2de9b5655125691371d8aed96a5fc9ad47b2d';
+String _$geigerScoreControllerHash() => r'e5e2de9b5655125691371d8aed96a5fc9ad47b2d';
 
 /// See also [GeigerScoreController].
 @ProviderFor(GeigerScoreController)
-final geigerScoreControllerProvider =
-    AutoDisposeAsyncNotifierProvider<GeigerScoreController, void>.internal(
+final geigerScoreControllerProvider = AutoDisposeAsyncNotifierProvider<GeigerScoreController, void>.internal(
   GeigerScoreController.new,
   name: r'geigerScoreControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$geigerScoreControllerHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$geigerScoreControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

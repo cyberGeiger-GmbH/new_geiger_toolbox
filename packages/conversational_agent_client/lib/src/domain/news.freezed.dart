@@ -12,7 +12,8 @@ part of 'news.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 News _$NewsFromJson(Map<String, dynamic> json) {
   return _News.fromJson(json);
@@ -31,8 +32,7 @@ mixin _$News {
   String get imageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'date_created')
   String get dateCreated => throw _privateConstructorUsedError;
-  List<Recommendation> get recommendations =>
-      throw _privateConstructorUsedError;
+  List<Recommendation> get recommendations => throw _privateConstructorUsedError;
 
   /// Serializes this News to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,23 +45,22 @@ mixin _$News {
 
 /// @nodoc
 abstract class $NewsCopyWith<$Res> {
-  factory $NewsCopyWith(News value, $Res Function(News) then) =
-      _$NewsCopyWithImpl<$Res, News>;
+  factory $NewsCopyWith(News value, $Res Function(News) then) = _$NewsCopyWithImpl<$Res, News>;
   @useResult
-  $Res call(
-      {String id,
-      String title,
-      String summary,
-      @JsonKey(name: 'news_category') String newsCategory,
-      @JsonKey(name: 'article_url') String articleUrl,
-      @JsonKey(name: 'image_url') String imageUrl,
-      @JsonKey(name: 'date_created') String dateCreated,
-      List<Recommendation> recommendations});
+  $Res call({
+    String id,
+    String title,
+    String summary,
+    @JsonKey(name: 'news_category') String newsCategory,
+    @JsonKey(name: 'article_url') String articleUrl,
+    @JsonKey(name: 'image_url') String imageUrl,
+    @JsonKey(name: 'date_created') String dateCreated,
+    List<Recommendation> recommendations,
+  });
 }
 
 /// @nodoc
-class _$NewsCopyWithImpl<$Res, $Val extends News>
-    implements $NewsCopyWith<$Res> {
+class _$NewsCopyWithImpl<$Res, $Val extends News> implements $NewsCopyWith<$Res> {
   _$NewsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -83,67 +82,74 @@ class _$NewsCopyWithImpl<$Res, $Val extends News>
     Object? dateCreated = null,
     Object? recommendations = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      newsCategory: null == newsCategory
-          ? _value.newsCategory
-          : newsCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      articleUrl: null == articleUrl
-          ? _value.articleUrl
-          : articleUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateCreated: null == dateCreated
-          ? _value.dateCreated
-          : dateCreated // ignore: cast_nullable_to_non_nullable
-              as String,
-      recommendations: null == recommendations
-          ? _value.recommendations
-          : recommendations // ignore: cast_nullable_to_non_nullable
-              as List<Recommendation>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            title:
+                null == title
+                    ? _value.title
+                    : title // ignore: cast_nullable_to_non_nullable
+                        as String,
+            summary:
+                null == summary
+                    ? _value.summary
+                    : summary // ignore: cast_nullable_to_non_nullable
+                        as String,
+            newsCategory:
+                null == newsCategory
+                    ? _value.newsCategory
+                    : newsCategory // ignore: cast_nullable_to_non_nullable
+                        as String,
+            articleUrl:
+                null == articleUrl
+                    ? _value.articleUrl
+                    : articleUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            imageUrl:
+                null == imageUrl
+                    ? _value.imageUrl
+                    : imageUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            dateCreated:
+                null == dateCreated
+                    ? _value.dateCreated
+                    : dateCreated // ignore: cast_nullable_to_non_nullable
+                        as String,
+            recommendations:
+                null == recommendations
+                    ? _value.recommendations
+                    : recommendations // ignore: cast_nullable_to_non_nullable
+                        as List<Recommendation>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$NewsImplCopyWith<$Res> implements $NewsCopyWith<$Res> {
-  factory _$$NewsImplCopyWith(
-          _$NewsImpl value, $Res Function(_$NewsImpl) then) =
-      __$$NewsImplCopyWithImpl<$Res>;
+  factory _$$NewsImplCopyWith(_$NewsImpl value, $Res Function(_$NewsImpl) then) = __$$NewsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String title,
-      String summary,
-      @JsonKey(name: 'news_category') String newsCategory,
-      @JsonKey(name: 'article_url') String articleUrl,
-      @JsonKey(name: 'image_url') String imageUrl,
-      @JsonKey(name: 'date_created') String dateCreated,
-      List<Recommendation> recommendations});
+  $Res call({
+    String id,
+    String title,
+    String summary,
+    @JsonKey(name: 'news_category') String newsCategory,
+    @JsonKey(name: 'article_url') String articleUrl,
+    @JsonKey(name: 'image_url') String imageUrl,
+    @JsonKey(name: 'date_created') String dateCreated,
+    List<Recommendation> recommendations,
+  });
 }
 
 /// @nodoc
-class __$$NewsImplCopyWithImpl<$Res>
-    extends _$NewsCopyWithImpl<$Res, _$NewsImpl>
-    implements _$$NewsImplCopyWith<$Res> {
-  __$$NewsImplCopyWithImpl(_$NewsImpl _value, $Res Function(_$NewsImpl) _then)
-      : super(_value, _then);
+class __$$NewsImplCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res, _$NewsImpl> implements _$$NewsImplCopyWith<$Res> {
+  __$$NewsImplCopyWithImpl(_$NewsImpl _value, $Res Function(_$NewsImpl) _then) : super(_value, _then);
 
   /// Create a copy of News
   /// with the given fields replaced by the non-null parameter values.
@@ -159,60 +165,69 @@ class __$$NewsImplCopyWithImpl<$Res>
     Object? dateCreated = null,
     Object? recommendations = null,
   }) {
-    return _then(_$NewsImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      newsCategory: null == newsCategory
-          ? _value.newsCategory
-          : newsCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      articleUrl: null == articleUrl
-          ? _value.articleUrl
-          : articleUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateCreated: null == dateCreated
-          ? _value.dateCreated
-          : dateCreated // ignore: cast_nullable_to_non_nullable
-              as String,
-      recommendations: null == recommendations
-          ? _value._recommendations
-          : recommendations // ignore: cast_nullable_to_non_nullable
-              as List<Recommendation>,
-    ));
+    return _then(
+      _$NewsImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        title:
+            null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                    as String,
+        summary:
+            null == summary
+                ? _value.summary
+                : summary // ignore: cast_nullable_to_non_nullable
+                    as String,
+        newsCategory:
+            null == newsCategory
+                ? _value.newsCategory
+                : newsCategory // ignore: cast_nullable_to_non_nullable
+                    as String,
+        articleUrl:
+            null == articleUrl
+                ? _value.articleUrl
+                : articleUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        imageUrl:
+            null == imageUrl
+                ? _value.imageUrl
+                : imageUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        dateCreated:
+            null == dateCreated
+                ? _value.dateCreated
+                : dateCreated // ignore: cast_nullable_to_non_nullable
+                    as String,
+        recommendations:
+            null == recommendations
+                ? _value._recommendations
+                : recommendations // ignore: cast_nullable_to_non_nullable
+                    as List<Recommendation>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NewsImpl extends _News {
-  const _$NewsImpl(
-      {required this.id,
-      required this.title,
-      required this.summary,
-      @JsonKey(name: 'news_category') required this.newsCategory,
-      @JsonKey(name: 'article_url') required this.articleUrl,
-      @JsonKey(name: 'image_url') required this.imageUrl,
-      @JsonKey(name: 'date_created') required this.dateCreated,
-      required final List<Recommendation> recommendations})
-      : _recommendations = recommendations,
-        super._();
+  const _$NewsImpl({
+    required this.id,
+    required this.title,
+    required this.summary,
+    @JsonKey(name: 'news_category') required this.newsCategory,
+    @JsonKey(name: 'article_url') required this.articleUrl,
+    @JsonKey(name: 'image_url') required this.imageUrl,
+    @JsonKey(name: 'date_created') required this.dateCreated,
+    required final List<Recommendation> recommendations,
+  }) : _recommendations = recommendations,
+       super._();
 
-  factory _$NewsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NewsImplFromJson(json);
+  factory _$NewsImpl.fromJson(Map<String, dynamic> json) => _$$NewsImplFromJson(json);
 
   @override
   final String id;
@@ -253,57 +268,51 @@ class _$NewsImpl extends _News {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.summary, summary) || other.summary == summary) &&
-            (identical(other.newsCategory, newsCategory) ||
-                other.newsCategory == newsCategory) &&
-            (identical(other.articleUrl, articleUrl) ||
-                other.articleUrl == articleUrl) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
-            (identical(other.dateCreated, dateCreated) ||
-                other.dateCreated == dateCreated) &&
-            const DeepCollectionEquality()
-                .equals(other._recommendations, _recommendations));
+            (identical(other.newsCategory, newsCategory) || other.newsCategory == newsCategory) &&
+            (identical(other.articleUrl, articleUrl) || other.articleUrl == articleUrl) &&
+            (identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl) &&
+            (identical(other.dateCreated, dateCreated) || other.dateCreated == dateCreated) &&
+            const DeepCollectionEquality().equals(other._recommendations, _recommendations));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      summary,
-      newsCategory,
-      articleUrl,
-      imageUrl,
-      dateCreated,
-      const DeepCollectionEquality().hash(_recommendations));
+    runtimeType,
+    id,
+    title,
+    summary,
+    newsCategory,
+    articleUrl,
+    imageUrl,
+    dateCreated,
+    const DeepCollectionEquality().hash(_recommendations),
+  );
 
   /// Create a copy of News
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$NewsImplCopyWith<_$NewsImpl> get copyWith =>
-      __$$NewsImplCopyWithImpl<_$NewsImpl>(this, _$identity);
+  _$$NewsImplCopyWith<_$NewsImpl> get copyWith => __$$NewsImplCopyWithImpl<_$NewsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NewsImplToJson(
-      this,
-    );
+    return _$$NewsImplToJson(this);
   }
 }
 
 abstract class _News extends News {
-  const factory _News(
-      {required final String id,
-      required final String title,
-      required final String summary,
-      @JsonKey(name: 'news_category') required final String newsCategory,
-      @JsonKey(name: 'article_url') required final String articleUrl,
-      @JsonKey(name: 'image_url') required final String imageUrl,
-      @JsonKey(name: 'date_created') required final String dateCreated,
-      required final List<Recommendation> recommendations}) = _$NewsImpl;
+  const factory _News({
+    required final String id,
+    required final String title,
+    required final String summary,
+    @JsonKey(name: 'news_category') required final String newsCategory,
+    @JsonKey(name: 'article_url') required final String articleUrl,
+    @JsonKey(name: 'image_url') required final String imageUrl,
+    @JsonKey(name: 'date_created') required final String dateCreated,
+    required final List<Recommendation> recommendations,
+  }) = _$NewsImpl;
   const _News._() : super._();
 
   factory _News.fromJson(Map<String, dynamic> json) = _$NewsImpl.fromJson;
@@ -333,6 +342,5 @@ abstract class _News extends News {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NewsImplCopyWith<_$NewsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$NewsImplCopyWith<_$NewsImpl> get copyWith => throw _privateConstructorUsedError;
 }

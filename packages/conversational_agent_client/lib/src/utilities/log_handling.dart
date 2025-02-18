@@ -11,8 +11,7 @@ class LogHandling extends LogPrinter {
   final String packageName;
   LogHandling._(this.className, {required this.packageName});
 
-  factory LogHandling.withPackageName(
-      {required String packageName, required String className}) {
+  factory LogHandling.withPackageName({required String packageName, required String className}) {
     return LogHandling._("", packageName: packageName);
   }
 
@@ -33,10 +32,6 @@ class LogHandling extends LogPrinter {
 @riverpod
 Logger logHandler(Ref ref, String source, {String? packageName}) {
   return packageName != null
-      ? Logger(
-          printer: LogHandling.withPackageName(
-              packageName: packageName, className: source))
-      : Logger(
-          printer: LogHandling.withDefaultPackageName(className: source));
- 
+      ? Logger(printer: LogHandling.withPackageName(packageName: packageName, className: source))
+      : Logger(printer: LogHandling.withDefaultPackageName(className: source));
 }

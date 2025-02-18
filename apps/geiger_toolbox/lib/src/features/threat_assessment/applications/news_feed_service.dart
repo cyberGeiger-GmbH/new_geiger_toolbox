@@ -14,8 +14,7 @@ part 'news_feed_service.g.dart';
 class NewsFeedService {
   final Ref ref;
 
-  LocalNewsFeedRepository get _cache =>
-      ref.read(localNewsFeedRepositoryProvider);
+  LocalNewsFeedRepository get _cache => ref.read(localNewsFeedRepositoryProvider);
 
   Logger get _log => ref.read(logHandlerProvider("NewsFeedService"));
 
@@ -32,8 +31,7 @@ class NewsFeedService {
       final userProfileState = await userProfileModel.fetchUserProfileModel();
       _log.i("Getting News from Server...");
 
-      List<News> data =
-          await remoteRepo.fetchNewsUpdate(smeProfile: userProfileState);
+      List<News> data = await remoteRepo.fetchNewsUpdate(smeProfile: userProfileState);
 
       if (data.isNotEmpty) {
         _log.i("storing newsfeed locally...");

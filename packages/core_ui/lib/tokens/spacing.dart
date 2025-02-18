@@ -17,7 +17,7 @@ class Spacing {
   static const gapW22 = Gap(Spacing.p22);
   static const gapW32 = Gap(Spacing.p32);
 
-//const gap height
+  //const gap height
   static const gapH4 = Gap(Spacing.p4);
   static const gapH8 = Gap(Spacing.p8);
   static const gapH12 = Gap(Spacing.p12);

@@ -5,130 +5,108 @@ import '../../tokens/spacing.dart';
 import '../texts/app_text.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton._({
-    super.key,
-    required this.child,
-    this.onPressed,
-    this.style,
-  });
+  const AppButton._({super.key, required this.child, this.onPressed, this.style});
 
-//todo: wrap with Semantics for visual impair user
-  factory AppButton.primary(
-      {Key? key,
-      required String label,
-      VoidCallback? onPressed,
-      required BuildContext context}) {
+  //todo: wrap with Semantics for visual impair user
+  factory AppButton.primary({Key? key, required String label, VoidCallback? onPressed, required BuildContext context}) {
     return AppButton._(
       key: key,
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          backgroundColor: _appColor(context).primary,
-          overlayColor: _appColor(context).onPrimary),
-      child: AppText.labelLarge(
-        text: label,
-        context: context,
-        color: _appColor(context).onPrimary,
+        backgroundColor: _appColor(context).primary,
+        overlayColor: _appColor(context).onPrimary,
       ),
+      child: AppText.labelLarge(text: label, context: context, color: _appColor(context).onPrimary),
     );
   }
 
-  factory AppButton.secondary(
-      {Key? key,
-      required String label,
-      VoidCallback? onPressed,
-      required BuildContext context}) {
+  factory AppButton.secondary({
+    Key? key,
+    required String label,
+    VoidCallback? onPressed,
+    required BuildContext context,
+  }) {
     return AppButton._(
       key: key,
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          backgroundColor: _appColor(context).secondary,
-          overlayColor: _appColor(context).onSecondary),
-      child: AppText.labelLarge(
-          text: label, context: context, color: _appColor(context).onSecondary),
+        backgroundColor: _appColor(context).secondary,
+        overlayColor: _appColor(context).onSecondary,
+      ),
+      child: AppText.labelLarge(text: label, context: context, color: _appColor(context).onSecondary),
     );
   }
 
-  factory AppButton.tertiary(
-      {Key? key,
-      required String label,
-      VoidCallback? onPressed,
-      bool isloading = false,
-      required BuildContext context}) {
+  factory AppButton.tertiary({
+    Key? key,
+    required String label,
+    VoidCallback? onPressed,
+    bool isloading = false,
+    required BuildContext context,
+  }) {
     return AppButton._(
       key: key,
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          backgroundColor: _appColor(context).tertiary,
-          overlayColor: _appColor(context).onTertiary),
+        backgroundColor: _appColor(context).tertiary,
+        overlayColor: _appColor(context).onTertiary,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           isloading
               ? const CircularProgressIndicator()
-              : AppText.labelLarge(
-                  text: label,
-                  context: context,
-                  color: _appColor(context).onTertiary)
+              : AppText.labelLarge(text: label, context: context, color: _appColor(context).onTertiary),
         ],
       ),
     );
   }
 
-  factory AppButton.action(
-      {Key? key,
-      required String label,
-      VoidCallback? onPressed,
-      bool isLoading = false,
-      Color? backgroundColor,
-      Color? fontgroundColor,
-      bool centeredContent = false,
-      bool isItemDeleted = false,
-      required BuildContext context}) {
+  factory AppButton.action({
+    Key? key,
+    required String label,
+    VoidCallback? onPressed,
+    bool isLoading = false,
+    Color? backgroundColor,
+    Color? fontgroundColor,
+    bool centeredContent = false,
+    bool isItemDeleted = false,
+    required BuildContext context,
+  }) {
     return AppButton._(
       key: key,
       onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-          shape: const RoundedRectangleBorder(),
-          backgroundColor: backgroundColor),
+      style: ElevatedButton.styleFrom(shape: const RoundedRectangleBorder(), backgroundColor: backgroundColor),
       child: Row(
-          mainAxisAlignment: centeredContent
-              ? MainAxisAlignment.center
-              : MainAxisAlignment.start,
-          children: [
-            isLoading
-                ? const CircularProgressIndicator()
-                : AppText.labelLarge(
-                    text: label,
-                    context: context,
-                    color: fontgroundColor,
-                    textDeleted: isItemDeleted,
-                  ),
-          ]),
+        mainAxisAlignment: centeredContent ? MainAxisAlignment.center : MainAxisAlignment.start,
+        children: [
+          isLoading
+              ? const CircularProgressIndicator()
+              : AppText.labelLarge(text: label, context: context, color: fontgroundColor, textDeleted: isItemDeleted),
+        ],
+      ),
     );
   }
 
-  factory AppButton.delete(
-      {Key? key,
-      required String label,
-      VoidCallback? onPressed,
-      required BuildContext context}) {
+  factory AppButton.delete({Key? key, required String label, VoidCallback? onPressed, required BuildContext context}) {
     return AppButton._(
       key: key,
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          backgroundColor: _appColor(context).error,
-          overlayColor: _appColor(context).onError),
-      child: AppText.labelLarge(
-          text: label, context: context, color: _appColor(context).onTertiary),
+        backgroundColor: _appColor(context).error,
+        overlayColor: _appColor(context).onError,
+      ),
+      child: AppText.labelLarge(text: label, context: context, color: _appColor(context).onTertiary),
     );
   }
 
-  factory AppButton.scan(
-      {Key? key,
-      required String label,
-      VoidCallback? onPressed,
-      Color? color,
-      required BuildContext context}) {
+  factory AppButton.scan({
+    Key? key,
+    required String label,
+    VoidCallback? onPressed,
+    Color? color,
+    required BuildContext context,
+  }) {
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
@@ -138,24 +116,20 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).onPrimary,
       ),
       onPressed: onPressed,
-      child: AppText.labelLarge(
-        text: label,
-        context: context,
-        color: color ?? _appColor(context).onPrimary,
-      ),
+      child: AppText.labelLarge(text: label, context: context, color: color ?? _appColor(context).onPrimary),
     );
   }
-  factory AppButton.news(
-      {Key? key,
-      required String title,
-      VoidCallback? onPressed,
-      Color? color,
-      required BuildContext context}) {
+  factory AppButton.news({
+    Key? key,
+    required String title,
+    VoidCallback? onPressed,
+    Color? color,
+    required BuildContext context,
+  }) {
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-            borderRadius: AppRadius.main().asBorderRadius.regular),
+        shape: RoundedRectangleBorder(borderRadius: AppRadius.main().asBorderRadius.regular),
         maximumSize: const Size(130, 100),
         minimumSize: const Size(130, 100),
         backgroundColor: color ?? _appColor(context).surface,
@@ -173,12 +147,13 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  factory AppButton.activeNews(
-      {Key? key,
-      required String title,
-      VoidCallback? onPressed,
-      Color? color,
-      required BuildContext context}) {
+  factory AppButton.activeNews({
+    Key? key,
+    required String title,
+    VoidCallback? onPressed,
+    Color? color,
+    required BuildContext context,
+  }) {
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
@@ -215,11 +190,6 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      key: key,
-      onPressed: onPressed,
-      style: style,
-      child: child,
-    );
+    return ElevatedButton(key: key, onPressed: onPressed, style: style, child: child);
   }
 }

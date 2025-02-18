@@ -30,8 +30,7 @@ class GeigerScoreService {
 
       _log.i("sending userProfile model");
 
-      final geigerScore =
-          await ref.read(getGeigerScoreProvider(userProfile: profile).future);
+      final geigerScore = await ref.read(getGeigerScoreProvider(userProfile: profile).future);
       _log.i("Received Score from Server");
       if (geigerScore != null) {
         _log.i("Storing score locally....}");

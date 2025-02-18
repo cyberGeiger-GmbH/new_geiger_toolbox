@@ -6,11 +6,6 @@ part of 'value.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ValueImpl _$$ValueImplFromJson(Map<String, dynamic> json) => _$ValueImpl(
-      message: json['message'] as String,
-    );
+_$ValueImpl _$$ValueImplFromJson(Map<String, dynamic> json) => _$ValueImpl(message: json['message'] as String);
 
-Map<String, dynamic> _$$ValueImplToJson(_$ValueImpl instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$$ValueImplToJson(_$ValueImpl instance) => <String, dynamic>{'message': instance.message};

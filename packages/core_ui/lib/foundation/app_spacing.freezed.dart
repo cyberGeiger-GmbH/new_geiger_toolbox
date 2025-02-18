@@ -12,7 +12,8 @@ part of 'app_spacing.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AppSpacing {
@@ -25,23 +26,19 @@ mixin _$AppSpacing {
   /// Create a copy of AppSpacing
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppSpacingCopyWith<AppSpacing> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AppSpacingCopyWith<AppSpacing> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppSpacingCopyWith<$Res> {
-  factory $AppSpacingCopyWith(
-          AppSpacing value, $Res Function(AppSpacing) then) =
+  factory $AppSpacingCopyWith(AppSpacing value, $Res Function(AppSpacing) then) =
       _$AppSpacingCopyWithImpl<$Res, AppSpacing>;
   @useResult
-  $Res call(
-      {double xsmall, double small, double medium, double big, double large});
+  $Res call({double xsmall, double small, double medium, double big, double large});
 }
 
 /// @nodoc
-class _$AppSpacingCopyWithImpl<$Res, $Val extends AppSpacing>
-    implements $AppSpacingCopyWith<$Res> {
+class _$AppSpacingCopyWithImpl<$Res, $Val extends AppSpacing> implements $AppSpacingCopyWith<$Res> {
   _$AppSpacingCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -60,50 +57,52 @@ class _$AppSpacingCopyWithImpl<$Res, $Val extends AppSpacing>
     Object? big = null,
     Object? large = null,
   }) {
-    return _then(_value.copyWith(
-      xsmall: null == xsmall
-          ? _value.xsmall
-          : xsmall // ignore: cast_nullable_to_non_nullable
-              as double,
-      small: null == small
-          ? _value.small
-          : small // ignore: cast_nullable_to_non_nullable
-              as double,
-      medium: null == medium
-          ? _value.medium
-          : medium // ignore: cast_nullable_to_non_nullable
-              as double,
-      big: null == big
-          ? _value.big
-          : big // ignore: cast_nullable_to_non_nullable
-              as double,
-      large: null == large
-          ? _value.large
-          : large // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            xsmall:
+                null == xsmall
+                    ? _value.xsmall
+                    : xsmall // ignore: cast_nullable_to_non_nullable
+                        as double,
+            small:
+                null == small
+                    ? _value.small
+                    : small // ignore: cast_nullable_to_non_nullable
+                        as double,
+            medium:
+                null == medium
+                    ? _value.medium
+                    : medium // ignore: cast_nullable_to_non_nullable
+                        as double,
+            big:
+                null == big
+                    ? _value.big
+                    : big // ignore: cast_nullable_to_non_nullable
+                        as double,
+            large:
+                null == large
+                    ? _value.large
+                    : large // ignore: cast_nullable_to_non_nullable
+                        as double,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$AppSpacingImplCopyWith<$Res>
-    implements $AppSpacingCopyWith<$Res> {
-  factory _$$AppSpacingImplCopyWith(
-          _$AppSpacingImpl value, $Res Function(_$AppSpacingImpl) then) =
+abstract class _$$AppSpacingImplCopyWith<$Res> implements $AppSpacingCopyWith<$Res> {
+  factory _$$AppSpacingImplCopyWith(_$AppSpacingImpl value, $Res Function(_$AppSpacingImpl) then) =
       __$$AppSpacingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {double xsmall, double small, double medium, double big, double large});
+  $Res call({double xsmall, double small, double medium, double big, double large});
 }
 
 /// @nodoc
-class __$$AppSpacingImplCopyWithImpl<$Res>
-    extends _$AppSpacingCopyWithImpl<$Res, _$AppSpacingImpl>
+class __$$AppSpacingImplCopyWithImpl<$Res> extends _$AppSpacingCopyWithImpl<$Res, _$AppSpacingImpl>
     implements _$$AppSpacingImplCopyWith<$Res> {
-  __$$AppSpacingImplCopyWithImpl(
-      _$AppSpacingImpl _value, $Res Function(_$AppSpacingImpl) _then)
-      : super(_value, _then);
+  __$$AppSpacingImplCopyWithImpl(_$AppSpacingImpl _value, $Res Function(_$AppSpacingImpl) _then) : super(_value, _then);
 
   /// Create a copy of AppSpacing
   /// with the given fields replaced by the non-null parameter values.
@@ -116,41 +115,48 @@ class __$$AppSpacingImplCopyWithImpl<$Res>
     Object? big = null,
     Object? large = null,
   }) {
-    return _then(_$AppSpacingImpl(
-      xsmall: null == xsmall
-          ? _value.xsmall
-          : xsmall // ignore: cast_nullable_to_non_nullable
-              as double,
-      small: null == small
-          ? _value.small
-          : small // ignore: cast_nullable_to_non_nullable
-              as double,
-      medium: null == medium
-          ? _value.medium
-          : medium // ignore: cast_nullable_to_non_nullable
-              as double,
-      big: null == big
-          ? _value.big
-          : big // ignore: cast_nullable_to_non_nullable
-              as double,
-      large: null == large
-          ? _value.large
-          : large // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+    return _then(
+      _$AppSpacingImpl(
+        xsmall:
+            null == xsmall
+                ? _value.xsmall
+                : xsmall // ignore: cast_nullable_to_non_nullable
+                    as double,
+        small:
+            null == small
+                ? _value.small
+                : small // ignore: cast_nullable_to_non_nullable
+                    as double,
+        medium:
+            null == medium
+                ? _value.medium
+                : medium // ignore: cast_nullable_to_non_nullable
+                    as double,
+        big:
+            null == big
+                ? _value.big
+                : big // ignore: cast_nullable_to_non_nullable
+                    as double,
+        large:
+            null == large
+                ? _value.large
+                : large // ignore: cast_nullable_to_non_nullable
+                    as double,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$AppSpacingImpl extends _AppSpacing {
-  const _$AppSpacingImpl(
-      {required this.xsmall,
-      required this.small,
-      required this.medium,
-      required this.big,
-      required this.large})
-      : super._();
+  const _$AppSpacingImpl({
+    required this.xsmall,
+    required this.small,
+    required this.medium,
+    required this.big,
+    required this.large,
+  }) : super._();
 
   @override
   final double xsmall;
@@ -181,8 +187,7 @@ class _$AppSpacingImpl extends _AppSpacing {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, xsmall, small, medium, big, large);
+  int get hashCode => Object.hash(runtimeType, xsmall, small, medium, big, large);
 
   /// Create a copy of AppSpacing
   /// with the given fields replaced by the non-null parameter values.
@@ -194,12 +199,13 @@ class _$AppSpacingImpl extends _AppSpacing {
 }
 
 abstract class _AppSpacing extends AppSpacing {
-  const factory _AppSpacing(
-      {required final double xsmall,
-      required final double small,
-      required final double medium,
-      required final double big,
-      required final double large}) = _$AppSpacingImpl;
+  const factory _AppSpacing({
+    required final double xsmall,
+    required final double small,
+    required final double medium,
+    required final double big,
+    required final double large,
+  }) = _$AppSpacingImpl;
   const _AppSpacing._() : super._();
 
   @override
@@ -217,8 +223,7 @@ abstract class _AppSpacing extends AppSpacing {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppSpacingImplCopyWith<_$AppSpacingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AppSpacingImplCopyWith<_$AppSpacingImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -228,14 +233,12 @@ mixin _$AppEdgeInsetsSpacing {
   /// Create a copy of AppEdgeInsetsSpacing
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppEdgeInsetsSpacingCopyWith<AppEdgeInsetsSpacing> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AppEdgeInsetsSpacingCopyWith<AppEdgeInsetsSpacing> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppEdgeInsetsSpacingCopyWith<$Res> {
-  factory $AppEdgeInsetsSpacingCopyWith(AppEdgeInsetsSpacing value,
-          $Res Function(AppEdgeInsetsSpacing) then) =
+  factory $AppEdgeInsetsSpacingCopyWith(AppEdgeInsetsSpacing value, $Res Function(AppEdgeInsetsSpacing) then) =
       _$AppEdgeInsetsSpacingCopyWithImpl<$Res, AppEdgeInsetsSpacing>;
   @useResult
   $Res call({AppSpacing spacing});
@@ -244,8 +247,7 @@ abstract class $AppEdgeInsetsSpacingCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AppEdgeInsetsSpacingCopyWithImpl<$Res,
-        $Val extends AppEdgeInsetsSpacing>
+class _$AppEdgeInsetsSpacingCopyWithImpl<$Res, $Val extends AppEdgeInsetsSpacing>
     implements $AppEdgeInsetsSpacingCopyWith<$Res> {
   _$AppEdgeInsetsSpacingCopyWithImpl(this._value, this._then);
 
@@ -258,15 +260,17 @@ class _$AppEdgeInsetsSpacingCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? spacing = null,
-  }) {
-    return _then(_value.copyWith(
-      spacing: null == spacing
-          ? _value.spacing
-          : spacing // ignore: cast_nullable_to_non_nullable
-              as AppSpacing,
-    ) as $Val);
+  $Res call({Object? spacing = null}) {
+    return _then(
+      _value.copyWith(
+            spacing:
+                null == spacing
+                    ? _value.spacing
+                    : spacing // ignore: cast_nullable_to_non_nullable
+                        as AppSpacing,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of AppEdgeInsetsSpacing
@@ -281,11 +285,11 @@ class _$AppEdgeInsetsSpacingCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$AppEdgeInsetsSpacingImplCopyWith<$Res>
-    implements $AppEdgeInsetsSpacingCopyWith<$Res> {
-  factory _$$AppEdgeInsetsSpacingImplCopyWith(_$AppEdgeInsetsSpacingImpl value,
-          $Res Function(_$AppEdgeInsetsSpacingImpl) then) =
-      __$$AppEdgeInsetsSpacingImplCopyWithImpl<$Res>;
+abstract class _$$AppEdgeInsetsSpacingImplCopyWith<$Res> implements $AppEdgeInsetsSpacingCopyWith<$Res> {
+  factory _$$AppEdgeInsetsSpacingImplCopyWith(
+    _$AppEdgeInsetsSpacingImpl value,
+    $Res Function(_$AppEdgeInsetsSpacingImpl) then,
+  ) = __$$AppEdgeInsetsSpacingImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({AppSpacing spacing});
@@ -298,23 +302,25 @@ abstract class _$$AppEdgeInsetsSpacingImplCopyWith<$Res>
 class __$$AppEdgeInsetsSpacingImplCopyWithImpl<$Res>
     extends _$AppEdgeInsetsSpacingCopyWithImpl<$Res, _$AppEdgeInsetsSpacingImpl>
     implements _$$AppEdgeInsetsSpacingImplCopyWith<$Res> {
-  __$$AppEdgeInsetsSpacingImplCopyWithImpl(_$AppEdgeInsetsSpacingImpl _value,
-      $Res Function(_$AppEdgeInsetsSpacingImpl) _then)
-      : super(_value, _then);
+  __$$AppEdgeInsetsSpacingImplCopyWithImpl(
+    _$AppEdgeInsetsSpacingImpl _value,
+    $Res Function(_$AppEdgeInsetsSpacingImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AppEdgeInsetsSpacing
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? spacing = null,
-  }) {
-    return _then(_$AppEdgeInsetsSpacingImpl(
-      spacing: null == spacing
-          ? _value.spacing
-          : spacing // ignore: cast_nullable_to_non_nullable
-              as AppSpacing,
-    ));
+  $Res call({Object? spacing = null}) {
+    return _then(
+      _$AppEdgeInsetsSpacingImpl(
+        spacing:
+            null == spacing
+                ? _value.spacing
+                : spacing // ignore: cast_nullable_to_non_nullable
+                    as AppSpacing,
+      ),
+    );
   }
 }
 
@@ -347,15 +353,12 @@ class _$AppEdgeInsetsSpacingImpl extends _AppEdgeInsetsSpacing {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AppEdgeInsetsSpacingImplCopyWith<_$AppEdgeInsetsSpacingImpl>
-      get copyWith =>
-          __$$AppEdgeInsetsSpacingImplCopyWithImpl<_$AppEdgeInsetsSpacingImpl>(
-              this, _$identity);
+  _$$AppEdgeInsetsSpacingImplCopyWith<_$AppEdgeInsetsSpacingImpl> get copyWith =>
+      __$$AppEdgeInsetsSpacingImplCopyWithImpl<_$AppEdgeInsetsSpacingImpl>(this, _$identity);
 }
 
 abstract class _AppEdgeInsetsSpacing extends AppEdgeInsetsSpacing {
-  const factory _AppEdgeInsetsSpacing({required final AppSpacing spacing}) =
-      _$AppEdgeInsetsSpacingImpl;
+  const factory _AppEdgeInsetsSpacing({required final AppSpacing spacing}) = _$AppEdgeInsetsSpacingImpl;
   const _AppEdgeInsetsSpacing._() : super._();
 
   @override
@@ -365,6 +368,5 @@ abstract class _AppEdgeInsetsSpacing extends AppEdgeInsetsSpacing {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppEdgeInsetsSpacingImplCopyWith<_$AppEdgeInsetsSpacingImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$AppEdgeInsetsSpacingImplCopyWith<_$AppEdgeInsetsSpacingImpl> get copyWith => throw _privateConstructorUsedError;
 }

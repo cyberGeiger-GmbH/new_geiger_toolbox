@@ -31,14 +31,12 @@ class MixpanelAnalyticsClient implements AnalyticsClient {
 
   @override
   Future<void> trackScreenView(String routeName, String action) async {
-    await _mixpanel.track("Screen View",
-        properties: {'name': routeName, 'actiong': action});
+    await _mixpanel.track("Screen View", properties: {'name': routeName, 'actiong': action});
   }
 
   @override
   Future<void> trackTodoCompleted(int completedCount) async {
-    await _mixpanel
-        .track('Todo completed', properties: {'count': completedCount});
+    await _mixpanel.track('Todo completed', properties: {'count': completedCount});
   }
 
   @override
@@ -54,10 +52,7 @@ class MixpanelAnalyticsClient implements AnalyticsClient {
 
 @Riverpod(keepAlive: true)
 Future<MixpanelAnalyticsClient> mixpanelAnalyticsClient(Ref ref) async {
-  final mixpanel = await Mixpanel.init(
-    Env.mixpanelProjectToken,
-    trackAutomaticEvents: true,
-  );
-  
+  final mixpanel = await Mixpanel.init(Env.mixpanelProjectToken, trackAutomaticEvents: true);
+
   return MixpanelAnalyticsClient(mixpanel);
 }

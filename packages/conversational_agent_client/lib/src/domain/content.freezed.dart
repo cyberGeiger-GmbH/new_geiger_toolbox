@@ -12,7 +12,8 @@ part of 'content.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Content _$ContentFromJson(Map<String, dynamic> json) {
   return _Content.fromJson(json);
@@ -34,8 +35,7 @@ mixin _$Content {
 
 /// @nodoc
 abstract class $ContentCopyWith<$Res> {
-  factory $ContentCopyWith(Content value, $Res Function(Content) then) =
-      _$ContentCopyWithImpl<$Res, Content>;
+  factory $ContentCopyWith(Content value, $Res Function(Content) then) = _$ContentCopyWithImpl<$Res, Content>;
   @useResult
   $Res call({String type, Text text});
 
@@ -43,8 +43,7 @@ abstract class $ContentCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ContentCopyWithImpl<$Res, $Val extends Content>
-    implements $ContentCopyWith<$Res> {
+class _$ContentCopyWithImpl<$Res, $Val extends Content> implements $ContentCopyWith<$Res> {
   _$ContentCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -56,20 +55,22 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-    Object? text = null,
-  }) {
-    return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as Text,
-    ) as $Val);
+  $Res call({Object? type = null, Object? text = null}) {
+    return _then(
+      _value.copyWith(
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+            text:
+                null == text
+                    ? _value.text
+                    : text // ignore: cast_nullable_to_non_nullable
+                        as Text,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Content
@@ -85,8 +86,7 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
 
 /// @nodoc
 abstract class _$$ContentImplCopyWith<$Res> implements $ContentCopyWith<$Res> {
-  factory _$$ContentImplCopyWith(
-          _$ContentImpl value, $Res Function(_$ContentImpl) then) =
+  factory _$$ContentImplCopyWith(_$ContentImpl value, $Res Function(_$ContentImpl) then) =
       __$$ContentImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -97,31 +97,29 @@ abstract class _$$ContentImplCopyWith<$Res> implements $ContentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ContentImplCopyWithImpl<$Res>
-    extends _$ContentCopyWithImpl<$Res, _$ContentImpl>
+class __$$ContentImplCopyWithImpl<$Res> extends _$ContentCopyWithImpl<$Res, _$ContentImpl>
     implements _$$ContentImplCopyWith<$Res> {
-  __$$ContentImplCopyWithImpl(
-      _$ContentImpl _value, $Res Function(_$ContentImpl) _then)
-      : super(_value, _then);
+  __$$ContentImplCopyWithImpl(_$ContentImpl _value, $Res Function(_$ContentImpl) _then) : super(_value, _then);
 
   /// Create a copy of Content
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-    Object? text = null,
-  }) {
-    return _then(_$ContentImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as Text,
-    ));
+  $Res call({Object? type = null, Object? text = null}) {
+    return _then(
+      _$ContentImpl(
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+        text:
+            null == text
+                ? _value.text
+                : text // ignore: cast_nullable_to_non_nullable
+                    as Text,
+      ),
+    );
   }
 }
 
@@ -130,8 +128,7 @@ class __$$ContentImplCopyWithImpl<$Res>
 class _$ContentImpl implements _Content {
   const _$ContentImpl({required this.type, required this.text});
 
-  factory _$ContentImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ContentImplFromJson(json);
+  factory _$ContentImpl.fromJson(Map<String, dynamic> json) => _$$ContentImplFromJson(json);
 
   @override
   final String type;
@@ -161,20 +158,16 @@ class _$ContentImpl implements _Content {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
-      __$$ContentImplCopyWithImpl<_$ContentImpl>(this, _$identity);
+  _$$ContentImplCopyWith<_$ContentImpl> get copyWith => __$$ContentImplCopyWithImpl<_$ContentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ContentImplToJson(
-      this,
-    );
+    return _$$ContentImplToJson(this);
   }
 }
 
 abstract class _Content implements Content {
-  const factory _Content(
-      {required final String type, required final Text text}) = _$ContentImpl;
+  const factory _Content({required final String type, required final Text text}) = _$ContentImpl;
 
   factory _Content.fromJson(Map<String, dynamic> json) = _$ContentImpl.fromJson;
 
@@ -187,6 +180,5 @@ abstract class _Content implements Content {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ContentImplCopyWith<_$ContentImpl> get copyWith => throw _privateConstructorUsedError;
 }

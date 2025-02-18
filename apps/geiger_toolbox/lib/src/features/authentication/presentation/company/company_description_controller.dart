@@ -12,19 +12,18 @@ class CompanyDescriptionController extends _$CompanyDescriptionController {
     return null;
   }
 
-  Future<void> setCompanyDescription(
-      {required String companyName, required String location}) async {
+  Future<void> setCompanyDescription({required String companyName, required String location}) async {
     final perplexityRepo = ref.read(perplexityRepositoryProvider);
     state = AsyncLoading<String>();
-    state = await AsyncValue.guard(() => perplexityRepo.getCompanyDescription(
-        companyName: companyName, location: location));
+    state = await AsyncValue.guard(
+      () => perplexityRepo.getCompanyDescription(companyName: companyName, location: location),
+    );
   }
 }
 
 @riverpod
 Future<String?> getCompanyDescription(Ref ref) async {
-  final remoteData =
-      await ref.watch(companyDescriptionControllerProvider.future);
+  final remoteData = await ref.watch(companyDescriptionControllerProvider.future);
   final cache = await ref.watch(watchCompanyProvider.future);
   if (remoteData != null) {
     return remoteData;

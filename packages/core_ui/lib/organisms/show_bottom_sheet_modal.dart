@@ -4,48 +4,56 @@ import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
-void showWoltModalBottomSheet(BuildContext context,
-    {required String title,
-    required Widget page,
-    Widget? stickyActionBar,
-    bool forceMaxHeight = true}) {
+void showWoltModalBottomSheet(
+  BuildContext context, {
+  required String title,
+  required Widget page,
+  Widget? stickyActionBar,
+  bool forceMaxHeight = true,
+}) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.bottomSheet(),
     context: context,
     barrierDismissible: false,
     pageListBuilder: (bottomSheetContext) {
       return [
-        _takeActionSliverWolModalSheetPage(context,
-            title: title,
-            mainContent: page,
-            stickyActionBar: stickyActionBar,
-            forceMaxHeight: forceMaxHeight)
+        _takeActionSliverWolModalSheetPage(
+          context,
+          title: title,
+          mainContent: page,
+          stickyActionBar: stickyActionBar,
+          forceMaxHeight: forceMaxHeight,
+        ),
       ];
     },
   );
 }
 
-void showWoltAlertDialog(BuildContext context,
-    {required String title, required Widget page, bool forceMaxHeight = true}) {
+void showWoltAlertDialog(
+  BuildContext context, {
+  required String title,
+  required Widget page,
+  bool forceMaxHeight = true,
+}) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.alertDialog(),
     context: context,
     barrierDismissible: false,
     pageListBuilder: (bottomSheetContext) {
       return [
-        _takeActionSliverWolModalSheetPage(context,
-            title: title, mainContent: page, forceMaxHeight: forceMaxHeight)
+        _takeActionSliverWolModalSheetPage(context, title: title, mainContent: page, forceMaxHeight: forceMaxHeight),
       ];
     },
   );
 }
 
 SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
-    BuildContext modalSheetContext,
-    {required String title,
-    required Widget mainContent,
-    Widget? stickyActionBar,
-    bool forceMaxHeight = true}) {
+  BuildContext modalSheetContext, {
+  required String title,
+  required Widget mainContent,
+  Widget? stickyActionBar,
+  bool forceMaxHeight = true,
+}) {
   final appColors = Theme.of(modalSheetContext).colorScheme;
 
   return SliverWoltModalSheetPage(
@@ -69,14 +77,9 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     ),
 
     mainContentSliversBuilder: (bottomSheetContext) {
-      return [
-        SliverToBoxAdapter(child: mainContent),
-      ];
+      return [SliverToBoxAdapter(child: mainContent)];
     },
 
-    stickyActionBar: Padding(
-      padding: const EdgeInsets.only(bottom: Spacing.p22),
-      child: stickyActionBar,
-    ),
+    stickyActionBar: Padding(padding: const EdgeInsets.only(bottom: Spacing.p22), child: stickyActionBar),
   );
 }

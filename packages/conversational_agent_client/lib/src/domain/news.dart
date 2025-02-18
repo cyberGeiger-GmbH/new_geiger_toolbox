@@ -12,15 +12,16 @@ part 'news.g.dart';
 class News with _$News {
   const News._();
 
-  const factory News(
-      {required final String id,
-      required final String title,
-      required final String summary,
-      @JsonKey(name: 'news_category') required final String newsCategory,
-      @JsonKey(name: 'article_url') required final String articleUrl,
-      @JsonKey(name: 'image_url') required final String imageUrl,
-      @JsonKey(name: 'date_created') required final String dateCreated,
-      required final List<Recommendation> recommendations}) = _News;
+  const factory News({
+    required final String id,
+    required final String title,
+    required final String summary,
+    @JsonKey(name: 'news_category') required final String newsCategory,
+    @JsonKey(name: 'article_url') required final String articleUrl,
+    @JsonKey(name: 'image_url') required final String imageUrl,
+    @JsonKey(name: 'date_created') required final String dateCreated,
+    required final List<Recommendation> recommendations,
+  }) = _News;
 
   factory News.fromJson(Map<String, Object?> json) => _$NewsFromJson(json);
 

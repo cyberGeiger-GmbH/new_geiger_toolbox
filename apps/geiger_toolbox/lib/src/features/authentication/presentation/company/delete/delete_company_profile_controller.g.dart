@@ -6,21 +6,19 @@ part of 'delete_company_profile_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$deleteCompanyProfileControllerHash() =>
-    r'd40de46eaf58b0be69923a9eba845b6fedfbdeb1';
+String _$deleteCompanyProfileControllerHash() => r'd40de46eaf58b0be69923a9eba845b6fedfbdeb1';
 
 /// See also [DeleteCompanyProfileController].
 @ProviderFor(DeleteCompanyProfileController)
-final deleteCompanyProfileControllerProvider = AutoDisposeAsyncNotifierProvider<
-    DeleteCompanyProfileController, void>.internal(
-  DeleteCompanyProfileController.new,
-  name: r'deleteCompanyProfileControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$deleteCompanyProfileControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final deleteCompanyProfileControllerProvider =
+    AutoDisposeAsyncNotifierProvider<DeleteCompanyProfileController, void>.internal(
+      DeleteCompanyProfileController.new,
+      name: r'deleteCompanyProfileControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product') ? null : _$deleteCompanyProfileControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$DeleteCompanyProfileController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint

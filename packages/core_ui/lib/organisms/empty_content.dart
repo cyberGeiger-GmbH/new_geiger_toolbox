@@ -4,12 +4,13 @@ import '../molecules/texts/app_text.dart';
 
 ///for showing empty content
 class EmptyContent extends StatelessWidget {
-  const EmptyContent(
-      {super.key,
-      this.title,
-      this.message = "Add a new item to get started",
-      this.color,
-      this.textAlign});
+  const EmptyContent({
+    super.key,
+    this.title,
+    this.message = "Add a new item to get started",
+    this.color,
+    this.textAlign,
+  });
 
   final String? title;
   final String message;
@@ -22,16 +23,8 @@ class EmptyContent extends StatelessWidget {
       children: [
         title == null
             ? const SizedBox.shrink()
-            : AppText.titleLarge(
-                textAlign: textAlign,
-                text: title ?? "",
-                color: color,
-                context: context),
-        AppText.bodyMedium(
-          text: message,
-          context: context,
-          textAlign: textAlign,
-        ),
+            : AppText.titleLarge(textAlign: textAlign, text: title ?? "", color: color, context: context),
+        AppText.bodyMedium(text: message, context: context, textAlign: textAlign),
       ],
     );
   }

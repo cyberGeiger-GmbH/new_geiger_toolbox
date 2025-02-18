@@ -22,14 +22,14 @@ void main() {
   }
 
   ProviderContainer getDataBaseContainer() {
-    final container = ProviderContainer(overrides: [
-      appDatabaseProvider.overrideWithValue(
-        /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
-        AppDatabase(
-          testDatabaseConnection(),
+    final container = ProviderContainer(
+      overrides: [
+        appDatabaseProvider.overrideWithValue(
+          /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
+          AppDatabase(testDatabaseConnection()),
         ),
-      ),
-    ]);
+      ],
+    );
 
     return container;
   }
@@ -46,102 +46,90 @@ void main() {
 
   tester.group('todo offering repository ...', () {
     tester.test(
-        'Given  recommendation offering is available, when offering has been filtered, then add offerings to todos with status marked as planned and lastUpdated to current date',
-        () async {
-      final todoRepo = container.read(todoOfferingRepoProvider);
-      final newsRepo = container.read(localNewsFeedRepositoryProvider);
-      //store news
-      await newsRepo.synFromRemote(data: sourceData);
+      'Given  recommendation offering is available, when offering has been filtered, then add offerings to todos with status marked as planned and lastUpdated to current date',
+      () async {
+        final todoRepo = container.read(todoOfferingRepoProvider);
+        final newsRepo = container.read(localNewsFeedRepositoryProvider);
+        //store news
+        await newsRepo.synFromRemote(data: sourceData);
 
-      // get recommendation
-      final selectedNews = await newsRepo.fetchNewsByTitle(
-          title: "Defensible Security Architecture");
+        // get recommendation
+        final selectedNews = await newsRepo.fetchNewsByTitle(title: "Defensible Security Architecture");
 
-      final recommendations = selectedNews.recommendations;
+        final recommendations = selectedNews.recommendations;
 
-      final firstRecommendation = recommendations.first;
+        final firstRecommendation = recommendations.first;
 
-      //fetch all recommendationOffer
-      final offering = await todoRepo.fetchFilteredOfferingStatus(
-          recommendationId: firstRecommendation.id);
+        //fetch all recommendationOffer
+        final offering = await todoRepo.fetchFilteredOfferingStatus(recommendationId: firstRecommendation.id);
 
-      print("offering => $offering");
+        print("offering => $offering");
 
-      //show all todos
-      final Stream<List<TodoOffering>> stream =
-          todoRepo.watchTodoOfferingStatus();
+        //show all todos
+        final Stream<List<TodoOffering>> stream = todoRepo.watchTodoOfferingStatus();
 
-      // lister to the stream of todos
-      final expectation = tester.expectLater(
-        stream,
-        tester.emitsInOrder([
-          tester.isEmpty,
-          tester.isA<List<TodoOffering>>(),
-        ]),
-      );
+        // lister to the stream of todos
+        final expectation = tester.expectLater(
+          stream,
+          tester.emitsInOrder([tester.isEmpty, tester.isA<List<TodoOffering>>()]),
+        );
 
-      //add all offering to todo
-      await todoRepo.addListTodo(
-          offerData: offering
-              .map((toElement) => toElement.copyWith(
-                  status: Status.planned, lastUpdated: DateTime.now()))
-              .toList());
+        //add all offering to todo
+        await todoRepo.addListTodo(
+          offerData:
+              offering
+                  .map((toElement) => toElement.copyWith(status: Status.planned, lastUpdated: DateTime.now()))
+                  .toList(),
+        );
 
-      tester.expect(offering, tester.isNotEmpty);
+        tester.expect(offering, tester.isNotEmpty);
 
-      // wait for the stream to emit expected values
-      await expectation;
-    });
+        // wait for the stream to emit expected values
+        await expectation;
+      },
+    );
     tester.test(
-        "given todo offering is available, when status marked has done updated, then todo offering status is updated",
-        () async {
-      final todoRepo = container.read(todoOfferingRepoProvider);
-      final newsRepo = container.read(localNewsFeedRepositoryProvider);
+      "given todo offering is available, when status marked has done updated, then todo offering status is updated",
+      () async {
+        final todoRepo = container.read(todoOfferingRepoProvider);
+        final newsRepo = container.read(localNewsFeedRepositoryProvider);
 
-      final selectedNews = await newsRepo.fetchNewsByTitle(
-          title: "Defensible Security Architecture");
+        final selectedNews = await newsRepo.fetchNewsByTitle(title: "Defensible Security Architecture");
 
-      final recommendations = selectedNews.recommendations;
+        final recommendations = selectedNews.recommendations;
 
-      final firstRecommendation = recommendations.first;
+        final firstRecommendation = recommendations.first;
 
-      //fetch all recommendationOffer
-      final offerings = await todoRepo.fetchFilteredOfferingStatus(
-          recommendationId: firstRecommendation.id);
+        //fetch all recommendationOffer
+        final offerings = await todoRepo.fetchFilteredOfferingStatus(recommendationId: firstRecommendation.id);
 
-      final offering = offerings.first;
+        final offering = offerings.first;
 
-      //update status of todos
+        //update status of todos
 
-      //show all todos
-      final Stream<List<TodoOffering>> stream =
-          todoRepo.watchTodoOfferingStatus();
+        //show all todos
+        final Stream<List<TodoOffering>> stream = todoRepo.watchTodoOfferingStatus();
 
-      // lister to the stream of todos
-      final expectation = tester.expectLater(
-        stream,
-        tester.emitsInOrder([
-          tester.isNotEmpty,
-          tester.isA<List<TodoOffering>>(),
-        ]),
-      );
-      //marke as single todo has done
-      final result =
-          await todoRepo.updateTodoStatus(id: offering.id, status: Status.done);
+        // lister to the stream of todos
+        final expectation = tester.expectLater(
+          stream,
+          tester.emitsInOrder([tester.isNotEmpty, tester.isA<List<TodoOffering>>()]),
+        );
+        //marke as single todo has done
+        final result = await todoRepo.updateTodoStatus(id: offering.id, status: Status.done);
 
-      tester.expect(result, 1);
+        tester.expect(result, 1);
 
-      await expectation;
-    });
-    tester.test(
-        " Given todo is updated, when todo is not found, then throw DataBaseException",
-        () async {
+        await expectation;
+      },
+    );
+    tester.test(" Given todo is updated, when todo is not found, then throw DataBaseException", () async {
       final todoRepo = container.read(todoOfferingRepoProvider);
 
       await tester.expectLater(
-          () => todoRepo.updateTodoStatus(id: "123", status: Status.done),
-          tester.throwsA(tester.isA<DataBaseException>()));
-      
+        () => todoRepo.updateTodoStatus(id: "123", status: Status.done),
+        tester.throwsA(tester.isA<DataBaseException>()),
+      );
     });
   });
 }

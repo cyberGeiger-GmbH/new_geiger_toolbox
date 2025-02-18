@@ -13,9 +13,7 @@ String _$analyticsFacadeHash() => r'fbb5986f3884d121077f4917c4408e14a6b54c13';
 final analyticsFacadeProvider = Provider<AnalyticsFacade>.internal(
   analyticsFacade,
   name: r'analyticsFacadeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$analyticsFacadeHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$analyticsFacadeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

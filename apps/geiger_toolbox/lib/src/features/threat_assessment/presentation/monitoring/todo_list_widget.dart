@@ -10,9 +10,7 @@ import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
 
 class TodoListWidget extends ConsumerWidget {
-  const TodoListWidget({
-    super.key,
-  });
+  const TodoListWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,22 +18,13 @@ class TodoListWidget extends ConsumerWidget {
 
     return AsyncValueWidget(
       value: todos,
-      data: (data) => data.isEmpty
-          ? const SizedBox.shrink()
-          : ShortTodoList(
-              items: data,
-              displayLimit: 3,
-            ),
+      data: (data) => data.isEmpty ? const SizedBox.shrink() : ShortTodoList(items: data, displayLimit: 3),
     );
   }
 }
 
 class ShortTodoList extends StatelessWidget {
-  const ShortTodoList({
-    super.key,
-    required this.items,
-    required this.displayLimit,
-  });
+  const ShortTodoList({super.key, required this.items, required this.displayLimit});
   final List<TodoOffering> items;
   final int displayLimit;
 
@@ -51,10 +40,7 @@ class ShortTodoList extends StatelessWidget {
               showAllTodos(context);
             },
           ),
-          ShowLimitedTodos(
-            items: items,
-            displayLimit: displayLimit,
-          ),
+          ShowLimitedTodos(items: items, displayLimit: displayLimit),
           if (items.length > displayLimit)
             SeeAllText(
               seeAll: () {
@@ -71,33 +57,25 @@ class ShortTodoList extends StatelessWidget {
       context,
       title: 'Todos',
       page: Column(
-        children: ListTile.divideTiles(
-          context: context,
-          tiles: (items.map(
-            (item) => Card(
-              child: ListTile(
-                title: AppText.bodyMedium(
-                  text: item.offering.name,
-                  context: context,
-                  textAlign: TextAlign.start,
+        children:
+            ListTile.divideTiles(
+              context: context,
+              tiles: (items.map(
+                (item) => Card(
+                  child: ListTile(
+                    title: AppText.bodyMedium(text: item.offering.name, context: context, textAlign: TextAlign.start),
+                    subtitle: AppText.bodySmall(text: item.offering.summary, context: context),
+                  ),
                 ),
-                subtitle: AppText.bodySmall(
-                    text: item.offering.summary, context: context),
-              ),
-            ),
-          )),
-        ).toList(),
+              )),
+            ).toList(),
       ),
     );
   }
 }
 
 class ShowLimitedTodos extends ConsumerWidget {
-  const ShowLimitedTodos({
-    super.key,
-    required this.items,
-    required this.displayLimit,
-  });
+  const ShowLimitedTodos({super.key, required this.items, required this.displayLimit});
   final List<TodoOffering> items;
   final int displayLimit;
 
@@ -121,13 +99,7 @@ class ShowLimitedTodos extends ConsumerWidget {
             },
             child: TodoListTileCard(item: items[i]),
           ),
-          if (i <
-              (items.length > displayLimit
-                  ? displayLimit - 1
-                  : items.length - 1))
-            Divider(
-              height: 1,
-            ),
+          if (i < (items.length > displayLimit ? displayLimit - 1 : items.length - 1)) Divider(height: 1),
         ],
       ],
     );
@@ -137,12 +109,7 @@ class ShowLimitedTodos extends ConsumerWidget {
 typedef DismissibleCallback<T> = Future<bool?> Function(T value);
 
 class DismissibleTodo extends StatelessWidget {
-  const DismissibleTodo({
-    super.key,
-    required this.item,
-    required this.child,
-    required this.onDismissed,
-  });
+  const DismissibleTodo({super.key, required this.item, required this.child, required this.onDismissed});
 
   final TodoOffering item;
   final Widget child;
@@ -151,21 +118,22 @@ class DismissibleTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-        key: Key(item.id),
-        background: Container(
-          color: Colors.green,
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Icon(Icons.check, color: Colors.white),
-        ),
-        secondaryBackground: Container(
-          color: Colors.red,
-          alignment: Alignment.centerRight,
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Icon(Icons.delete, color: Colors.white),
-        ),
-        confirmDismiss: onDismissed,
-        child: child);
+      key: Key(item.id),
+      background: Container(
+        color: Colors.green,
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Icon(Icons.check, color: Colors.white),
+      ),
+      secondaryBackground: Container(
+        color: Colors.red,
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
+      confirmDismiss: onDismissed,
+      child: child,
+    );
   }
 }
 
@@ -175,29 +143,26 @@ class TodoListTileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading:
-          item.status == Status.done ? Icon(Icons.done) : Icon(Icons.pending),
-      title: AppText.bodyMedium(
-        text: item.offering.name,
-        context: context,
-      ),
+      leading: item.status == Status.done ? Icon(Icons.done) : Icon(Icons.pending),
+      title: AppText.bodyMedium(text: item.offering.name, context: context),
       trailing: Icon(Icons.chevron_right),
       onTap: () {
-        showWoltModalBottomSheet(context,
-            title: item.offering.name,
-            forceMaxHeight: false,
-            page: Column(
-              children: [
-                SizedBox(
-                    height: MediaQuery.sizeOf(context).height *
-                        0.3, // Use 40% of screen height
-                    child: Padding(
-                      padding: const EdgeInsets.all(Spacing.p16),
-                      child: AppText.bodySmall(
-                          text: item.offering.summary, context: context),
-                    )),
-              ],
-            ));
+        showWoltModalBottomSheet(
+          context,
+          title: item.offering.name,
+          forceMaxHeight: false,
+          page: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.3, // Use 40% of screen height
+                child: Padding(
+                  padding: const EdgeInsets.all(Spacing.p16),
+                  child: AppText.bodySmall(text: item.offering.summary, context: context),
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }
@@ -216,9 +181,8 @@ class Label extends StatelessWidget {
         onTap: showAllItems,
         child: Row(
           children: [
-            AppText.bodySmall(
-                text: text, context: context, color: theme.hintColor),
-            Icon(Icons.chevron_right, color: theme.hintColor)
+            AppText.bodySmall(text: text, context: context, color: theme.hintColor),
+            Icon(Icons.chevron_right, color: theme.hintColor),
           ],
         ),
       ),
@@ -234,14 +198,8 @@ class SeeAllText extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Divider(
-          height: 1,
-        ),
-        AppTextButton.primary(
-          context: context,
-          label: "See All".hardcoded,
-          onTap: seeAll,
-        ),
+        Divider(height: 1),
+        AppTextButton.primary(context: context, label: "See All".hardcoded, onTap: seeAll),
       ],
     );
   }

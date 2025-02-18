@@ -12,7 +12,8 @@ part of 'recommendation.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Recommendation _$RecommendationFromJson(Map<String, dynamic> json) {
   return _Recommendation.fromJson(json);
@@ -32,26 +33,19 @@ mixin _$Recommendation {
   /// Create a copy of Recommendation
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RecommendationCopyWith<Recommendation> get copyWith =>
-      throw _privateConstructorUsedError;
+  $RecommendationCopyWith<Recommendation> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $RecommendationCopyWith<$Res> {
-  factory $RecommendationCopyWith(
-          Recommendation value, $Res Function(Recommendation) then) =
+  factory $RecommendationCopyWith(Recommendation value, $Res Function(Recommendation) then) =
       _$RecommendationCopyWithImpl<$Res, Recommendation>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String rationale,
-      @JsonKey(name: "specific_offerings") List<Offering> offerings});
+  $Res call({String id, String name, String rationale, @JsonKey(name: "specific_offerings") List<Offering> offerings});
 }
 
 /// @nodoc
-class _$RecommendationCopyWithImpl<$Res, $Val extends Recommendation>
-    implements $RecommendationCopyWith<$Res> {
+class _$RecommendationCopyWithImpl<$Res, $Val extends Recommendation> implements $RecommendationCopyWith<$Res> {
   _$RecommendationCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -63,100 +57,93 @@ class _$RecommendationCopyWithImpl<$Res, $Val extends Recommendation>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? rationale = null,
-    Object? offerings = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      rationale: null == rationale
-          ? _value.rationale
-          : rationale // ignore: cast_nullable_to_non_nullable
-              as String,
-      offerings: null == offerings
-          ? _value.offerings
-          : offerings // ignore: cast_nullable_to_non_nullable
-              as List<Offering>,
-    ) as $Val);
+  $Res call({Object? id = null, Object? name = null, Object? rationale = null, Object? offerings = null}) {
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            rationale:
+                null == rationale
+                    ? _value.rationale
+                    : rationale // ignore: cast_nullable_to_non_nullable
+                        as String,
+            offerings:
+                null == offerings
+                    ? _value.offerings
+                    : offerings // ignore: cast_nullable_to_non_nullable
+                        as List<Offering>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$RecommendationImplCopyWith<$Res>
-    implements $RecommendationCopyWith<$Res> {
-  factory _$$RecommendationImplCopyWith(_$RecommendationImpl value,
-          $Res Function(_$RecommendationImpl) then) =
+abstract class _$$RecommendationImplCopyWith<$Res> implements $RecommendationCopyWith<$Res> {
+  factory _$$RecommendationImplCopyWith(_$RecommendationImpl value, $Res Function(_$RecommendationImpl) then) =
       __$$RecommendationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String rationale,
-      @JsonKey(name: "specific_offerings") List<Offering> offerings});
+  $Res call({String id, String name, String rationale, @JsonKey(name: "specific_offerings") List<Offering> offerings});
 }
 
 /// @nodoc
-class __$$RecommendationImplCopyWithImpl<$Res>
-    extends _$RecommendationCopyWithImpl<$Res, _$RecommendationImpl>
+class __$$RecommendationImplCopyWithImpl<$Res> extends _$RecommendationCopyWithImpl<$Res, _$RecommendationImpl>
     implements _$$RecommendationImplCopyWith<$Res> {
-  __$$RecommendationImplCopyWithImpl(
-      _$RecommendationImpl _value, $Res Function(_$RecommendationImpl) _then)
-      : super(_value, _then);
+  __$$RecommendationImplCopyWithImpl(_$RecommendationImpl _value, $Res Function(_$RecommendationImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Recommendation
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? rationale = null,
-    Object? offerings = null,
-  }) {
-    return _then(_$RecommendationImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      rationale: null == rationale
-          ? _value.rationale
-          : rationale // ignore: cast_nullable_to_non_nullable
-              as String,
-      offerings: null == offerings
-          ? _value._offerings
-          : offerings // ignore: cast_nullable_to_non_nullable
-              as List<Offering>,
-    ));
+  $Res call({Object? id = null, Object? name = null, Object? rationale = null, Object? offerings = null}) {
+    return _then(
+      _$RecommendationImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        rationale:
+            null == rationale
+                ? _value.rationale
+                : rationale // ignore: cast_nullable_to_non_nullable
+                    as String,
+        offerings:
+            null == offerings
+                ? _value._offerings
+                : offerings // ignore: cast_nullable_to_non_nullable
+                    as List<Offering>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$RecommendationImpl implements _Recommendation {
-  _$RecommendationImpl(
-      {required this.id,
-      required this.name,
-      required this.rationale,
-      @JsonKey(name: "specific_offerings")
-      required final List<Offering> offerings})
-      : _offerings = offerings;
+  _$RecommendationImpl({
+    required this.id,
+    required this.name,
+    required this.rationale,
+    @JsonKey(name: "specific_offerings") required final List<Offering> offerings,
+  }) : _offerings = offerings;
 
-  factory _$RecommendationImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RecommendationImplFromJson(json);
+  factory _$RecommendationImpl.fromJson(Map<String, dynamic> json) => _$$RecommendationImplFromJson(json);
 
   @override
   final String id;
@@ -185,16 +172,13 @@ class _$RecommendationImpl implements _Recommendation {
             other is _$RecommendationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.rationale, rationale) ||
-                other.rationale == rationale) &&
-            const DeepCollectionEquality()
-                .equals(other._offerings, _offerings));
+            (identical(other.rationale, rationale) || other.rationale == rationale) &&
+            const DeepCollectionEquality().equals(other._offerings, _offerings));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, rationale,
-      const DeepCollectionEquality().hash(_offerings));
+  int get hashCode => Object.hash(runtimeType, id, name, rationale, const DeepCollectionEquality().hash(_offerings));
 
   /// Create a copy of Recommendation
   /// with the given fields replaced by the non-null parameter values.
@@ -202,27 +186,23 @@ class _$RecommendationImpl implements _Recommendation {
   @override
   @pragma('vm:prefer-inline')
   _$$RecommendationImplCopyWith<_$RecommendationImpl> get copyWith =>
-      __$$RecommendationImplCopyWithImpl<_$RecommendationImpl>(
-          this, _$identity);
+      __$$RecommendationImplCopyWithImpl<_$RecommendationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RecommendationImplToJson(
-      this,
-    );
+    return _$$RecommendationImplToJson(this);
   }
 }
 
 abstract class _Recommendation implements Recommendation {
-  factory _Recommendation(
-      {required final String id,
-      required final String name,
-      required final String rationale,
-      @JsonKey(name: "specific_offerings")
-      required final List<Offering> offerings}) = _$RecommendationImpl;
+  factory _Recommendation({
+    required final String id,
+    required final String name,
+    required final String rationale,
+    @JsonKey(name: "specific_offerings") required final List<Offering> offerings,
+  }) = _$RecommendationImpl;
 
-  factory _Recommendation.fromJson(Map<String, dynamic> json) =
-      _$RecommendationImpl.fromJson;
+  factory _Recommendation.fromJson(Map<String, dynamic> json) = _$RecommendationImpl.fromJson;
 
   @override
   String get id;
@@ -238,6 +218,5 @@ abstract class _Recommendation implements Recommendation {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RecommendationImplCopyWith<_$RecommendationImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RecommendationImplCopyWith<_$RecommendationImpl> get copyWith => throw _privateConstructorUsedError;
 }

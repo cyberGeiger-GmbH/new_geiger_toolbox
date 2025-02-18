@@ -17,19 +17,19 @@ class TodoOfferingRepository {
 
   Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
 
-//enum to database
+  //enum to database
   OfferingStatus todoToOfferingStatus(Status status) => switch (status) {
-        Status.recommended => OfferingStatus.recommended,
-        Status.planned => OfferingStatus.planned,
-        Status.done => OfferingStatus.done
-      };
-//enum from database
+    Status.recommended => OfferingStatus.recommended,
+    Status.planned => OfferingStatus.planned,
+    Status.done => OfferingStatus.done,
+  };
+  //enum from database
   Status offeringToTodoStatus(OfferingStatus? status) => switch (status) {
-        OfferingStatus.recommended => Status.recommended,
-        OfferingStatus.planned => Status.planned,
-        OfferingStatus.done => Status.done,
-        _ => Status.recommended
-      };
+    OfferingStatus.recommended => Status.recommended,
+    OfferingStatus.planned => Status.planned,
+    OfferingStatus.done => Status.done,
+    _ => Status.recommended,
+  };
 
   TodoOfferingRepository(this.ref);
 
@@ -44,8 +44,7 @@ class TodoOfferingRepository {
     await _db.into(_db.todoOfferings).insertOnConflictUpdate(todoOffer);
   }
 
-  Future<int> updateTodoStatus(
-      {required OfferingId id, required Status status}) async {
+  Future<int> updateTodoStatus({required OfferingId id, required Status status}) async {
     try {
       final todoOffer = TodoOfferingsCompanion(
         offeringId: Value(id),
@@ -53,9 +52,7 @@ class TodoOfferingRepository {
       );
 
       /// update the todoOffer status
-      final result = await (_db.update(_db.todoOfferings)
-            ..where((t) => t.offeringId.equals(id)))
-          .write(todoOffer);
+      final result = await (_db.update(_db.todoOfferings)..where((t) => t.offeringId.equals(id))).write(todoOffer);
       if (result == 0) {
         throw DataBaseException(error: "No todo offering found");
       }
@@ -67,7 +64,7 @@ class TodoOfferingRepository {
 
   //* add/update status of a given offerings
   Future<void> addListTodo({required List<TodoOffering> offerData}) async {
-   // _log.i("add offer to todos $offerData");
+    // _log.i("add offer to todos $offerData");
     if (offerData.isNotEmpty) {
       await _db.transaction(() async {
         for (var data in offerData) {
@@ -102,16 +99,9 @@ class TodoOfferingRepository {
     _log.i("watch List<offeringStatus>");
     //create a join query that include TodoOfferingStatusesTable and OfferingsTable
     final query = _db.select(_db.recommendationOfferings).join(
-      [
-        leftOuterJoin(
-          _db.todoOfferings,
-          _db.todoOfferings.offeringId
-              .equalsExp(_db.recommendationOfferings.id),
-        ),
-      ],
+      [leftOuterJoin(_db.todoOfferings, _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id))],
       //filter by offerings id
-    )..where(
-        _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id));
+    )..where(_db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id));
     // transform the query stream into a stream of [OfferingStatus] lists
     return query.watch().map((rows) {
       return rows.map((row) {
@@ -120,10 +110,7 @@ class TodoOfferingRepository {
         // Read the todo offering status entry or null if there is no match
         final todofferingEntry = row.readTableOrNull(_db.todoOfferings);
 
-        final offering = Offering(
-          name: offeringEntry.name,
-          summary: offeringEntry.summary,
-        );
+        final offering = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
         final status = offeringToTodoStatus(todofferingEntry!.offeringStatus);
 
         return TodoOffering(
@@ -138,18 +125,13 @@ class TodoOfferingRepository {
   }
 
   //get offering that has already be added to todos by filtering by recommendation id
-  Future<List<TodoOffering>> fetchFilteredOfferingStatus(
-      {required String recommendationId}) async {
+  Future<List<TodoOffering>> fetchFilteredOfferingStatus({required String recommendationId}) async {
     //create a join query that include TodoOfferingStatusesTable and OfferingsTable
     final query = _db.select(_db.recommendationOfferings).join([
-      leftOuterJoin(
-          _db.todoOfferings,
-          _db.todoOfferings.offeringId
-              .equalsExp(_db.recommendationOfferings.id))
-    ])
+        leftOuterJoin(_db.todoOfferings, _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id)),
+      ])
       //filter by recommendationID
-      ..where(_db.recommendationOfferings.recommendationId
-          .equals(recommendationId));
+      ..where(_db.recommendationOfferings.recommendationId.equals(recommendationId));
 
     final result = await query.get();
 
@@ -160,10 +142,7 @@ class TodoOfferingRepository {
       // Read the todo offering status entry or null if there is no match
       final todoOfferingEntry = row.readTableOrNull(_db.todoOfferings);
 
-      final offering = Offering(
-        name: offeringEntry.name,
-        summary: offeringEntry.summary,
-      );
+      final offering = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
 
       final status = offeringToTodoStatus(todoOfferingEntry?.offeringStatus);
 
@@ -182,11 +161,8 @@ class TodoOfferingRepository {
 
   /// Check if the todo offer Status table is empty
   Future<bool> isTodOfferingStatusTableEmpty() async {
-    final query = _db.selectOnly(_db.todoOfferings)
-      ..addColumns([_db.todoOfferings.offeringId.count()]);
-    final result = await query
-        .map((row) => row.read<int>(_db.todoOfferings.offeringId.count()))
-        .getSingle();
+    final query = _db.selectOnly(_db.todoOfferings)..addColumns([_db.todoOfferings.offeringId.count()]);
+    final result = await query.map((row) => row.read<int>(_db.todoOfferings.offeringId.count())).getSingle();
     return result == 0;
   }
 }
@@ -197,8 +173,7 @@ TodoOfferingRepository todoOfferingRepo(Ref ref) {
 }
 
 @riverpod
-Future<List<TodoOffering>> fetchOfferStatus(Ref ref,
-    {required RecommendationID id}) {
+Future<List<TodoOffering>> fetchOfferStatus(Ref ref, {required RecommendationID id}) {
   final repo = ref.watch(todoOfferingRepoProvider);
   return repo.fetchFilteredOfferingStatus(recommendationId: id);
 }

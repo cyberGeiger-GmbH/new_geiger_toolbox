@@ -13,8 +13,7 @@ String _$deviceTypeHash() => r'80796fa2656bf63c798642c0de92aed8cfcae8fc';
 final deviceTypeProvider = FutureProvider<Device>.internal(
   deviceType,
   name: r'deviceTypeProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$deviceTypeHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$deviceTypeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

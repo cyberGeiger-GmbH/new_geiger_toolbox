@@ -5,9 +5,7 @@ part 'choice.g.dart';
 
 @freezed
 class Choice with _$Choice {
-  const factory Choice({
-    required Message message,
-  }) = _Choice;
+  const factory Choice({required Message message}) = _Choice;
 
   factory Choice.fromJson(Map<String, dynamic> json) => _$ChoiceFromJson(json);
 }

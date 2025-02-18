@@ -13,8 +13,7 @@ String _$statusCodesHash() => r'2ca58b66974f56b328ec61c4ddf11c1b37143aa8';
 final statusCodesProvider = AutoDisposeProvider<StatusCodes>.internal(
   statusCodes,
   name: r'statusCodesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$statusCodesHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$statusCodesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

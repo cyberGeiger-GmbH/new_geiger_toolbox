@@ -28,12 +28,9 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //show error when scan button throw as exceptions
-    ref.listen(
-      scanButtonControllerProvider,
-      (_, nextState) {
-        return nextState.showAlertDialogOnError(context: context);
-      },
-    );
+    ref.listen(scanButtonControllerProvider, (_, nextState) {
+      return nextState.showAlertDialogOnError(context: context);
+    });
 
     // final state = ref.watch(homeScreenControllerProvider);
     final ScrollController scrollController = ScrollController();
@@ -57,8 +54,7 @@ class MainScreen extends ConsumerWidget {
 }
 
 class FeatureListView extends ConsumerWidget {
-  const FeatureListView(
-      {super.key, this.scrollController, required this.onScanPressed});
+  const FeatureListView({super.key, this.scrollController, required this.onScanPressed});
 
   final ScrollController? scrollController;
   final VoidCallback onScanPressed;
@@ -68,21 +64,20 @@ class FeatureListView extends ConsumerWidget {
 
     return AsyncValueWidget(
       value: newsFeedValue,
-      data: (value) => value.isEmpty
-          ? WelcomeScanIntroWidget(onScanPressed: onScanPressed)
-          : SingleChildScrollView(
-              controller: scrollController,
-              child: FeatureList(onScanPressed: onScanPressed),
-            ),
+      data:
+          (value) =>
+              value.isEmpty
+                  ? WelcomeScanIntroWidget(onScanPressed: onScanPressed)
+                  : SingleChildScrollView(
+                    controller: scrollController,
+                    child: FeatureList(onScanPressed: onScanPressed),
+                  ),
     );
   }
 }
 
 class FeatureList extends StatelessWidget {
-  const FeatureList({
-    super.key,
-    required this.onScanPressed,
-  });
+  const FeatureList({super.key, required this.onScanPressed});
 
   final VoidCallback onScanPressed;
 
@@ -104,7 +99,7 @@ class FeatureList extends StatelessWidget {
         // getFlavor() == Flavor.dev ? RecommendationWidget() :
         const TodoListWidget(),
         Spacing.gapH12,
-        const PreviousNewsWidget()
+        const PreviousNewsWidget(),
       ],
     );
   }

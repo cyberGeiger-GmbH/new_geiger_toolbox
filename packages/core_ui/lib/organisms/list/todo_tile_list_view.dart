@@ -13,9 +13,10 @@ class TodoTileListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListViewBuilder.outlined(
-        itemBuilder: (_, index) => todoTile[index],
-        length: todoTile.length,
-        context: context);
+      itemBuilder: (_, index) => todoTile[index],
+      length: todoTile.length,
+      context: context,
+    );
   }
 }
 
@@ -28,10 +29,7 @@ class TodoTileList extends StatelessWidget {
 
     return Container(
       decoration: Utils.getDecoration(appColors),
-      child: Column(
-          children: ListTile.divideTiles(
-              context: context,
-              tiles: todoTile.map((value) => value)).toList()),
+      child: Column(children: ListTile.divideTiles(context: context, tiles: todoTile.map((value) => value)).toList()),
     );
   }
 }

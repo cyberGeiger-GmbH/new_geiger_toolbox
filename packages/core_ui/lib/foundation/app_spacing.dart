@@ -11,19 +11,21 @@ class AppSpacing with _$AppSpacing {
 
   const AppSpacing._();
 
-  const factory AppSpacing(
-      {required double xsmall,
-      required double small,
-      required double medium,
-      required double big,
-      required double large}) = _AppSpacing;
+  const factory AppSpacing({
+    required double xsmall,
+    required double small,
+    required double medium,
+    required double big,
+    required double large,
+  }) = _AppSpacing;
 
   factory AppSpacing.reqular() => const AppSpacing(
-      xsmall: Spacing.p4,
-      small: Spacing.p8,
-      medium: Spacing.p16,
-      big: Spacing.p12,
-      large: Spacing.p22);
+    xsmall: Spacing.p4,
+    small: Spacing.p8,
+    medium: Spacing.p16,
+    big: Spacing.p12,
+    large: Spacing.p22,
+  );
 }
 
 @freezed
@@ -35,6 +37,5 @@ class AppEdgeInsetsSpacing with _$AppEdgeInsetsSpacing {
   EdgeInsets get large => EdgeInsets.all(spacing.large);
 
   const AppEdgeInsetsSpacing._();
-  const factory AppEdgeInsetsSpacing({required AppSpacing spacing}) =
-      _AppEdgeInsetsSpacing;
+  const factory AppEdgeInsetsSpacing({required AppSpacing spacing}) = _AppEdgeInsetsSpacing;
 }

@@ -10,7 +10,7 @@ class Utils {
       boxShadow: [
         BoxShadow(
           // ignore: no-magic-number
-          color: Colors.grey.withValues(alpha:  0.2),
+          color: Colors.grey.withValues(alpha: 0.2),
           // ignore: no-magic-number
           blurRadius: 6,
           offset: const Offset(0, 3), // Shadow position
@@ -23,7 +23,7 @@ class Utils {
   static BoxShadow getBoxShadow(ColorScheme appColors) {
     return BoxShadow(
       // ignore: no-magic-number
-      color: Colors.grey.withValues(alpha:  0.2),
+      color: Colors.grey.withValues(alpha: 0.2),
       // ignore: no-magic-number
       blurRadius: 6,
       offset: const Offset(0, 3), // Shadow position

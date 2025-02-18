@@ -12,7 +12,8 @@ part of 'user_not_found.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 UserNotFound _$UserNotFoundFromJson(Map<String, dynamic> json) {
   return _UserNotFound.fromJson(json);
@@ -28,22 +29,19 @@ mixin _$UserNotFound {
   /// Create a copy of UserNotFound
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserNotFoundCopyWith<UserNotFound> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserNotFoundCopyWith<UserNotFound> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserNotFoundCopyWith<$Res> {
-  factory $UserNotFoundCopyWith(
-          UserNotFound value, $Res Function(UserNotFound) then) =
+  factory $UserNotFoundCopyWith(UserNotFound value, $Res Function(UserNotFound) then) =
       _$UserNotFoundCopyWithImpl<$Res, UserNotFound>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class _$UserNotFoundCopyWithImpl<$Res, $Val extends UserNotFound>
-    implements $UserNotFoundCopyWith<$Res> {
+class _$UserNotFoundCopyWithImpl<$Res, $Val extends UserNotFound> implements $UserNotFoundCopyWith<$Res> {
   _$UserNotFoundCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -55,23 +53,23 @@ class _$UserNotFoundCopyWithImpl<$Res, $Val extends UserNotFound>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? error = null,
-  }) {
-    return _then(_value.copyWith(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? error = null}) {
+    return _then(
+      _value.copyWith(
+            error:
+                null == error
+                    ? _value.error
+                    : error // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$UserNotFoundImplCopyWith<$Res>
-    implements $UserNotFoundCopyWith<$Res> {
-  factory _$$UserNotFoundImplCopyWith(
-          _$UserNotFoundImpl value, $Res Function(_$UserNotFoundImpl) then) =
+abstract class _$$UserNotFoundImplCopyWith<$Res> implements $UserNotFoundCopyWith<$Res> {
+  factory _$$UserNotFoundImplCopyWith(_$UserNotFoundImpl value, $Res Function(_$UserNotFoundImpl) then) =
       __$$UserNotFoundImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -79,26 +77,25 @@ abstract class _$$UserNotFoundImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UserNotFoundImplCopyWithImpl<$Res>
-    extends _$UserNotFoundCopyWithImpl<$Res, _$UserNotFoundImpl>
+class __$$UserNotFoundImplCopyWithImpl<$Res> extends _$UserNotFoundCopyWithImpl<$Res, _$UserNotFoundImpl>
     implements _$$UserNotFoundImplCopyWith<$Res> {
-  __$$UserNotFoundImplCopyWithImpl(
-      _$UserNotFoundImpl _value, $Res Function(_$UserNotFoundImpl) _then)
-      : super(_value, _then);
+  __$$UserNotFoundImplCopyWithImpl(_$UserNotFoundImpl _value, $Res Function(_$UserNotFoundImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of UserNotFound
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? error = null,
-  }) {
-    return _then(_$UserNotFoundImpl(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? error = null}) {
+    return _then(
+      _$UserNotFoundImpl(
+        error:
+            null == error
+                ? _value.error
+                : error // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -107,8 +104,7 @@ class __$$UserNotFoundImplCopyWithImpl<$Res>
 class _$UserNotFoundImpl extends _UserNotFound {
   const _$UserNotFoundImpl({required this.error}) : super._();
 
-  factory _$UserNotFoundImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserNotFoundImplFromJson(json);
+  factory _$UserNotFoundImpl.fromJson(Map<String, dynamic> json) => _$$UserNotFoundImplFromJson(json);
 
   @override
   final String error;
@@ -140,19 +136,15 @@ class _$UserNotFoundImpl extends _UserNotFound {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserNotFoundImplToJson(
-      this,
-    );
+    return _$$UserNotFoundImplToJson(this);
   }
 }
 
 abstract class _UserNotFound extends UserNotFound {
-  const factory _UserNotFound({required final String error}) =
-      _$UserNotFoundImpl;
+  const factory _UserNotFound({required final String error}) = _$UserNotFoundImpl;
   const _UserNotFound._() : super._();
 
-  factory _UserNotFound.fromJson(Map<String, dynamic> json) =
-      _$UserNotFoundImpl.fromJson;
+  factory _UserNotFound.fromJson(Map<String, dynamic> json) = _$UserNotFoundImpl.fromJson;
 
   @override
   String get error;
@@ -161,6 +153,5 @@ abstract class _UserNotFound extends UserNotFound {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserNotFoundImplCopyWith<_$UserNotFoundImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UserNotFoundImplCopyWith<_$UserNotFoundImpl> get copyWith => throw _privateConstructorUsedError;
 }

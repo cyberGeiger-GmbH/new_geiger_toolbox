@@ -5,24 +5,17 @@ part 'user_profile_model.g.dart';
 
 @freezed
 class UserProfileModel with _$UserProfileModel {
-  const factory UserProfileModel(
-      {required Profile currentUserProfile,
-      Profile? previousUserProfile}) = _UserProfileModel;
+  const factory UserProfileModel({required Profile currentUserProfile, Profile? previousUserProfile}) =
+      _UserProfileModel;
 
-  factory UserProfileModel.fromJson(Map<String, dynamic> json) =>
-      _$UserProfileModelFromJson(json);
+  factory UserProfileModel.fromJson(Map<String, dynamic> json) => _$UserProfileModelFromJson(json);
 }
 
 @freezed
 class Profile with _$Profile {
-  const factory Profile({
-    required String id,
-    required Actor actor,
-    required List<NewsActicle> news,
-  }) = _Profile;
+  const factory Profile({required String id, required Actor actor, required List<NewsActicle> news}) = _Profile;
 
-  factory Profile.fromJson(Map<String, dynamic> json) =>
-      _$ProfileFromJson(json);
+  factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
 }
 
 @freezed
@@ -42,11 +35,7 @@ class Actor with _$Actor {
 
 @freezed
 class Asset with _$Asset {
-  const factory Asset({
-    required String type,
-    required String version,
-    required String model,
-  }) = _Asset;
+  const factory Asset({required String type, required String version, required String model}) = _Asset;
 
   factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
 }
@@ -61,18 +50,12 @@ class NewsActicle with _$NewsActicle {
     required List<Protection> protection,
   }) = _Definition;
 
-  factory NewsActicle.fromJson(Map<String, dynamic> json) =>
-      _$NewsActicleFromJson(json);
+  factory NewsActicle.fromJson(Map<String, dynamic> json) => _$NewsActicleFromJson(json);
 }
 
 @freezed
 class Protection with _$Protection {
-  const factory Protection({
-    required String name,
-    required String summary,
-    required String status,
-  }) = _Protection;
+  const factory Protection({required String name, required String summary, required String status}) = _Protection;
 
-  factory Protection.fromJson(Map<String, dynamic> json) =>
-      _$ProtectionFromJson(json);
+  factory Protection.fromJson(Map<String, dynamic> json) => _$ProtectionFromJson(json);
 }

@@ -14,10 +14,11 @@ class PerplexitySearchRepository {
   final Ref ref;
   PerplexitySearchRepository(this.ref);
 
-  Future<Description?> searchCompanyDescription(
-      {required String companyName,
-      required String location,
-      required String apiKey}) async {
+  Future<Description?> searchCompanyDescription({
+    required String companyName,
+    required String location,
+    required String apiKey,
+  }) async {
     final client = ref.read(dioClientProvider);
     final log = ref.read(loggingHandlerProvider("searchCompanyDescription"));
 
@@ -30,10 +31,10 @@ class PerplexitySearchRepository {
           {
             "content":
                 "you are a search enginer. what company does base on the name and the location provided. the result show be short",
-            "role": "system"
+            "role": "system",
           },
-          {"role": "user", "content": "who is $companyName in $location"}
-        ]
+          {"role": "user", "content": "who is $companyName in $location"},
+        ],
       };
 
       final Map<String, String> headers = {};
@@ -42,11 +43,7 @@ class PerplexitySearchRepository {
       headers.addEntries(Base.contentType.entries);
       headers.addEntries(authorization.entries);
 
-      final Response response = await client.postUri(
-        uri,
-        data: data,
-        options: Options(headers: headers),
-      );
+      final Response response = await client.postUri(uri, data: data, options: Options(headers: headers));
 
       // print("api key => $authorization");
       return response.searchParser(ref);

@@ -26,8 +26,7 @@ class NewsFeedsWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //listen for errors
     if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
-      ref.listen(watchRecentNewsFeedsProvider,
-          (_, nxt) => nxt.showAlertDialogOnError(context: context));
+      ref.listen(watchRecentNewsFeedsProvider, (_, nxt) => nxt.showAlertDialogOnError(context: context));
     }
 
     final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
@@ -40,25 +39,23 @@ class NewsFeedsWidget extends ConsumerWidget {
         if (news.isEmpty) {
           return const SizedBox.shrink();
         } else {
-          final limitNews =
-              limitListLength(inputList: news, limit: limitNewsFeedDisplay);
+          final limitNews = limitListLength(inputList: news, limit: limitNewsFeedDisplay);
           return Column(
             children: [
               CarouselSlider(
                 items: limitNews.toWidgetList(
                   context: context,
                   currentIndex: index,
-                  onPressed: state.isLoading
-                      ? null
-                      : () {
-                          final title = news[index].title;
-                          context.goNamed(
-                            AppRouter.newsFeedDetails.name,
-                            pathParameters: {
-                              AppRouter.newsFeedDetails.name: title
-                            },
-                          );
-                        },
+                  onPressed:
+                      state.isLoading
+                          ? null
+                          : () {
+                            final title = news[index].title;
+                            context.goNamed(
+                              AppRouter.newsFeedDetails.name,
+                              pathParameters: {AppRouter.newsFeedDetails.name: title},
+                            );
+                          },
                 ),
                 controller: _controller,
                 options: CarouselOptions(
@@ -72,9 +69,7 @@ class NewsFeedsWidget extends ConsumerWidget {
                   disableCenter: true,
                   //auto callback
                   onPageChanged: (index, reason) {
-                    ref
-                        .read(newsFeedsControllerProvider.notifier)
-                        .update(index);
+                    ref.read(newsFeedsControllerProvider.notifier).update(index);
                   },
                 ),
               ),

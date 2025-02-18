@@ -1,4 +1,3 @@
-
 class Base {
   static const baseUrl = "api.perplexity.ai";
 

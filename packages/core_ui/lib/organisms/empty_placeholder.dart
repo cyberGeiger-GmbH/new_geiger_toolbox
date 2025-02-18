@@ -8,27 +8,20 @@ import '../tokens/spacing.dart';
 ///[onTap] to return to home screen
 ///
 class EmptyPlaceholder extends StatelessWidget {
-  const EmptyPlaceholder(
-      {super.key, required this.message, required this.label, this.onTap});
+  const EmptyPlaceholder({super.key, required this.message, required this.label, this.onTap});
   final String message;
   final VoidCallback? onTap;
   final String label;
   @override
   Widget build(BuildContext context) {
-    
     return Padding(
       padding: const EdgeInsets.all(Spacing.p16),
       child: Center(
         child: Column(
           children: [
-            AppText.headlineMedium(
-              context: context,
-              text: message,
-              textAlign: TextAlign.center,
-          
-            ),
+            AppText.headlineMedium(context: context, text: message, textAlign: TextAlign.center),
             Spacing.gapH32,
-            AppButton.primary(label: label, onPressed: onTap, context: context)
+            AppButton.primary(label: label, onPressed: onTap, context: context),
           ],
         ),
       ),

@@ -2,10 +2,9 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/atoms/app_asset_image_data.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/molecules/background_with_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/env/flavor.dart';
+
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
@@ -30,7 +29,7 @@ class AppStartUp extends _$AppStartUp {
     //Preload any other FutureProviders what will be used with requireValue
     await _preloadDependencies();
 
-// dispose dependency
+    // dispose dependency
     ref.onDispose(() {
       //ensure we invalidate all the providers we depend on
       ref.invalidate(packageInfoProvider);
@@ -85,10 +84,7 @@ class AppStartUpWidget extends ConsumerWidget {
     return AsyncValueWidget(
       value: appStartupState,
       data: (_) => onLoaded(context),
-      error: (e, s) => AppStartUpErrorWidget(
-        message: e.toString(),
-        onRetry: () => ref.invalidate(appStartUpProvider),
-      ),
+      error: (e, s) => AppStartUpErrorWidget(message: e.toString(), onRetry: () => ref.invalidate(appStartUpProvider)),
       loadingWidget: const AppStartUpLoadingWidget(),
     );
   }
@@ -104,11 +100,7 @@ class AppStartUpLoadingWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AppAssetImageData.geigerLogo().image,
-            Spacing.gapH22,
-            const CircularProgressIndicator(),
-          ],
+          children: [AppAssetImageData.geigerLogo().image, Spacing.gapH22, const CircularProgressIndicator()],
         ),
       ),
     );
@@ -116,8 +108,7 @@ class AppStartUpLoadingWidget extends StatelessWidget {
 }
 
 class AppStartUpErrorWidget extends StatelessWidget {
-  const AppStartUpErrorWidget(
-      {super.key, required this.message, required this.onRetry});
+  const AppStartUpErrorWidget({super.key, required this.message, required this.onRetry});
   final String message;
   final VoidCallback onRetry;
 
@@ -134,11 +125,7 @@ class AppStartUpErrorWidget extends StatelessWidget {
           children: [
             ErrorMessage(errorMessage: message),
             Spacing.gapH16,
-            AppButton.secondary(
-              label: "Retry".hardcoded,
-              context: context,
-              onPressed: onRetry,
-            ),
+            AppButton.secondary(label: "Retry".hardcoded, context: context, onPressed: onRetry),
           ],
         ),
       ),

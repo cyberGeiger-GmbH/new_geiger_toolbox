@@ -14,28 +14,18 @@ class NewsArticleLogRepository {
 
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
-
   NewsArticleLogRepository(this.ref);
 
   Future<List<NewsActicle>> getObject() async {
-    final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
-      [
-        leftOuterJoin(
-          _db.recommendations,
-          _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
-        ),
-        leftOuterJoin(
-          _db.recommendationOfferings,
-          _db.recommendationOfferings.recommendationId
-              .equalsExp(_db.recommendations.id),
-        ),
-        leftOuterJoin(
-          _db.todoOfferings,
-          _db.todoOfferings.offeringId
-              .equalsExp(_db.recommendationOfferings.id),
-        ),
-      ],
-    )).get();
+    final newsWithRecoAndOffering =
+        await (_db.select(_db.newsInfo).join([
+          leftOuterJoin(_db.recommendations, _db.recommendations.newsId.equalsExp(_db.newsInfo.id)),
+          leftOuterJoin(
+            _db.recommendationOfferings,
+            _db.recommendationOfferings.recommendationId.equalsExp(_db.recommendations.id),
+          ),
+          leftOuterJoin(_db.todoOfferings, _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id)),
+        ])).get();
     //Tranfrom the query inot a list of News with their associated Recommendation and task;
     final List<NewsActicle> newsObj = [];
     final Map<String, List<Protection>> proObjMap = {};
@@ -51,13 +41,12 @@ class NewsArticleLogRepository {
 
       if (recommendationEntry != null && offeringEntry != null) {
         final protection = Protection(
-            name: offeringEntry.name,
-            summary: offeringEntry.summary,
-            status: todoOfferingEntry?.offeringStatus.name ?? "recommended");
+          name: offeringEntry.name,
+          summary: offeringEntry.summary,
+          status: todoOfferingEntry?.offeringStatus.name ?? "recommended",
+        );
 
-        proObjMap
-            .putIfAbsent(recommendationEntry.newsId, () => [])
-            .add(protection);
+        proObjMap.putIfAbsent(recommendationEntry.newsId, () => []).add(protection);
 
         if (!proObjMap.containsKey(recommendationEntry.newsId)) {
           proObjMap[recommendationEntry.newsId] = [];

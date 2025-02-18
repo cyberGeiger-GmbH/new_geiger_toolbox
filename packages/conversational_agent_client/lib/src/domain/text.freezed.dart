@@ -12,7 +12,8 @@ part of 'text.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Text _$TextFromJson(Map<String, dynamic> json) {
   return _Text.fromJson(json);
@@ -33,8 +34,7 @@ mixin _$Text {
 
 /// @nodoc
 abstract class $TextCopyWith<$Res> {
-  factory $TextCopyWith(Text value, $Res Function(Text) then) =
-      _$TextCopyWithImpl<$Res, Text>;
+  factory $TextCopyWith(Text value, $Res Function(Text) then) = _$TextCopyWithImpl<$Res, Text>;
   @useResult
   $Res call({Value value});
 
@@ -42,8 +42,7 @@ abstract class $TextCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TextCopyWithImpl<$Res, $Val extends Text>
-    implements $TextCopyWith<$Res> {
+class _$TextCopyWithImpl<$Res, $Val extends Text> implements $TextCopyWith<$Res> {
   _$TextCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -55,15 +54,17 @@ class _$TextCopyWithImpl<$Res, $Val extends Text>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-  }) {
-    return _then(_value.copyWith(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as Value,
-    ) as $Val);
+  $Res call({Object? value = null}) {
+    return _then(
+      _value.copyWith(
+            value:
+                null == value
+                    ? _value.value
+                    : value // ignore: cast_nullable_to_non_nullable
+                        as Value,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Text
@@ -79,9 +80,7 @@ class _$TextCopyWithImpl<$Res, $Val extends Text>
 
 /// @nodoc
 abstract class _$$TextImplCopyWith<$Res> implements $TextCopyWith<$Res> {
-  factory _$$TextImplCopyWith(
-          _$TextImpl value, $Res Function(_$TextImpl) then) =
-      __$$TextImplCopyWithImpl<$Res>;
+  factory _$$TextImplCopyWith(_$TextImpl value, $Res Function(_$TextImpl) then) = __$$TextImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Value value});
@@ -91,25 +90,23 @@ abstract class _$$TextImplCopyWith<$Res> implements $TextCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TextImplCopyWithImpl<$Res>
-    extends _$TextCopyWithImpl<$Res, _$TextImpl>
-    implements _$$TextImplCopyWith<$Res> {
-  __$$TextImplCopyWithImpl(_$TextImpl _value, $Res Function(_$TextImpl) _then)
-      : super(_value, _then);
+class __$$TextImplCopyWithImpl<$Res> extends _$TextCopyWithImpl<$Res, _$TextImpl> implements _$$TextImplCopyWith<$Res> {
+  __$$TextImplCopyWithImpl(_$TextImpl _value, $Res Function(_$TextImpl) _then) : super(_value, _then);
 
   /// Create a copy of Text
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? value = null,
-  }) {
-    return _then(_$TextImpl(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as Value,
-    ));
+  $Res call({Object? value = null}) {
+    return _then(
+      _$TextImpl(
+        value:
+            null == value
+                ? _value.value
+                : value // ignore: cast_nullable_to_non_nullable
+                    as Value,
+      ),
+    );
   }
 }
 
@@ -118,8 +115,7 @@ class __$$TextImplCopyWithImpl<$Res>
 class _$TextImpl implements _Text {
   const _$TextImpl({required this.value});
 
-  factory _$TextImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TextImplFromJson(json);
+  factory _$TextImpl.fromJson(Map<String, dynamic> json) => _$$TextImplFromJson(json);
 
   @override
   final Value value;
@@ -146,14 +142,11 @@ class _$TextImpl implements _Text {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TextImplCopyWith<_$TextImpl> get copyWith =>
-      __$$TextImplCopyWithImpl<_$TextImpl>(this, _$identity);
+  _$$TextImplCopyWith<_$TextImpl> get copyWith => __$$TextImplCopyWithImpl<_$TextImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TextImplToJson(
-      this,
-    );
+    return _$$TextImplToJson(this);
   }
 }
 
@@ -169,6 +162,5 @@ abstract class _Text implements Text {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TextImplCopyWith<_$TextImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TextImplCopyWith<_$TextImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,8 @@ part of 'description.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$Description {
@@ -22,22 +23,19 @@ mixin _$Description {
   /// Create a copy of Description
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $DescriptionCopyWith<Description> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DescriptionCopyWith<Description> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DescriptionCopyWith<$Res> {
-  factory $DescriptionCopyWith(
-          Description value, $Res Function(Description) then) =
+  factory $DescriptionCopyWith(Description value, $Res Function(Description) then) =
       _$DescriptionCopyWithImpl<$Res, Description>;
   @useResult
   $Res call({List<String> references, String description});
 }
 
 /// @nodoc
-class _$DescriptionCopyWithImpl<$Res, $Val extends Description>
-    implements $DescriptionCopyWith<$Res> {
+class _$DescriptionCopyWithImpl<$Res, $Val extends Description> implements $DescriptionCopyWith<$Res> {
   _$DescriptionCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -49,28 +47,28 @@ class _$DescriptionCopyWithImpl<$Res, $Val extends Description>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? references = null,
-    Object? description = null,
-  }) {
-    return _then(_value.copyWith(
-      references: null == references
-          ? _value.references
-          : references // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? references = null, Object? description = null}) {
+    return _then(
+      _value.copyWith(
+            references:
+                null == references
+                    ? _value.references
+                    : references // ignore: cast_nullable_to_non_nullable
+                        as List<String>,
+            description:
+                null == description
+                    ? _value.description
+                    : description // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$DescriptionImplCopyWith<$Res>
-    implements $DescriptionCopyWith<$Res> {
-  factory _$$DescriptionImplCopyWith(
-          _$DescriptionImpl value, $Res Function(_$DescriptionImpl) then) =
+abstract class _$$DescriptionImplCopyWith<$Res> implements $DescriptionCopyWith<$Res> {
+  factory _$$DescriptionImplCopyWith(_$DescriptionImpl value, $Res Function(_$DescriptionImpl) then) =
       __$$DescriptionImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -78,40 +76,38 @@ abstract class _$$DescriptionImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DescriptionImplCopyWithImpl<$Res>
-    extends _$DescriptionCopyWithImpl<$Res, _$DescriptionImpl>
+class __$$DescriptionImplCopyWithImpl<$Res> extends _$DescriptionCopyWithImpl<$Res, _$DescriptionImpl>
     implements _$$DescriptionImplCopyWith<$Res> {
-  __$$DescriptionImplCopyWithImpl(
-      _$DescriptionImpl _value, $Res Function(_$DescriptionImpl) _then)
-      : super(_value, _then);
+  __$$DescriptionImplCopyWithImpl(_$DescriptionImpl _value, $Res Function(_$DescriptionImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Description
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? references = null,
-    Object? description = null,
-  }) {
-    return _then(_$DescriptionImpl(
-      references: null == references
-          ? _value._references
-          : references // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? references = null, Object? description = null}) {
+    return _then(
+      _$DescriptionImpl(
+        references:
+            null == references
+                ? _value._references
+                : references // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        description:
+            null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$DescriptionImpl implements _Description {
-  const _$DescriptionImpl(
-      {required final List<String> references, required this.description})
-      : _references = references;
+  const _$DescriptionImpl({required final List<String> references, required this.description})
+    : _references = references;
 
   final List<String> _references;
   @override
@@ -134,15 +130,12 @@ class _$DescriptionImpl implements _Description {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DescriptionImpl &&
-            const DeepCollectionEquality()
-                .equals(other._references, _references) &&
-            (identical(other.description, description) ||
-                other.description == description));
+            const DeepCollectionEquality().equals(other._references, _references) &&
+            (identical(other.description, description) || other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_references), description);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_references), description);
 
   /// Create a copy of Description
   /// with the given fields replaced by the non-null parameter values.
@@ -154,9 +147,8 @@ class _$DescriptionImpl implements _Description {
 }
 
 abstract class _Description implements Description {
-  const factory _Description(
-      {required final List<String> references,
-      required final String description}) = _$DescriptionImpl;
+  const factory _Description({required final List<String> references, required final String description}) =
+      _$DescriptionImpl;
 
   @override
   List<String> get references;
@@ -167,6 +159,5 @@ abstract class _Description implements Description {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DescriptionImplCopyWith<_$DescriptionImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DescriptionImplCopyWith<_$DescriptionImpl> get copyWith => throw _privateConstructorUsedError;
 }

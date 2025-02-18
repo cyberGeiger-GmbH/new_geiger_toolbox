@@ -6,8 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Conditional import implementation based on the Drift Flutter web example:
 // https://github.com/simolus3/drift/tree/develop/examples/app
-import 'package:geiger_toolbox/src/utils/drift_storage/connection/connection.dart'
-    as impl;
+import 'package:geiger_toolbox/src/utils/drift_storage/connection/connection.dart' as impl;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'database_table.g.dart';
@@ -43,8 +42,7 @@ class GeigerScores extends Table {
   TextColumn get interpretation => text()();
   IntColumn get score => integer()();
 
-  DateTimeColumn get lastUpdated =>
-      dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get lastUpdated => dateTime().withDefault(currentDateAndTime)();
 }
 
 // class ReasonData extends TypeConverter<List<String>, String> {
@@ -88,13 +86,11 @@ class Recommendations extends Table {
 @DataClassName('RecommendationOfferingData')
 class RecommendationOfferings extends Table {
   TextColumn get id => text().customConstraint('UNIQUE NOT NULL')();
-  TextColumn get recommendationId =>
-      text().references(Recommendations, #id)(); // Foreign key
+  TextColumn get recommendationId => text().references(Recommendations, #id)(); // Foreign key
   TextColumn get name => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
 
-  DateTimeColumn get dateRecommendated =>
-      dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get dateRecommendated => dateTime().withDefault(currentDateAndTime)();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -117,13 +113,10 @@ class TodoOfferingStatusConverter extends TypeConverter<OfferingStatus, int> {
 
 @DataClassName('TodoOfferingData')
 class TodoOfferings extends Table {
-  TextColumn get offeringId =>
-      text().references(RecommendationOfferings, #id)();
-// Foreign key
-  IntColumn get offeringStatus =>
-      integer().map(const TodoOfferingStatusConverter())();
-  DateTimeColumn get lastUpdated =>
-      dateTime().withDefault(currentDateAndTime)();
+  TextColumn get offeringId => text().references(RecommendationOfferings, #id)();
+  // Foreign key
+  IntColumn get offeringStatus => integer().map(const TodoOfferingStatusConverter())();
+  DateTimeColumn get lastUpdated => dateTime().withDefault(currentDateAndTime)();
 
   @override
   Set<Column> get primaryKey => {offeringId};
@@ -147,8 +140,7 @@ class PreviousProfileConverter extends TypeConverter<Profile, String> {
 @DataClassName("PreviousUserProfileData")
 class PreviousUserProfiles extends Table {
   IntColumn get id => integer()();
-  TextColumn get previousProfile =>
-      text().map(const PreviousProfileConverter())();
+  TextColumn get previousProfile => text().map(const PreviousProfileConverter())();
 
   @override
   Set<Column> get primaryKey => {id};
@@ -204,7 +196,7 @@ class PreviousUserProfiles extends Table {
     Recommendations,
     RecommendationOfferings,
     TodoOfferings,
-    PreviousUserProfiles
+    PreviousUserProfiles,
 
     //BusinessProfiles,
     // Industries,

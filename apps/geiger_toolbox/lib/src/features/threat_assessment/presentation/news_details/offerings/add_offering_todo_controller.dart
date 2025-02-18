@@ -20,7 +20,7 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
     //store the todoTask in cache
     state = await AsyncValue.guard(() => repo.addTodo(todo: status));
 
-// //reset toggle to false on error
+    // //reset toggle to false on error
     if (state.hasError == true) {
       debugPrint("error occurs");
       final toggle = ref.read(toggleOfferControllerProvider(status).notifier);
@@ -28,15 +28,13 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
     }
   }
 
-// add has a list
-  Future<void> addToActiveTodo(
-      {required List<TodoOffering> offeringsStatus}) async {
+  // add has a list
+  Future<void> addToActiveTodo({required List<TodoOffering> offeringsStatus}) async {
     final repo = ref.read(todoOfferingRepoProvider);
     state = const AsyncLoading<void>();
 
     //store the todoTask in cache
-    state = await AsyncValue.guard(
-        () => repo.addListTodo(offerData: offeringsStatus));
+    state = await AsyncValue.guard(() => repo.addListTodo(offerData: offeringsStatus));
   }
 }
 

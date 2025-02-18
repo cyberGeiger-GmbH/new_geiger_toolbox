@@ -17,46 +17,45 @@ class GeigerScoreWidget extends ConsumerWidget {
     final state = ref.watch(geigerScoreControllerProvider);
 
     ref.listen(scanButtonControllerProvider, (_, newV) {
-      ref
-          .read(geigerScoreControllerProvider.notifier)
-          .onScanComplete(scanPressState: newV);
+      ref.read(geigerScoreControllerProvider.notifier).onScanComplete(scanPressState: newV);
     });
 
     return state.isLoading
         ? AppText.titleMedium(text: "Calculating Score....", context: context)
         : AsyncValueWidget(
-            value: scoreValue,
-            data: (data) => data != null
-                ? _ScoreWithInfo(
-                    score: "${data.geigerScore}",
-                    key: key,
-                    //Todo: change font color base the score range
-                    showinfo: () {
-                      showWoltAlertDialog(
-                        context,
-                        title: "Geiger Score!",
-                        forceMaxHeight: false,
-                        page: Padding(
-                          padding: const EdgeInsets.all(Spacing.p8),
-                          child: ShowScoreReason(
-                            align: TextAlign.center,
-                            height: 170,
-                            reason: data.reason,
-                            status: data.status,
-                          ),
-                        ),
-                      );
-                    },
-                  )
-                : SizedBox.shrink(),
-          );
+          value: scoreValue,
+          data:
+              (data) =>
+                  data != null
+                      ? _ScoreWithInfo(
+                        score: "${data.geigerScore}",
+                        key: key,
+                        //Todo: change font color base the score range
+                        showinfo: () {
+                          showWoltAlertDialog(
+                            context,
+                            title: "Geiger Score!",
+                            forceMaxHeight: false,
+                            page: Padding(
+                              padding: const EdgeInsets.all(Spacing.p8),
+                              child: ShowScoreReason(
+                                align: TextAlign.center,
+                                height: 170,
+                                reason: data.reason,
+                                status: data.status,
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                      : SizedBox.shrink(),
+        );
     //: AppText.titleSmall(text: "RecalCulating score", context: context);
   }
 }
 
 class _ScoreWithInfo extends StatelessWidget {
-  const _ScoreWithInfo(
-      {super.key, required this.score, required this.showinfo, this.fontColor});
+  const _ScoreWithInfo({super.key, required this.score, required this.showinfo, this.fontColor});
   final String score;
   final Color? fontColor;
   final VoidCallback showinfo;
@@ -65,18 +64,11 @@ class _ScoreWithInfo extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        _ScoreContent(
-          score: score,
-          color: fontColor,
-          key: key,
-        ),
+        _ScoreContent(score: score, color: fontColor, key: key),
         Positioned(
           top: -10, // Adjust position as needed
           right: -14,
-          child: IconButton(
-            onPressed: showinfo,
-            icon: Icon(Icons.info_outline_rounded),
-          ),
+          child: IconButton(onPressed: showinfo, icon: Icon(Icons.info_outline_rounded)),
         ),
       ],
     );
@@ -90,15 +82,10 @@ class _ScoreContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final textStyle = theme.textTheme.displayLarge!
-        .copyWith(fontWeight: FontWeight.bold, color: color ?? Colors.black);
+    final textStyle = theme.textTheme.displayLarge!.copyWith(fontWeight: FontWeight.bold, color: color ?? Colors.black);
     return Padding(
       padding: const EdgeInsets.only(top: 15, right: 10, left: 10),
-      child: Text(
-        score,
-        style: textStyle,
-        textAlign: TextAlign.center,
-      ),
+      child: Text(score, style: textStyle, textAlign: TextAlign.center),
     );
   }
 }

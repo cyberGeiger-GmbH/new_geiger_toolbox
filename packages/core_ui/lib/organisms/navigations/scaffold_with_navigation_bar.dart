@@ -1,15 +1,15 @@
-
 import 'package:flutter/material.dart';
 
 import '../../molecules/bars/custom_navigation_destination.dart';
 
 class ScaffoldWithNavigationBar extends StatelessWidget {
-  const ScaffoldWithNavigationBar(
-      {super.key,
-      required this.body,
-      this.feedback,
-      required this.selectedIndex,
-      required this.onDestinationSelected});
+  const ScaffoldWithNavigationBar({
+    super.key,
+    required this.body,
+    this.feedback,
+    required this.selectedIndex,
+    required this.onDestinationSelected,
+  });
 
   final Widget body;
   final Widget? feedback;

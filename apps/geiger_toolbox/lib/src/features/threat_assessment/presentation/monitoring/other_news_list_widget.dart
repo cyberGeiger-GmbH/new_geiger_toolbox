@@ -22,9 +22,11 @@ class PreviousNewsWidget extends ConsumerWidget {
     final int limitView = 5;
     return AsyncValueWidget(
       value: newsValue,
-      data: (value) => value.isEmpty || value.length <= limitView
-          ? const SizedBox.shrink()
-          : OlderNewsList(limit: 4, items: value),
+      data:
+          (value) =>
+              value.isEmpty || value.length <= limitView
+                  ? const SizedBox.shrink()
+                  : OlderNewsList(limit: 4, items: value),
     );
   }
 }
@@ -38,18 +40,9 @@ class OlderNewsList extends StatelessWidget {
     return Card(
       child: Column(
         children: [
-          Label(
-            showAllItems: () {},
-            text: "Other News".hardcoded,
-          ),
-          ShowLimitedTodos(
-            displayLimit: limit,
-            items: items,
-          ),
-          if (items.length > limit)
-            SeeAllText(
-              seeAll: () {},
-            ),
+          Label(showAllItems: () {}, text: "Other News".hardcoded),
+          ShowLimitedTodos(displayLimit: limit, items: items),
+          if (items.length > limit) SeeAllText(seeAll: () {}),
         ],
       ),
     );
@@ -57,8 +50,7 @@ class OlderNewsList extends StatelessWidget {
 }
 
 class ShowLimitedTodos extends StatelessWidget {
-  const ShowLimitedTodos(
-      {super.key, required this.items, required this.displayLimit});
+  const ShowLimitedTodos({super.key, required this.items, required this.displayLimit});
   final List<News> items;
   final int displayLimit;
   @override
@@ -74,20 +66,11 @@ class ShowLimitedTodos extends StatelessWidget {
             onPress: () {
               context.goNamed(
                 AppRouter.newsFeedDetails.name,
-                pathParameters: {
-                  AppRouter.newsFeedDetails.name:
-                      items[i].title.replaceSpacesWithHyphen
-                },
+                pathParameters: {AppRouter.newsFeedDetails.name: items[i].title.replaceSpacesWithHyphen},
               );
             },
           ),
-          if (i <
-              (items.length > displayLimit
-                  ? displayLimit - 1
-                  : items.length - 1))
-            Divider(
-              height: 1,
-            ),
+          if (i < (items.length > displayLimit ? displayLimit - 1 : items.length - 1)) Divider(height: 1),
         ],
       ],
     );
@@ -95,12 +78,7 @@ class ShowLimitedTodos extends StatelessWidget {
 }
 
 class OtherNews extends StatelessWidget {
-  const OtherNews(
-      {super.key,
-      required this.url,
-      required this.title,
-      required this.lastUpdated,
-      this.onPress});
+  const OtherNews({super.key, required this.url, required this.title, required this.lastUpdated, this.onPress});
   final String url;
   final String title;
   final String lastUpdated;
@@ -110,17 +88,11 @@ class OtherNews extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Avatar(radius: 25, photoUrl: url),
-      title: AppText.bodyMedium(
-        text: title,
-        context: context,
-        textAlign: TextAlign.start,
-      ),
+      title: AppText.bodyMedium(text: title, context: context, textAlign: TextAlign.start),
       subtitle: Consumer(
         builder: (context, ref, child) {
-          final format =
-              ref.watch(formattedDateProvider(inputDate: lastUpdated));
-          return HorizontalTitleContent(
-              title: 'Last update'.hardcoded, source: format);
+          final format = ref.watch(formattedDateProvider(inputDate: lastUpdated));
+          return HorizontalTitleContent(title: 'Last update'.hardcoded, source: format);
         },
       ),
       trailing: Icon(Icons.chevron_right),

@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+13
 
 environment:
-  sdk: 3.6.0
+  sdk: 3.7.0
 
 dependencies:
   flutter:
@@ -15,44 +15,44 @@ dependencies:
   conversational_agent_client: 1.4.1
   perplexity_search: 1.2.0
   cupertino_icons: 1.0.8
-  go_router: 14.7.2
+  go_router: 14.8.0
   flutter_riverpod: 2.6.1
   riverpod_annotation: 2.6.1
-  custom_lint: 0.7.0
   freezed_annotation: 2.4.4
   carousel_slider_plus: 7.0.2
-  device_info_plus: 11.2.0
+  device_info_plus: 11.3.0
   url_launcher: 6.3.1
-  force_update_helper: 0.1.5
+  force_update_helper: 0.1.7
 
    # Drift and friends
-  drift: 2.21.0
-  drift_dev: 2.21.2
+  drift: 2.25.1
+  drift_dev: 2.25.2
   path_provider: 2.1.5
-  path: 1.9.0
-  sqlite3_flutter_libs: 0.5.26
-  sqlite3: 2.4.7
+  path: 1.9.1
+  sqlite3_flutter_libs: 0.5.30
+  sqlite3: 2.7.4
   #other packages
-
   json_annotation: 4.9.0
-  package_info_plus: 8.1.1
-  
-  shared_preferences: 2.3.3
+  package_info_plus: 8.2.1
+  shared_preferences: 2.5.2
   intl: 0.19.0
   uuid: 4.5.1
   # error monitor
-  sentry_flutter: 8.10.1
+  sentry_flutter: 8.13.0
   # send feedback
   feedback: 3.1.0
   # feedback collection
   feedback_sentry: 3.1.0
   # app analytics
-  firebase_analytics: 11.3.3
+  firebase_analytics: 11.4.3
   # remote config
-  firebase_remote_config: 5.1.3
-  firebase_core: 3.6.0
+  firebase_remote_config: 5.4.1
+  firebase_core: 3.12.0
   # mixpanel
-  mixpanel_flutter: 2.3.3
+  mixpanel_flutter:
+    git:
+      url: https://github.com/nikb7/mixpanel-flutter.git
+      ref: v1-embedding
  
 
 
@@ -61,18 +61,16 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: 5.0.0
-  build_runner: 2.4.13
-  riverpod_generator: 2.6.3
-  riverpod_lint: 2.6.3
-  freezed: 2.5.7
-  json_serializable: 6.9.0
-  #check for memory leaks during testing
-  leak_tracker_flutter_testing: 3.0.8
-
-  flutter_launcher_icons: 0.14.1
+  build_runner: 2.4.15
+  custom_lint: 0.7.3
+  riverpod_generator: 2.6.4
+  riverpod_lint: 2.6.4
+  freezed: 2.5.8
+  json_serializable: 6.9.4
+  flutter_launcher_icons: 0.14.3
   flutter_native_splash: 2.4.3
   flutter_flavorizr: 2.2.3
-  sentry_dart_plugin: 2.1.0
+  sentry_dart_plugin: 2.4.0
 
 # The following section is specific to Flutter packages.
 flutter:

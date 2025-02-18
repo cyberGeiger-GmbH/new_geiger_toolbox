@@ -5,16 +5,17 @@ import 'package:core_ui/molecules/background_with_image.dart';
 import 'package:flutter/material.dart';
 
 class TermsAndConditionScreen extends StatelessWidget {
-  const TermsAndConditionScreen(
-      {super.key,
-      this.title,
-      this.subtitle,
-      this.policyStatement,
-      this.allSizePadding,
-      this.getStartedLabel,
-      required this.acceptCondition,
-      this.value = false,
-      this.getStarted});
+  const TermsAndConditionScreen({
+    super.key,
+    this.title,
+    this.subtitle,
+    this.policyStatement,
+    this.allSizePadding,
+    this.getStartedLabel,
+    required this.acceptCondition,
+    this.value = false,
+    this.getStarted,
+  });
   final String? title;
   final String? subtitle;
   final String? policyStatement;
@@ -38,16 +39,15 @@ class TermsAndConditionScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AppAssetImageData.geigerLogo().image,
-                    AppText.headlineLarge(
-                        text: title ?? "Welcome to the GEIGER Toolbox",
-                        context: context),
+                    AppText.headlineLarge(text: title ?? "Welcome to the GEIGER Toolbox", context: context),
                     Spacing.gapH12,
                     AppText.bodyMedium(
-                      text: subtitle ??
+                      text:
+                          subtitle ??
                           "An AI power cyber risks assesement, guidance and awareness application for  improving your company's cybersecurity.",
                       context: context,
                       textAlign: TextAlign.justify,
-                    )
+                    ),
                   ],
                 ),
               ),

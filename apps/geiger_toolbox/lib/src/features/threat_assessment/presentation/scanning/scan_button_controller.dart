@@ -21,16 +21,13 @@ class ScanButtonController extends _$ScanButtonController {
 
   Future<void> scan() async {
     _log.i("scanButton pressed");
-//analytics
+    //analytics
     unawaited(_trackScanning());
-    
+
     state = const AsyncLoading();
 
-    state = await AsyncValue.guard(
-        () => ref.read(newsFeedServiceProvider).cacheNews());
+    state = await AsyncValue.guard(() => ref.read(newsFeedServiceProvider).cacheNews());
     _log.i("scanning completed ");
-
-
   }
 
   Future<void> _trackScanning() async {
@@ -38,7 +35,6 @@ class ScanButtonController extends _$ScanButtonController {
     final compProfile = await compRepo.fetchCompany();
 
     if (compProfile != null) {
-      
       ref.read(analyticsFacadeProvider).trackScanWithProfile();
     } else {
       ref.read(analyticsFacadeProvider).trackScanWithoutProfile();

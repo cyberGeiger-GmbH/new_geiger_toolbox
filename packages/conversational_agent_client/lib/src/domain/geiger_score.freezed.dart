@@ -12,7 +12,8 @@ part of 'geiger_score.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 GeigerScore _$GeigerScoreFromJson(Map<String, dynamic> json) {
   return _GeigerScore.fromJson(json);
@@ -30,22 +31,19 @@ mixin _$GeigerScore {
   /// Create a copy of GeigerScore
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GeigerScoreCopyWith<GeigerScore> get copyWith =>
-      throw _privateConstructorUsedError;
+  $GeigerScoreCopyWith<GeigerScore> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GeigerScoreCopyWith<$Res> {
-  factory $GeigerScoreCopyWith(
-          GeigerScore value, $Res Function(GeigerScore) then) =
+  factory $GeigerScoreCopyWith(GeigerScore value, $Res Function(GeigerScore) then) =
       _$GeigerScoreCopyWithImpl<$Res, GeigerScore>;
   @useResult
   $Res call({int geigerScore, String reasons, String interpretation});
 }
 
 /// @nodoc
-class _$GeigerScoreCopyWithImpl<$Res, $Val extends GeigerScore>
-    implements $GeigerScoreCopyWith<$Res> {
+class _$GeigerScoreCopyWithImpl<$Res, $Val extends GeigerScore> implements $GeigerScoreCopyWith<$Res> {
   _$GeigerScoreCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -57,33 +55,33 @@ class _$GeigerScoreCopyWithImpl<$Res, $Val extends GeigerScore>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? geigerScore = null,
-    Object? reasons = null,
-    Object? interpretation = null,
-  }) {
-    return _then(_value.copyWith(
-      geigerScore: null == geigerScore
-          ? _value.geigerScore
-          : geigerScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      reasons: null == reasons
-          ? _value.reasons
-          : reasons // ignore: cast_nullable_to_non_nullable
-              as String,
-      interpretation: null == interpretation
-          ? _value.interpretation
-          : interpretation // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? geigerScore = null, Object? reasons = null, Object? interpretation = null}) {
+    return _then(
+      _value.copyWith(
+            geigerScore:
+                null == geigerScore
+                    ? _value.geigerScore
+                    : geigerScore // ignore: cast_nullable_to_non_nullable
+                        as int,
+            reasons:
+                null == reasons
+                    ? _value.reasons
+                    : reasons // ignore: cast_nullable_to_non_nullable
+                        as String,
+            interpretation:
+                null == interpretation
+                    ? _value.interpretation
+                    : interpretation // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$GeigerScoreImplCopyWith<$Res>
-    implements $GeigerScoreCopyWith<$Res> {
-  factory _$$GeigerScoreImplCopyWith(
-          _$GeigerScoreImpl value, $Res Function(_$GeigerScoreImpl) then) =
+abstract class _$$GeigerScoreImplCopyWith<$Res> implements $GeigerScoreCopyWith<$Res> {
+  factory _$$GeigerScoreImplCopyWith(_$GeigerScoreImpl value, $Res Function(_$GeigerScoreImpl) then) =
       __$$GeigerScoreImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -91,49 +89,44 @@ abstract class _$$GeigerScoreImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GeigerScoreImplCopyWithImpl<$Res>
-    extends _$GeigerScoreCopyWithImpl<$Res, _$GeigerScoreImpl>
+class __$$GeigerScoreImplCopyWithImpl<$Res> extends _$GeigerScoreCopyWithImpl<$Res, _$GeigerScoreImpl>
     implements _$$GeigerScoreImplCopyWith<$Res> {
-  __$$GeigerScoreImplCopyWithImpl(
-      _$GeigerScoreImpl _value, $Res Function(_$GeigerScoreImpl) _then)
-      : super(_value, _then);
+  __$$GeigerScoreImplCopyWithImpl(_$GeigerScoreImpl _value, $Res Function(_$GeigerScoreImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of GeigerScore
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? geigerScore = null,
-    Object? reasons = null,
-    Object? interpretation = null,
-  }) {
-    return _then(_$GeigerScoreImpl(
-      geigerScore: null == geigerScore
-          ? _value.geigerScore
-          : geigerScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      reasons: null == reasons
-          ? _value.reasons
-          : reasons // ignore: cast_nullable_to_non_nullable
-              as String,
-      interpretation: null == interpretation
-          ? _value.interpretation
-          : interpretation // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? geigerScore = null, Object? reasons = null, Object? interpretation = null}) {
+    return _then(
+      _$GeigerScoreImpl(
+        geigerScore:
+            null == geigerScore
+                ? _value.geigerScore
+                : geigerScore // ignore: cast_nullable_to_non_nullable
+                    as int,
+        reasons:
+            null == reasons
+                ? _value.reasons
+                : reasons // ignore: cast_nullable_to_non_nullable
+                    as String,
+        interpretation:
+            null == interpretation
+                ? _value.interpretation
+                : interpretation // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$GeigerScoreImpl implements _GeigerScore {
-  const _$GeigerScoreImpl(
-      {required this.geigerScore,
-      required this.reasons,
-      required this.interpretation});
+  const _$GeigerScoreImpl({required this.geigerScore, required this.reasons, required this.interpretation});
 
-  factory _$GeigerScoreImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GeigerScoreImplFromJson(json);
+  factory _$GeigerScoreImpl.fromJson(Map<String, dynamic> json) => _$$GeigerScoreImplFromJson(json);
 
   @override
   final int geigerScore;
@@ -152,17 +145,14 @@ class _$GeigerScoreImpl implements _GeigerScore {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GeigerScoreImpl &&
-            (identical(other.geigerScore, geigerScore) ||
-                other.geigerScore == geigerScore) &&
+            (identical(other.geigerScore, geigerScore) || other.geigerScore == geigerScore) &&
             (identical(other.reasons, reasons) || other.reasons == reasons) &&
-            (identical(other.interpretation, interpretation) ||
-                other.interpretation == interpretation));
+            (identical(other.interpretation, interpretation) || other.interpretation == interpretation));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, geigerScore, reasons, interpretation);
+  int get hashCode => Object.hash(runtimeType, geigerScore, reasons, interpretation);
 
   /// Create a copy of GeigerScore
   /// with the given fields replaced by the non-null parameter values.
@@ -174,20 +164,18 @@ class _$GeigerScoreImpl implements _GeigerScore {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GeigerScoreImplToJson(
-      this,
-    );
+    return _$$GeigerScoreImplToJson(this);
   }
 }
 
 abstract class _GeigerScore implements GeigerScore {
-  const factory _GeigerScore(
-      {required final int geigerScore,
-      required final String reasons,
-      required final String interpretation}) = _$GeigerScoreImpl;
+  const factory _GeigerScore({
+    required final int geigerScore,
+    required final String reasons,
+    required final String interpretation,
+  }) = _$GeigerScoreImpl;
 
-  factory _GeigerScore.fromJson(Map<String, dynamic> json) =
-      _$GeigerScoreImpl.fromJson;
+  factory _GeigerScore.fromJson(Map<String, dynamic> json) = _$GeigerScoreImpl.fromJson;
 
   @override
   int get geigerScore;
@@ -200,6 +188,5 @@ abstract class _GeigerScore implements GeigerScore {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GeigerScoreImplCopyWith<_$GeigerScoreImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GeigerScoreImplCopyWith<_$GeigerScoreImpl> get copyWith => throw _privateConstructorUsedError;
 }

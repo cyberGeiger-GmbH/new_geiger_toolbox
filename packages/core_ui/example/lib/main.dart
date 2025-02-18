@@ -1,4 +1,3 @@
-
 import 'package:core_ui/foundation/themes/app_theme_data.dart';
 import 'package:core_ui/pages/design_system.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
   //     home: const DesignSystem(),
   //   );
   // }
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Toolbox Styling',
       theme: AppThemeData.light,

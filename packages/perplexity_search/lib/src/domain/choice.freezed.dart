@@ -12,7 +12,8 @@ part of 'choice.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Choice _$ChoiceFromJson(Map<String, dynamic> json) {
   return _Choice.fromJson(json);
@@ -33,8 +34,7 @@ mixin _$Choice {
 
 /// @nodoc
 abstract class $ChoiceCopyWith<$Res> {
-  factory $ChoiceCopyWith(Choice value, $Res Function(Choice) then) =
-      _$ChoiceCopyWithImpl<$Res, Choice>;
+  factory $ChoiceCopyWith(Choice value, $Res Function(Choice) then) = _$ChoiceCopyWithImpl<$Res, Choice>;
   @useResult
   $Res call({Message message});
 
@@ -42,8 +42,7 @@ abstract class $ChoiceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ChoiceCopyWithImpl<$Res, $Val extends Choice>
-    implements $ChoiceCopyWith<$Res> {
+class _$ChoiceCopyWithImpl<$Res, $Val extends Choice> implements $ChoiceCopyWith<$Res> {
   _$ChoiceCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -55,15 +54,17 @@ class _$ChoiceCopyWithImpl<$Res, $Val extends Choice>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as Message,
-    ) as $Val);
+  $Res call({Object? message = null}) {
+    return _then(
+      _value.copyWith(
+            message:
+                null == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as Message,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Choice
@@ -79,8 +80,7 @@ class _$ChoiceCopyWithImpl<$Res, $Val extends Choice>
 
 /// @nodoc
 abstract class _$$ChoiceImplCopyWith<$Res> implements $ChoiceCopyWith<$Res> {
-  factory _$$ChoiceImplCopyWith(
-          _$ChoiceImpl value, $Res Function(_$ChoiceImpl) then) =
+  factory _$$ChoiceImplCopyWith(_$ChoiceImpl value, $Res Function(_$ChoiceImpl) then) =
       __$$ChoiceImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -91,26 +91,24 @@ abstract class _$$ChoiceImplCopyWith<$Res> implements $ChoiceCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ChoiceImplCopyWithImpl<$Res>
-    extends _$ChoiceCopyWithImpl<$Res, _$ChoiceImpl>
+class __$$ChoiceImplCopyWithImpl<$Res> extends _$ChoiceCopyWithImpl<$Res, _$ChoiceImpl>
     implements _$$ChoiceImplCopyWith<$Res> {
-  __$$ChoiceImplCopyWithImpl(
-      _$ChoiceImpl _value, $Res Function(_$ChoiceImpl) _then)
-      : super(_value, _then);
+  __$$ChoiceImplCopyWithImpl(_$ChoiceImpl _value, $Res Function(_$ChoiceImpl) _then) : super(_value, _then);
 
   /// Create a copy of Choice
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$ChoiceImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as Message,
-    ));
+  $Res call({Object? message = null}) {
+    return _then(
+      _$ChoiceImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as Message,
+      ),
+    );
   }
 }
 
@@ -119,8 +117,7 @@ class __$$ChoiceImplCopyWithImpl<$Res>
 class _$ChoiceImpl implements _Choice {
   const _$ChoiceImpl({required this.message});
 
-  factory _$ChoiceImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChoiceImplFromJson(json);
+  factory _$ChoiceImpl.fromJson(Map<String, dynamic> json) => _$$ChoiceImplFromJson(json);
 
   @override
   final Message message;
@@ -147,14 +144,11 @@ class _$ChoiceImpl implements _Choice {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ChoiceImplCopyWith<_$ChoiceImpl> get copyWith =>
-      __$$ChoiceImplCopyWithImpl<_$ChoiceImpl>(this, _$identity);
+  _$$ChoiceImplCopyWith<_$ChoiceImpl> get copyWith => __$$ChoiceImplCopyWithImpl<_$ChoiceImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChoiceImplToJson(
-      this,
-    );
+    return _$$ChoiceImplToJson(this);
   }
 }
 
@@ -170,6 +164,5 @@ abstract class _Choice implements Choice {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChoiceImplCopyWith<_$ChoiceImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ChoiceImplCopyWith<_$ChoiceImpl> get copyWith => throw _privateConstructorUsedError;
 }

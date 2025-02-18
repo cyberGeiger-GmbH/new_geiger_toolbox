@@ -12,7 +12,8 @@ part of 'conversation.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Conversation _$ConversationFromJson(Map<String, dynamic> json) {
   return _Conversation.fromJson(json);
@@ -32,26 +33,19 @@ mixin _$Conversation {
   /// Create a copy of Conversation
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ConversationCopyWith<Conversation> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ConversationCopyWith<Conversation> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ConversationCopyWith<$Res> {
-  factory $ConversationCopyWith(
-          Conversation value, $Res Function(Conversation) then) =
+  factory $ConversationCopyWith(Conversation value, $Res Function(Conversation) then) =
       _$ConversationCopyWithImpl<$Res, Conversation>;
   @useResult
-  $Res call(
-      {String id,
-      String role,
-      @JsonKey(name: "created_at") int createdAt,
-      List<Content> content});
+  $Res call({String id, String role, @JsonKey(name: "created_at") int createdAt, List<Content> content});
 }
 
 /// @nodoc
-class _$ConversationCopyWithImpl<$Res, $Val extends Conversation>
-    implements $ConversationCopyWith<$Res> {
+class _$ConversationCopyWithImpl<$Res, $Val extends Conversation> implements $ConversationCopyWith<$Res> {
   _$ConversationCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -63,99 +57,93 @@ class _$ConversationCopyWithImpl<$Res, $Val extends Conversation>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? role = null,
-    Object? createdAt = null,
-    Object? content = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      role: null == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as int,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as List<Content>,
-    ) as $Val);
+  $Res call({Object? id = null, Object? role = null, Object? createdAt = null, Object? content = null}) {
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            role:
+                null == role
+                    ? _value.role
+                    : role // ignore: cast_nullable_to_non_nullable
+                        as String,
+            createdAt:
+                null == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as int,
+            content:
+                null == content
+                    ? _value.content
+                    : content // ignore: cast_nullable_to_non_nullable
+                        as List<Content>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$ConversationImplCopyWith<$Res>
-    implements $ConversationCopyWith<$Res> {
-  factory _$$ConversationImplCopyWith(
-          _$ConversationImpl value, $Res Function(_$ConversationImpl) then) =
+abstract class _$$ConversationImplCopyWith<$Res> implements $ConversationCopyWith<$Res> {
+  factory _$$ConversationImplCopyWith(_$ConversationImpl value, $Res Function(_$ConversationImpl) then) =
       __$$ConversationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String role,
-      @JsonKey(name: "created_at") int createdAt,
-      List<Content> content});
+  $Res call({String id, String role, @JsonKey(name: "created_at") int createdAt, List<Content> content});
 }
 
 /// @nodoc
-class __$$ConversationImplCopyWithImpl<$Res>
-    extends _$ConversationCopyWithImpl<$Res, _$ConversationImpl>
+class __$$ConversationImplCopyWithImpl<$Res> extends _$ConversationCopyWithImpl<$Res, _$ConversationImpl>
     implements _$$ConversationImplCopyWith<$Res> {
-  __$$ConversationImplCopyWithImpl(
-      _$ConversationImpl _value, $Res Function(_$ConversationImpl) _then)
-      : super(_value, _then);
+  __$$ConversationImplCopyWithImpl(_$ConversationImpl _value, $Res Function(_$ConversationImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of Conversation
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? role = null,
-    Object? createdAt = null,
-    Object? content = null,
-  }) {
-    return _then(_$ConversationImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      role: null == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as int,
-      content: null == content
-          ? _value._content
-          : content // ignore: cast_nullable_to_non_nullable
-              as List<Content>,
-    ));
+  $Res call({Object? id = null, Object? role = null, Object? createdAt = null, Object? content = null}) {
+    return _then(
+      _$ConversationImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        role:
+            null == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
+                    as String,
+        createdAt:
+            null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as int,
+        content:
+            null == content
+                ? _value._content
+                : content // ignore: cast_nullable_to_non_nullable
+                    as List<Content>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ConversationImpl implements _Conversation {
-  const _$ConversationImpl(
-      {required this.id,
-      required this.role,
-      @JsonKey(name: "created_at") required this.createdAt,
-      required final List<Content> content})
-      : _content = content;
+  const _$ConversationImpl({
+    required this.id,
+    required this.role,
+    @JsonKey(name: "created_at") required this.createdAt,
+    required final List<Content> content,
+  }) : _content = content;
 
-  factory _$ConversationImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConversationImplFromJson(json);
+  factory _$ConversationImpl.fromJson(Map<String, dynamic> json) => _$$ConversationImplFromJson(json);
 
   @override
   final String id;
@@ -184,15 +172,13 @@ class _$ConversationImpl implements _Conversation {
             other is _$ConversationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.role, role) || other.role == role) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
+            (identical(other.createdAt, createdAt) || other.createdAt == createdAt) &&
             const DeepCollectionEquality().equals(other._content, _content));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, role, createdAt,
-      const DeepCollectionEquality().hash(_content));
+  int get hashCode => Object.hash(runtimeType, id, role, createdAt, const DeepCollectionEquality().hash(_content));
 
   /// Create a copy of Conversation
   /// with the given fields replaced by the non-null parameter values.
@@ -204,21 +190,19 @@ class _$ConversationImpl implements _Conversation {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ConversationImplToJson(
-      this,
-    );
+    return _$$ConversationImplToJson(this);
   }
 }
 
 abstract class _Conversation implements Conversation {
-  const factory _Conversation(
-      {required final String id,
-      required final String role,
-      @JsonKey(name: "created_at") required final int createdAt,
-      required final List<Content> content}) = _$ConversationImpl;
+  const factory _Conversation({
+    required final String id,
+    required final String role,
+    @JsonKey(name: "created_at") required final int createdAt,
+    required final List<Content> content,
+  }) = _$ConversationImpl;
 
-  factory _Conversation.fromJson(Map<String, dynamic> json) =
-      _$ConversationImpl.fromJson;
+  factory _Conversation.fromJson(Map<String, dynamic> json) = _$ConversationImpl.fromJson;
 
   @override
   String get id;
@@ -234,6 +218,5 @@ abstract class _Conversation implements Conversation {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConversationImplCopyWith<_$ConversationImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ConversationImplCopyWith<_$ConversationImpl> get copyWith => throw _privateConstructorUsedError;
 }

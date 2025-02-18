@@ -36,8 +36,7 @@ class ValidatorInputFormatter implements TextInputFormatter {
   final StringValidator editingValidator;
 
   @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     final bool oldValueValid = editingValidator.isValid(oldValue.text);
     final bool newValueValid = editingValidator.isValid(newValue.text);
     if (oldValueValid && !newValueValid) {
@@ -54,7 +53,6 @@ class EmailEditingRegexValidator extends RegexValidator {
 class EmailSubmitRegexValidator extends RegexValidator {
   EmailSubmitRegexValidator() : super(regexSource: '^\\S+@\\S+\\.\\S+\$');
 }
-
 
 class NonEmptyStringValidator extends StringValidator {
   @override

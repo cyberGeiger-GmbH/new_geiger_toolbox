@@ -19,14 +19,14 @@ void main() {
   }
 
   ProviderContainer getDataBaseContainer() {
-    final container = ProviderContainer(overrides: [
-      appDatabaseProvider.overrideWithValue(
-        /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
-        AppDatabase(
-          testDatabaseConnection(),
+    final container = ProviderContainer(
+      overrides: [
+        appDatabaseProvider.overrideWithValue(
+          /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
+          AppDatabase(testDatabaseConnection()),
         ),
-      ),
-    ]);
+      ],
+    );
 
     return container;
   }
@@ -43,68 +43,61 @@ void main() {
 
   tester.group("test news feed repository", () {
     tester.test(
-        "Given news data is fetched from file that is not empty and the length is 3, when news data is synchronised, then news data is stored in database and the length of the news data is 3",
-        () async {
-      final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
+      "Given news data is fetched from file that is not empty and the length is 3, when news data is synchronised, then news data is stored in database and the length of the news data is 3",
+      () async {
+        final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
-      //store data
-      await repoNewsFeed.synFromRemote(data: sourceData);
-      //fetch data
-      final result = await repoNewsFeed.fetchNewsList();
+        //store data
+        await repoNewsFeed.synFromRemote(data: sourceData);
+        //fetch data
+        final result = await repoNewsFeed.fetchNewsList();
 
-      tester.expect(result.length, 3);
-    });
-
-    tester.test(
-        "Given news data is  already stored in the database, when news the news data is stored again, then same news data length  is returned",
-        () async {
-      final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
-
-      //store data again
-      await repoNewsFeed.synFromRemote(data: sourceData);
-
-      //fetch data
-      final result = await repoNewsFeed.fetchNewsList();
-
-      tester.expect(result.length, 3);
-    });
+        tester.expect(result.length, 3);
+      },
+    );
 
     tester.test(
-        "Given news data has been stored in the database, when news data is fetched by title  that does not exist, then no news data is returned",
-        () async {
-      final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
+      "Given news data is  already stored in the database, when news the news data is stored again, then same news data length  is returned",
+      () async {
+        final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
-      //fetch data
-      tester.expect(
-        () => repoNewsFeed.fetchNewsByTitle(title: "title1"),
-        tester.throwsA(
-          tester.isA<StateError>().having(
-                (e) => e.message,
-                'message',
-                'No news found with title: title1,',
-              ),
-        ),
-      );
-    });
+        //store data again
+        await repoNewsFeed.synFromRemote(data: sourceData);
+
+        //fetch data
+        final result = await repoNewsFeed.fetchNewsList();
+
+        tester.expect(result.length, 3);
+      },
+    );
 
     tester.test(
-        "Given news data has been stored in the database, when news data is fetched by title  that does  exist, then news data is returned",
-        () async {
-      final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
+      "Given news data has been stored in the database, when news data is fetched by title  that does not exist, then no news data is returned",
+      () async {
+        final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
-      final result = await repoNewsFeed.fetchNewsByTitle(
-          title: "Defensible Security Architecture");
+        //fetch data
+        tester.expect(
+          () => repoNewsFeed.fetchNewsByTitle(title: "title1"),
+          tester.throwsA(
+            tester.isA<StateError>().having((e) => e.message, 'message', 'No news found with title: title1,'),
+          ),
+        );
+      },
+    );
 
-      //fetch data
-      tester.expect(
-        result,
-        tester.isNot(tester.throwsA(tester.isA<StateError>())),
-      );
+    tester.test(
+      "Given news data has been stored in the database, when news data is fetched by title  that does  exist, then news data is returned",
+      () async {
+        final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
-      tester.expect(
-        result,
-        tester.isA<News>(),
-      );
-    });
+        final result = await repoNewsFeed.fetchNewsByTitle(title: "Defensible Security Architecture");
+
+        //fetch data
+        tester.expect(result, tester.isNot(tester.throwsA(tester.isA<StateError>())));
+
+        tester.expect(result, tester.isA<News>());
+      },
+    );
   });
 }

@@ -21,12 +21,10 @@ class CompanyProfileFormWidget extends ConsumerStatefulWidget {
   final Company? companyData;
 
   @override
-  ConsumerState<CompanyProfileFormWidget> createState() =>
-      _UserProfileScreenState();
+  ConsumerState<CompanyProfileFormWidget> createState() => _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
-    with CompanyNameLocationValidators {
+class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> with CompanyNameLocationValidators {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _node = FocusScopeNode();
   final TextEditingController _companyTextController = TextEditingController();
@@ -72,10 +70,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
   Future<void> _createProfile() async {
     final controller = ref.read(companyProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
-    final company = Company(
-        companyName: companyName,
-        location: location,
-        description: description!);
+    final company = Company(companyName: companyName, location: location, description: description!);
     final success = await controller.createCompanyProfile(company: company);
     if (success) {
       widget.onSubmit?.call();
@@ -86,10 +81,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
     final controller = ref.read(companyProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
 
-    final data = Company(
-        companyName: companyName,
-        location: location,
-        description: description!);
+    final data = Company(companyName: companyName, location: location, description: description!);
     final success = await controller.updateCompanyProfile(company: data);
     if (success) {
       widget.onSubmit?.call();
@@ -100,8 +92,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
   Future<void> _setCompanyDescription() async {
     final controller = ref.read(companyDescriptionControllerProvider.notifier);
 
-    await controller.setCompanyDescription(
-        companyName: companyName, location: location);
+    await controller.setCompanyDescription(companyName: companyName, location: location);
   }
 
   Future<void> _onSubmit() async {
@@ -138,19 +129,17 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
   @override
   Widget build(BuildContext context) {
     //listen for error in user controller
-    ref.listen(companyProfileControllerProvider,
-        (_, newState) => newState.showAlertDialogOnError(context: context));
+    ref.listen(companyProfileControllerProvider, (_, newState) => newState.showAlertDialogOnError(context: context));
 
     ref.listen(companyProfileControllerProvider, (_, nxt) {
       nxt.updateUserProfileSuccessSnackBar(context: context);
     });
 
-//listen for error in company controller
-    ref.listen(companyProfileControllerProvider,
-        (_, newState) => newState.showAlertDialogOnError(context: context));
+    //listen for error in company controller
+    ref.listen(companyProfileControllerProvider, (_, newState) => newState.showAlertDialogOnError(context: context));
 
-//* testing purpose
-//update when form field when content is deleted
+    //* testing purpose
+    //update when form field when content is deleted
     ref.listen(watchCompanyProvider, (_, nxtVal) {
       final data = nxtVal.value;
       if (data == null) {
@@ -165,9 +154,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
       node: _node,
       child: Form(
         key: _formKey,
-        autovalidateMode: _submitted
-            ? AutovalidateMode.onUserInteraction
-            : AutovalidateMode.disabled,
+        autovalidateMode: _submitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           children: [
@@ -177,8 +164,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
               label: "Comany Name",
               hint: 'for example "CyberGeiger"',
               enabled: !state.isLoading,
-              validator: (companyName) =>
-                  _submitted ? companyNameErrorText(companyName ?? "") : null,
+              validator: (companyName) => _submitted ? companyNameErrorText(companyName ?? "") : null,
               onEditingComplete: () => _companyNameEditingComplete(),
               autoComplete: true,
               isLastField: false,
@@ -190,8 +176,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
               label: "Company Location",
               hint: 'for example "Freiburg, Germany"',
               enabled: !state.isLoading,
-              validator: (location) =>
-                  _submitted ? locationErrorText(location ?? "") : null,
+              validator: (location) => _submitted ? locationErrorText(location ?? "") : null,
               onEditingComplete: () => _locationEditingComplete(),
               isLastField: true,
               autoComplete: true,
@@ -199,7 +184,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget>
             Spacing.gapH8,
             CompanyDescriptionWidget(),
             Spacing.gapH8,
-            ConfirmationButtonWidget(state: state, onPressed: () => _onSubmit())
+            ConfirmationButtonWidget(state: state, onPressed: () => _onSubmit()),
           ],
         ),
       ),

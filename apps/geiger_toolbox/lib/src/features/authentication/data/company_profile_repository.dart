@@ -19,8 +19,7 @@ class CompanyProfileRepository {
   CompanyProfileRepository(this.ref);
 
   // create company profile
-  Future<int> createCompanyProfile(
-      {required UserID userId, required Company companyInfo}) async {
+  Future<int> createCompanyProfile({required UserID userId, required Company companyInfo}) async {
     try {
       final companyProfile = CompanyProfilesCompanion(
         userId: Value(userId),
@@ -34,14 +33,14 @@ class CompanyProfileRepository {
     }
   }
 
-  Future<bool?> updateCompanyProfile(
-      {required UserID userId, required Company companyInfo}) async {
+  Future<bool?> updateCompanyProfile({required UserID userId, required Company companyInfo}) async {
     try {
       final companyProfile = CompanyProfilesCompanion(
-          userId: Value(userId),
-          companyName: Value(companyInfo.companyName),
-          location: Value(companyInfo.location),
-          description: Value(companyInfo.description));
+        userId: Value(userId),
+        companyName: Value(companyInfo.companyName),
+        location: Value(companyInfo.location),
+        description: Value(companyInfo.description),
+      );
       return _db.update(_db.companyProfiles).replace(companyProfile);
     } catch (e) {
       rethrow;
@@ -50,21 +49,17 @@ class CompanyProfileRepository {
 
   Future<Company?> fetchCompany() async {
     try {
-      final query = await (_db.select(_db.companyProfiles).join([
-        leftOuterJoin(_db.userProfiles,
-            _db.userProfiles.userId.equalsExp(_db.companyProfiles.userId))
-      ])
-            ..where(_db.companyProfiles.userId
-                .equalsExp(_db.companyProfiles.userId))
-            ..orderBy([OrderingTerm.desc(_db.userProfiles.createdAt)]))
-          .getSingleOrNull();
+      final query =
+          await (_db.select(_db.companyProfiles).join([
+                  leftOuterJoin(_db.userProfiles, _db.userProfiles.userId.equalsExp(_db.companyProfiles.userId)),
+                ])
+                ..where(_db.companyProfiles.userId.equalsExp(_db.companyProfiles.userId))
+                ..orderBy([OrderingTerm.desc(_db.userProfiles.createdAt)]))
+              .getSingleOrNull();
 
       if (query != null) {
         final data = query.readTable(_db.companyProfiles);
-        return Company(
-            companyName: data.companyName,
-            location: data.location,
-            description: data.description);
+        return Company(companyName: data.companyName, location: data.location, description: data.description);
       }
     } catch (e) {
       rethrow;
@@ -77,20 +72,18 @@ class CompanyProfileRepository {
       final company = _db.select(_db.companyProfiles);
 
       final query = company.join([
-        leftOuterJoin(_db.userProfiles,
-            _db.userProfiles.userId.equalsExp(_db.companyProfiles.userId))
-      ])
-        ..where(
-            _db.companyProfiles.userId.equalsExp(_db.companyProfiles.userId));
+        leftOuterJoin(_db.userProfiles, _db.userProfiles.userId.equalsExp(_db.companyProfiles.userId)),
+      ])..where(_db.companyProfiles.userId.equalsExp(_db.companyProfiles.userId));
       final row = query.watchSingleOrNull();
 
       return row.map((value) {
         if (value != null) {
           final data = value.readTable(_db.companyProfiles);
           final company = Company(
-              companyName: data.companyName,
-              location: data.location,
-              description: data.description);
+            companyName: data.companyName,
+            location: data.location,
+            description: data.description,
+          );
           return company;
         } else {
           return null;

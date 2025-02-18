@@ -6,8 +6,12 @@ import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 ///that are set by the controllers in the app
 class AsyncErrorLogger extends ProviderObserver {
   @override
-  void didUpdateProvider(ProviderBase<Object?> provider, Object? previousValue,
-      Object? newValue, ProviderContainer container) {
+  void didUpdateProvider(
+    ProviderBase<Object?> provider,
+    Object? previousValue,
+    Object? newValue,
+    ProviderContainer container,
+  ) {
     final errorLogger = container.read(appLoggerProvider);
     final error = _findError(newValue);
     if (error != null) {
@@ -22,7 +26,7 @@ class AsyncErrorLogger extends ProviderObserver {
     super.didUpdateProvider(provider, previousValue, newValue, container);
   }
 
-//ensure the object is an AsyncError
+  //ensure the object is an AsyncError
   // ignore: avoid-dynamic
   AsyncError<dynamic>? _findError(Object? value) {
     return value is AsyncError ? value : null;

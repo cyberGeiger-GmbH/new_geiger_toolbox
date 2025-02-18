@@ -13,7 +13,6 @@ class NewsDetailsWidget extends StatelessWidget {
   final News newsfeed;
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -27,21 +26,19 @@ class NewsDetailsWidget extends StatelessWidget {
               children: [
                 Consumer(
                   builder: (context, ref, child) {
-                    final formattedDate = ref.watch(
-                        formattedDateProvider(inputDate: newsfeed.dateCreated));
+                    final formattedDate = ref.watch(formattedDateProvider(inputDate: newsfeed.dateCreated));
                     return NewsContent(
-                        summary: newsfeed.summary,
-                        lastedUpdated: formattedDate,
-                        lastUpdatedLabel: "Last updated".hardcoded,
-                        title: newsfeed.title);
+                      summary: newsfeed.summary,
+                      lastedUpdated: formattedDate,
+                      lastUpdatedLabel: "Last updated".hardcoded,
+                      title: newsfeed.title,
+                    );
                   },
                 ),
                 Spacing.gapH4,
                 ProtectionTileListWithTitle(
                   title: "How to Protect me?".hardcoded,
-                  protectionTileList: RecommendationTileListWidget(
-                    recommendations: newsfeed.recommendations,
-                  ),
+                  protectionTileList: RecommendationTileListWidget(recommendations: newsfeed.recommendations),
                 ),
               ],
             ),

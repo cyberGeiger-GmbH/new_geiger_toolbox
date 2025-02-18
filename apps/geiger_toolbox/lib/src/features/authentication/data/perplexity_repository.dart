@@ -8,14 +8,11 @@ class PerplexityRepository {
   final Ref ref;
   PerplexityRepository(this.ref);
 
-  Future<String?> getCompanyDescription(
-      {required String companyName, required String location}) async {
-        
+  Future<String?> getCompanyDescription({required String companyName, required String location}) async {
     final repo = ref.read(perplexitySearchRepositoryProvider);
     final apiKey = Env.perplexityApiToken;
     //debugPrint("perplexity api_key $apiKey");
-    final data = await repo.searchCompanyDescription(
-        companyName: companyName, location: location, apiKey: apiKey);
+    final data = await repo.searchCompanyDescription(companyName: companyName, location: location, apiKey: apiKey);
     return data?.description;
   }
 }

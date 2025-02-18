@@ -11,59 +11,42 @@ sealed class AppException implements Exception {
 
 //
 class UserNotFoundException extends AppException {
-  UserNotFoundException()
-      : super(
-            code: 'user-not-found', message: "User profile has not be created");
+  UserNotFoundException() : super(code: 'user-not-found', message: "User profile has not be created");
 }
 
 class CachedNewsFeedException extends AppException {
-  CachedNewsFeedException()
-      : super(
-            code: 'fail-read-newsfeed-cache',
-            message: "Fail to retrived cached news data");
+  CachedNewsFeedException() : super(code: 'fail-read-newsfeed-cache', message: "Fail to retrived cached news data");
 }
 
 class CachedNewsFeedStoreException extends AppException {
-  CachedNewsFeedStoreException()
-      : super(code: 'fail-cache-newsfeed', message: "Fail to cache news data");
+  CachedNewsFeedStoreException() : super(code: 'fail-cache-newsfeed', message: "Fail to cache news data");
 }
 
 class DeleteCachedNewsFeedStoreException extends AppException {
   DeleteCachedNewsFeedStoreException({this.error, this.stack})
-      : super(
-            code: error ?? 'fail-delete-cache-newsList',
-            message: stack ?? "Fail to delete news object from cache");
+    : super(code: error ?? 'fail-delete-cache-newsList', message: stack ?? "Fail to delete news object from cache");
 
   final String? error;
   final String? stack;
 }
 
 class AddTodoTaskRepositryException extends AppException {
-  AddTodoTaskRepositryException()
-      : super(
-            code: 'fail-add-todo-cache',
-            message: "Fail to add todo task to cache");
+  AddTodoTaskRepositryException() : super(code: 'fail-add-todo-cache', message: "Fail to add todo task to cache");
 }
 
 class FetchTodoTaskRepositryException extends AppException {
   FetchTodoTaskRepositryException()
-      : super(
-            code: 'fail-to-get-todo-cache',
-            message: "Fail to retrive todo task to cache");
+    : super(code: 'fail-to-get-todo-cache', message: "Fail to retrive todo task to cache");
 }
 
 class RemoveTodoTaskRepositryException extends AppException {
   RemoveTodoTaskRepositryException()
-      : super(
-            code: 'fail-remove-todo-cache',
-            message: "Fail to remove todo task to cache");
+    : super(code: 'fail-remove-todo-cache', message: "Fail to remove todo task to cache");
 }
 
 class DataBaseException extends AppException {
   DataBaseException({this.error, this.stack})
-      : super(
-            code: error ?? "database-exception",
-            message: stack ?? "DataBase Exception");
+    : super(code: error ?? "database-exception", message: stack ?? "DataBase Exception");
 
   final String? error;
   final String? stack;

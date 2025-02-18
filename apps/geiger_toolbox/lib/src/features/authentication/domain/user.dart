@@ -6,10 +6,11 @@ typedef UserID = String;
 
 @freezed
 class User with _$User {
-  factory User(
-      {required final String userId,
-      final String? name,
-      final String? email,
-      required bool owner,
-      final DateTime? createdAt}) = _User;
+  factory User({
+    required final String userId,
+    final String? name,
+    final String? email,
+    required bool owner,
+    final DateTime? createdAt,
+  }) = _User;
 }

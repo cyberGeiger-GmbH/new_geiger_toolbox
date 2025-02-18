@@ -6,18 +6,14 @@ part of 'collect_usage_statistics_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$collectUsageStatisticsStoreHash() =>
-    r'e24e4e47dfcda874afd6d60cc127c2c1e12754be';
+String _$collectUsageStatisticsStoreHash() => r'e24e4e47dfcda874afd6d60cc127c2c1e12754be';
 
 /// See also [CollectUsageStatisticsStore].
 @ProviderFor(CollectUsageStatisticsStore)
-final collectUsageStatisticsStoreProvider =
-    AutoDisposeNotifierProvider<CollectUsageStatisticsStore, bool>.internal(
+final collectUsageStatisticsStoreProvider = AutoDisposeNotifierProvider<CollectUsageStatisticsStore, bool>.internal(
   CollectUsageStatisticsStore.new,
   name: r'collectUsageStatisticsStoreProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$collectUsageStatisticsStoreHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$collectUsageStatisticsStoreHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

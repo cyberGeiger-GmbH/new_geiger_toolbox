@@ -27,14 +27,13 @@ class NewsRepository {
     final log = ref.read(logHandlerProvider("FetchNews", packageName: "Conversational_agent_client"));
 
     try {
-      final Uri uri = Uri.https(
-        Base.url,
-        Base.newsPath,
-      );
+      final Uri uri = Uri.https(Base.url, Base.newsPath);
 
-      final Response response = await dio.getUri(uri,
-          data: json.encode(userProfile.toJson()),
-          options: Options(headers: Base.headers));
+      final Response response = await dio.getUri(
+        uri,
+        data: json.encode(userProfile.toJson()),
+        options: Options(headers: Base.headers),
+      );
 
       return response.newsParser(ref);
     } on DioException catch (e, s) {
@@ -45,17 +44,12 @@ class NewsRepository {
         throw ServerTimeOutException();
       } else if (e.type == DioExceptionType.badResponse) {
         throw BadResponseException();
-      } else if (e.type == DioExceptionType.unknown &&
-          e.error is SocketException) {
+      } else if (e.type == DioExceptionType.unknown && e.error is SocketException) {
         throw InterConnectionException();
       } else if (e.type == DioExceptionType.connectionError) {
         throw (ConnectionErrorException());
       }
-      throw DioException(
-          requestOptions: RequestOptions(
-            data: userProfile,
-          ),
-          error: e);
+      throw DioException(requestOptions: RequestOptions(data: userProfile), error: e);
     } catch (e, s) {
       log.e("failed $e, stack => $s");
       throw NewsFeedException();

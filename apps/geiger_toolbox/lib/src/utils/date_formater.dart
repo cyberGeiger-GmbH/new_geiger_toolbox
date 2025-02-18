@@ -15,8 +15,7 @@ String formattedDate(Ref ref, {required String inputDate}) {
     return formattedDate;
   } catch (e) {
     // Manually parse the date in "YYYY/MM/DD" format
-    DateTime parsedDate =
-        DateFormat("yyyy/MM/dd").parse(dateString ?? inputDate);
+    DateTime parsedDate = DateFormat("yyyy/MM/dd").parse(dateString ?? inputDate);
     // Format the date to a user-friendly string
     String formattedDate = DateFormat('EEEE, MMM. d y').format(parsedDate);
     return formattedDate;
@@ -35,8 +34,7 @@ DateTime stringToDate(Ref ref, {required String inputDate}) {
     return parsedDate;
   } catch (e) {
     // Manually parse the date in "YYYY/MM/DD" format
-    DateTime parsedDate =
-        DateFormat("yyyy/MM/dd").parse(dateString ?? inputDate);
+    DateTime parsedDate = DateFormat("yyyy/MM/dd").parse(dateString ?? inputDate);
     return parsedDate;
   }
 }
@@ -49,8 +47,7 @@ DateTime previousMonth(Ref ref, {int month = 6}) {
   final date = DateTime(now.year, now.month - month, now.day);
   // Assert that the calculated date is valid
 
-  assert(date.isBefore(now),
-      'Calculated date for $month months ago must be before the current date.');
+  assert(date.isBefore(now), 'Calculated date for $month months ago must be before the current date.');
   return date;
 }
 

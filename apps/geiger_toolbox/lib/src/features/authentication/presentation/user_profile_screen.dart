@@ -49,17 +49,12 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-          title: "User Profile", onCloseProfile: widget.onCloseProfile),
-      floatingActionButton:
-          getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
+      appBar: CustomAppBar(title: "User Profile", onCloseProfile: widget.onCloseProfile),
+      floatingActionButton: getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          ResponsiveSliverCenterWidget(
-            padding: EdgeInsets.all(Spacing.p16),
-            child: CompanyProfileContentsWidget(),
-          ),
+          ResponsiveSliverCenterWidget(padding: EdgeInsets.all(Spacing.p16), child: CompanyProfileContentsWidget()),
         ],
       ),
     );

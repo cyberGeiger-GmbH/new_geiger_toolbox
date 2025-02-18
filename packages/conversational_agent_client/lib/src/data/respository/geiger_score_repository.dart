@@ -27,14 +27,13 @@ class GeigerScoreRepository {
     final log = _ref.read(logHandlerProvider("fetchGeigerScore:"));
 
     try {
-      final Uri uri = Uri.https(
-        Base.url,
-        Base.geigerScorePath,
-      );
+      final Uri uri = Uri.https(Base.url, Base.geigerScorePath);
 
-      final Response response = await dio.getUri(uri,
-          data: json.encode(userProfile.toJson()),
-          options: Options(headers: Base.headers));
+      final Response response = await dio.getUri(
+        uri,
+        data: json.encode(userProfile.toJson()),
+        options: Options(headers: Base.headers),
+      );
 
       return response.geigerScoreParser(_ref);
     } on DioException catch (e) {
@@ -44,17 +43,12 @@ class GeigerScoreRepository {
         throw ServerTimeOutException();
       } else if (e.type == DioExceptionType.badResponse) {
         throw BadResponseException();
-      } else if (e.type == DioExceptionType.unknown &&
-          e.error is SocketException) {
+      } else if (e.type == DioExceptionType.unknown && e.error is SocketException) {
         throw InterConnectionException();
       } else if (e.type == DioExceptionType.connectionError) {
         throw (ConnectionErrorException());
       }
-      throw DioException(
-          requestOptions: RequestOptions(
-            data: userProfile,
-          ),
-          error: e);
+      throw DioException(requestOptions: RequestOptions(data: userProfile), error: e);
     } catch (e, s) {
       log.e("failed to get => $e, stack => $s");
       throw GeigerScoreException();

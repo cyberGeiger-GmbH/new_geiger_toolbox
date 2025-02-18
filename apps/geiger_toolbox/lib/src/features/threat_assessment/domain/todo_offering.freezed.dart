@@ -12,7 +12,8 @@ part of 'todo_offering.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$TodoOffering {
@@ -25,29 +26,21 @@ mixin _$TodoOffering {
   /// Create a copy of TodoOffering
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TodoOfferingCopyWith<TodoOffering> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TodoOfferingCopyWith<TodoOffering> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TodoOfferingCopyWith<$Res> {
-  factory $TodoOfferingCopyWith(
-          TodoOffering value, $Res Function(TodoOffering) then) =
+  factory $TodoOfferingCopyWith(TodoOffering value, $Res Function(TodoOffering) then) =
       _$TodoOfferingCopyWithImpl<$Res, TodoOffering>;
   @useResult
-  $Res call(
-      {String id,
-      Status status,
-      DateTime dateRecommendated,
-      DateTime? lastUpdated,
-      Offering offering});
+  $Res call({String id, Status status, DateTime dateRecommendated, DateTime? lastUpdated, Offering offering});
 
   $OfferingCopyWith<$Res> get offering;
 }
 
 /// @nodoc
-class _$TodoOfferingCopyWithImpl<$Res, $Val extends TodoOffering>
-    implements $TodoOfferingCopyWith<$Res> {
+class _$TodoOfferingCopyWithImpl<$Res, $Val extends TodoOffering> implements $TodoOfferingCopyWith<$Res> {
   _$TodoOfferingCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -66,28 +59,36 @@ class _$TodoOfferingCopyWithImpl<$Res, $Val extends TodoOffering>
     Object? lastUpdated = freezed,
     Object? offering = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as Status,
-      dateRecommendated: null == dateRecommendated
-          ? _value.dateRecommendated
-          : dateRecommendated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      offering: null == offering
-          ? _value.offering
-          : offering // ignore: cast_nullable_to_non_nullable
-              as Offering,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as Status,
+            dateRecommendated:
+                null == dateRecommendated
+                    ? _value.dateRecommendated
+                    : dateRecommendated // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            lastUpdated:
+                freezed == lastUpdated
+                    ? _value.lastUpdated
+                    : lastUpdated // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+            offering:
+                null == offering
+                    ? _value.offering
+                    : offering // ignore: cast_nullable_to_non_nullable
+                        as Offering,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of TodoOffering
@@ -102,31 +103,22 @@ class _$TodoOfferingCopyWithImpl<$Res, $Val extends TodoOffering>
 }
 
 /// @nodoc
-abstract class _$$TodoOfferingImplCopyWith<$Res>
-    implements $TodoOfferingCopyWith<$Res> {
-  factory _$$TodoOfferingImplCopyWith(
-          _$TodoOfferingImpl value, $Res Function(_$TodoOfferingImpl) then) =
+abstract class _$$TodoOfferingImplCopyWith<$Res> implements $TodoOfferingCopyWith<$Res> {
+  factory _$$TodoOfferingImplCopyWith(_$TodoOfferingImpl value, $Res Function(_$TodoOfferingImpl) then) =
       __$$TodoOfferingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      Status status,
-      DateTime dateRecommendated,
-      DateTime? lastUpdated,
-      Offering offering});
+  $Res call({String id, Status status, DateTime dateRecommendated, DateTime? lastUpdated, Offering offering});
 
   @override
   $OfferingCopyWith<$Res> get offering;
 }
 
 /// @nodoc
-class __$$TodoOfferingImplCopyWithImpl<$Res>
-    extends _$TodoOfferingCopyWithImpl<$Res, _$TodoOfferingImpl>
+class __$$TodoOfferingImplCopyWithImpl<$Res> extends _$TodoOfferingCopyWithImpl<$Res, _$TodoOfferingImpl>
     implements _$$TodoOfferingImplCopyWith<$Res> {
-  __$$TodoOfferingImplCopyWithImpl(
-      _$TodoOfferingImpl _value, $Res Function(_$TodoOfferingImpl) _then)
-      : super(_value, _then);
+  __$$TodoOfferingImplCopyWithImpl(_$TodoOfferingImpl _value, $Res Function(_$TodoOfferingImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of TodoOffering
   /// with the given fields replaced by the non-null parameter values.
@@ -139,40 +131,48 @@ class __$$TodoOfferingImplCopyWithImpl<$Res>
     Object? lastUpdated = freezed,
     Object? offering = null,
   }) {
-    return _then(_$TodoOfferingImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as Status,
-      dateRecommendated: null == dateRecommendated
-          ? _value.dateRecommendated
-          : dateRecommendated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      offering: null == offering
-          ? _value.offering
-          : offering // ignore: cast_nullable_to_non_nullable
-              as Offering,
-    ));
+    return _then(
+      _$TodoOfferingImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as Status,
+        dateRecommendated:
+            null == dateRecommendated
+                ? _value.dateRecommendated
+                : dateRecommendated // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        lastUpdated:
+            freezed == lastUpdated
+                ? _value.lastUpdated
+                : lastUpdated // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+        offering:
+            null == offering
+                ? _value.offering
+                : offering // ignore: cast_nullable_to_non_nullable
+                    as Offering,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$TodoOfferingImpl implements _TodoOffering {
-  const _$TodoOfferingImpl(
-      {required this.id,
-      required this.status,
-      required this.dateRecommendated,
-      this.lastUpdated,
-      required this.offering});
+  const _$TodoOfferingImpl({
+    required this.id,
+    required this.status,
+    required this.dateRecommendated,
+    this.lastUpdated,
+    required this.offering,
+  });
 
   @override
   final String id;
@@ -197,17 +197,13 @@ class _$TodoOfferingImpl implements _TodoOffering {
             other is _$TodoOfferingImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.dateRecommendated, dateRecommendated) ||
-                other.dateRecommendated == dateRecommendated) &&
-            (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated) &&
-            (identical(other.offering, offering) ||
-                other.offering == offering));
+            (identical(other.dateRecommendated, dateRecommendated) || other.dateRecommendated == dateRecommendated) &&
+            (identical(other.lastUpdated, lastUpdated) || other.lastUpdated == lastUpdated) &&
+            (identical(other.offering, offering) || other.offering == offering));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, status, dateRecommendated, lastUpdated, offering);
+  int get hashCode => Object.hash(runtimeType, id, status, dateRecommendated, lastUpdated, offering);
 
   /// Create a copy of TodoOffering
   /// with the given fields replaced by the non-null parameter values.
@@ -219,12 +215,13 @@ class _$TodoOfferingImpl implements _TodoOffering {
 }
 
 abstract class _TodoOffering implements TodoOffering {
-  const factory _TodoOffering(
-      {required final String id,
-      required final Status status,
-      required final DateTime dateRecommendated,
-      final DateTime? lastUpdated,
-      required final Offering offering}) = _$TodoOfferingImpl;
+  const factory _TodoOffering({
+    required final String id,
+    required final Status status,
+    required final DateTime dateRecommendated,
+    final DateTime? lastUpdated,
+    required final Offering offering,
+  }) = _$TodoOfferingImpl;
 
   @override
   String get id;
@@ -241,6 +238,5 @@ abstract class _TodoOffering implements TodoOffering {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TodoOfferingImplCopyWith<_$TodoOfferingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TodoOfferingImplCopyWith<_$TodoOfferingImpl> get copyWith => throw _privateConstructorUsedError;
 }

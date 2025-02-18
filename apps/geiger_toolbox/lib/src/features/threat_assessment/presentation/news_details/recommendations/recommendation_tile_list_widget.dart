@@ -7,38 +7,34 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 class RecommendationTileListWidget extends StatelessWidget {
-  const RecommendationTileListWidget({
-    super.key,
-    required this.recommendations,
-  });
+  const RecommendationTileListWidget({super.key, required this.recommendations});
 
   final List<Recommendation> recommendations;
 
   @override
   Widget build(BuildContext context) {
     return ProtectionTileList(
-      protectionTile: recommendations.map(
-        (reco) {
-          return ProtectionTile.outlined(
-            context: context,
-            title: reco.name,
-            onPressed: () {
-              showWoltModalBottomSheet(context,
+      protectionTile:
+          recommendations.map((reco) {
+            return ProtectionTile.outlined(
+              context: context,
+              title: reco.name,
+              onPressed: () {
+                showWoltModalBottomSheet(
+                  context,
                   title: reco.name,
                   page: RecommendedTodoListWidget(id: reco.id),
-                  stickyActionBar: AddAllTodoWidget());
-            },
-          );
-        },
-      ).toList(),
+                  stickyActionBar: AddAllTodoWidget(),
+                );
+              },
+            );
+          }).toList(),
     );
   }
 }
 
 class AddAllTodoWidget extends ConsumerWidget {
-  const AddAllTodoWidget({
-    super.key,
-  });
+  const AddAllTodoWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,9 +46,7 @@ class AddAllTodoWidget extends ConsumerWidget {
       label: "update todo list".hardcoded,
       context: context,
       onPressed: () async {
-        await ref
-            .read(addOfferingTodoControllerProvider.notifier)
-            .addToActiveTodo(offeringsStatus: todos);
+        await ref.read(addOfferingTodoControllerProvider.notifier).addToActiveTodo(offeringsStatus: todos);
       },
     );
   }

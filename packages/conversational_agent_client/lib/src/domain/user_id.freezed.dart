@@ -12,7 +12,8 @@ part of 'user_id.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 UserID _$UserIDFromJson(Map<String, dynamic> json) {
   return _UserID.fromJson(json);
@@ -34,15 +35,13 @@ mixin _$UserID {
 
 /// @nodoc
 abstract class $UserIDCopyWith<$Res> {
-  factory $UserIDCopyWith(UserID value, $Res Function(UserID) then) =
-      _$UserIDCopyWithImpl<$Res, UserID>;
+  factory $UserIDCopyWith(UserID value, $Res Function(UserID) then) = _$UserIDCopyWithImpl<$Res, UserID>;
   @useResult
   $Res call({String userID, String? origin});
 }
 
 /// @nodoc
-class _$UserIDCopyWithImpl<$Res, $Val extends UserID>
-    implements $UserIDCopyWith<$Res> {
+class _$UserIDCopyWithImpl<$Res, $Val extends UserID> implements $UserIDCopyWith<$Res> {
   _$UserIDCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -54,27 +53,28 @@ class _$UserIDCopyWithImpl<$Res, $Val extends UserID>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? userID = null,
-    Object? origin = freezed,
-  }) {
-    return _then(_value.copyWith(
-      userID: null == userID
-          ? _value.userID
-          : userID // ignore: cast_nullable_to_non_nullable
-              as String,
-      origin: freezed == origin
-          ? _value.origin
-          : origin // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? userID = null, Object? origin = freezed}) {
+    return _then(
+      _value.copyWith(
+            userID:
+                null == userID
+                    ? _value.userID
+                    : userID // ignore: cast_nullable_to_non_nullable
+                        as String,
+            origin:
+                freezed == origin
+                    ? _value.origin
+                    : origin // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$UserIDImplCopyWith<$Res> implements $UserIDCopyWith<$Res> {
-  factory _$$UserIDImplCopyWith(
-          _$UserIDImpl value, $Res Function(_$UserIDImpl) then) =
+  factory _$$UserIDImplCopyWith(_$UserIDImpl value, $Res Function(_$UserIDImpl) then) =
       __$$UserIDImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -82,31 +82,29 @@ abstract class _$$UserIDImplCopyWith<$Res> implements $UserIDCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UserIDImplCopyWithImpl<$Res>
-    extends _$UserIDCopyWithImpl<$Res, _$UserIDImpl>
+class __$$UserIDImplCopyWithImpl<$Res> extends _$UserIDCopyWithImpl<$Res, _$UserIDImpl>
     implements _$$UserIDImplCopyWith<$Res> {
-  __$$UserIDImplCopyWithImpl(
-      _$UserIDImpl _value, $Res Function(_$UserIDImpl) _then)
-      : super(_value, _then);
+  __$$UserIDImplCopyWithImpl(_$UserIDImpl _value, $Res Function(_$UserIDImpl) _then) : super(_value, _then);
 
   /// Create a copy of UserID
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? userID = null,
-    Object? origin = freezed,
-  }) {
-    return _then(_$UserIDImpl(
-      userID: null == userID
-          ? _value.userID
-          : userID // ignore: cast_nullable_to_non_nullable
-              as String,
-      origin: freezed == origin
-          ? _value.origin
-          : origin // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? userID = null, Object? origin = freezed}) {
+    return _then(
+      _$UserIDImpl(
+        userID:
+            null == userID
+                ? _value.userID
+                : userID // ignore: cast_nullable_to_non_nullable
+                    as String,
+        origin:
+            freezed == origin
+                ? _value.origin
+                : origin // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
@@ -115,8 +113,7 @@ class __$$UserIDImplCopyWithImpl<$Res>
 class _$UserIDImpl implements _UserID {
   const _$UserIDImpl({required this.userID, this.origin = "toolbox"});
 
-  factory _$UserIDImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserIDImplFromJson(json);
+  factory _$UserIDImpl.fromJson(Map<String, dynamic> json) => _$$UserIDImplFromJson(json);
 
   @override
   final String userID;
@@ -147,20 +144,16 @@ class _$UserIDImpl implements _UserID {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserIDImplCopyWith<_$UserIDImpl> get copyWith =>
-      __$$UserIDImplCopyWithImpl<_$UserIDImpl>(this, _$identity);
+  _$$UserIDImplCopyWith<_$UserIDImpl> get copyWith => __$$UserIDImplCopyWithImpl<_$UserIDImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserIDImplToJson(
-      this,
-    );
+    return _$$UserIDImplToJson(this);
   }
 }
 
 abstract class _UserID implements UserID {
-  const factory _UserID({required final String userID, final String? origin}) =
-      _$UserIDImpl;
+  const factory _UserID({required final String userID, final String? origin}) = _$UserIDImpl;
 
   factory _UserID.fromJson(Map<String, dynamic> json) = _$UserIDImpl.fromJson;
 
@@ -173,6 +166,5 @@ abstract class _UserID implements UserID {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserIDImplCopyWith<_$UserIDImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UserIDImplCopyWith<_$UserIDImpl> get copyWith => throw _privateConstructorUsedError;
 }

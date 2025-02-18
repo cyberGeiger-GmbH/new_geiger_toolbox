@@ -13,9 +13,7 @@ String _$newsRepositoryHash() => r'13cc2e434450f40734ba5687030a72231b79eef0';
 final newsRepositoryProvider = AutoDisposeProvider<NewsRepository>.internal(
   newsRepository,
   name: r'newsRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$newsRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$newsRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

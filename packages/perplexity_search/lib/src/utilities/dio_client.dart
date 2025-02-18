@@ -10,9 +10,7 @@ Dio dioClient(Ref ref) {
   final dio = Dio();
   //cover status code between 200 and 404
   dio.options.validateStatus = (int? status) {
-    return status != null &&
-        status >= StatusCode.success.code &&
-        status <= StatusCode.notFound.code;
+    return status != null && status >= StatusCode.success.code && status <= StatusCode.notFound.code;
   };
 
   return dio;

@@ -15,24 +15,19 @@ extension NewsExtension on List<News> {
     return json.encode(_toJsonList());
   }
 
-  List<Widget> toWidgetList(
-      {required context, int? currentIndex, VoidCallback? onPressed}) {
-    return asMap()
-        .entries
+  List<Widget> toWidgetList({required context, int? currentIndex, VoidCallback? onPressed}) {
+    return asMap().entries
         .map(
-          (value) => value.key == currentIndex
-              ? AppButton.activeNews(
-                  context: context,
-                  title: value.value.title,
-                  onPressed: onPressed)
-              : AppButton.news(
-                  context: context,
-                  title: value.value.title,
-                  onPressed: () {
-                    debugPrint(
-                        " go to detail newsfeed screen => ${value.value.title}");
-                  },
-                ),
+          (value) =>
+              value.key == currentIndex
+                  ? AppButton.activeNews(context: context, title: value.value.title, onPressed: onPressed)
+                  : AppButton.news(
+                    context: context,
+                    title: value.value.title,
+                    onPressed: () {
+                      debugPrint(" go to detail newsfeed screen => ${value.value.title}");
+                    },
+                  ),
         )
         .toList();
   }

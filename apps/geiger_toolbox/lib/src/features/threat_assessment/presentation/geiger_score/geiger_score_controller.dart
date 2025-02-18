@@ -15,9 +15,7 @@ class GeigerScoreController extends _$GeigerScoreController {
 
   Future<void> _calculateGeigerScore() async {
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(
-      () => ref.read(geigerScoreServiceProvider).cachedGeigerScore(),
-    );
+    state = await AsyncValue.guard(() => ref.read(geigerScoreServiceProvider).cachedGeigerScore());
   }
 
   void onScanComplete({required AsyncValue<void> scanPressState}) async {

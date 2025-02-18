@@ -6,13 +6,12 @@ part 'recommendation.g.dart';
 
 @freezed
 class Recommendation with _$Recommendation {
-  factory Recommendation(
-      {required final String id,
-      required String name,
-      required String rationale,
-      @JsonKey(name: "specific_offerings")
-      required List<Offering> offerings}) = _Recommendation;
+  factory Recommendation({
+    required final String id,
+    required String name,
+    required String rationale,
+    @JsonKey(name: "specific_offerings") required List<Offering> offerings,
+  }) = _Recommendation;
 
-  factory Recommendation.fromJson(Map<String, dynamic> json) =>
-      _$RecommendationFromJson(json);
+  factory Recommendation.fromJson(Map<String, dynamic> json) => _$RecommendationFromJson(json);
 }

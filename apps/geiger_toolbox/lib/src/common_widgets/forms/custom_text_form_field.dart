@@ -57,16 +57,12 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       autocorrect: autoComplete,
       obscureText: isPassword,
-      textInputAction:
-          isLastField ? TextInputAction.done : TextInputAction.next,
+      textInputAction: isLastField ? TextInputAction.done : TextInputAction.next,
       keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.name,
       keyboardAppearance: Brightness.light,
       onEditingComplete: onEditingComplete,
       inputFormatters: <TextInputFormatter>[
-        if (isEmail)
-          ValidatorInputFormatter(
-            editingValidator: EmailEditingRegexValidator(),
-          )
+        if (isEmail) ValidatorInputFormatter(editingValidator: EmailEditingRegexValidator()),
       ],
       maxLength: maxLength ?? 50,
     );

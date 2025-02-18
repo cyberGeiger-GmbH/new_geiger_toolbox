@@ -14,16 +14,13 @@ class AnalyticsFacade implements AnalyticsClient {
   final List<AnalyticsClient> clients;
 
   @override
-  Future<void> trackScanWithProfile() =>
-      _dispatch((c) => c.trackScanWithProfile());
+  Future<void> trackScanWithProfile() => _dispatch((c) => c.trackScanWithProfile());
 
   @override
-  Future<void> trackScanWithoutProfile() =>
-      _dispatch((c) => c.trackScanWithoutProfile());
+  Future<void> trackScanWithoutProfile() => _dispatch((c) => c.trackScanWithoutProfile());
 
   @override
-  Future<void> trackTodoCompleted(int completedCount) =>
-      _dispatch((c) => c.trackTodoCompleted(completedCount));
+  Future<void> trackTodoCompleted(int completedCount) => _dispatch((c) => c.trackTodoCompleted(completedCount));
 
   @override
   Future<void> trackTodosCreated() => _dispatch((c) => c.trackTodosCreated());
@@ -32,18 +29,13 @@ class AnalyticsFacade implements AnalyticsClient {
   Future<void> trackTodosUpdated() => _dispatch((c) => c.trackTodosUpdated());
 
   @override
-  Future<void> trackScreenView(
-    String routeName,
-    String action,
-  ) =>
+  Future<void> trackScreenView(String routeName, String action) =>
       _dispatch((c) => c.trackScreenView(routeName, action));
 
   @override
-  Future<void> setAnalyticsCollectionEnabled(bool enable) =>
-      _dispatch((c) => c.setAnalyticsCollectionEnabled(enable));
+  Future<void> setAnalyticsCollectionEnabled(bool enable) => _dispatch((c) => c.setAnalyticsCollectionEnabled(enable));
 
-  Future<void> _dispatch(
-      Future<void> Function(AnalyticsClient client) work) async {
+  Future<void> _dispatch(Future<void> Function(AnalyticsClient client) work) async {
     for (var client in clients) {
       await work(client);
     }
@@ -52,8 +44,7 @@ class AnalyticsFacade implements AnalyticsClient {
 
 @Riverpod(keepAlive: true)
 AnalyticsFacade analyticsFacade(Ref ref) {
-  final mixpanelAnalyticsClient =
-      ref.watch(mixpanelAnalyticsClientProvider).requireValue;
+  final mixpanelAnalyticsClient = ref.watch(mixpanelAnalyticsClientProvider).requireValue;
 
   final firebaseAnalyticsClient = ref.watch(firebaseAnalyticsClientProvider);
 
@@ -62,25 +53,11 @@ AnalyticsFacade analyticsFacade(Ref ref) {
     mixpanelAnalyticsClient.setAnalyticsCollectionEnabled(false);
     firebaseAnalyticsClient.setAnalyticsCollectionEnabled(false);
     return AnalyticsFacade(
-      kReleaseMode
-          ? [
-              mixpanelAnalyticsClient,
-              firebaseAnalyticsClient,
-            ]
-          : [
-              LoggerAnalyticsClient(ref),
-            ],
+      kReleaseMode ? [mixpanelAnalyticsClient, firebaseAnalyticsClient] : [LoggerAnalyticsClient(ref)],
     );
   } else {
     return AnalyticsFacade(
-      kReleaseMode
-          ? [
-              mixpanelAnalyticsClient,
-              firebaseAnalyticsClient,
-            ]
-          : [
-              LoggerAnalyticsClient(ref),
-            ],
+      kReleaseMode ? [mixpanelAnalyticsClient, firebaseAnalyticsClient] : [LoggerAnalyticsClient(ref)],
     );
   }
 }

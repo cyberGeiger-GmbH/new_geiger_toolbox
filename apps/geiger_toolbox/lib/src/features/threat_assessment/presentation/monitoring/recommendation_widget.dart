@@ -8,9 +8,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_
 
 @Deprecated("don't use")
 class RecommendationWidget extends ConsumerWidget {
-  const RecommendationWidget({
-    super.key,
-  });
+  const RecommendationWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,8 +25,7 @@ class RecommendationWidget extends ConsumerWidget {
 
             return recommendations.isEmpty
                 ? SizedBox.shrink()
-                : RecommendationTileListWidget(
-                    recommendations: recommendations.toList());
+                : RecommendationTileListWidget(recommendations: recommendations.toList());
           } catch (e) {
             return const SizedBox.shrink();
           }

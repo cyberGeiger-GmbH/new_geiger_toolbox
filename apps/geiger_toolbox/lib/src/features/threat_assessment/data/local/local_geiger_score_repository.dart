@@ -16,8 +16,7 @@ class LocalGeigerScoreRepository {
   Logger get _log => ref.read(logHandlerProvider("LocalGeigerScoreRepository"));
 
   //create score
-  Future<void> storeGeigerScore(
-      {required GeigerScore score, required UserID userId}) async {
+  Future<void> storeGeigerScore({required GeigerScore score, required UserID userId}) async {
     try {
       _log.i("storing geigerScore .. ");
       await _db.transaction(() async {
@@ -37,23 +36,21 @@ class LocalGeigerScoreRepository {
 
   Stream<GeigerScoreInfo?> watchGeigerScore() {
     _log.i("watching GeigerScore...");
-    final query = (_db.select(_db.geigerScores)
-          ..orderBy([
-            (n) => OrderingTerm.desc(
-                  n.lastUpdated,
-                )
-          ])
-          ..limit(1))
-        .watchSingleOrNull(); //only fetch the most recent update
+    final query =
+        (_db.select(_db.geigerScores)
+              ..orderBy([(n) => OrderingTerm.desc(n.lastUpdated)])
+              ..limit(1))
+            .watchSingleOrNull(); //only fetch the most recent update
 
     return query.map((row) {
       if (row != null) {
         return GeigerScoreInfo(
-            id: row.id,
-            geigerScore: row.score,
-            lastUpdate: row.lastUpdated,
-            status: row.interpretation,
-            reason: row.reason);
+          id: row.id,
+          geigerScore: row.score,
+          lastUpdate: row.lastUpdated,
+          status: row.interpretation,
+          reason: row.reason,
+        );
       }
       return null;
     });
@@ -61,24 +58,22 @@ class LocalGeigerScoreRepository {
 
   Future<GeigerScoreInfo?> fetchGeigerScore() async {
     _log.i("fetching GeigerScore...");
-    final query = await (_db.select(_db.geigerScores)
-          ..orderBy([
-            (n) => OrderingTerm.desc(
-                  n.lastUpdated,
-                )
-          ])
-          ..limit(1))
-        .getSingleOrNull(); //only fetch the most recent update
+    final query =
+        await (_db.select(_db.geigerScores)
+              ..orderBy([(n) => OrderingTerm.desc(n.lastUpdated)])
+              ..limit(1))
+            .getSingleOrNull(); //only fetch the most recent update
 
     if (query != null) {
       // if the reasons  is not yet in the list add it
 
       return GeigerScoreInfo(
-          id: query.id,
-          geigerScore: query.score,
-          lastUpdate: query.lastUpdated,
-          status: query.interpretation,
-          reason: query.reason);
+        id: query.id,
+        geigerScore: query.score,
+        lastUpdate: query.lastUpdated,
+        status: query.interpretation,
+        reason: query.reason,
+      );
     }
     return null;
   }
@@ -86,43 +81,37 @@ class LocalGeigerScoreRepository {
   Stream<List<GeigerScoreInfo>> watchGeigerScoreList() {
     _log.i("watching List<GeigerScore>...");
     final query = _db.select(_db.geigerScores)
-      ..orderBy([
-        (n) => OrderingTerm.desc(
-              n.lastUpdated,
-            )
-      ]); //only fetch the most recent update
+      ..orderBy([(n) => OrderingTerm.desc(n.lastUpdated)]); //only fetch the most recent update
 
     return query.watch().map((rows) {
       return rows.map((row) {
         return GeigerScoreInfo(
-            id: row.id,
-            geigerScore: row.score,
-            lastUpdate: row.lastUpdated,
-            status: row.interpretation,
-            reason: row.reason);
+          id: row.id,
+          geigerScore: row.score,
+          lastUpdate: row.lastUpdated,
+          status: row.interpretation,
+          reason: row.reason,
+        );
       }).toList();
     });
   }
 
   Future<List<GeigerScoreInfo>> fetchGeigerScoreList() async {
     _log.i("fechting List<GeigerScore>...");
-    final query = await (_db.select(_db.geigerScores)
-          ..orderBy([
-            (n) => OrderingTerm.desc(
-                  n.lastUpdated,
-                )
-          ]))
-        .get(); //only fetch the most recent update
+    final query =
+        await (_db.select(_db.geigerScores)
+          ..orderBy([(n) => OrderingTerm.desc(n.lastUpdated)])).get(); //only fetch the most recent update
 
     final List<GeigerScoreInfo> scoreList = [];
     for (var row in query) {
       if (!scoreList.any((value) => value.id == row.id)) {
         final data = GeigerScoreInfo(
-            id: row.id,
-            geigerScore: row.score,
-            lastUpdate: row.lastUpdated,
-            status: row.interpretation,
-            reason: row.reason);
+          id: row.id,
+          geigerScore: row.score,
+          lastUpdate: row.lastUpdated,
+          status: row.interpretation,
+          reason: row.reason,
+        );
         scoreList.add(data);
       }
     }

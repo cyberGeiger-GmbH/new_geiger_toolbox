@@ -18,14 +18,14 @@ void main() {
   }
 
   ProviderContainer getDataBaseContainer() {
-    final container = ProviderContainer(overrides: [
-      appDatabaseProvider.overrideWithValue(
-        /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
-        AppDatabase(
-          testDatabaseConnection(),
+    final container = ProviderContainer(
+      overrides: [
+        appDatabaseProvider.overrideWithValue(
+          /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
+          AppDatabase(testDatabaseConnection()),
         ),
-      ),
-    ]);
+      ],
+    );
 
     return container;
   }
@@ -49,25 +49,16 @@ void main() {
       tester.expect(result, tester.isNull);
     });
 
-    tester.test(
-        'Stream emits null initially and then the user objct after insertion',
-        () async {
+    tester.test('Stream emits null initially and then the user objct after insertion', () async {
       final uuid = container.read(getUuidProvider);
-      final User user = User(
-          userId: uuid, owner: true, name: "tester", email: "tester@gmail.com");
+      final User user = User(userId: uuid, owner: true, name: "tester", email: "tester@gmail.com");
       final userRepo = container.read(userProfileRepositoryProvider);
 
       //stream user
       final Stream<User?> stream = userRepo.watchUser();
 
       // lister to the stream
-      final expectation = tester.expectLater(
-        stream,
-        tester.emitsInOrder([
-          tester.isNull,
-          tester.isA<User>(),
-        ]),
-      );
+      final expectation = tester.expectLater(stream, tester.emitsInOrder([tester.isNull, tester.isA<User>()]));
 
       //store
       final status = await userRepo.createUserProfile(user: user);

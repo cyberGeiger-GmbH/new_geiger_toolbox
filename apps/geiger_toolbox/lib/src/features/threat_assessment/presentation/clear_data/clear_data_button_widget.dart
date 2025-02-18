@@ -14,31 +14,29 @@ class ClearDataButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(cleanDataControllerProvider,
-        (_, nxt) => nxt.showAlertDialogOnError(context: context));
+    ref.listen(cleanDataControllerProvider, (_, nxt) => nxt.showAlertDialogOnError(context: context));
     final state = ref.watch(cleanDataControllerProvider);
     final colors = Theme.of(context).colorScheme;
     return AppIconButton.filled(
       context: context,
       backgroundColor: colors.error,
       iconData: state.isLoading ? Icons.timer : Icons.delete_forever,
-      onPressed: state.isLoading
-          ? null
-          : () async {
-              showAlertDialog(
+      onPressed:
+          state.isLoading
+              ? null
+              : () async {
+                showAlertDialog(
                   context: context,
                   title: "Deletion Alert".hardcoded,
-                  content:
-                      "Are you sure you want to delete data? \n Note: This action can't be undone.",
+                  content: "Are you sure you want to delete data? \n Note: This action can't be undone.",
                   cancelActionText: 'Cancel'.hardcoded,
                   trigger: () {
-                    ref
-                        .read(cleanDataControllerProvider.notifier)
-                        .deleteNewsData();
+                    ref.read(cleanDataControllerProvider.notifier).deleteNewsData();
                     //pop alert
                     context.pop(true);
-                  });
-            },
+                  },
+                );
+              },
     );
   }
 }

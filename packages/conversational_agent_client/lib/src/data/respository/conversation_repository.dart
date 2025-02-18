@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:conversational_agent_client/conversational_agent_client.dart';
@@ -28,15 +27,8 @@ class ConversationRepository {
     final log = ref.read(logHandlerProvider("CreateUserId"));
 
     try {
-      final Uri uri = Uri.https(
-        Base.url,
-        Base.createThreadPath,
-      );
-      final Response response = await client.postUri(
-        uri,
-        data: Base.origin,
-        options: Options(headers: Base.headers),
-      );
+      final Uri uri = Uri.https(Base.url, Base.createThreadPath);
+      final Response response = await client.postUri(uri, data: Base.origin, options: Options(headers: Base.headers));
 
       return response.userIdParser(ref);
     } catch (e, s) {
@@ -61,10 +53,7 @@ class ConversationRepository {
     final log = ref.read(logHandlerProvider("ChatWithCA"));
 
     try {
-      final Uri uri = Uri.https(
-        Base.url,
-        Base.chatPath,
-      );
+      final Uri uri = Uri.https(Base.url, Base.chatPath);
       final Response response = await client.postUri(
         uri,
         data: json.encode(prompt),
@@ -93,13 +82,14 @@ class ConversationRepository {
       final Uri uri = Uri.https(Base.url, Base.chatHistory, userId.toJson());
       final Response response = await client.getUri(uri);
       final List<Conversation> conversations = response.conversationParser(ref);
-//remap
+      //remap
       for (var data in conversations) {
         final Message message = Message(
-            message: data.content.first.text.value.message,
-            role: data.role == Role.user.value ? Role.user : Role.assistant,
-            id: data.id,
-            createdAt: DateTime(data.createdAt));
+          message: data.content.first.text.value.message,
+          role: data.role == Role.user.value ? Role.user : Role.assistant,
+          id: data.id,
+          createdAt: DateTime(data.createdAt),
+        );
         messages.add(message);
       }
 

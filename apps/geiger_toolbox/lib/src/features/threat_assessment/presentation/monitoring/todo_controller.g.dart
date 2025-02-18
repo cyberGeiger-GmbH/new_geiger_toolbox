@@ -10,13 +10,10 @@ String _$todoControllerHash() => r'61c702016465c86842218a75405ea79b789b3587';
 
 /// See also [TodoController].
 @ProviderFor(TodoController)
-final todoControllerProvider =
-    AutoDisposeAsyncNotifierProvider<TodoController, void>.internal(
+final todoControllerProvider = AutoDisposeAsyncNotifierProvider<TodoController, void>.internal(
   TodoController.new,
   name: r'todoControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$todoControllerHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$todoControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

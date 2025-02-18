@@ -24,9 +24,7 @@ class AppLogger {
 
   void info({required String message, required String name}) {
     final log = ref.read(logHandlerProvider(name));
-    log.i(
-      " $message",
-    );
+    log.i(" $message");
   }
 }
 

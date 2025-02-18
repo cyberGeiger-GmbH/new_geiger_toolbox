@@ -6,18 +6,14 @@ part of 'news_feeds_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$newsFeedsControllerHash() =>
-    r'8af179ec2ef92c114c6a081f726cf4cbe6c8d6ea';
+String _$newsFeedsControllerHash() => r'8af179ec2ef92c114c6a081f726cf4cbe6c8d6ea';
 
 /// See also [NewsFeedsController].
 @ProviderFor(NewsFeedsController)
-final newsFeedsControllerProvider =
-    AutoDisposeNotifierProvider<NewsFeedsController, int>.internal(
+final newsFeedsControllerProvider = AutoDisposeNotifierProvider<NewsFeedsController, int>.internal(
   NewsFeedsController.new,
   name: r'newsFeedsControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$newsFeedsControllerHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$newsFeedsControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

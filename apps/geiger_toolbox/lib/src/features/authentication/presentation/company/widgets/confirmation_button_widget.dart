@@ -7,8 +7,7 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/company/
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 class ConfirmationButtonWidget extends ConsumerWidget {
-  const ConfirmationButtonWidget(
-      {super.key, required this.state, required this.onPressed});
+  const ConfirmationButtonWidget({super.key, required this.state, required this.onPressed});
   final AsyncValue<void> state;
   final VoidCallback onPressed;
   @override
@@ -19,14 +18,16 @@ class ConfirmationButtonWidget extends ConsumerWidget {
       value: companyDescriptionValue,
       //hide loading button
       loadingWidget: SizedBox.shrink(),
-      data: (value) => value == null
-          ? SizedBox.shrink()
-          : AppButton.tertiary(
-              label: "Confirm info".hardcoded,
-              context: context,
-              isloading: state.isLoading,
-              onPressed: state.isLoading ? null : onPressed,
-            ),
+      data:
+          (value) =>
+              value == null
+                  ? SizedBox.shrink()
+                  : AppButton.tertiary(
+                    label: "Confirm info".hardcoded,
+                    context: context,
+                    isloading: state.isLoading,
+                    onPressed: state.isLoading ? null : onPressed,
+                  ),
     );
   }
 }

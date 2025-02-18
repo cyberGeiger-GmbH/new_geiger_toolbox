@@ -15,9 +15,7 @@ class CompanyProfileContentsWidget extends ConsumerWidget {
 
     return AsyncValueWidget<Company?>(
       value: streamUser,
-      data: (userData) => CompanyProfileFormWidget(
-        companyData: userData,
-      ),
+      data: (userData) => CompanyProfileFormWidget(companyData: userData),
     );
   }
 }

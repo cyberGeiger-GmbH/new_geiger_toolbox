@@ -6,8 +6,7 @@ part 'profile_screen_controller.g.dart';
 
 @riverpod
 class ProfileScreenController extends _$ProfileScreenController {
-  SharedPreferences get _sharedPreferences =>
-      ref.watch(sharedPreferencesProvider).requireValue;
+  SharedPreferences get _sharedPreferences => ref.watch(sharedPreferencesProvider).requireValue;
 
   @override
   bool build() {

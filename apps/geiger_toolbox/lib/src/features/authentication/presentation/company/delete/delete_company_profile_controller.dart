@@ -12,7 +12,6 @@ class DeleteCompanyProfileController extends _$DeleteCompanyProfileController {
     final companyRepo = ref.read(companyProfileRepositoryProvider);
 
     state = const AsyncLoading<void>();
-    state =
-        await AsyncValue.guard(() async => companyRepo.deleteCompanyProfile());
+    state = await AsyncValue.guard(() async => companyRepo.deleteCompanyProfile());
   }
 }

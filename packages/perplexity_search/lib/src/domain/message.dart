@@ -6,6 +6,5 @@ part 'message.g.dart';
 class Message with _$Message {
   const factory Message({required final String content}) = _Message;
 
-  factory Message.fromJson(Map<String, dynamic> json) =>
-      _$MessageFromJson(json);
+  factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
 }

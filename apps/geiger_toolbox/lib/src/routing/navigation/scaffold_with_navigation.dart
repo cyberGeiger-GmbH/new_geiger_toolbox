@@ -11,24 +11,27 @@ class ScaffoldWithNavigation extends StatelessWidget {
   final Widget? feedbackButton;
 
   void _goBranch(int index) {
-    navigationShell.goBranch(index,
-        initialLocation: index == navigationShell.currentIndex);
+    navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
   }
 
   @override
   Widget build(BuildContext context) {
     //check device screen size
-    return LayoutBuilder(builder: (context, constraint) {
-      return constraint.isSmallDevice
-          ? ScaffoldWithNavigationBar(
+    return LayoutBuilder(
+      builder: (context, constraint) {
+        return constraint.isSmallDevice
+            ? ScaffoldWithNavigationBar(
               body: navigationShell,
               selectedIndex: navigationShell.currentIndex,
               feedback: feedbackButton,
-              onDestinationSelected: _goBranch)
-          : ScaffoldWithNaviagionRail(
+              onDestinationSelected: _goBranch,
+            )
+            : ScaffoldWithNaviagionRail(
               body: navigationShell,
               selectedIndex: navigationShell.currentIndex,
-              onDestinationSelected: _goBranch);
-    });
+              onDestinationSelected: _goBranch,
+            );
+      },
+    );
   }
 }

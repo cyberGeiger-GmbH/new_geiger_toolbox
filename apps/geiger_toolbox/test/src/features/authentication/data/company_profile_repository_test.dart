@@ -20,14 +20,14 @@ void main() {
   }
 
   ProviderContainer getDataBaseContainer() {
-    final container = ProviderContainer(overrides: [
-      appDatabaseProvider.overrideWithValue(
-        /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
-        AppDatabase(
-          testDatabaseConnection(),
+    final container = ProviderContainer(
+      overrides: [
+        appDatabaseProvider.overrideWithValue(
+          /// Replace the [QueryExecutor] parameter with a [DatabaseConnection]
+          AppDatabase(testDatabaseConnection()),
         ),
-      ),
-    ]);
+      ],
+    );
 
     return container;
   }
@@ -41,20 +41,14 @@ void main() {
   });
 
   tester.group('Test Case: watch company profile: ', () {
-    final company = Company(
-        companyName: "Cyber Geiger",
-        location: "Freiburg",
-        description: "start up");
+    final company = Company(companyName: "Cyber Geiger", location: "Freiburg", description: "start up");
 
-    tester.test(
-        "'Stream emits null initially and then the company object after insertion",
-        () async {
+    tester.test("'Stream emits null initially and then the company object after insertion", () async {
       final uuid = container.read(getUuidProvider);
       final userRepo = container.read(userProfileRepositoryProvider);
       final compRepo = container.read(companyProfileRepositoryProvider);
 
-      final User user = User(
-          userId: uuid, owner: true, name: "tester", email: "tester@gmail.com");
+      final User user = User(userId: uuid, owner: true, name: "tester", email: "tester@gmail.com");
       //create user
       final userResult = await userRepo.createUserProfile(user: user);
       tester.expect(userResult, 1);
@@ -62,20 +56,13 @@ void main() {
       //stream user
       final Stream<Company?> stream = compRepo.watchCompany();
       // lister to the stream
-      final expectation = tester.expectLater(
-        stream,
-        tester.emitsInOrder([
-          tester.isNull,
-          tester.isA<Company>(),
-        ]),
-      );
+      final expectation = tester.expectLater(stream, tester.emitsInOrder([tester.isNull, tester.isA<Company>()]));
       //retrieve user
       final userObj = await userRepo.fetchUser();
       tester.expect(userObj, tester.isNotNull);
 
       //create company profile
-      final userCompanyResult = await compRepo.createCompanyProfile(
-          userId: userObj!.userId, companyInfo: company);
+      final userCompanyResult = await compRepo.createCompanyProfile(userId: userObj!.userId, companyInfo: company);
       tester.expect(userCompanyResult, 1);
 
       // wait for the stream to emit expected values
@@ -84,10 +71,7 @@ void main() {
   });
 
   tester.group('Test Case: fetch a company profile: ', () {
-    final company = Company(
-        companyName: "Cyber Geiger",
-        location: "Freiburg",
-        description: "start up");
+    final company = Company(companyName: "Cyber Geiger", location: "Freiburg", description: "start up");
 
     tester.test("fetch company profile", () async {
       final compRepo = container.read(companyProfileRepositoryProvider);

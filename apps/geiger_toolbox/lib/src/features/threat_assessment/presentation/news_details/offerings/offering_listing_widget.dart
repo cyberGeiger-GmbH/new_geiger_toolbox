@@ -14,62 +14,47 @@ class RecommendedTodoListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //listen to error message when adding offering to todo to be done
-    ref.listen(addOfferingTodoControllerProvider,
-        (_, nxtState) => nxtState.showAlertDialogOnError(context: context));
+    ref.listen(addOfferingTodoControllerProvider, (_, nxtState) => nxtState.showAlertDialogOnError(context: context));
 
     final offering = ref.watch(fetchOfferStatusProvider(id: id));
 
     return AsyncValueWidget(
       value: offering,
-      data: (data) => data.isEmpty
-          ? Center(
-              child: EmptyContent(
-                message: "No Offerings found",
-                title: "Info",
-              ),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TodoTileList(
-                todoTile: data
-                    .map(
-                      (offer) => RecommendedTodoWidget(key: key, offer: offer),
-                    )
-                    .toList(),
-              ),
-            ),
+      data:
+          (data) =>
+              data.isEmpty
+                  ? Center(child: EmptyContent(message: "No Offerings found", title: "Info"))
+                  : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TodoTileList(
+                      todoTile: data.map((offer) => RecommendedTodoWidget(key: key, offer: offer)).toList(),
+                    ),
+                  ),
     );
   }
 }
 
 class RecommendedTodoWidget extends ConsumerWidget {
-  const RecommendedTodoWidget({
-    super.key,
-    required this.offer,
-  });
+  const RecommendedTodoWidget({super.key, required this.offer});
 
   final TodoOffering offer;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final state = ref.watch(toggleOfferControllerProvider(offer));
 
     return TodoTile.plain(
-        key: key,
-        summary: offer.offering.summary,
-        title: offer.offering.name,
-        done: state.status == Status.planned,
-        onChange: (value) async {
-          //to update the ui
-          ref
-              .read(toggleOfferControllerProvider(offer).notifier)
-              .onChange(offer.copyWith(status: Status.planned));
+      key: key,
+      summary: offer.offering.summary,
+      title: offer.offering.name,
+      done: state.status == Status.planned,
+      onChange: (value) async {
+        //to update the ui
+        ref.read(toggleOfferControllerProvider(offer).notifier).onChange(offer.copyWith(status: Status.planned));
 
-          //add to a todo list
-          ref
-              .read(toggleListOfferControllerProvider.notifier)
-              .selectTodoItems(state.copyWith(status: Status.planned));
-        }); // only all to activeTodo
+        //add to a todo list
+        ref.read(toggleListOfferControllerProvider.notifier).selectTodoItems(state.copyWith(status: Status.planned));
+      },
+    ); // only all to activeTodo
   }
 }

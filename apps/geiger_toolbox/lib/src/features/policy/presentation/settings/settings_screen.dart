@@ -13,10 +13,7 @@ class SettingsScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const CollectUsageStatisticsListTile(),
-        const SendFeedListTile()
-      ],
+      children: [const CollectUsageStatisticsListTile(), const SendFeedListTile()],
     );
   }
 }
@@ -35,9 +32,7 @@ class CollectUsageStatisticsListTile extends ConsumerWidget {
         child: Switch.adaptive(
           value: state,
           onChanged: (value) {
-            ref
-                .read(collectUsageStatisticsStoreProvider.notifier)
-                .setCollectUsageStatistics(value);
+            ref.read(collectUsageStatisticsStoreProvider.notifier).setCollectUsageStatistics(value);
           },
         ),
       ),

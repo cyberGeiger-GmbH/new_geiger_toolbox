@@ -19,36 +19,38 @@ Future<bool?> showAlertDialog({
     // * Only make the dialog dismissible if there is a cancel button
     barrierDismissible: cancelActionText != null,
     // * AlertDialog.adaptive was added in Flutter 3.13
-    builder: (context) => AlertDialog.adaptive(
-      title: Text(title),
-      content: content != null ? Text(content) : null,
-      // * Use [TextButton] or [CupertinoDialogAction] depending on the platform
-      actions: kIsWeb || defaultTargetPlatform == TargetPlatform.android
-          ? <Widget>[
-              if (cancelActionText != null)
-                TextButton(
-                  child: Text(cancelActionText),
-                  //context.pop fails during testing
-                  onPressed: () => Navigator.of(context).pop(false),
-                ),
-              TextButton(
-                key: defaultDialogKey,
-                onPressed: trigger ?? () => Navigator.of(context).pop(true),
-                child: Text(defaultActionText),
-              ),
-            ]
-          : <Widget>[
-              if (cancelActionText != null)
-                CupertinoDialogAction(
-                  child: Text(cancelActionText),
-                  onPressed: () => Navigator.of(context).pop(false),
-                ),
-              CupertinoDialogAction(
-                onPressed: trigger ?? () => Navigator.of(context).pop(true),
-                child: Text(defaultActionText),
-              ),
-            ],
-    ),
+    builder:
+        (context) => AlertDialog.adaptive(
+          title: Text(title),
+          content: content != null ? Text(content) : null,
+          // * Use [TextButton] or [CupertinoDialogAction] depending on the platform
+          actions:
+              kIsWeb || defaultTargetPlatform == TargetPlatform.android
+                  ? <Widget>[
+                    if (cancelActionText != null)
+                      TextButton(
+                        child: Text(cancelActionText),
+                        //context.pop fails during testing
+                        onPressed: () => Navigator.of(context).pop(false),
+                      ),
+                    TextButton(
+                      key: defaultDialogKey,
+                      onPressed: trigger ?? () => Navigator.of(context).pop(true),
+                      child: Text(defaultActionText),
+                    ),
+                  ]
+                  : <Widget>[
+                    if (cancelActionText != null)
+                      CupertinoDialogAction(
+                        child: Text(cancelActionText),
+                        onPressed: () => Navigator.of(context).pop(false),
+                      ),
+                    CupertinoDialogAction(
+                      onPressed: trigger ?? () => Navigator.of(context).pop(true),
+                      child: Text(defaultActionText),
+                    ),
+                  ],
+        ),
   );
 }
 
@@ -57,19 +59,11 @@ Future<void> showExceptionAlertDialog({
   required String title,
   // ignore: avoid-dynamic
   required dynamic exception,
-}) =>
+}) => showAlertDialog(context: context, title: title, content: exception.toString(), defaultActionText: 'OK'.hardcoded);
+
+Future<void> showNotImplementedAlertDialog({required BuildContext context, String? title, String? content}) =>
     showAlertDialog(
       context: context,
-      title: title,
-      content: exception.toString(),
-      defaultActionText: 'OK'.hardcoded,
+      title: title ?? 'Not implemented'.hardcoded,
+      content: content ?? "This feature is not quite ready yet.\n Thank you for your interest.".hardcoded,
     );
-
-Future<void> showNotImplementedAlertDialog(
-        {required BuildContext context, String? title, String? content}) =>
-    showAlertDialog(
-        context: context,
-        title: title ?? 'Not implemented'.hardcoded,
-        content: content ??
-            "This feature is not quite ready yet.\n Thank you for your interest."
-                .hardcoded);

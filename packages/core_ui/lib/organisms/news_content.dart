@@ -4,12 +4,13 @@ import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 
 class NewsContent extends StatelessWidget {
-  const NewsContent(
-      {super.key,
-      required this.summary,
-      this.lastUpdatedLabel,
-      required this.lastedUpdated,
-      required this.title});
+  const NewsContent({
+    super.key,
+    required this.summary,
+    this.lastUpdatedLabel,
+    required this.lastedUpdated,
+    required this.title,
+  });
   final String summary;
   final String? lastUpdatedLabel;
   final String lastedUpdated;
@@ -19,25 +20,18 @@ class NewsContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText.headlineMedium(
-          text: title,
-          context: context,
-        ),
+        AppText.headlineMedium(text: title, context: context),
         Spacing.gapH4,
         EmptyContent(textAlign: TextAlign.justify, message: summary),
         Spacing.gapH4,
-        HorizontalTitleContent(
-            key: key,
-            title: lastUpdatedLabel ?? "last updated",
-            source: lastedUpdated),
+        HorizontalTitleContent(key: key, title: lastUpdatedLabel ?? "last updated", source: lastedUpdated),
       ],
     );
   }
 }
 
 class HorizontalTitleContent extends StatelessWidget {
-  const HorizontalTitleContent(
-      {super.key, required this.title, required this.source});
+  const HorizontalTitleContent({super.key, required this.title, required this.source});
   final String title;
   final String source;
   @override
@@ -50,9 +44,11 @@ class HorizontalTitleContent extends StatelessWidget {
         text: "$title: ", // Title in bold
         style: theme.textTheme.bodySmall!.copyWith(color: color),
         children: [
-          TextSpan(text: source, style: theme.textTheme.bodySmall
-              // Message in normal style
-              ),
+          TextSpan(
+            text: source,
+            style: theme.textTheme.bodySmall,
+            // Message in normal style
+          ),
         ],
       ),
     );

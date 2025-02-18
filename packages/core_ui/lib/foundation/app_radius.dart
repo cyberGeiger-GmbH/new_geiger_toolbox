@@ -12,16 +12,13 @@ class AppRadius with _$AppRadius {
   // inside the class, freezed rules not mine
   const AppRadius._();
 
-  const factory AppRadius(
-      {required Radius small,
-      required Radius regular,
-      required Radius big}) = _AppRadius;
+  const factory AppRadius({required Radius small, required Radius regular, required Radius big}) = _AppRadius;
 
   factory AppRadius.main() => const AppRadius(
-        small: Radius.circular(RadiusSizes.sm),
-        regular: Radius.circular(RadiusSizes.md),
-        big: Radius.circular(RadiusSizes.lg),
-      );
+    small: Radius.circular(RadiusSizes.sm),
+    regular: Radius.circular(RadiusSizes.md),
+    big: Radius.circular(RadiusSizes.lg),
+  );
 }
 
 @freezed

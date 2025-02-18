@@ -12,8 +12,7 @@ class StatusCodes {
   StatusCode? getStatus(int? statusCode) {
     final log = ref.read(loggingHandlerProvider("Perplexity search 🌎"));
     if (statusCode == StatusCode.unauthorised.code) {
-      log.w(
-          "UNAUTHORISED $statusCode: either no API key was provided or it wasn't valid");
+      log.w("UNAUTHORISED $statusCode: either no API key was provided or it wasn't valid");
 
       return StatusCode.unauthorised;
     } else if (statusCode == StatusCode.forbidden.code) {
@@ -29,8 +28,7 @@ class StatusCodes {
 
       return StatusCode.tooManyRequest;
     } else if (statusCode == StatusCode.serviceUnavailable.code) {
-      log.w(
-          "SERVICE UNAVAILABLE $statusCode: conversational_agent_client not available");
+      log.w("SERVICE UNAVAILABLE $statusCode: conversational_agent_client not available");
 
       return StatusCode.serviceUnavailable;
     } else if (statusCode == StatusCode.success.code) {

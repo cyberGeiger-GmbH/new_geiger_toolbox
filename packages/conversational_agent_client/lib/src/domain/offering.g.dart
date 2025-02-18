@@ -7,13 +7,9 @@ part of 'offering.dart';
 // **************************************************************************
 
 _$OfferingImpl _$$OfferingImplFromJson(Map<String, dynamic> json) =>
-    _$OfferingImpl(
-      name: json['name'] as String,
-      summary: json['summary'] as String,
-    );
+    _$OfferingImpl(name: json['name'] as String, summary: json['summary'] as String);
 
-Map<String, dynamic> _$$OfferingImplToJson(_$OfferingImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'summary': instance.summary,
-    };
+Map<String, dynamic> _$$OfferingImplToJson(_$OfferingImpl instance) => <String, dynamic>{
+  'name': instance.name,
+  'summary': instance.summary,
+};

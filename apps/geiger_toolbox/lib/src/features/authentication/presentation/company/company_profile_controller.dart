@@ -15,8 +15,9 @@ class CompanyProfileController extends _$CompanyProfileController {
     final userRepo = ref.read(userProfileRepositoryProvider);
     state = const AsyncLoading<void>();
     final userId = await userRepo.fetchUser();
-    state = await AsyncValue.guard(() async => companyRepo.createCompanyProfile(
-        companyInfo: company, userId: userId!.userId));
+    state = await AsyncValue.guard(
+      () async => companyRepo.createCompanyProfile(companyInfo: company, userId: userId!.userId),
+    );
     return state.hasError == false;
   }
 
@@ -26,8 +27,7 @@ class CompanyProfileController extends _$CompanyProfileController {
     state = const AsyncLoading<void>();
     final userId = await userRepo.fetchUser();
     state = await AsyncValue.guard(
-      () async => companyRepo.updateCompanyProfile(
-          companyInfo: company, userId: userId!.userId),
+      () async => companyRepo.updateCompanyProfile(companyInfo: company, userId: userId!.userId),
     );
     return state.hasError == false;
   }

@@ -20,41 +20,37 @@ import 'src/exceptions/app_logger.dart';
 Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   WidgetsFlutterBinding.ensureInitialized();
   //sentry error monitoring
-  await SentryFlutter.init(
-    (options) {
-      options.dsn = Env.sentryDsn;
-      options.environment = getFlavor().name;
-      options
-        ..considerInAppFramesByDefault = false
-        ..addInAppInclude('geiger_toolbox')
-        ..addInAppInclude('core_ui')
-        ..addInAppInclude('conversational_agent_client')
-        ..addInAppInclude('perplexity_search');
+  await SentryFlutter.init((options) {
+    options.dsn = Env.sentryDsn;
+    options.environment = getFlavor().name;
+    options
+      ..considerInAppFramesByDefault = false
+      ..addInAppInclude('geiger_toolbox')
+      ..addInAppInclude('core_ui')
+      ..addInAppInclude('conversational_agent_client')
+      ..addInAppInclude('perplexity_search');
 
-      options.beforeSend = (SentryEvent event, Hint hint) async {
-        // Ignore events that are not from release builds
-        if (!kReleaseMode) {
-          return null;
-        }
-        // If there was no response, it means that a connection error occurred
-        // Do not log this to Sentry
-        final exception = event.throwable;
-        if (exception is DioException && exception.response == null) {
-          return null;
-        }
-        // For all other events, return the event as is
-        return event;
-      };
-    },
-  );
+    options.beforeSend = (SentryEvent event, Hint hint) async {
+      // Ignore events that are not from release builds
+      if (!kReleaseMode) {
+        return null;
+      }
+      // If there was no response, it means that a connection error occurred
+      // Do not log this to Sentry
+      final exception = event.throwable;
+      if (exception is DioException && exception.response == null) {
+        return null;
+      }
+      // For all other events, return the event as is
+      return event;
+    };
+  });
 
   // initialize firebase
   await Firebase.initializeApp(options: firebaseOptions);
 
   // * riverpod container for observing container errors [ AsyncErrorLogger] and overriding default storage
-  final container = ProviderContainer(
-    observers: [AsyncErrorLogger()],
-  );
+  final container = ProviderContainer(observers: [AsyncErrorLogger()]);
 
   //* Register error handler.For more info, see:
   // * https://docs.flutter.dev/testing/errors
@@ -62,12 +58,7 @@ Future<void> runMainApp({FirebaseOptions? firebaseOptions}) async {
   registerErroHandlers(errorLogger);
 
   // * run app
-  runApp(
-    UncontrolledProviderScope(
-      container: container,
-      child: FeedbackWidget.wrapWidget(child: const GeigerApp()),
-    ),
-  );
+  runApp(UncontrolledProviderScope(container: container, child: FeedbackWidget.wrapWidget(child: const GeigerApp())));
 }
 
 void registerErroHandlers(AppLogger errorLogger) {
@@ -87,10 +78,7 @@ void registerErroHandlers(AppLogger errorLogger) {
   //* Show some error UI when any widget in the app fails to build
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text("An error occurred".hardcoded),
-      ),
+      appBar: AppBar(backgroundColor: Colors.red, title: Text("An error occurred".hardcoded)),
       body: ErrorMessage(errorMessage: "$details"),
     );
   };

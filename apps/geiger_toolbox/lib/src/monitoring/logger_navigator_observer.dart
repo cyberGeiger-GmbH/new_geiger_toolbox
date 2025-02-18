@@ -1,4 +1,3 @@
-
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +13,7 @@ class LoggerNavigatorObserver extends NavigatorObserver {
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    _logNavigation(
-      route.settings.name,
-      'push',
-    );
+    _logNavigation(route.settings.name, 'push');
   }
 
   @override
@@ -32,10 +28,7 @@ class LoggerNavigatorObserver extends NavigatorObserver {
     }
   }
 
-  void _logNavigation(
-    String? routeName,
-    String action,
-  ) {
+  void _logNavigation(String? routeName, String action) {
     if (routeName != null) {
       ref.read(analyticsFacadeProvider).trackScreenView(routeName, action);
     } else {

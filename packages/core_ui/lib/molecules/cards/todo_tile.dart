@@ -4,36 +4,33 @@ import 'package:flutter/material.dart';
 import '../../utils/utils.dart';
 
 class TodoTile extends StatelessWidget {
-  const TodoTile._(
-      {super.key,
-      required this.title,
-      required this.summary,
-      this.onChange,
-      this.decoration,
-      this.done = false});
+  const TodoTile._({
+    super.key,
+    required this.title,
+    required this.summary,
+    this.onChange,
+    this.decoration,
+    this.done = false,
+  });
 
-  factory TodoTile.plain(
-      {Key? key,
-      required String title,
-      required String summary,
-      ValueChanged<bool?>? onChange,
-      bool done = false}) {
-    return TodoTile._(
-      key: key,
-      title: title,
-      summary: summary,
-      onChange: onChange,
-      done: done,
-    );
+  factory TodoTile.plain({
+    Key? key,
+    required String title,
+    required String summary,
+    ValueChanged<bool?>? onChange,
+    bool done = false,
+  }) {
+    return TodoTile._(key: key, title: title, summary: summary, onChange: onChange, done: done);
   }
 
-  factory TodoTile.outlined(
-      {Key? key,
-      required String title,
-      required String summary,
-      ValueChanged<bool?>? onChange,
-      required BuildContext context,
-      bool done = false}) {
+  factory TodoTile.outlined({
+    Key? key,
+    required String title,
+    required String summary,
+    ValueChanged<bool?>? onChange,
+    required BuildContext context,
+    bool done = false,
+  }) {
     final appColors = Theme.of(context).colorScheme;
 
     return TodoTile._(
@@ -59,12 +56,13 @@ class TodoTile extends StatelessWidget {
     return Container(
       decoration: decoration,
       child: _ContentWidget(
-          key: key,
-          title: title,
-          appColors: appColors,
-          summary: summary,
-          done: done,
-          onChange: onChange),
+        key: key,
+        title: title,
+        appColors: appColors,
+        summary: summary,
+        done: done,
+        onChange: onChange,
+      ),
     );
   }
 }
@@ -88,19 +86,9 @@ class _ContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: AppText.titleMedium(
-        text: title,
-        context: context,
-      ),
-      subtitle: AppText.bodySmall(
-        text: summary,
-        context: context,
-      ),
-      trailing: Checkbox.adaptive(
-        value: done,
-        onChanged: onChange,
-        activeColor: appColors!.primary,
-      ),
+      title: AppText.titleMedium(text: title, context: context),
+      subtitle: AppText.bodySmall(text: summary, context: context),
+      trailing: Checkbox.adaptive(value: done, onChanged: onChange, activeColor: appColors!.primary),
     );
   }
 }

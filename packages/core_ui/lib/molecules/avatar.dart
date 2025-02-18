@@ -2,12 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
-  const Avatar(
-      {super.key,
-      this.photoUrl,
-      required this.radius,
-      this.borderColor,
-      this.borderWidth});
+  const Avatar({super.key, this.photoUrl, required this.radius, this.borderColor, this.borderWidth});
 
   final String? photoUrl;
   final double radius;

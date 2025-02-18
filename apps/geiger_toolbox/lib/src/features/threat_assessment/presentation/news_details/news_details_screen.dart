@@ -23,9 +23,7 @@ class NewsDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: appColors.surface,
-      appBar: CustomAppBar(
-        title: "News".hardcoded,
-      ),
+      appBar: CustomAppBar(title: "News".hardcoded),
       body: Consumer(
         builder: (context, ref, _) {
           //show success snackBar alert when adding offering to todos
@@ -35,24 +33,25 @@ class NewsDetailsScreen extends StatelessWidget {
 
           //listen for errors
           if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
-            ref.listen(fetchNewsFeedByTitleProvider(newsTitle: newsTitle),
-                (_, nxt) => nxt.showAlertDialogOnError(context: context));
+            ref.listen(
+              fetchNewsFeedByTitleProvider(newsTitle: newsTitle),
+              (_, nxt) => nxt.showAlertDialogOnError(context: context),
+            );
           }
 
-          final newsFeed =
-              ref.watch(fetchNewsFeedByTitleProvider(newsTitle: newsTitle));
+          final newsFeed = ref.watch(fetchNewsFeedByTitleProvider(newsTitle: newsTitle));
 
           return AsyncValueWidget(
             value: newsFeed,
             data: (data) {
               return data == null
                   ? EmptyPlaceholder(
-                      message: "News not found".hardcoded,
-                      label: "Go back".hardcoded,
-                      onTap: () {
-                        context.goNamed(AppRouter.main.name);
-                      },
-                    )
+                    message: "News not found".hardcoded,
+                    label: "Go back".hardcoded,
+                    onTap: () {
+                      context.goNamed(AppRouter.main.name);
+                    },
+                  )
                   : NewsDetailsWidget(newsfeed: data);
             },
           );

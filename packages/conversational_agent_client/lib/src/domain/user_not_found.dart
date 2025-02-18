@@ -8,6 +8,5 @@ class UserNotFound with _$UserNotFound {
 
   const factory UserNotFound({required final String error}) = _UserNotFound;
 
-  factory UserNotFound.fromJson(Map<String, dynamic> json) =>
-      _$UserNotFoundFromJson(json);
+  factory UserNotFound.fromJson(Map<String, dynamic> json) => _$UserNotFoundFromJson(json);
 }

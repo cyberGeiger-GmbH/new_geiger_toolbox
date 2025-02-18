@@ -12,7 +12,8 @@ part of 'user_profile_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) {
   return _UserProfileModel.fromJson(json);
@@ -29,14 +30,12 @@ mixin _$UserProfileModel {
   /// Create a copy of UserProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserProfileModelCopyWith<UserProfileModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserProfileModelCopyWith<UserProfileModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UserProfileModelCopyWith<$Res> {
-  factory $UserProfileModelCopyWith(
-          UserProfileModel value, $Res Function(UserProfileModel) then) =
+  factory $UserProfileModelCopyWith(UserProfileModel value, $Res Function(UserProfileModel) then) =
       _$UserProfileModelCopyWithImpl<$Res, UserProfileModel>;
   @useResult
   $Res call({Profile currentUserProfile, Profile? previousUserProfile});
@@ -46,8 +45,7 @@ abstract class $UserProfileModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
-    implements $UserProfileModelCopyWith<$Res> {
+class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel> implements $UserProfileModelCopyWith<$Res> {
   _$UserProfileModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -59,20 +57,22 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? currentUserProfile = null,
-    Object? previousUserProfile = freezed,
-  }) {
-    return _then(_value.copyWith(
-      currentUserProfile: null == currentUserProfile
-          ? _value.currentUserProfile
-          : currentUserProfile // ignore: cast_nullable_to_non_nullable
-              as Profile,
-      previousUserProfile: freezed == previousUserProfile
-          ? _value.previousUserProfile
-          : previousUserProfile // ignore: cast_nullable_to_non_nullable
-              as Profile?,
-    ) as $Val);
+  $Res call({Object? currentUserProfile = null, Object? previousUserProfile = freezed}) {
+    return _then(
+      _value.copyWith(
+            currentUserProfile:
+                null == currentUserProfile
+                    ? _value.currentUserProfile
+                    : currentUserProfile // ignore: cast_nullable_to_non_nullable
+                        as Profile,
+            previousUserProfile:
+                freezed == previousUserProfile
+                    ? _value.previousUserProfile
+                    : previousUserProfile // ignore: cast_nullable_to_non_nullable
+                        as Profile?,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of UserProfileModel
@@ -101,10 +101,8 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
 }
 
 /// @nodoc
-abstract class _$$UserProfileModelImplCopyWith<$Res>
-    implements $UserProfileModelCopyWith<$Res> {
-  factory _$$UserProfileModelImplCopyWith(_$UserProfileModelImpl value,
-          $Res Function(_$UserProfileModelImpl) then) =
+abstract class _$$UserProfileModelImplCopyWith<$Res> implements $UserProfileModelCopyWith<$Res> {
+  factory _$$UserProfileModelImplCopyWith(_$UserProfileModelImpl value, $Res Function(_$UserProfileModelImpl) then) =
       __$$UserProfileModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -117,42 +115,39 @@ abstract class _$$UserProfileModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UserProfileModelImplCopyWithImpl<$Res>
-    extends _$UserProfileModelCopyWithImpl<$Res, _$UserProfileModelImpl>
+class __$$UserProfileModelImplCopyWithImpl<$Res> extends _$UserProfileModelCopyWithImpl<$Res, _$UserProfileModelImpl>
     implements _$$UserProfileModelImplCopyWith<$Res> {
-  __$$UserProfileModelImplCopyWithImpl(_$UserProfileModelImpl _value,
-      $Res Function(_$UserProfileModelImpl) _then)
-      : super(_value, _then);
+  __$$UserProfileModelImplCopyWithImpl(_$UserProfileModelImpl _value, $Res Function(_$UserProfileModelImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of UserProfileModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? currentUserProfile = null,
-    Object? previousUserProfile = freezed,
-  }) {
-    return _then(_$UserProfileModelImpl(
-      currentUserProfile: null == currentUserProfile
-          ? _value.currentUserProfile
-          : currentUserProfile // ignore: cast_nullable_to_non_nullable
-              as Profile,
-      previousUserProfile: freezed == previousUserProfile
-          ? _value.previousUserProfile
-          : previousUserProfile // ignore: cast_nullable_to_non_nullable
-              as Profile?,
-    ));
+  $Res call({Object? currentUserProfile = null, Object? previousUserProfile = freezed}) {
+    return _then(
+      _$UserProfileModelImpl(
+        currentUserProfile:
+            null == currentUserProfile
+                ? _value.currentUserProfile
+                : currentUserProfile // ignore: cast_nullable_to_non_nullable
+                    as Profile,
+        previousUserProfile:
+            freezed == previousUserProfile
+                ? _value.previousUserProfile
+                : previousUserProfile // ignore: cast_nullable_to_non_nullable
+                    as Profile?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserProfileModelImpl implements _UserProfileModel {
-  const _$UserProfileModelImpl(
-      {required this.currentUserProfile, this.previousUserProfile});
+  const _$UserProfileModelImpl({required this.currentUserProfile, this.previousUserProfile});
 
-  factory _$UserProfileModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserProfileModelImplFromJson(json);
+  factory _$UserProfileModelImpl.fromJson(Map<String, dynamic> json) => _$$UserProfileModelImplFromJson(json);
 
   @override
   final Profile currentUserProfile;
@@ -177,8 +172,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, currentUserProfile, previousUserProfile);
+  int get hashCode => Object.hash(runtimeType, currentUserProfile, previousUserProfile);
 
   /// Create a copy of UserProfileModel
   /// with the given fields replaced by the non-null parameter values.
@@ -186,24 +180,19 @@ class _$UserProfileModelImpl implements _UserProfileModel {
   @override
   @pragma('vm:prefer-inline')
   _$$UserProfileModelImplCopyWith<_$UserProfileModelImpl> get copyWith =>
-      __$$UserProfileModelImplCopyWithImpl<_$UserProfileModelImpl>(
-          this, _$identity);
+      __$$UserProfileModelImplCopyWithImpl<_$UserProfileModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserProfileModelImplToJson(
-      this,
-    );
+    return _$$UserProfileModelImplToJson(this);
   }
 }
 
 abstract class _UserProfileModel implements UserProfileModel {
-  const factory _UserProfileModel(
-      {required final Profile currentUserProfile,
-      final Profile? previousUserProfile}) = _$UserProfileModelImpl;
+  const factory _UserProfileModel({required final Profile currentUserProfile, final Profile? previousUserProfile}) =
+      _$UserProfileModelImpl;
 
-  factory _UserProfileModel.fromJson(Map<String, dynamic> json) =
-      _$UserProfileModelImpl.fromJson;
+  factory _UserProfileModel.fromJson(Map<String, dynamic> json) = _$UserProfileModelImpl.fromJson;
 
   @override
   Profile get currentUserProfile;
@@ -214,8 +203,7 @@ abstract class _UserProfileModel implements UserProfileModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserProfileModelImplCopyWith<_$UserProfileModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UserProfileModelImplCopyWith<_$UserProfileModelImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) {
@@ -239,8 +227,7 @@ mixin _$Profile {
 
 /// @nodoc
 abstract class $ProfileCopyWith<$Res> {
-  factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
-      _$ProfileCopyWithImpl<$Res, Profile>;
+  factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) = _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
   $Res call({String id, Actor actor, List<NewsActicle> news});
 
@@ -248,8 +235,7 @@ abstract class $ProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
-    implements $ProfileCopyWith<$Res> {
+class _$ProfileCopyWithImpl<$Res, $Val extends Profile> implements $ProfileCopyWith<$Res> {
   _$ProfileCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -261,25 +247,27 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? actor = null,
-    Object? news = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      actor: null == actor
-          ? _value.actor
-          : actor // ignore: cast_nullable_to_non_nullable
-              as Actor,
-      news: null == news
-          ? _value.news
-          : news // ignore: cast_nullable_to_non_nullable
-              as List<NewsActicle>,
-    ) as $Val);
+  $Res call({Object? id = null, Object? actor = null, Object? news = null}) {
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            actor:
+                null == actor
+                    ? _value.actor
+                    : actor // ignore: cast_nullable_to_non_nullable
+                        as Actor,
+            news:
+                null == news
+                    ? _value.news
+                    : news // ignore: cast_nullable_to_non_nullable
+                        as List<NewsActicle>,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Profile
@@ -295,8 +283,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
 
 /// @nodoc
 abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
-  factory _$$ProfileImplCopyWith(
-          _$ProfileImpl value, $Res Function(_$ProfileImpl) then) =
+  factory _$$ProfileImplCopyWith(_$ProfileImpl value, $Res Function(_$ProfileImpl) then) =
       __$$ProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -307,50 +294,43 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ProfileImplCopyWithImpl<$Res>
-    extends _$ProfileCopyWithImpl<$Res, _$ProfileImpl>
+class __$$ProfileImplCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res, _$ProfileImpl>
     implements _$$ProfileImplCopyWith<$Res> {
-  __$$ProfileImplCopyWithImpl(
-      _$ProfileImpl _value, $Res Function(_$ProfileImpl) _then)
-      : super(_value, _then);
+  __$$ProfileImplCopyWithImpl(_$ProfileImpl _value, $Res Function(_$ProfileImpl) _then) : super(_value, _then);
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? actor = null,
-    Object? news = null,
-  }) {
-    return _then(_$ProfileImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      actor: null == actor
-          ? _value.actor
-          : actor // ignore: cast_nullable_to_non_nullable
-              as Actor,
-      news: null == news
-          ? _value._news
-          : news // ignore: cast_nullable_to_non_nullable
-              as List<NewsActicle>,
-    ));
+  $Res call({Object? id = null, Object? actor = null, Object? news = null}) {
+    return _then(
+      _$ProfileImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        actor:
+            null == actor
+                ? _value.actor
+                : actor // ignore: cast_nullable_to_non_nullable
+                    as Actor,
+        news:
+            null == news
+                ? _value._news
+                : news // ignore: cast_nullable_to_non_nullable
+                    as List<NewsActicle>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProfileImpl implements _Profile {
-  const _$ProfileImpl(
-      {required this.id,
-      required this.actor,
-      required final List<NewsActicle> news})
-      : _news = news;
+  const _$ProfileImpl({required this.id, required this.actor, required final List<NewsActicle> news}) : _news = news;
 
-  factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProfileImplFromJson(json);
+  factory _$ProfileImpl.fromJson(Map<String, dynamic> json) => _$$ProfileImplFromJson(json);
 
   @override
   final String id;
@@ -381,30 +361,27 @@ class _$ProfileImpl implements _Profile {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, actor, const DeepCollectionEquality().hash(_news));
+  int get hashCode => Object.hash(runtimeType, id, actor, const DeepCollectionEquality().hash(_news));
 
   /// Create a copy of Profile
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
-      __$$ProfileImplCopyWithImpl<_$ProfileImpl>(this, _$identity);
+  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith => __$$ProfileImplCopyWithImpl<_$ProfileImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProfileImplToJson(
-      this,
-    );
+    return _$$ProfileImplToJson(this);
   }
 }
 
 abstract class _Profile implements Profile {
-  const factory _Profile(
-      {required final String id,
-      required final Actor actor,
-      required final List<NewsActicle> news}) = _$ProfileImpl;
+  const factory _Profile({
+    required final String id,
+    required final Actor actor,
+    required final List<NewsActicle> news,
+  }) = _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
@@ -419,8 +396,7 @@ abstract class _Profile implements Profile {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 Actor _$ActorFromJson(Map<String, dynamic> json) {
@@ -448,24 +424,23 @@ mixin _$Actor {
 
 /// @nodoc
 abstract class $ActorCopyWith<$Res> {
-  factory $ActorCopyWith(Actor value, $Res Function(Actor) then) =
-      _$ActorCopyWithImpl<$Res, Actor>;
+  factory $ActorCopyWith(Actor value, $Res Function(Actor) then) = _$ActorCopyWithImpl<$Res, Actor>;
   @useResult
-  $Res call(
-      {String? companyName,
-      String? location,
-      String? companyDescription,
-      Asset userDevice,
-      String? score,
-      String locale,
-      List<Asset> assets});
+  $Res call({
+    String? companyName,
+    String? location,
+    String? companyDescription,
+    Asset userDevice,
+    String? score,
+    String locale,
+    List<Asset> assets,
+  });
 
   $AssetCopyWith<$Res> get userDevice;
 }
 
 /// @nodoc
-class _$ActorCopyWithImpl<$Res, $Val extends Actor>
-    implements $ActorCopyWith<$Res> {
+class _$ActorCopyWithImpl<$Res, $Val extends Actor> implements $ActorCopyWith<$Res> {
   _$ActorCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -486,36 +461,46 @@ class _$ActorCopyWithImpl<$Res, $Val extends Actor>
     Object? locale = null,
     Object? assets = null,
   }) {
-    return _then(_value.copyWith(
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyDescription: freezed == companyDescription
-          ? _value.companyDescription
-          : companyDescription // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userDevice: null == userDevice
-          ? _value.userDevice
-          : userDevice // ignore: cast_nullable_to_non_nullable
-              as Asset,
-      score: freezed == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as String?,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-      assets: null == assets
-          ? _value.assets
-          : assets // ignore: cast_nullable_to_non_nullable
-              as List<Asset>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            companyName:
+                freezed == companyName
+                    ? _value.companyName
+                    : companyName // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            location:
+                freezed == location
+                    ? _value.location
+                    : location // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            companyDescription:
+                freezed == companyDescription
+                    ? _value.companyDescription
+                    : companyDescription // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            userDevice:
+                null == userDevice
+                    ? _value.userDevice
+                    : userDevice // ignore: cast_nullable_to_non_nullable
+                        as Asset,
+            score:
+                freezed == score
+                    ? _value.score
+                    : score // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            locale:
+                null == locale
+                    ? _value.locale
+                    : locale // ignore: cast_nullable_to_non_nullable
+                        as String,
+            assets:
+                null == assets
+                    ? _value.assets
+                    : assets // ignore: cast_nullable_to_non_nullable
+                        as List<Asset>,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of Actor
@@ -531,31 +516,27 @@ class _$ActorCopyWithImpl<$Res, $Val extends Actor>
 
 /// @nodoc
 abstract class _$$ActorImplCopyWith<$Res> implements $ActorCopyWith<$Res> {
-  factory _$$ActorImplCopyWith(
-          _$ActorImpl value, $Res Function(_$ActorImpl) then) =
-      __$$ActorImplCopyWithImpl<$Res>;
+  factory _$$ActorImplCopyWith(_$ActorImpl value, $Res Function(_$ActorImpl) then) = __$$ActorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? companyName,
-      String? location,
-      String? companyDescription,
-      Asset userDevice,
-      String? score,
-      String locale,
-      List<Asset> assets});
+  $Res call({
+    String? companyName,
+    String? location,
+    String? companyDescription,
+    Asset userDevice,
+    String? score,
+    String locale,
+    List<Asset> assets,
+  });
 
   @override
   $AssetCopyWith<$Res> get userDevice;
 }
 
 /// @nodoc
-class __$$ActorImplCopyWithImpl<$Res>
-    extends _$ActorCopyWithImpl<$Res, _$ActorImpl>
+class __$$ActorImplCopyWithImpl<$Res> extends _$ActorCopyWithImpl<$Res, _$ActorImpl>
     implements _$$ActorImplCopyWith<$Res> {
-  __$$ActorImplCopyWithImpl(
-      _$ActorImpl _value, $Res Function(_$ActorImpl) _then)
-      : super(_value, _then);
+  __$$ActorImplCopyWithImpl(_$ActorImpl _value, $Res Function(_$ActorImpl) _then) : super(_value, _then);
 
   /// Create a copy of Actor
   /// with the given fields replaced by the non-null parameter values.
@@ -570,54 +551,62 @@ class __$$ActorImplCopyWithImpl<$Res>
     Object? locale = null,
     Object? assets = null,
   }) {
-    return _then(_$ActorImpl(
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyDescription: freezed == companyDescription
-          ? _value.companyDescription
-          : companyDescription // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userDevice: null == userDevice
-          ? _value.userDevice
-          : userDevice // ignore: cast_nullable_to_non_nullable
-              as Asset,
-      score: freezed == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as String?,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
-      assets: null == assets
-          ? _value._assets
-          : assets // ignore: cast_nullable_to_non_nullable
-              as List<Asset>,
-    ));
+    return _then(
+      _$ActorImpl(
+        companyName:
+            freezed == companyName
+                ? _value.companyName
+                : companyName // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        location:
+            freezed == location
+                ? _value.location
+                : location // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        companyDescription:
+            freezed == companyDescription
+                ? _value.companyDescription
+                : companyDescription // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        userDevice:
+            null == userDevice
+                ? _value.userDevice
+                : userDevice // ignore: cast_nullable_to_non_nullable
+                    as Asset,
+        score:
+            freezed == score
+                ? _value.score
+                : score // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        locale:
+            null == locale
+                ? _value.locale
+                : locale // ignore: cast_nullable_to_non_nullable
+                    as String,
+        assets:
+            null == assets
+                ? _value._assets
+                : assets // ignore: cast_nullable_to_non_nullable
+                    as List<Asset>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ActorImpl implements _Actor {
-  const _$ActorImpl(
-      {this.companyName,
-      this.location,
-      this.companyDescription,
-      required this.userDevice,
-      this.score,
-      required this.locale,
-      required final List<Asset> assets})
-      : _assets = assets;
+  const _$ActorImpl({
+    this.companyName,
+    this.location,
+    this.companyDescription,
+    required this.userDevice,
+    this.score,
+    required this.locale,
+    required final List<Asset> assets,
+  }) : _assets = assets;
 
-  factory _$ActorImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ActorImplFromJson(json);
+  factory _$ActorImpl.fromJson(Map<String, dynamic> json) => _$$ActorImplFromJson(json);
 
   @override
   final String? companyName;
@@ -649,14 +638,11 @@ class _$ActorImpl implements _Actor {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ActorImpl &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.companyName, companyName) || other.companyName == companyName) &&
+            (identical(other.location, location) || other.location == location) &&
             (identical(other.companyDescription, companyDescription) ||
                 other.companyDescription == companyDescription) &&
-            (identical(other.userDevice, userDevice) ||
-                other.userDevice == userDevice) &&
+            (identical(other.userDevice, userDevice) || other.userDevice == userDevice) &&
             (identical(other.score, score) || other.score == score) &&
             (identical(other.locale, locale) || other.locale == locale) &&
             const DeepCollectionEquality().equals(other._assets, _assets));
@@ -665,40 +651,39 @@ class _$ActorImpl implements _Actor {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      companyName,
-      location,
-      companyDescription,
-      userDevice,
-      score,
-      locale,
-      const DeepCollectionEquality().hash(_assets));
+    runtimeType,
+    companyName,
+    location,
+    companyDescription,
+    userDevice,
+    score,
+    locale,
+    const DeepCollectionEquality().hash(_assets),
+  );
 
   /// Create a copy of Actor
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ActorImplCopyWith<_$ActorImpl> get copyWith =>
-      __$$ActorImplCopyWithImpl<_$ActorImpl>(this, _$identity);
+  _$$ActorImplCopyWith<_$ActorImpl> get copyWith => __$$ActorImplCopyWithImpl<_$ActorImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ActorImplToJson(
-      this,
-    );
+    return _$$ActorImplToJson(this);
   }
 }
 
 abstract class _Actor implements Actor {
-  const factory _Actor(
-      {final String? companyName,
-      final String? location,
-      final String? companyDescription,
-      required final Asset userDevice,
-      final String? score,
-      required final String locale,
-      required final List<Asset> assets}) = _$ActorImpl;
+  const factory _Actor({
+    final String? companyName,
+    final String? location,
+    final String? companyDescription,
+    required final Asset userDevice,
+    final String? score,
+    required final String locale,
+    required final List<Asset> assets,
+  }) = _$ActorImpl;
 
   factory _Actor.fromJson(Map<String, dynamic> json) = _$ActorImpl.fromJson;
 
@@ -721,8 +706,7 @@ abstract class _Actor implements Actor {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ActorImplCopyWith<_$ActorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ActorImplCopyWith<_$ActorImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 Asset _$AssetFromJson(Map<String, dynamic> json) {
@@ -746,15 +730,13 @@ mixin _$Asset {
 
 /// @nodoc
 abstract class $AssetCopyWith<$Res> {
-  factory $AssetCopyWith(Asset value, $Res Function(Asset) then) =
-      _$AssetCopyWithImpl<$Res, Asset>;
+  factory $AssetCopyWith(Asset value, $Res Function(Asset) then) = _$AssetCopyWithImpl<$Res, Asset>;
   @useResult
   $Res call({String type, String version, String model});
 }
 
 /// @nodoc
-class _$AssetCopyWithImpl<$Res, $Val extends Asset>
-    implements $AssetCopyWith<$Res> {
+class _$AssetCopyWithImpl<$Res, $Val extends Asset> implements $AssetCopyWith<$Res> {
   _$AssetCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -766,80 +748,76 @@ class _$AssetCopyWithImpl<$Res, $Val extends Asset>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-    Object? version = null,
-    Object? model = null,
-  }) {
-    return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      version: null == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
-              as String,
-      model: null == model
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? type = null, Object? version = null, Object? model = null}) {
+    return _then(
+      _value.copyWith(
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+            version:
+                null == version
+                    ? _value.version
+                    : version // ignore: cast_nullable_to_non_nullable
+                        as String,
+            model:
+                null == model
+                    ? _value.model
+                    : model // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AssetImplCopyWith<$Res> implements $AssetCopyWith<$Res> {
-  factory _$$AssetImplCopyWith(
-          _$AssetImpl value, $Res Function(_$AssetImpl) then) =
-      __$$AssetImplCopyWithImpl<$Res>;
+  factory _$$AssetImplCopyWith(_$AssetImpl value, $Res Function(_$AssetImpl) then) = __$$AssetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, String version, String model});
 }
 
 /// @nodoc
-class __$$AssetImplCopyWithImpl<$Res>
-    extends _$AssetCopyWithImpl<$Res, _$AssetImpl>
+class __$$AssetImplCopyWithImpl<$Res> extends _$AssetCopyWithImpl<$Res, _$AssetImpl>
     implements _$$AssetImplCopyWith<$Res> {
-  __$$AssetImplCopyWithImpl(
-      _$AssetImpl _value, $Res Function(_$AssetImpl) _then)
-      : super(_value, _then);
+  __$$AssetImplCopyWithImpl(_$AssetImpl _value, $Res Function(_$AssetImpl) _then) : super(_value, _then);
 
   /// Create a copy of Asset
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-    Object? version = null,
-    Object? model = null,
-  }) {
-    return _then(_$AssetImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      version: null == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
-              as String,
-      model: null == model
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? type = null, Object? version = null, Object? model = null}) {
+    return _then(
+      _$AssetImpl(
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+        version:
+            null == version
+                ? _value.version
+                : version // ignore: cast_nullable_to_non_nullable
+                    as String,
+        model:
+            null == model
+                ? _value.model
+                : model // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AssetImpl implements _Asset {
-  const _$AssetImpl(
-      {required this.type, required this.version, required this.model});
+  const _$AssetImpl({required this.type, required this.version, required this.model});
 
-  factory _$AssetImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AssetImplFromJson(json);
+  factory _$AssetImpl.fromJson(Map<String, dynamic> json) => _$$AssetImplFromJson(json);
 
   @override
   final String type;
@@ -872,22 +850,17 @@ class _$AssetImpl implements _Asset {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>
-      __$$AssetImplCopyWithImpl<_$AssetImpl>(this, _$identity);
+  _$$AssetImplCopyWith<_$AssetImpl> get copyWith => __$$AssetImplCopyWithImpl<_$AssetImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AssetImplToJson(
-      this,
-    );
+    return _$$AssetImplToJson(this);
   }
 }
 
 abstract class _Asset implements Asset {
-  const factory _Asset(
-      {required final String type,
-      required final String version,
-      required final String model}) = _$AssetImpl;
+  const factory _Asset({required final String type, required final String version, required final String model}) =
+      _$AssetImpl;
 
   factory _Asset.fromJson(Map<String, dynamic> json) = _$AssetImpl.fromJson;
 
@@ -902,8 +875,7 @@ abstract class _Asset implements Asset {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AssetImplCopyWith<_$AssetImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AssetImplCopyWith<_$AssetImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 NewsActicle _$NewsActicleFromJson(Map<String, dynamic> json) {
@@ -924,27 +896,19 @@ mixin _$NewsActicle {
   /// Create a copy of NewsActicle
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $NewsActicleCopyWith<NewsActicle> get copyWith =>
-      throw _privateConstructorUsedError;
+  $NewsActicleCopyWith<NewsActicle> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NewsActicleCopyWith<$Res> {
-  factory $NewsActicleCopyWith(
-          NewsActicle value, $Res Function(NewsActicle) then) =
+  factory $NewsActicleCopyWith(NewsActicle value, $Res Function(NewsActicle) then) =
       _$NewsActicleCopyWithImpl<$Res, NewsActicle>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String description,
-      String type,
-      List<Protection> protection});
+  $Res call({String id, String name, String description, String type, List<Protection> protection});
 }
 
 /// @nodoc
-class _$NewsActicleCopyWithImpl<$Res, $Val extends NewsActicle>
-    implements $NewsActicleCopyWith<$Res> {
+class _$NewsActicleCopyWithImpl<$Res, $Val extends NewsActicle> implements $NewsActicleCopyWith<$Res> {
   _$NewsActicleCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -963,54 +927,52 @@ class _$NewsActicleCopyWithImpl<$Res, $Val extends NewsActicle>
     Object? type = null,
     Object? protection = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      protection: null == protection
-          ? _value.protection
-          : protection // ignore: cast_nullable_to_non_nullable
-              as List<Protection>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            description:
+                null == description
+                    ? _value.description
+                    : description // ignore: cast_nullable_to_non_nullable
+                        as String,
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as String,
+            protection:
+                null == protection
+                    ? _value.protection
+                    : protection // ignore: cast_nullable_to_non_nullable
+                        as List<Protection>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$DefinitionImplCopyWith<$Res>
-    implements $NewsActicleCopyWith<$Res> {
-  factory _$$DefinitionImplCopyWith(
-          _$DefinitionImpl value, $Res Function(_$DefinitionImpl) then) =
+abstract class _$$DefinitionImplCopyWith<$Res> implements $NewsActicleCopyWith<$Res> {
+  factory _$$DefinitionImplCopyWith(_$DefinitionImpl value, $Res Function(_$DefinitionImpl) then) =
       __$$DefinitionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String description,
-      String type,
-      List<Protection> protection});
+  $Res call({String id, String name, String description, String type, List<Protection> protection});
 }
 
 /// @nodoc
-class __$$DefinitionImplCopyWithImpl<$Res>
-    extends _$NewsActicleCopyWithImpl<$Res, _$DefinitionImpl>
+class __$$DefinitionImplCopyWithImpl<$Res> extends _$NewsActicleCopyWithImpl<$Res, _$DefinitionImpl>
     implements _$$DefinitionImplCopyWith<$Res> {
-  __$$DefinitionImplCopyWithImpl(
-      _$DefinitionImpl _value, $Res Function(_$DefinitionImpl) _then)
-      : super(_value, _then);
+  __$$DefinitionImplCopyWithImpl(_$DefinitionImpl _value, $Res Function(_$DefinitionImpl) _then) : super(_value, _then);
 
   /// Create a copy of NewsActicle
   /// with the given fields replaced by the non-null parameter values.
@@ -1023,44 +985,50 @@ class __$$DefinitionImplCopyWithImpl<$Res>
     Object? type = null,
     Object? protection = null,
   }) {
-    return _then(_$DefinitionImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      protection: null == protection
-          ? _value._protection
-          : protection // ignore: cast_nullable_to_non_nullable
-              as List<Protection>,
-    ));
+    return _then(
+      _$DefinitionImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        description:
+            null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                    as String,
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as String,
+        protection:
+            null == protection
+                ? _value._protection
+                : protection // ignore: cast_nullable_to_non_nullable
+                    as List<Protection>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$DefinitionImpl implements _Definition {
-  const _$DefinitionImpl(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.type,
-      required final List<Protection> protection})
-      : _protection = protection;
+  const _$DefinitionImpl({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.type,
+    required final List<Protection> protection,
+  }) : _protection = protection;
 
-  factory _$DefinitionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DefinitionImplFromJson(json);
+  factory _$DefinitionImpl.fromJson(Map<String, dynamic> json) => _$$DefinitionImplFromJson(json);
 
   @override
   final String id;
@@ -1090,17 +1058,15 @@ class _$DefinitionImpl implements _Definition {
             other is _$DefinitionImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
+            (identical(other.description, description) || other.description == description) &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality()
-                .equals(other._protection, _protection));
+            const DeepCollectionEquality().equals(other._protection, _protection));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description, type,
-      const DeepCollectionEquality().hash(_protection));
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, description, type, const DeepCollectionEquality().hash(_protection));
 
   /// Create a copy of NewsActicle
   /// with the given fields replaced by the non-null parameter values.
@@ -1112,22 +1078,20 @@ class _$DefinitionImpl implements _Definition {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DefinitionImplToJson(
-      this,
-    );
+    return _$$DefinitionImplToJson(this);
   }
 }
 
 abstract class _Definition implements NewsActicle {
-  const factory _Definition(
-      {required final String id,
-      required final String name,
-      required final String description,
-      required final String type,
-      required final List<Protection> protection}) = _$DefinitionImpl;
+  const factory _Definition({
+    required final String id,
+    required final String name,
+    required final String description,
+    required final String type,
+    required final List<Protection> protection,
+  }) = _$DefinitionImpl;
 
-  factory _Definition.fromJson(Map<String, dynamic> json) =
-      _$DefinitionImpl.fromJson;
+  factory _Definition.fromJson(Map<String, dynamic> json) = _$DefinitionImpl.fromJson;
 
   @override
   String get id;
@@ -1144,8 +1108,7 @@ abstract class _Definition implements NewsActicle {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DefinitionImplCopyWith<_$DefinitionImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DefinitionImplCopyWith<_$DefinitionImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 Protection _$ProtectionFromJson(Map<String, dynamic> json) {
@@ -1164,22 +1127,19 @@ mixin _$Protection {
   /// Create a copy of Protection
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ProtectionCopyWith<Protection> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ProtectionCopyWith<Protection> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ProtectionCopyWith<$Res> {
-  factory $ProtectionCopyWith(
-          Protection value, $Res Function(Protection) then) =
+  factory $ProtectionCopyWith(Protection value, $Res Function(Protection) then) =
       _$ProtectionCopyWithImpl<$Res, Protection>;
   @useResult
   $Res call({String name, String summary, String status});
 }
 
 /// @nodoc
-class _$ProtectionCopyWithImpl<$Res, $Val extends Protection>
-    implements $ProtectionCopyWith<$Res> {
+class _$ProtectionCopyWithImpl<$Res, $Val extends Protection> implements $ProtectionCopyWith<$Res> {
   _$ProtectionCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -1191,33 +1151,33 @@ class _$ProtectionCopyWithImpl<$Res, $Val extends Protection>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? summary = null,
-    Object? status = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? name = null, Object? summary = null, Object? status = null}) {
+    return _then(
+      _value.copyWith(
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            summary:
+                null == summary
+                    ? _value.summary
+                    : summary // ignore: cast_nullable_to_non_nullable
+                        as String,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$ProtectionImplCopyWith<$Res>
-    implements $ProtectionCopyWith<$Res> {
-  factory _$$ProtectionImplCopyWith(
-          _$ProtectionImpl value, $Res Function(_$ProtectionImpl) then) =
+abstract class _$$ProtectionImplCopyWith<$Res> implements $ProtectionCopyWith<$Res> {
+  factory _$$ProtectionImplCopyWith(_$ProtectionImpl value, $Res Function(_$ProtectionImpl) then) =
       __$$ProtectionImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -1225,47 +1185,43 @@ abstract class _$$ProtectionImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ProtectionImplCopyWithImpl<$Res>
-    extends _$ProtectionCopyWithImpl<$Res, _$ProtectionImpl>
+class __$$ProtectionImplCopyWithImpl<$Res> extends _$ProtectionCopyWithImpl<$Res, _$ProtectionImpl>
     implements _$$ProtectionImplCopyWith<$Res> {
-  __$$ProtectionImplCopyWithImpl(
-      _$ProtectionImpl _value, $Res Function(_$ProtectionImpl) _then)
-      : super(_value, _then);
+  __$$ProtectionImplCopyWithImpl(_$ProtectionImpl _value, $Res Function(_$ProtectionImpl) _then) : super(_value, _then);
 
   /// Create a copy of Protection
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? summary = null,
-    Object? status = null,
-  }) {
-    return _then(_$ProtectionImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? name = null, Object? summary = null, Object? status = null}) {
+    return _then(
+      _$ProtectionImpl(
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        summary:
+            null == summary
+                ? _value.summary
+                : summary // ignore: cast_nullable_to_non_nullable
+                    as String,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProtectionImpl implements _Protection {
-  const _$ProtectionImpl(
-      {required this.name, required this.summary, required this.status});
+  const _$ProtectionImpl({required this.name, required this.summary, required this.status});
 
-  factory _$ProtectionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProtectionImplFromJson(json);
+  factory _$ProtectionImpl.fromJson(Map<String, dynamic> json) => _$$ProtectionImplFromJson(json);
 
   @override
   final String name;
@@ -1303,20 +1259,15 @@ class _$ProtectionImpl implements _Protection {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProtectionImplToJson(
-      this,
-    );
+    return _$$ProtectionImplToJson(this);
   }
 }
 
 abstract class _Protection implements Protection {
-  const factory _Protection(
-      {required final String name,
-      required final String summary,
-      required final String status}) = _$ProtectionImpl;
+  const factory _Protection({required final String name, required final String summary, required final String status}) =
+      _$ProtectionImpl;
 
-  factory _Protection.fromJson(Map<String, dynamic> json) =
-      _$ProtectionImpl.fromJson;
+  factory _Protection.fromJson(Map<String, dynamic> json) = _$ProtectionImpl.fromJson;
 
   @override
   String get name;
@@ -1329,6 +1280,5 @@ abstract class _Protection implements Protection {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProtectionImplCopyWith<_$ProtectionImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ProtectionImplCopyWith<_$ProtectionImpl> get copyWith => throw _privateConstructorUsedError;
 }

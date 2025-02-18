@@ -8,11 +8,7 @@ import 'package:test/test.dart';
 
 void main() {
   ProviderContainer getContainer() {
-    return ProviderContainer(
-      overrides: [
-        dioProvider.overrideWithValue(Dio()),
-      ],
-    );
+    return ProviderContainer(overrides: [dioProvider.overrideWithValue(Dio())]);
   }
 
   final container = getContainer();
@@ -27,9 +23,10 @@ void main() {
     expect(userID, isNotNull);
 
     final prompt = Prompt(
-        userID: userID!.userID,
-        origin: userID.origin ?? "",
-        userMessage: "hello, what is geiger toolbox");
+      userID: userID!.userID,
+      origin: userID.origin ?? "",
+      userMessage: "hello, what is geiger toolbox",
+    );
 
     final message = await convRepo.chatWithCA(prompt: prompt);
     print("prompt => $prompt");

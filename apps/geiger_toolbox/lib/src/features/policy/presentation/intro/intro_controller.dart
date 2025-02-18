@@ -12,6 +12,4 @@ class IntroController extends _$IntroController {
   void update(int value) {
     state = value;
   }
-
-
 }

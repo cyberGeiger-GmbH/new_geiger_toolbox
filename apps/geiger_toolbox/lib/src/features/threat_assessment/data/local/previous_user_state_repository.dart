@@ -15,13 +15,9 @@ class PreviousUserStateRepository {
 
   PreviousUserStateRepository(this.ref);
 
-  Future<void> storeUserProfileState(
-      {required Profile currentUserProfile}) async {
+  Future<void> storeUserProfileState({required Profile currentUserProfile}) async {
     try {
-      final value = PreviousUserProfilesCompanion(
-        id: Value(1),
-        previousProfile: Value(currentUserProfile),
-      );
+      final value = PreviousUserProfilesCompanion(id: Value(1), previousProfile: Value(currentUserProfile));
       await _db.into(_db.previousUserProfiles).insertOnConflictUpdate(value);
     } catch (e, s) {
       _log.e("$e, $s");

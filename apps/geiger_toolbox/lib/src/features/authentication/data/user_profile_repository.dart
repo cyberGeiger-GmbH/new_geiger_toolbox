@@ -29,14 +29,14 @@ class UserProfileRepository {
     }
   }
 
-  Future<bool?> updateUserProfile(
-      {required UserID userId, required User user}) async {
+  Future<bool?> updateUserProfile({required UserID userId, required User user}) async {
     try {
       final userProfile = UserProfilesCompanion(
-          name: Value(user.name),
-          email: Value(user.email),
-          owner: Value(user.owner),
-          createdAt: Value(user.createdAt!));
+        name: Value(user.name),
+        email: Value(user.email),
+        owner: Value(user.owner),
+        createdAt: Value(user.createdAt!),
+      );
       return _db.update(_db.userProfiles).replace(userProfile);
     } catch (e) {
       rethrow;
@@ -74,15 +74,16 @@ class UserProfileRepository {
     final row = query.watchSingleOrNull();
 
     return row.map(
-      (user) => user != null
-          ? User(
-              userId: user.userId,
-              name: user.name,
-              email: user.email,
-              owner: user.owner,
-              createdAt: user.createdAt,
-            )
-          : null,
+      (user) =>
+          user != null
+              ? User(
+                userId: user.userId,
+                name: user.name,
+                email: user.email,
+                owner: user.owner,
+                createdAt: user.createdAt,
+              )
+              : null,
     );
   }
 }

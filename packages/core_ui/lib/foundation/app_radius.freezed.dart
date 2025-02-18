@@ -12,7 +12,8 @@ part of 'app_radius.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AppRadius {
@@ -23,21 +24,18 @@ mixin _$AppRadius {
   /// Create a copy of AppRadius
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppRadiusCopyWith<AppRadius> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AppRadiusCopyWith<AppRadius> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppRadiusCopyWith<$Res> {
-  factory $AppRadiusCopyWith(AppRadius value, $Res Function(AppRadius) then) =
-      _$AppRadiusCopyWithImpl<$Res, AppRadius>;
+  factory $AppRadiusCopyWith(AppRadius value, $Res Function(AppRadius) then) = _$AppRadiusCopyWithImpl<$Res, AppRadius>;
   @useResult
   $Res call({Radius small, Radius regular, Radius big});
 }
 
 /// @nodoc
-class _$AppRadiusCopyWithImpl<$Res, $Val extends AppRadius>
-    implements $AppRadiusCopyWith<$Res> {
+class _$AppRadiusCopyWithImpl<$Res, $Val extends AppRadius> implements $AppRadiusCopyWith<$Res> {
   _$AppRadiusCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -49,33 +47,33 @@ class _$AppRadiusCopyWithImpl<$Res, $Val extends AppRadius>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? small = null,
-    Object? regular = null,
-    Object? big = null,
-  }) {
-    return _then(_value.copyWith(
-      small: null == small
-          ? _value.small
-          : small // ignore: cast_nullable_to_non_nullable
-              as Radius,
-      regular: null == regular
-          ? _value.regular
-          : regular // ignore: cast_nullable_to_non_nullable
-              as Radius,
-      big: null == big
-          ? _value.big
-          : big // ignore: cast_nullable_to_non_nullable
-              as Radius,
-    ) as $Val);
+  $Res call({Object? small = null, Object? regular = null, Object? big = null}) {
+    return _then(
+      _value.copyWith(
+            small:
+                null == small
+                    ? _value.small
+                    : small // ignore: cast_nullable_to_non_nullable
+                        as Radius,
+            regular:
+                null == regular
+                    ? _value.regular
+                    : regular // ignore: cast_nullable_to_non_nullable
+                        as Radius,
+            big:
+                null == big
+                    ? _value.big
+                    : big // ignore: cast_nullable_to_non_nullable
+                        as Radius,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$AppRadiusImplCopyWith<$Res>
-    implements $AppRadiusCopyWith<$Res> {
-  factory _$$AppRadiusImplCopyWith(
-          _$AppRadiusImpl value, $Res Function(_$AppRadiusImpl) then) =
+abstract class _$$AppRadiusImplCopyWith<$Res> implements $AppRadiusCopyWith<$Res> {
+  factory _$$AppRadiusImplCopyWith(_$AppRadiusImpl value, $Res Function(_$AppRadiusImpl) then) =
       __$$AppRadiusImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -83,45 +81,41 @@ abstract class _$$AppRadiusImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AppRadiusImplCopyWithImpl<$Res>
-    extends _$AppRadiusCopyWithImpl<$Res, _$AppRadiusImpl>
+class __$$AppRadiusImplCopyWithImpl<$Res> extends _$AppRadiusCopyWithImpl<$Res, _$AppRadiusImpl>
     implements _$$AppRadiusImplCopyWith<$Res> {
-  __$$AppRadiusImplCopyWithImpl(
-      _$AppRadiusImpl _value, $Res Function(_$AppRadiusImpl) _then)
-      : super(_value, _then);
+  __$$AppRadiusImplCopyWithImpl(_$AppRadiusImpl _value, $Res Function(_$AppRadiusImpl) _then) : super(_value, _then);
 
   /// Create a copy of AppRadius
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? small = null,
-    Object? regular = null,
-    Object? big = null,
-  }) {
-    return _then(_$AppRadiusImpl(
-      small: null == small
-          ? _value.small
-          : small // ignore: cast_nullable_to_non_nullable
-              as Radius,
-      regular: null == regular
-          ? _value.regular
-          : regular // ignore: cast_nullable_to_non_nullable
-              as Radius,
-      big: null == big
-          ? _value.big
-          : big // ignore: cast_nullable_to_non_nullable
-              as Radius,
-    ));
+  $Res call({Object? small = null, Object? regular = null, Object? big = null}) {
+    return _then(
+      _$AppRadiusImpl(
+        small:
+            null == small
+                ? _value.small
+                : small // ignore: cast_nullable_to_non_nullable
+                    as Radius,
+        regular:
+            null == regular
+                ? _value.regular
+                : regular // ignore: cast_nullable_to_non_nullable
+                    as Radius,
+        big:
+            null == big
+                ? _value.big
+                : big // ignore: cast_nullable_to_non_nullable
+                    as Radius,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$AppRadiusImpl extends _AppRadius {
-  const _$AppRadiusImpl(
-      {required this.small, required this.regular, required this.big})
-      : super._();
+  const _$AppRadiusImpl({required this.small, required this.regular, required this.big}) : super._();
 
   @override
   final Radius small;
@@ -158,10 +152,8 @@ class _$AppRadiusImpl extends _AppRadius {
 }
 
 abstract class _AppRadius extends AppRadius {
-  const factory _AppRadius(
-      {required final Radius small,
-      required final Radius regular,
-      required final Radius big}) = _$AppRadiusImpl;
+  const factory _AppRadius({required final Radius small, required final Radius regular, required final Radius big}) =
+      _$AppRadiusImpl;
   const _AppRadius._() : super._();
 
   @override
@@ -175,8 +167,7 @@ abstract class _AppRadius extends AppRadius {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppRadiusImplCopyWith<_$AppRadiusImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AppRadiusImplCopyWith<_$AppRadiusImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -186,14 +177,12 @@ mixin _$AppBorderRadius {
   /// Create a copy of AppBorderRadius
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppBorderRadiusCopyWith<AppBorderRadius> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AppBorderRadiusCopyWith<AppBorderRadius> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppBorderRadiusCopyWith<$Res> {
-  factory $AppBorderRadiusCopyWith(
-          AppBorderRadius value, $Res Function(AppBorderRadius) then) =
+  factory $AppBorderRadiusCopyWith(AppBorderRadius value, $Res Function(AppBorderRadius) then) =
       _$AppBorderRadiusCopyWithImpl<$Res, AppBorderRadius>;
   @useResult
   $Res call({AppRadius radius});
@@ -202,8 +191,7 @@ abstract class $AppBorderRadiusCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AppBorderRadiusCopyWithImpl<$Res, $Val extends AppBorderRadius>
-    implements $AppBorderRadiusCopyWith<$Res> {
+class _$AppBorderRadiusCopyWithImpl<$Res, $Val extends AppBorderRadius> implements $AppBorderRadiusCopyWith<$Res> {
   _$AppBorderRadiusCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -215,15 +203,17 @@ class _$AppBorderRadiusCopyWithImpl<$Res, $Val extends AppBorderRadius>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? radius = null,
-  }) {
-    return _then(_value.copyWith(
-      radius: null == radius
-          ? _value.radius
-          : radius // ignore: cast_nullable_to_non_nullable
-              as AppRadius,
-    ) as $Val);
+  $Res call({Object? radius = null}) {
+    return _then(
+      _value.copyWith(
+            radius:
+                null == radius
+                    ? _value.radius
+                    : radius // ignore: cast_nullable_to_non_nullable
+                        as AppRadius,
+          )
+          as $Val,
+    );
   }
 
   /// Create a copy of AppBorderRadius
@@ -238,10 +228,8 @@ class _$AppBorderRadiusCopyWithImpl<$Res, $Val extends AppBorderRadius>
 }
 
 /// @nodoc
-abstract class _$$AppBorderRadiusImplCopyWith<$Res>
-    implements $AppBorderRadiusCopyWith<$Res> {
-  factory _$$AppBorderRadiusImplCopyWith(_$AppBorderRadiusImpl value,
-          $Res Function(_$AppBorderRadiusImpl) then) =
+abstract class _$$AppBorderRadiusImplCopyWith<$Res> implements $AppBorderRadiusCopyWith<$Res> {
+  factory _$$AppBorderRadiusImplCopyWith(_$AppBorderRadiusImpl value, $Res Function(_$AppBorderRadiusImpl) then) =
       __$$AppBorderRadiusImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -252,26 +240,25 @@ abstract class _$$AppBorderRadiusImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AppBorderRadiusImplCopyWithImpl<$Res>
-    extends _$AppBorderRadiusCopyWithImpl<$Res, _$AppBorderRadiusImpl>
+class __$$AppBorderRadiusImplCopyWithImpl<$Res> extends _$AppBorderRadiusCopyWithImpl<$Res, _$AppBorderRadiusImpl>
     implements _$$AppBorderRadiusImplCopyWith<$Res> {
-  __$$AppBorderRadiusImplCopyWithImpl(
-      _$AppBorderRadiusImpl _value, $Res Function(_$AppBorderRadiusImpl) _then)
-      : super(_value, _then);
+  __$$AppBorderRadiusImplCopyWithImpl(_$AppBorderRadiusImpl _value, $Res Function(_$AppBorderRadiusImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of AppBorderRadius
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? radius = null,
-  }) {
-    return _then(_$AppBorderRadiusImpl(
-      radius: null == radius
-          ? _value.radius
-          : radius // ignore: cast_nullable_to_non_nullable
-              as AppRadius,
-    ));
+  $Res call({Object? radius = null}) {
+    return _then(
+      _$AppBorderRadiusImpl(
+        radius:
+            null == radius
+                ? _value.radius
+                : radius // ignore: cast_nullable_to_non_nullable
+                    as AppRadius,
+      ),
+    );
   }
 }
 
@@ -305,13 +292,11 @@ class _$AppBorderRadiusImpl extends _AppBorderRadius {
   @override
   @pragma('vm:prefer-inline')
   _$$AppBorderRadiusImplCopyWith<_$AppBorderRadiusImpl> get copyWith =>
-      __$$AppBorderRadiusImplCopyWithImpl<_$AppBorderRadiusImpl>(
-          this, _$identity);
+      __$$AppBorderRadiusImplCopyWithImpl<_$AppBorderRadiusImpl>(this, _$identity);
 }
 
 abstract class _AppBorderRadius extends AppBorderRadius {
-  const factory _AppBorderRadius({required final AppRadius radius}) =
-      _$AppBorderRadiusImpl;
+  const factory _AppBorderRadius({required final AppRadius radius}) = _$AppBorderRadiusImpl;
   const _AppBorderRadius._() : super._();
 
   @override
@@ -321,6 +306,5 @@ abstract class _AppBorderRadius extends AppBorderRadius {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppBorderRadiusImplCopyWith<_$AppBorderRadiusImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AppBorderRadiusImplCopyWith<_$AppBorderRadiusImpl> get copyWith => throw _privateConstructorUsedError;
 }

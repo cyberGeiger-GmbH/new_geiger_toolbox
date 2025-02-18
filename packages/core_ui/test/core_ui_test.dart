@@ -6,22 +6,14 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 
 void main() {
   testGoldens("Design system", (WidgetTester tester) async {
-    final builder = GoldenBuilder.column()
-      ..addScenario(
-        "Colors",
-        DesignSystemHelper.getColors(),
-      )
-      ..addScenario(
-        "Text",
-        DesignSystemHelper.getTexts(),
-      )
-      ..addScenario("Buttons", DesignSystemHelper.getAppButtons());
+    final builder =
+        GoldenBuilder.column()
+          ..addScenario("Colors", DesignSystemHelper.getColors())
+          ..addScenario("Text", DesignSystemHelper.getTexts())
+          ..addScenario("Buttons", DesignSystemHelper.getAppButtons());
 
     //await loadRobotoFont();
-    await tester.pumpWidgetBuilder(
-      builder.build(),
-      surfaceSize: const Size(1000, 1000),
-    );
+    await tester.pumpWidgetBuilder(builder.build(), surfaceSize: const Size(1000, 1000));
     await screenMatchesGolden(tester, "design_system");
   }, tags: ['golden']);
 }

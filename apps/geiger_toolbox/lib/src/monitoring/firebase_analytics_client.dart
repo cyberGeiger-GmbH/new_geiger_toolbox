@@ -26,15 +26,12 @@ class FirebaseAnalyticsClient implements AnalyticsClient {
 
   @override
   Future<void> trackScreenView(String routeName, String action) async {
-    await _analytics.logScreenView(
-        screenName: "screen_view",
-        parameters: {'name': routeName, 'action': action});
+    await _analytics.logScreenView(screenName: "screen_view", parameters: {'name': routeName, 'action': action});
   }
 
   @override
   Future<void> trackTodoCompleted(int completedCount) async {
-    await _analytics.logEvent(
-        name: 'Todo completed', parameters: {'count': completedCount});
+    await _analytics.logEvent(name: 'Todo completed', parameters: {'count': completedCount});
   }
 
   @override

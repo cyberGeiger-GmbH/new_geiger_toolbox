@@ -13,8 +13,7 @@ String _$getUuidHash() => r'07d1e88e7cd9b010bf6942a80220705c1691f0b2';
 final getUuidProvider = AutoDisposeProvider<String>.internal(
   getUuid,
   name: r'getUuidProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$getUuidHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getUuidHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

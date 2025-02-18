@@ -6,18 +6,14 @@ part of 'perplexity_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$perplexityRepositoryHash() =>
-    r'46c5ce0e54fa6641176ba2332414845a1d4da27b';
+String _$perplexityRepositoryHash() => r'46c5ce0e54fa6641176ba2332414845a1d4da27b';
 
 /// See also [perplexityRepository].
 @ProviderFor(perplexityRepository)
-final perplexityRepositoryProvider =
-    AutoDisposeProvider<PerplexityRepository>.internal(
+final perplexityRepositoryProvider = AutoDisposeProvider<PerplexityRepository>.internal(
   perplexityRepository,
   name: r'perplexityRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$perplexityRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$perplexityRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

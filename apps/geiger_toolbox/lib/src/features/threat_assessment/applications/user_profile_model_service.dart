@@ -28,8 +28,7 @@ class UserProfileModelService {
     final userProfileStateRepo = ref.read(previousUserStateRepoProvider);
     final currentUserProfile = await _fetchCurrentUser();
     _log.i("fetching current user profile");
-    await userProfileStateRepo.storeUserProfileState(
-        currentUserProfile: currentUserProfile);
+    await userProfileStateRepo.storeUserProfileState(currentUserProfile: currentUserProfile);
     _log.i("DONE Caching current user profile state");
   }
 
@@ -40,38 +39,35 @@ class UserProfileModelService {
     final scoreRepo = ref.read(localGeigerScoreRepoProvider);
 
     final companyInfo = await compRepo.fetchCompany();
-    final currentNewsState =
-        await ref.read(fetchCurrentNewsStateProvider.future);
+    final currentNewsState = await ref.read(fetchCurrentNewsStateProvider.future);
 
     final currentUserDevice = Asset(
-        type: _deviceType.type.name,
-        version: _deviceType.version,
-        model: _deviceType.model);
+      type: _deviceType.type.name,
+      version: _deviceType.version,
+      model: _deviceType.model,
+    );
 
     final score = await scoreRepo.fetchGeigerScore();
 
     final actor = Actor(
-        userDevice: currentUserDevice,
-        companyDescription: companyInfo?.description,
-        location: companyInfo?.location,
-        companyName: companyInfo?.companyName,
-        //todo: get locale from device or user profile
-        locale: "en",
-        assets: [],
-        score: "${score?.geigerScore}");
-    final currentProfile =
-        Profile(id: userId, actor: actor, news: currentNewsState);
+      userDevice: currentUserDevice,
+      companyDescription: companyInfo?.description,
+      location: companyInfo?.location,
+      companyName: companyInfo?.companyName,
+      //todo: get locale from device or user profile
+      locale: "en",
+      assets: [],
+      score: "${score?.geigerScore}",
+    );
+    final currentProfile = Profile(id: userId, actor: actor, news: currentNewsState);
     return currentProfile;
   }
 
   Future<UserProfileModel> fetchUserProfileModel() async {
-    final prevProfile = await ref
-        .read(previousUserStateRepoProvider)
-        .fetchPreviousUserProfile();
+    final prevProfile = await ref.read(previousUserStateRepoProvider).fetchPreviousUserProfile();
     final currentProfile = await _fetchCurrentUser();
 
-    return UserProfileModel(
-        currentUserProfile: currentProfile, previousUserProfile: prevProfile);
+    return UserProfileModel(currentUserProfile: currentProfile, previousUserProfile: prevProfile);
   }
 
   Future<String> _userId() async {

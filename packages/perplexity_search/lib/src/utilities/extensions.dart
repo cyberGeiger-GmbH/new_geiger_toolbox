@@ -12,9 +12,7 @@ extension ResponseExtension<T> on Response {
 
     if (code != null && code == StatusCode.success) {
       final choice = Choices.fromJson(data);
-      final description = Description(
-          references: choice.citations,
-          description: choice.choices[0].message.content);
+      final description = Description(references: choice.citations, description: choice.choices[0].message.content);
       return description;
     }
     return null;

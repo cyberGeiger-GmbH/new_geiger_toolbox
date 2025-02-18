@@ -21,17 +21,18 @@ extension StringExtension on String {
       return words.take(remainingWord).join(' ');
     }
 
-    words.map((word) {
-      // Format numbers greater than or equal to 1000 with commas
-      if (RegExp(r'^\d+$').hasMatch(word)) {
-        int number = int.parse(word);
-        if (number >= 1000) {
-          return NumberFormat.decimalPattern()
-              .format(number); // Format the number
-        }
-      }
-      return word; // Leave other words as is
-    }).join(' '); // Join words back into a sentence
+    words
+        .map((word) {
+          // Format numbers greater than or equal to 1000 with commas
+          if (RegExp(r'^\d+$').hasMatch(word)) {
+            int number = int.parse(word);
+            if (number >= 1000) {
+              return NumberFormat.decimalPattern().format(number); // Format the number
+            }
+          }
+          return word; // Leave other words as is
+        })
+        .join(' '); // Join words back into a sentence
 
     // Otherwise, return the entire result
     return result;
@@ -98,7 +99,7 @@ extension StringExtension on String {
       "down",
       "off",
       "above",
-      "near"
+      "near",
     };
 
     // Split the string into words

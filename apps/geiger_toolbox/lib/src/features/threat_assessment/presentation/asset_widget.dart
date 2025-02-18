@@ -11,22 +11,17 @@ class AssetWidget extends StatelessWidget {
     return AppAssetsIcons.filledTonal(
       context: context,
       addDevices: () {
-        showNotImplementedAlertDialog(
-            context: context,
-            title: "Devices",
-            content: "No devices yet!".hardcoded);
+        showNotImplementedAlertDialog(context: context, title: "Devices", content: "No devices yet!".hardcoded);
       },
       addNetwork: () {
         showNotImplementedAlertDialog(
-            context: context,
-            title: "Network Monitoring",
-            content: "No network yet!".hardcoded);
+          context: context,
+          title: "Network Monitoring",
+          content: "No network yet!".hardcoded,
+        );
       },
       checkPhishing: () {
-        showNotImplementedAlertDialog(
-            context: context,
-            title: "Detect Phishing",
-            content: "Not active yet!".hardcoded);
+        showNotImplementedAlertDialog(context: context, title: "Detect Phishing", content: "Not active yet!".hardcoded);
       },
     );
   }

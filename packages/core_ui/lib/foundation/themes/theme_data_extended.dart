@@ -2,7 +2,6 @@
 import 'package:core_ui/tokens/breakpoints.dart';
 import 'package:flutter/material.dart';
 
-
 extension MediaQueryExtended on BoxConstraints {
   bool get isSmallDevice {
     return maxWidth <= BreakPoints.mobile && maxWidth <= BreakPoints.tablet;
@@ -13,8 +12,7 @@ extension MediaQueryExtended on BoxConstraints {
   }
 
   bool get isDesktop {
-    return maxWidth >= BreakPoints.desktop &&
-        maxWidth <= BreakPoints.largeScreen;
+    return maxWidth >= BreakPoints.desktop && maxWidth <= BreakPoints.largeScreen;
   }
 
   bool get isLargerDisplay {

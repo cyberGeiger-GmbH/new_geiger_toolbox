@@ -15,9 +15,9 @@ class ScanButtonWidget extends ConsumerWidget {
     final newsFeedState = ref.watch(watchRecentNewsFeedsProvider);
 
     return AppButton.scan(
-        label:
-            state.isLoading || newsFeedState.isLoading ? "scanning..." : 'Scan',
-        context: context,
-        onPressed: state.isLoading ? null : onScanPressed);
+      label: state.isLoading || newsFeedState.isLoading ? "scanning..." : 'Scan',
+      context: context,
+      onPressed: state.isLoading ? null : onScanPressed,
+    );
   }
 }

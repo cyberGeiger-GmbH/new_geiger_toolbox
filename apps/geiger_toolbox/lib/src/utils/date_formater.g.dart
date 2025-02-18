@@ -39,21 +39,13 @@ class FormattedDateFamily extends Family<String> {
   const FormattedDateFamily();
 
   /// See also [formattedDate].
-  FormattedDateProvider call({
-    required String inputDate,
-  }) {
-    return FormattedDateProvider(
-      inputDate: inputDate,
-    );
+  FormattedDateProvider call({required String inputDate}) {
+    return FormattedDateProvider(inputDate: inputDate);
   }
 
   @override
-  FormattedDateProvider getProviderOverride(
-    covariant FormattedDateProvider provider,
-  ) {
-    return call(
-      inputDate: provider.inputDate,
-    );
+  FormattedDateProvider getProviderOverride(covariant FormattedDateProvider provider) {
+    return call(inputDate: provider.inputDate);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -64,8 +56,7 @@ class FormattedDateFamily extends Family<String> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'formattedDateProvider';
@@ -74,24 +65,16 @@ class FormattedDateFamily extends Family<String> {
 /// See also [formattedDate].
 class FormattedDateProvider extends AutoDisposeProvider<String> {
   /// See also [formattedDate].
-  FormattedDateProvider({
-    required String inputDate,
-  }) : this._internal(
-          (ref) => formattedDate(
-            ref as FormattedDateRef,
-            inputDate: inputDate,
-          ),
-          from: formattedDateProvider,
-          name: r'formattedDateProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$formattedDateHash,
-          dependencies: FormattedDateFamily._dependencies,
-          allTransitiveDependencies:
-              FormattedDateFamily._allTransitiveDependencies,
-          inputDate: inputDate,
-        );
+  FormattedDateProvider({required String inputDate})
+    : this._internal(
+        (ref) => formattedDate(ref as FormattedDateRef, inputDate: inputDate),
+        from: formattedDateProvider,
+        name: r'formattedDateProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$formattedDateHash,
+        dependencies: FormattedDateFamily._dependencies,
+        allTransitiveDependencies: FormattedDateFamily._allTransitiveDependencies,
+        inputDate: inputDate,
+      );
 
   FormattedDateProvider._internal(
     super._createNotifier, {
@@ -106,9 +89,7 @@ class FormattedDateProvider extends AutoDisposeProvider<String> {
   final String inputDate;
 
   @override
-  Override overrideWith(
-    String Function(FormattedDateRef provider) create,
-  ) {
+  Override overrideWith(String Function(FormattedDateRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: FormattedDateProvider._internal(
@@ -149,8 +130,7 @@ mixin FormattedDateRef on AutoDisposeProviderRef<String> {
   String get inputDate;
 }
 
-class _FormattedDateProviderElement extends AutoDisposeProviderElement<String>
-    with FormattedDateRef {
+class _FormattedDateProviderElement extends AutoDisposeProviderElement<String> with FormattedDateRef {
   _FormattedDateProviderElement(super.provider);
 
   @override
@@ -169,21 +149,13 @@ class StringToDateFamily extends Family<DateTime> {
   const StringToDateFamily();
 
   /// See also [stringToDate].
-  StringToDateProvider call({
-    required String inputDate,
-  }) {
-    return StringToDateProvider(
-      inputDate: inputDate,
-    );
+  StringToDateProvider call({required String inputDate}) {
+    return StringToDateProvider(inputDate: inputDate);
   }
 
   @override
-  StringToDateProvider getProviderOverride(
-    covariant StringToDateProvider provider,
-  ) {
-    return call(
-      inputDate: provider.inputDate,
-    );
+  StringToDateProvider getProviderOverride(covariant StringToDateProvider provider) {
+    return call(inputDate: provider.inputDate);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -194,8 +166,7 @@ class StringToDateFamily extends Family<DateTime> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'stringToDateProvider';
@@ -204,24 +175,16 @@ class StringToDateFamily extends Family<DateTime> {
 /// See also [stringToDate].
 class StringToDateProvider extends AutoDisposeProvider<DateTime> {
   /// See also [stringToDate].
-  StringToDateProvider({
-    required String inputDate,
-  }) : this._internal(
-          (ref) => stringToDate(
-            ref as StringToDateRef,
-            inputDate: inputDate,
-          ),
-          from: stringToDateProvider,
-          name: r'stringToDateProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$stringToDateHash,
-          dependencies: StringToDateFamily._dependencies,
-          allTransitiveDependencies:
-              StringToDateFamily._allTransitiveDependencies,
-          inputDate: inputDate,
-        );
+  StringToDateProvider({required String inputDate})
+    : this._internal(
+        (ref) => stringToDate(ref as StringToDateRef, inputDate: inputDate),
+        from: stringToDateProvider,
+        name: r'stringToDateProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$stringToDateHash,
+        dependencies: StringToDateFamily._dependencies,
+        allTransitiveDependencies: StringToDateFamily._allTransitiveDependencies,
+        inputDate: inputDate,
+      );
 
   StringToDateProvider._internal(
     super._createNotifier, {
@@ -236,9 +199,7 @@ class StringToDateProvider extends AutoDisposeProvider<DateTime> {
   final String inputDate;
 
   @override
-  Override overrideWith(
-    DateTime Function(StringToDateRef provider) create,
-  ) {
+  Override overrideWith(DateTime Function(StringToDateRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: StringToDateProvider._internal(
@@ -279,8 +240,7 @@ mixin StringToDateRef on AutoDisposeProviderRef<DateTime> {
   String get inputDate;
 }
 
-class _StringToDateProviderElement extends AutoDisposeProviderElement<DateTime>
-    with StringToDateRef {
+class _StringToDateProviderElement extends AutoDisposeProviderElement<DateTime> with StringToDateRef {
   _StringToDateProviderElement(super.provider);
 
   @override
@@ -299,21 +259,13 @@ class PreviousMonthFamily extends Family<DateTime> {
   const PreviousMonthFamily();
 
   /// See also [previousMonth].
-  PreviousMonthProvider call({
-    int month = 6,
-  }) {
-    return PreviousMonthProvider(
-      month: month,
-    );
+  PreviousMonthProvider call({int month = 6}) {
+    return PreviousMonthProvider(month: month);
   }
 
   @override
-  PreviousMonthProvider getProviderOverride(
-    covariant PreviousMonthProvider provider,
-  ) {
-    return call(
-      month: provider.month,
-    );
+  PreviousMonthProvider getProviderOverride(covariant PreviousMonthProvider provider) {
+    return call(month: provider.month);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -324,8 +276,7 @@ class PreviousMonthFamily extends Family<DateTime> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'previousMonthProvider';
@@ -334,24 +285,16 @@ class PreviousMonthFamily extends Family<DateTime> {
 /// See also [previousMonth].
 class PreviousMonthProvider extends AutoDisposeProvider<DateTime> {
   /// See also [previousMonth].
-  PreviousMonthProvider({
-    int month = 6,
-  }) : this._internal(
-          (ref) => previousMonth(
-            ref as PreviousMonthRef,
-            month: month,
-          ),
-          from: previousMonthProvider,
-          name: r'previousMonthProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$previousMonthHash,
-          dependencies: PreviousMonthFamily._dependencies,
-          allTransitiveDependencies:
-              PreviousMonthFamily._allTransitiveDependencies,
-          month: month,
-        );
+  PreviousMonthProvider({int month = 6})
+    : this._internal(
+        (ref) => previousMonth(ref as PreviousMonthRef, month: month),
+        from: previousMonthProvider,
+        name: r'previousMonthProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$previousMonthHash,
+        dependencies: PreviousMonthFamily._dependencies,
+        allTransitiveDependencies: PreviousMonthFamily._allTransitiveDependencies,
+        month: month,
+      );
 
   PreviousMonthProvider._internal(
     super._createNotifier, {
@@ -366,9 +309,7 @@ class PreviousMonthProvider extends AutoDisposeProvider<DateTime> {
   final int month;
 
   @override
-  Override overrideWith(
-    DateTime Function(PreviousMonthRef provider) create,
-  ) {
+  Override overrideWith(DateTime Function(PreviousMonthRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: PreviousMonthProvider._internal(
@@ -409,12 +350,12 @@ mixin PreviousMonthRef on AutoDisposeProviderRef<DateTime> {
   int get month;
 }
 
-class _PreviousMonthProviderElement extends AutoDisposeProviderElement<DateTime>
-    with PreviousMonthRef {
+class _PreviousMonthProviderElement extends AutoDisposeProviderElement<DateTime> with PreviousMonthRef {
   _PreviousMonthProviderElement(super.provider);
 
   @override
   int get month => (origin as PreviousMonthProvider).month;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -39,24 +39,13 @@ class LogHandlerFamily extends Family<Logger> {
   const LogHandlerFamily();
 
   /// See also [logHandler].
-  LogHandlerProvider call(
-    String source, {
-    String? packageName,
-  }) {
-    return LogHandlerProvider(
-      source,
-      packageName: packageName,
-    );
+  LogHandlerProvider call(String source, {String? packageName}) {
+    return LogHandlerProvider(source, packageName: packageName);
   }
 
   @override
-  LogHandlerProvider getProviderOverride(
-    covariant LogHandlerProvider provider,
-  ) {
-    return call(
-      provider.source,
-      packageName: provider.packageName,
-    );
+  LogHandlerProvider getProviderOverride(covariant LogHandlerProvider provider) {
+    return call(provider.source, packageName: provider.packageName);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -67,8 +56,7 @@ class LogHandlerFamily extends Family<Logger> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'logHandlerProvider';
@@ -77,27 +65,17 @@ class LogHandlerFamily extends Family<Logger> {
 /// See also [logHandler].
 class LogHandlerProvider extends AutoDisposeProvider<Logger> {
   /// See also [logHandler].
-  LogHandlerProvider(
-    String source, {
-    String? packageName,
-  }) : this._internal(
-          (ref) => logHandler(
-            ref as LogHandlerRef,
-            source,
-            packageName: packageName,
-          ),
-          from: logHandlerProvider,
-          name: r'logHandlerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$logHandlerHash,
-          dependencies: LogHandlerFamily._dependencies,
-          allTransitiveDependencies:
-              LogHandlerFamily._allTransitiveDependencies,
-          source: source,
-          packageName: packageName,
-        );
+  LogHandlerProvider(String source, {String? packageName})
+    : this._internal(
+        (ref) => logHandler(ref as LogHandlerRef, source, packageName: packageName),
+        from: logHandlerProvider,
+        name: r'logHandlerProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$logHandlerHash,
+        dependencies: LogHandlerFamily._dependencies,
+        allTransitiveDependencies: LogHandlerFamily._allTransitiveDependencies,
+        source: source,
+        packageName: packageName,
+      );
 
   LogHandlerProvider._internal(
     super._createNotifier, {
@@ -114,9 +92,7 @@ class LogHandlerProvider extends AutoDisposeProvider<Logger> {
   final String? packageName;
 
   @override
-  Override overrideWith(
-    Logger Function(LogHandlerRef provider) create,
-  ) {
+  Override overrideWith(Logger Function(LogHandlerRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: LogHandlerProvider._internal(
@@ -139,9 +115,7 @@ class LogHandlerProvider extends AutoDisposeProvider<Logger> {
 
   @override
   bool operator ==(Object other) {
-    return other is LogHandlerProvider &&
-        other.source == source &&
-        other.packageName == packageName;
+    return other is LogHandlerProvider && other.source == source && other.packageName == packageName;
   }
 
   @override
@@ -164,8 +138,7 @@ mixin LogHandlerRef on AutoDisposeProviderRef<Logger> {
   String? get packageName;
 }
 
-class _LogHandlerProviderElement extends AutoDisposeProviderElement<Logger>
-    with LogHandlerRef {
+class _LogHandlerProviderElement extends AutoDisposeProviderElement<Logger> with LogHandlerRef {
   _LogHandlerProviderElement(super.provider);
 
   @override
@@ -173,5 +146,6 @@ class _LogHandlerProviderElement extends AutoDisposeProviderElement<Logger>
   @override
   String? get packageName => (origin as LogHandlerProvider).packageName;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

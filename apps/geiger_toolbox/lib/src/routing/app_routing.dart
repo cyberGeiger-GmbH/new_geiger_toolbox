@@ -42,19 +42,15 @@ enum AppRouter {
 }
 
 class AppRouting {
-  static final GlobalKey<NavigatorState> _rootNavKey =
-      GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> _shellHomeNavKey =
-      GlobalKey<NavigatorState>(debugLabel: "shellHome");
-  static final GlobalKey<NavigatorState> _shellCommunityNavKey =
-      GlobalKey<NavigatorState>(debugLabel: "shellCommunity");
-  static final GlobalKey<NavigatorState> _shellCalendarNavKey =
-      GlobalKey<NavigatorState>(debugLabel: "shellCalendar");
+  static final GlobalKey<NavigatorState> _rootNavKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> _shellHomeNavKey = GlobalKey<NavigatorState>(debugLabel: "shellHome");
+  static final GlobalKey<NavigatorState> _shellCommunityNavKey = GlobalKey<NavigatorState>(
+    debugLabel: "shellCommunity",
+  );
+  static final GlobalKey<NavigatorState> _shellCalendarNavKey = GlobalKey<NavigatorState>(debugLabel: "shellCalendar");
 
-  static final GlobalKey<NavigatorState> _shellChatNavKey =
-      GlobalKey<NavigatorState>(debugLabel: "shellChat");
-  static final GlobalKey<NavigatorState> _shellSettingNavKey =
-      GlobalKey<NavigatorState>(debugLabel: "shellSetting");
+  static final GlobalKey<NavigatorState> _shellChatNavKey = GlobalKey<NavigatorState>(debugLabel: "shellChat");
+  static final GlobalKey<NavigatorState> _shellSettingNavKey = GlobalKey<NavigatorState>(debugLabel: "shellSetting");
 
   AppRouting._();
   static GoRouter goRouter(Ref ref) {
@@ -102,39 +98,38 @@ class AppRouting {
       // refreshListenable:  GoRouterRefreshStream(d),
       routes: [
         //for ui without bottom navigation
-
         GoRoute(
           path: AppRouter.introdution.path,
           name: AppRouter.introdution.name,
-          pageBuilder: (context, state) => NoTransitionPage<void>(
-              child: IntroScreen(), key: state.pageKey, name: state.name),
+          pageBuilder:
+              (context, state) => NoTransitionPage<void>(child: IntroScreen(), key: state.pageKey, name: state.name),
         ),
 
         GoRoute(
           path: AppRouter.createProfile.path,
           name: AppRouter.createProfile.name,
-          pageBuilder: (context, state) => MaterialPage<void>(
-              fullscreenDialog: true,
-              child: CreateProfileScreen(
-                onCloseProfile: () {
-                  ref.read(profileScreenControllerProvider.notifier).skip(true);
+          pageBuilder:
+              (context, state) => MaterialPage<void>(
+                fullscreenDialog: true,
+                child: CreateProfileScreen(
+                  onCloseProfile: () {
+                    ref.read(profileScreenControllerProvider.notifier).skip(true);
 
-                  context.goNamed(AppRouter.main.name);
-                },
+                    context.goNamed(AppRouter.main.name);
+                  },
+                ),
+                key: state.pageKey,
+                name: state.name,
               ),
-              key: state.pageKey,
-              name: state.name),
         ),
 
         //for ui with bottom navigation
         StatefulShellRoute.indexedStack(
-          builder: (context, state, navigationShell) => ScaffoldWithNavigation(
-            navigationShell: navigationShell,
-            feedbackButton:
-                (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg)
-                    ? TesterButtons()
-                    : null,
-          ),
+          builder:
+              (context, state, navigationShell) => ScaffoldWithNavigation(
+                navigationShell: navigationShell,
+                feedbackButton: (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) ? TesterButtons() : null,
+              ),
           branches: [
             StatefulShellBranch(
               navigatorKey: _shellHomeNavKey,
@@ -146,26 +141,19 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.main.path,
                   name: AppRouter.main.name,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: MainScreen(),
-                    key: state.pageKey,
-                    name: state.name,
-                  ),
+                  pageBuilder:
+                      (context, state) => NoTransitionPage(child: MainScreen(), key: state.pageKey, name: state.name),
                   //nested route
                   routes: [
                     GoRoute(
                       path: AppRouter.newsFeedDetails.path,
                       name: AppRouter.newsFeedDetails.name,
                       pageBuilder: (context, state) {
-                        final title = state
-                            .pathParameters[AppRouter.newsFeedDetails.name]!;
+                        final title = state.pathParameters[AppRouter.newsFeedDetails.name]!;
 
                         return MaterialPage(
                           //fullscreenDialog: true,
-                          child: NewsDetailsScreen(
-                            newsTitle: title,
-                            key: state.pageKey,
-                          ),
+                          child: NewsDetailsScreen(newsTitle: title, key: state.pageKey),
                           key: state.pageKey,
                           name: state.name,
                         );
@@ -181,12 +169,9 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.community.path,
                   name: AppRouter.community.name,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: Community(),
-                    key: state.pageKey,
-                    name: state.name,
-                  ),
-                )
+                  pageBuilder:
+                      (context, state) => NoTransitionPage(child: Community(), key: state.pageKey, name: state.name),
+                ),
               ],
             ),
             StatefulShellBranch(
@@ -195,12 +180,9 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.calendar.path,
                   name: AppRouter.calendar.name,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: Calendar(),
-                    key: state.pageKey,
-                    name: state.name,
-                  ),
-                )
+                  pageBuilder:
+                      (context, state) => NoTransitionPage(child: Calendar(), key: state.pageKey, name: state.name),
+                ),
               ],
             ),
             StatefulShellBranch(
@@ -209,12 +191,9 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.chat.path,
                   name: AppRouter.chat.name,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: Chat(),
-                    key: state.pageKey,
-                    name: state.name,
-                  ),
-                )
+                  pageBuilder:
+                      (context, state) => NoTransitionPage(child: Chat(), key: state.pageKey, name: state.name),
+                ),
               ],
             ),
             StatefulShellBranch(
@@ -223,12 +202,10 @@ class AppRouting {
                 GoRoute(
                   path: AppRouter.settings.path,
                   name: AppRouter.settings.name,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: SettingsScreen(),
-                    key: state.pageKey,
-                    name: state.name,
-                  ),
-                )
+                  pageBuilder:
+                      (context, state) =>
+                          NoTransitionPage(child: SettingsScreen(), key: state.pageKey, name: state.name),
+                ),
               ],
             ),
           ],
@@ -251,9 +228,7 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Calendar"),
-    );
+    return const Center(child: Text("Calendar"));
   }
 }
 
@@ -262,9 +237,7 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Chat Room"),
-    );
+    return const Center(child: Text("Chat Room"));
   }
 }
 
@@ -273,8 +246,6 @@ class Community extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Community"),
-    );
+    return const Center(child: Text("Community"));
   }
 }

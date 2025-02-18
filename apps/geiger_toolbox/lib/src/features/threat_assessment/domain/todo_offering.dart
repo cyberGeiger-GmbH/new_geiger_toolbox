@@ -10,10 +10,11 @@ enum Status { recommended, planned, done }
 
 @freezed
 class TodoOffering with _$TodoOffering {
-  const factory TodoOffering(
-      {required OfferingId id,
-      required Status status,
-      required DateTime dateRecommendated,
-      DateTime? lastUpdated,
-      required Offering offering}) = _TodoOffering;
+  const factory TodoOffering({
+    required OfferingId id,
+    required Status status,
+    required DateTime dateRecommendated,
+    DateTime? lastUpdated,
+    required Offering offering,
+  }) = _TodoOffering;
 }

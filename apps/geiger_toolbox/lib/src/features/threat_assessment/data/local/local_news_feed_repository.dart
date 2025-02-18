@@ -33,8 +33,7 @@ class LocalNewsFeedRepository {
         await _db.transaction(() async {
           for (var newsData in uniqueNews) {
             //insert news
-            final dateCreated =
-                ref.read(stringToDateProvider(inputDate: newsData.dateCreated));
+            final dateCreated = ref.read(stringToDateProvider(inputDate: newsData.dateCreated));
             final newsCompanion = NewsInfoCompanion(
               id: Value(newsData.id),
               title: Value(newsData.title),
@@ -48,26 +47,24 @@ class LocalNewsFeedRepository {
             //insert recommendations for each news
             for (var recomData in newsData.recommendations) {
               final reco = RecommendationsCompanion(
-                  id: Value(recomData.id),
-                  newsId: Value(newsData.id),
-                  name: Value(recomData.name),
-                  rationale: Value(recomData.rationale));
+                id: Value(recomData.id),
+                newsId: Value(newsData.id),
+                name: Value(recomData.name),
+                rationale: Value(recomData.rationale),
+              );
               await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
 
               // insert offering for each recommendation
               for (var offerData in recomData.offerings) {
                 //id = combination of offerings name and recom Id
-                final id =
-                    "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
+                final id = "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
                 final offer = RecommendationOfferingsCompanion(
                   id: Value(id),
                   recommendationId: Value(recomData.id),
                   name: Value(offerData.name),
                   summary: Value(offerData.summary),
                 );
-                await _db
-                    .into(_db.recommendationOfferings)
-                    .insertOnConflictUpdate(offer);
+                await _db.into(_db.recommendationOfferings).insertOnConflictUpdate(offer);
               }
             }
           }
@@ -97,9 +94,8 @@ class LocalNewsFeedRepository {
         }
 
         // Filter out users that appear more than once
-        List<News> uniqueUsers = combinedList
-            .where((data) => countMap[data.title] == 1)
-            .toList(); // Keep only unique ones
+        List<News> uniqueUsers =
+            combinedList.where((data) => countMap[data.title] == 1).toList(); // Keep only unique ones
 
         return uniqueUsers;
       }
@@ -110,7 +106,7 @@ class LocalNewsFeedRepository {
     }
   }
 
-// for testing purpose
+  // for testing purpose
   Future<void> deleteNews() async {
     try {
       _log.i("deletign news...");
@@ -129,32 +125,23 @@ class LocalNewsFeedRepository {
 
   ///check if news table is empty (used by app startup logic)
   Future<bool> isNewsTableEmpty() async {
-    final query = _db.selectOnly(_db.newsInfo)
-      ..addColumns([_db.newsInfo.id.count()]);
-    final result = await query
-        .map((row) => row.read<int>(_db.newsInfo.id.count()))
-        .getSingle();
+    final query = _db.selectOnly(_db.newsInfo)..addColumns([_db.newsInfo.id.count()]);
+    final result = await query.map((row) => row.read<int>(_db.newsInfo.id.count())).getSingle();
     return result == 0;
   }
 
-//get news object
-//sort by recent news and
+  //get news object
+  //sort by recent news and
   Stream<List<TypedResult>> _sortNewsInfo({bool sort = true}) {
     final newsInfoQuery = _db.select(_db.newsInfo);
 
-    final joint = newsInfoQuery.join(
-      [
-        leftOuterJoin(
-          _db.recommendations,
-          _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
-        ),
-        leftOuterJoin(
-          _db.recommendationOfferings,
-          _db.recommendationOfferings.recommendationId
-              .equalsExp(_db.recommendations.id),
-        )
-      ],
-    );
+    final joint = newsInfoQuery.join([
+      leftOuterJoin(_db.recommendations, _db.recommendations.newsId.equalsExp(_db.newsInfo.id)),
+      leftOuterJoin(
+        _db.recommendationOfferings,
+        _db.recommendationOfferings.recommendationId.equalsExp(_db.recommendations.id),
+      ),
+    ]);
     if (sort) {
       joint.orderBy([OrderingTerm.desc(_db.newsInfo.dateCreated)]);
     } else {
@@ -163,25 +150,17 @@ class LocalNewsFeedRepository {
     return joint.watch();
   }
 
-//get older news
+  //get older news
   Stream<List<TypedResult>> _olderNewsInfo({required DateTime older}) {
-    return (_db.select(_db.newsInfo).join(
-      [
-        leftOuterJoin(
-          _db.recommendations,
-          _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
-        ),
-        leftOuterJoin(
-          _db.recommendationOfferings,
-          _db.recommendationOfferings.recommendationId
-              .equalsExp(_db.recommendations.id),
-        )
-      ],
-    )
+    return (_db.select(_db.newsInfo).join([
+            leftOuterJoin(_db.recommendations, _db.recommendations.newsId.equalsExp(_db.newsInfo.id)),
+            leftOuterJoin(
+              _db.recommendationOfferings,
+              _db.recommendationOfferings.recommendationId.equalsExp(_db.recommendations.id),
+            ),
+          ])
           ..where(_db.newsInfo.dateCreated.isSmallerOrEqualValue(older))
-          ..orderBy([
-            OrderingTerm.desc(_db.newsInfo.dateCreated),
-          ]))
+          ..orderBy([OrderingTerm.desc(_db.newsInfo.dateCreated)]))
         .watch();
   }
 
@@ -205,45 +184,41 @@ class LocalNewsFeedRepository {
 
         // Add offerings to the corresponding list in offerMap
         if (offeringEntry != null) {
-          final offer = Offering(
-            name: offeringEntry.name,
-            summary: offeringEntry.summary,
-          );
+          final offer = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
 
-          offerMap
-              .putIfAbsent(offeringEntry.recommendationId, () => [])
-              .add(offer);
+          offerMap.putIfAbsent(offeringEntry.recommendationId, () => []).add(offer);
         }
 
         // Create or update recommendations for the current newsId
         if (recommendationEntry != null) {
           final reco = Recommendation(
-              id: recommendationEntry.id,
-              rationale: recommendationEntry.rationale,
-              name: recommendationEntry.name,
-              offerings: offerMap[recommendationEntry.id] ?? []);
+            id: recommendationEntry.id,
+            rationale: recommendationEntry.rationale,
+            name: recommendationEntry.name,
+            offerings: offerMap[recommendationEntry.id] ?? [],
+          );
 
           // Ensure the recommendation is added only once for a specific newsId
           if (!recosMap.containsKey(recommendationEntry.newsId)) {
             recosMap[recommendationEntry.newsId] = [];
           }
           // Only add the recommendation if it's not already in the list for the specific newsId
-          if (!recosMap[recommendationEntry.newsId]!
-              .any((rec) => rec.id == reco.id)) {
+          if (!recosMap[recommendationEntry.newsId]!.any((rec) => rec.id == reco.id)) {
             recosMap[recommendationEntry.newsId]!.add(reco);
           }
         }
         // if the news is not yet in the list add it
         if (!newsResult.any((value) => value.id == newsEntry.id)) {
           final news = News(
-              id: newsEntry.id,
-              title: newsEntry.title,
-              summary: newsEntry.summary,
-              newsCategory: newsEntry.newsCategorg,
-              articleUrl: "",
-              imageUrl: newsEntry.imageUrl,
-              dateCreated: "${newsEntry.dateCreated}",
-              recommendations: recosMap[newsEntry.id] ?? []);
+            id: newsEntry.id,
+            title: newsEntry.title,
+            summary: newsEntry.summary,
+            newsCategory: newsEntry.newsCategorg,
+            articleUrl: "",
+            imageUrl: newsEntry.imageUrl,
+            dateCreated: "${newsEntry.dateCreated}",
+            recommendations: recosMap[newsEntry.id] ?? [],
+          );
 
           newsResult.add(news);
         }
@@ -254,19 +229,14 @@ class LocalNewsFeedRepository {
   }
 
   Future<List<News>> fetchNewsList() async {
-    final newsWithRecoAndOffering = await (_db.select(_db.newsInfo).join(
-      [
-        leftOuterJoin(
-          _db.recommendations,
-          _db.recommendations.newsId.equalsExp(_db.newsInfo.id),
-        ),
-        leftOuterJoin(
-          _db.recommendationOfferings,
-          _db.recommendationOfferings.recommendationId
-              .equalsExp(_db.recommendations.id),
-        )
-      ],
-    )).get();
+    final newsWithRecoAndOffering =
+        await (_db.select(_db.newsInfo).join([
+          leftOuterJoin(_db.recommendations, _db.recommendations.newsId.equalsExp(_db.newsInfo.id)),
+          leftOuterJoin(
+            _db.recommendationOfferings,
+            _db.recommendationOfferings.recommendationId.equalsExp(_db.recommendations.id),
+          ),
+        ])).get();
 
     //Tranfrom the query inot a list of News with their associated Recommendation and task;
     final List<News> newsResult = [];
@@ -286,30 +256,25 @@ class LocalNewsFeedRepository {
 
       // add offfer to the corresponding list in offerMap
       if (offeringEntry != null) {
-        final offer = Offering(
-          name: offeringEntry.name,
-          summary: offeringEntry.summary,
-        );
-        offerMap
-            .putIfAbsent(offeringEntry.recommendationId, () => [])
-            .add(offer);
+        final offer = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
+        offerMap.putIfAbsent(offeringEntry.recommendationId, () => []).add(offer);
       }
 
       // Create or update recommendations for the current newsId
       if (recommendationEntry != null) {
         final reco = Recommendation(
-            id: recommendationEntry.id,
-            name: recommendationEntry.name,
-            rationale: recommendationEntry.rationale,
-            offerings: offerMap[recommendationEntry.id] ?? []);
+          id: recommendationEntry.id,
+          name: recommendationEntry.name,
+          rationale: recommendationEntry.rationale,
+          offerings: offerMap[recommendationEntry.id] ?? [],
+        );
 
         // Ensure the recommendation is added only once for a specific newsId
         if (!recosMap.containsKey(recommendationEntry.newsId)) {
           recosMap[recommendationEntry.newsId] = [];
         }
         // Only add the recommendation if it's not already in the list for the specific newsId
-        if (!recosMap[recommendationEntry.newsId]!
-            .any((rec) => rec.id == reco.id)) {
+        if (!recosMap[recommendationEntry.newsId]!.any((rec) => rec.id == reco.id)) {
           recosMap[recommendationEntry.newsId]!.add(reco);
         }
       }
@@ -317,14 +282,15 @@ class LocalNewsFeedRepository {
       // if the news is not yet in the list add it
       if (!newsResult.any((value) => value.id == newsEntry.id)) {
         final news = News(
-            id: newsEntry.id,
-            title: newsEntry.title,
-            newsCategory: newsEntry.newsCategorg,
-            summary: newsEntry.summary,
-            articleUrl: "",
-            imageUrl: newsEntry.imageUrl,
-            dateCreated: "${newsEntry.dateCreated}",
-            recommendations: recosMap[newsEntry.id] ?? []);
+          id: newsEntry.id,
+          title: newsEntry.title,
+          newsCategory: newsEntry.newsCategorg,
+          summary: newsEntry.summary,
+          articleUrl: "",
+          imageUrl: newsEntry.imageUrl,
+          dateCreated: "${newsEntry.dateCreated}",
+          recommendations: recosMap[newsEntry.id] ?? [],
+        );
 
         newsResult.add(news);
       }
@@ -340,11 +306,9 @@ class LocalNewsFeedRepository {
     return _getNews(newsfeeds: data, newsTitle: title.replaceSpacesWithHyphen);
   }
 
-  static News _getNews(
-      {required List<News> newsfeeds, required String newsTitle}) {
+  static News _getNews({required List<News> newsfeeds, required String newsTitle}) {
     try {
-      final obj = newsfeeds.firstWhere(
-          (news) => news.title.replaceSpacesWithHyphen == newsTitle);
+      final obj = newsfeeds.firstWhere((news) => news.title.replaceSpacesWithHyphen == newsTitle);
       return obj;
     } on StateError {
       throw StateError("No news found with title: $newsTitle,");

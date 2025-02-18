@@ -30,19 +30,15 @@ class GeigerApp extends ConsumerWidget {
       theme: AppThemeData.light,
       darkTheme: AppThemeData.dark,
       routerConfig: router,
-      builder: (context, child) => AppStartUpWidget(
-        onLoaded: (_) => ForceUpdateWidgetWrapper(
-          router: router,
-          child: child!,
-        ),
-      ),
+      builder:
+          (context, child) =>
+              AppStartUpWidget(onLoaded: (_) => ForceUpdateWidgetWrapper(router: router, child: child!)),
     );
   }
 }
 
 class ForceUpdateWidgetWrapper extends ConsumerWidget {
-  const ForceUpdateWidgetWrapper(
-      {super.key, required this.router, required this.child});
+  const ForceUpdateWidgetWrapper({super.key, required this.router, required this.child});
 
   final GoRouter router;
   final Widget child;
@@ -50,35 +46,41 @@ class ForceUpdateWidgetWrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ForceUpdateWidget(
-        navigatorKey: router.routerDelegate.navigatorKey,
-        forceUpdateClient: ForceUpdateClient(
-          fetchRequiredVersion: () async {
-            // * only fetch from remote config in release mode
-            if (kReleaseMode) {
-              final remoteConfig =
-                  await ref.read(firebaseRemoteConfigProvider.future);
-              return remoteConfig.getString('required_version');
-            }
-            return "1.0.0";
-          },
-          // TODO: Set APP_STORE_ID in the .env files
-          iosAppStoreId: Env.appStoreId,
-        ),
-        allowCancel: false,
-        showForceUpdateAlert: (context, bool allowCancel) => showAlertDialog(
+      navigatorKey: router.routerDelegate.navigatorKey,
+      forceUpdateClient: ForceUpdateClient(
+        fetchRequiredVersion: () async {
+          // * only fetch from remote config in release mode
+          if (kReleaseMode) {
+            final remoteConfig = await ref.read(firebaseRemoteConfigProvider.future);
+            return remoteConfig.getString('required_version');
+          }
+          return "1.0.0";
+        },
+        // TODO: Set APP_STORE_ID in the .env files
+        iosAppStoreId: Env.appStoreId,
+      ),
+      allowCancel: false,
+      showForceUpdateAlert:
+          (context, bool allowCancel) => showAlertDialog(
             context: context,
             title: "App Update Required".hardcoded,
             content: "Please update to continue using the app.".hardcoded,
             cancelActionText: allowCancel ? "Later".hardcoded : null,
-            defaultActionText: "Update Now".hardcoded),
-        showStoreListing: (Uri storeUrl) async {
-          ref.read(urlLauncherProvider).launch(storeUrl,
+            defaultActionText: "Update Now".hardcoded,
+          ),
+      showStoreListing: (Uri storeUrl) async {
+        ref
+            .read(urlLauncherProvider)
+            .launch(
+              storeUrl,
               // * Open app store app directly (or fallback to browser)
-              mode: LaunchMode.externalApplication);
-        },
-        onException: (e, s) {
-          ref.read(appLoggerProvider).logError(e, s);
-        },
-        child: child);
+              mode: LaunchMode.externalApplication,
+            );
+      },
+      onException: (e, s) {
+        ref.read(appLoggerProvider).logError(e, s);
+      },
+      child: child,
+    );
   }
 }

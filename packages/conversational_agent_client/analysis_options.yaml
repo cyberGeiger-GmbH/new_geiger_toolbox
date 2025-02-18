@@ -7,15 +7,23 @@ include: package:lints/recommended.yaml
 # linter:
 #   rules:
 #     - camel_case_types
+formatter:
+  page_width: 120
+  
+analyzer: 
+  exclude:
+  # exclude warnings in .g.dart
+    - "test/generated/**"
+    - "**/*.g.dart"
 
-analyzer:
- plugins:
+
+  plugins:
  # enable riverpod_lint
-   - custom_lint
+    - custom_lint
 #   exclude:
 #     - path/to/excluded/files/**
 
- errors:
+  errors:
     #fix json_serializable and freezed lint issues
     invalid_annotation_target: ignore
 #code analysis

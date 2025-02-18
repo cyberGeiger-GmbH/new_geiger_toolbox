@@ -6,26 +6,21 @@ part of 'company_profile_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$companyProfileRepositoryHash() =>
-    r'9c809ded181e52e69abfc2062df716fe3e1e485a';
+String _$companyProfileRepositoryHash() => r'9c809ded181e52e69abfc2062df716fe3e1e485a';
 
 /// See also [companyProfileRepository].
 @ProviderFor(companyProfileRepository)
-final companyProfileRepositoryProvider =
-    AutoDisposeProvider<CompanyProfileRepository>.internal(
+final companyProfileRepositoryProvider = AutoDisposeProvider<CompanyProfileRepository>.internal(
   companyProfileRepository,
   name: r'companyProfileRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$companyProfileRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$companyProfileRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef CompanyProfileRepositoryRef
-    = AutoDisposeProviderRef<CompanyProfileRepository>;
+typedef CompanyProfileRepositoryRef = AutoDisposeProviderRef<CompanyProfileRepository>;
 String _$watchCompanyHash() => r'd3a7d97739b6c267348b8339b4ae08c8d3f9eb34';
 
 /// See also [watchCompany].
@@ -33,8 +28,7 @@ String _$watchCompanyHash() => r'd3a7d97739b6c267348b8339b4ae08c8d3f9eb34';
 final watchCompanyProvider = AutoDisposeStreamProvider<Company?>.internal(
   watchCompany,
   name: r'watchCompanyProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$watchCompanyHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$watchCompanyHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

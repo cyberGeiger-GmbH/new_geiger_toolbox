@@ -8,9 +8,7 @@ class BackgroundWithImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AppAssetImageData.backgroundImage().image.image,
-            fit: BoxFit.cover),
+        image: DecorationImage(image: AppAssetImageData.backgroundImage().image.image, fit: BoxFit.cover),
       ),
       child: child,
     );

@@ -12,7 +12,8 @@ part of 'geiger_score_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$GeigerScoreInfo {
@@ -25,27 +26,19 @@ mixin _$GeigerScoreInfo {
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GeigerScoreInfoCopyWith<GeigerScoreInfo> get copyWith =>
-      throw _privateConstructorUsedError;
+  $GeigerScoreInfoCopyWith<GeigerScoreInfo> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GeigerScoreInfoCopyWith<$Res> {
-  factory $GeigerScoreInfoCopyWith(
-          GeigerScoreInfo value, $Res Function(GeigerScoreInfo) then) =
+  factory $GeigerScoreInfoCopyWith(GeigerScoreInfo value, $Res Function(GeigerScoreInfo) then) =
       _$GeigerScoreInfoCopyWithImpl<$Res, GeigerScoreInfo>;
   @useResult
-  $Res call(
-      {int id,
-      int geigerScore,
-      DateTime lastUpdate,
-      String status,
-      String reason});
+  $Res call({int id, int geigerScore, DateTime lastUpdate, String status, String reason});
 }
 
 /// @nodoc
-class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo>
-    implements $GeigerScoreInfoCopyWith<$Res> {
+class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo> implements $GeigerScoreInfoCopyWith<$Res> {
   _$GeigerScoreInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -64,54 +57,53 @@ class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo>
     Object? status = null,
     Object? reason = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      geigerScore: null == geigerScore
-          ? _value.geigerScore
-          : geigerScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastUpdate: null == lastUpdate
-          ? _value.lastUpdate
-          : lastUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      reason: null == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            geigerScore:
+                null == geigerScore
+                    ? _value.geigerScore
+                    : geigerScore // ignore: cast_nullable_to_non_nullable
+                        as int,
+            lastUpdate:
+                null == lastUpdate
+                    ? _value.lastUpdate
+                    : lastUpdate // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            status:
+                null == status
+                    ? _value.status
+                    : status // ignore: cast_nullable_to_non_nullable
+                        as String,
+            reason:
+                null == reason
+                    ? _value.reason
+                    : reason // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$GeigerScoreInfoImplCopyWith<$Res>
-    implements $GeigerScoreInfoCopyWith<$Res> {
-  factory _$$GeigerScoreInfoImplCopyWith(_$GeigerScoreInfoImpl value,
-          $Res Function(_$GeigerScoreInfoImpl) then) =
+abstract class _$$GeigerScoreInfoImplCopyWith<$Res> implements $GeigerScoreInfoCopyWith<$Res> {
+  factory _$$GeigerScoreInfoImplCopyWith(_$GeigerScoreInfoImpl value, $Res Function(_$GeigerScoreInfoImpl) then) =
       __$$GeigerScoreInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      int geigerScore,
-      DateTime lastUpdate,
-      String status,
-      String reason});
+  $Res call({int id, int geigerScore, DateTime lastUpdate, String status, String reason});
 }
 
 /// @nodoc
-class __$$GeigerScoreInfoImplCopyWithImpl<$Res>
-    extends _$GeigerScoreInfoCopyWithImpl<$Res, _$GeigerScoreInfoImpl>
+class __$$GeigerScoreInfoImplCopyWithImpl<$Res> extends _$GeigerScoreInfoCopyWithImpl<$Res, _$GeigerScoreInfoImpl>
     implements _$$GeigerScoreInfoImplCopyWith<$Res> {
-  __$$GeigerScoreInfoImplCopyWithImpl(
-      _$GeigerScoreInfoImpl _value, $Res Function(_$GeigerScoreInfoImpl) _then)
-      : super(_value, _then);
+  __$$GeigerScoreInfoImplCopyWithImpl(_$GeigerScoreInfoImpl _value, $Res Function(_$GeigerScoreInfoImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -124,40 +116,48 @@ class __$$GeigerScoreInfoImplCopyWithImpl<$Res>
     Object? status = null,
     Object? reason = null,
   }) {
-    return _then(_$GeigerScoreInfoImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      geigerScore: null == geigerScore
-          ? _value.geigerScore
-          : geigerScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastUpdate: null == lastUpdate
-          ? _value.lastUpdate
-          : lastUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      reason: null == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _$GeigerScoreInfoImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        geigerScore:
+            null == geigerScore
+                ? _value.geigerScore
+                : geigerScore // ignore: cast_nullable_to_non_nullable
+                    as int,
+        lastUpdate:
+            null == lastUpdate
+                ? _value.lastUpdate
+                : lastUpdate // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+        status:
+            null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                    as String,
+        reason:
+            null == reason
+                ? _value.reason
+                : reason // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
-  const _$GeigerScoreInfoImpl(
-      {required this.id,
-      required this.geigerScore,
-      required this.lastUpdate,
-      required this.status,
-      required this.reason});
+  const _$GeigerScoreInfoImpl({
+    required this.id,
+    required this.geigerScore,
+    required this.lastUpdate,
+    required this.status,
+    required this.reason,
+  });
 
   @override
   final int id;
@@ -181,17 +181,14 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
         (other.runtimeType == runtimeType &&
             other is _$GeigerScoreInfoImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.geigerScore, geigerScore) ||
-                other.geigerScore == geigerScore) &&
-            (identical(other.lastUpdate, lastUpdate) ||
-                other.lastUpdate == lastUpdate) &&
+            (identical(other.geigerScore, geigerScore) || other.geigerScore == geigerScore) &&
+            (identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, geigerScore, lastUpdate, status, reason);
+  int get hashCode => Object.hash(runtimeType, id, geigerScore, lastUpdate, status, reason);
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -199,17 +196,17 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
   @override
   @pragma('vm:prefer-inline')
   _$$GeigerScoreInfoImplCopyWith<_$GeigerScoreInfoImpl> get copyWith =>
-      __$$GeigerScoreInfoImplCopyWithImpl<_$GeigerScoreInfoImpl>(
-          this, _$identity);
+      __$$GeigerScoreInfoImplCopyWithImpl<_$GeigerScoreInfoImpl>(this, _$identity);
 }
 
 abstract class _GeigerScoreInfo implements GeigerScoreInfo {
-  const factory _GeigerScoreInfo(
-      {required final int id,
-      required final int geigerScore,
-      required final DateTime lastUpdate,
-      required final String status,
-      required final String reason}) = _$GeigerScoreInfoImpl;
+  const factory _GeigerScoreInfo({
+    required final int id,
+    required final int geigerScore,
+    required final DateTime lastUpdate,
+    required final String status,
+    required final String reason,
+  }) = _$GeigerScoreInfoImpl;
 
   @override
   int get id;
@@ -226,6 +223,5 @@ abstract class _GeigerScoreInfo implements GeigerScoreInfo {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GeigerScoreInfoImplCopyWith<_$GeigerScoreInfoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GeigerScoreInfoImplCopyWith<_$GeigerScoreInfoImpl> get copyWith => throw _privateConstructorUsedError;
 }

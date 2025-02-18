@@ -8,9 +8,6 @@ class GoldenTestWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: AppThemeData.light,
-      child: Builder(builder: getChild),
-    );
+    return Theme(data: AppThemeData.light, child: Builder(builder: getChild));
   }
 }

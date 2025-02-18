@@ -15,8 +15,10 @@ LazyDatabase connect() {
     );
 
     if (db.missingFeatures.isNotEmpty) {
-      debugPrint('Using ${db.chosenImplementation} due to unsupported '
-          'browser features: ${db.missingFeatures}');
+      debugPrint(
+        'Using ${db.chosenImplementation} due to unsupported '
+        'browser features: ${db.missingFeatures}',
+      );
     }
 
     return db.resolvedExecutor;

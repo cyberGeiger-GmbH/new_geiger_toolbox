@@ -7,13 +7,9 @@ part of 'content.dart';
 // **************************************************************************
 
 _$ContentImpl _$$ContentImplFromJson(Map<String, dynamic> json) =>
-    _$ContentImpl(
-      type: json['type'] as String,
-      text: Text.fromJson(json['text'] as Map<String, dynamic>),
-    );
+    _$ContentImpl(type: json['type'] as String, text: Text.fromJson(json['text'] as Map<String, dynamic>));
 
-Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'text': instance.text,
-    };
+Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) => <String, dynamic>{
+  'type': instance.type,
+  'text': instance.text,
+};

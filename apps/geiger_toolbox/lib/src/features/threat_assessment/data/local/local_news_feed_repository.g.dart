@@ -6,26 +6,21 @@ part of 'local_news_feed_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localNewsFeedRepositoryHash() =>
-    r'4162c0b981a2281f442e59d89fe1148e97480087';
+String _$localNewsFeedRepositoryHash() => r'4162c0b981a2281f442e59d89fe1148e97480087';
 
 /// See also [localNewsFeedRepository].
 @ProviderFor(localNewsFeedRepository)
-final localNewsFeedRepositoryProvider =
-    AutoDisposeProvider<LocalNewsFeedRepository>.internal(
+final localNewsFeedRepositoryProvider = AutoDisposeProvider<LocalNewsFeedRepository>.internal(
   localNewsFeedRepository,
   name: r'localNewsFeedRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$localNewsFeedRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$localNewsFeedRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef LocalNewsFeedRepositoryRef
-    = AutoDisposeProviderRef<LocalNewsFeedRepository>;
+typedef LocalNewsFeedRepositoryRef = AutoDisposeProviderRef<LocalNewsFeedRepository>;
 String _$fetchNewsListHash() => r'c178446d262c011ffcad6504ba7b32afcfaf9447';
 
 /// See also [fetchNewsList].
@@ -33,9 +28,7 @@ String _$fetchNewsListHash() => r'c178446d262c011ffcad6504ba7b32afcfaf9447';
 final fetchNewsListProvider = AutoDisposeFutureProvider<List<News>>.internal(
   fetchNewsList,
   name: r'fetchNewsListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchNewsListHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$fetchNewsListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -50,9 +43,7 @@ String _$isNewsTableEmptyHash() => r'dfe706c17a39e192ca9977928ae56b36325fcdd8';
 final isNewsTableEmptyProvider = FutureProvider<bool>.internal(
   isNewsTableEmpty,
   name: r'isNewsTableEmptyProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$isNewsTableEmptyHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$isNewsTableEmptyHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

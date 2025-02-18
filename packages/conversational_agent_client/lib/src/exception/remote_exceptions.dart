@@ -1,5 +1,4 @@
-
-sealed class RemoteExceptions  {
+sealed class RemoteExceptions {
   final String code;
   final String message;
 
@@ -10,46 +9,30 @@ sealed class RemoteExceptions  {
 
 //
 class NewsFeedException extends RemoteExceptions {
-  NewsFeedException()
-      : super(
-            code: 'news-feed-errror',
-            message: "Failed get recommendated news feed for this SME");
+  NewsFeedException() : super(code: 'news-feed-errror', message: "Failed get recommendated news feed for this SME");
 }
 
-
 class GeigerScoreException extends RemoteExceptions {
-  GeigerScoreException()
-      : super(
-            code: 'geiger-score-errror',
-            message: "Fail to get score for this user");
+  GeigerScoreException() : super(code: 'geiger-score-errror', message: "Fail to get score for this user");
 }
 
 class ConnectionTimeoutException extends RemoteExceptions {
-  ConnectionTimeoutException()
-      : super(code: 'connection-time-out', message: "Connection timeout");
+  ConnectionTimeoutException() : super(code: 'connection-time-out', message: "Connection timeout");
 }
 
 class ServerTimeOutException extends RemoteExceptions {
-  ServerTimeOutException()
-      : super(code: 'server-time-out', message: "Application Timeout");
+  ServerTimeOutException() : super(code: 'server-time-out', message: "Application Timeout");
 }
 
 class BadResponseException extends RemoteExceptions {
-  BadResponseException()
-      : super(code: 'bad-response', message: "Bad response received");
+  BadResponseException() : super(code: 'bad-response', message: "Bad response received");
 }
 
 class InterConnectionException extends RemoteExceptions {
   InterConnectionException()
-      : super(
-            code: 'fail-internet-connection',
-            message:
-                "Fail to connect to the internet. Please check your connection");
+    : super(code: 'fail-internet-connection', message: "Fail to connect to the internet. Please check your connection");
 }
 
 class ConnectionErrorException extends RemoteExceptions {
-  ConnectionErrorException()
-      : super(
-            code: 'server-connection-exception',
-            message: "Can't connect to the server");
+  ConnectionErrorException() : super(code: 'server-connection-exception', message: "Can't connect to the server");
 }

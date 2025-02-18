@@ -1,4 +1,3 @@
-
 import 'package:core_ui/core_ui.dart';
 
 import 'package:core_ui/helpers/design_system_helper.dart';
@@ -20,13 +19,7 @@ class DesignSystem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                GeigerSvgImages.magnifyingGlass(),
-                GeigerSvgImages.trickGood(),
-                GeigerSvgImages.measure()
-              ],
-            ),
+            Row(children: [GeigerSvgImages.magnifyingGlass(), GeigerSvgImages.trickGood(), GeigerSvgImages.measure()]),
             Spacing.gapH8,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,11 +30,7 @@ class DesignSystem extends StatelessWidget {
                   context: context,
                   onPressed: () {
                     // Navigate to SecondScreen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NewsScreen()),
-                    );
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NewsScreen()));
                   },
                 ),
                 AppButton.primary(
@@ -51,10 +40,7 @@ class DesignSystem extends StatelessWidget {
                     // Navigate to SecondScreen
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => TermsAndConditionScreen(
-                                acceptCondition: (value) {},
-                              )),
+                      MaterialPageRoute(builder: (context) => TermsAndConditionScreen(acceptCondition: (value) {})),
                     );
                   },
                 ),

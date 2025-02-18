@@ -14,23 +14,19 @@ class TermsAndConditionWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return  Column(
-        children: [
-          GetStartedButton(
-            onPressed: () {
-              //accept terms and condition
-              ref
-                  .read(termsConditionControllerProvider.notifier)
-                  .acceptTermsAndCondition(true);
-              //navigate to main screen
-              context.goNamed(AppRouter.main.name);
-            },
-          ),
-          Spacing.gapH22,
-          TermsPrivacyWidget(),
-         
-        ],
-      
+    return Column(
+      children: [
+        GetStartedButton(
+          onPressed: () {
+            //accept terms and condition
+            ref.read(termsConditionControllerProvider.notifier).acceptTermsAndCondition(true);
+            //navigate to main screen
+            context.goNamed(AppRouter.main.name);
+          },
+        ),
+        Spacing.gapH22,
+        TermsPrivacyWidget(),
+      ],
     );
   }
 }
@@ -42,11 +38,7 @@ class GetStartedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: AppButton.primary(
-        label: "Get Started",
-        context: context,
-        onPressed: onPressed,
-      ),
+      child: AppButton.primary(label: "Get Started", context: context, onPressed: onPressed),
     );
   }
 }
@@ -63,24 +55,25 @@ class TermsPrivacyWidget extends StatelessWidget {
         text: TextSpan(
           style: TextStyle(fontSize: 14, color: Colors.black),
           children: [
-            TextSpan(
-                text: 'By continuing you agree to Geiger Toolbox '.hardcoded),
+            TextSpan(text: 'By continuing you agree to Geiger Toolbox '.hardcoded),
             TextSpan(
               text: 'Terms of Service',
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  // Handle Terms of Service tap
-                },
+              recognizer:
+                  TapGestureRecognizer()
+                    ..onTap = () {
+                      // Handle Terms of Service tap
+                    },
             ),
             TextSpan(text: ' and '),
             TextSpan(
               text: 'Privacy Policy',
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  // Handle Privacy Policy tap
-                },
+              recognizer:
+                  TapGestureRecognizer()
+                    ..onTap = () {
+                      // Handle Privacy Policy tap
+                    },
             ),
           ],
         ),

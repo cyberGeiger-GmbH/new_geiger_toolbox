@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../../molecules/bars/custom_navigation_rail_destination.dart';
 
 class ScaffoldWithNaviagionRail extends StatelessWidget {
-  const ScaffoldWithNaviagionRail(
-      {super.key,
-      required this.body,
-      required this.selectedIndex,
-      required this.onDestinationSelected});
+  const ScaffoldWithNaviagionRail({
+    super.key,
+    required this.body,
+    required this.selectedIndex,
+    required this.onDestinationSelected,
+  });
 
   final Widget body;
   final int selectedIndex;
@@ -24,8 +25,7 @@ class ScaffoldWithNaviagionRail extends StatelessWidget {
             backgroundColor: appColor.surface,
             indicatorColor: appColor.onSecondary,
             labelType: NavigationRailLabelType.selected,
-            destinations:
-                CustomNavigationRailDestination.getdestination(context),
+            destinations: CustomNavigationRailDestination.getdestination(context),
             selectedIndex: selectedIndex,
             onDestinationSelected: onDestinationSelected,
           ),

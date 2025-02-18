@@ -10,10 +10,7 @@ class LoggerAnalyticsClient implements AnalyticsClient {
   AppLogger get _log => ref.read(appLoggerProvider);
   @override
   Future<void> trackScanWithProfile() async {
-    _log.info(
-      message: "trackScanWithProfile",
-      name: _name,
-    );
+    _log.info(message: "trackScanWithProfile", name: _name);
   }
 
   @override
@@ -37,12 +34,8 @@ class LoggerAnalyticsClient implements AnalyticsClient {
   }
 
   @override
-  Future<void> trackScreenView(
-    String routeName,
-    String action,
-  ) async {
-    _log.info(
-        message: "trackScreenView($routeName, $action)", name: "Navigation");
+  Future<void> trackScreenView(String routeName, String action) async {
+    _log.info(message: "trackScreenView($routeName, $action)", name: "Navigation");
   }
 
   @override

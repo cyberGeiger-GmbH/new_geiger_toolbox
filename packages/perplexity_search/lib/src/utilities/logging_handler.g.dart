@@ -39,21 +39,13 @@ class LoggingHandlerFamily extends Family<Logger> {
   const LoggingHandlerFamily();
 
   /// See also [loggingHandler].
-  LoggingHandlerProvider call(
-    String source,
-  ) {
-    return LoggingHandlerProvider(
-      source,
-    );
+  LoggingHandlerProvider call(String source) {
+    return LoggingHandlerProvider(source);
   }
 
   @override
-  LoggingHandlerProvider getProviderOverride(
-    covariant LoggingHandlerProvider provider,
-  ) {
-    return call(
-      provider.source,
-    );
+  LoggingHandlerProvider getProviderOverride(covariant LoggingHandlerProvider provider) {
+    return call(provider.source);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -64,8 +56,7 @@ class LoggingHandlerFamily extends Family<Logger> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'loggingHandlerProvider';
@@ -74,24 +65,16 @@ class LoggingHandlerFamily extends Family<Logger> {
 /// See also [loggingHandler].
 class LoggingHandlerProvider extends AutoDisposeProvider<Logger> {
   /// See also [loggingHandler].
-  LoggingHandlerProvider(
-    String source,
-  ) : this._internal(
-          (ref) => loggingHandler(
-            ref as LoggingHandlerRef,
-            source,
-          ),
-          from: loggingHandlerProvider,
-          name: r'loggingHandlerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$loggingHandlerHash,
-          dependencies: LoggingHandlerFamily._dependencies,
-          allTransitiveDependencies:
-              LoggingHandlerFamily._allTransitiveDependencies,
-          source: source,
-        );
+  LoggingHandlerProvider(String source)
+    : this._internal(
+        (ref) => loggingHandler(ref as LoggingHandlerRef, source),
+        from: loggingHandlerProvider,
+        name: r'loggingHandlerProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$loggingHandlerHash,
+        dependencies: LoggingHandlerFamily._dependencies,
+        allTransitiveDependencies: LoggingHandlerFamily._allTransitiveDependencies,
+        source: source,
+      );
 
   LoggingHandlerProvider._internal(
     super._createNotifier, {
@@ -106,9 +89,7 @@ class LoggingHandlerProvider extends AutoDisposeProvider<Logger> {
   final String source;
 
   @override
-  Override overrideWith(
-    Logger Function(LoggingHandlerRef provider) create,
-  ) {
+  Override overrideWith(Logger Function(LoggingHandlerRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: LoggingHandlerProvider._internal(
@@ -149,12 +130,12 @@ mixin LoggingHandlerRef on AutoDisposeProviderRef<Logger> {
   String get source;
 }
 
-class _LoggingHandlerProviderElement extends AutoDisposeProviderElement<Logger>
-    with LoggingHandlerRef {
+class _LoggingHandlerProviderElement extends AutoDisposeProviderElement<Logger> with LoggingHandlerRef {
   _LoggingHandlerProviderElement(super.provider);
 
   @override
   String get source => (origin as LoggingHandlerProvider).source;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

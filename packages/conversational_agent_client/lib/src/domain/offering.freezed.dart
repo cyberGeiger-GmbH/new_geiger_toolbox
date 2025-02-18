@@ -12,7 +12,8 @@ part of 'offering.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Offering _$OfferingFromJson(Map<String, dynamic> json) {
   return _Offering.fromJson(json);
@@ -29,21 +30,18 @@ mixin _$Offering {
   /// Create a copy of Offering
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $OfferingCopyWith<Offering> get copyWith =>
-      throw _privateConstructorUsedError;
+  $OfferingCopyWith<Offering> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $OfferingCopyWith<$Res> {
-  factory $OfferingCopyWith(Offering value, $Res Function(Offering) then) =
-      _$OfferingCopyWithImpl<$Res, Offering>;
+  factory $OfferingCopyWith(Offering value, $Res Function(Offering) then) = _$OfferingCopyWithImpl<$Res, Offering>;
   @useResult
   $Res call({String name, String summary});
 }
 
 /// @nodoc
-class _$OfferingCopyWithImpl<$Res, $Val extends Offering>
-    implements $OfferingCopyWith<$Res> {
+class _$OfferingCopyWithImpl<$Res, $Val extends Offering> implements $OfferingCopyWith<$Res> {
   _$OfferingCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -55,28 +53,28 @@ class _$OfferingCopyWithImpl<$Res, $Val extends Offering>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? summary = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? name = null, Object? summary = null}) {
+    return _then(
+      _value.copyWith(
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            summary:
+                null == summary
+                    ? _value.summary
+                    : summary // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$OfferingImplCopyWith<$Res>
-    implements $OfferingCopyWith<$Res> {
-  factory _$$OfferingImplCopyWith(
-          _$OfferingImpl value, $Res Function(_$OfferingImpl) then) =
+abstract class _$$OfferingImplCopyWith<$Res> implements $OfferingCopyWith<$Res> {
+  factory _$$OfferingImplCopyWith(_$OfferingImpl value, $Res Function(_$OfferingImpl) then) =
       __$$OfferingImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -84,31 +82,29 @@ abstract class _$$OfferingImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$OfferingImplCopyWithImpl<$Res>
-    extends _$OfferingCopyWithImpl<$Res, _$OfferingImpl>
+class __$$OfferingImplCopyWithImpl<$Res> extends _$OfferingCopyWithImpl<$Res, _$OfferingImpl>
     implements _$$OfferingImplCopyWith<$Res> {
-  __$$OfferingImplCopyWithImpl(
-      _$OfferingImpl _value, $Res Function(_$OfferingImpl) _then)
-      : super(_value, _then);
+  __$$OfferingImplCopyWithImpl(_$OfferingImpl _value, $Res Function(_$OfferingImpl) _then) : super(_value, _then);
 
   /// Create a copy of Offering
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? summary = null,
-  }) {
-    return _then(_$OfferingImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      summary: null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? name = null, Object? summary = null}) {
+    return _then(
+      _$OfferingImpl(
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        summary:
+            null == summary
+                ? _value.summary
+                : summary // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -117,8 +113,7 @@ class __$$OfferingImplCopyWithImpl<$Res>
 class _$OfferingImpl implements _Offering {
   _$OfferingImpl({required this.name, required this.summary});
 
-  factory _$OfferingImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OfferingImplFromJson(json);
+  factory _$OfferingImpl.fromJson(Map<String, dynamic> json) => _$$OfferingImplFromJson(json);
 
   @override
   final String name;
@@ -153,19 +148,14 @@ class _$OfferingImpl implements _Offering {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OfferingImplToJson(
-      this,
-    );
+    return _$$OfferingImplToJson(this);
   }
 }
 
 abstract class _Offering implements Offering {
-  factory _Offering(
-      {required final String name,
-      required final String summary}) = _$OfferingImpl;
+  factory _Offering({required final String name, required final String summary}) = _$OfferingImpl;
 
-  factory _Offering.fromJson(Map<String, dynamic> json) =
-      _$OfferingImpl.fromJson;
+  factory _Offering.fromJson(Map<String, dynamic> json) = _$OfferingImpl.fromJson;
 
   @override
   String get name;
@@ -176,6 +166,5 @@ abstract class _Offering implements Offering {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OfferingImplCopyWith<_$OfferingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OfferingImplCopyWith<_$OfferingImpl> get copyWith => throw _privateConstructorUsedError;
 }

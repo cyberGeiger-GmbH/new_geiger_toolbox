@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomNavigationDestination extends StatelessWidget {
-  const CustomNavigationDestination._(
-      {required this.icon, required this.label});
+  const CustomNavigationDestination._({required this.icon, required this.label});
 
   factory CustomNavigationDestination.home() {
     return const CustomNavigationDestination._(icon: Icons.home, label: "home");
   }
 
   factory CustomNavigationDestination.people() {
-    return const CustomNavigationDestination._(
-        icon: Icons.people, label: "people");
+    return const CustomNavigationDestination._(icon: Icons.people, label: "people");
   }
 
   factory CustomNavigationDestination.calendar() {
-    return const CustomNavigationDestination._(
-        icon: Icons.calendar_month, label: "calendar");
+    return const CustomNavigationDestination._(icon: Icons.calendar_month, label: "calendar");
   }
 
   factory CustomNavigationDestination.chat() {
@@ -23,8 +20,7 @@ class CustomNavigationDestination extends StatelessWidget {
   }
 
   factory CustomNavigationDestination.setting() {
-    return const CustomNavigationDestination._(
-        icon: Icons.settings, label: "setting");
+    return const CustomNavigationDestination._(icon: Icons.settings, label: "setting");
   }
 
   static List<CustomNavigationDestination> getDestination() {

@@ -6,18 +6,14 @@ part of 'terms_condition_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$termsConditionControllerHash() =>
-    r'daf4e148662e52e649f5c52ea1c467bb1013b76d';
+String _$termsConditionControllerHash() => r'daf4e148662e52e649f5c52ea1c467bb1013b76d';
 
 /// See also [TermsConditionController].
 @ProviderFor(TermsConditionController)
-final termsConditionControllerProvider =
-    AutoDisposeNotifierProvider<TermsConditionController, bool>.internal(
+final termsConditionControllerProvider = AutoDisposeNotifierProvider<TermsConditionController, bool>.internal(
   TermsConditionController.new,
   name: r'termsConditionControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$termsConditionControllerHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$termsConditionControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

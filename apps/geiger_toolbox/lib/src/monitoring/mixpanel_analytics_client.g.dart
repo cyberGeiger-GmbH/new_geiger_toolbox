@@ -6,18 +6,14 @@ part of 'mixpanel_analytics_client.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mixpanelAnalyticsClientHash() =>
-    r'32db508041573051264941fbe4f6a44a0ee1cb77';
+String _$mixpanelAnalyticsClientHash() => r'32db508041573051264941fbe4f6a44a0ee1cb77';
 
 /// See also [mixpanelAnalyticsClient].
 @ProviderFor(mixpanelAnalyticsClient)
-final mixpanelAnalyticsClientProvider =
-    FutureProvider<MixpanelAnalyticsClient>.internal(
+final mixpanelAnalyticsClientProvider = FutureProvider<MixpanelAnalyticsClient>.internal(
   mixpanelAnalyticsClient,
   name: r'mixpanelAnalyticsClientProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$mixpanelAnalyticsClientHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$mixpanelAnalyticsClientHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

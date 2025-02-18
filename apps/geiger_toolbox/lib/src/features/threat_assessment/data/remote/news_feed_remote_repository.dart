@@ -6,11 +6,11 @@ part 'news_feed_remote_repository.g.dart';
 class NewsFeedRemoteRepository {
   final Ref ref;
 
-    Logger get _log => ref.read(logHandlerProvider("$NewsFeedRemoteRepository"));
+  Logger get _log => ref.read(logHandlerProvider("$NewsFeedRemoteRepository"));
   NewsFeedRemoteRepository(this.ref);
 
   Future<List<News>> fetchNewsUpdate({required UserProfileModel smeProfile}) async {
-      try {
+    try {
       final newsRepo = ref.read(newsRepositoryProvider);
       final data = await newsRepo.fetchNews(userProfile: smeProfile);
       _log.i("total news received > ${data.length}");

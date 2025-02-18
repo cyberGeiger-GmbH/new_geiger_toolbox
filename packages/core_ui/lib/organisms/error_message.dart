@@ -10,10 +10,6 @@ class ErrorMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).colorScheme;
 
-    return AppText.titleLarge(
-      text: errorMessage,
-      context: context,
-      color: appColor.error,
-    );
+    return AppText.titleLarge(text: errorMessage, context: context, color: appColor.error);
   }
 }

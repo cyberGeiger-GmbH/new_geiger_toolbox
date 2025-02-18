@@ -12,7 +12,8 @@ part of 'message.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Message _$MessageFromJson(Map<String, dynamic> json) {
   return _Message.fromJson(json);
@@ -37,19 +38,13 @@ mixin _$Message {
 
 /// @nodoc
 abstract class $MessageCopyWith<$Res> {
-  factory $MessageCopyWith(Message value, $Res Function(Message) then) =
-      _$MessageCopyWithImpl<$Res, Message>;
+  factory $MessageCopyWith(Message value, $Res Function(Message) then) = _$MessageCopyWithImpl<$Res, Message>;
   @useResult
-  $Res call(
-      {String message,
-      String? id,
-      Role? role,
-      @JsonKey(name: 'created_at') DateTime? createdAt});
+  $Res call({String message, String? id, Role? role, @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
-class _$MessageCopyWithImpl<$Res, $Val extends Message>
-    implements $MessageCopyWith<$Res> {
+class _$MessageCopyWithImpl<$Res, $Val extends Message> implements $MessageCopyWith<$Res> {
   _$MessageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -61,97 +56,87 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-    Object? id = freezed,
-    Object? role = freezed,
-    Object? createdAt = freezed,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      role: freezed == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as Role?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+  $Res call({Object? message = null, Object? id = freezed, Object? role = freezed, Object? createdAt = freezed}) {
+    return _then(
+      _value.copyWith(
+            message:
+                null == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as String,
+            id:
+                freezed == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            role:
+                freezed == role
+                    ? _value.role
+                    : role // ignore: cast_nullable_to_non_nullable
+                        as Role?,
+            createdAt:
+                freezed == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
-  factory _$$MessageImplCopyWith(
-          _$MessageImpl value, $Res Function(_$MessageImpl) then) =
+  factory _$$MessageImplCopyWith(_$MessageImpl value, $Res Function(_$MessageImpl) then) =
       __$$MessageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String message,
-      String? id,
-      Role? role,
-      @JsonKey(name: 'created_at') DateTime? createdAt});
+  $Res call({String message, String? id, Role? role, @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
-class __$$MessageImplCopyWithImpl<$Res>
-    extends _$MessageCopyWithImpl<$Res, _$MessageImpl>
+class __$$MessageImplCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res, _$MessageImpl>
     implements _$$MessageImplCopyWith<$Res> {
-  __$$MessageImplCopyWithImpl(
-      _$MessageImpl _value, $Res Function(_$MessageImpl) _then)
-      : super(_value, _then);
+  __$$MessageImplCopyWithImpl(_$MessageImpl _value, $Res Function(_$MessageImpl) _then) : super(_value, _then);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-    Object? id = freezed,
-    Object? role = freezed,
-    Object? createdAt = freezed,
-  }) {
-    return _then(_$MessageImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      role: freezed == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as Role?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
+  $Res call({Object? message = null, Object? id = freezed, Object? role = freezed, Object? createdAt = freezed}) {
+    return _then(
+      _$MessageImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        id:
+            freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        role:
+            freezed == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
+                    as Role?,
+        createdAt:
+            freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MessageImpl implements _Message {
-  const _$MessageImpl(
-      {required this.message,
-      this.id,
-      this.role,
-      @JsonKey(name: 'created_at') this.createdAt});
+  const _$MessageImpl({required this.message, this.id, this.role, @JsonKey(name: 'created_at') this.createdAt});
 
-  factory _$MessageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MessageImplFromJson(json);
+  factory _$MessageImpl.fromJson(Map<String, dynamic> json) => _$$MessageImplFromJson(json);
 
   @override
   final String message;
@@ -176,8 +161,7 @@ class _$MessageImpl implements _Message {
             (identical(other.message, message) || other.message == message) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.role, role) || other.role == role) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.createdAt, createdAt) || other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -189,23 +173,21 @@ class _$MessageImpl implements _Message {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MessageImplCopyWith<_$MessageImpl> get copyWith =>
-      __$$MessageImplCopyWithImpl<_$MessageImpl>(this, _$identity);
+  _$$MessageImplCopyWith<_$MessageImpl> get copyWith => __$$MessageImplCopyWithImpl<_$MessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MessageImplToJson(
-      this,
-    );
+    return _$$MessageImplToJson(this);
   }
 }
 
 abstract class _Message implements Message {
-  const factory _Message(
-      {required final String message,
-      final String? id,
-      final Role? role,
-      @JsonKey(name: 'created_at') final DateTime? createdAt}) = _$MessageImpl;
+  const factory _Message({
+    required final String message,
+    final String? id,
+    final Role? role,
+    @JsonKey(name: 'created_at') final DateTime? createdAt,
+  }) = _$MessageImpl;
 
   factory _Message.fromJson(Map<String, dynamic> json) = _$MessageImpl.fromJson;
 
@@ -223,6 +205,5 @@ abstract class _Message implements Message {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MessageImplCopyWith<_$MessageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MessageImplCopyWith<_$MessageImpl> get copyWith => throw _privateConstructorUsedError;
 }

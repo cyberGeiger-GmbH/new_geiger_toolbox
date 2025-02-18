@@ -11,12 +11,9 @@ class AppAssetImageData with _$AppAssetImageData {
 
   factory AppAssetImageData({required Image image}) = _AppAssetImageData;
 
-  factory AppAssetImageData.geigerLogo() =>
-      AppAssetImageData(image: Assets.images.appIcon.image());
+  factory AppAssetImageData.geigerLogo() => AppAssetImageData(image: Assets.images.appIcon.image());
 
-  factory AppAssetImageData.logoIcon() => AppAssetImageData(
-      image: Assets.images.appIcon.image(height: 40, width: 40));
+  factory AppAssetImageData.logoIcon() => AppAssetImageData(image: Assets.images.appIcon.image(height: 40, width: 40));
 
-  factory AppAssetImageData.backgroundImage() =>
-      AppAssetImageData(image: Assets.images.circlesBg.image());
+  factory AppAssetImageData.backgroundImage() => AppAssetImageData(image: Assets.images.circlesBg.image());
 }

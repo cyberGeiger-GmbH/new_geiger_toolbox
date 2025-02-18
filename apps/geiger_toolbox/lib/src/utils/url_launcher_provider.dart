@@ -14,8 +14,7 @@ class UrlLauncher {
 
   static const _name = 'URL Launcher';
 
-  Future<bool> launch(Uri uri,
-      {LaunchMode mode = LaunchMode.platformDefault}) async {
+  Future<bool> launch(Uri uri, {LaunchMode mode = LaunchMode.platformDefault}) async {
     final log = ref.read(logHandlerProvider(_name));
 
     if (await canLaunchUrl(uri)) {

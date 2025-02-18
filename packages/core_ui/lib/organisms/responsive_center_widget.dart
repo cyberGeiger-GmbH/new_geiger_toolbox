@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 /// If available width is smaller than the maximum width, the child use all the
 /// available width.
 class ResponsiveCenterWidget extends StatelessWidget {
-  const ResponsiveCenterWidget(
-      {super.key,
-      this.maxContentWidth = BreakPoints.tablet,
-      this.padding = EdgeInsets.zero,
-      required this.child});
+  const ResponsiveCenterWidget({
+    super.key,
+    this.maxContentWidth = BreakPoints.tablet,
+    this.padding = EdgeInsets.zero,
+    required this.child,
+  });
 
   final double maxContentWidth;
   final EdgeInsetsGeometry padding;
@@ -23,35 +24,26 @@ class ResponsiveCenterWidget extends StatelessWidget {
       // together with SizedBox to specify the max width (tight constraints)
       // See this thread for more info:
       // https://twitter.com/biz84/status/1445400059894542337
-      child: SizedBox(
-        width: maxContentWidth,
-        child: Padding(
-          padding: padding,
-          child: child,
-        ),
-      ),
+      child: SizedBox(width: maxContentWidth, child: Padding(padding: padding, child: child)),
     );
   }
 }
 
 /// Sliver-equivalent of [ResponsiveCenter]
 class ResponsiveSliverCenterWidget extends StatelessWidget {
-  const ResponsiveSliverCenterWidget(
-      {super.key,
-      this.maxContentWidth = BreakPoints.tablet,
-      this.padding = EdgeInsets.zero,
-      required this.child});
+  const ResponsiveSliverCenterWidget({
+    super.key,
+    this.maxContentWidth = BreakPoints.tablet,
+    this.padding = EdgeInsets.zero,
+    required this.child,
+  });
   final double maxContentWidth;
   final EdgeInsetsGeometry padding;
   final Widget child;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: ResponsiveCenterWidget(
-        maxContentWidth: maxContentWidth,
-        padding: padding,
-        child: child,
-      ),
+      child: ResponsiveCenterWidget(maxContentWidth: maxContentWidth, padding: padding, child: child),
     );
   }
 }

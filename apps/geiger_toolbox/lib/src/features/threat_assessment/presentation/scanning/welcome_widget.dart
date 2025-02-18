@@ -14,12 +14,7 @@ class WelcomeScanIntroWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
-        children: [
-          const GeigerScoreWidget(),
-          ScanButtonWidget(
-            onScanPressed: onScanPressed,
-          )
-        ],
+        children: [const GeigerScoreWidget(), ScanButtonWidget(onScanPressed: onScanPressed)],
       ),
     );
   }

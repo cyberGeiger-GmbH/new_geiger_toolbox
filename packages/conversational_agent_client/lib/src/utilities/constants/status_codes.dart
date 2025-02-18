@@ -9,7 +9,7 @@ class StatusCodes {
 
   StatusCode? getStatus(int? statusCode) {
     final log = ref.read(logHandlerProvider("StatusCode 🌎", packageName: "Conversational_agent_client"));
-    
+
     if (statusCode == StatusCode.unauthorised.code) {
       log.w("UNAUTHORISED: either no API key was provided or it wasn't valid");
 

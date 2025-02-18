@@ -12,21 +12,9 @@ typedef PageChanged<T> = Function(int index, T value);
 class IntroScreen extends ConsumerWidget {
   IntroScreen({super.key});
   final items = [
-    IntroImage(
-        svgImage: GeigerSvgImages.magnifyingGlass(
-          height: 180,
-        ),
-        description: 'Detect Cybersecurity Threat'),
-    IntroImage(
-        svgImage: GeigerSvgImages.measure(
-          height: 180,
-        ),
-        description: 'Accessment of Cybersecurity Threat Level'),
-    IntroImage(
-        svgImage: GeigerSvgImages.trickGood(
-          height: 180,
-        ),
-        description: 'Plan your cybersecurity Strategy'),
+    IntroImage(svgImage: GeigerSvgImages.magnifyingGlass(height: 180), description: 'Detect Cybersecurity Threat'),
+    IntroImage(svgImage: GeigerSvgImages.measure(height: 180), description: 'Accessment of Cybersecurity Threat Level'),
+    IntroImage(svgImage: GeigerSvgImages.trickGood(height: 180), description: 'Plan your cybersecurity Strategy'),
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,14 +29,10 @@ class IntroScreen extends ConsumerWidget {
               child: CarouselWidget(
                 slidingSpeed: 6,
                 items: items,
-                onPageChanged: (index, value) =>
-                    ref.read(introControllerProvider.notifier).update(index),
+                onPageChanged: (index, value) => ref.read(introControllerProvider.notifier).update(index),
               ),
             ),
-            SlideIndicator(
-              data: items,
-              current: index,
-            ),
+            SlideIndicator(data: items, current: index),
             Spacing.gapH8,
             TermsAndConditionWidget(),
           ],
@@ -59,11 +43,7 @@ class IntroScreen extends ConsumerWidget {
 }
 
 class CarouselWidget extends StatelessWidget {
-  CarouselWidget(
-      {super.key,
-      required this.items,
-      required this.onPageChanged,
-      this.slidingSpeed});
+  CarouselWidget({super.key, required this.items, required this.onPageChanged, this.slidingSpeed});
 
   final List<IntroImage> items;
   final CarouselSliderController controller = CarouselSliderController();
@@ -81,8 +61,7 @@ class CarouselWidget extends StatelessWidget {
           autoPlay: true,
           enlargeCenterPage: true,
           // aspectRatio: 16 / 9,
-          height: MediaQuery.sizeOf(context).height *
-              0.4, // Use 40% of screen height
+          height: MediaQuery.sizeOf(context).height * 0.4, // Use 40% of screen height
           viewportFraction: 1,
           autoPlayInterval: Duration(seconds: slidingSpeed ?? 3),
           onPageChanged: onPageChanged,
@@ -94,8 +73,7 @@ class CarouselWidget extends StatelessWidget {
 }
 
 class IntroImage extends StatelessWidget {
-  const IntroImage(
-      {super.key, required this.svgImage, required this.description});
+  const IntroImage({super.key, required this.svgImage, required this.description});
   final GeigerSvgImages svgImage;
   final String description;
   @override

@@ -21,12 +21,13 @@ import 'package:flutter/material.dart';
 /// ```
 ///
 class ResponsiveCenterScrollableWidget extends StatelessWidget {
-  const ResponsiveCenterScrollableWidget(
-      {super.key,
-      this.maxContentWidth = BreakPoints.tablet,
-      this.padding = EdgeInsets.zero,
-      this.controller,
-      required this.child});
+  const ResponsiveCenterScrollableWidget({
+    super.key,
+    this.maxContentWidth = BreakPoints.tablet,
+    this.padding = EdgeInsets.zero,
+    this.controller,
+    required this.child,
+  });
   final double maxContentWidth;
   final EdgeInsetsGeometry padding;
   final ScrollController? controller;
@@ -53,12 +54,8 @@ class ResponsiveCenterScrollableWidget extends StatelessWidget {
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: maxContentWidth),
             child: ScrollConfiguration(
-              behavior:
-                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
-              child: Padding(
-                padding: padding,
-                child: child,
-              ),
+              behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: Padding(padding: padding, child: child),
             ),
           ),
         ),

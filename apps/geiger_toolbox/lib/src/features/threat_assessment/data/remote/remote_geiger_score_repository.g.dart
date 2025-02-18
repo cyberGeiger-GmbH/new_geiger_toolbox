@@ -39,21 +39,13 @@ class GetGeigerScoreFamily extends Family<AsyncValue<GeigerScore?>> {
   const GetGeigerScoreFamily();
 
   /// See also [getGeigerScore].
-  GetGeigerScoreProvider call({
-    required UserProfileModel userProfile,
-  }) {
-    return GetGeigerScoreProvider(
-      userProfile: userProfile,
-    );
+  GetGeigerScoreProvider call({required UserProfileModel userProfile}) {
+    return GetGeigerScoreProvider(userProfile: userProfile);
   }
 
   @override
-  GetGeigerScoreProvider getProviderOverride(
-    covariant GetGeigerScoreProvider provider,
-  ) {
-    return call(
-      userProfile: provider.userProfile,
-    );
+  GetGeigerScoreProvider getProviderOverride(covariant GetGeigerScoreProvider provider) {
+    return call(userProfile: provider.userProfile);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -64,8 +56,7 @@ class GetGeigerScoreFamily extends Family<AsyncValue<GeigerScore?>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'getGeigerScoreProvider';
@@ -74,24 +65,16 @@ class GetGeigerScoreFamily extends Family<AsyncValue<GeigerScore?>> {
 /// See also [getGeigerScore].
 class GetGeigerScoreProvider extends AutoDisposeFutureProvider<GeigerScore?> {
   /// See also [getGeigerScore].
-  GetGeigerScoreProvider({
-    required UserProfileModel userProfile,
-  }) : this._internal(
-          (ref) => getGeigerScore(
-            ref as GetGeigerScoreRef,
-            userProfile: userProfile,
-          ),
-          from: getGeigerScoreProvider,
-          name: r'getGeigerScoreProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getGeigerScoreHash,
-          dependencies: GetGeigerScoreFamily._dependencies,
-          allTransitiveDependencies:
-              GetGeigerScoreFamily._allTransitiveDependencies,
-          userProfile: userProfile,
-        );
+  GetGeigerScoreProvider({required UserProfileModel userProfile})
+    : this._internal(
+        (ref) => getGeigerScore(ref as GetGeigerScoreRef, userProfile: userProfile),
+        from: getGeigerScoreProvider,
+        name: r'getGeigerScoreProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getGeigerScoreHash,
+        dependencies: GetGeigerScoreFamily._dependencies,
+        allTransitiveDependencies: GetGeigerScoreFamily._allTransitiveDependencies,
+        userProfile: userProfile,
+      );
 
   GetGeigerScoreProvider._internal(
     super._createNotifier, {
@@ -106,9 +89,7 @@ class GetGeigerScoreProvider extends AutoDisposeFutureProvider<GeigerScore?> {
   final UserProfileModel userProfile;
 
   @override
-  Override overrideWith(
-    FutureOr<GeigerScore?> Function(GetGeigerScoreRef provider) create,
-  ) {
+  Override overrideWith(FutureOr<GeigerScore?> Function(GetGeigerScoreRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: GetGeigerScoreProvider._internal(
@@ -149,14 +130,12 @@ mixin GetGeigerScoreRef on AutoDisposeFutureProviderRef<GeigerScore?> {
   UserProfileModel get userProfile;
 }
 
-class _GetGeigerScoreProviderElement
-    extends AutoDisposeFutureProviderElement<GeigerScore?>
-    with GetGeigerScoreRef {
+class _GetGeigerScoreProviderElement extends AutoDisposeFutureProviderElement<GeigerScore?> with GetGeigerScoreRef {
   _GetGeigerScoreProviderElement(super.provider);
 
   @override
-  UserProfileModel get userProfile =>
-      (origin as GetGeigerScoreProvider).userProfile;
+  UserProfileModel get userProfile => (origin as GetGeigerScoreProvider).userProfile;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

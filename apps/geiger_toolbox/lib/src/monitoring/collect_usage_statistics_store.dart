@@ -12,8 +12,7 @@ part 'collect_usage_statistics_store.g.dart';
 class CollectUsageStatisticsStore extends _$CollectUsageStatisticsStore {
   static const key = 'collect_usage_statistics';
 
-  SharedPreferences get _sharedPreferences =>
-      ref.watch(sharedPreferencesProvider).requireValue;
+  SharedPreferences get _sharedPreferences => ref.watch(sharedPreferencesProvider).requireValue;
 
   AnalyticsFacade get _analyticsFacade => ref.watch(analyticsFacadeProvider);
 

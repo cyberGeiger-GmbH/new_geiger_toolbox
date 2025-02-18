@@ -36,3 +36,4 @@ pubspec_overrides.yaml
 **/failures/*.png
 
 *.iml
+packages/perplexity_search/custom_lint.log

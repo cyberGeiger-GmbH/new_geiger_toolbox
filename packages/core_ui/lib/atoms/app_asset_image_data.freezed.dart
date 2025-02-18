@@ -12,7 +12,8 @@ part of 'app_asset_image_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AppAssetImageData {
@@ -21,14 +22,12 @@ mixin _$AppAssetImageData {
   /// Create a copy of AppAssetImageData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppAssetImageDataCopyWith<AppAssetImageData> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AppAssetImageDataCopyWith<AppAssetImageData> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppAssetImageDataCopyWith<$Res> {
-  factory $AppAssetImageDataCopyWith(
-          AppAssetImageData value, $Res Function(AppAssetImageData) then) =
+  factory $AppAssetImageDataCopyWith(AppAssetImageData value, $Res Function(AppAssetImageData) then) =
       _$AppAssetImageDataCopyWithImpl<$Res, AppAssetImageData>;
   @useResult
   $Res call({Image image});
@@ -48,23 +47,23 @@ class _$AppAssetImageDataCopyWithImpl<$Res, $Val extends AppAssetImageData>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? image = null,
-  }) {
-    return _then(_value.copyWith(
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as Image,
-    ) as $Val);
+  $Res call({Object? image = null}) {
+    return _then(
+      _value.copyWith(
+            image:
+                null == image
+                    ? _value.image
+                    : image // ignore: cast_nullable_to_non_nullable
+                        as Image,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
-abstract class _$$AppAssetImageDataImplCopyWith<$Res>
-    implements $AppAssetImageDataCopyWith<$Res> {
-  factory _$$AppAssetImageDataImplCopyWith(_$AppAssetImageDataImpl value,
-          $Res Function(_$AppAssetImageDataImpl) then) =
+abstract class _$$AppAssetImageDataImplCopyWith<$Res> implements $AppAssetImageDataCopyWith<$Res> {
+  factory _$$AppAssetImageDataImplCopyWith(_$AppAssetImageDataImpl value, $Res Function(_$AppAssetImageDataImpl) then) =
       __$$AppAssetImageDataImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -72,26 +71,25 @@ abstract class _$$AppAssetImageDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AppAssetImageDataImplCopyWithImpl<$Res>
-    extends _$AppAssetImageDataCopyWithImpl<$Res, _$AppAssetImageDataImpl>
+class __$$AppAssetImageDataImplCopyWithImpl<$Res> extends _$AppAssetImageDataCopyWithImpl<$Res, _$AppAssetImageDataImpl>
     implements _$$AppAssetImageDataImplCopyWith<$Res> {
-  __$$AppAssetImageDataImplCopyWithImpl(_$AppAssetImageDataImpl _value,
-      $Res Function(_$AppAssetImageDataImpl) _then)
-      : super(_value, _then);
+  __$$AppAssetImageDataImplCopyWithImpl(_$AppAssetImageDataImpl _value, $Res Function(_$AppAssetImageDataImpl) _then)
+    : super(_value, _then);
 
   /// Create a copy of AppAssetImageData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? image = null,
-  }) {
-    return _then(_$AppAssetImageDataImpl(
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as Image,
-    ));
+  $Res call({Object? image = null}) {
+    return _then(
+      _$AppAssetImageDataImpl(
+        image:
+            null == image
+                ? _value.image
+                : image // ignore: cast_nullable_to_non_nullable
+                    as Image,
+      ),
+    );
   }
 }
 
@@ -125,13 +123,11 @@ class _$AppAssetImageDataImpl extends _AppAssetImageData {
   @override
   @pragma('vm:prefer-inline')
   _$$AppAssetImageDataImplCopyWith<_$AppAssetImageDataImpl> get copyWith =>
-      __$$AppAssetImageDataImplCopyWithImpl<_$AppAssetImageDataImpl>(
-          this, _$identity);
+      __$$AppAssetImageDataImplCopyWithImpl<_$AppAssetImageDataImpl>(this, _$identity);
 }
 
 abstract class _AppAssetImageData extends AppAssetImageData {
-  factory _AppAssetImageData({required final Image image}) =
-      _$AppAssetImageDataImpl;
+  factory _AppAssetImageData({required final Image image}) = _$AppAssetImageDataImpl;
   _AppAssetImageData._() : super._();
 
   @override
@@ -141,6 +137,5 @@ abstract class _AppAssetImageData extends AppAssetImageData {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppAssetImageDataImplCopyWith<_$AppAssetImageDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AppAssetImageDataImplCopyWith<_$AppAssetImageDataImpl> get copyWith => throw _privateConstructorUsedError;
 }

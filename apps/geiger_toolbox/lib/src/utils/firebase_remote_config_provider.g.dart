@@ -6,18 +6,14 @@ part of 'firebase_remote_config_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseRemoteConfigHash() =>
-    r'51bf4729b7e37fa9d48876d3ffb5cbc22528f7d5';
+String _$firebaseRemoteConfigHash() => r'51bf4729b7e37fa9d48876d3ffb5cbc22528f7d5';
 
 /// See also [firebaseRemoteConfig].
 @ProviderFor(firebaseRemoteConfig)
-final firebaseRemoteConfigProvider =
-    FutureProvider<FirebaseRemoteConfig>.internal(
+final firebaseRemoteConfigProvider = FutureProvider<FirebaseRemoteConfig>.internal(
   firebaseRemoteConfig,
   name: r'firebaseRemoteConfigProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseRemoteConfigHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$firebaseRemoteConfigHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
