@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
@@ -97,7 +98,37 @@ class ShowLimitedTodos extends ConsumerWidget {
                 return true;
               }
             },
-            child: TodoListTileCard(item: items[i]),
+            child: TodoListTile(
+              item: items[i],
+              onChanged: () {
+                if (items[i].status == Status.done) {
+                  final value = items[i].copyWith(status: Status.planned);
+                  ref.read(todoControllerProvider.notifier).planLater(value);
+                } else {
+                  final value = items[i].copyWith(status: Status.done);
+                  ref.read(todoControllerProvider.notifier).makeAsDone(value);
+                }
+              },
+              showDetails: () {
+                showWoltModalBottomSheet(
+                  context,
+                  title: items[i].offering.name,
+                  forceMaxHeight: false,
+                  page: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.sizeOf(context).height * 0.3, // Use 40% of screen height
+                        child: Padding(
+                          padding: const EdgeInsets.all(Spacing.p16),
+                          child: AppText.bodySmall(text: items[i].offering.summary, context: context),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            // child: TodoListTileCard(item: items[i]),
           ),
           if (i < (items.length > displayLimit ? displayLimit - 1 : items.length - 1)) Divider(height: 1),
         ],
@@ -137,33 +168,37 @@ class DismissibleTodo extends StatelessWidget {
   }
 }
 
-class TodoListTileCard extends StatelessWidget {
-  const TodoListTileCard({super.key, required this.item});
+class TodoListTile extends StatelessWidget {
   final TodoOffering item;
+  final VoidCallback onChanged;
+  final VoidCallback showDetails;
+
+  const TodoListTile({super.key, required this.item, required this.onChanged, required this.showDetails});
+
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: item.status == Status.done ? Icon(Icons.done) : Icon(Icons.pending),
-      title: AppText.bodyMedium(text: item.offering.name, context: context),
-      trailing: Icon(Icons.chevron_right),
-      onTap: () {
-        showWoltModalBottomSheet(
-          context,
-          title: item.offering.name,
-          forceMaxHeight: false,
-          page: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.3, // Use 40% of screen height
-                child: Padding(
-                  padding: const EdgeInsets.all(Spacing.p16),
-                  child: AppText.bodySmall(text: item.offering.summary, context: context),
-                ),
-              ),
-            ],
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      child: ListTile(
+        onTap: () => showDetails(),
+        leading: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: Icon(
+            item.status == Status.done ? CupertinoIcons.checkmark_circle_fill : CupertinoIcons.circle,
+            color: item.status == Status.done ? Colors.blue : Colors.grey,
+            size: 28,
           ),
-        );
-      },
+          onPressed: () => onChanged(),
+        ),
+        title: AppText.bodyMedium(
+          text: item.offering.name,
+          color: item.status == Status.done ? Colors.grey : Colors.black,
+          context: context,
+          textAlign: TextAlign.start,
+          textRemoved: item.status == Status.done,
+        ),
+        trailing: Icon(Icons.chevron_right),
+      ),
     );
   }
 }
