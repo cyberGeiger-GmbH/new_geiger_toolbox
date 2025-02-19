@@ -1,2 +1,0 @@
-/Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/android/app/.cxx/Debug/3i4n6l28/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/android/app/.cxx/Debug/3i4n6l28/armeabi-v7a/CMakeFiles/rebuild_cache.dir

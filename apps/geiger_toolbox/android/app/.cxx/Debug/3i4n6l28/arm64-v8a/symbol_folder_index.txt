@@ -1,1 +1,0 @@
-/Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/apps/geiger_toolbox/build/app/intermediates/cxx/Debug/3i4n6l28/obj/arm64-v8a
