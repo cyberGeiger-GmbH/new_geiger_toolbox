@@ -23,8 +23,9 @@ class RecommendationTileListWidget extends StatelessWidget {
                 showWoltModalBottomSheet(
                   context,
                   title: reco.name,
-                  page: RecommendedTodoListWidget(id: reco.id),
+                  page: RecommendedTodoListWidget(id: reco.id, rationale: reco.rationale),
                   stickyActionBar: AddAllTodoWidget(),
+                  horizontalPadding: Spacing.p8,
                 );
               },
             );
@@ -43,7 +44,7 @@ class AddAllTodoWidget extends ConsumerWidget {
     // debugPrint("todos added $todos");
     return AppButton.tertiary(
       isloading: state.isLoading,
-      label: "update todo list".hardcoded,
+      label: "Add To todos ".hardcoded,
       context: context,
       onPressed: () async {
         await ref.read(addOfferingTodoControllerProvider.notifier).addToActiveTodo(offeringsStatus: todos);

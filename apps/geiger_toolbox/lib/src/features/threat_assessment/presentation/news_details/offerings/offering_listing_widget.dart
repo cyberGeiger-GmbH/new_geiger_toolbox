@@ -9,8 +9,9 @@ import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offeri
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 
 class RecommendedTodoListWidget extends ConsumerWidget {
-  const RecommendedTodoListWidget({super.key, required this.id});
+  const RecommendedTodoListWidget({super.key, required this.id, required this.rationale});
   final RecommendationID id;
+  final String rationale;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //listen to error message when adding offering to todo to be done
@@ -24,11 +25,9 @@ class RecommendedTodoListWidget extends ConsumerWidget {
           (data) =>
               data.isEmpty
                   ? Center(child: EmptyContent(message: "No Offerings found", title: "Info"))
-                  : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TodoTileList(
-                      todoTile: data.map((offer) => RecommendedTodoWidget(key: key, offer: offer)).toList(),
-                    ),
+                  : TodoTileList(
+                    todoTile: data.map((offer) => RecommendedTodoWidget(key: key, offer: offer)).toList(),
+                    rationale: rationale,
                   ),
     );
   }
@@ -48,6 +47,7 @@ class RecommendedTodoWidget extends ConsumerWidget {
       summary: offer.offering.summary,
       title: offer.offering.name,
       done: state.status == Status.planned,
+
       onChange: (value) async {
         //to update the ui
         ref.read(toggleOfferControllerProvider(offer).notifier).onChange(offer.copyWith(status: Status.planned));

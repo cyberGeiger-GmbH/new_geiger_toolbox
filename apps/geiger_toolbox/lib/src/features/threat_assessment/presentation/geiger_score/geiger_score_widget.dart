@@ -36,7 +36,7 @@ class GeigerScoreWidget extends ConsumerWidget {
                             context,
                             title: "Geiger Score!",
                             forceMaxHeight: false,
-                            page: Padding(
+                            mainContent: Padding(
                               padding: const EdgeInsets.all(Spacing.p8),
                               child: ShowScoreReason(
                                 align: TextAlign.center,

@@ -1,3 +1,5 @@
+import 'package:core_ui/molecules/texts/app_text.dart';
+import 'package:core_ui/tokens/spacing.dart';
 import 'package:core_ui/utils/list_view_builder.dart';
 import 'package:core_ui/utils/utils.dart';
 
@@ -21,15 +23,24 @@ class TodoTileListView extends StatelessWidget {
 }
 
 class TodoTileList extends StatelessWidget {
-  const TodoTileList({super.key, required this.todoTile});
+  const TodoTileList({super.key, required this.todoTile, required this.rationale});
   final List<Widget> todoTile;
+  final String rationale;
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
-
-    return Container(
-      decoration: Utils.getDecoration(appColors),
-      child: Column(children: ListTile.divideTiles(context: context, tiles: todoTile.map((value) => value)).toList()),
+    final hint = Theme.of(context).hintColor;
+    return Column(
+      children: [
+        Container(
+          decoration: Utils.getDecoration(appColors),
+          child: Column(
+            children: ListTile.divideTiles(context: context, tiles: todoTile.map((value) => value)).toList(),
+          ),
+        ),
+        Spacing.gapH16,
+        AppText.bodySmall(text: rationale, context: context, color: hint, textAlign: TextAlign.center),
+      ],
     );
   }
 }

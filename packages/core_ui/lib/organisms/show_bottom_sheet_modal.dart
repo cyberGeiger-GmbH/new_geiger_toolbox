@@ -9,12 +9,14 @@ void showWoltModalBottomSheet(
   required String title,
   required Widget page,
   Widget? stickyActionBar,
+  double horizontalPadding = Spacing.p0,
   bool forceMaxHeight = true,
 }) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.bottomSheet(),
     context: context,
     barrierDismissible: false,
+
     pageListBuilder: (bottomSheetContext) {
       return [
         _takeActionSliverWolModalSheetPage(
@@ -23,6 +25,7 @@ void showWoltModalBottomSheet(
           mainContent: page,
           stickyActionBar: stickyActionBar,
           forceMaxHeight: forceMaxHeight,
+          horizontalPadding: horizontalPadding,
         ),
       ];
     },
@@ -32,16 +35,24 @@ void showWoltModalBottomSheet(
 void showWoltAlertDialog(
   BuildContext context, {
   required String title,
-  required Widget page,
+  required Widget mainContent,
   bool forceMaxHeight = true,
+  double horizontalPadding = Spacing.p0,
 }) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.alertDialog(),
     context: context,
     barrierDismissible: false,
+
     pageListBuilder: (bottomSheetContext) {
       return [
-        _takeActionSliverWolModalSheetPage(context, title: title, mainContent: page, forceMaxHeight: forceMaxHeight),
+        _takeActionSliverWolModalSheetPage(
+          context,
+          title: title,
+          mainContent: mainContent,
+          forceMaxHeight: forceMaxHeight,
+          horizontalPadding: horizontalPadding,
+        ),
       ];
     },
   );
@@ -53,6 +64,7 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
   required Widget mainContent,
   Widget? stickyActionBar,
   bool forceMaxHeight = true,
+  required double horizontalPadding,
 }) {
   final appColors = Theme.of(modalSheetContext).colorScheme;
 
@@ -77,9 +89,18 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     ),
 
     mainContentSliversBuilder: (bottomSheetContext) {
-      return [SliverToBoxAdapter(child: mainContent)];
+      return [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: Spacing.p8, horizontal: horizontalPadding),
+            child: mainContent,
+          ),
+        ),
+      ];
     },
-
-    stickyActionBar: Padding(padding: const EdgeInsets.only(bottom: Spacing.p22), child: stickyActionBar),
+    stickyActionBar: Padding(
+      padding: EdgeInsets.symmetric(vertical: Spacing.p22, horizontal: horizontalPadding),
+      child: stickyActionBar,
+    ),
   );
 }
