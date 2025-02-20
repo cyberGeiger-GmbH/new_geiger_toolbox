@@ -44,6 +44,7 @@ class MainScreen extends ConsumerWidget {
       body: ResponsiveCenterScrollableWidget(
         controller: scrollController,
         child: FeatureListView(
+          scrollController: scrollController,
           onScanPressed: () {
             ref.read(scanButtonControllerProvider.notifier).scan();
           },
