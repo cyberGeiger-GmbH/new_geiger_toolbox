@@ -13,6 +13,7 @@ class TodoOffering with _$TodoOffering {
   const factory TodoOffering({
     required OfferingId id,
     required Status status,
+   
     required DateTime dateRecommendated,
     DateTime? lastUpdated,
     required Offering offering,

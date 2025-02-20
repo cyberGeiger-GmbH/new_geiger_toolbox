@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todo_list_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
@@ -65,8 +65,8 @@ class ShowLimitedTodos extends StatelessWidget {
             url: items[i].imageUrl,
             onPress: () {
               context.goNamed(
-                AppRouter.newsFeedDetails.name,
-                pathParameters: {AppRouter.newsFeedDetails.name: items[i].title.replaceSpacesWithHyphen},
+                AppRouter.newDetailsRouter.name,
+                pathParameters: {AppRouter.newDetailsRouter.name: items[i].title.replaceSpacesWithHyphen},
               );
             },
           ),

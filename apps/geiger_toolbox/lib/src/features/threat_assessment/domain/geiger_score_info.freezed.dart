@@ -26,19 +26,29 @@ mixin _$GeigerScoreInfo {
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GeigerScoreInfoCopyWith<GeigerScoreInfo> get copyWith => throw _privateConstructorUsedError;
+  $GeigerScoreInfoCopyWith<GeigerScoreInfo> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GeigerScoreInfoCopyWith<$Res> {
-  factory $GeigerScoreInfoCopyWith(GeigerScoreInfo value, $Res Function(GeigerScoreInfo) then) =
-      _$GeigerScoreInfoCopyWithImpl<$Res, GeigerScoreInfo>;
+  factory $GeigerScoreInfoCopyWith(
+    GeigerScoreInfo value,
+    $Res Function(GeigerScoreInfo) then,
+  ) = _$GeigerScoreInfoCopyWithImpl<$Res, GeigerScoreInfo>;
   @useResult
-  $Res call({int id, int geigerScore, DateTime lastUpdate, String status, String reason});
+  $Res call({
+    int id,
+    int geigerScore,
+    DateTime lastUpdate,
+    String status,
+    String reason,
+  });
 }
 
 /// @nodoc
-class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo> implements $GeigerScoreInfoCopyWith<$Res> {
+class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo>
+    implements $GeigerScoreInfoCopyWith<$Res> {
   _$GeigerScoreInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -91,19 +101,31 @@ class _$GeigerScoreInfoCopyWithImpl<$Res, $Val extends GeigerScoreInfo> implemen
 }
 
 /// @nodoc
-abstract class _$$GeigerScoreInfoImplCopyWith<$Res> implements $GeigerScoreInfoCopyWith<$Res> {
-  factory _$$GeigerScoreInfoImplCopyWith(_$GeigerScoreInfoImpl value, $Res Function(_$GeigerScoreInfoImpl) then) =
-      __$$GeigerScoreInfoImplCopyWithImpl<$Res>;
+abstract class _$$GeigerScoreInfoImplCopyWith<$Res>
+    implements $GeigerScoreInfoCopyWith<$Res> {
+  factory _$$GeigerScoreInfoImplCopyWith(
+    _$GeigerScoreInfoImpl value,
+    $Res Function(_$GeigerScoreInfoImpl) then,
+  ) = __$$GeigerScoreInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int geigerScore, DateTime lastUpdate, String status, String reason});
+  $Res call({
+    int id,
+    int geigerScore,
+    DateTime lastUpdate,
+    String status,
+    String reason,
+  });
 }
 
 /// @nodoc
-class __$$GeigerScoreInfoImplCopyWithImpl<$Res> extends _$GeigerScoreInfoCopyWithImpl<$Res, _$GeigerScoreInfoImpl>
+class __$$GeigerScoreInfoImplCopyWithImpl<$Res>
+    extends _$GeigerScoreInfoCopyWithImpl<$Res, _$GeigerScoreInfoImpl>
     implements _$$GeigerScoreInfoImplCopyWith<$Res> {
-  __$$GeigerScoreInfoImplCopyWithImpl(_$GeigerScoreInfoImpl _value, $Res Function(_$GeigerScoreInfoImpl) _then)
-    : super(_value, _then);
+  __$$GeigerScoreInfoImplCopyWithImpl(
+    _$GeigerScoreInfoImpl _value,
+    $Res Function(_$GeigerScoreInfoImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -181,14 +203,17 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
         (other.runtimeType == runtimeType &&
             other is _$GeigerScoreInfoImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.geigerScore, geigerScore) || other.geigerScore == geigerScore) &&
-            (identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate) &&
+            (identical(other.geigerScore, geigerScore) ||
+                other.geigerScore == geigerScore) &&
+            (identical(other.lastUpdate, lastUpdate) ||
+                other.lastUpdate == lastUpdate) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, geigerScore, lastUpdate, status, reason);
+  int get hashCode =>
+      Object.hash(runtimeType, id, geigerScore, lastUpdate, status, reason);
 
   /// Create a copy of GeigerScoreInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -196,7 +221,10 @@ class _$GeigerScoreInfoImpl implements _GeigerScoreInfo {
   @override
   @pragma('vm:prefer-inline')
   _$$GeigerScoreInfoImplCopyWith<_$GeigerScoreInfoImpl> get copyWith =>
-      __$$GeigerScoreInfoImplCopyWithImpl<_$GeigerScoreInfoImpl>(this, _$identity);
+      __$$GeigerScoreInfoImplCopyWithImpl<_$GeigerScoreInfoImpl>(
+        this,
+        _$identity,
+      );
 }
 
 abstract class _GeigerScoreInfo implements GeigerScoreInfo {
@@ -223,5 +251,6 @@ abstract class _GeigerScoreInfo implements GeigerScoreInfo {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GeigerScoreInfoImplCopyWith<_$GeigerScoreInfoImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$GeigerScoreInfoImplCopyWith<_$GeigerScoreInfoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

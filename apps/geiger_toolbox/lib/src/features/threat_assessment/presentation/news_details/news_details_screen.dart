@@ -49,7 +49,7 @@ class NewsDetailsScreen extends StatelessWidget {
                     message: "News not found".hardcoded,
                     label: "Go back".hardcoded,
                     onTap: () {
-                      context.goNamed(AppRouter.main.name);
+                      context.goNamed(AppRouter.mainRouter.name);
                     },
                   )
                   : NewsDetailsWidget(newsfeed: data);

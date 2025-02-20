@@ -44,7 +44,9 @@ class GetGeigerScoreFamily extends Family<AsyncValue<GeigerScore?>> {
   }
 
   @override
-  GetGeigerScoreProvider getProviderOverride(covariant GetGeigerScoreProvider provider) {
+  GetGeigerScoreProvider getProviderOverride(
+    covariant GetGeigerScoreProvider provider,
+  ) {
     return call(userProfile: provider.userProfile);
   }
 
@@ -56,7 +58,8 @@ class GetGeigerScoreFamily extends Family<AsyncValue<GeigerScore?>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'getGeigerScoreProvider';
@@ -67,12 +70,17 @@ class GetGeigerScoreProvider extends AutoDisposeFutureProvider<GeigerScore?> {
   /// See also [getGeigerScore].
   GetGeigerScoreProvider({required UserProfileModel userProfile})
     : this._internal(
-        (ref) => getGeigerScore(ref as GetGeigerScoreRef, userProfile: userProfile),
+        (ref) =>
+            getGeigerScore(ref as GetGeigerScoreRef, userProfile: userProfile),
         from: getGeigerScoreProvider,
         name: r'getGeigerScoreProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getGeigerScoreHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$getGeigerScoreHash,
         dependencies: GetGeigerScoreFamily._dependencies,
-        allTransitiveDependencies: GetGeigerScoreFamily._allTransitiveDependencies,
+        allTransitiveDependencies:
+            GetGeigerScoreFamily._allTransitiveDependencies,
         userProfile: userProfile,
       );
 
@@ -89,7 +97,9 @@ class GetGeigerScoreProvider extends AutoDisposeFutureProvider<GeigerScore?> {
   final UserProfileModel userProfile;
 
   @override
-  Override overrideWith(FutureOr<GeigerScore?> Function(GetGeigerScoreRef provider) create) {
+  Override overrideWith(
+    FutureOr<GeigerScore?> Function(GetGeigerScoreRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: GetGeigerScoreProvider._internal(
@@ -130,11 +140,14 @@ mixin GetGeigerScoreRef on AutoDisposeFutureProviderRef<GeigerScore?> {
   UserProfileModel get userProfile;
 }
 
-class _GetGeigerScoreProviderElement extends AutoDisposeFutureProviderElement<GeigerScore?> with GetGeigerScoreRef {
+class _GetGeigerScoreProviderElement
+    extends AutoDisposeFutureProviderElement<GeigerScore?>
+    with GetGeigerScoreRef {
   _GetGeigerScoreProviderElement(super.provider);
 
   @override
-  UserProfileModel get userProfile => (origin as GetGeigerScoreProvider).userProfile;
+  UserProfileModel get userProfile =>
+      (origin as GetGeigerScoreProvider).userProfile;
 }
 
 // ignore_for_file: type=lint

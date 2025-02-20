@@ -52,8 +52,8 @@ class NewsFeedsWidget extends ConsumerWidget {
                           : () {
                             final title = news[index].title;
                             context.goNamed(
-                              AppRouter.newsFeedDetails.name,
-                              pathParameters: {AppRouter.newsFeedDetails.name: title},
+                              AppRouter.newDetailsRouter.name,
+                              pathParameters: {AppRouter.newDetailsRouter.name: title},
                             );
                           },
                 ),

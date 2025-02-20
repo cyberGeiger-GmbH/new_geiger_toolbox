@@ -10,6 +10,7 @@ import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/local_news_feed_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering_category.dart';
 
 import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 
@@ -66,12 +67,12 @@ void main() {
         print("offering => $offering");
 
         //show all todos
-        final Stream<List<TodoOffering>> stream = todoRepo.watchTodoOfferingStatus();
+        final Stream<List<TodoOfferingCategory>> stream = todoRepo.watchTodoOfferingStatus();
 
         // lister to the stream of todos
         final expectation = tester.expectLater(
           stream,
-          tester.emitsInOrder([tester.isEmpty, tester.isA<List<TodoOffering>>()]),
+          tester.emitsInOrder([tester.isEmpty, tester.isA<List<TodoOfferingCategory>>()]),
         );
 
         //add all offering to todo
@@ -108,12 +109,12 @@ void main() {
         //update status of todos
 
         //show all todos
-        final Stream<List<TodoOffering>> stream = todoRepo.watchTodoOfferingStatus();
+        final Stream<List<TodoOfferingCategory>> stream = todoRepo.watchTodoOfferingStatus();
 
         // lister to the stream of todos
         final expectation = tester.expectLater(
           stream,
-          tester.emitsInOrder([tester.isNotEmpty, tester.isA<List<TodoOffering>>()]),
+          tester.emitsInOrder([tester.isNotEmpty, tester.isA<List<TodoOfferingCategory>>()]),
         );
         //marke as single todo has done
         final result = await todoRepo.updateTodoStatus(id: offering.id, status: Status.done);

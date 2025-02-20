@@ -6,21 +6,27 @@ part of 'user_profile_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userProfileRepositoryHash() => r'11adc18fdb4edf17b6e40bb3e8f6daa15e5f2c09';
+String _$userProfileRepositoryHash() =>
+    r'11adc18fdb4edf17b6e40bb3e8f6daa15e5f2c09';
 
 /// See also [userProfileRepository].
 @ProviderFor(userProfileRepository)
-final userProfileRepositoryProvider = AutoDisposeProvider<UserProfileRepository>.internal(
-  userProfileRepository,
-  name: r'userProfileRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$userProfileRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final userProfileRepositoryProvider =
+    AutoDisposeProvider<UserProfileRepository>.internal(
+      userProfileRepository,
+      name: r'userProfileRepositoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$userProfileRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef UserProfileRepositoryRef = AutoDisposeProviderRef<UserProfileRepository>;
+typedef UserProfileRepositoryRef =
+    AutoDisposeProviderRef<UserProfileRepository>;
 String _$watchUserHash() => r'd4e58e2911384cc248a7685d3385a0539860bce5';
 
 /// See also [watchUser].
@@ -28,7 +34,8 @@ String _$watchUserHash() => r'd4e58e2911384cc248a7685d3385a0539860bce5';
 final watchUserProvider = AutoDisposeStreamProvider<User?>.internal(
   watchUser,
   name: r'watchUserProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$watchUserHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$watchUserHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -43,7 +50,8 @@ String _$fetchUserHash() => r'9d0500607aea9027c03a3c4c2da93de12baaf158';
 final fetchUserProvider = AutoDisposeFutureProvider<User?>.internal(
   fetchUser,
   name: r'fetchUserProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$fetchUserHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$fetchUserHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

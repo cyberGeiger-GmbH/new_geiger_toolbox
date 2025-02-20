@@ -44,7 +44,9 @@ class FormattedDateFamily extends Family<String> {
   }
 
   @override
-  FormattedDateProvider getProviderOverride(covariant FormattedDateProvider provider) {
+  FormattedDateProvider getProviderOverride(
+    covariant FormattedDateProvider provider,
+  ) {
     return call(inputDate: provider.inputDate);
   }
 
@@ -56,7 +58,8 @@ class FormattedDateFamily extends Family<String> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'formattedDateProvider';
@@ -70,9 +73,13 @@ class FormattedDateProvider extends AutoDisposeProvider<String> {
         (ref) => formattedDate(ref as FormattedDateRef, inputDate: inputDate),
         from: formattedDateProvider,
         name: r'formattedDateProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$formattedDateHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$formattedDateHash,
         dependencies: FormattedDateFamily._dependencies,
-        allTransitiveDependencies: FormattedDateFamily._allTransitiveDependencies,
+        allTransitiveDependencies:
+            FormattedDateFamily._allTransitiveDependencies,
         inputDate: inputDate,
       );
 
@@ -130,7 +137,8 @@ mixin FormattedDateRef on AutoDisposeProviderRef<String> {
   String get inputDate;
 }
 
-class _FormattedDateProviderElement extends AutoDisposeProviderElement<String> with FormattedDateRef {
+class _FormattedDateProviderElement extends AutoDisposeProviderElement<String>
+    with FormattedDateRef {
   _FormattedDateProviderElement(super.provider);
 
   @override
@@ -154,7 +162,9 @@ class StringToDateFamily extends Family<DateTime> {
   }
 
   @override
-  StringToDateProvider getProviderOverride(covariant StringToDateProvider provider) {
+  StringToDateProvider getProviderOverride(
+    covariant StringToDateProvider provider,
+  ) {
     return call(inputDate: provider.inputDate);
   }
 
@@ -166,7 +176,8 @@ class StringToDateFamily extends Family<DateTime> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'stringToDateProvider';
@@ -180,9 +191,13 @@ class StringToDateProvider extends AutoDisposeProvider<DateTime> {
         (ref) => stringToDate(ref as StringToDateRef, inputDate: inputDate),
         from: stringToDateProvider,
         name: r'stringToDateProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$stringToDateHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$stringToDateHash,
         dependencies: StringToDateFamily._dependencies,
-        allTransitiveDependencies: StringToDateFamily._allTransitiveDependencies,
+        allTransitiveDependencies:
+            StringToDateFamily._allTransitiveDependencies,
         inputDate: inputDate,
       );
 
@@ -240,7 +255,8 @@ mixin StringToDateRef on AutoDisposeProviderRef<DateTime> {
   String get inputDate;
 }
 
-class _StringToDateProviderElement extends AutoDisposeProviderElement<DateTime> with StringToDateRef {
+class _StringToDateProviderElement extends AutoDisposeProviderElement<DateTime>
+    with StringToDateRef {
   _StringToDateProviderElement(super.provider);
 
   @override
@@ -264,7 +280,9 @@ class PreviousMonthFamily extends Family<DateTime> {
   }
 
   @override
-  PreviousMonthProvider getProviderOverride(covariant PreviousMonthProvider provider) {
+  PreviousMonthProvider getProviderOverride(
+    covariant PreviousMonthProvider provider,
+  ) {
     return call(month: provider.month);
   }
 
@@ -276,7 +294,8 @@ class PreviousMonthFamily extends Family<DateTime> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'previousMonthProvider';
@@ -290,9 +309,13 @@ class PreviousMonthProvider extends AutoDisposeProvider<DateTime> {
         (ref) => previousMonth(ref as PreviousMonthRef, month: month),
         from: previousMonthProvider,
         name: r'previousMonthProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$previousMonthHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$previousMonthHash,
         dependencies: PreviousMonthFamily._dependencies,
-        allTransitiveDependencies: PreviousMonthFamily._allTransitiveDependencies,
+        allTransitiveDependencies:
+            PreviousMonthFamily._allTransitiveDependencies,
         month: month,
       );
 
@@ -350,7 +373,8 @@ mixin PreviousMonthRef on AutoDisposeProviderRef<DateTime> {
   int get month;
 }
 
-class _PreviousMonthProviderElement extends AutoDisposeProviderElement<DateTime> with PreviousMonthRef {
+class _PreviousMonthProviderElement extends AutoDisposeProviderElement<DateTime>
+    with PreviousMonthRef {
   _PreviousMonthProviderElement(super.provider);
 
   @override

@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering_category.dart';
 import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -95,32 +96,47 @@ class TodoOfferingRepository {
   // }
 
   //Get all Offers that has be added to the todoOfferingStatus
-  Stream<List<TodoOffering>> watchTodoOfferingStatus() {
+  Stream<List<TodoOfferingCategory>> watchTodoOfferingStatus() {
     _log.i("watch List<offeringStatus>");
     //create a join query that include TodoOfferingStatusesTable and OfferingsTable
     final query = _db.select(_db.recommendationOfferings).join(
-      [leftOuterJoin(_db.todoOfferings, _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id))],
+      [
+        leftOuterJoin(_db.todoOfferings, _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id)),
+        leftOuterJoin(
+          _db.recommendations,
+          _db.recommendations.id.equalsExp(_db.recommendationOfferings.recommendationId),
+        ),
+      ],
       //filter by offerings id
     )..where(_db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id));
     // transform the query stream into a stream of [OfferingStatus] lists
     return query.watch().map((rows) {
-      return rows.map((row) {
-        // Read the offerings entry;
+      final Map<String, List<TodoOffering>> categoryMap = {};
+
+      for (final row in rows) {
+        final recommendationEntry = row.readTable(_db.recommendations);
         final offeringEntry = row.readTable(_db.recommendationOfferings);
-        // Read the todo offering status entry or null if there is no match
         final todofferingEntry = row.readTableOrNull(_db.todoOfferings);
 
         final offering = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
         final status = offeringToTodoStatus(todofferingEntry!.offeringStatus);
 
-        return TodoOffering(
+        final todos = TodoOffering(
           id: offeringEntry.id,
           offering: offering,
           status: status,
           dateRecommendated: offeringEntry.dateRecommendated,
           lastUpdated: todofferingEntry.lastUpdated,
         );
-      }).toList();
+
+        // Group offerings by category name
+        categoryMap.putIfAbsent(recommendationEntry.name, () => []).add(todos);
+      }
+
+      // Convert the map to list of TodoOfferingCategory
+      return categoryMap.entries
+          .map((entry) => TodoOfferingCategory(category: entry.key, offerings: entry.value))
+          .toList();
     });
   }
 
@@ -179,7 +195,7 @@ Future<List<TodoOffering>> fetchOfferStatus(Ref ref, {required RecommendationID 
 }
 
 @riverpod
-Stream<List<TodoOffering>> watchTodos(Ref ref) {
+Stream<List<TodoOfferingCategory>> watchTodos(Ref ref) {
   final repo = ref.watch(todoOfferingRepoProvider);
   return repo.watchTodoOfferingStatus();
 }

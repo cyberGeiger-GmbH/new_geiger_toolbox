@@ -10,13 +10,17 @@ String _$introControllerHash() => r'652ff7348de095ed8fd424f1d7602c6120ddceaf';
 
 /// See also [IntroController].
 @ProviderFor(IntroController)
-final introControllerProvider = AutoDisposeNotifierProvider<IntroController, int>.internal(
-  IntroController.new,
-  name: r'introControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$introControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final introControllerProvider =
+    AutoDisposeNotifierProvider<IntroController, int>.internal(
+      IntroController.new,
+      name: r'introControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$introControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$IntroController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint

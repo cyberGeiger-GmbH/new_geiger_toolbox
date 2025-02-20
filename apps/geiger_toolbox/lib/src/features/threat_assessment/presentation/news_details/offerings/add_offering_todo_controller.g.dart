@@ -6,34 +6,46 @@ part of 'add_offering_todo_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addOfferingTodoControllerHash() => r'e066a51184be3c2cfa579d099fd0259ffbf1011a';
+String _$addOfferingTodoControllerHash() =>
+    r'e066a51184be3c2cfa579d099fd0259ffbf1011a';
 
 /// See also [AddOfferingTodoController].
 @ProviderFor(AddOfferingTodoController)
-final addOfferingTodoControllerProvider = AutoDisposeAsyncNotifierProvider<AddOfferingTodoController, void>.internal(
-  AddOfferingTodoController.new,
-  name: r'addOfferingTodoControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$addOfferingTodoControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$AddOfferingTodoController = AutoDisposeAsyncNotifier<void>;
-String _$toggleListOfferControllerHash() => r'85b96b1ccdf1fec7bc420b984be46b63d023bef8';
-
-/// See also [ToggleListOfferController].
-@ProviderFor(ToggleListOfferController)
-final toggleListOfferControllerProvider =
-    AutoDisposeNotifierProvider<ToggleListOfferController, List<TodoOffering>>.internal(
-      ToggleListOfferController.new,
-      name: r'toggleListOfferControllerProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$toggleListOfferControllerHash,
+final addOfferingTodoControllerProvider =
+    AutoDisposeAsyncNotifierProvider<AddOfferingTodoController, void>.internal(
+      AddOfferingTodoController.new,
+      name: r'addOfferingTodoControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$addOfferingTodoControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
+typedef _$AddOfferingTodoController = AutoDisposeAsyncNotifier<void>;
+String _$toggleListOfferControllerHash() =>
+    r'85b96b1ccdf1fec7bc420b984be46b63d023bef8';
+
+/// See also [ToggleListOfferController].
+@ProviderFor(ToggleListOfferController)
+final toggleListOfferControllerProvider = AutoDisposeNotifierProvider<
+  ToggleListOfferController,
+  List<TodoOffering>
+>.internal(
+  ToggleListOfferController.new,
+  name: r'toggleListOfferControllerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$toggleListOfferControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
 typedef _$ToggleListOfferController = AutoDisposeNotifier<List<TodoOffering>>;
-String _$toggleOfferControllerHash() => r'79bac53026e4e26a164bb7935e528605e6c4a575';
+String _$toggleOfferControllerHash() =>
+    r'79bac53026e4e26a164bb7935e528605e6c4a575';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -56,7 +68,8 @@ class _SystemHash {
   }
 }
 
-abstract class _$ToggleOfferController extends BuildlessAutoDisposeNotifier<TodoOffering> {
+abstract class _$ToggleOfferController
+    extends BuildlessAutoDisposeNotifier<TodoOffering> {
   late final TodoOffering value;
 
   TodoOffering build(TodoOffering value);
@@ -77,7 +90,9 @@ class ToggleOfferControllerFamily extends Family<TodoOffering> {
   }
 
   @override
-  ToggleOfferControllerProvider getProviderOverride(covariant ToggleOfferControllerProvider provider) {
+  ToggleOfferControllerProvider getProviderOverride(
+    covariant ToggleOfferControllerProvider provider,
+  ) {
     return call(provider.value);
   }
 
@@ -89,23 +104,30 @@ class ToggleOfferControllerFamily extends Family<TodoOffering> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'toggleOfferControllerProvider';
 }
 
 /// See also [ToggleOfferController].
-class ToggleOfferControllerProvider extends AutoDisposeNotifierProviderImpl<ToggleOfferController, TodoOffering> {
+class ToggleOfferControllerProvider
+    extends
+        AutoDisposeNotifierProviderImpl<ToggleOfferController, TodoOffering> {
   /// See also [ToggleOfferController].
   ToggleOfferControllerProvider(TodoOffering value)
     : this._internal(
         () => ToggleOfferController()..value = value,
         from: toggleOfferControllerProvider,
         name: r'toggleOfferControllerProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$toggleOfferControllerHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$toggleOfferControllerHash,
         dependencies: ToggleOfferControllerFamily._dependencies,
-        allTransitiveDependencies: ToggleOfferControllerFamily._allTransitiveDependencies,
+        allTransitiveDependencies:
+            ToggleOfferControllerFamily._allTransitiveDependencies,
         value: value,
       );
 
@@ -143,7 +165,8 @@ class ToggleOfferControllerProvider extends AutoDisposeNotifierProviderImpl<Togg
   }
 
   @override
-  AutoDisposeNotifierProviderElement<ToggleOfferController, TodoOffering> createElement() {
+  AutoDisposeNotifierProviderElement<ToggleOfferController, TodoOffering>
+  createElement() {
     return _ToggleOfferControllerProviderElement(this);
   }
 
@@ -169,7 +192,8 @@ mixin ToggleOfferControllerRef on AutoDisposeNotifierProviderRef<TodoOffering> {
 }
 
 class _ToggleOfferControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<ToggleOfferController, TodoOffering>
+    extends
+        AutoDisposeNotifierProviderElement<ToggleOfferController, TodoOffering>
     with ToggleOfferControllerRef {
   _ToggleOfferControllerProviderElement(super.provider);
 

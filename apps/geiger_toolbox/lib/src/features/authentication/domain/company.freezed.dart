@@ -29,13 +29,15 @@ mixin _$Company {
 
 /// @nodoc
 abstract class $CompanyCopyWith<$Res> {
-  factory $CompanyCopyWith(Company value, $Res Function(Company) then) = _$CompanyCopyWithImpl<$Res, Company>;
+  factory $CompanyCopyWith(Company value, $Res Function(Company) then) =
+      _$CompanyCopyWithImpl<$Res, Company>;
   @useResult
   $Res call({String companyName, String location, String description});
 }
 
 /// @nodoc
-class _$CompanyCopyWithImpl<$Res, $Val extends Company> implements $CompanyCopyWith<$Res> {
+class _$CompanyCopyWithImpl<$Res, $Val extends Company>
+    implements $CompanyCopyWith<$Res> {
   _$CompanyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -47,7 +49,11 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company> implements $CompanyCopyW
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? companyName = null, Object? location = null, Object? description = null}) {
+  $Res call({
+    Object? companyName = null,
+    Object? location = null,
+    Object? description = null,
+  }) {
     return _then(
       _value.copyWith(
             companyName:
@@ -73,23 +79,33 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company> implements $CompanyCopyW
 
 /// @nodoc
 abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
-  factory _$$CompanyImplCopyWith(_$CompanyImpl value, $Res Function(_$CompanyImpl) then) =
-      __$$CompanyImplCopyWithImpl<$Res>;
+  factory _$$CompanyImplCopyWith(
+    _$CompanyImpl value,
+    $Res Function(_$CompanyImpl) then,
+  ) = __$$CompanyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String companyName, String location, String description});
 }
 
 /// @nodoc
-class __$$CompanyImplCopyWithImpl<$Res> extends _$CompanyCopyWithImpl<$Res, _$CompanyImpl>
+class __$$CompanyImplCopyWithImpl<$Res>
+    extends _$CompanyCopyWithImpl<$Res, _$CompanyImpl>
     implements _$$CompanyImplCopyWith<$Res> {
-  __$$CompanyImplCopyWithImpl(_$CompanyImpl _value, $Res Function(_$CompanyImpl) _then) : super(_value, _then);
+  __$$CompanyImplCopyWithImpl(
+    _$CompanyImpl _value,
+    $Res Function(_$CompanyImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of Company
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? companyName = null, Object? location = null, Object? description = null}) {
+  $Res call({
+    Object? companyName = null,
+    Object? location = null,
+    Object? description = null,
+  }) {
     return _then(
       _$CompanyImpl(
         companyName:
@@ -115,7 +131,11 @@ class __$$CompanyImplCopyWithImpl<$Res> extends _$CompanyCopyWithImpl<$Res, _$Co
 /// @nodoc
 
 class _$CompanyImpl implements _Company {
-  _$CompanyImpl({required this.companyName, required this.location, required this.description});
+  _$CompanyImpl({
+    required this.companyName,
+    required this.location,
+    required this.description,
+  });
 
   @override
   final String companyName;
@@ -134,20 +154,25 @@ class _$CompanyImpl implements _Company {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CompanyImpl &&
-            (identical(other.companyName, companyName) || other.companyName == companyName) &&
-            (identical(other.location, location) || other.location == location) &&
-            (identical(other.description, description) || other.description == description));
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, companyName, location, description);
+  int get hashCode =>
+      Object.hash(runtimeType, companyName, location, description);
 
   /// Create a copy of Company
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith => __$$CompanyImplCopyWithImpl<_$CompanyImpl>(this, _$identity);
+  _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith =>
+      __$$CompanyImplCopyWithImpl<_$CompanyImpl>(this, _$identity);
 }
 
 abstract class _Company implements Company {
@@ -168,5 +193,6 @@ abstract class _Company implements Company {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

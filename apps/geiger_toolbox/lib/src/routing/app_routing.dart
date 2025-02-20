@@ -5,11 +5,13 @@ import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/profile_screen_controller.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
-import 'package:geiger_toolbox/src/features/policy/presentation/intro/intro_widget.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/intro/intro_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/settings/settings_screen.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_condition_controller.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/clear_data/tester_buttons.dart';
+
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/category/todos_category_screen.dart';
 
 import 'package:geiger_toolbox/src/monitoring/logger_navigator_observer.dart';
 
@@ -27,14 +29,15 @@ part 'app_routing.g.dart';
 
 // ignore: prefer-match-file-name
 enum AppRouter {
-  main(path: "/", name: "main-screen"),
-  newsFeedDetails(path: "/newsfeed/:news", name: "news"),
-  community(path: "/community", name: "community"),
-  calendar(path: "/calendar", name: "calendar"),
-  settings(path: "/settings", name: "settings"),
-  chat(path: "/chat", name: "chat"),
-  createProfile(path: "/create-profile", name: "create-profile"),
-  introdution(path: "/intro", name: "intro-screen");
+  mainRouter(path: "/", name: "main-screen"),
+  newDetailsRouter(path: "/newsfeed/:news", name: "news"),
+  communityRouter(path: "/community", name: "community"),
+  calendarRouter(path: "/calendar", name: "calendar"),
+  settingsRouter(path: "/settings", name: "settings"),
+  chatRouter(path: "/chat", name: "chat"),
+  profileRouter(path: "/create-profile", name: "create-profile"),
+  introRouter(path: "/intro", name: "intro-screen"),
+  todoRouter(path: "/all-todos", name: "all-todos");
 
   const AppRouter({required this.path, required this.name});
   final String path;
@@ -56,7 +59,7 @@ class AppRouting {
   static GoRouter goRouter(Ref ref) {
     return GoRouter(
       navigatorKey: _rootNavKey,
-      initialLocation: AppRouter.main.path,
+      initialLocation: AppRouter.mainRouter.path,
       debugLogDiagnostics: true,
       errorBuilder: (context, state) => const NotFoundScreen(),
       observers: [
@@ -75,8 +78,8 @@ class AppRouting {
         final path = state.uri.path;
         // redirect to [TermAndConditionsScreen]
         if (!termsConditionState) {
-          if (path != AppRouter.introdution.path) {
-            return AppRouter.introdution.path;
+          if (path != AppRouter.introRouter.path) {
+            return AppRouter.introRouter.path;
           }
 
           return null;
@@ -85,8 +88,8 @@ class AppRouting {
         //redirect to profile screen when profile is null, skip is false and news feed table is not empty
         // if (companyProfileState && !skipProfile && !isNewsFeedEmpty) {
         if (!skipProfile) {
-          if (path != AppRouter.createProfile.path) {
-            return AppRouter.createProfile.path;
+          if (path != AppRouter.profileRouter.path) {
+            return AppRouter.profileRouter.path;
           }
 
           return null; // No redirect needed
@@ -99,15 +102,15 @@ class AppRouting {
       routes: [
         //for ui without bottom navigation
         GoRoute(
-          path: AppRouter.introdution.path,
-          name: AppRouter.introdution.name,
+          path: AppRouter.introRouter.path,
+          name: AppRouter.introRouter.name,
           pageBuilder:
               (context, state) => NoTransitionPage<void>(child: IntroScreen(), key: state.pageKey, name: state.name),
         ),
 
         GoRoute(
-          path: AppRouter.createProfile.path,
-          name: AppRouter.createProfile.name,
+          path: AppRouter.profileRouter.path,
+          name: AppRouter.profileRouter.name,
           pageBuilder:
               (context, state) => MaterialPage<void>(
                 fullscreenDialog: true,
@@ -115,7 +118,7 @@ class AppRouting {
                   onCloseProfile: () {
                     ref.read(profileScreenControllerProvider.notifier).skip(true);
 
-                    context.goNamed(AppRouter.main.name);
+                    context.goNamed(AppRouter.mainRouter.name);
                   },
                 ),
                 key: state.pageKey,
@@ -139,17 +142,17 @@ class AppRouting {
               ],
               routes: [
                 GoRoute(
-                  path: AppRouter.main.path,
-                  name: AppRouter.main.name,
+                  path: AppRouter.mainRouter.path,
+                  name: AppRouter.mainRouter.name,
                   pageBuilder:
                       (context, state) => NoTransitionPage(child: MainScreen(), key: state.pageKey, name: state.name),
                   //nested route
                   routes: [
                     GoRoute(
-                      path: AppRouter.newsFeedDetails.path,
-                      name: AppRouter.newsFeedDetails.name,
+                      path: AppRouter.newDetailsRouter.path,
+                      name: AppRouter.newDetailsRouter.name,
                       pageBuilder: (context, state) {
-                        final title = state.pathParameters[AppRouter.newsFeedDetails.name]!;
+                        final title = state.pathParameters[AppRouter.newDetailsRouter.name]!;
 
                         return MaterialPage(
                           //fullscreenDialog: true,
@@ -159,6 +162,17 @@ class AppRouting {
                         );
                       },
                     ),
+
+                    GoRoute(
+                      path: AppRouter.todoRouter.path,
+                      name: AppRouter.todoRouter.name,
+                      pageBuilder:
+                          (context, state) => MaterialPage<void>(
+                            child: TodosCategoryScreen(),
+                            key: state.pageKey,
+                            name: state.name,
+                          ),
+                    ),
                   ],
                 ),
               ],
@@ -167,8 +181,8 @@ class AppRouting {
               navigatorKey: _shellCommunityNavKey,
               routes: [
                 GoRoute(
-                  path: AppRouter.community.path,
-                  name: AppRouter.community.name,
+                  path: AppRouter.communityRouter.path,
+                  name: AppRouter.communityRouter.name,
                   pageBuilder:
                       (context, state) => NoTransitionPage(child: Community(), key: state.pageKey, name: state.name),
                 ),
@@ -178,8 +192,8 @@ class AppRouting {
               navigatorKey: _shellCalendarNavKey,
               routes: [
                 GoRoute(
-                  path: AppRouter.calendar.path,
-                  name: AppRouter.calendar.name,
+                  path: AppRouter.calendarRouter.path,
+                  name: AppRouter.calendarRouter.name,
                   pageBuilder:
                       (context, state) => NoTransitionPage(child: Calendar(), key: state.pageKey, name: state.name),
                 ),
@@ -189,8 +203,8 @@ class AppRouting {
               navigatorKey: _shellChatNavKey,
               routes: [
                 GoRoute(
-                  path: AppRouter.chat.path,
-                  name: AppRouter.chat.name,
+                  path: AppRouter.chatRouter.path,
+                  name: AppRouter.chatRouter.name,
                   pageBuilder:
                       (context, state) => NoTransitionPage(child: Chat(), key: state.pageKey, name: state.name),
                 ),
@@ -200,8 +214,8 @@ class AppRouting {
               navigatorKey: _shellSettingNavKey,
               routes: [
                 GoRoute(
-                  path: AppRouter.settings.path,
-                  name: AppRouter.settings.name,
+                  path: AppRouter.settingsRouter.path,
+                  name: AppRouter.settingsRouter.name,
                   pageBuilder:
                       (context, state) =>
                           NoTransitionPage(child: SettingsScreen(), key: state.pageKey, name: state.name),

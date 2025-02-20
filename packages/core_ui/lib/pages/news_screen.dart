@@ -64,7 +64,7 @@ class NewsScreen extends StatelessWidget {
                   onChange: (value) {},
                 ),
               )
-              .toList(),
+              .toList(), rationale: 'why',
     );
   }
 

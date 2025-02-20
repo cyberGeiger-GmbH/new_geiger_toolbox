@@ -10,13 +10,17 @@ String _$todoOfferingRepoHash() => r'6df371046684761e6371f911ab458e85e56085b7';
 
 /// See also [todoOfferingRepo].
 @ProviderFor(todoOfferingRepo)
-final todoOfferingRepoProvider = AutoDisposeProvider<TodoOfferingRepository>.internal(
-  todoOfferingRepo,
-  name: r'todoOfferingRepoProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$todoOfferingRepoHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final todoOfferingRepoProvider =
+    AutoDisposeProvider<TodoOfferingRepository>.internal(
+      todoOfferingRepo,
+      name: r'todoOfferingRepoProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$todoOfferingRepoHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -59,7 +63,9 @@ class FetchOfferStatusFamily extends Family<AsyncValue<List<TodoOffering>>> {
   }
 
   @override
-  FetchOfferStatusProvider getProviderOverride(covariant FetchOfferStatusProvider provider) {
+  FetchOfferStatusProvider getProviderOverride(
+    covariant FetchOfferStatusProvider provider,
+  ) {
     return call(id: provider.id);
   }
 
@@ -71,23 +77,29 @@ class FetchOfferStatusFamily extends Family<AsyncValue<List<TodoOffering>>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'fetchOfferStatusProvider';
 }
 
 /// See also [fetchOfferStatus].
-class FetchOfferStatusProvider extends AutoDisposeFutureProvider<List<TodoOffering>> {
+class FetchOfferStatusProvider
+    extends AutoDisposeFutureProvider<List<TodoOffering>> {
   /// See also [fetchOfferStatus].
   FetchOfferStatusProvider({required String id})
     : this._internal(
         (ref) => fetchOfferStatus(ref as FetchOfferStatusRef, id: id),
         from: fetchOfferStatusProvider,
         name: r'fetchOfferStatusProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$fetchOfferStatusHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$fetchOfferStatusHash,
         dependencies: FetchOfferStatusFamily._dependencies,
-        allTransitiveDependencies: FetchOfferStatusFamily._allTransitiveDependencies,
+        allTransitiveDependencies:
+            FetchOfferStatusFamily._allTransitiveDependencies,
         id: id,
       );
 
@@ -104,7 +116,9 @@ class FetchOfferStatusProvider extends AutoDisposeFutureProvider<List<TodoOfferi
   final String id;
 
   @override
-  Override overrideWith(FutureOr<List<TodoOffering>> Function(FetchOfferStatusRef provider) create) {
+  Override overrideWith(
+    FutureOr<List<TodoOffering>> Function(FetchOfferStatusRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: FetchOfferStatusProvider._internal(
@@ -145,7 +159,8 @@ mixin FetchOfferStatusRef on AutoDisposeFutureProviderRef<List<TodoOffering>> {
   String get id;
 }
 
-class _FetchOfferStatusProviderElement extends AutoDisposeFutureProviderElement<List<TodoOffering>>
+class _FetchOfferStatusProviderElement
+    extends AutoDisposeFutureProviderElement<List<TodoOffering>>
     with FetchOfferStatusRef {
   _FetchOfferStatusProviderElement(super.provider);
 
@@ -153,20 +168,25 @@ class _FetchOfferStatusProviderElement extends AutoDisposeFutureProviderElement<
   String get id => (origin as FetchOfferStatusProvider).id;
 }
 
-String _$watchTodosHash() => r'7cf81ad3856f72504e3dab19fb6815fa5da8e087';
+String _$watchTodosHash() => r'41fc23ec32faa9e3828455c903c47300b4ce3442';
 
 /// See also [watchTodos].
 @ProviderFor(watchTodos)
-final watchTodosProvider = AutoDisposeStreamProvider<List<TodoOffering>>.internal(
-  watchTodos,
-  name: r'watchTodosProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$watchTodosHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final watchTodosProvider =
+    AutoDisposeStreamProvider<List<TodoOfferingCategory>>.internal(
+      watchTodos,
+      name: r'watchTodosProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchTodosHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchTodosRef = AutoDisposeStreamProviderRef<List<TodoOffering>>;
+typedef WatchTodosRef =
+    AutoDisposeStreamProviderRef<List<TodoOfferingCategory>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

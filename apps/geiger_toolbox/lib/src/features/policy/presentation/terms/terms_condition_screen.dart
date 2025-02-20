@@ -21,7 +21,7 @@ class TermsAndConditionWidget extends ConsumerWidget {
             //accept terms and condition
             ref.read(termsConditionControllerProvider.notifier).acceptTermsAndCondition(true);
             //navigate to main screen
-            context.goNamed(AppRouter.main.name);
+            context.goNamed(AppRouter.mainRouter.name);
           },
         ),
         Spacing.gapH22,

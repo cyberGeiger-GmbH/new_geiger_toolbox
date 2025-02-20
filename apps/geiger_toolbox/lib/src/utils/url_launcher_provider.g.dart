@@ -13,7 +13,8 @@ String _$urlLauncherHash() => r'639ddc6995aa93826c9c5c086ce645b14d7a0dbc';
 final urlLauncherProvider = AutoDisposeProvider<UrlLauncher>.internal(
   urlLauncher,
   name: r'urlLauncherProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$urlLauncherHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$urlLauncherHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

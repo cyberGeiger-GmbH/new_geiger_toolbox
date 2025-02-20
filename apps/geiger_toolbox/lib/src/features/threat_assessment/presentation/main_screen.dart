@@ -5,6 +5,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_app_bar.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
@@ -12,7 +13,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geige
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/other_news_list_widget.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todo_list_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
@@ -36,9 +37,9 @@ class MainScreen extends ConsumerWidget {
     final ScrollController scrollController = ScrollController();
 
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: GeigerAppBar(
         userProfile: () {
-          context.pushNamed(AppRouter.createProfile.name);
+          context.pushNamed(AppRouter.profileRouter.name);
         },
       ),
       body: ResponsiveCenterScrollableWidget(

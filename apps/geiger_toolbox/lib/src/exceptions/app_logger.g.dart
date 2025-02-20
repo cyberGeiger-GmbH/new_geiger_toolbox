@@ -13,7 +13,8 @@ String _$appLoggerHash() => r'3767508806d8994fe7af71cd927099cc7f428a8e';
 final appLoggerProvider = Provider<AppLogger>.internal(
   appLogger,
   name: r'appLoggerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$appLoggerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$appLoggerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
