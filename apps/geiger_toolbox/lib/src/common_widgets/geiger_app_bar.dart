@@ -20,7 +20,7 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: title != null ? AppText.titleMedium(text: title ?? "", context: context) : null,
       leading:
-          context.canPop()
+          shouldShowBackButton(context)
               ? IconButton(
                 onPressed: () => context.pop(),
                 icon: Icon(Platform.isIOS ? CupertinoIcons.back : Icons.arrow_back),
@@ -42,4 +42,9 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(height);
+}
+
+//check if the current route is the first route
+bool shouldShowBackButton(BuildContext context) {
+  return ModalRoute.of(context)?.isFirst == false; // Not the first screen
 }

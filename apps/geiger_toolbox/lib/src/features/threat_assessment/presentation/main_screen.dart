@@ -10,7 +10,7 @@ import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/other_news_list_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
@@ -96,7 +96,8 @@ class FeatureList extends StatelessWidget {
         NewsFeedsWidget(),
         Spacing.gapH12,
         //AssetWidget(),
-        const ScoreMessageWidget(),
+        //**FEEDBACK: don't show the score message widget
+        // const ScoreMessageWidget(),
         Spacing.gapH12,
         // getFlavor() == Flavor.dev ? RecommendationWidget() :
         const TodoListWidget(),

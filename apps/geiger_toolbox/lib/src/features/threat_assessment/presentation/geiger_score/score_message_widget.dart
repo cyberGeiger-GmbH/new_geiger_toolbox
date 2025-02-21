@@ -68,7 +68,7 @@ class AlertMessageBox extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            HorizontalContent(title: "Geiger Score Update!", onClose: onClose, icons: icons),
+            HorizontalContent(title: "GEIGER Score Update", onClose: onClose, icons: icons),
             Spacing.gapH8,
             ShowScoreReason(reason: reason, align: TextAlign.center, status: status),
           ],
@@ -117,19 +117,16 @@ class IconTitle extends StatelessWidget {
 }
 
 class ShowScoreReason extends StatelessWidget {
-  const ShowScoreReason({super.key, required this.reason, this.height, required this.status, this.width, this.align});
+  const ShowScoreReason({super.key, required this.reason, required this.status, this.align});
   final String reason;
   final String status;
-  final double? height;
-  final double? width;
+
   final TextAlign? align;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
-      width: height,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           AppText.bodyLarge(text: reason, context: context, textAlign: align ?? TextAlign.start),
           Chip(label: Text(status)),

@@ -34,15 +34,15 @@ class GeigerScoreWidget extends ConsumerWidget {
                         showinfo: () {
                           showWoltAlertDialog(
                             context,
-                            title: "Geiger Score!",
+                            title: "GEIGER Score",
                             forceMaxHeight: false,
                             mainContent: Padding(
                               padding: const EdgeInsets.all(Spacing.p8),
                               child: ShowScoreReason(
                                 align: TextAlign.center,
-                                height: 170,
                                 reason: data.reason,
                                 status: data.status,
+                               
                               ),
                             ),
                           );

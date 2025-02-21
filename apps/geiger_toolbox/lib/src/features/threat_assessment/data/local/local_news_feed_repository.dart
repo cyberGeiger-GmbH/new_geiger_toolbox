@@ -28,8 +28,8 @@ class LocalNewsFeedRepository {
       if (uniqueNews.isEmpty) {
         _log.w("news feed data already existing");
 
-        //todo: throw an exception
-        throw NewsFeedAlreadyExistsException();
+        // don't throw an exception
+        _log.w(NewsFeedAlreadyExistsException());
       } else {
         _log.i("storing new news locally...");
         await _db.transaction(() async {
@@ -92,12 +92,12 @@ class LocalNewsFeedRepository {
         Map<String, int> countMap = {};
 
         for (var news in combinedList) {
-          countMap[news.title] = (countMap[news.title] ?? 0) + 1;
+          countMap[news.title.toLowerCase()] = (countMap[news.title.toLowerCase()] ?? 0) + 1;
         }
 
         // Filter out users that appear more than once
         List<News> uniqueUsers =
-            combinedList.where((data) => countMap[data.title] == 1).toList(); // Keep only unique ones
+            combinedList.where((data) => countMap[data.title.toLowerCase()] == 1).toList(); // Keep only unique ones
 
         return uniqueUsers;
       }
