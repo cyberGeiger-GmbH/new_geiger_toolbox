@@ -7,24 +7,20 @@ part 'app_logger.g.dart';
 
 class AppLogger {
   AppLogger(this.ref);
-
+  Logger get _log => ref.read(logHandlerProvider("AppLogger"));
   final Ref ref;
   FutureOr<void> logError(Object error, StackTrace? stackTrace) async {
-    final log = ref.read(logHandlerProvider("AppLogger "));
     await Sentry.captureException(error, stackTrace: stackTrace);
-    log.e(' $error, $stackTrace');
+    _log.e('$error, $stackTrace');
   }
 
   FutureOr<void> logAppException(AppException exception) async {
-    final log = ref.read(logHandlerProvider("Debug:"));
-
     await Sentry.captureException(exception);
-    log.e("$exception");
+    _log.e("$exception");
   }
 
   void info({required String message, required String name}) {
-    final log = ref.read(logHandlerProvider(name));
-    log.i(" $message");
+    _log.i(" $message");
   }
 }
 

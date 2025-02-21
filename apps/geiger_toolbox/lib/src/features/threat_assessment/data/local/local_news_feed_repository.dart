@@ -27,7 +27,9 @@ class LocalNewsFeedRepository {
       final uniqueNews = await _uniqueNews(newObj: data);
       if (uniqueNews.isEmpty) {
         _log.w("news feed data already existing");
-        _log.w("Not storing it again");
+
+        //todo: throw an exception
+        throw NewsFeedAlreadyExistsException();
       } else {
         _log.i("storing new news locally...");
         await _db.transaction(() async {
@@ -42,7 +44,7 @@ class LocalNewsFeedRepository {
               imageUrl: Value(newsData.imageUrl),
               dateCreated: Value(dateCreated),
             );
-            await _db.into(_db.newsInfo).insertOnConflictUpdate(newsCompanion);
+            await _db.into(_db.newsInfo).insert(newsCompanion);
 
             //insert recommendations for each news
             for (var recomData in newsData.recommendations) {
@@ -52,7 +54,7 @@ class LocalNewsFeedRepository {
                 name: Value(recomData.name),
                 rationale: Value(recomData.rationale),
               );
-              await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
+              await _db.into(_db.recommendations).insert(reco);
 
               // insert offering for each recommendation
               for (var offerData in recomData.offerings) {
@@ -64,7 +66,7 @@ class LocalNewsFeedRepository {
                   name: Value(offerData.name),
                   summary: Value(offerData.summary),
                 );
-                await _db.into(_db.recommendationOfferings).insertOnConflictUpdate(offer);
+                await _db.into(_db.recommendationOfferings).insert(offer);
               }
             }
           }
@@ -73,7 +75,7 @@ class LocalNewsFeedRepository {
       _log.i("done storing");
     } catch (e, s) {
       _log.e("error:$e, stack:$s");
-      throw DataBaseException(error: "failed to syn news feed $e", stack: "$s");
+      rethrow;
     }
     return;
   }

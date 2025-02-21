@@ -55,7 +55,7 @@ class TodoOfferingRepository {
       /// update the todoOffer status
       final result = await (_db.update(_db.todoOfferings)..where((t) => t.offeringId.equals(id))).write(todoOffer);
       if (result == 0) {
-        throw DataBaseException(error: "No todo offering found");
+        throw DataBaseException(output: "No todo offering found");
       }
       return result;
     } catch (e) {

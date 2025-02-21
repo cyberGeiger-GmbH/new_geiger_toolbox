@@ -45,9 +45,11 @@ class RemoveTodoTaskRepositryException extends AppException {
 }
 
 class DataBaseException extends AppException {
-  DataBaseException({this.error, this.stack})
-    : super(code: error ?? "database-exception", message: stack ?? "DataBase Exception");
+  DataBaseException({this.output}) : super(code: "database-exception", message: output ?? "DataBase Exception");
 
-  final String? error;
-  final String? stack;
+  final String? output;
+}
+
+class NewsFeedAlreadyExistsException extends AppException {
+  NewsFeedAlreadyExistsException() : super(code: 'news-feed-already-exists', message: "No news updates available");
 }
