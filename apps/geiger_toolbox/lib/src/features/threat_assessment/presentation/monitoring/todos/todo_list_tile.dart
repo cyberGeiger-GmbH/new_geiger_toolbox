@@ -28,26 +28,11 @@ class TodoListTile extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: ListTile(
         onTap: () => showDetails(),
-        leading:
-            Platform.isIOS
-                ? CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: Icon(
-                    item.status == Status.done ? CupertinoIcons.checkmark_circle_fill : CupertinoIcons.circle,
-                    color: item.status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
-                    size: 28,
-                  ),
-                  onPressed: () => onChanged(),
-                )
-                : IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: Icon(
-                    item.status == Status.done ? Icons.check_circle : Icons.circle,
-                    color: item.status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
-                    size: 28,
-                  ),
-                  onPressed: () => onChanged(),
-                ),
+        leading: TodoCheckbox(
+          onChanged: onChanged,
+          status: item.status,
+          color: item.status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
+        ),
         title: AppText.bodyMedium(
           text: item.offering.name,
           color: item.status == Status.done ? Colors.grey : Colors.black,
@@ -58,5 +43,36 @@ class TodoListTile extends StatelessWidget {
         trailing: noTrailWidget ? null : Icon(Icons.chevron_right),
       ),
     );
+  }
+}
+
+class TodoCheckbox extends StatelessWidget {
+  const TodoCheckbox({super.key, required this.onChanged, required this.status, this.color});
+  final Status status;
+  final Color? color;
+  final VoidCallback onChanged;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    return Platform.isIOS
+        ? CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: Icon(
+            status == Status.done ? CupertinoIcons.checkmark_circle_fill : CupertinoIcons.circle,
+            color: status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
+            size: 28,
+          ),
+          onPressed: () => onChanged(),
+        )
+        : IconButton(
+          padding: EdgeInsets.zero,
+          icon: Icon(
+            status == Status.done ? Icons.check_circle : Icons.circle,
+            color: status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
+            size: 28,
+          ),
+          onPressed: () => onChanged(),
+        );
   }
 }

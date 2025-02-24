@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/utils/shared_preference.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,9 +16,12 @@ class TermsConditionController extends _$TermsConditionController {
     return terms ?? false;
   }
 
-  void acceptTermsAndCondition(bool value) {
-    _sharedPreferences.setBool(SharedPreference.termsConditionKey, value);
-    // invalidate to ensure listeners rebuild when the value changes
-    ref.invalidateSelf();
+  void acceptTermsAndCondition() {
+    _sharedPreferences.setBool(SharedPreference.termsConditionKey, state);
+  }
+
+  void onChanged(bool value) {
+    debugPrint("onChanged: $value");
+    state = value;
   }
 }

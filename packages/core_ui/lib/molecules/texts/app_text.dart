@@ -32,11 +32,12 @@ class AppText extends StatelessWidget {
     required BuildContext context,
     Color? color,
     TextAlign? textAlign,
+    FontWeight? fontWeight,
     TextOverflow? textOverflow,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: _appTextStyles(context).displayMedium!.copyWith(color: color),
+    textStyle: _appTextStyles(context).displayMedium!.copyWith(color: color, fontWeight: fontWeight),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -157,13 +158,16 @@ class AppText extends StatelessWidget {
     Color? color,
     TextAlign? textAlign,
     TextOverflow? textOverflow,
+    FontWeight? fontWeight,
     bool textDeleted = false,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: _appTextStyles(
-      context,
-    ).labelLarge!.copyWith(color: color, decoration: textDeleted ? TextDecoration.lineThrough : null),
+    textStyle: _appTextStyles(context).labelLarge!.copyWith(
+      color: color,
+      decoration: textDeleted ? TextDecoration.lineThrough : null,
+      fontWeight: fontWeight,
+    ),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );

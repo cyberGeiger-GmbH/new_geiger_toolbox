@@ -1,7 +1,8 @@
 class TypoSize {
   //sizes
 
-  static const double sm = 14;
+  static const double sm = 12;
+  static const double sm2 = 14;
   static const double md = 18;
   static const double bg = 20;
 

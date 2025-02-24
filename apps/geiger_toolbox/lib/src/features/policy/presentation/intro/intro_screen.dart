@@ -2,51 +2,62 @@ import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_scaffold.dart';
 import 'package:geiger_toolbox/src/common_widgets/slide_indicator.dart';
 
 import 'package:geiger_toolbox/src/features/policy/presentation/intro/intro_controller.dart';
-import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_condition_screen.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_condition_widget.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 typedef PageChanged<T> = Function(int index, T value);
 
 class IntroScreen extends ConsumerWidget {
   IntroScreen({super.key});
   final items = [
-    IntroImage(svgImage: GeigerSvgImages.magnifyingGlass(height: 180), description: 'Detect Cybersecurity Threat'),
-    IntroImage(svgImage: GeigerSvgImages.measure(height: 180), description: 'Accessment of Cybersecurity Threat Level'),
-    IntroImage(svgImage: GeigerSvgImages.trickGood(height: 180), description: 'Plan your cybersecurity Strategy'),
+    IntroImage(svgImage: GeigerSvgImages.magnifyingGlass(), description: 'Access Your Cybersecurity'.hardcoded),
+    IntroImage(svgImage: GeigerSvgImages.measure(), description: 'Know Your Cyberthreat.'.hardcoded),
+    IntroImage(svgImage: GeigerSvgImages.trickGood(), description: 'Improve Your Protection'.hardcoded),
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(introControllerProvider);
 
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
-        child: Column(
-          children: [
-            Expanded(
-              child: CarouselWidget(
-                slidingSpeed: 6,
-                items: items,
-                onPageChanged: (index, value) => ref.read(introControllerProvider.notifier).update(index),
-              ),
+    return GeigerScaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: CarouselWidget(
+              slidingSpeed: 6,
+              isAutoPlay: false,
+              items: items,
+              onPageChanged: (index, value) => ref.read(introControllerProvider.notifier).update(index),
             ),
-            SlideIndicator(data: items, current: index),
-            Spacing.gapH8,
-            TermsAndConditionWidget(),
-          ],
-        ),
+          ),
+          Spacing.gapH8,
+          SlideIndicator(data: items, current: index),
+          Spacing.gapH8,
+          TermsAndConditionWidget(),
+          Spacing.gapH22,
+        ],
       ),
     );
   }
 }
 
 class CarouselWidget extends StatelessWidget {
-  CarouselWidget({super.key, required this.items, required this.onPageChanged, this.slidingSpeed});
+  CarouselWidget({
+    super.key,
+    required this.items,
+    required this.onPageChanged,
+    this.slidingSpeed,
+    this.isAutoPlay = true,
+  });
 
   final List<IntroImage> items;
   final CarouselSliderController controller = CarouselSliderController();
+  final bool isAutoPlay;
 
   /// Sliding speed in seconds
   final int? slidingSpeed;
@@ -58,10 +69,10 @@ class CarouselWidget extends StatelessWidget {
       child: CarouselSlider(
         items: items,
         options: CarouselOptions(
-          autoPlay: true,
+          autoPlay: isAutoPlay,
           enlargeCenterPage: true,
           // aspectRatio: 16 / 9,
-          height: MediaQuery.sizeOf(context).height * 0.4, // Use 40% of screen height
+          height: MediaQuery.sizeOf(context).height * 0.5, // Use 40% of screen height
           viewportFraction: 1,
           autoPlayInterval: Duration(seconds: slidingSpeed ?? 3),
           onPageChanged: onPageChanged,
@@ -83,11 +94,9 @@ class IntroImage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center, //
       children: [
         svgImage,
-        Spacing.gapH22,
-        Flexible(
-          // Wrap with Flexible
-          child: IntroContent(description: description),
-        ),
+        Spacing.gapH8,
+        // Wrap with Flexible
+        IntroContent(description: description),
       ],
     );
   }
@@ -99,11 +108,12 @@ class IntroContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppText.headlineLarge(
+    return AppText.displayMedium(
       text: description,
       context: context,
       fontWeight: FontWeight.bold,
       textAlign: TextAlign.center,
+      color: Colors.black,
     );
   }
 }
