@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 
 import 'package:core_ui/helpers/design_system_helper.dart';
+import 'package:core_ui/organisms/geiger_scaffold.dart';
 import 'package:core_ui/pages/news_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -10,11 +11,11 @@ class DesignSystem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = Theme.of(context);
+    //final appTheme = Theme.of(context);
 
-    return Scaffold(
-      backgroundColor: appTheme.colorScheme.surface,
-      appBar: const CustomAppBar(),
+    return GeigerScaffold(
+      //backgroundColor: appTheme.colorScheme.surface,
+      appBar: const GeigerAppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

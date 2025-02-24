@@ -4,7 +4,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GeigerAppBar({super.key, this.height = kToolbarHeight, this.title, this.userProfile, this.closeDefaultProfile});
@@ -22,7 +21,7 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading:
           shouldShowBackButton(context)
               ? IconButton(
-                onPressed: () => context.pop(),
+                onPressed: () => Navigator.pop(context),
                 icon: Icon(Platform.isIOS ? CupertinoIcons.back : Icons.arrow_back),
               )
               : closeDefaultProfile != null
@@ -48,3 +47,4 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
 bool shouldShowBackButton(BuildContext context) {
   return ModalRoute.of(context)?.isFirst == false; // Not the first screen
 }
+

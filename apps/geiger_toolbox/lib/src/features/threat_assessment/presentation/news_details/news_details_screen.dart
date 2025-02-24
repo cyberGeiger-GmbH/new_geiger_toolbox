@@ -23,7 +23,7 @@ class NewsDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: appColors.surface,
-      appBar: CustomAppBar(title: "News".hardcoded),
+      appBar: GeigerAppBar(title: "News".hardcoded),
       body: Consumer(
         builder: (context, ref, _) {
           //show success snackBar alert when adding offering to todos

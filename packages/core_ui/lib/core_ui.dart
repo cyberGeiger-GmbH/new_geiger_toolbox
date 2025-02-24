@@ -10,7 +10,7 @@ export './foundation/themes/app_theme_data.dart';
 export './atoms/geiger_svg_images.dart';
 
 ///export molecules
-export 'molecules/bars/custom_app_bar.dart';
+export 'molecules/bars/geiger_app_bar.dart';
 export 'molecules/buttons/tool_button.dart';
 export './molecules/avatar.dart';
 export './molecules/texts/app_text.dart';
@@ -25,6 +25,7 @@ export './organisms/empty_content.dart';
 export './organisms/error_message.dart';
 export './organisms/responsive_center_scrollable_widget.dart';
 export './organisms/responsive_center_widget.dart';
+export './organisms/geiger_scaffold.dart';
 export './organisms/show_bottom_sheet_modal.dart';
 
 //list widget

@@ -95,7 +95,7 @@ class AppStartUpLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GeigerScaffold(
       body: ResponsiveCenterWidget(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -114,11 +114,11 @@ class AppStartUpErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).colorScheme;
+    //final appColors = Theme.of(context).colorScheme;
 
-    return Scaffold(
-      backgroundColor: appColors.surface,
-      appBar: const CustomAppBar(),
+    return GeigerScaffold(
+      //backgroundColor: appColors.surface,
+      appBar: const GeigerAppBar(),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

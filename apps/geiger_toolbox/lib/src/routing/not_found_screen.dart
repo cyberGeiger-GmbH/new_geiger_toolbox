@@ -9,8 +9,7 @@ class NotFoundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(),
+    return GeigerScaffold(
       body: EmptyPlaceholder(
         label: "Go to home".hardcoded,
         message: "404 - Page not found!".hardcoded,

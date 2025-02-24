@@ -1,7 +1,7 @@
 // ignore_for_file: avoid-returning-widgets
 
 import 'package:core_ui/atoms/app_cached_network_image.dart';
-import 'package:core_ui/molecules/bars/custom_app_bar.dart';
+import 'package:core_ui/molecules/bars/geiger_app_bar.dart';
 import 'package:core_ui/organisms/news_content.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +74,7 @@ class NewsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: appColors.surface,
-      appBar: const CustomAppBar(title: "News"),
+      appBar: const GeigerAppBar(title: "News"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

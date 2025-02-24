@@ -1,7 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
-import 'package:geiger_toolbox/src/common_widgets/geiger_app_bar.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/delete/delete_profile_widget.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/widgets/company_profile_contents_widget.dart';
 
@@ -35,7 +34,9 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   @override
   void dispose() {
     super.dispose();
+
     _scrollController.removeListener(() => _dismissOnScreenKeyboard());
+    _scrollController.dispose();
   }
 
   // When the form field gets the focus, the keyboard appears on mobile.
@@ -49,14 +50,12 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GeigerScaffold(
       appBar: GeigerAppBar(title: "User Profile", closeDefaultProfile: widget.onCloseProfile),
       floatingActionButton: getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
       body: CustomScrollView(
         controller: _scrollController,
-        slivers: [
-          ResponsiveSliverCenterWidget(padding: EdgeInsets.all(Spacing.p16), child: CompanyProfileContentsWidget()),
-        ],
+        slivers: [ResponsiveSliverCenterWidget(child: CompanyProfileContentsWidget())],
       ),
     );
   }
