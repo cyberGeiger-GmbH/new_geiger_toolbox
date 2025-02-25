@@ -14,7 +14,7 @@ class GeigerScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: appTheme.colorScheme.surface,
       appBar: appBar,
-      body: Padding(padding: const EdgeInsets.symmetric(horizontal: Spacing.p12), child: body),
+      body: Padding(padding: const EdgeInsets.symmetric(horizontal: Spacing.p12, vertical: Spacing.p12), child: body),
       floatingActionButton: floatingActionButton,
     );
   }

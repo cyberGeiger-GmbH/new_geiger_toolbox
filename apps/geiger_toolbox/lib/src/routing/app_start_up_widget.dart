@@ -96,12 +96,15 @@ class AppStartUpLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GeigerScaffold(
-      body: ResponsiveCenterWidget(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [AppAssetImageData.geigerLogo().image, Spacing.gapH22, const CircularProgressIndicator()],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(child: ResponsiveCenterWidget(child: AppAssetImageData.geigerLogo().image)),
+          Spacing.gapH22,
+          const CircularProgressIndicator(),
+          Spacing.gapH22,
+        ],
       ),
     );
   }

@@ -12,10 +12,14 @@ class CompanyProfileContentsWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final streamUser = ref.watch(watchCompanyProvider);
+    final screenHeight = MediaQuery.sizeOf(context).height;
 
     return AsyncValueWidget<Company?>(
       value: streamUser,
-      data: (userData) => CompanyProfileFormWidget(companyData: userData),
+      data: (userData) => SizedBox(
+        height: screenHeight * 0.8,
+        child:   CompanyProfileFormWidget(companyData: userData),
+      ),
     );
   }
 }

@@ -15,8 +15,6 @@ import 'package:geiger_toolbox/src/common_widgets/forms/custom_text_form_field.d
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
-import 'package:geiger_toolbox/src/routing/app_routing.dart';
-import 'package:go_router/go_router.dart';
 
 class CompanyProfileFormWidget extends ConsumerStatefulWidget {
   const CompanyProfileFormWidget({super.key, this.onSubmit, this.companyData});
@@ -174,7 +172,6 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Spacing.gapH8,
             CompanyProfileForm(
               companyData: widget.companyData,
               companyKey: CreateProfileScreen.companyKey,
