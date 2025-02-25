@@ -75,28 +75,27 @@ extension CustomThemeData on ThemeData {
     // An updated theme with bigger text sizes
     return copyWith(
       textTheme: TextTheme(
-        headlineLarge: textTheme.headlineLarge?.copyWith(fontSize: TypoSize.xdp),
-        headlineMedium: textTheme.headlineMedium?.copyWith(fontSize: TypoSize.dp),
-        headlineSmall: textTheme.headlineSmall?.copyWith(fontSize: TypoSize.xlg),
-        titleLarge: textTheme.titleLarge?.copyWith(fontSize: TypoSize.lg),
-        titleMedium: textTheme.titleMedium?.copyWith(fontSize: TypoSize.md),
-        titleSmall: textTheme.titleMedium?.copyWith(fontSize: TypoSize.sm),
-        bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: TypoSize.bg),
-        bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: TypoSize.md),
-        bodySmall: textTheme.bodySmall?.copyWith(fontSize: TypoSize.sm),
-        labelLarge: textTheme.labelLarge?.copyWith(fontSize: TypoSize.md),
+        headlineLarge: textTheme.headlineLarge?.copyWith(fontSize: TypoSize.headlineLarge),
+        headlineMedium: textTheme.headlineMedium?.copyWith(fontSize: TypoSize.headlineMedium),
+        headlineSmall: textTheme.headlineSmall?.copyWith(fontSize: TypoSize.headlineSmall),
+        titleLarge: textTheme.titleLarge?.copyWith(fontSize: TypoSize.titleLarge),
+        titleMedium: textTheme.titleMedium?.copyWith(fontSize: TypoSize.titleMedium),
+        titleSmall: textTheme.titleSmall?.copyWith(fontSize: TypoSize.titleSmall),
+        bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: TypoSize.bodyLarge),
+        bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: TypoSize.bodyMedium),
+        bodySmall: textTheme.bodySmall?.copyWith(fontSize: TypoSize.bodySmall),
+        labelLarge: textTheme.labelLarge?.copyWith(fontSize: TypoSize.labelLarge),
+        labelMedium: textTheme.labelMedium?.copyWith(fontSize: TypoSize.labelMedium),
+        labelSmall: textTheme.labelSmall?.copyWith(fontSize: TypoSize.labelSmall),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(Spacing.p16),
-          textStyle: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+          textStyle: const TextStyle(fontSize: TypoSize.labelLarge, fontWeight: FontWeight.w500),
         ),
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
-        style: SegmentedButton.styleFrom(
-          padding: const EdgeInsets.all(Spacing.p16),
-          textStyle: const TextStyle(fontSize: 18),
-        ),
+        style: SegmentedButton.styleFrom(padding: const EdgeInsets.all(Spacing.p16)),
       ),
     );
   }

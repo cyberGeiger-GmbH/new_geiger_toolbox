@@ -1,3 +1,4 @@
+import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/validators/string_validators.dart';
@@ -43,25 +44,8 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       key: key,
       controller: textEditingController,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        enabled: enabled,
-        labelStyle: appTheme.textTheme.bodySmall,
-        hintStyle: appTheme.textTheme.bodySmall,
-        helperStyle: appTheme.textTheme.bodySmall,
-        //filled: true,
-        fillColor: appTheme.colorScheme.onInverseSurface,
-        // fillColor: readOnly == true ? Colors.grey.shade200 : Colors.white70,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.black45),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: appTheme.colorScheme.primary),
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
+      style: appTheme.textTheme.bodySmall,
+      decoration: getInputDecoration(appTheme),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textCapitalization: TextCapitalization.sentences,
       validator: validator,
@@ -76,6 +60,29 @@ class CustomTextFormField extends StatelessWidget {
         FilteringTextInputFormatter.deny(emojiRegex),
       ],
       maxLength: maxLength ?? 50,
+    );
+  }
+
+  InputDecoration getInputDecoration(ThemeData appTheme) {
+    return InputDecoration(
+      labelText: label,
+      hintText: hint,
+      enabled: enabled,
+      labelStyle: appTheme.textTheme.bodySmall,
+      hintStyle: appTheme.textTheme.bodySmall,
+      helperStyle: appTheme.textTheme.bodySmall,
+      filled: true,
+      fillColor: appTheme.colorScheme.onInverseSurface,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: BorderSide.none),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: appTheme.colorScheme.primary),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide(color: appTheme.colorScheme.error),
+      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p12),
     );
   }
 }

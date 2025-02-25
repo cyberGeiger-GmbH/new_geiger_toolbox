@@ -7,6 +7,7 @@ import 'package:geiger_toolbox/src/common_widgets/slide_indicator.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/intro/intro_controller.dart';
 import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_condition_widget.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/utils/helpers/carousel_helper.dart';
 
 typedef PageChanged<T> = Function(int index, T value);
 
@@ -14,7 +15,7 @@ class IntroScreen extends ConsumerWidget {
   IntroScreen({super.key});
   final items = [
     IntroImage(svgImage: GeigerSvgImages.magnifyingGlass(), description: 'Access Your Cybersecurity'.hardcoded),
-    IntroImage(svgImage: GeigerSvgImages.measure(), description: 'Know Your Cyberthreat.'.hardcoded),
+    IntroImage(svgImage: GeigerSvgImages.measure(), description: 'Know Your Cyberthreat'.hardcoded),
     IntroImage(svgImage: GeigerSvgImages.trickGood(), description: 'Improve Your Protection'.hardcoded),
   ];
   @override
@@ -38,7 +39,7 @@ class IntroScreen extends ConsumerWidget {
           SlideIndicator(data: items, current: index),
           Spacing.gapH8,
           TermsAndConditionWidget(),
-          Spacing.gapH22,
+          Spacing.gapH8,
         ],
       ),
     );
@@ -67,13 +68,9 @@ class CarouselWidget extends StatelessWidget {
     return ResponsiveCenterWidget(
       child: CarouselSlider(
         items: items,
-        options: CarouselOptions(
+        options: CarouselHelper.customCarouselOptions(
           autoPlay: isAutoPlay,
-          enlargeCenterPage: true,
-          // aspectRatio: 16 / 9,
           height: MediaQuery.sizeOf(context).height * 0.5, // Use 40% of screen height
-          viewportFraction: 1,
-          autoPlayInterval: Duration(seconds: slidingSpeed ?? 3),
           onPageChanged: onPageChanged,
         ),
         controller: controller,

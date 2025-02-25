@@ -186,21 +186,24 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
               onEditLocationComplete: _locationEditingComplete,
             ),
             Spacing.gapH8,
-            GenerateCompanyProfileButton(
-              isLoading: companyDescriptionState.isLoading,
-              onPressed: () => _generateCompanyProfile(),
-              label:
-                  widget.companyData == null
-                      ? "Generate Company Profile".hardcoded
-                      : "Regenerate Company Profile".hardcoded,
-            ),
+            companyDescriptionState.isLoading
+                ? const SizedBox.shrink()
+                : GenerateCompanyProfileButton(
+                  isLoading: companyDescriptionState.isLoading,
+                  onPressed: () => _generateCompanyProfile(),
+                  label:
+                      widget.companyData == null
+                          ? "Generate Company Profile".hardcoded
+                          : "Regenerate Company Profile".hardcoded,
+                ),
 
             Spacing.gapH8,
+
             CompanyDescriptionWidget(),
             Spacing.gapH8,
             ConfirmationButtonWidget(
               state: state,
-              label: widget.companyData == null ? "Save Profile".hardcoded : "update Profile".hardcoded,
+              label: widget.companyData == null ? "Save Profile".hardcoded : "Update Profile".hardcoded,
               onPressed: () => _onSubmit(),
             ),
           ],
@@ -242,8 +245,10 @@ class CompanyProfileForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        LabelText(label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded),
-        Spacing.gapH16,
+        SectionTitle(
+          label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
+        ),
+
         CustomTextFormField(
           key: companyKey,
           textEditingController: companyTextController,
@@ -271,13 +276,16 @@ class CompanyProfileForm extends StatelessWidget {
   }
 }
 
-class LabelText extends StatelessWidget {
-  const LabelText({super.key, required this.label});
+class SectionTitle extends StatelessWidget {
+  const SectionTitle({super.key, required this.label});
   final String label;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return AppText.labelLarge(text: label, context: context, color: theme.colorScheme.onSurface);
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: Spacing.p12),
+      child: AppText.labelLarge(text: label, context: context, color: theme.colorScheme.onSurface),
+    );
   }
 }

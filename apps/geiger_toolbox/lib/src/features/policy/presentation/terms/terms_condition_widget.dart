@@ -64,7 +64,7 @@ class TermsPrivacyRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [CustomCheckbox(value: value, onChanged: onChanged), Spacing.gapW8, TermsPrivacySpanText()],
+      children: [CustomCheckbox(value: value, onChanged: onChanged), Spacing.gapW4, TermsPrivacySpanText()],
     );
   }
 }
@@ -76,7 +76,7 @@ class TermsPrivacySpanText extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textSpanStyle = theme.textTheme.bodySmall?.copyWith(
-      fontSize: TypoSize.sm2,
+      //fontSize: TypoSize.bodySmall,
       fontWeight: FontWeight.w700,
       color: Colors.blue,
     );

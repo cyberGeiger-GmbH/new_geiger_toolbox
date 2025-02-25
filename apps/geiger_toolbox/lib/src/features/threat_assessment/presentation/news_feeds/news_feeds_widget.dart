@@ -15,6 +15,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scann
 
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
+import 'package:geiger_toolbox/src/utils/helpers/carousel_helper.dart';
 import 'package:go_router/go_router.dart';
 
 class NewsFeedsWidget extends ConsumerWidget {
@@ -40,6 +41,7 @@ class NewsFeedsWidget extends ConsumerWidget {
           return const SizedBox.shrink();
         } else {
           final limitNews = limitListLength(inputList: news, limit: limitNewsFeedDisplay);
+
           return Column(
             children: [
               CarouselSlider(
@@ -58,19 +60,12 @@ class NewsFeedsWidget extends ConsumerWidget {
                           },
                 ),
                 controller: _controller,
-                options: CarouselOptions(
-                  autoPlay: false,
-                  enlargeCenterPage: true,
-                  // ignore: no-magic-number
-                  enlargeFactor: 0.3,
-                  // ignore: no-magic-number
-                  height: 120,
-                  //aspectRatio: 4.0,
-                  disableCenter: true,
+                options: CarouselHelper.customCarouselOptions(
                   //auto callback
                   onPageChanged: (index, reason) {
                     ref.read(newsFeedsControllerProvider.notifier).update(index);
                   },
+                  disableCenter: true,
                 ),
               ),
               SlideIndicator(data: limitNews, current: index),
@@ -81,3 +76,5 @@ class NewsFeedsWidget extends ConsumerWidget {
     );
   }
 }
+
+

@@ -23,6 +23,6 @@ class CustomCheckbox extends StatelessWidget {
           ),
           onPressed: () => onChanged(!value),
         )
-        : Padding(padding: EdgeInsets.zero, child: Checkbox(onChanged: (value) => onChanged(!value!), value: value));
+        : Padding(padding: EdgeInsets.zero, child: Checkbox(onChanged: (value) => onChanged(value), value: value));
   }
 }

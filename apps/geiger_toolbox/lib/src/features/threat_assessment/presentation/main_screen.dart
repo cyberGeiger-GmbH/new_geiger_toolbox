@@ -35,7 +35,7 @@ class MainScreen extends ConsumerWidget {
     // final state = ref.watch(homeScreenControllerProvider);
     final ScrollController scrollController = ScrollController();
 
-    return Scaffold(
+    return GeigerScaffold(
       appBar: GeigerAppBar(
         userProfile: () {
           context.pushNamed(AppRouter.profileRouter.name);
