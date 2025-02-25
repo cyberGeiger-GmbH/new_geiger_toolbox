@@ -17,6 +17,8 @@ class CustomTextFormField extends StatelessWidget {
     this.autoComplete = false,
     this.onEditingComplete,
     this.maxLength,
+    this.autofillHints,
+    this.keyboardType = TextInputType.text,
   });
 
   final TextEditingController textEditingController;
@@ -27,10 +29,11 @@ class CustomTextFormField extends StatelessWidget {
   final bool isLastField;
   final bool autoComplete;
   final VoidCallback? onEditingComplete;
-
+  final List<String>? autofillHints;
+  final TextInputType keyboardType;
   final int? maxLength;
-  final bool isEmail;
   final bool isPassword;
+  final bool isEmail;
 
   // Regex pattern to match emojis
   static final RegExp emojiRegex = RegExp(
@@ -48,13 +51,15 @@ class CustomTextFormField extends StatelessWidget {
       decoration: getInputDecoration(appTheme),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textCapitalization: TextCapitalization.sentences,
+      autofillHints: autofillHints,
       validator: validator,
       autocorrect: autoComplete,
       obscureText: isPassword,
       textInputAction: isLastField ? TextInputAction.done : TextInputAction.next,
-      keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.name,
+      keyboardType: keyboardType,
       keyboardAppearance: Brightness.light,
       onEditingComplete: onEditingComplete,
+
       inputFormatters: <TextInputFormatter>[
         if (isEmail) ValidatorInputFormatter(editingValidator: EmailEditingRegexValidator()),
         FilteringTextInputFormatter.deny(emojiRegex),

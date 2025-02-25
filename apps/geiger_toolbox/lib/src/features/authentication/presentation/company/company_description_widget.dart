@@ -25,6 +25,7 @@ class CompanyDescriptionWidget extends ConsumerWidget {
                     children: [
                       SectionTitle(label: "Company Description".hardcoded),
                       Card(
+                        elevation: 0,
                         color: appTheme.colorScheme.onInverseSurface,
                         margin: EdgeInsets.zero,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

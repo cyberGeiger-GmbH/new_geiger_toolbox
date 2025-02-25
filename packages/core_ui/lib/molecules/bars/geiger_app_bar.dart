@@ -34,7 +34,7 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: IconButton(icon: const Icon(Icons.person), onPressed: userProfile),
         ),
       ],
-      backgroundColor: appColor.onPrimary,
+      backgroundColor: appColor.surface,
       //surfaceTintColor: appColor.error,
     );
   }
@@ -47,4 +47,3 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
 bool shouldShowBackButton(BuildContext context) {
   return ModalRoute.of(context)?.isFirst == false; // Not the first screen
 }
-

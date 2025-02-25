@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
@@ -133,7 +134,8 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     if (!canSubmitLocation(location)) {
       return;
     }
-
+    //finish autofill context to avoid autofill suggestions to be shown when the form is submitted
+    TextInput.finishAutofillContext();
     _setCompanyDescription();
     _node.unfocus();
   }
@@ -168,45 +170,45 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
       child: Form(
         key: _formKey,
         autovalidateMode: _submitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CompanyProfileForm(
-              companyData: widget.companyData,
-              companyKey: CreateProfileScreen.companyKey,
-              locationKey: CreateProfileScreen.locationKey,
-              companyTextController: _companyTextController,
-              locationTextController: _locationTextController,
-              enabled: state.isLoading,
-              submitted: _submitted,
-              validateCompanyName: (companyName) => companyNameErrorText(companyName ?? ""),
-              validateLocation: (location) => locationErrorText(location ?? ""),
-              onEditCompanyNameComplete: _companyNameEditingComplete,
-              onEditLocationComplete: _locationEditingComplete,
-            ),
-            Spacing.gapH8,
-            companyDescriptionState.isLoading
-                ? const SizedBox.shrink()
-                : GenerateCompanyProfileButton(
-                  isLoading: companyDescriptionState.isLoading,
-                  onPressed: () => _generateCompanyProfile(),
-                  label:
-                      widget.companyData == null
-                          ? "Generate Company Profile".hardcoded
-                          : "Regenerate Company Profile".hardcoded,
-                ),
+        child: AutofillGroup(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CompanyProfileForm(
+                companyData: widget.companyData,
+                companyKey: CreateProfileScreen.companyKey,
+                locationKey: CreateProfileScreen.locationKey,
+                companyTextController: _companyTextController,
+                locationTextController: _locationTextController,
+                enabled: state.isLoading,
+                submitted: _submitted,
+                validateCompanyName: (companyName) => companyNameErrorText(companyName ?? ""),
+                validateLocation: (location) => locationErrorText(location ?? ""),
+                onEditCompanyNameComplete: _companyNameEditingComplete,
+                onEditLocationComplete: _locationEditingComplete,
+              ),
+              Spacing.gapH12,
+              companyDescriptionState.isLoading
+                  ? const SizedBox.shrink()
+                  : GenerateCompanyProfileButton(
+                    isLoading: companyDescriptionState.isLoading,
+                    onPressed: () => _generateCompanyProfile(),
+                    label:
+                        widget.companyData == null
+                            ? "Generate Company Profile".hardcoded
+                            : "Regenerate Company Profile".hardcoded,
+                  ),
 
-            Spacing.gapH8,
-
-            CompanyDescriptionWidget(),
-            Spacing.gapH8,
-            ConfirmationButtonWidget(
-              state: state,
-              label: widget.companyData == null ? "Save Profile".hardcoded : "Update Profile".hardcoded,
-              onPressed: () => _onSubmit(),
-            ),
-          ],
+              CompanyDescriptionWidget(),
+              Spacing.gapH12,
+              ConfirmationButtonWidget(
+                state: state,
+                label: widget.companyData == null ? "Save Profile".hardcoded : "Update Profile".hardcoded,
+                onPressed: () => _onSubmit(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -248,11 +250,12 @@ class CompanyProfileForm extends StatelessWidget {
         SectionTitle(
           label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
         ),
-
         CustomTextFormField(
           key: companyKey,
           textEditingController: companyTextController,
           label: "Comany Name".hardcoded,
+          autofillHints: [AutofillHints.name],
+          keyboardType: TextInputType.name,
           enabled: !enabled,
           validator: (companyName) => submitted ? validateCompanyName(companyName) : null,
           onEditingComplete: onEditCompanyNameComplete,
@@ -264,6 +267,8 @@ class CompanyProfileForm extends StatelessWidget {
           key: locationKey,
           textEditingController: locationTextController,
           label: "Company Location",
+          keyboardType: TextInputType.streetAddress,
+          autofillHints: [AutofillHints.addressCityAndState, AutofillHints.countryName],
           hint: 'for example "Freiburg, Germany"',
           enabled: !enabled,
           validator: (location) => submitted ? validateLocation(location ?? "") : null,
