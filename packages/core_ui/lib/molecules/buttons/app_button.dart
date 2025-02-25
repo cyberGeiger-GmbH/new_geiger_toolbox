@@ -8,7 +8,13 @@ class AppButton extends StatelessWidget {
   const AppButton._({super.key, required this.child, this.onPressed, this.style});
 
   //todo: wrap with Semantics for visual impair user
-  factory AppButton.primary({Key? key, required String label, VoidCallback? onPressed, required BuildContext context}) {
+  factory AppButton.primary({
+    Key? key,
+    required String label,
+    VoidCallback? onPressed,
+    required BuildContext context,
+    bool isLoading = false,
+  }) {
     return AppButton._(
       key: key,
       onPressed: onPressed,
@@ -16,7 +22,14 @@ class AppButton extends StatelessWidget {
         backgroundColor: _appColor(context).primary,
         overlayColor: _appColor(context).onPrimary,
       ),
-      child: AppText.labelLarge(text: label, context: context, color: _appColor(context).onPrimary),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          isLoading
+              ? CircularProgressIndicator(color: _appColor(context).onPrimary)
+              : AppText.labelLarge(text: label, context: context, color: _appColor(context).onPrimary),
+        ],
+      ),
     );
   }
 
@@ -41,7 +54,7 @@ class AppButton extends StatelessWidget {
     Key? key,
     required String label,
     VoidCallback? onPressed,
-    bool isloading = false,
+    bool isLoading = false,
     required BuildContext context,
   }) {
     return AppButton._(
@@ -54,7 +67,7 @@ class AppButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          isloading
+          isLoading
               ? const CircularProgressIndicator()
               : AppText.labelLarge(text: label, context: context, color: _appColor(context).onTertiary),
         ],

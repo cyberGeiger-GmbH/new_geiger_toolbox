@@ -14,7 +14,7 @@ class CompanyDescriptionWidget extends ConsumerWidget {
 
     return AsyncValueWidget(
       value: value,
-      data: (desc) => desc == null ? const SizedBox.shrink() : AppText.bodyMedium(text: desc, context: context),
+      data: (desc) => desc == null ? const SizedBox.shrink() : AppText.bodySmall(text: desc, context: context),
     );
   }
 }

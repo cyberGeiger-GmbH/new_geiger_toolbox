@@ -55,6 +55,7 @@ class _CircularScanningButtonState extends State<CircularScanningButton> {
   bool isLoading = false;
 
   void _handleTap() async {
+    if (!mounted) return;
     setState(() {
       isLoading = true;
     });
@@ -62,6 +63,7 @@ class _CircularScanningButtonState extends State<CircularScanningButton> {
     // Simulate a scanning process
     await Future.delayed(const Duration(seconds: 3));
 
+    if (!mounted) return;
     setState(() {
       isLoading = false;
     });

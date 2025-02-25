@@ -14,6 +14,9 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/validato
 import 'package:geiger_toolbox/src/common_widgets/forms/custom_text_form_field.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:go_router/go_router.dart';
 
 class CompanyProfileFormWidget extends ConsumerStatefulWidget {
   const CompanyProfileFormWidget({super.key, this.onSubmit, this.companyData});
@@ -38,8 +41,8 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
 
   @override
   void initState() {
-    super.initState();
     _preLoadField();
+    super.initState();
   }
 
   @override
@@ -50,6 +53,16 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     super.dispose();
   }
 
+  bool _validateAndSaveForm() {
+    final form = _formKey.currentState!;
+    debugPrint("form.validate() => ${form.validate()}");
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
   void _preLoadField() {
     final data = widget.companyData;
     if (data != null) {
@@ -58,23 +71,11 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     }
   }
 
-  bool _validateAndSaveForm() {
-    final form = _formKey.currentState!;
-    if (form.validate()) {
-      form.save();
-      return true;
-    }
-    return false;
-  }
-
   Future<void> _createProfile() async {
     final controller = ref.read(companyProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
     final company = Company(companyName: companyName, location: location, description: description!);
-    final success = await controller.createCompanyProfile(company: company);
-    if (success) {
-      widget.onSubmit?.call();
-    }
+    await controller.createCompanyProfile(company: company);
   }
 
   Future<void> _updateProfile() async {
@@ -82,10 +83,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     final description = await ref.read(getCompanyDescriptionProvider.future);
 
     final data = Company(companyName: companyName, location: location, description: description!);
-    final success = await controller.updateCompanyProfile(company: data);
-    if (success) {
-      widget.onSubmit?.call();
-    }
+    await controller.updateCompanyProfile(company: data);
   }
 
   //update company description
@@ -98,6 +96,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
   Future<void> _onSubmit() async {
     setState(() => _submitted = true);
     //only submit the form if validation passes
+
     if (_validateAndSaveForm()) {
       if (widget.companyData != null) {
         //update profile
@@ -110,6 +109,18 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     }
   }
 
+  void _generateCompanyProfile() {
+    setState(() => _submitted = true);
+    if (!canSubmitCompanyName(companyName) || !canSubmitLocation(location)) {
+      return;
+    }
+
+    if (_validateAndSaveForm()) {
+      _setCompanyDescription();
+      _node.unfocus();
+    }
+  }
+
   void _companyNameEditingComplete() {
     if (canSubmitCompanyName(companyName)) {
       _node.nextFocus();
@@ -117,8 +128,11 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
   }
 
   void _locationEditingComplete() {
-    if (!canSubmitLocation(location)) {
+    if (!canSubmitCompanyName(companyName)) {
       _node.previousFocus();
+      return;
+    }
+    if (!canSubmitLocation(location)) {
       return;
     }
 
@@ -149,6 +163,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     });
 
     final state = ref.watch(companyProfileControllerProvider);
+    final companyDescriptionState = ref.watch(getCompanyDescriptionProvider);
 
     return FocusScope(
       node: _node,
@@ -156,38 +171,116 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
         key: _formKey,
         autovalidateMode: _submitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
         child: Column(
-          //mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomTextFormField(
-              key: CreateProfileScreen.companyKey,
-              textEditingController: _companyTextController,
-              label: "Comany Name",
-              hint: 'for example "CyberGeiger"',
-              enabled: !state.isLoading,
-              validator: (companyName) => _submitted ? companyNameErrorText(companyName ?? "") : null,
-              onEditingComplete: () => _companyNameEditingComplete(),
-              autoComplete: true,
-              isLastField: false,
+            Spacing.gapH8,
+            CompanyProfileForm(
+              companyData: widget.companyData,
+              companyKey: CreateProfileScreen.companyKey,
+              locationKey: CreateProfileScreen.locationKey,
+              companyTextController: _companyTextController,
+              locationTextController: _locationTextController,
+              enabled: state.isLoading,
+              submitted: _submitted,
+              validateCompanyName: (companyName) => companyNameErrorText(companyName ?? ""),
+              validateLocation: (location) => locationErrorText(location ?? ""),
+              onEditCompanyNameComplete: _companyNameEditingComplete,
+              onEditLocationComplete: _locationEditingComplete,
             ),
             Spacing.gapH8,
-            CustomTextFormField(
-              key: CreateProfileScreen.locationKey,
-              textEditingController: _locationTextController,
-              label: "Company Location",
-              hint: 'for example "Freiburg, Germany"',
-              enabled: !state.isLoading,
-              validator: (location) => _submitted ? locationErrorText(location ?? "") : null,
-              onEditingComplete: () => _locationEditingComplete(),
-              isLastField: true,
-              autoComplete: true,
+            GenerateCompanyProfileButton(
+              isLoading: companyDescriptionState.isLoading,
+              onPressed: () => _generateCompanyProfile(),
+              label:
+                  widget.companyData == null
+                      ? "Generate Company Profile".hardcoded
+                      : "Regenerate Company Profile".hardcoded,
             ),
+
             Spacing.gapH8,
             CompanyDescriptionWidget(),
             Spacing.gapH8,
-            ConfirmationButtonWidget(state: state, onPressed: () => _onSubmit()),
+            ConfirmationButtonWidget(
+              state: state,
+              label: widget.companyData == null ? "Save Profile".hardcoded : "update Profile".hardcoded,
+              onPressed: () => _onSubmit(),
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+class CompanyProfileForm extends StatelessWidget {
+  const CompanyProfileForm({
+    super.key,
+    required this.companyTextController,
+    required this.locationTextController,
+    required this.enabled,
+    required this.submitted,
+    required this.onEditLocationComplete,
+    required this.onEditCompanyNameComplete,
+    required this.validateCompanyName,
+    required this.validateLocation,
+    required this.companyKey,
+    required this.locationKey,
+    this.companyData,
+  });
+  final TextEditingController companyTextController;
+  final TextEditingController locationTextController;
+  final bool enabled;
+  final bool submitted;
+  final VoidCallback onEditLocationComplete;
+  final VoidCallback onEditCompanyNameComplete;
+  final String? Function(String? value) validateCompanyName;
+  final String? Function(String? value) validateLocation;
+  final Key? companyKey;
+  final Key? locationKey;
+  final Company? companyData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LabelText(label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded),
+        Spacing.gapH16,
+        CustomTextFormField(
+          key: companyKey,
+          textEditingController: companyTextController,
+          label: "Comany Name".hardcoded,
+          enabled: !enabled,
+          validator: (companyName) => submitted ? validateCompanyName(companyName) : null,
+          onEditingComplete: onEditCompanyNameComplete,
+          autoComplete: true,
+          isLastField: false,
+        ),
+        Spacing.gapH8,
+        CustomTextFormField(
+          key: locationKey,
+          textEditingController: locationTextController,
+          label: "Company Location",
+          hint: 'for example "Freiburg, Germany"',
+          enabled: !enabled,
+          validator: (location) => submitted ? validateLocation(location ?? "") : null,
+          onEditingComplete: onEditLocationComplete,
+          isLastField: true,
+          autoComplete: true,
+        ),
+      ],
+    );
+  }
+}
+
+class LabelText extends StatelessWidget {
+  const LabelText({super.key, required this.label});
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AppText.labelLarge(text: label, context: context, color: theme.colorScheme.onSurface);
   }
 }

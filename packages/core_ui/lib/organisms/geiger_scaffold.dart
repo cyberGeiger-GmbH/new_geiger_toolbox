@@ -10,7 +10,9 @@ class GeigerScaffold extends StatelessWidget {
   final Widget? floatingActionButton;
   @override
   Widget build(BuildContext context) {
+    final appTheme = Theme.of(context);
     return Scaffold(
+      backgroundColor: appTheme.colorScheme.surface,
       appBar: appBar,
       body: Padding(padding: const EdgeInsets.symmetric(horizontal: Spacing.p12), child: body),
       floatingActionButton: floatingActionButton,

@@ -12,7 +12,7 @@ class AsyncValueWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: data,
-      error: error ?? (e, s) => ResponsiveCenterWidget(child: ErrorMessage(errorMessage: e.toString())),
+      error: error ?? (e, s) => ResponsiveCenterWidget(child: ErrorMessage(errorMessage: "$e")),
       loading: () => loadingWidget ?? const Center(child: CircularProgressIndicator()),
     );
   }

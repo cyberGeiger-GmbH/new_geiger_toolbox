@@ -13,11 +13,20 @@ class CompanyDescriptionController extends _$CompanyDescriptionController {
   }
 
   Future<void> setCompanyDescription({required String companyName, required String location}) async {
+    if (companyName.isEmpty || location.isEmpty) {
+      state = AsyncError("Company name and location are required!", StackTrace.current);
+      return;
+    }
     final perplexityRepo = ref.read(perplexityRepositoryProvider);
     state = AsyncLoading<String>();
     state = await AsyncValue.guard(
       () => perplexityRepo.getCompanyDescription(companyName: companyName, location: location),
     );
+  }
+
+  // for testing purpose
+  Future<void> deleteCompanyDescription() async {
+    state = AsyncValue.data(null);
   }
 }
 

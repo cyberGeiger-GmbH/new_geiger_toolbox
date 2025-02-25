@@ -1,7 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 
 import 'package:core_ui/helpers/design_system_helper.dart';
-import 'package:core_ui/organisms/geiger_scaffold.dart';
 import 'package:core_ui/pages/news_screen.dart';
 
 import 'package:flutter/material.dart';

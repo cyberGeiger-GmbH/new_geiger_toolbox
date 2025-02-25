@@ -7,7 +7,7 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.textEditingController,
     required this.label,
-    required this.hint,
+    this.hint = 'For example "CyberGEIGER"',
     required this.enabled,
     required this.validator,
     this.isLastField = false,
@@ -20,7 +20,7 @@ class CustomTextFormField extends StatelessWidget {
 
   final TextEditingController textEditingController;
   final String label;
-  final String hint;
+  final String? hint;
   final bool enabled;
   final String? Function(String? value)? validator;
   final bool isLastField;
@@ -31,9 +31,15 @@ class CustomTextFormField extends StatelessWidget {
   final bool isEmail;
   final bool isPassword;
 
-  //final String initValue;
+  // Regex pattern to match emojis
+  static final RegExp emojiRegex = RegExp(
+    r'[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F000}-\u{1F02F}]|[\u{1F0A0}-\u{1F0FF}]|[\u{1F100}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}]|[\u{1F900}-\u{1F9FF}]|[\u{2190}-\u{21FF}]|[\u{2300}-\u{23FF}]|[\u{1F170}-\u{1F251}]',
+    unicode: true,
+  );
+
   @override
   Widget build(BuildContext context) {
+    final appTheme = Theme.of(context);
     return TextFormField(
       key: key,
       controller: textEditingController,
@@ -41,19 +47,23 @@ class CustomTextFormField extends StatelessWidget {
         labelText: label,
         hintText: hint,
         enabled: enabled,
+        labelStyle: appTheme.textTheme.bodySmall,
+        hintStyle: appTheme.textTheme.bodySmall,
+        helperStyle: appTheme.textTheme.bodySmall,
         //filled: true,
+        fillColor: appTheme.colorScheme.onInverseSurface,
         // fillColor: readOnly == true ? Colors.grey.shade200 : Colors.white70,
-        // border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(10),
-        //     borderSide: readOnly == true
-        //         ? BorderSide.none
-        //         : BorderSide(color: Colors.black45)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.black45),
+        ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.green),
-          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: appTheme.colorScheme.primary),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      textCapitalization: TextCapitalization.sentences,
       validator: validator,
       autocorrect: autoComplete,
       obscureText: isPassword,
@@ -63,6 +73,7 @@ class CustomTextFormField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       inputFormatters: <TextInputFormatter>[
         if (isEmail) ValidatorInputFormatter(editingValidator: EmailEditingRegexValidator()),
+        FilteringTextInputFormatter.deny(emojiRegex),
       ],
       maxLength: maxLength ?? 50,
     );

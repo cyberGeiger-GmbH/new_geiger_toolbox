@@ -55,7 +55,9 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
       floatingActionButton: getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
       body: CustomScrollView(
         controller: _scrollController,
-        slivers: [ResponsiveSliverCenterWidget(child: CompanyProfileContentsWidget())],
+        slivers: [
+          ResponsiveSliverCenterWidget(child: CompanyProfileContentsWidget()),
+        ],
       ),
     );
   }

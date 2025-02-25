@@ -28,12 +28,11 @@ class PerplexitySearchRepository {
         "temperature": 0,
         "model": "llama-3.1-sonar-small-128k-online",
         "messages": [
+          {"content": "you are a search enginer for finding information.", "role": "system"},
           {
-            "content":
-                "you are a search enginer. what company does base on the name and the location provided. the result show be short",
-            "role": "system",
+            "role": "user",
+            "content": "who is $companyName in $location, provide the information description iss than 50 words.",
           },
-          {"role": "user", "content": "who is $companyName in $location"},
         ],
       };
 
