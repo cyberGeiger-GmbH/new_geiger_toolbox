@@ -27,6 +27,9 @@ class ScanButtonController extends _$ScanButtonController {
     state = const AsyncLoading();
 
     state = await AsyncValue.guard(() => ref.read(newsFeedServiceProvider).cacheNews());
+
+    // state = await AsyncValue.guard(() => Future.delayed(const Duration(seconds: 3)));
+
     _log.i("scanning completed ");
   }
 

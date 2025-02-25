@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../molecules/bars/custom_navigation_destination.dart';
+//import '../../molecules/bars/custom_navigation_destination.dart';
 
 class ScaffoldWithNavigationBar extends StatelessWidget {
   const ScaffoldWithNavigationBar({
@@ -18,19 +18,20 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).colorScheme;
+    //final appColor = Theme.of(context).colorScheme;
     return Scaffold(
       body: body,
       floatingActionButton: feedback,
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: appColor.secondaryContainer,
-        indicatorColor: appColor.onPrimary,
-        elevation: 1,
-        destinations: CustomNavigationDestination.getDestination(),
-        onDestinationSelected: onDestinationSelected,
-        selectedIndex: selectedIndex,
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-      ),
+      //todo: uncomment for version 1.1.0
+      // bottomNavigationBar: NavigationBar(
+      //   backgroundColor: appColor.secondaryContainer,
+      //   indicatorColor: appColor.onPrimary,
+      //   elevation: 1,
+      //   destinations: CustomNavigationDestination.getDestination(),
+      //   onDestinationSelected: onDestinationSelected,
+      //   selectedIndex: selectedIndex,
+      //   labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+      // ),
     );
   }
 }

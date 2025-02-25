@@ -113,25 +113,6 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  factory AppButton.scan({
-    Key? key,
-    required String label,
-    VoidCallback? onPressed,
-    Color? color,
-    required BuildContext context,
-  }) {
-    return AppButton._(
-      key: key,
-      style: ElevatedButton.styleFrom(
-        shape: const CircleBorder(),
-        backgroundColor: color ?? _appColor(context).primary,
-        minimumSize: const Size(130, 130),
-        overlayColor: _appColor(context).onPrimary,
-      ),
-      onPressed: onPressed,
-      child: AppText.labelLarge(text: label, context: context, color: color ?? _appColor(context).onPrimary),
-    );
-  }
   factory AppButton.news({
     Key? key,
     required String title,

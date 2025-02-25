@@ -103,7 +103,7 @@ class DesignSystemHelper {
                   AppButton.primary(label: "Primary Button", onPressed: () {}, context: context),
                   AppButton.secondary(label: "Secondary Button", onPressed: () {}, context: context),
                   AppButton.tertiary(label: "Tertiary Button", onPressed: () {}, context: context),
-                  AppButton.scan(onPressed: () {}, label: "Scan", context: context),
+
                   AppButton.news(
                     onPressed: () {},
                     title: "Cyberbetrug durch Telefontricks verbreitet, news about threat aowfjoawfjwo",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../molecules/bars/custom_navigation_rail_destination.dart';
+//import '../../molecules/bars/custom_navigation_rail_destination.dart';
 
 class ScaffoldWithNaviagionRail extends StatelessWidget {
   const ScaffoldWithNaviagionRail({
@@ -15,21 +15,21 @@ class ScaffoldWithNaviagionRail extends StatelessWidget {
   final ValueChanged<int> onDestinationSelected;
   @override
   Widget build(BuildContext context) {
-    final appColor = Theme.of(context).colorScheme;
+    //final appColor = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: appColor.surface,
       body: Row(
         children: [
-          NavigationRail(
-            backgroundColor: appColor.surface,
-            indicatorColor: appColor.onSecondary,
-            labelType: NavigationRailLabelType.selected,
-            destinations: CustomNavigationRailDestination.getdestination(context),
-            selectedIndex: selectedIndex,
-            onDestinationSelected: onDestinationSelected,
-          ),
-          const VerticalDivider(),
+          //todo: uncomment for version 1.1.0
+          // NavigationRail(
+          //   backgroundColor: appColor.surface,
+          //   indicatorColor: appColor.onSecondary,
+          //   labelType: NavigationRailLabelType.selected,
+          //   destinations: CustomNavigationRailDestination.getdestination(context),
+          //   selectedIndex: selectedIndex,
+          //   onDestinationSelected: onDestinationSelected,
+          // ),
+          // const VerticalDivider(),
           Expanded(child: body),
         ],
       ),

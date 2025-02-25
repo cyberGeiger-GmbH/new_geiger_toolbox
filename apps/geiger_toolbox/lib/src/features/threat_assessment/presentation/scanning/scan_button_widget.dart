@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
@@ -12,7 +13,6 @@ class ScanButtonWidget extends ConsumerWidget {
   final VoidCallback onScanPressed;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     final state = ref.watch(scanButtonControllerProvider);
     final newsFeedState = ref.watch(watchRecentNewsFeedsProvider);
 
@@ -23,58 +23,38 @@ class ScanButtonWidget extends ConsumerWidget {
     // );
 
     return CircularScanningButton(
-      onPressed: () {},
-      //label: state.isLoading || newsFeedState.isLoading ? "scanning..." : 'Scan',
+      onPressed: onScanPressed,
       size: 120.0,
-      color: theme.colorScheme.primary,
+      initStatelabel: 'Scan'.hardcoded,
+      loadingStateLabel: 'Scanning'.hardcoded,
+      isLoading: state.isLoading,
     );
   }
 }
 
-class CircularScanningButton extends StatefulWidget {
+class CircularScanningButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double size;
-  final Color color;
-  final String loadStateLabel;
-  final String initStatelabel;
 
+  final String loadingStateLabel;
+  final String initStatelabel;
+  final bool isLoading;
   const CircularScanningButton({
     super.key,
     required this.onPressed,
-    this.loadStateLabel = 'Scanning',
+    this.loadingStateLabel = 'Scanning',
     this.size = 0.0,
-    this.color = Colors.blueAccent,
+
     this.initStatelabel = 'Scan',
+    this.isLoading = false,
   });
 
   @override
-  _CircularScanningButtonState createState() => _CircularScanningButtonState();
-}
-
-class _CircularScanningButtonState extends State<CircularScanningButton> {
-  bool isLoading = false;
-
-  void _handleTap() async {
-    if (!mounted) return;
-    setState(() {
-      isLoading = true;
-    });
-
-    // Simulate a scanning process
-    await Future.delayed(const Duration(seconds: 3));
-
-    if (!mounted) return;
-    setState(() {
-      isLoading = false;
-    });
-
-    widget.onPressed();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final color = theme.colorScheme;
     return GestureDetector(
-      onTap: isLoading ? null : _handleTap,
+      onTap: isLoading ? null : onPressed,
       child: Material(
         elevation: 3.0,
         shape: const CircleBorder(),
@@ -82,26 +62,23 @@ class _CircularScanningButtonState extends State<CircularScanningButton> {
           alignment: Alignment.center,
           children: [
             Container(
-              width: widget.size + 20,
-              height: widget.size + 20,
+              width: size + 20,
+              height: size + 20,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: widget.color.withAlpha(128), width: 5.0),
+                border: Border.all(color: color.primary.withAlpha(128), width: 5.0),
               ),
             ),
 
             Container(
-              width: widget.size,
-              height: widget.size,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: widget.color),
+              width: size,
+              height: size,
+              decoration: BoxDecoration(shape: BoxShape.circle, color: color.primary),
               child: Center(
                 child:
                     isLoading
-                        ? ScanningText(size: widget.size, state: widget.loadStateLabel)
-                        : Text(
-                          widget.initStatelabel,
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
+                        ? ScanningText(size: size, state: loadingStateLabel)
+                        : AppText.labelLarge(text: initStatelabel, color: color.onPrimary, context: context),
               ),
             ),
           ],
@@ -111,13 +88,13 @@ class _CircularScanningButtonState extends State<CircularScanningButton> {
   }
 }
 
-class ScanningText extends ConsumerWidget {
+class ScanningText extends StatelessWidget {
   const ScanningText({super.key, required this.size, required this.state});
   final double size;
   final String state;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final color = theme.colorScheme;
     return Stack(
