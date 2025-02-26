@@ -81,34 +81,22 @@ class TodoOfferingRepository {
     }
   }
 
-  // * todo state
-
-  // Future<void> updateStatusTodo({required TodoOffing todo}) async {
-  //   final offeringStatus = StatusTodoOfferingsCompanion(
-  //     offeringId: Value(todo.id),
-  //     added: Value(todo.added),
-  //   );
-
-  //   /// insert or update the todoOffer status
-  //   await _db
-  //       .into(_db.todoOfferingStatuses)
-  //       .insertOnConflictUpdate(offeringStatus);
-  // }
-
-  //Get all Offers that has be added to the todoOfferingStatus
+  //create a join query that include TodoOfferingStatusesTable and OfferingsTable and recommendations table
+  //filter by offering status
   Stream<List<TodoOfferingCategory>> watchTodoOfferingStatus() {
     _log.i("watch List<offeringStatus>");
-    //create a join query that include TodoOfferingStatusesTable and OfferingsTable
-    final query = _db.select(_db.recommendationOfferings).join(
-      [
-        leftOuterJoin(_db.todoOfferings, _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id)),
-        leftOuterJoin(
-          _db.recommendations,
-          _db.recommendations.id.equalsExp(_db.recommendationOfferings.recommendationId),
-        ),
-      ],
-      //filter by offerings id
-    )..where(_db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id));
+
+    final query = _db.select(_db.recommendationOfferings).join([
+      leftOuterJoin(_db.todoOfferings, _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id)),
+      leftOuterJoin(
+        _db.recommendations,
+        _db.recommendations.id.equalsExp(_db.recommendationOfferings.recommendationId),
+      ),
+    ])..where(
+      _db.todoOfferings.offeringId.equalsExp(_db.recommendationOfferings.id) &
+          (_db.todoOfferings.offeringStatus.equals(OfferingStatus.planned.index) |
+              _db.todoOfferings.offeringStatus.equals(OfferingStatus.done.index)),
+    );
     // transform the query stream into a stream of [OfferingStatus] lists
     return query.watch().map((rows) {
       final Map<String, List<TodoOffering>> categoryMap = {};
