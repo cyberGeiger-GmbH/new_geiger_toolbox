@@ -130,10 +130,11 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).tertiary,
       ),
       onPressed: onPressed,
-      child: AppText.titleMedium(
+      child: AppText.labelLarge(
         text: title,
         context: context,
         textAlign: TextAlign.center,
+
         textOverflow: TextOverflow.fade,
       ),
     );
@@ -153,10 +154,11 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).tertiary,
       ),
       onPressed: onPressed,
-      child: AppText.titleLarge(
+      child: AppText.labelLarge(
         text: title,
         context: context,
         textAlign: TextAlign.center,
+
         textOverflow: TextOverflow.fade,
       ),
     );
