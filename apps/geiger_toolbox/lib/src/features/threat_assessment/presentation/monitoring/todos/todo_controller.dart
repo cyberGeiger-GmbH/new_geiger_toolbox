@@ -24,6 +24,15 @@ class TodoController extends _$TodoController {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {
+      await todoRepository.updateTodoStatus(id: todo.id, status: todo.copyWith(status: Status.planned).status);
+    });
+  }
+
+  Future<void> removeTodo(TodoOffering todo) async {
+    final todoRepository = ref.read(todoOfferingRepoProvider);
+    state = const AsyncValue.loading();
+
+    state = await AsyncValue.guard(() async {
       await todoRepository.updateTodoStatus(id: todo.id, status: todo.copyWith(status: Status.recommended).status);
     });
   }

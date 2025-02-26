@@ -8,7 +8,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offeri
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/limit_todo_list.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo.item.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_item.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';

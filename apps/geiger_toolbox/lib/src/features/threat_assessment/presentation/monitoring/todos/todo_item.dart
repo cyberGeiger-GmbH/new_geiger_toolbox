@@ -38,7 +38,7 @@ class TodoItem extends StatelessWidget {
               status: item.status,
               color: item.status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
             ),
-            Spacing.gapW12,
+            Spacing.gapW4,
             Expanded(child: TodoContent(item: item, showDetails: showDetails)),
             IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
           ],

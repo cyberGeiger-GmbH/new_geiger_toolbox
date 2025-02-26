@@ -31,11 +31,11 @@ class ProtectionTileList extends StatelessWidget {
   }
 }
 
-class ProtectionTileListWithTitle extends StatelessWidget {
-  const ProtectionTileListWithTitle({super.key, required this.title, required this.protectionTileList});
+class RecommendationTitleList extends StatelessWidget {
+  const RecommendationTitleList({super.key, required this.title, required this.recommendations});
 
   final String title;
-  final Widget protectionTileList;
+  final Widget recommendations;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,11 @@ class ProtectionTileListWithTitle extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [Text(title, style: appTextStyle.titleMedium!.copyWith()), Spacing.gapH8, protectionTileList],
+      children: [
+        Text(title, style: appTextStyle.bodySmall!.copyWith(fontWeight: FontWeight.w700)),
+        Spacing.gapH4,
+        recommendations,
+      ],
     );
   }
 }

@@ -64,7 +64,8 @@ class NewsScreen extends StatelessWidget {
                   onChange: (value) {},
                 ),
               )
-              .toList(), rationale: 'why',
+              .toList(),
+      rationale: 'why',
     );
   }
 
@@ -87,7 +88,7 @@ class NewsScreen extends StatelessWidget {
             lastedUpdated: "2024-12-12",
           ),
           Spacing.gapH16,
-          ProtectionTileListWithTitle(title: "How to protect me?", protectionTileList: _getProtectionTileList(context)),
+          RecommendationTitleList(title: "How to protect me?", protectionTileList: _getProtectionTileList(context)),
         ],
       ),
     );

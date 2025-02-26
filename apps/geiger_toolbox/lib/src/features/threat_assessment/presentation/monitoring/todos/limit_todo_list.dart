@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/dismissible_todo.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo.item.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_item.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
 
 import 'package:geiger_toolbox/src/utils/constants.dart';
@@ -30,7 +30,7 @@ class LimitTodoList extends ConsumerWidget {
                     ref.read(todoControllerProvider.notifier).makeAsDone(item);
                     return false;
                   } else {
-                    ref.read(todoControllerProvider.notifier).planLater(item);
+                    ref.read(todoControllerProvider.notifier).removeTodo(item);
                     return true;
                   }
                 },

@@ -6,7 +6,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offeri
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering_category.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/category/todos_category_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo.item.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_item.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
 
 class TodoCategory extends ConsumerWidget {

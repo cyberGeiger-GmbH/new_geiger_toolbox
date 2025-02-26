@@ -17,10 +17,15 @@ class NewsContent extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText.headlineMedium(text: title, context: context),
+        AppText.bodyLarge(
+          text: title,
+          context: context,
+          textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
+        ),
         Spacing.gapH4,
         EmptyContent(textAlign: TextAlign.justify, message: summary),
         Spacing.gapH4,
@@ -42,7 +47,7 @@ class HorizontalTitleContent extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: "$title: ", // Title in bold
-        style: theme.textTheme.bodySmall!.copyWith(color: color),
+        style: theme.textTheme.bodySmall!.copyWith(color: color, fontWeight: FontWeight.bold),
         children: [
           TextSpan(
             text: source,
