@@ -5,7 +5,7 @@ class CoreColor {
   //colors for light theme
   //primary color variant
 
-  static const Color primary = Color.fromRGBO(56, 105, 63, 1);
+  static const Color primary = Color(0xFF38693F);
   static const Color onPrimary = Color(0xFFFFFFFF);
   static const Color primaryContainer = Color(0xFFADF2C7);
   static const Color onPrimaryContainer = Color(0xFF002111);

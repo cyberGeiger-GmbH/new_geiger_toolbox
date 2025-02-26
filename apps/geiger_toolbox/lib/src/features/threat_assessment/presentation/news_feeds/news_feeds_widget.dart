@@ -1,4 +1,5 @@
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
@@ -68,6 +69,7 @@ class NewsFeedsWidget extends ConsumerWidget {
                   disableCenter: true,
                 ),
               ),
+
               SlideIndicator(data: limitNews, current: index),
             ],
           );
@@ -76,5 +78,3 @@ class NewsFeedsWidget extends ConsumerWidget {
     );
   }
 }
-
-

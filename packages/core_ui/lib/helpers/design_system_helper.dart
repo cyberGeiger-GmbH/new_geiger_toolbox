@@ -104,14 +104,14 @@ class DesignSystemHelper {
                   AppButton.secondary(label: "Secondary Button", onPressed: () {}, context: context),
                   AppButton.tertiary(label: "Tertiary Button", onPressed: () {}, context: context),
 
-                  AppButton.news(
+                  AppButton.newsCard(
                     onPressed: () {},
                     title: "Cyberbetrug durch Telefontricks verbreitet, news about threat aowfjoawfjwo",
                     context: context,
                   ),
-                  AppButton.news(onPressed: () {}, title: "News 1", context: context),
-                  AppButton.news(onPressed: () {}, title: "News 3", context: context),
-                  AppButton.activeNews(onPressed: () {}, title: "Active News", context: context),
+                  AppButton.newsCard(onPressed: () {}, title: "News 1", context: context),
+                  AppButton.newsCard(onPressed: () {}, title: "News 3", context: context),
+                  AppButton.activeNewsCard(onPressed: () {}, title: "Active News", context: context),
                   ToolButton.elevated(
                     label: "Elevated Tool Card",
                     context: context,

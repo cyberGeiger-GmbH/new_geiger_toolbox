@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../foundation/app_radius.dart';
 import '../../tokens/spacing.dart';
 import '../texts/app_text.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton._({super.key, required this.child, this.onPressed, this.style});
+
+  static ColorScheme _appColor(BuildContext context) {
+    return Theme.of(context).colorScheme;
+  }
 
   //todo: wrap with Semantics for visual impair user
   factory AppButton.primary({
@@ -113,68 +116,50 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  factory AppButton.news({
+  factory AppButton.newsCard({
     Key? key,
     required String title,
     VoidCallback? onPressed,
-    Color? color,
     required BuildContext context,
   }) {
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: AppRadius.main().asBorderRadius.regular),
-        maximumSize: const Size(130, 100),
-        minimumSize: const Size(130, 100),
-        backgroundColor: color ?? _appColor(context).surface,
-        padding: const EdgeInsets.all(Spacing.p12),
-        overlayColor: _appColor(context).onSurface,
-      ),
-      onPressed: onPressed,
-      child: AppText.titleSmall(
-        text: title,
-        context: context,
-        color: color,
-        textAlign: TextAlign.justify,
-        textOverflow: TextOverflow.fade,
-      ),
-    );
-  }
-
-  factory AppButton.activeNews({
-    Key? key,
-    required String title,
-    VoidCallback? onPressed,
-    Color? color,
-    required BuildContext context,
-  }) {
-    return AppButton._(
-      key: key,
-      style: ElevatedButton.styleFrom(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadius.main().asBorderRadius.regular,
-          side: BorderSide(color: _appColor(context).primary, width: 2),
-        ),
-        maximumSize: const Size(100, 100),
-        minimumSize: const Size(90, 90),
-        backgroundColor: color ?? _appColor(context).surface,
-        padding: const EdgeInsets.all(Spacing.p12),
-        overlayColor: _appColor(context).primary,
+        backgroundColor: _appColor(context).onInverseSurface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
+        overlayColor: _appColor(context).tertiary,
       ),
       onPressed: onPressed,
       child: AppText.titleMedium(
         text: title,
         context: context,
-        color: color,
         textAlign: TextAlign.center,
         textOverflow: TextOverflow.fade,
       ),
     );
   }
 
-  static ColorScheme _appColor(BuildContext context) {
-    return Theme.of(context).colorScheme;
+  factory AppButton.activeNewsCard({
+    Key? key,
+    required String title,
+    VoidCallback? onPressed,
+    required BuildContext context,
+  }) {
+    return AppButton._(
+      key: key,
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
+        backgroundColor: _appColor(context).onInverseSurface,
+        overlayColor: _appColor(context).tertiary,
+      ),
+      onPressed: onPressed,
+      child: AppText.titleLarge(
+        text: title,
+        context: context,
+        textAlign: TextAlign.center,
+        textOverflow: TextOverflow.fade,
+      ),
+    );
   }
 
   final VoidCallback? onPressed;

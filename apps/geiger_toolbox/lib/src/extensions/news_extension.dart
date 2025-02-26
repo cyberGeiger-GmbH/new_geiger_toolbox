@@ -20,13 +20,19 @@ extension NewsExtension on List<News> {
         .map(
           (value) =>
               value.key == currentIndex
-                  ? AppButton.activeNews(context: context, title: value.value.title, onPressed: onPressed)
-                  : AppButton.news(
-                    context: context,
-                    title: value.value.title,
-                    onPressed: () {
-                      debugPrint(" go to detail newsfeed screen => ${value.value.title}");
-                    },
+                  ? Padding(
+                    padding: EdgeInsets.symmetric(vertical: Spacing.p4),
+                    child: AppButton.activeNewsCard(context: context, title: value.value.title, onPressed: onPressed),
+                  )
+                  : Padding(
+                    padding: EdgeInsets.symmetric(vertical: Spacing.p4),
+                    child: AppButton.newsCard(
+                      context: context,
+                      title: value.value.title,
+                      onPressed: () {
+                        debugPrint(" go to detail newsfeed screen => ${value.value.title}");
+                      },
+                    ),
                   ),
         )
         .toList();

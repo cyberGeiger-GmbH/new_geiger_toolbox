@@ -34,7 +34,7 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: IconButton(icon: const Icon(Icons.person), onPressed: userProfile),
         ),
       ],
-      backgroundColor: appColor.surface,
+      backgroundColor: appColor.onPrimary,
       //surfaceTintColor: appColor.error,
     );
   }
