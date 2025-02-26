@@ -1,7 +1,7 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
-import 'package:geiger_toolbox/src/utils/date_formater.dart';
+import 'package:geiger_toolbox/src/utils/date_time_formatter.dart';
 
 import 'package:drift/drift.dart';
 import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';

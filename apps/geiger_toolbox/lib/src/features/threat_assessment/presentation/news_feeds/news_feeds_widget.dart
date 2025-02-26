@@ -13,6 +13,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_controller.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
+import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
@@ -44,7 +45,9 @@ class NewsFeedsWidget extends ConsumerWidget {
           final limitNews = limitListLength(inputList: news, limit: limitNewsFeedDisplay);
 
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              LabelWidget(text: "Your Threats".hardcoded),
               CarouselSlider(
                 items: limitNews.toWidgetList(
                   context: context,
@@ -76,5 +79,14 @@ class NewsFeedsWidget extends ConsumerWidget {
         }
       },
     );
+  }
+}
+
+class LabelWidget extends StatelessWidget {
+  const LabelWidget({super.key, required this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return AppText.bodySmall(text: text, context: context);
   }
 }

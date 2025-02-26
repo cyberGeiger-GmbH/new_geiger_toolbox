@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'date_formater.dart';
+part of 'date_time_formatter.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$formattedDateHash() => r'682656c4dc02726e520da756592e474529d42c5f';
+String _$dateTimeStringFormatterHash() =>
+    r'39ee90e51a0e2304ab9081e2daacb8a4a65bb50d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,23 +30,23 @@ class _SystemHash {
   }
 }
 
-/// See also [formattedDate].
-@ProviderFor(formattedDate)
-const formattedDateProvider = FormattedDateFamily();
+/// See also [dateTimeStringFormatter].
+@ProviderFor(dateTimeStringFormatter)
+const dateTimeStringFormatterProvider = DateTimeStringFormatterFamily();
 
-/// See also [formattedDate].
-class FormattedDateFamily extends Family<String> {
-  /// See also [formattedDate].
-  const FormattedDateFamily();
+/// See also [dateTimeStringFormatter].
+class DateTimeStringFormatterFamily extends Family<String> {
+  /// See also [dateTimeStringFormatter].
+  const DateTimeStringFormatterFamily();
 
-  /// See also [formattedDate].
-  FormattedDateProvider call({required String inputDate}) {
-    return FormattedDateProvider(inputDate: inputDate);
+  /// See also [dateTimeStringFormatter].
+  DateTimeStringFormatterProvider call({required String inputDate}) {
+    return DateTimeStringFormatterProvider(inputDate: inputDate);
   }
 
   @override
-  FormattedDateProvider getProviderOverride(
-    covariant FormattedDateProvider provider,
+  DateTimeStringFormatterProvider getProviderOverride(
+    covariant DateTimeStringFormatterProvider provider,
   ) {
     return call(inputDate: provider.inputDate);
   }
@@ -62,28 +63,31 @@ class FormattedDateFamily extends Family<String> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'formattedDateProvider';
+  String? get name => r'dateTimeStringFormatterProvider';
 }
 
-/// See also [formattedDate].
-class FormattedDateProvider extends AutoDisposeProvider<String> {
-  /// See also [formattedDate].
-  FormattedDateProvider({required String inputDate})
+/// See also [dateTimeStringFormatter].
+class DateTimeStringFormatterProvider extends AutoDisposeProvider<String> {
+  /// See also [dateTimeStringFormatter].
+  DateTimeStringFormatterProvider({required String inputDate})
     : this._internal(
-        (ref) => formattedDate(ref as FormattedDateRef, inputDate: inputDate),
-        from: formattedDateProvider,
-        name: r'formattedDateProvider',
+        (ref) => dateTimeStringFormatter(
+          ref as DateTimeStringFormatterRef,
+          inputDate: inputDate,
+        ),
+        from: dateTimeStringFormatterProvider,
+        name: r'dateTimeStringFormatterProvider',
         debugGetCreateSourceHash:
             const bool.fromEnvironment('dart.vm.product')
                 ? null
-                : _$formattedDateHash,
-        dependencies: FormattedDateFamily._dependencies,
+                : _$dateTimeStringFormatterHash,
+        dependencies: DateTimeStringFormatterFamily._dependencies,
         allTransitiveDependencies:
-            FormattedDateFamily._allTransitiveDependencies,
+            DateTimeStringFormatterFamily._allTransitiveDependencies,
         inputDate: inputDate,
       );
 
-  FormattedDateProvider._internal(
+  DateTimeStringFormatterProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -96,11 +100,13 @@ class FormattedDateProvider extends AutoDisposeProvider<String> {
   final String inputDate;
 
   @override
-  Override overrideWith(String Function(FormattedDateRef provider) create) {
+  Override overrideWith(
+    String Function(DateTimeStringFormatterRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
-      override: FormattedDateProvider._internal(
-        (ref) => create(ref as FormattedDateRef),
+      override: DateTimeStringFormatterProvider._internal(
+        (ref) => create(ref as DateTimeStringFormatterRef),
         from: from,
         name: null,
         dependencies: null,
@@ -113,12 +119,13 @@ class FormattedDateProvider extends AutoDisposeProvider<String> {
 
   @override
   AutoDisposeProviderElement<String> createElement() {
-    return _FormattedDateProviderElement(this);
+    return _DateTimeStringFormatterProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FormattedDateProvider && other.inputDate == inputDate;
+    return other is DateTimeStringFormatterProvider &&
+        other.inputDate == inputDate;
   }
 
   @override
@@ -132,17 +139,140 @@ class FormattedDateProvider extends AutoDisposeProvider<String> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin FormattedDateRef on AutoDisposeProviderRef<String> {
+mixin DateTimeStringFormatterRef on AutoDisposeProviderRef<String> {
   /// The parameter `inputDate` of this provider.
   String get inputDate;
 }
 
-class _FormattedDateProviderElement extends AutoDisposeProviderElement<String>
-    with FormattedDateRef {
-  _FormattedDateProviderElement(super.provider);
+class _DateTimeStringFormatterProviderElement
+    extends AutoDisposeProviderElement<String>
+    with DateTimeStringFormatterRef {
+  _DateTimeStringFormatterProviderElement(super.provider);
 
   @override
-  String get inputDate => (origin as FormattedDateProvider).inputDate;
+  String get inputDate => (origin as DateTimeStringFormatterProvider).inputDate;
+}
+
+String _$dateTimeFormatterHash() => r'dd326b4299daa9638c210dbe0a0a8c82bcd7c393';
+
+/// See also [dateTimeFormatter].
+@ProviderFor(dateTimeFormatter)
+const dateTimeFormatterProvider = DateTimeFormatterFamily();
+
+/// See also [dateTimeFormatter].
+class DateTimeFormatterFamily extends Family<String> {
+  /// See also [dateTimeFormatter].
+  const DateTimeFormatterFamily();
+
+  /// See also [dateTimeFormatter].
+  DateTimeFormatterProvider call({required DateTime inputDate}) {
+    return DateTimeFormatterProvider(inputDate: inputDate);
+  }
+
+  @override
+  DateTimeFormatterProvider getProviderOverride(
+    covariant DateTimeFormatterProvider provider,
+  ) {
+    return call(inputDate: provider.inputDate);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'dateTimeFormatterProvider';
+}
+
+/// See also [dateTimeFormatter].
+class DateTimeFormatterProvider extends AutoDisposeProvider<String> {
+  /// See also [dateTimeFormatter].
+  DateTimeFormatterProvider({required DateTime inputDate})
+    : this._internal(
+        (ref) => dateTimeFormatter(
+          ref as DateTimeFormatterRef,
+          inputDate: inputDate,
+        ),
+        from: dateTimeFormatterProvider,
+        name: r'dateTimeFormatterProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$dateTimeFormatterHash,
+        dependencies: DateTimeFormatterFamily._dependencies,
+        allTransitiveDependencies:
+            DateTimeFormatterFamily._allTransitiveDependencies,
+        inputDate: inputDate,
+      );
+
+  DateTimeFormatterProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.inputDate,
+  }) : super.internal();
+
+  final DateTime inputDate;
+
+  @override
+  Override overrideWith(String Function(DateTimeFormatterRef provider) create) {
+    return ProviderOverride(
+      origin: this,
+      override: DateTimeFormatterProvider._internal(
+        (ref) => create(ref as DateTimeFormatterRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        inputDate: inputDate,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<String> createElement() {
+    return _DateTimeFormatterProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is DateTimeFormatterProvider && other.inputDate == inputDate;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, inputDate.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin DateTimeFormatterRef on AutoDisposeProviderRef<String> {
+  /// The parameter `inputDate` of this provider.
+  DateTime get inputDate;
+}
+
+class _DateTimeFormatterProviderElement
+    extends AutoDisposeProviderElement<String>
+    with DateTimeFormatterRef {
+  _DateTimeFormatterProviderElement(super.provider);
+
+  @override
+  DateTime get inputDate => (origin as DateTimeFormatterProvider).inputDate;
 }
 
 String _$stringToDateHash() => r'7706e5fec3f0b8255821a4d2e6fe1fc576e72936';

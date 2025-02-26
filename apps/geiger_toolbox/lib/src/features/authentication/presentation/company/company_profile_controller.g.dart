@@ -7,7 +7,7 @@ part of 'company_profile_controller.dart';
 // **************************************************************************
 
 String _$companyProfileControllerHash() =>
-    r'1b9c354d3b15655d4e298671beb1ef8179d22b01';
+    r'7e1fdbbbbd3bb2189f0e57119e6ba76e517ce0b7';
 
 /// See also [CompanyProfileController].
 @ProviderFor(CompanyProfileController)

@@ -43,6 +43,7 @@ class MainScreen extends ConsumerWidget {
       ),
       body: ResponsiveCenterScrollableWidget(
         controller: scrollController,
+        thumbVisibility: false,
         child: FeatureListView(
           scrollController: scrollController,
           onScanPressed: () {
@@ -71,6 +72,7 @@ class FeatureListView extends ConsumerWidget {
                   ? WelcomeScanIntroWidget(onScanPressed: onScanPressed)
                   : SingleChildScrollView(
                     controller: scrollController,
+
                     child: FeatureList(onScanPressed: onScanPressed),
                   ),
     );

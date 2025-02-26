@@ -6,11 +6,9 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
-
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/limit_todo_list.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_tile.dart';
-
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo.item.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
@@ -29,7 +27,7 @@ class TodoListWidget extends ConsumerWidget {
           (data) =>
               data.isEmpty
                   ? const SizedBox.shrink()
-                  : TodoList(
+                  : TodoContainer(
                     showAllTodos: () {
                       context.goNamed(AppRouter.todoRouter.name);
                     },
@@ -37,7 +35,7 @@ class TodoListWidget extends ConsumerWidget {
                         data
                             .expand(
                               (category) => category.offerings.map(
-                                (todo) => TodoListTile(
+                                (todo) => TodoItem(
                                   item: todo,
                                   onChanged: () {
                                     if (todo.status == Status.done) {
@@ -78,29 +76,37 @@ void showTodoDetails(BuildContext context, TodoOffering item) {
   );
 }
 
-class TodoList extends StatelessWidget {
-  const TodoList({super.key, required this.items, required this.displayLimit, required this.showAllTodos});
-  final List<TodoListTile> items;
+class TodoContainer extends StatelessWidget {
+  const TodoContainer({super.key, required this.items, required this.displayLimit, required this.showAllTodos});
+  final List<TodoItem> items;
   final int displayLimit;
 
   final VoidCallback showAllTodos;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appColors = theme.colorScheme;
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Label(text: "Todos".hardcoded, showAllItems: showAllTodos),
-          LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos),
-        ],
+      color: appColors.onInverseSurface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(Spacing.p8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ContainerLabel(text: "Todos".hardcoded, showAllItems: showAllTodos),
+            LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos),
+          ],
+        ),
       ),
     );
   }
 }
 
-class Label extends StatelessWidget {
-  const Label({super.key, required this.showAllItems, required this.text});
+class ContainerLabel extends StatelessWidget {
+  const ContainerLabel({super.key, required this.showAllItems, required this.text});
   final VoidCallback showAllItems;
   final String text;
   @override
@@ -129,7 +135,8 @@ class SeeAllText extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Divider(height: 1),
+        //commented out divider for now
+        //Divider(height: 1),
         AppTextButton.primary(context: context, label: "See All".hardcoded, onTap: seeAll),
       ],
     );

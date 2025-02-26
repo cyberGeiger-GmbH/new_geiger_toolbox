@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'date_formater.g.dart';
+part 'date_time_formatter.g.dart';
 
 @riverpod
-String formattedDate(Ref ref, {required String inputDate}) {
+String dateTimeStringFormatter(Ref ref, {required String inputDate}) {
   final dateString = _convertToStandard(inputDate);
   try {
     // when [inputeDate] formate is YYYY-MM-DD
@@ -20,6 +20,13 @@ String formattedDate(Ref ref, {required String inputDate}) {
     String formattedDate = DateFormat('EEEE, MMM. d y').format(parsedDate);
     return formattedDate;
   }
+}
+
+@riverpod
+String dateTimeFormatter(Ref ref, {required DateTime inputDate}) {
+  // Format the date to a user-friendly string
+  String formattedDate = DateFormat('E, MMM. d, y').format(inputDate);
+  return formattedDate;
 }
 
 @riverpod

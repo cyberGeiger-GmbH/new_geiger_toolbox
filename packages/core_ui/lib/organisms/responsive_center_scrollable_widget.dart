@@ -27,11 +27,13 @@ class ResponsiveCenterScrollableWidget extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.controller,
     required this.child,
+    this.thumbVisibility = true,
   });
   final double maxContentWidth;
   final EdgeInsetsGeometry padding;
   final ScrollController? controller;
   final Widget child;
+  final bool thumbVisibility;
   @override
   Widget build(BuildContext context) {
     return Listener(
@@ -50,6 +52,7 @@ class ResponsiveCenterScrollableWidget extends StatelessWidget {
       },
       child: Scrollbar(
         controller: controller,
+        thumbVisibility: thumbVisibility,
         child: Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: maxContentWidth),

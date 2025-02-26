@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/recommendations/recommendation_tile_list_widget.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
-import 'package:geiger_toolbox/src/utils/date_formater.dart';
+import 'package:geiger_toolbox/src/utils/date_time_formatter.dart';
 
 class NewsDetailsWidget extends StatelessWidget {
   const NewsDetailsWidget({super.key, required this.newsfeed});
@@ -26,7 +26,7 @@ class NewsDetailsWidget extends StatelessWidget {
               children: [
                 Consumer(
                   builder: (context, ref, child) {
-                    final formattedDate = ref.watch(formattedDateProvider(inputDate: newsfeed.dateCreated));
+                    final formattedDate = ref.watch(dateTimeStringFormatterProvider(inputDate: newsfeed.dateCreated));
                     return NewsContent(
                       summary: newsfeed.summary,
                       lastedUpdated: formattedDate,

@@ -20,6 +20,7 @@ class GeigerScaffold extends StatelessWidget {
     final appTheme = Theme.of(context);
     return Scaffold(
       backgroundColor: appTheme.colorScheme.surface,
+
       appBar: appBar,
       body:
           isGradient

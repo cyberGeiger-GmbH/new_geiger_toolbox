@@ -7,7 +7,7 @@ part of 'delete_company_profile_controller.dart';
 // **************************************************************************
 
 String _$deleteCompanyProfileControllerHash() =>
-    r'd40de46eaf58b0be69923a9eba845b6fedfbdeb1';
+    r'531fcceb83ae6de2768eead38555f4c3249ccabe';
 
 /// See also [DeleteCompanyProfileController].
 @ProviderFor(DeleteCompanyProfileController)

@@ -27,7 +27,7 @@ final getCompanyDescriptionProvider =
 // ignore: unused_element
 typedef GetCompanyDescriptionRef = AutoDisposeFutureProviderRef<String?>;
 String _$companyDescriptionControllerHash() =>
-    r'd91fa7e78d4f33d3f4d1676c5610ed49335c7363';
+    r'e37781a8425a3e9f769fe69e601a9d9e9710b649';
 
 /// See also [CompanyDescriptionController].
 @ProviderFor(CompanyDescriptionController)

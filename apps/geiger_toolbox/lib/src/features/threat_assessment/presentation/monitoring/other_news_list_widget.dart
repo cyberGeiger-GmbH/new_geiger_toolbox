@@ -10,7 +10,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monit
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
-import 'package:geiger_toolbox/src/utils/date_formater.dart';
+import 'package:geiger_toolbox/src/utils/date_time_formatter.dart';
 import 'package:go_router/go_router.dart';
 
 class PreviousNewsWidget extends ConsumerWidget {
@@ -40,7 +40,7 @@ class OlderNewsList extends StatelessWidget {
     return Card(
       child: Column(
         children: [
-          Label(showAllItems: () {}, text: "Other News".hardcoded),
+          ContainerLabel(showAllItems: () {}, text: "Other News".hardcoded),
           ShowLimitedTodos(displayLimit: limit, items: items),
           if (items.length > limit) SeeAllText(seeAll: () {}),
         ],
@@ -91,7 +91,7 @@ class OtherNews extends StatelessWidget {
       title: AppText.bodyMedium(text: title, context: context, textAlign: TextAlign.start),
       subtitle: Consumer(
         builder: (context, ref, child) {
-          final format = ref.watch(formattedDateProvider(inputDate: lastUpdated));
+          final format = ref.watch(dateTimeStringFormatterProvider(inputDate: lastUpdated));
           return HorizontalTitleContent(title: 'Last update'.hardcoded, source: format);
         },
       ),
