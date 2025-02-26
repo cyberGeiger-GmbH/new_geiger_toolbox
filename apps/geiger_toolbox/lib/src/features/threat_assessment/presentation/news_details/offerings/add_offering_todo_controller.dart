@@ -3,14 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
+import 'package:geiger_toolbox/src/mixin/notifier_mounted.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'add_offering_todo_controller.g.dart';
 
 @riverpod
-class AddOfferingTodoController extends _$AddOfferingTodoController {
+class AddOfferingTodoController extends _$AddOfferingTodoController with NotifierMounted {
   @override
-  FutureOr<void> build() {}
+  FutureOr<void> build() {
+    ref.onDispose(setUnmounted);
+  }
 
   /// add single OfferingStatus
   Future<void> addTodo({required TodoOffering status}) async {
@@ -29,12 +32,20 @@ class AddOfferingTodoController extends _$AddOfferingTodoController {
   }
 
   // add has a list
-  Future<void> addToActiveTodo({required List<TodoOffering> offeringsStatus}) async {
+  Future<void> addToActiveTodo({
+    required List<TodoOffering> offeringsStatus,
+    required void Function() onSuccess,
+  }) async {
     final repo = ref.read(todoOfferingRepoProvider);
     state = const AsyncLoading<void>();
 
-    //store the todoTask in cache
-    state = await AsyncValue.guard(() => repo.addListTodo(offerData: offeringsStatus));
+    if (mounted) {
+      debugPrint("is already mounted $mounted");
+      state = await AsyncValue.guard(() => repo.addListTodo(offerData: offeringsStatus));
+      if (state.hasError == false) {
+        onSuccess();
+      }
+    }
   }
 }
 

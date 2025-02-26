@@ -16,6 +16,7 @@ import 'package:geiger_toolbox/src/common_widgets/forms/custom_text_form_field.d
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:go_router/go_router.dart';
 
 class CompanyProfileFormWidget extends ConsumerStatefulWidget {
   const CompanyProfileFormWidget({super.key, this.onSubmit, this.companyData});
@@ -74,7 +75,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     final controller = ref.read(companyProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
     final company = Company(companyName: companyName, location: location, description: description!);
-    await controller.createCompanyProfile(company: company);
+    await controller.createCompanyProfile(company: company, onSuccess: context.pop);
   }
 
   Future<void> _updateProfile() async {
@@ -82,7 +83,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     final description = await ref.read(getCompanyDescriptionProvider.future);
 
     final data = Company(companyName: companyName, location: location, description: description!);
-    await controller.updateCompanyProfile(company: data);
+    await controller.updateCompanyProfile(company: data, onSuccess: context.pop);
   }
 
   //update company description

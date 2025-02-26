@@ -2,10 +2,12 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/content_item_container.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/offering_listing_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/offering_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/recommendations/recommenation_item.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:go_router/go_router.dart';
 
 class RecommendationListWidget extends StatelessWidget {
   const RecommendationListWidget({super.key, required this.recommendations});
@@ -14,7 +16,7 @@ class RecommendationListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RecommendationItemContainer(
+    return ContentItemContainer(
       items:
           recommendations.map((reco) {
             return RecommendationItem(
@@ -23,30 +25,12 @@ class RecommendationListWidget extends StatelessWidget {
                 showWoltModalBottomSheet(
                   context,
                   title: reco.name,
-                  page: RecommendedTodoListWidget(id: reco.id, rationale: reco.rationale),
+                  page: OfferingWidget(id: reco.id, rationale: reco.rationale),
                   stickyActionBar: AddAllTodoWidget(),
-                  horizontalPadding: Spacing.p8,
                 );
               },
             );
           }).toList(),
-    );
-  }
-}
-
-class RecommendationItemContainer extends StatelessWidget {
-  const RecommendationItemContainer({super.key, required this.items});
-  final List<RecommendationItem> items;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final appColors = theme.colorScheme;
-    return Card(
-      color: appColors.onInverseSurface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
-      margin: EdgeInsets.zero,
-      child: Column(mainAxisSize: MainAxisSize.min, children: items),
     );
   }
 }
@@ -61,10 +45,12 @@ class AddAllTodoWidget extends ConsumerWidget {
     // debugPrint("todos added $todos");
     return AppButton.tertiary(
       isLoading: state.isLoading,
-      label: "Add To todos ".hardcoded,
+      label: "Save  todos ".hardcoded,
       context: context,
       onPressed: () async {
-        await ref.read(addOfferingTodoControllerProvider.notifier).addToActiveTodo(offeringsStatus: todos);
+        await ref
+            .read(addOfferingTodoControllerProvider.notifier)
+            .addToActiveTodo(offeringsStatus: todos, onSuccess: context.pop);
       },
     );
   }

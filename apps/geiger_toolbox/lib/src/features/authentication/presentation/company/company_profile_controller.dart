@@ -1,6 +1,7 @@
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/company.dart';
+import 'package:geiger_toolbox/src/mixin/notifier_mounted.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,7 +16,7 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     });
   }
 
-  Future<void> createCompanyProfile({required Company company}) async {
+  Future<void> createCompanyProfile({required Company company, required void Function() onSuccess}) async {
     final companyRepo = ref.read(companyProfileRepositoryProvider);
     final userRepo = ref.read(userProfileRepositoryProvider);
     state = const AsyncLoading<void>();
@@ -27,15 +28,15 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     // final newState = await AsyncValue.guard(() => Future.delayed(const Duration(seconds: 5)));
 
     if (mounted) {
+      // * only set the state if the controller hasn't been disposed
       state = newState;
       if (newState.hasError == false) {
-        // get the GoRouter instance and call pop on it
-        ref.read(goRouterProvider).pop();
+        onSuccess();
       }
     }
   }
 
-  Future<void> updateCompanyProfile({required Company company}) async {
+  Future<void> updateCompanyProfile({required Company company, required void Function() onSuccess}) async {
     final companyRepo = ref.read(companyProfileRepositoryProvider);
     final userRepo = ref.read(userProfileRepositoryProvider);
     state = const AsyncLoading<void>();
@@ -48,17 +49,8 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     if (mounted) {
       state = newState;
       if (newState.hasError == false) {
-        // get the GoRouter instance and call pop on it
-        ref.read(goRouterProvider).pop();
+        onSuccess();
       }
     }
   }
-}
-
-mixin NotifierMounted {
-  bool _mounted = true;
-
-  void setUnmounted() => _mounted = false;
-
-  bool get mounted => _mounted;
 }

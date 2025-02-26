@@ -9,7 +9,7 @@ void showWoltModalBottomSheet(
   required String title,
   required Widget page,
   Widget? stickyActionBar,
-  double horizontalPadding = Spacing.p0,
+  double horizontalPadding = Spacing.p16,
   bool forceMaxHeight = true,
 }) {
   WoltModalSheet.show(
@@ -72,7 +72,7 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     forceMaxHeight: forceMaxHeight,
     enableDrag: false,
 
-    //  backgroundColor: appColors.surface,
+    backgroundColor: appColors.onInverseSurface,
     topBarTitle: AppText.headlineSmall(
       text: title,
       context: modalSheetContext,

@@ -2,14 +2,16 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/content_item_container.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/offering_item.dart';
 
-class RecommendedTodoListWidget extends ConsumerWidget {
-  const RecommendedTodoListWidget({super.key, required this.id, required this.rationale});
+class OfferingWidget extends ConsumerWidget {
+  const OfferingWidget({super.key, required this.id, required this.rationale});
   final RecommendationID id;
   final String rationale;
   @override
@@ -18,43 +20,18 @@ class RecommendedTodoListWidget extends ConsumerWidget {
     ref.listen(addOfferingTodoControllerProvider, (_, nxtState) => nxtState.showAlertDialogOnError(context: context));
 
     final offering = ref.watch(fetchOfferStatusProvider(id: id));
-
+    final appColors = Theme.of(context).colorScheme;
     return AsyncValueWidget(
       value: offering,
       data:
           (data) =>
               data.isEmpty
                   ? Center(child: EmptyContent(message: "No Offerings found", title: "Info"))
-                  : TodoTileList(
-                    todoTile: data.map((offer) => RecommendedTodoWidget(key: key, offer: offer)).toList(),
-                    rationale: rationale,
+                  : ContentItemContainer(
+                    backgroundColor: appColors.surface,
+                    items: data.map((offer) => OfferingItem(key: key, offer: offer)).toList(),
+                    explanation: rationale,
                   ),
     );
-  }
-}
-
-class RecommendedTodoWidget extends ConsumerWidget {
-  const RecommendedTodoWidget({super.key, required this.offer});
-
-  final TodoOffering offer;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(toggleOfferControllerProvider(offer));
-
-    return TodoTile.plain(
-      key: key,
-      summary: offer.offering.summary,
-      title: offer.offering.name,
-      done: state.status == Status.planned,
-
-      onChange: (value) async {
-        //to update the ui
-        ref.read(toggleOfferControllerProvider(offer).notifier).onChange(offer.copyWith(status: Status.planned));
-
-        //add to a todo list
-        ref.read(toggleListOfferControllerProvider.notifier).selectTodoItems(state.copyWith(status: Status.planned));
-      },
-    ); // only all to activeTodo
   }
 }

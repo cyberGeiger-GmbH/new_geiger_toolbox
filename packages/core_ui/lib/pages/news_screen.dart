@@ -88,7 +88,7 @@ class NewsScreen extends StatelessWidget {
             lastedUpdated: "2024-12-12",
           ),
           Spacing.gapH16,
-          RecommendationTitleList(title: "How to protect me?", protectionTileList: _getProtectionTileList(context)),
+          RecommendationTitleList(title: "How to protect me?",recommendations: _getProtectionTileList(context)),
         ],
       ),
     );
