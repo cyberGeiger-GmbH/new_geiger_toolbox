@@ -8,6 +8,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offeri
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/limit_todo_list.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_controller.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_details.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_item.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
@@ -62,19 +63,19 @@ void showTodoDetails(BuildContext context, TodoOffering item) {
     context,
     title: item.offering.name,
     forceMaxHeight: false,
+
     page: Column(
       children: [
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.3, // Use 40% of screen height
-          child: Padding(
-            padding: const EdgeInsets.all(Spacing.p16),
-            child: AppText.bodySmall(text: item.offering.summary, context: context),
-          ),
+          child: TodoDetails(item: item),
         ),
       ],
     ),
   );
 }
+
+
 
 class TodoContainer extends StatelessWidget {
   const TodoContainer({super.key, required this.items, required this.displayLimit, required this.showAllTodos});

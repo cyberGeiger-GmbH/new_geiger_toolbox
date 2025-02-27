@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
@@ -36,14 +37,10 @@ class GeigerScoreWidget extends ConsumerWidget {
                             context,
                             title: "GEIGER Score",
                             forceMaxHeight: false,
-                            mainContent: Padding(
-                              padding: const EdgeInsets.all(Spacing.p8),
-                              child: ShowScoreReason(
-                                align: TextAlign.center,
-                                reason: data.reason,
-                                status: data.status,
-                               
-                              ),
+                            mainContent: ShowScoreReason(
+                              align: TextAlign.center,
+                              reason: data.reason,
+                              status: data.status.toTitleCase,
                             ),
                           );
                         },
@@ -86,6 +83,30 @@ class _ScoreContent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 15, right: 10, left: 10),
       child: Text(score, style: textStyle, textAlign: TextAlign.center),
+    );
+  }
+}
+
+class ShowScoreReason extends StatelessWidget {
+  const ShowScoreReason({super.key, required this.reason, required this.status, this.align});
+  final String reason;
+  final String status;
+
+  final TextAlign? align;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).width * 0.35,
+      child: RichText(
+        text: TextSpan(
+          style: theme.textTheme.bodySmall,
+          children: [
+            TextSpan(text: "$status: ", style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
+            TextSpan(text: reason),
+          ],
+        ),
+      ),
     );
   }
 }

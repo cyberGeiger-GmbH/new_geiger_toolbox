@@ -11,6 +11,7 @@ void showWoltModalBottomSheet(
   Widget? stickyActionBar,
   double horizontalPadding = Spacing.p16,
   bool forceMaxHeight = true,
+  Color? backgroundColor,
 }) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.bottomSheet(),
@@ -26,6 +27,7 @@ void showWoltModalBottomSheet(
           stickyActionBar: stickyActionBar,
           forceMaxHeight: forceMaxHeight,
           horizontalPadding: horizontalPadding,
+          backgroundColor: backgroundColor,
         ),
       ];
     },
@@ -37,7 +39,7 @@ void showWoltAlertDialog(
   required String title,
   required Widget mainContent,
   bool forceMaxHeight = true,
-  double horizontalPadding = Spacing.p0,
+  double horizontalPadding = Spacing.p16,
 }) {
   WoltModalSheet.show(
     modalTypeBuilder: (context) => WoltModalType.alertDialog(),
@@ -64,6 +66,7 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
   required Widget mainContent,
   Widget? stickyActionBar,
   bool forceMaxHeight = true,
+  Color? backgroundColor,
   required double horizontalPadding,
 }) {
   final appColors = Theme.of(modalSheetContext).colorScheme;
@@ -72,7 +75,7 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     forceMaxHeight: forceMaxHeight,
     enableDrag: false,
 
-    backgroundColor: appColors.onInverseSurface,
+    backgroundColor: backgroundColor ?? appColors.onInverseSurface,
     topBarTitle: AppText.headlineSmall(
       text: title,
       context: modalSheetContext,

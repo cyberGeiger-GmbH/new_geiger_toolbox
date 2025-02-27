@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
-import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
-import 'package:geiger_toolbox/src/utils/date_time_formatter.dart';
+
 
 class TodoItem extends StatelessWidget {
   final TodoOffering item;
@@ -61,29 +61,14 @@ class TodoContent extends StatelessWidget {
             textAlign: TextAlign.start,
             textRemoved: item.status == Status.done,
           ),
-          TodoLastUpdated(lastUpdated: item.lastUpdated!),
+          LastUpdatedWidget(lastUpdated: item.lastUpdated!),
         ],
       ),
     );
   }
 }
 
-class TodoLastUpdated extends ConsumerWidget {
-  const TodoLastUpdated({super.key, required this.lastUpdated});
-  final DateTime lastUpdated;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
 
-    final formattedDate = ref.watch(timeAgoProvider(timestamp: lastUpdated));
-    return RichText(
-      text: TextSpan(
-        style: theme.textTheme.labelSmall?.copyWith(color: theme.hintColor),
-        children: [TextSpan(text: "Updated: ".hardcoded), TextSpan(text: formattedDate)],
-      ),
-    );
-  }
-}
 
 class TodoCheckbox extends StatelessWidget {
   const TodoCheckbox({super.key, required this.onChanged, required this.status});
