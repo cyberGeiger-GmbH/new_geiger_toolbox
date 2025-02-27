@@ -2,6 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
@@ -86,12 +87,8 @@ class TodoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final appColors = theme.colorScheme;
-    return Card(
-      color: appColors.onInverseSurface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
-      margin: EdgeInsets.zero,
+    return GeigerCard(
+    
       child: Padding(
         padding: const EdgeInsets.all(Spacing.p8),
         child: Column(

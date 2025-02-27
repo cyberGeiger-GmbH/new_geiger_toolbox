@@ -19,5 +19,6 @@ class RemoteGeigerScoreRepository {
 @riverpod
 Future<GeigerScore?> getGeigerScore(Ref ref, {required UserProfileModel userProfile}) {
   final instance = RemoteGeigerScoreRepository(ref);
+  
   return instance.geigerScore(profile: userProfile);
 }

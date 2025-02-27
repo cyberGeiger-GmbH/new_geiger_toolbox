@@ -13,18 +13,14 @@ class WelcomeScanIntroWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isScanning = ref.watch(scanButtonControllerProvider);
-    return ResponsiveCenterWidget(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const GeigerScoreWidget(),
-          ScanButtonWidget(onScanPressed: onScanPressed),
-          Spacing.gapH12,
-          WelcomeNoteWidget(isScanning: isScanning.isLoading),
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const GeigerScoreWidget(),
+        ScanButtonWidget(onScanPressed: onScanPressed),
+        Spacing.gapH12,
+        WelcomeNoteWidget(isScanning: isScanning.isLoading),
+      ],
     );
   }
 }

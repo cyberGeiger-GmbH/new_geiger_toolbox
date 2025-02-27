@@ -11,7 +11,8 @@ class AppAssetImageData with _$AppAssetImageData {
 
   factory AppAssetImageData({required Image image}) = _AppAssetImageData;
 
-  factory AppAssetImageData.geigerLogo() => AppAssetImageData(image: Assets.images.appIcon.image(height: 130, width: 130));
+  factory AppAssetImageData.geigerLogo({double? size}) =>
+      AppAssetImageData(image: Assets.images.appIcon.image(height: size , width: size));
 
   factory AppAssetImageData.logoIcon() => AppAssetImageData(image: Assets.images.appIcon.image(height: 40, width: 40));
 

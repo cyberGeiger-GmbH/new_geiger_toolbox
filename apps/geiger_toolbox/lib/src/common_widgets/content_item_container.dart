@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
 
 class ContentItemContainer extends StatelessWidget {
   const ContentItemContainer({super.key, required this.items, this.explanation, this.backgroundColor});
@@ -8,15 +9,10 @@ class ContentItemContainer extends StatelessWidget {
   final Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final appColors = theme.colorScheme;
     return Column(
       children: [
-        Card(
-          color: backgroundColor ?? appColors.onInverseSurface,
-          elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
-          margin: EdgeInsets.zero,
+        GeigerCard(
+       
           child: Column(mainAxisSize: MainAxisSize.min, children: items),
         ),
         if (explanation != null) ContentItemContainerWithExplanation(explanation: explanation!),

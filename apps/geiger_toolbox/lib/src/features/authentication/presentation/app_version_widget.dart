@@ -27,7 +27,7 @@ class AppVersionWidget extends ConsumerWidget {
               ),
             ),
             TextSpan(text: "Version: "),
-            TextSpan(text: "${appVersion.requireValue.version} (${appVersion.value?.buildNumber})"),
+            TextSpan(text: "${appVersion.requireValue.version} (${appVersion.requireValue.buildNumber})"),
           ],
         ),
       ),

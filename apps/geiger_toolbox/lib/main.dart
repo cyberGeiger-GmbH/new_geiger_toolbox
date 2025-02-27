@@ -79,7 +79,7 @@ void registerErroHandlers(AppLogger errorLogger) {
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.red, title: Text("An error occurred".hardcoded)),
-      body: ErrorMessage(errorMessage: "$details"),
+      body: ErrorMessage(message: "$details"),
     );
   };
 }

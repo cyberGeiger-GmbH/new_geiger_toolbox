@@ -95,15 +95,37 @@ class AppStartUpLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    // Set icon size relative to screen size (example: 20% of the smaller dimension)
+    double imageSize = (screenWidth < screenHeight ? screenWidth : screenHeight) * 0.6;
     return GeigerScaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(child: ResponsiveCenterWidget(child: AppAssetImageData.geigerLogo().image)),
-          Spacing.gapH22,
-          const CircularProgressIndicator(),
-          Spacing.gapH22,
+          Expanded(child: ResponsiveCenterWidget(child: AppAssetImageData.geigerLogo(size: imageSize).image)),
+          const CircularProgressIndicator.adaptive(),
+          const OwnershipTextWidget(),
+        ],
+      ),
+    );
+  }
+}
+
+class OwnershipTextWidget extends StatelessWidget {
+  const OwnershipTextWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        style: theme.textTheme.bodySmall,
+        children: [
+          TextSpan(text: "from\n".hardcoded),
+          TextSpan(text: "cyberGEIGER GmbH", style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -117,19 +139,12 @@ class AppStartUpErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final appColors = Theme.of(context).colorScheme;
-
     return GeigerScaffold(
-      //backgroundColor: appColors.surface,
       appBar: const GeigerAppBar(),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
-            ErrorMessage(errorMessage: message),
-            Spacing.gapH16,
-            AppButton.secondary(label: "Retry".hardcoded, context: context, onPressed: onRetry),
-          ],
+          children: [ErrorMessage(message: message, onRetry: onRetry, retryLabel: "Retry".hardcoded), Spacing.gapH16],
         ),
       ),
     );

@@ -24,9 +24,10 @@ class GeigerScoreRepository {
 
   Future<GeigerScore?> fetchGeigerScore({required UserProfileModel userProfile}) async {
     final dio = _ref.read(dioProvider);
-    final log = _ref.read(logHandlerProvider("fetchGeigerScore:"));
+    final log = _ref.read(logHandlerProvider("fetchGeigerScore:", packageName: "conversational_agent_client"));
 
     try {
+      //throw Exception("test");
       final Uri uri = Uri.https(Base.url, Base.geigerScorePath);
 
       final Response response = await dio.getUri(
@@ -51,7 +52,7 @@ class GeigerScoreRepository {
       throw DioException(requestOptions: RequestOptions(data: userProfile), error: e);
     } catch (e, s) {
       log.e("failed to get => $e, stack => $s");
-      throw GeigerScoreException();
+      rethrow;
     }
   }
 }

@@ -3,6 +3,8 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
+import 'package:geiger_toolbox/src/common_widgets/snack_bar.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_controller.dart';
@@ -17,11 +19,42 @@ class GeigerScoreWidget extends ConsumerWidget {
     final scoreValue = ref.watch(watchGeigerScoreProvider);
     final state = ref.watch(geigerScoreControllerProvider);
 
+    final theme = Theme.of(context);
+
+    //listen to the scan button controller provider for scan complete
     ref.listen(scanButtonControllerProvider, (_, newV) {
       ref.read(geigerScoreControllerProvider.notifier).onScanComplete(scanPressState: newV);
     });
 
-    return state.isLoading
+    //listen to the geiger score controller provider for error
+    ref.listen(geigerScoreControllerProvider, (_, newV) {
+      ref.read(scoreErrorProvider.notifier).onCalculateError(calculateState: newV);
+    });
+
+    //show error snackbar
+    ref.listen(scoreErrorProvider, (_, newV) {
+      if (newV) {
+        showSnackBar(
+          context: context,
+          content: "Error still persist please, contact the support team",
+          backgroundColor: theme.colorScheme.errorContainer,
+          duration: 6,
+        );
+      }
+    });
+
+    final errorState = ref.watch(scoreErrorProvider);
+
+    return errorState
+        ? GeigerCard(
+          child: ErrorMessage(
+            message: "Failed to calculate score",
+            onRetry: () async {
+              await ref.read(geigerScoreControllerProvider.notifier).calculateGeigerScore();
+            },
+          ),
+        )
+        : state.isLoading
         ? AppText.titleMedium(text: "Calculating Score....", context: context)
         : AsyncValueWidget(
           value: scoreValue,

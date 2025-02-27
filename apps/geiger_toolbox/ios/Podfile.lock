@@ -116,7 +116,7 @@ PODS:
   - Mixpanel-swift (4.3.0):
     - Mixpanel-swift/Complete (= 4.3.0)
   - Mixpanel-swift/Complete (4.3.0)
-  - mixpanel_flutter (2.3.3):
+  - mixpanel_flutter (2.3.4):
     - Flutter
     - Mixpanel-swift (= 4.3.0)
   - nanopb (3.30910.0):
@@ -247,7 +247,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: fc0817122bd4d4189164f85374e06773b9561896
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   Mixpanel-swift: 2192b9a24cf41b870749e4e0e10fbc9822bb2b4a
-  mixpanel_flutter: d84097a22c87f32fbe1c7f4991c8c357f18016c1
+  mixpanel_flutter: a3c76135610714c50f64ccdc09a1c66cf9be546b
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
