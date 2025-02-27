@@ -12,19 +12,21 @@ class DismissibleTodo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appColorScheme = theme.colorScheme;
     return Dismissible(
       key: Key(item.id),
       background: Container(
-        color: Colors.green,
+        color: appColorScheme.primary,
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Icon(Icons.check, color: Colors.white),
+        child: Icon(Icons.check_circle_outline, color: appColorScheme.onPrimary),
       ),
       secondaryBackground: Container(
-        color: Colors.red,
+        color: appColorScheme.error,
         alignment: Alignment.centerRight,
         padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Icon(Icons.delete, color: Colors.white),
+        child: Icon(Icons.remove_circle_outline, color: appColorScheme.onPrimary),
       ),
       confirmDismiss: onDismissed,
       child: child,
