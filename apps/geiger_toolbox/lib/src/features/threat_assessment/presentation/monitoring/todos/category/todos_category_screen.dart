@@ -13,13 +13,12 @@ class TodosCategoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref.watch(watchTodosProvider);
-    return Scaffold(
+    return GeigerScaffold(
       appBar: GeigerAppBar(title: "Todos".hardcoded),
       body: AsyncValueWidget(value: todos, data: (data) => TodoCategoryCardList(categories: data)),
     );
   }
 }
-
 
 
 class TodoCategoryCardList extends ConsumerWidget {

@@ -96,15 +96,17 @@ class ShowScoreReason extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).width * 0.35,
-      child: RichText(
-        text: TextSpan(
-          style: theme.textTheme.bodySmall,
-          children: [
-            TextSpan(text: "$status: ", style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
-            TextSpan(text: reason),
-          ],
+    return ResponsiveCenterWidget(
+      child: SizedBox(
+        height: MediaQuery.sizeOf(context).width * 0.3,
+        child: RichText(
+          text: TextSpan(
+            style: theme.textTheme.bodySmall,
+            children: [
+              TextSpan(text: "$status: ", style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold)),
+              TextSpan(text: reason),
+            ],
+          ),
         ),
       ),
     );

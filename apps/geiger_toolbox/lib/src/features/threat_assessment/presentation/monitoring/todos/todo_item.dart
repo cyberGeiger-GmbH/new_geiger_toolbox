@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
-
 class TodoItem extends StatelessWidget {
   final TodoOffering item;
   final VoidCallback onChanged;
@@ -25,7 +24,6 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       child: Padding(
@@ -49,17 +47,24 @@ class TodoContent extends StatelessWidget {
   final VoidCallback showDetails;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appColorScheme = theme.colorScheme;
     return GestureDetector(
       onTap: showDetails,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText.bodyMedium(
+          AppText.bodySmall(
             text: item.offering.name,
-            color: item.status == Status.done ? Colors.grey : Colors.black,
+
             context: context,
             textAlign: TextAlign.start,
-            textRemoved: item.status == Status.done,
+
+            textStyle: theme.textTheme.bodyMedium?.copyWith(
+              color: item.status == Status.done ? theme.hintColor : appColorScheme.onSurface,
+              decoration: item.status == Status.done ? TextDecoration.lineThrough : TextDecoration.none,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           LastUpdatedWidget(lastUpdated: item.lastUpdated!),
         ],
@@ -67,8 +72,6 @@ class TodoContent extends StatelessWidget {
     );
   }
 }
-
-
 
 class TodoCheckbox extends StatelessWidget {
   const TodoCheckbox({super.key, required this.onChanged, required this.status});
@@ -92,7 +95,7 @@ class TodoCheckbox extends StatelessWidget {
         : IconButton(
           padding: EdgeInsets.zero,
           icon: Icon(
-            status == Status.done ? Icons.check_circle : Icons.circle,
+            status == Status.done ? Icons.check_circle : Icons.circle_outlined,
             color: status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
             size: 28,
           ),

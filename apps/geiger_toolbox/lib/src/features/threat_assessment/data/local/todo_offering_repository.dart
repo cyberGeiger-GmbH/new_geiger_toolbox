@@ -50,6 +50,7 @@ class TodoOfferingRepository {
       final todoOffer = TodoOfferingsCompanion(
         offeringId: Value(id),
         offeringStatus: Value(todoToOfferingStatus(status)),
+        lastUpdated: Value(DateTime.now()),
       );
 
       /// update the todoOffer status
@@ -72,6 +73,7 @@ class TodoOfferingRepository {
           final todoOffer = TodoOfferingsCompanion(
             offeringId: Value(data.id),
             offeringStatus: Value(todoToOfferingStatus(data.status)),
+            lastUpdated: Value(DateTime.now()),
           );
 
           /// insert or update the todoOffer status
@@ -113,7 +115,7 @@ class TodoOfferingRepository {
           id: offeringEntry.id,
           offering: offering,
           status: status,
-          dateRecommendated:  offeringEntry.dateRecommendated,
+          dateRecommendated: offeringEntry.dateRecommendated,
           lastUpdated: todoOfferingEntry.lastUpdated,
         );
 
