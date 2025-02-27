@@ -6,7 +6,7 @@ import 'package:geiger_toolbox/src/common_widgets/content_item_container.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/offering_item.dart';
 

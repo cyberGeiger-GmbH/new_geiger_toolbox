@@ -47,6 +47,23 @@ DateTime stringToDate(Ref ref, {required String inputDate}) {
 }
 
 @riverpod
+String timeAgo(Ref ref, {required DateTime timestamp}) {
+  Duration difference = DateTime.now().difference(timestamp);
+
+  if (difference.inSeconds < 60) {
+    return "now";
+  } else if (difference.inMinutes < 60) {
+    return "${difference.inMinutes} min ago";
+  } else if (difference.inHours < 24) {
+    return "${difference.inHours} hour${difference.inHours > 1 ? 's' : ''} ago";
+  } else if (difference.inDays < 7) {
+    return "${difference.inDays} day${difference.inDays > 1 ? 's' : ''} ago";
+  } else {
+    return DateFormat('E, MMM. d, y').format(timestamp);
+  }
+}
+
+@riverpod
 DateTime previousMonth(Ref ref, {int month = 6}) {
   assert(month > 0, 'month must be greater than 0.');
   // Get the date 6 months ago

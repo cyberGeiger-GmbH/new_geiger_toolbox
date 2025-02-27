@@ -7,15 +7,17 @@ import 'package:geiger_toolbox/src/features/authentication/data/company_profile_
 import 'package:geiger_toolbox/src/features/authentication/domain/company.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_description_controller.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_description_widget.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/widgets/company_description_widget.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_profile_controller.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/widgets/confirmation_button_widget.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/profile_screen_controller.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/validators/company_name_location_validators.dart';
 import 'package:geiger_toolbox/src/common_widgets/forms/custom_text_form_field.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/presentation/user_profile_screen.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
+import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
 class CompanyProfileFormWidget extends ConsumerStatefulWidget {
@@ -71,11 +73,22 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     }
   }
 
+  //* on success, if the user has skipped the profile screen, we need to pop the current screen
+  void _onSuccess() {
+    final skip = ref.read(profileScreenControllerProvider);
+    if (!skip) {
+      ref.read(profileScreenControllerProvider.notifier).skip(true);
+      context.goNamed(AppRouter.mainRouter.name);
+    } else {
+      context.pop();
+    }
+  }
+
   Future<void> _createProfile() async {
     final controller = ref.read(companyProfileControllerProvider.notifier);
     final description = await ref.read(getCompanyDescriptionProvider.future);
     final company = Company(companyName: companyName, location: location, description: description!);
-    await controller.createCompanyProfile(company: company, onSuccess: context.pop);
+    await controller.createCompanyProfile(company: company, onSuccess: _onSuccess);
   }
 
   Future<void> _updateProfile() async {
@@ -83,7 +96,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     final description = await ref.read(getCompanyDescriptionProvider.future);
 
     final data = Company(companyName: companyName, location: location, description: description!);
-    await controller.updateCompanyProfile(company: data, onSuccess: context.pop);
+    await controller.updateCompanyProfile(company: data, onSuccess: _onSuccess);
   }
 
   //update company description

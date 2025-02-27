@@ -393,6 +393,121 @@ class _StringToDateProviderElement extends AutoDisposeProviderElement<DateTime>
   String get inputDate => (origin as StringToDateProvider).inputDate;
 }
 
+String _$timeAgoHash() => r'fba697b3aaad0277e5d1c8940ddf3cd9c6befbe9';
+
+/// See also [timeAgo].
+@ProviderFor(timeAgo)
+const timeAgoProvider = TimeAgoFamily();
+
+/// See also [timeAgo].
+class TimeAgoFamily extends Family<String> {
+  /// See also [timeAgo].
+  const TimeAgoFamily();
+
+  /// See also [timeAgo].
+  TimeAgoProvider call({required DateTime timestamp}) {
+    return TimeAgoProvider(timestamp: timestamp);
+  }
+
+  @override
+  TimeAgoProvider getProviderOverride(covariant TimeAgoProvider provider) {
+    return call(timestamp: provider.timestamp);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'timeAgoProvider';
+}
+
+/// See also [timeAgo].
+class TimeAgoProvider extends AutoDisposeProvider<String> {
+  /// See also [timeAgo].
+  TimeAgoProvider({required DateTime timestamp})
+    : this._internal(
+        (ref) => timeAgo(ref as TimeAgoRef, timestamp: timestamp),
+        from: timeAgoProvider,
+        name: r'timeAgoProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$timeAgoHash,
+        dependencies: TimeAgoFamily._dependencies,
+        allTransitiveDependencies: TimeAgoFamily._allTransitiveDependencies,
+        timestamp: timestamp,
+      );
+
+  TimeAgoProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.timestamp,
+  }) : super.internal();
+
+  final DateTime timestamp;
+
+  @override
+  Override overrideWith(String Function(TimeAgoRef provider) create) {
+    return ProviderOverride(
+      origin: this,
+      override: TimeAgoProvider._internal(
+        (ref) => create(ref as TimeAgoRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        timestamp: timestamp,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<String> createElement() {
+    return _TimeAgoProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is TimeAgoProvider && other.timestamp == timestamp;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, timestamp.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin TimeAgoRef on AutoDisposeProviderRef<String> {
+  /// The parameter `timestamp` of this provider.
+  DateTime get timestamp;
+}
+
+class _TimeAgoProviderElement extends AutoDisposeProviderElement<String>
+    with TimeAgoRef {
+  _TimeAgoProviderElement(super.provider);
+
+  @override
+  DateTime get timestamp => (origin as TimeAgoProvider).timestamp;
+}
+
 String _$previousMonthHash() => r'6103e97e804fe99e3282f7bd70e4bbedfc09e3e9';
 
 /// See also [previousMonth].

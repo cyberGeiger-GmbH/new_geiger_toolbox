@@ -26,18 +26,13 @@ class TodoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: Spacing.p8),
         child: Row(
           children: [
-            TodoCheckbox(
-              onChanged: onChanged,
-              status: item.status,
-              color: item.status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
-            ),
+            TodoCheckbox(onChanged: onChanged, status: item.status),
             Spacing.gapW4,
             Expanded(child: TodoContent(item: item, showDetails: showDetails)),
             IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
@@ -80,7 +75,7 @@ class TodoLastUpdated extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
 
-    final formattedDate = ref.watch(dateTimeFormatterProvider(inputDate: lastUpdated));
+    final formattedDate = ref.watch(timeAgoProvider(timestamp: lastUpdated));
     return RichText(
       text: TextSpan(
         style: theme.textTheme.labelSmall?.copyWith(color: theme.hintColor),
@@ -91,9 +86,9 @@ class TodoLastUpdated extends ConsumerWidget {
 }
 
 class TodoCheckbox extends StatelessWidget {
-  const TodoCheckbox({super.key, required this.onChanged, required this.status, this.color});
+  const TodoCheckbox({super.key, required this.onChanged, required this.status});
   final Status status;
-  final Color? color;
+
   final VoidCallback onChanged;
   @override
   Widget build(BuildContext context) {

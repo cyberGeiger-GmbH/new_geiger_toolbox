@@ -13,17 +13,27 @@ class OfferingItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(toggleOfferControllerProvider(offer));
-
+    final theme = Theme.of(context);
     return ListTile(
       key: key,
       title: AppText.bodySmall(
         text: offer.offering.name,
         context: context,
-        textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700),
+
+        textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+          fontWeight: FontWeight.w700,
+          decoration: state.status == Status.done ? TextDecoration.lineThrough : null,
+          color: state.status == Status.done ? theme.hintColor : null,
+        ),
       ),
-      subtitle: AppText.bodySmall(text: offer.offering.summary, context: context),
+      subtitle: AppText.bodySmall(
+        text: offer.offering.summary,
+        context: context,
+        lintThrough: state.status == Status.done,
+        color: state.status == Status.done ? theme.hintColor : null,
+      ),
       trailing: CustomCheckbox(
-        value: state.status == Status.planned,
+        value: state.status == Status.planned || state.status == Status.done,
         onChanged: (value) {
           //to update the ui
           ref.read(toggleOfferControllerProvider(offer).notifier).onChange(offer.copyWith(status: Status.planned));

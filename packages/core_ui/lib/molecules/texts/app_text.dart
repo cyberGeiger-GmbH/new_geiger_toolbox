@@ -260,7 +260,7 @@ class AppText extends StatelessWidget {
     TextAlign? textAlign,
     Color? color,
     TextOverflow? textOverflow,
-    bool textRemoved = false,
+    bool lintThrough = false,
     TextStyle? textStyle,
   }) => AppText._(
     key: key,
@@ -269,7 +269,7 @@ class AppText extends StatelessWidget {
         textStyle ??
         _appTextStyles(
           context,
-        ).bodySmall!.copyWith(color: color, decoration: textRemoved ? TextDecoration.lineThrough : null),
+        ).bodySmall!.copyWith(color: color, decoration: lintThrough ? TextDecoration.lineThrough : null),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );

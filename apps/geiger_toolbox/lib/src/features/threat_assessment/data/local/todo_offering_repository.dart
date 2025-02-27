@@ -104,17 +104,17 @@ class TodoOfferingRepository {
       for (final row in rows) {
         final recommendationEntry = row.readTable(_db.recommendations);
         final offeringEntry = row.readTable(_db.recommendationOfferings);
-        final todofferingEntry = row.readTableOrNull(_db.todoOfferings);
+        final todoOfferingEntry = row.readTableOrNull(_db.todoOfferings);
 
         final offering = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
-        final status = offeringToTodoStatus(todofferingEntry!.offeringStatus);
+        final status = offeringToTodoStatus(todoOfferingEntry!.offeringStatus);
 
         final todos = TodoOffering(
           id: offeringEntry.id,
           offering: offering,
           status: status,
-          dateRecommendated: offeringEntry.dateRecommendated,
-          lastUpdated: todofferingEntry.lastUpdated,
+          dateRecommendated:  offeringEntry.dateRecommendated,
+          lastUpdated: todoOfferingEntry.lastUpdated,
         );
 
         // Group offerings by category name
