@@ -6,7 +6,7 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_controller.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/score_message_widget.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 
 class GeigerScoreWidget extends ConsumerWidget {

@@ -35,11 +35,27 @@ class OfferingItem extends ConsumerWidget {
       trailing: CustomCheckbox(
         value: state.status == Status.planned || state.status == Status.done,
         onChanged: (value) {
-          //to update the ui
-          ref.read(toggleOfferControllerProvider(offer).notifier).onChange(offer.copyWith(status: Status.planned));
+          debugPrint("onChanged: $value");
 
-          //add to a todo list
-          ref.read(toggleListOfferControllerProvider.notifier).selectTodoItems(state.copyWith(status: Status.planned));
+          if (value != null && value) {
+            //to update the ui
+            ref.read(toggleOfferControllerProvider(offer).notifier).onChange(offer.copyWith(status: Status.planned));
+
+            //add to a todo list
+            ref
+                .read(toggleListOfferControllerProvider.notifier)
+                .selectTodoItems(state.copyWith(status: Status.planned));
+          } else {
+            //to update the ui
+            ref
+                .read(toggleOfferControllerProvider(offer).notifier)
+                .onChange(offer.copyWith(status: Status.recommended));
+
+            //add to a todo list
+            ref
+                .read(toggleListOfferControllerProvider.notifier)
+                .selectTodoItems(state.copyWith(status: Status.recommended));
+          }
         },
       ),
     );

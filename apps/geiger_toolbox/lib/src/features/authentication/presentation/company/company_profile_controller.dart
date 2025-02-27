@@ -2,7 +2,6 @@ import 'package:geiger_toolbox/src/features/authentication/data/company_profile_
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/company.dart';
 import 'package:geiger_toolbox/src/mixin/notifier_mounted.dart';
-import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'company_profile_controller.g.dart';

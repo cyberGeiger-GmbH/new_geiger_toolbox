@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/app_version_widget.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/delete/delete_profile_widget.dart';

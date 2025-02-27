@@ -1,5 +1,4 @@
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
-import 'package:geiger_toolbox/src/mixin/notifier_mounted.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
