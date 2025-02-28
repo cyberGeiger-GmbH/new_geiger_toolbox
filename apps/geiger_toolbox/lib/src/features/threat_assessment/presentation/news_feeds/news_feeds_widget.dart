@@ -15,11 +15,10 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
-import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
 import 'package:geiger_toolbox/src/utils/helpers/carousel_helper.dart';
 import 'package:geiger_toolbox/src/utils/helpers/helpers_functions.dart';
-import 'package:go_router/go_router.dart';
+
 
 class NewsFeedsWidget extends ConsumerWidget {
   NewsFeedsWidget({super.key, this.limitNewsFeedDisplay = 5});
