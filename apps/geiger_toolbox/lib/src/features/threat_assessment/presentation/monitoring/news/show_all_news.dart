@@ -7,8 +7,8 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monit
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/news/news_item.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
-class ShowAllNewsWidget extends ConsumerWidget {
-  const ShowAllNewsWidget({super.key});
+class _ShowAllNewsWidget extends ConsumerWidget {
+  const _ShowAllNewsWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,5 +38,5 @@ class ShowAllNewsWidget extends ConsumerWidget {
 }
 
 void showAlllNewsBottomSheet(BuildContext context) {
-  showWoltModalBottomSheet(context, title: "All News".hardcoded, page: const ShowAllNewsWidget());
+  showWoltModalBottomSheet(context, title: "All News".hardcoded, page: const _ShowAllNewsWidget());
 }

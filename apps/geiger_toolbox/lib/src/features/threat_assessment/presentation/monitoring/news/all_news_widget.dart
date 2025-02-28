@@ -18,7 +18,7 @@ class AllNewsWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final newsValue = ref.watch(watchOldNewsFeedsProvider);
 
-    final int limitView = 6;
+    final int limitView = 5;
 
     //only show previous that is not currrently in the Carousel
     return AsyncValueWidget(
@@ -26,6 +26,8 @@ class AllNewsWidget extends ConsumerWidget {
       data:
           (value) =>
               value.isEmpty
+                  ? const SizedBox.shrink()
+                  : value.length <= limitView
                   ? const SizedBox.shrink()
                   : NewsContainer(
                     limit: 2,

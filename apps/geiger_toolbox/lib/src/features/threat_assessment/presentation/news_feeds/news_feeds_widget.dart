@@ -19,7 +19,6 @@ import 'package:geiger_toolbox/src/utils/constants.dart';
 import 'package:geiger_toolbox/src/utils/helpers/carousel_helper.dart';
 import 'package:geiger_toolbox/src/utils/helpers/helpers_functions.dart';
 
-
 class NewsFeedsWidget extends ConsumerWidget {
   NewsFeedsWidget({super.key, this.limitNewsFeedDisplay = 5});
   final int limitNewsFeedDisplay;
