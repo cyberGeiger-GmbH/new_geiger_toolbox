@@ -76,8 +76,6 @@ void showTodoDetails(BuildContext context, TodoOffering item) {
   );
 }
 
-
-
 class TodoContainer extends StatelessWidget {
   const TodoContainer({super.key, required this.items, required this.displayLimit, required this.showAllTodos});
   final List<TodoItem> items;
@@ -88,55 +86,15 @@ class TodoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GeigerCard(
-    
-      child: Padding(
-        padding: const EdgeInsets.all(Spacing.p8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ContainerLabel(text: "Todos".hardcoded, showAllItems: showAllTodos),
-            LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ContainerLabel(text: "Todos".hardcoded, showAllItems: showAllTodos),
+          LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos),
+        ],
       ),
     );
   }
 }
 
-class ContainerLabel extends StatelessWidget {
-  const ContainerLabel({super.key, required this.showAllItems, required this.text});
-  final VoidCallback showAllItems;
-  final String text;
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.only(left: Spacing.p16, top: Spacing.p8),
-      child: GestureDetector(
-        onTap: showAllItems,
-        child: Row(
-          children: [
-            AppText.bodySmall(text: text, context: context, color: theme.hintColor),
-            Icon(Icons.chevron_right, color: theme.hintColor),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
-class SeeAllText extends StatelessWidget {
-  const SeeAllText({super.key, required this.seeAll});
-  final VoidCallback seeAll;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        //commented out divider for now
-        //Divider(height: 1),
-        AppTextButton.primary(context: context, label: "See All".hardcoded, onTap: seeAll),
-      ],
-    );
-  }
-}

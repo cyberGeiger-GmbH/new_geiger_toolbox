@@ -15,7 +15,7 @@ class GeigerCard extends StatelessWidget {
       color: appColors.onInverseSurface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
       margin: EdgeInsets.zero,
-      child: child,
+      child: Padding(padding: EdgeInsets.symmetric(horizontal: Spacing.p16), child: child),
     );
   }
 }

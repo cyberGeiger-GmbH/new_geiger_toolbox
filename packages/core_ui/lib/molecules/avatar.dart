@@ -24,14 +24,23 @@ class Avatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).colorScheme;
-
     return Container(
       decoration: _borderDecoration(),
       child: CircleAvatar(
         radius: radius,
         backgroundColor: appColor.surface,
-        backgroundImage: photoUrl != null ? CachedNetworkImageProvider(photoUrl ?? "") : null,
-        child: photoUrl != null ? null : null,
+        child:
+            photoUrl == null || photoUrl!.isEmpty
+                ? Icon(Icons.warning, size: radius, color: appColor.onSurface)
+                : ClipOval(
+                  child: CachedNetworkImage(
+                    imageUrl: photoUrl!,
+                    fit: BoxFit.cover,
+                    width: radius * 2,
+                    height: radius * 2,
+                    errorWidget: (context, url, error) => Icon(Icons.warning, size: radius, color: appColor.onSurface),
+                  ),
+                ),
       ),
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/see_all_text_button.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/dismissible_todo.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_item.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
+
 
 import 'package:geiger_toolbox/src/utils/constants.dart';
 
@@ -41,7 +42,7 @@ class LimitTodoList extends ConsumerWidget {
             ],
           ],
         ),
-        if (items.length > displayLimit) SeeAllText(seeAll: showAllTodos),
+        if (items.length > displayLimit) SeeAllTextButton(seeAll: showAllTodos),
       ],
     );
   }

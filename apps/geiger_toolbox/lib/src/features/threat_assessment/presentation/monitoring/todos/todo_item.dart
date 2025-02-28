@@ -26,48 +26,36 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: Spacing.p8),
-        child: Row(
-          children: [
-            TodoCheckbox(onChanged: onChanged, status: item.status),
-            Spacing.gapW4,
-            Expanded(child: TodoContent(item: item, showDetails: showDetails)),
-            IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
-          ],
-        ),
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        onTap: showDetails,
+        leading: TodoCheckbox(onChanged: onChanged, status: item.status),
+        title: TodoContent(item: item),
+        subtitle: LastUpdatedWidget(lastUpdated: item.lastUpdated!),
+        trailing: const Icon(Icons.chevron_right),
       ),
     );
   }
 }
 
 class TodoContent extends StatelessWidget {
-  const TodoContent({super.key, required this.item, required this.showDetails});
+  const TodoContent({super.key, required this.item});
   final TodoOffering item;
-  final VoidCallback showDetails;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appColorScheme = theme.colorScheme;
-    return GestureDetector(
-      onTap: showDetails,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText.bodySmall(
-            text: item.offering.name,
+    return AppText.bodySmall(
+      text: item.offering.name,
 
-            context: context,
-            textAlign: TextAlign.start,
+      context: context,
+      textAlign: TextAlign.start,
 
-            textStyle: theme.textTheme.bodyMedium?.copyWith(
-              color: item.status == Status.done ? theme.hintColor : appColorScheme.onSurface,
-              decoration: item.status == Status.done ? TextDecoration.lineThrough : TextDecoration.none,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          LastUpdatedWidget(lastUpdated: item.lastUpdated!),
-        ],
+      textStyle: theme.textTheme.bodySmall?.copyWith(
+        color: item.status == Status.done ? theme.hintColor : appColorScheme.onSurface,
+        decoration: item.status == Status.done ? TextDecoration.lineThrough : TextDecoration.none,
+        fontWeight: FontWeight.w700,
       ),
     );
   }
@@ -85,6 +73,7 @@ class TodoCheckbox extends StatelessWidget {
     return Platform.isIOS
         ? CupertinoButton(
           padding: EdgeInsets.zero,
+
           child: Icon(
             status == Status.done ? CupertinoIcons.checkmark_circle_fill : CupertinoIcons.circle,
             color: status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
@@ -94,12 +83,34 @@ class TodoCheckbox extends StatelessWidget {
         )
         : IconButton(
           padding: EdgeInsets.zero,
+          iconSize: 28,
           icon: Icon(
             status == Status.done ? Icons.check_circle : Icons.circle_outlined,
             color: status == Status.done ? colorScheme.primary : colorScheme.surfaceDim,
-            size: 28,
           ),
           onPressed: () => onChanged(),
         );
+  }
+}
+
+class ContainerLabel extends StatelessWidget {
+  const ContainerLabel({super.key, required this.showAllItems, required this.text});
+  final VoidCallback showAllItems;
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: Spacing.p4),
+      child: GestureDetector(
+        onTap: showAllItems,
+        child: Row(
+          children: [
+            AppText.bodySmall(text: text, context: context, color: theme.hintColor),
+            Icon(Icons.chevron_right, color: theme.hintColor),
+          ],
+        ),
+      ),
+    );
   }
 }
