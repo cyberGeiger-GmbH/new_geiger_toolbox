@@ -31,13 +31,14 @@ part 'app_routing.g.dart';
 enum AppRouter {
   mainRouter(path: "/", name: "main-screen"),
   newDetailsRouter(path: "/newsfeed/:news", name: "news"),
-  communityRouter(path: "/community", name: "community"),
-  calendarRouter(path: "/calendar", name: "calendar"),
-  settingsRouter(path: "/settings", name: "settings"),
-  chatRouter(path: "/chat", name: "chat"),
-  profileRouter(path: "/create-profile", name: "create-profile"),
+  communityRouter(path: "/community", name: "community-screen"),
+  calendarRouter(path: "/calendar", name: "calendar-screen"),
+  settingsRouter(path: "/settings", name: "settings-screen"),
+  chatRouter(path: "/chat", name: "chat-screen"),
+  profileRouter(path: "/create-profile", name: "create-profile-screen"),
   introRouter(path: "/intro", name: "intro-screen"),
-  todoRouter(path: "/all-todos", name: "all-todos");
+  todoRouter(path: "/all-todos", name: "all-todos-screen"),
+  allNewsRouter(path: "/all-news", name: "all-news-screen");
 
   const AppRouter({required this.path, required this.name});
   final String path;

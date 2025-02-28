@@ -21,7 +21,7 @@ class NewsItem extends StatelessWidget {
         textStyle: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700),
       ),
       subtitle: LastUpdatedWidget(lastUpdated: lastUpdated),
-      trailing: Icon(Icons.chevron_right),
+      trailing: onPress != null ? Icon(Icons.chevron_right) : null,
       onTap: onPress,
       contentPadding: EdgeInsets.zero, // Adjust padding
     );

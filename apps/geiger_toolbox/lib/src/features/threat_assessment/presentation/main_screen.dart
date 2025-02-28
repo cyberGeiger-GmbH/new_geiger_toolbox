@@ -10,7 +10,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/news/other_news_list_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/news/all_news_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
 
@@ -103,7 +103,7 @@ class FeatureList extends StatelessWidget {
         // getFlavor() == Flavor.dev ? RecommendationWidget() :
         const TodoListWidget(),
         Spacing.gapH12,
-        const PreviousNewsWidget(),
+        const AllNewsWidget(),
       ],
     );
   }

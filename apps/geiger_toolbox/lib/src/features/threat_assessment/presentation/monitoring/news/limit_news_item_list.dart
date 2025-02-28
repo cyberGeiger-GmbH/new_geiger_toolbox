@@ -7,6 +7,8 @@ import 'package:geiger_toolbox/src/utils/constants.dart';
 class LimitNewsItemList extends StatelessWidget {
   const LimitNewsItemList({super.key, required this.items, required this.displayLimit, required this.seeAll});
   final List<NewsItem> items;
+  //* displayLimit is the number of items to display in the list 
+  
   final int displayLimit;
   final VoidCallback seeAll;
 
