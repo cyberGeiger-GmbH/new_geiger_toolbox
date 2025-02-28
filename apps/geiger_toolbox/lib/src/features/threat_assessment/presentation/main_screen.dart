@@ -35,13 +35,14 @@ class MainScreen extends ConsumerWidget {
     // final state = ref.watch(homeScreenControllerProvider);
     final ScrollController scrollController = ScrollController();
 
-    return GeigerScaffold(
+    return Scaffold(
       appBar: GeigerAppBar(
         userProfile: () {
           context.pushNamed(AppRouter.profileRouter.name);
         },
       ),
       body: ResponsiveCenterScrollableWidget(
+        padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8),
         controller: scrollController,
         thumbVisibility: false,
         child: FeatureListView(
