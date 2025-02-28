@@ -57,9 +57,15 @@ Future<bool?> showAlertDialog({
 Future<void> showExceptionAlertDialog({
   required BuildContext context,
   required String title,
-  // ignore: avoid-dynamic
+  void Function()? onError,
   required dynamic exception,
-}) => showAlertDialog(context: context, title: title, content: exception.toString(), defaultActionText: 'OK'.hardcoded);
+}) => showAlertDialog(
+  context: context,
+  title: title,
+  content: exception.toString(),
+  defaultActionText: 'OK'.hardcoded,
+  trigger: onError,
+);
 
 Future<void> showNotImplementedAlertDialog({required BuildContext context, String? title, String? content}) =>
     showAlertDialog(

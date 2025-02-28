@@ -1149,12 +1149,12 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _newsCategorgMeta = const VerificationMeta(
-    'newsCategorg',
+  static const VerificationMeta _newsCategoryMeta = const VerificationMeta(
+    'newsCategory',
   );
   @override
-  late final GeneratedColumn<String> newsCategorg = GeneratedColumn<String>(
-    'news_categorg',
+  late final GeneratedColumn<String> newsCategory = GeneratedColumn<String>(
+    'news_category',
     aliasedName,
     false,
     type: DriftSqlType.string,
@@ -1187,7 +1187,7 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
     id,
     title,
     summary,
-    newsCategorg,
+    newsCategory,
     imageUrl,
     dateCreated,
   ];
@@ -1224,16 +1224,16 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
     } else if (isInserting) {
       context.missing(_summaryMeta);
     }
-    if (data.containsKey('news_categorg')) {
+    if (data.containsKey('news_category')) {
       context.handle(
-        _newsCategorgMeta,
-        newsCategorg.isAcceptableOrUnknown(
-          data['news_categorg']!,
-          _newsCategorgMeta,
+        _newsCategoryMeta,
+        newsCategory.isAcceptableOrUnknown(
+          data['news_category']!,
+          _newsCategoryMeta,
         ),
       );
     } else if (isInserting) {
-      context.missing(_newsCategorgMeta);
+      context.missing(_newsCategoryMeta);
     }
     if (data.containsKey('image_url')) {
       context.handle(
@@ -1278,10 +1278,10 @@ class $NewsInfoTable extends NewsInfo with TableInfo<$NewsInfoTable, NewsData> {
             DriftSqlType.string,
             data['${effectivePrefix}summary'],
           )!,
-      newsCategorg:
+      newsCategory:
           attachedDatabase.typeMapping.read(
             DriftSqlType.string,
-            data['${effectivePrefix}news_categorg'],
+            data['${effectivePrefix}news_category'],
           )!,
       imageUrl:
           attachedDatabase.typeMapping.read(
@@ -1306,14 +1306,14 @@ class NewsData extends DataClass implements Insertable<NewsData> {
   final String id;
   final String title;
   final String summary;
-  final String newsCategorg;
+  final String newsCategory;
   final String imageUrl;
   final DateTime dateCreated;
   const NewsData({
     required this.id,
     required this.title,
     required this.summary,
-    required this.newsCategorg,
+    required this.newsCategory,
     required this.imageUrl,
     required this.dateCreated,
   });
@@ -1323,7 +1323,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
     map['id'] = Variable<String>(id);
     map['title'] = Variable<String>(title);
     map['summary'] = Variable<String>(summary);
-    map['news_categorg'] = Variable<String>(newsCategorg);
+    map['news_category'] = Variable<String>(newsCategory);
     map['image_url'] = Variable<String>(imageUrl);
     map['date_created'] = Variable<DateTime>(dateCreated);
     return map;
@@ -1334,7 +1334,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       id: Value(id),
       title: Value(title),
       summary: Value(summary),
-      newsCategorg: Value(newsCategorg),
+      newsCategory: Value(newsCategory),
       imageUrl: Value(imageUrl),
       dateCreated: Value(dateCreated),
     );
@@ -1349,7 +1349,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       id: serializer.fromJson<String>(json['id']),
       title: serializer.fromJson<String>(json['title']),
       summary: serializer.fromJson<String>(json['summary']),
-      newsCategorg: serializer.fromJson<String>(json['newsCategorg']),
+      newsCategory: serializer.fromJson<String>(json['newsCategory']),
       imageUrl: serializer.fromJson<String>(json['imageUrl']),
       dateCreated: serializer.fromJson<DateTime>(json['dateCreated']),
     );
@@ -1361,7 +1361,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       'id': serializer.toJson<String>(id),
       'title': serializer.toJson<String>(title),
       'summary': serializer.toJson<String>(summary),
-      'newsCategorg': serializer.toJson<String>(newsCategorg),
+      'newsCategory': serializer.toJson<String>(newsCategory),
       'imageUrl': serializer.toJson<String>(imageUrl),
       'dateCreated': serializer.toJson<DateTime>(dateCreated),
     };
@@ -1371,14 +1371,14 @@ class NewsData extends DataClass implements Insertable<NewsData> {
     String? id,
     String? title,
     String? summary,
-    String? newsCategorg,
+    String? newsCategory,
     String? imageUrl,
     DateTime? dateCreated,
   }) => NewsData(
     id: id ?? this.id,
     title: title ?? this.title,
     summary: summary ?? this.summary,
-    newsCategorg: newsCategorg ?? this.newsCategorg,
+    newsCategory: newsCategory ?? this.newsCategory,
     imageUrl: imageUrl ?? this.imageUrl,
     dateCreated: dateCreated ?? this.dateCreated,
   );
@@ -1387,10 +1387,10 @@ class NewsData extends DataClass implements Insertable<NewsData> {
       id: data.id.present ? data.id.value : this.id,
       title: data.title.present ? data.title.value : this.title,
       summary: data.summary.present ? data.summary.value : this.summary,
-      newsCategorg:
-          data.newsCategorg.present
-              ? data.newsCategorg.value
-              : this.newsCategorg,
+      newsCategory:
+          data.newsCategory.present
+              ? data.newsCategory.value
+              : this.newsCategory,
       imageUrl: data.imageUrl.present ? data.imageUrl.value : this.imageUrl,
       dateCreated:
           data.dateCreated.present ? data.dateCreated.value : this.dateCreated,
@@ -1403,7 +1403,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
           ..write('id: $id, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
-          ..write('newsCategorg: $newsCategorg, ')
+          ..write('newsCategory: $newsCategory, ')
           ..write('imageUrl: $imageUrl, ')
           ..write('dateCreated: $dateCreated')
           ..write(')'))
@@ -1412,7 +1412,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
 
   @override
   int get hashCode =>
-      Object.hash(id, title, summary, newsCategorg, imageUrl, dateCreated);
+      Object.hash(id, title, summary, newsCategory, imageUrl, dateCreated);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1420,7 +1420,7 @@ class NewsData extends DataClass implements Insertable<NewsData> {
           other.id == this.id &&
           other.title == this.title &&
           other.summary == this.summary &&
-          other.newsCategorg == this.newsCategorg &&
+          other.newsCategory == this.newsCategory &&
           other.imageUrl == this.imageUrl &&
           other.dateCreated == this.dateCreated);
 }
@@ -1429,7 +1429,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
   final Value<String> id;
   final Value<String> title;
   final Value<String> summary;
-  final Value<String> newsCategorg;
+  final Value<String> newsCategory;
   final Value<String> imageUrl;
   final Value<DateTime> dateCreated;
   final Value<int> rowid;
@@ -1437,7 +1437,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     this.id = const Value.absent(),
     this.title = const Value.absent(),
     this.summary = const Value.absent(),
-    this.newsCategorg = const Value.absent(),
+    this.newsCategory = const Value.absent(),
     this.imageUrl = const Value.absent(),
     this.dateCreated = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -1446,21 +1446,21 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     required String id,
     required String title,
     required String summary,
-    required String newsCategorg,
+    required String newsCategory,
     required String imageUrl,
     required DateTime dateCreated,
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        title = Value(title),
        summary = Value(summary),
-       newsCategorg = Value(newsCategorg),
+       newsCategory = Value(newsCategory),
        imageUrl = Value(imageUrl),
        dateCreated = Value(dateCreated);
   static Insertable<NewsData> custom({
     Expression<String>? id,
     Expression<String>? title,
     Expression<String>? summary,
-    Expression<String>? newsCategorg,
+    Expression<String>? newsCategory,
     Expression<String>? imageUrl,
     Expression<DateTime>? dateCreated,
     Expression<int>? rowid,
@@ -1469,7 +1469,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
       if (id != null) 'id': id,
       if (title != null) 'title': title,
       if (summary != null) 'summary': summary,
-      if (newsCategorg != null) 'news_categorg': newsCategorg,
+      if (newsCategory != null) 'news_category': newsCategory,
       if (imageUrl != null) 'image_url': imageUrl,
       if (dateCreated != null) 'date_created': dateCreated,
       if (rowid != null) 'rowid': rowid,
@@ -1480,7 +1480,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     Value<String>? id,
     Value<String>? title,
     Value<String>? summary,
-    Value<String>? newsCategorg,
+    Value<String>? newsCategory,
     Value<String>? imageUrl,
     Value<DateTime>? dateCreated,
     Value<int>? rowid,
@@ -1489,7 +1489,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
       id: id ?? this.id,
       title: title ?? this.title,
       summary: summary ?? this.summary,
-      newsCategorg: newsCategorg ?? this.newsCategorg,
+      newsCategory: newsCategory ?? this.newsCategory,
       imageUrl: imageUrl ?? this.imageUrl,
       dateCreated: dateCreated ?? this.dateCreated,
       rowid: rowid ?? this.rowid,
@@ -1508,8 +1508,8 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
     if (summary.present) {
       map['summary'] = Variable<String>(summary.value);
     }
-    if (newsCategorg.present) {
-      map['news_categorg'] = Variable<String>(newsCategorg.value);
+    if (newsCategory.present) {
+      map['news_category'] = Variable<String>(newsCategory.value);
     }
     if (imageUrl.present) {
       map['image_url'] = Variable<String>(imageUrl.value);
@@ -1529,7 +1529,7 @@ class NewsInfoCompanion extends UpdateCompanion<NewsData> {
           ..write('id: $id, ')
           ..write('title: $title, ')
           ..write('summary: $summary, ')
-          ..write('newsCategorg: $newsCategorg, ')
+          ..write('newsCategory: $newsCategory, ')
           ..write('imageUrl: $imageUrl, ')
           ..write('dateCreated: $dateCreated, ')
           ..write('rowid: $rowid')
@@ -1637,7 +1637,7 @@ class $RecommendationsTable extends Recommendations
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {id, newsId};
   @override
   RecommendationData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -3889,7 +3889,7 @@ typedef $$NewsInfoTableCreateCompanionBuilder =
       required String id,
       required String title,
       required String summary,
-      required String newsCategorg,
+      required String newsCategory,
       required String imageUrl,
       required DateTime dateCreated,
       Value<int> rowid,
@@ -3899,7 +3899,7 @@ typedef $$NewsInfoTableUpdateCompanionBuilder =
       Value<String> id,
       Value<String> title,
       Value<String> summary,
-      Value<String> newsCategorg,
+      Value<String> newsCategory,
       Value<String> imageUrl,
       Value<DateTime> dateCreated,
       Value<int> rowid,
@@ -3954,8 +3954,8 @@ class $$NewsInfoTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get newsCategorg => $composableBuilder(
-    column: $table.newsCategorg,
+  ColumnFilters<String> get newsCategory => $composableBuilder(
+    column: $table.newsCategory,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -4019,8 +4019,8 @@ class $$NewsInfoTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get newsCategorg => $composableBuilder(
-    column: $table.newsCategorg,
+  ColumnOrderings<String> get newsCategory => $composableBuilder(
+    column: $table.newsCategory,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -4053,8 +4053,8 @@ class $$NewsInfoTableAnnotationComposer
   GeneratedColumn<String> get summary =>
       $composableBuilder(column: $table.summary, builder: (column) => column);
 
-  GeneratedColumn<String> get newsCategorg => $composableBuilder(
-    column: $table.newsCategorg,
+  GeneratedColumn<String> get newsCategory => $composableBuilder(
+    column: $table.newsCategory,
     builder: (column) => column,
   );
 
@@ -4123,7 +4123,7 @@ class $$NewsInfoTableTableManager
                 Value<String> id = const Value.absent(),
                 Value<String> title = const Value.absent(),
                 Value<String> summary = const Value.absent(),
-                Value<String> newsCategorg = const Value.absent(),
+                Value<String> newsCategory = const Value.absent(),
                 Value<String> imageUrl = const Value.absent(),
                 Value<DateTime> dateCreated = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
@@ -4131,7 +4131,7 @@ class $$NewsInfoTableTableManager
                 id: id,
                 title: title,
                 summary: summary,
-                newsCategorg: newsCategorg,
+                newsCategory: newsCategory,
                 imageUrl: imageUrl,
                 dateCreated: dateCreated,
                 rowid: rowid,
@@ -4141,7 +4141,7 @@ class $$NewsInfoTableTableManager
                 required String id,
                 required String title,
                 required String summary,
-                required String newsCategorg,
+                required String newsCategory,
                 required String imageUrl,
                 required DateTime dateCreated,
                 Value<int> rowid = const Value.absent(),
@@ -4149,7 +4149,7 @@ class $$NewsInfoTableTableManager
                 id: id,
                 title: title,
                 summary: summary,
-                newsCategorg: newsCategorg,
+                newsCategory: newsCategory,
                 imageUrl: imageUrl,
                 dateCreated: dateCreated,
                 rowid: rowid,

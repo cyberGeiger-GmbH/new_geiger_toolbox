@@ -1,5 +1,6 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/utils/date_time_formatter.dart';
 
@@ -19,8 +20,23 @@ class LocalNewsFeedRepository {
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
   Logger get _log => ref.read(logHandlerProvider("LocalNewsFeedRepository"));
+  AppLogger get _appLogger => ref.read(appLoggerProvider);
 
-  Future<void> synFromRemote({required List<News> data}) async {
+  //resolve news conflict on rescanning
+  Future<void> resolveNewsConflict({required List<News> data}) async {
+    try {
+      await _synFromRemote(data: data);
+    } catch (e, s) {
+      //* if sync failed, delete all news and recommendations
+      await deleteNewsObject();
+      // * Then try to recover by inserting again
+      await _synFromRemote(data: data);
+      //fail silently don't throw an exception
+      _appLogger.logError(e, s);
+    }
+  }
+
+  Future<void> _synFromRemote({required List<News> data}) async {
     // debugPrint("news feed=> $data");
 
     try {
@@ -36,37 +52,43 @@ class LocalNewsFeedRepository {
           for (var newsData in uniqueNews) {
             //insert news
             final dateCreated = ref.read(stringToDateProvider(inputDate: newsData.dateCreated));
+            final newsId = newsData.id.toLowerCase();
+
             final newsCompanion = NewsInfoCompanion(
-              id: Value(newsData.id),
+              id: Value(newsId),
               title: Value(newsData.title),
               summary: Value(newsData.summary),
-              newsCategorg: Value(newsData.newsCategory),
+              newsCategory: Value(newsData.newsCategory),
               imageUrl: Value(newsData.imageUrl),
               dateCreated: Value(dateCreated),
             );
-            await _db.into(_db.newsInfo).insert(newsCompanion);
+            await _db.into(_db.newsInfo).insertOnConflictUpdate(newsCompanion);
 
             //insert recommendations for each news
             for (var recomData in newsData.recommendations) {
+              //combine recommendation id and news id to avoid conflict
+              final recoId = recomData.id.toLowerCase();
+
               final reco = RecommendationsCompanion(
-                id: Value(recomData.id),
-                newsId: Value(newsData.id),
+                id: Value(recoId),
+                newsId: Value(newsId),
                 name: Value(recomData.name),
                 rationale: Value(recomData.rationale),
               );
-              await _db.into(_db.recommendations).insert(reco);
+              await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
 
               // insert offering for each recommendation
               for (var offerData in recomData.offerings) {
-                //id = combination of offerings name and recom Id
-                final id = "${offerData.name.replaceSpacesWithHyphen}${recomData.id}";
+                //id is the combination of recommendation id and offering name
+                final id = "${recoId}_${offerData.name.replaceSpacesWithUnderscore}";
+
                 final offer = RecommendationOfferingsCompanion(
                   id: Value(id),
-                  recommendationId: Value(recomData.id),
+                  recommendationId: Value(recoId),
                   name: Value(offerData.name),
                   summary: Value(offerData.summary),
                 );
-                await _db.into(_db.recommendationOfferings).insert(offer);
+                await _db.into(_db.recommendationOfferings).insertOnConflictUpdate(offer);
               }
             }
           }
@@ -77,10 +99,9 @@ class LocalNewsFeedRepository {
       _log.e("error:$e, stack:$s");
       rethrow;
     }
-    return;
   }
 
-  //filter unique news by title
+  //remove duplicate news by id
   Future<List<News>> _uniqueNews({required List<News> newObj}) async {
     try {
       if (newObj.isNotEmpty) {
@@ -92,12 +113,12 @@ class LocalNewsFeedRepository {
         Map<String, int> countMap = {};
 
         for (var news in combinedList) {
-          countMap[news.title.toLowerCase()] = (countMap[news.title.toLowerCase()] ?? 0) + 1;
+          countMap[news.id.toLowerCase()] = (countMap[news.id.toLowerCase()] ?? 0) + 1;
         }
 
         // Filter out users that appear more than once
         List<News> uniqueUsers =
-            combinedList.where((data) => countMap[data.title.toLowerCase()] == 1).toList(); // Keep only unique ones
+            combinedList.where((data) => countMap[data.id.toLowerCase()] == 1).toList(); // Keep only unique ones
 
         return uniqueUsers;
       }
@@ -108,8 +129,23 @@ class LocalNewsFeedRepository {
     }
   }
 
+  Future<void> deleteNewsObject() async {
+    try {
+      _log.i("deletign news...");
+      await _db.transaction(() async {
+        await _db.delete(_db.newsInfo).go();
+        await _db.delete(_db.recommendations).go();
+        await _db.delete(_db.recommendationOfferings).go();
+      });
+      _log.i("news deleted");
+    } catch (e) {
+      _log.e(e);
+      throw DataBaseException();
+    }
+  }
+
   // for testing purpose
-  Future<void> deleteNews() async {
+  Future<void> deleteData() async {
     try {
       _log.i("deletign news...");
       await _db.transaction(() async {
@@ -215,7 +251,7 @@ class LocalNewsFeedRepository {
             id: newsEntry.id,
             title: newsEntry.title,
             summary: newsEntry.summary,
-            newsCategory: newsEntry.newsCategorg,
+            newsCategory: newsEntry.newsCategory,
             articleUrl: "",
             imageUrl: newsEntry.imageUrl,
             dateCreated: "${newsEntry.dateCreated}",
@@ -242,7 +278,7 @@ class LocalNewsFeedRepository {
 
     //Tranfrom the query inot a list of News with their associated Recommendation and task;
     final List<News> newsResult = [];
-    final Map<String, List<Recommendation>> recosMap = {};
+    final Map<String, Set<Recommendation>> recosMap = {};
     final Map<String, List<Offering>> offerMap = {};
 
     for (var rows in newsWithRecoAndOffering) {
@@ -273,7 +309,7 @@ class LocalNewsFeedRepository {
 
         // Ensure the recommendation is added only once for a specific newsId
         if (!recosMap.containsKey(recommendationEntry.newsId)) {
-          recosMap[recommendationEntry.newsId] = [];
+          recosMap[recommendationEntry.newsId] = {};
         }
         // Only add the recommendation if it's not already in the list for the specific newsId
         if (!recosMap[recommendationEntry.newsId]!.any((rec) => rec.id == reco.id)) {
@@ -286,12 +322,12 @@ class LocalNewsFeedRepository {
         final news = News(
           id: newsEntry.id,
           title: newsEntry.title,
-          newsCategory: newsEntry.newsCategorg,
+          newsCategory: newsEntry.newsCategory,
           summary: newsEntry.summary,
           articleUrl: "",
           imageUrl: newsEntry.imageUrl,
           dateCreated: "${newsEntry.dateCreated}",
-          recommendations: recosMap[newsEntry.id] ?? [],
+          recommendations: (recosMap[newsEntry.id] ?? {}).toList(),
         );
 
         newsResult.add(news);
@@ -301,19 +337,19 @@ class LocalNewsFeedRepository {
     return newsResult;
   }
 
-  Future<News> fetchNewsByTitle({required String title}) async {
-    _log.i("fetching news by title");
+  Future<News> fetchNewsById({required String newsId}) async {
+    _log.i("fetching news by id");
     final data = await fetchNewsList();
 
-    return _getNews(newsfeeds: data, newsTitle: title.replaceSpacesWithHyphen);
+    return _getNews(newsfeeds: data, newsId: newsId);
   }
 
-  static News _getNews({required List<News> newsfeeds, required String newsTitle}) {
+  News _getNews({required List<News> newsfeeds, required String newsId}) {
     try {
-      final obj = newsfeeds.firstWhere((news) => news.title.replaceSpacesWithHyphen == newsTitle);
+      final obj = newsfeeds.firstWhere((news) => news.id == newsId.toLowerCase());
       return obj;
     } on StateError {
-      throw StateError("No news found with title: $newsTitle,");
+      throw StateError("No news found with id: $newsId,");
     } catch (e) {
       rethrow;
     }

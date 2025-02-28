@@ -63,8 +63,7 @@ final watchOldNewsFeedsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchOldNewsFeedsRef = AutoDisposeStreamProviderRef<List<News>>;
-String _$fetchNewsFeedByTitleHash() =>
-    r'9327a925062623ad64c197b1836766eb862e9b44';
+String _$fetchNewsFeedByIdHash() => r'ab8b8b2a534b57d0a172aa905f9bba7c3a975394';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -87,25 +86,25 @@ class _SystemHash {
   }
 }
 
-/// See also [fetchNewsFeedByTitle].
-@ProviderFor(fetchNewsFeedByTitle)
-const fetchNewsFeedByTitleProvider = FetchNewsFeedByTitleFamily();
+/// See also [fetchNewsFeedById].
+@ProviderFor(fetchNewsFeedById)
+const fetchNewsFeedByIdProvider = FetchNewsFeedByIdFamily();
 
-/// See also [fetchNewsFeedByTitle].
-class FetchNewsFeedByTitleFamily extends Family<AsyncValue<News?>> {
-  /// See also [fetchNewsFeedByTitle].
-  const FetchNewsFeedByTitleFamily();
+/// See also [fetchNewsFeedById].
+class FetchNewsFeedByIdFamily extends Family<AsyncValue<News?>> {
+  /// See also [fetchNewsFeedById].
+  const FetchNewsFeedByIdFamily();
 
-  /// See also [fetchNewsFeedByTitle].
-  FetchNewsFeedByTitleProvider call({required String newsTitle}) {
-    return FetchNewsFeedByTitleProvider(newsTitle: newsTitle);
+  /// See also [fetchNewsFeedById].
+  FetchNewsFeedByIdProvider call({required String newsId}) {
+    return FetchNewsFeedByIdProvider(newsId: newsId);
   }
 
   @override
-  FetchNewsFeedByTitleProvider getProviderOverride(
-    covariant FetchNewsFeedByTitleProvider provider,
+  FetchNewsFeedByIdProvider getProviderOverride(
+    covariant FetchNewsFeedByIdProvider provider,
   ) {
-    return call(newsTitle: provider.newsTitle);
+    return call(newsId: provider.newsId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -120,75 +119,71 @@ class FetchNewsFeedByTitleFamily extends Family<AsyncValue<News?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'fetchNewsFeedByTitleProvider';
+  String? get name => r'fetchNewsFeedByIdProvider';
 }
 
-/// See also [fetchNewsFeedByTitle].
-class FetchNewsFeedByTitleProvider extends AutoDisposeFutureProvider<News?> {
-  /// See also [fetchNewsFeedByTitle].
-  FetchNewsFeedByTitleProvider({required String newsTitle})
+/// See also [fetchNewsFeedById].
+class FetchNewsFeedByIdProvider extends AutoDisposeFutureProvider<News?> {
+  /// See also [fetchNewsFeedById].
+  FetchNewsFeedByIdProvider({required String newsId})
     : this._internal(
-        (ref) => fetchNewsFeedByTitle(
-          ref as FetchNewsFeedByTitleRef,
-          newsTitle: newsTitle,
-        ),
-        from: fetchNewsFeedByTitleProvider,
-        name: r'fetchNewsFeedByTitleProvider',
+        (ref) => fetchNewsFeedById(ref as FetchNewsFeedByIdRef, newsId: newsId),
+        from: fetchNewsFeedByIdProvider,
+        name: r'fetchNewsFeedByIdProvider',
         debugGetCreateSourceHash:
             const bool.fromEnvironment('dart.vm.product')
                 ? null
-                : _$fetchNewsFeedByTitleHash,
-        dependencies: FetchNewsFeedByTitleFamily._dependencies,
+                : _$fetchNewsFeedByIdHash,
+        dependencies: FetchNewsFeedByIdFamily._dependencies,
         allTransitiveDependencies:
-            FetchNewsFeedByTitleFamily._allTransitiveDependencies,
-        newsTitle: newsTitle,
+            FetchNewsFeedByIdFamily._allTransitiveDependencies,
+        newsId: newsId,
       );
 
-  FetchNewsFeedByTitleProvider._internal(
+  FetchNewsFeedByIdProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.newsTitle,
+    required this.newsId,
   }) : super.internal();
 
-  final String newsTitle;
+  final String newsId;
 
   @override
   Override overrideWith(
-    FutureOr<News?> Function(FetchNewsFeedByTitleRef provider) create,
+    FutureOr<News?> Function(FetchNewsFeedByIdRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: FetchNewsFeedByTitleProvider._internal(
-        (ref) => create(ref as FetchNewsFeedByTitleRef),
+      override: FetchNewsFeedByIdProvider._internal(
+        (ref) => create(ref as FetchNewsFeedByIdRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        newsTitle: newsTitle,
+        newsId: newsId,
       ),
     );
   }
 
   @override
   AutoDisposeFutureProviderElement<News?> createElement() {
-    return _FetchNewsFeedByTitleProviderElement(this);
+    return _FetchNewsFeedByIdProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchNewsFeedByTitleProvider &&
-        other.newsTitle == newsTitle;
+    return other is FetchNewsFeedByIdProvider && other.newsId == newsId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, newsTitle.hashCode);
+    hash = _SystemHash.combine(hash, newsId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -196,18 +191,18 @@ class FetchNewsFeedByTitleProvider extends AutoDisposeFutureProvider<News?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin FetchNewsFeedByTitleRef on AutoDisposeFutureProviderRef<News?> {
-  /// The parameter `newsTitle` of this provider.
-  String get newsTitle;
+mixin FetchNewsFeedByIdRef on AutoDisposeFutureProviderRef<News?> {
+  /// The parameter `newsId` of this provider.
+  String get newsId;
 }
 
-class _FetchNewsFeedByTitleProviderElement
+class _FetchNewsFeedByIdProviderElement
     extends AutoDisposeFutureProviderElement<News?>
-    with FetchNewsFeedByTitleRef {
-  _FetchNewsFeedByTitleProviderElement(super.provider);
+    with FetchNewsFeedByIdRef {
+  _FetchNewsFeedByIdProviderElement(super.provider);
 
   @override
-  String get newsTitle => (origin as FetchNewsFeedByTitleProvider).newsTitle;
+  String get newsId => (origin as FetchNewsFeedByIdProvider).newsId;
 }
 
 // ignore_for_file: type=lint

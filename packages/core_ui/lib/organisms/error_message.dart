@@ -1,4 +1,3 @@
-import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 
 import '../molecules/texts/app_text.dart';

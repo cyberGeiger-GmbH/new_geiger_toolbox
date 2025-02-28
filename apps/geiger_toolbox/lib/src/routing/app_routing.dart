@@ -152,11 +152,11 @@ class AppRouting {
                       path: AppRouter.newDetailsRouter.path,
                       name: AppRouter.newDetailsRouter.name,
                       pageBuilder: (context, state) {
-                        final title = state.pathParameters[AppRouter.newDetailsRouter.name]!;
+                        final newsId = state.pathParameters[AppRouter.newDetailsRouter.name]!;
 
                         return MaterialPage(
                           //fullscreenDialog: true,
-                          child: NewsDetailsScreen(newsTitle: title, key: state.pageKey),
+                          child: NewsDetailsScreen(newsId: newsId, key: state.pageKey),
                           key: state.pageKey,
                           name: state.name,
                         );
@@ -167,11 +167,8 @@ class AppRouting {
                       path: AppRouter.todoRouter.path,
                       name: AppRouter.todoRouter.name,
                       pageBuilder:
-                          (context, state) => MaterialPage<void>(
-                            child: TodosCategoryScreen(),
-                            key: state.pageKey,
-                            name: state.name,
-                          ),
+                          (context, state) =>
+                              MaterialPage<void>(child: TodosCategoryScreen(), key: state.pageKey, name: state.name),
                     ),
                   ],
                 ),

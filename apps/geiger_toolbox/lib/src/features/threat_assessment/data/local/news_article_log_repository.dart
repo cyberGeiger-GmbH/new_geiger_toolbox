@@ -59,7 +59,7 @@ class NewsArticleLogRepository {
           id: newsEntry.id,
           name: newsEntry.title,
           description: newsEntry.summary,
-          type: newsEntry.newsCategorg,
+          type: newsEntry.newsCategory,
           protection: proObjMap[newsEntry.id] ?? [],
         );
 

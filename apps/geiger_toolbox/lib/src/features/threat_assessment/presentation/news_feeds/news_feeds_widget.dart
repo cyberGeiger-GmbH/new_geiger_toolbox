@@ -18,6 +18,7 @@ import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
 import 'package:geiger_toolbox/src/utils/helpers/carousel_helper.dart';
+import 'package:geiger_toolbox/src/utils/helpers/helpers_functions.dart';
 import 'package:go_router/go_router.dart';
 
 class NewsFeedsWidget extends ConsumerWidget {
@@ -56,11 +57,7 @@ class NewsFeedsWidget extends ConsumerWidget {
                       state.isLoading
                           ? null
                           : () {
-                            final title = news[index].title;
-                            context.goNamed(
-                              AppRouter.newDetailsRouter.name,
-                              pathParameters: {AppRouter.newDetailsRouter.name: title},
-                            );
+                            navigateToNewsDetails(newsId: news[index].id, context: context);
                           },
                 ),
                 controller: _controller,

@@ -64,7 +64,7 @@ class NewsInfo extends Table {
 
   TextColumn get title => text().withLength(min: 1, max: 255)();
   TextColumn get summary => text()();
-  TextColumn get newsCategorg => text()();
+  TextColumn get newsCategory => text()();
   TextColumn get imageUrl => text()();
   DateTimeColumn get dateCreated => dateTime()();
 
@@ -80,7 +80,7 @@ class Recommendations extends Table {
   TextColumn get rationale => text()();
 
   @override
-  Set<Column> get primaryKey => {id};
+  Set<Column> get primaryKey => {id, newsId};
 }
 
 @DataClassName('RecommendationOfferingData')

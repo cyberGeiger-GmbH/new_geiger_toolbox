@@ -9,16 +9,21 @@ import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import '../common_widgets/alert_dialogs.dart';
 
 extension AsyncValueExtension on AsyncValue {
-  void showAlertDialogOnError({required BuildContext context}) {
+  void showAlertDialogOnError({required BuildContext context, void Function()? onError}) {
     if (!isLoading && hasError) {
       //show all error on dev
       if (getFlavor() == Flavor.dev) {
-        showExceptionAlertDialog(context: context, title: 'Error'.hardcoded, exception: error);
+        showExceptionAlertDialog(context: context, title: 'Error'.hardcoded, exception: error, onError: onError);
       } else {
         //on show app exception error in stg | prod
         if (error is AppException) {
           final appException = error as AppException;
-          showExceptionAlertDialog(context: context, title: 'Alert'.hardcoded, exception: appException.message);
+          showExceptionAlertDialog(
+            context: context,
+            title: 'Alert'.hardcoded,
+            exception: appException.message,
+            onError: onError,
+          );
         }
       }
     }

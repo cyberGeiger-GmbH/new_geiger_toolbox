@@ -35,7 +35,7 @@ class NewsFeedService {
 
       if (data.isNotEmpty) {
         _log.i("storing newsfeed locally...");
-        await _cache.synFromRemote(data: data);
+        await _cache.resolveNewsConflict(data: data);
         await userProfileModel.storePreviousUserProfileState();
       }
       _log.i("success");
@@ -65,7 +65,7 @@ Stream<List<News>> watchOldNewsFeeds(Ref ref) {
 }
 
 @riverpod
-Future<News?> fetchNewsFeedByTitle(Ref ref, {required String newsTitle}) async {
+Future<News?> fetchNewsFeedById(Ref ref, {required String newsId}) async {
   final cachedRepos = ref.watch(localNewsFeedRepositoryProvider);
-  return await cachedRepos.fetchNewsByTitle(title: newsTitle);
+  return await cachedRepos.fetchNewsById(newsId: newsId);
 }

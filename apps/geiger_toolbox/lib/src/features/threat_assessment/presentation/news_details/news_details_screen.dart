@@ -12,11 +12,12 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:geiger_toolbox/src/utils/helpers/helpers_functions.dart';
 import 'package:go_router/go_router.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
-  const NewsDetailsScreen({super.key, required this.newsTitle});
-  final String newsTitle;
+  const NewsDetailsScreen({super.key, required this.newsId});
+  final String newsId;
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).colorScheme;
@@ -31,15 +32,14 @@ class NewsDetailsScreen extends StatelessWidget {
             nxtValue.successAlertSnackBar(context: context);
           });
 
-          //listen for errors
-          if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
-            ref.listen(
-              fetchNewsFeedByTitleProvider(newsTitle: newsTitle),
-              (_, nxt) => nxt.showAlertDialogOnError(context: context),
-            );
-          }
+          //listen to errors
+          ref.listen(
+            fetchNewsFeedByIdProvider(newsId: newsId),
+            (_, nxt) =>
+                nxt.showAlertDialogOnError(context: context, onError: () => navigateToMainScreen(context: context)),
+          );
 
-          final newsFeed = ref.watch(fetchNewsFeedByTitleProvider(newsTitle: newsTitle));
+          final newsFeed = ref.watch(fetchNewsFeedByIdProvider(newsId: newsId));
 
           return AsyncValueWidget(
             value: newsFeed,

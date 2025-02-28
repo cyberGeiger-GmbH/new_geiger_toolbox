@@ -18,7 +18,7 @@ class CleanDataController extends _$CleanDataController {
     final data = ref.read(watchRecentNewsFeedsProvider);
     state = await AsyncValue.guard(() async {
       data.valueOrNull!.clear();
-      ref.read(localNewsFeedRepositoryProvider).deleteNews();
+      ref.read(localNewsFeedRepositoryProvider).deleteData();
       ref.read(localGeigerScoreRepoProvider).deleteScoreData();
       ref.read(previousUserStateRepoProvider).deleteOldProfileSate();
     });

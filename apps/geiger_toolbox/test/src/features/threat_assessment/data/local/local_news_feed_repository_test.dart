@@ -48,7 +48,7 @@ void main() {
         final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
         //store data
-        await repoNewsFeed.synFromRemote(data: sourceData);
+        await repoNewsFeed.resolveNewsConflict(data: sourceData);
         //fetch data
         final result = await repoNewsFeed.fetchNewsList();
 
@@ -62,7 +62,7 @@ void main() {
         final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
         //store data again
-        await repoNewsFeed.synFromRemote(data: sourceData);
+        await repoNewsFeed.resolveNewsConflict(data: sourceData);
 
         //fetch data
         final result = await repoNewsFeed.fetchNewsList();
@@ -78,9 +78,9 @@ void main() {
 
         //fetch data
         tester.expect(
-          () => repoNewsFeed.fetchNewsByTitle(title: "title1"),
+          () => repoNewsFeed.fetchNewsById(newsId: "title1"),
           tester.throwsA(
-            tester.isA<StateError>().having((e) => e.message, 'message', 'No news found with title: title1,'),
+            tester.isA<StateError>().having((e) => e.message, 'message', 'No news found with id: title1,'),
           ),
         );
       },
@@ -91,7 +91,7 @@ void main() {
       () async {
         final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
-        final result = await repoNewsFeed.fetchNewsByTitle(title: "Defensible Security Architecture");
+        final result = await repoNewsFeed.fetchNewsById(newsId: "Defensible-Security-Architecture-and-Engineering");
 
         //fetch data
         tester.expect(result, tester.isNot(tester.throwsA(tester.isA<StateError>())));

@@ -5,29 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
-import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
-import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:geiger_toolbox/src/utils/constants.dart';
-import 'package:go_router/go_router.dart';
+import 'package:geiger_toolbox/src/utils/helpers/helpers_functions.dart';
 
 class PreviousNewsWidget extends ConsumerWidget {
   const PreviousNewsWidget({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final newsValue = ref.watch(watchOldNewsFeedsProvider);
-    //only show previous news when the news available is > limitView
-    final int limitView = 5;
+
+    final int limitView = 6;
+
+    //only show previous that is not currrently in the Carousel
     return AsyncValueWidget(
       value: newsValue,
-      data:
-          (value) =>
-              value.isEmpty || value.length <= limitView
-                  ? const SizedBox.shrink()
-                  : OlderNewsList(limit: 4, items: value),
+      data: (value) => value.isEmpty ? const SizedBox.shrink() : OlderNewsList(limit: 8, items: value),
     );
   }
 }
@@ -64,12 +60,7 @@ class ShowLimitedTodos extends StatelessWidget {
             lastUpdated: DateTime.parse(items[i].dateCreated),
             title: items[i].title,
             url: items[i].imageUrl,
-            onPress: () {
-              context.goNamed(
-                AppRouter.newDetailsRouter.name,
-                pathParameters: {AppRouter.newDetailsRouter.name: items[i].title.replaceSpacesWithHyphen},
-              );
-            },
+            onPress: () => navigateToNewsDetails(newsId: items[i].id, context: context),
           ),
           if (i < (items.length > displayLimit ? displayLimit - 1 : items.length - 1)) Divider(height: 1),
         ],
@@ -92,7 +83,6 @@ class OtherNews extends StatelessWidget {
       title: AppText.bodyMedium(text: title, context: context, textAlign: TextAlign.start),
       subtitle: Consumer(
         builder: (context, ref, child) {
-         
           return LastUpdatedWidget(lastUpdated: lastUpdated);
         },
       ),

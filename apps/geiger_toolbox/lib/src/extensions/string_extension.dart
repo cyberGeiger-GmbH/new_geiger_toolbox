@@ -3,15 +3,15 @@ import 'package:intl/intl.dart';
 extension StringExtension on String {
   static const wordLength = 4;
   static const remainingWord = 3;
-  String get replaceSpacesWithHyphen {
+  String get replaceSpacesWithUnderscore {
     return toLowerCase()
         .replaceAll(RegExp(r'[^\w\s]'), '') // Remove special characters
-        .replaceAll(RegExp(r'\s+'), '-'); // Replace spaces with hyphens
+        .replaceAll(RegExp(r'\s+'), '_'); //Replace spaces with underscores
   }
 
-  String get replaceHyphenWithSpace {
-    // Replace all hyphens with spaces
-    String result = replaceAll('-', ' ');
+  String get replaceUnderscoresWithSpace {
+    // Replace all underscores with spaces
+    String result = replaceAll('_', ' ');
 
     // Split the result into a list of words
     List<String> words = result.split(' ');

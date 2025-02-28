@@ -1,5 +1,4 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'geiger_score_controller.g.dart';

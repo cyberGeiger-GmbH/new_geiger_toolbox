@@ -50,7 +50,7 @@ class WelcomeNoteWidget extends StatelessWidget {
                       TextSpan(text: "\n\nPress the GEIGER Scan Button to get your protection score".hardcoded),
                     ]
                     : [
-                      TextSpan(text: "No actions required yet!\n."),
+                      TextSpan(text: "No actions required yet!\n"),
                       TextSpan(text: "Please wait for the scan to complete".hardcoded),
                     ],
           ),

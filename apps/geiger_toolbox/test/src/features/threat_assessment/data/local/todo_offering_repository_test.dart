@@ -52,10 +52,10 @@ void main() {
         final todoRepo = container.read(todoOfferingRepoProvider);
         final newsRepo = container.read(localNewsFeedRepositoryProvider);
         //store news
-        await newsRepo.synFromRemote(data: sourceData);
+        await newsRepo.resolveNewsConflict(data: sourceData);
 
         // get recommendation
-        final selectedNews = await newsRepo.fetchNewsByTitle(title: "Defensible Security Architecture");
+        final selectedNews = await newsRepo.fetchNewsById(newsId: "Defensible-Security-Architecture-and-Engineering");
 
         final recommendations = selectedNews.recommendations;
 
@@ -95,7 +95,7 @@ void main() {
         final todoRepo = container.read(todoOfferingRepoProvider);
         final newsRepo = container.read(localNewsFeedRepositoryProvider);
 
-        final selectedNews = await newsRepo.fetchNewsByTitle(title: "Defensible Security Architecture");
+        final selectedNews = await newsRepo.fetchNewsById(newsId: "Defensible-Security-Architecture-and-Engineering");
 
         final recommendations = selectedNews.recommendations;
 
