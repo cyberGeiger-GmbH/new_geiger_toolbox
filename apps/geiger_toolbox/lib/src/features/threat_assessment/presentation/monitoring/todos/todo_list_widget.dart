@@ -36,7 +36,7 @@ class TodoListWidget extends ConsumerWidget {
                     items:
                         data
                             .expand(
-                              (category) => category.offerings.map(
+                              (category) => category.offerings.sortByStatus().map(
                                 (todo) => TodoItem(
                                   item: todo,
                                   onChanged: () {
