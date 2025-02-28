@@ -1,3 +1,4 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/buttons/custom_checkbox.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,11 @@ class OfferingItem extends ConsumerWidget {
     final theme = Theme.of(context);
     return ListTile(
       key: key,
+      contentPadding: const EdgeInsets.symmetric(horizontal: Spacing.p0),
       title: AppText.bodySmall(
         text: offer.offering.name,
         context: context,
-
+        textAlign: TextAlign.start,
         textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           fontWeight: FontWeight.w700,
           decoration: state.status == Status.done ? TextDecoration.lineThrough : null,
