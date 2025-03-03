@@ -1,3 +1,37 @@
+## 1.4.0
+
+ - **REFACTOR**(geiger_toolbox,core_ui): improve old news listings.
+ - **REFACTOR**(core_ui,geiger_toolbox): improve code reusability.
+ - **REFACTOR**(geiger_toolbox,core_ui): modify t and c screen  to intro.
+ - **FIX**(geiger_toolbox): issue with sqlit, ui improvement.
+ - **FIX**(geiger_toolbox): fix issues with data sync.
+ - **FIX**(geiger_toolbox): update dependency and text style.
+ - **FIX**(geiger_toolbox,core_ui): fix ui elements.
+ - **FIX**(geiger_toolbox): bug fix.
+ - **FIX**(geiger_toolbox,core_ui): improve user experience.
+ - **FIX**(geiger_toolbox,core_ui): improve recommendation widget.
+ - **FIX**(geiger_toolbox,core_ui): improve todos ui component.
+ - **FIX**(geiger_toolbox,core_ui): add welcome note.
+ - **FIX**(geiger_toolbox,core_ui): improve news feed card.
+ - **FIX**(geiger_toolbox,core_ui): comment bottom navigation bar.
+ - **FIX**(core_ui,geiger_toolbox): improve ui.
+ - **FIX**(geiger_toolbox,core_ui): improve profile screen.
+ - **FIX**(geiger_toolbox): add app version to profile.
+ - **FIX**(geiger_toolbox,perplexity_search): improve profile screen.
+ - **FIX**(geiger_toolbox): layout issues in intro screen.
+ - **FIX**(geiger_toolbox,core_ui): show rationale for recommendation.
+ - **FIX**(geiger_toolbox,core_ui): update asset.
+ - **FIX**(geiger_toolbox): improve storing of previous user profile state.
+ - **FIX**(geiger_toolbox): ui fixes.
+ - **FIX**(geiger_toolbox,conversational_agent_client,perplexity_search): bug fix.
+ - **FIX**(geiger_toolbox): optionally skip profile creation.
+ - **FIX**(geiger_toolbox): add dismissable geiger message card.
+ - **FIX**(geiger_toolbox,core_ui): ui text improvement, remove migration for now.
+ - **FIX**(core_ui,geiger_toolbox): remove unnecessary files.
+ - **FEAT**(geiger_toolbox,core_ui): add retry button.
+ - **FEAT**(geiger_toolbox): category todos according to recommendation.
+ - **FEAT**(core_ui): added svg.
+
 ## 1.3.2
 
  - **FIX**(geiger_toolbox,core_ui): show geiger score.

@@ -1,3 +1,22 @@
+## 1.3.0
+
+ - **REFACTOR**(geiger_toolbox,core_ui): modify t and c screen  to intro.
+ - **REFACTOR**(conversational_agent_client): refactor userProfile.
+ - **FIX**(geiger_toolbox,perplexity_search): improve profile screen.
+ - **FIX**(geiger_toolbox): Adapt Data Structure.
+ - **FIX**(geiger_toolbox,conversational_agent_client,perplexity_search): bug fix.
+ - **FIX**(geiger_toolbox,perplexity_search): add test.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix issues.
+ - **FIX**(geiger_toolbox): recalculate geiger score onScan complete.
+ - **FIX**(geiger_toolbox,conversational_agent_client): bug fix.
+ - **FIX**(geiger_toolbox): show profile screen on app restart.
+ - **FIX**(geiger_toolbox): add dismissable geiger message card.
+ - **FIX**(geiger_toolbox): force update, disable analytic in prod.
+ - **FIX**(geiger_toolbox): bug duplication of recommendation.
+ - **FIX**(geiger_toolbox,core_ui): ui text improvement, remove migration for now.
+ - **FIX**(core_ui,geiger_toolbox): remove unnecessary files.
+ - **FEAT**(core_ui): added svg.
+
 ## 1.2.0
 
  - **REFACTOR**(geiger_toolbox): refactor data model.

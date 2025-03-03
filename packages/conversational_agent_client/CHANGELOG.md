@@ -1,3 +1,16 @@
+## 1.5.0
+
+ - **REFACTOR**(conversational_agent_client): refactor userProfile.
+ - **FIX**(geiger_toolbox,conversational_agent_client,perplexity_search): bug fix.
+ - **FIX**(geiger_toolbox,perplexity_search): add test.
+ - **FIX**(geiger_toolbox): fix issues of storing already existing news.
+ - **FIX**(geiger_toolbox,conversational_agent_client): fix issues.
+ - **FIX**(geiger_toolbox): recalculate geiger score onScan complete.
+ - **FIX**(geiger_toolbox): logging.
+ - **FIX**(geiger_toolbox,conversational_agent_client): bug fix.
+ - **FIX**(geiger_toolbox): sentry config.
+ - **FEAT**(geiger_toolbox,core_ui): add retry button.
+
 ## 1.4.1
 
  - **FIX**(geiger_toolbox,conversational_agent_client): fix issue while send previous score.
