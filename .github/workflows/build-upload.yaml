@@ -1,11 +1,13 @@
 name: Build & Upload (Android, iOS)    
-on:
+
+on: 
   workflow_dispatch:
     inputs:
       environment:
         description: 'Environment to deploy'
         required: true
         default: 'prod'
+        type: choice
         options:
         - dev
         - stg
