@@ -9,9 +9,9 @@ on:
         default: 'prod'
         type: choice
         options:
-        - dev
-        - stg
-        - prod
+          - dev
+          - stg
+          - prod
 
 jobs:
   build:
