@@ -13,7 +13,7 @@ class LastUpdatedWidget extends ConsumerWidget {
     final formattedDate = ref.watch(timeAgoProvider(timestamp: lastUpdated));
     return RichText(
       text: TextSpan(
-        style: theme.textTheme.labelSmall?.copyWith(color: theme.hintColor),
+        style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor),
         children: [TextSpan(text: "Updated: ".hardcoded), TextSpan(text: formattedDate)],
       ),
     );

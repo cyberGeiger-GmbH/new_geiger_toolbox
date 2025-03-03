@@ -1,5 +1,4 @@
 import 'package:core_ui/molecules/texts/app_text.dart';
-import 'package:core_ui/organisms/empty_content.dart';
 import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +26,7 @@ class NewsContent extends StatelessWidget {
           textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
         ),
         Spacing.gapH4,
-        EmptyContent(textAlign: TextAlign.justify, message: summary),
+        AppText.bodyMedium(text: summary, context: context, textAlign: TextAlign.justify),
         Spacing.gapH4,
         HorizontalTitleContent(key: key, title: lastUpdatedLabel ?? "last updated", source: lastedUpdated),
       ],

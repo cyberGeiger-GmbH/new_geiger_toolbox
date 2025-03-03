@@ -132,7 +132,7 @@ class AppRouting {
           builder:
               (context, state, navigationShell) => ScaffoldWithNavigation(
                 navigationShell: navigationShell,
-                feedbackButton: (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) ? TesterButtons() : null,
+                feedbackButton: (getFlavor() == Flavor.dev) ? TesterButtons() : null,
               ),
           branches: [
             StatefulShellBranch(

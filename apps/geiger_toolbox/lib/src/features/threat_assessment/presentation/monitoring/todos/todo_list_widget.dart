@@ -36,7 +36,7 @@ class TodoListWidget extends ConsumerWidget {
                     items:
                         data
                             .expand(
-                              (category) => category.offerings.sortByStatus().map(
+                              (category) => category.offerings.map(
                                 (todo) => TodoItem(
                                   item: todo,
                                   onChanged: () {
@@ -96,5 +96,3 @@ class TodoContainer extends StatelessWidget {
     );
   }
 }
-
-

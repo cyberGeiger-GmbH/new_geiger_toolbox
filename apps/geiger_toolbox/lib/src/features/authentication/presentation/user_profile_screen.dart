@@ -5,7 +5,6 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/app_vers
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/delete/delete_profile_widget.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/widgets/company_profile_contents_widget.dart';
 
-
 /// Shows the form for creating profile of the user
 
 class CreateProfileScreen extends StatefulWidget {
@@ -54,7 +53,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   Widget build(BuildContext context) {
     return GeigerScaffold(
       appBar: GeigerAppBar(title: "User Profile", closeDefaultProfile: widget.onCloseProfile),
-      floatingActionButton: getFlavor() == Flavor.prod ? null : DeleteUserProfileButton(),
+      floatingActionButton: getFlavor() == Flavor.dev ? DeleteUserProfileButton() : null,
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [

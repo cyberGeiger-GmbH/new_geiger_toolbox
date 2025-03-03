@@ -1,5 +1,6 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/utils/date_time_formatter.dart';
@@ -31,7 +32,8 @@ class LocalNewsFeedRepository {
       await deleteNewsObject();
       // * Then try to recover by inserting again
       await _synFromRemote(data: data);
-      //fail silently don't throw an exception
+      //fail silently don't throw an exception in staging and production
+      if (getFlavor() == Flavor.dev) rethrow;
       _appLogger.logError(e, s);
     }
   }
@@ -67,7 +69,7 @@ class LocalNewsFeedRepository {
             //insert recommendations for each news
             for (var recomData in newsData.recommendations) {
               //combine recommendation id and news id to avoid conflict
-              final recoId = recomData.id.toLowerCase();
+              final recoId = "${recomData.id.toLowerCase()}_$newsId";
 
               final reco = RecommendationsCompanion(
                 id: Value(recoId),

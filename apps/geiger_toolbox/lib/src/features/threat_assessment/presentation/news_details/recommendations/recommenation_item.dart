@@ -13,14 +13,14 @@ class RecommendationItem extends StatelessWidget {
     final theme = Theme.of(context);
     return ListTile(
       onTap: onPressed,
-      contentPadding: const EdgeInsets.all(Spacing.p8),
+      contentPadding: EdgeInsets.symmetric(horizontal: Spacing.p8, vertical: Spacing.p8),
       title: AppText.bodyLarge(
         text: item.name,
         context: context,
         textAlign: TextAlign.start,
         textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
       ),
-      trailing: const Icon(Icons.chevron_right),
+      trailing: IconButton(onPressed: onPressed, icon: Icon(Icons.chevron_right)),
     );
   }
 }

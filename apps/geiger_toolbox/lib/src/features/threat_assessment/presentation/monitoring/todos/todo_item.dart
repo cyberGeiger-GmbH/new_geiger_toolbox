@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/list_title.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
 class TodoItem extends StatelessWidget {
@@ -26,36 +27,23 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
-        onTap: showDetails,
-        leading: TodoCheckbox(onChanged: onChanged, status: item.status),
-        title: TodoContent(item: item),
-        subtitle: LastUpdatedWidget(lastUpdated: item.lastUpdated!),
-        trailing: const Icon(Icons.chevron_right),
-      ),
-    );
-  }
-}
+      padding: EdgeInsets.symmetric(horizontal: Spacing.p8, vertical: Spacing.p8),
+      child: Row(
+        children: [
+          TodoCheckbox(onChanged: onChanged, status: item.status),
 
-class TodoContent extends StatelessWidget {
-  const TodoContent({super.key, required this.item});
-  final TodoOffering item;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final appColorScheme = theme.colorScheme;
-    return AppText.bodySmall(
-      text: item.offering.name,
-
-      context: context,
-      textAlign: TextAlign.start,
-
-      textStyle: theme.textTheme.bodySmall?.copyWith(
-        color: item.status == Status.done ? theme.hintColor : appColorScheme.onSurface,
-        decoration: item.status == Status.done ? TextDecoration.lineThrough : TextDecoration.none,
-        fontWeight: FontWeight.w700,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTitle(title: item.offering.name, crossTitle: item.status == Status.done),
+                Spacing.gapH4,
+                LastUpdatedWidget(lastUpdated: item.lastUpdated!),
+              ],
+            ),
+          ),
+          IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
+        ],
       ),
     );
   }
@@ -101,7 +89,7 @@ class ContainerLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Spacing.p4),
+      padding: const EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p22),
       child: GestureDetector(
         onTap: showAllItems,
         child: Row(

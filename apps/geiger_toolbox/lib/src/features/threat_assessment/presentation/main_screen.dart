@@ -92,19 +92,20 @@ class FeatureList extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const GeigerScoreWidget(),
-        Spacing.gapH12,
+        Spacing.gapH8,
         ScanButtonWidget(onScanPressed: onScanPressed),
-        Spacing.gapH12,
+        Spacing.gapH8,
         NewsFeedsWidget(),
-        Spacing.gapH12,
+        Spacing.gapH8,
         //AssetWidget(),
         //**FEEDBACK: don't show the score message widget
         // const ScoreMessageWidget(),
-        Spacing.gapH12,
+        // Spacing.gapH12,
         // getFlavor() == Flavor.dev ? RecommendationWidget() :
         const TodoListWidget(),
-        Spacing.gapH12,
+        Spacing.gapH8,
         const AllNewsWidget(),
+        Spacing.gapH8,
       ],
     );
   }
