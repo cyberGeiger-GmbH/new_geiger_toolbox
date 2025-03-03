@@ -20,7 +20,7 @@ class AppVersionWidget extends ConsumerWidget {
           style: theme.textTheme.bodySmall,
           children: [
             TextSpan(
-              text: "GEIGER Toolbox\n".hardcoded,
+              text: "${appVersion.requireValue.appName}\n".hardcoded,
               style: theme.textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: theme.colorScheme.onSurface,
