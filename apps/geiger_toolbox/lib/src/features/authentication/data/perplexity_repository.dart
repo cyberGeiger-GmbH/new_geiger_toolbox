@@ -15,6 +15,7 @@ class PerplexityRepository {
     final data = await repo.searchCompanyDescription(companyName: companyName, location: location, apiKey: apiKey);
     return data?.description;
   }
+
 }
 
 @riverpod

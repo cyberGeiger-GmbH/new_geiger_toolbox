@@ -35,8 +35,11 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
   final TextEditingController _companyTextController = TextEditingController();
   final TextEditingController _locationTextController = TextEditingController();
 
+  final TextEditingController _companyDescriptionController = TextEditingController();
+
   String get companyName => _companyTextController.text;
   String get location => _locationTextController.text;
+  String get companyDescription => _companyDescriptionController.text;
 
   //local variable used to apply AutovalidateMode.onUserInteraction and show error hints only when the form has been submitted
   var _submitted = false;
@@ -52,6 +55,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     _node.dispose();
     _companyTextController.dispose();
     _locationTextController.dispose();
+    _companyDescriptionController.dispose();
     super.dispose();
   }
 
@@ -70,6 +74,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     if (data != null) {
       _companyTextController.text = data.companyName;
       _locationTextController.text = data.location;
+      _companyDescriptionController.text = data.description;
     }
   }
 
@@ -102,8 +107,18 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
   //update company description
   Future<void> _setCompanyDescription() async {
     final controller = ref.read(companyDescriptionControllerProvider.notifier);
-
-    await controller.setCompanyDescription(companyName: companyName, location: location);
+    //if the company description is empty, use the company name and location to generate the company description
+    if (companyDescription.isEmpty) {
+      await controller.setCompanyDescription(companyName: companyName, location: location);
+      await controller.setCompanyDescription(companyName: companyName, location: location);
+      final description = await ref.read(getCompanyDescriptionProvider.future);
+      //set the company description to the generated description
+      _companyDescriptionController.text = description!;
+    } else {
+      //if the company description is not empty, update the company description state
+      debugPrint("companyDescription is not empty => $companyDescription");
+      await controller.updateCompanyDescription(description: companyDescription);
+    }
   }
 
   Future<void> _onSubmit() async {
@@ -141,17 +156,28 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
   }
 
   void _locationEditingComplete() {
+    //check if the company name is valid
     if (!canSubmitCompanyName(companyName)) {
+      //move focus to the company name field
       _node.previousFocus();
       return;
     }
+    //check if the location is valid
     if (!canSubmitLocation(location)) {
       return;
     }
     //finish autofill context to avoid autofill suggestions to be shown when the form is submitted
     TextInput.finishAutofillContext();
+    //update the company description
     _setCompanyDescription();
     _node.unfocus();
+  }
+
+  void _companyDescriptionEditingComplete() {
+    if (companyDescription.isNotEmpty) {
+      _setCompanyDescription();
+      _node.unfocus();
+    }
   }
 
   @override
@@ -195,7 +221,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
                 locationKey: CreateProfileScreen.locationKey,
                 companyTextController: _companyTextController,
                 locationTextController: _locationTextController,
-                enabled: state.isLoading,
+                enabled: !state.isLoading,
                 submitted: _submitted,
                 validateCompanyName: (companyName) => companyNameErrorText(companyName ?? ""),
                 validateLocation: (location) => locationErrorText(location ?? ""),
@@ -214,7 +240,10 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
                             : "Regenerate Company Profile".hardcoded,
                   ),
 
-              CompanyDescriptionWidget(),
+              CompanyDescriptionWidget(
+                controller: _companyDescriptionController,
+                onEditingComplete: _companyDescriptionEditingComplete,
+              ),
               Spacing.gapH12,
               ConfirmationButtonWidget(
                 state: state,
@@ -268,15 +297,16 @@ class CompanyProfileForm extends StatelessWidget {
           key: companyKey,
           textEditingController: companyTextController,
           label: "Comany Name".hardcoded,
-          autofillHints: [AutofillHints.name],
+          autofillHints: [AutofillHints.organizationName],
           keyboardType: TextInputType.name,
-          enabled: !enabled,
+          enabled: enabled,
           validator: (companyName) => submitted ? validateCompanyName(companyName) : null,
           onEditingComplete: onEditCompanyNameComplete,
           autoComplete: true,
-          isLastField: false,
+          textInputAction: TextInputAction.next,
+          maxLength: 50,
         ),
-        Spacing.gapH8,
+        Spacing.gapH4,
         CustomTextFormField(
           key: locationKey,
           textEditingController: locationTextController,
@@ -284,11 +314,12 @@ class CompanyProfileForm extends StatelessWidget {
           keyboardType: TextInputType.streetAddress,
           autofillHints: [AutofillHints.addressCityAndState, AutofillHints.countryName],
           hint: 'for example "Freiburg, Germany"',
-          enabled: !enabled,
+          enabled: enabled,
           validator: (location) => submitted ? validateLocation(location ?? "") : null,
           onEditingComplete: onEditLocationComplete,
-          isLastField: true,
+          textInputAction: TextInputAction.done,
           autoComplete: true,
+          maxLength: 50,
         ),
       ],
     );
