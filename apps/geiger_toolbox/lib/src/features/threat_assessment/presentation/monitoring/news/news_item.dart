@@ -12,18 +12,30 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return ListTile(
-      leading: Avatar(radius: 25, photoUrl: url),
-      title: AppText.bodySmall(
-        text: title,
-        context: context,
-        textAlign: TextAlign.start,
-        textStyle: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Spacing.p8, vertical: Spacing.p8),
+      child: Row(
+        children: [
+          Avatar(radius: 28, photoUrl: url),
+          Spacing.gapH8,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText.bodySmall(
+                  text: title,
+                  context: context,
+                  textAlign: TextAlign.start,
+                  textStyle: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700),
+                ),
+                Spacing.gapH4,
+                LastUpdatedWidget(lastUpdated: lastUpdated),
+              ],
+            ),
+          ),
+          if (onPress != null) IconButton(onPressed: onPress, icon: const Icon(Icons.chevron_right)),
+        ],
       ),
-      subtitle: LastUpdatedWidget(lastUpdated: lastUpdated),
-      trailing: onPress != null ? Icon(Icons.chevron_right) : null,
-      onTap: onPress,
-      contentPadding: EdgeInsets.zero, // Adjust padding
     );
   }
 }

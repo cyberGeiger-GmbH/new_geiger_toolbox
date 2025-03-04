@@ -105,7 +105,7 @@ class FeatureList extends StatelessWidget {
         const TodoListWidget(),
         Spacing.gapH8,
         const AllNewsWidget(),
-        Spacing.gapH8,
+        Spacing.gapH12,
       ],
     );
   }
