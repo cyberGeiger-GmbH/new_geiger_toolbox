@@ -13,7 +13,7 @@ class NewsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Spacing.p8, vertical: Spacing.p8),
+      padding: EdgeInsets.only(left: Spacing.p8, right: Spacing.p0, top: Spacing.p8, bottom: Spacing.p8),
       child: Row(
         children: [
           Avatar(radius: 28, photoUrl: url),
