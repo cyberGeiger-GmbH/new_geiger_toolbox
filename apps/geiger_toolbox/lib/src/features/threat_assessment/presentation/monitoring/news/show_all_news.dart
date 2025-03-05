@@ -20,7 +20,7 @@ class _ShowAllNewsWidget extends ConsumerWidget {
               value.isEmpty
                   ? const SizedBox.shrink()
                   : NewsContainer(
-                    limit: 100,
+                    limit: value.length,
                     items:
                         value
                             .map(

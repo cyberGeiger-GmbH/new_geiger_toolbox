@@ -20,13 +20,12 @@ class TodosCategoryScreen extends ConsumerWidget {
   }
 }
 
-
 class TodoCategoryCardList extends ConsumerWidget {
   final List<TodoOfferingCategory> categories;
   const TodoCategoryCardList({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(children: categories.map((e) => TodoCategory(category: e)).toList());
+    return ListView(children: categories.map((e) => TodoCategory(category: e)).toList());
   }
 }
