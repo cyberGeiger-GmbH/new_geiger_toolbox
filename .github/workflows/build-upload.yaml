@@ -37,14 +37,6 @@ jobs:
       # Generate .env.<flavor> file as it is gitignored but needed for the build
       - name: Setup Dart Defines
         run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
-
-      - name: Debug Firebase Secrets
-        run: |
-            echo "Checking Firebase Options Dart..."
-            mkdir -p lib/
-            echo "${{ secrets.FIREBASE_OPTIONS_DART }}" | base64 --decode > lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
-            ls -l lib/
-            cat lib/firebase_options_${{ env.DEPLOY_ENV }}.dart || echo "Failed to write firebase_options file"
      
       # Write all the gitignored Firebase filtes that are needed for the build
       - name: Setup Firebase 
@@ -56,7 +48,6 @@ jobs:
         run: |
           mkdir -p lib/
           echo "$FIREBASE_OPTIONS_DART" | base64 --decode > lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
-          mkdir -p android/app/src/${{ env.DEPLOY_ENV }}
           echo "$GOOGLE_SERVICES_JSON" | base64 --decode > android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
           mkdir -p ios/flavors/${{ env.DEPLOY_ENV }}
           echo "$GOOGLE_SERVICES_PLIST" | base64 --decode > ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
@@ -66,9 +57,3 @@ jobs:
      
       - name: Build Android App
         run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }}
-
-
-      
-      
-      
-      
