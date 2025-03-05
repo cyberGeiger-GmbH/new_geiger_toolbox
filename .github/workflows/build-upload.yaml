@@ -34,8 +34,8 @@ jobs:
           # cache: true
           # cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
           # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - name: Flutter Doctor
-        run: flutter doctor
+      - name: Run Flutter Doctor
+        run: flutter doctor -v
 
       - name: Flutter Clean for the Project
         run: |
@@ -44,6 +44,7 @@ jobs:
       
       - name: Get dependencies using Melos
         run: 
+          melos clean
           melos bs
         
       # Generate .env.<flavor> file as it is gitignored but needed for the build
