@@ -33,7 +33,7 @@ class CompanyProfileRepository {
     }
   }
 
-  Future<bool?> updateCompanyProfile({required UserID userId, required Company companyInfo}) async {
+  Future<bool> updateCompanyProfile({required UserID userId, required Company companyInfo}) async {
     try {
       final companyProfile = CompanyProfilesCompanion(
         userId: Value(userId),
@@ -41,7 +41,15 @@ class CompanyProfileRepository {
         location: Value(companyInfo.location),
         description: Value(companyInfo.description),
       );
-      return _db.update(_db.companyProfiles).replace(companyProfile);
+
+      final result = await (_db.update(_db.companyProfiles)
+        ..where((t) => t.userId.equals(userId))).write(companyProfile);
+
+      if (result == 0) {
+        throw DataBaseException(output: "can't update company profile");
+      } else {
+        return true;
+      }
     } catch (e) {
       rethrow;
     }

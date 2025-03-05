@@ -103,9 +103,9 @@ class FeatureList extends StatelessWidget {
         // Spacing.gapH12,
         // getFlavor() == Flavor.dev ? RecommendationWidget() :
         const TodoListWidget(),
-        Spacing.gapH8,
+        Spacing.gapH12,
         const AllNewsWidget(),
-        Spacing.gapH8,
+        Spacing.gapH12,
       ],
     );
   }

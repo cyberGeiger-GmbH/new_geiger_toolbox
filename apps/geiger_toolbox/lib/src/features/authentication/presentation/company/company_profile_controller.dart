@@ -43,7 +43,7 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     //for testing purpose
     // final newState = await AsyncValue.guard(() => Future.delayed(const Duration(seconds: 5)));
     final newState = await AsyncValue.guard(
-      () async => companyRepo.updateCompanyProfile(companyInfo: company, userId: userId!.userId),
+      () async => await companyRepo.updateCompanyProfile(companyInfo: company, userId: userId!.userId),
     );
     if (mounted) {
       state = newState;

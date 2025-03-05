@@ -24,6 +24,11 @@ class CompanyDescriptionController extends _$CompanyDescriptionController {
     );
   }
 
+  Future<void> updateCompanyDescription({required String description}) async {
+    state = AsyncLoading<String>();
+    state = AsyncValue.data(description);
+  }
+
   // for testing purpose
   Future<void> deleteCompanyDescription() async {
     state = AsyncValue.data(null);
@@ -42,4 +47,16 @@ Future<String?> getCompanyDescription(Ref ref) async {
     }
   }
   return null;
+}
+
+@riverpod
+class EditCompanyDescriptionController extends _$EditCompanyDescriptionController {
+  @override
+  bool build() {
+    return false;
+  }
+
+  void toggleEdit() {
+    state = !state;
+  }
 }
