@@ -29,7 +29,7 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     if (mounted) {
       // * only set the state if the controller hasn't been disposed
       state = newState;
-      if (newState.hasError == false) {
+      if (state.hasError == false) {
         onSuccess();
       }
     }
