@@ -167,6 +167,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     if (companyDescription.isNotEmpty) {
       await controller.updateCompanyDescription(description: companyDescription);
       _node.unfocus();
+      await _onSubmit();
     }
   }
 
@@ -234,7 +235,6 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
               CompanyDescriptionWidget(
                 controller: _companyDescriptionController,
                 onEditingComplete: _companyDescriptionEditingComplete,
-                
               ),
               Spacing.gapH12,
               ConfirmationButtonWidget(

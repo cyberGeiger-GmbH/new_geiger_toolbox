@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/perplexity_repository.dart';
+import 'package:geiger_toolbox/src/mixin/notifier_mounted.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'company_description_controller.g.dart';
@@ -19,14 +20,17 @@ class CompanyDescriptionController extends _$CompanyDescriptionController {
     }
     final perplexityRepo = ref.read(perplexityRepositoryProvider);
     state = AsyncLoading<String>();
-    state = await AsyncValue.guard(
+    final newState = await AsyncValue.guard(
       () => perplexityRepo.getCompanyDescription(companyName: companyName, location: location),
     );
+
+    state = newState;
   }
 
-  Future<void> updateCompanyDescription({required String description}) async {
+  Future<void> updateCompanyDescription({required String description, Function()? onSuccess}) async {
     state = AsyncLoading<String>();
-    state = AsyncValue.data(description);
+    final newState = AsyncValue.data(description);
+    state = newState;
   }
 
   // for testing purpose
