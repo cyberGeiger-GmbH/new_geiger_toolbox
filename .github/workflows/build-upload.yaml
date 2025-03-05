@@ -34,10 +34,14 @@ jobs:
           # cache: true
           # cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
           # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+      - name: Flutter Doctor
+        run: flutter doctor
+
       - name: Flutter Clean for the Project
         run: |
           flutter clean
           flutter pub get
+      
       - name: Get dependencies using Melos
         run: 
           melos bs
