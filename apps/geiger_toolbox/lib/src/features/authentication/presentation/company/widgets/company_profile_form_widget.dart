@@ -74,7 +74,6 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     if (data != null) {
       _companyTextController.text = data.companyName;
       _locationTextController.text = data.location;
-      _companyDescriptionController.text = data.description;
     }
   }
 
@@ -107,18 +106,8 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
   //update company description
   Future<void> _setCompanyDescription() async {
     final controller = ref.read(companyDescriptionControllerProvider.notifier);
-    //if the company description is empty, use the company name and location to generate the company description
-    if (companyDescription.isEmpty) {
-      await controller.setCompanyDescription(companyName: companyName, location: location);
-      await controller.setCompanyDescription(companyName: companyName, location: location);
-      final description = await ref.read(getCompanyDescriptionProvider.future);
-      //set the company description to the generated description
-      _companyDescriptionController.text = description!;
-    } else {
-      //if the company description is not empty, update the company description state
-      debugPrint("companyDescription is not empty => $companyDescription");
-      await controller.updateCompanyDescription(description: companyDescription);
-    }
+
+    await controller.setCompanyDescription(companyName: companyName, location: location);
   }
 
   Future<void> _onSubmit() async {
@@ -142,11 +131,11 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     if (!canSubmitCompanyName(companyName) || !canSubmitLocation(location)) {
       return;
     }
-
-    if (_validateAndSaveForm()) {
-      _setCompanyDescription();
-      _node.unfocus();
-    }
+    //if the company description is empty or not, generate the company description
+    // if (_validateAndSaveForm()) {
+    _setCompanyDescription();
+    _node.unfocus();
+    // }
   }
 
   void _companyNameEditingComplete() {
@@ -173,9 +162,10 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
     _node.unfocus();
   }
 
-  void _companyDescriptionEditingComplete() {
+  void _companyDescriptionEditingComplete() async {
+    final controller = ref.read(companyDescriptionControllerProvider.notifier);
     if (companyDescription.isNotEmpty) {
-      _setCompanyDescription();
+      await controller.updateCompanyDescription(description: companyDescription);
       _node.unfocus();
     }
   }
@@ -239,10 +229,12 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
                             ? "Generate Company Profile".hardcoded
                             : "Regenerate Company Profile".hardcoded,
                   ),
+              Spacing.gapH12,
 
               CompanyDescriptionWidget(
                 controller: _companyDescriptionController,
                 onEditingComplete: _companyDescriptionEditingComplete,
+                
               ),
               Spacing.gapH12,
               ConfirmationButtonWidget(
@@ -293,6 +285,7 @@ class CompanyProfileForm extends StatelessWidget {
         SectionTitle(
           label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
         ),
+        Spacing.gapH12,
         CustomTextFormField(
           key: companyKey,
           textEditingController: companyTextController,
@@ -333,9 +326,6 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: Spacing.p12),
-      child: AppText.labelLarge(text: label, context: context, color: theme.colorScheme.onSurface),
-    );
+    return AppText.labelLarge(text: label, context: context, color: theme.colorScheme.onSurface);
   }
 }

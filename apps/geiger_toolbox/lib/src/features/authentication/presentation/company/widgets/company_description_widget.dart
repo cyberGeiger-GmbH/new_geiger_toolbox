@@ -1,4 +1,5 @@
 //* show company description
+import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
@@ -9,47 +10,48 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/company/
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 class CompanyDescriptionWidget extends ConsumerWidget {
-  const CompanyDescriptionWidget({super.key, required this.controller, required this.onEditingComplete});
+  const CompanyDescriptionWidget({
+    super.key,
+    required this.controller,
+    required this.onEditingComplete,
+   
+  });
   final TextEditingController controller;
   final VoidCallback onEditingComplete;
+ 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final value = ref.watch(getCompanyDescriptionProvider);
     return AsyncValueWidget(
       value: value,
-      data:
-          (desc) =>
-              desc == null
-                  ? const SizedBox.shrink()
-                  : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SectionTitle(label: "Company Description".hardcoded),
-                      CompanyDescription(
-                        description: desc,
-                        controller: controller,
-                        onEditingComplete: onEditingComplete,
-                      ),
-                    ],
-                  ),
+      data: (desc) {
+        if (desc == null) {
+          return const SizedBox.shrink();
+        } else {
+          controller.text = desc;
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SectionTitle(label: "Company Description".hardcoded),
+            Spacing.gapH4,
+            CompanyDescription(controller: controller, onEditingComplete: onEditingComplete),
+          ],
+        );
+      },
     );
   }
 }
 
-class CompanyDescription extends ConsumerWidget {
-  const CompanyDescription({
-    super.key,
-    required this.description,
-    required this.controller,
-    required this.onEditingComplete,
-  });
-  final String description;
+class CompanyDescription extends StatelessWidget {
+  const CompanyDescription({super.key, required this.controller, required this.onEditingComplete});
+
   final TextEditingController controller;
   final VoidCallback onEditingComplete;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final editState = ref.watch(editCompanyDescriptionControllerProvider);
+  Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
     return Card(
       elevation: 0,
@@ -59,6 +61,7 @@ class CompanyDescription extends ConsumerWidget {
       child: CustomTextFormField(
         textEditingController: controller,
         autoComplete: true,
+        hint: "Complete the description of your company or generate one".hardcoded,
         textInputAction: TextInputAction.done,
         keyboardType: TextInputType.multiline,
 

@@ -38,7 +38,7 @@ class ConfirmationButtonWidget extends ConsumerWidget {
           (value) =>
               value == null
                   ? SizedBox.shrink()
-                  : AppButton.primary(
+                  : AppButton.tertiary(
                     label: label,
                     context: context,
                     isLoading: state.isLoading,
