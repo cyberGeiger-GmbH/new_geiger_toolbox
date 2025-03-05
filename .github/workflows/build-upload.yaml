@@ -43,9 +43,15 @@ jobs:
           flutter pub get
       
       - name: Get dependencies using Melos
+        run: melos bs
+      
+      - name: Check Gradle & Java Versions
         run: |
-          melos clean
-          melos bs
+          cd apps/geiger_toolbox/android
+          ./gradlew --version
+          java -version
+
+      
         
       # Generate .env.<flavor> file as it is gitignored but needed for the build
       - name: Setup Dart Defines
