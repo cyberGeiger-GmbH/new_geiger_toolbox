@@ -37,6 +37,14 @@ jobs:
       # Generate .env.<flavor> file as it is gitignored but needed for the build
       - name: Setup Dart Defines
         run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
+
+
+      - name: Debug Firebase Secrets
+        run: |
+            echo "Checking Firebase Options Dart..."
+            echo "$FIREBASE_OPTIONS_DART" | base64 --decode > lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
+            ls -l lib/
+            cat lib/firebase_options_${{ env.DEPLOY_ENV }}.dart || echo "Failed to write firebase_options file"
      
       # Write all the gitignored Firebase filtes that are needed for the build
       - name: Setup Firebase 
