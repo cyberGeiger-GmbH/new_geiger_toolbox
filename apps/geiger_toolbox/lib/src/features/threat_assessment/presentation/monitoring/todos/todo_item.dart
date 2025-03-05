@@ -27,7 +27,7 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      padding: EdgeInsets.symmetric(horizontal: Spacing.p8, vertical: Spacing.p8),
+      padding: EdgeInsets.symmetric(vertical: Spacing.p8),
       child: Row(
         children: [
           TodoCheckbox(onChanged: onChanged, status: item.status),

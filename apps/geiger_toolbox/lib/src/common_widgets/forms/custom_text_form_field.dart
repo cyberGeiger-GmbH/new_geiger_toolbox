@@ -7,11 +7,11 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.textEditingController,
-    required this.label,
+    this.label,
     this.hint = 'For example "CyberGEIGER"',
     required this.enabled,
     required this.validator,
-    this.isLastField = false,
+    this.textInputAction = TextInputAction.none,
     this.isEmail = false,
     this.isPassword = false,
     this.autoComplete = false,
@@ -19,21 +19,26 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.autofillHints,
     this.keyboardType = TextInputType.text,
+    this.onChanged,
+    this.maxLines,
   });
 
   final TextEditingController textEditingController;
-  final String label;
+  final String? label;
   final String? hint;
   final bool enabled;
   final String? Function(String? value)? validator;
-  final bool isLastField;
+  final TextInputAction? textInputAction;
   final bool autoComplete;
   final VoidCallback? onEditingComplete;
+  final ValueChanged<String>? onChanged;
   final List<String>? autofillHints;
   final TextInputType keyboardType;
   final int? maxLength;
   final bool isPassword;
   final bool isEmail;
+
+  final int? maxLines;
 
   // Regex pattern to match emojis
   static final RegExp emojiRegex = RegExp(
@@ -48,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
       key: key,
       controller: textEditingController,
       style: appTheme.textTheme.bodySmall,
+      enabled: enabled,
       decoration: getInputDecoration(appTheme),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textCapitalization: TextCapitalization.sentences,
@@ -55,16 +61,18 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       autocorrect: autoComplete,
       obscureText: isPassword,
-      textInputAction: isLastField ? TextInputAction.done : TextInputAction.next,
+      textInputAction: textInputAction,
       keyboardType: keyboardType,
       keyboardAppearance: Brightness.light,
       onEditingComplete: onEditingComplete,
+      onChanged: onChanged,
 
       inputFormatters: <TextInputFormatter>[
         if (isEmail) ValidatorInputFormatter(editingValidator: EmailEditingRegexValidator()),
         FilteringTextInputFormatter.deny(emojiRegex),
       ],
-      maxLength: maxLength ?? 50,
+      maxLength: maxLength,
+      maxLines: maxLines,
     );
   }
 

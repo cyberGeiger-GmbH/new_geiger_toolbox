@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/buttons/custom_checkbox.dart';
-import 'package:core_ui/molecules/texts/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/list_title.dart';

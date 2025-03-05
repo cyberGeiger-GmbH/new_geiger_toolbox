@@ -2,7 +2,6 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
-import 'package:geiger_toolbox/src/exceptions/app_logger.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering_category.dart';
 import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
@@ -18,7 +17,6 @@ class TodoOfferingRepository {
   AppDatabase get _db => ref.read(appDatabaseProvider);
 
   Logger get _log => ref.read(logHandlerProvider("TodoOfferingRepository"));
-  AppLogger get _logger => ref.read(appLoggerProvider);
 
   //enum to database
   OfferingStatus todoToOfferingStatus(Status status) => switch (status) {

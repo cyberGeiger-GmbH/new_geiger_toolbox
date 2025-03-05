@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
 import 'package:geiger_toolbox/src/common_widgets/snack_bar.dart';
+import 'package:geiger_toolbox/src/extensions/score_color.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/geiger_score_service.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_controller.dart';
@@ -85,16 +86,17 @@ class GeigerScoreWidget extends ConsumerWidget {
 }
 
 class _ScoreWithInfo extends StatelessWidget {
-  const _ScoreWithInfo({super.key, required this.score, required this.showinfo, this.fontColor});
+  const _ScoreWithInfo({super.key, required this.score, required this.showinfo, });
   final String score;
-  final Color? fontColor;
+
   final VoidCallback showinfo;
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).getScoreColor(int.parse(score));
     return Stack(
       alignment: Alignment.center,
       children: [
-        _ScoreContent(score: score, color: fontColor, key: key),
+        _ScoreContent(score: score, color: color, key: key),
         Positioned(
           top: -10, // Adjust position as needed
           right: -14,
