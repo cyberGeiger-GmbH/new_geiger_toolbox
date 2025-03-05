@@ -46,5 +46,18 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Firebase configuration files
+lib/firebase_options*.dart
+ios/Runner/GoogleService-Info.plist
+ios/flavors/*/GoogleService-Info.plist
+ios/firebase_app_id_file.json
+android/app/google-services.json
+android/app/src/*/google-services.json
+
+# Firebase hosting
+.firebase/
+firebase*.json
+
+
 #Avoid custom_lint log
 custom_lint.log
