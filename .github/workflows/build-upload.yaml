@@ -67,6 +67,14 @@ jobs:
           echo "$FIREBASE_JSON" | base64 --decode > apps/geiger_toolbox/firebase.json
           # Needed by the "flutterfire bundle-service-file" build phase in Xcode
           dart pub global activate flutterfire_cli 1.0.1 --overwrite
+      
+      - name: Clean Gradle Cache
+        run: |
+          rm -rf ~/.gradle/caches
+          rm -rf ~/.gradle/wrapper
+          cd android
+          ./gradlew --stop
+          ./gradlew clean
      
       - name: Build Android App
         run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }}
