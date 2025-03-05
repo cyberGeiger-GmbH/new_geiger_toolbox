@@ -34,7 +34,11 @@ jobs:
           # cache: true
           # cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
           # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-     
+      - name: Flutter Clean
+        run: |
+          flutter clean
+          flutter pub get
+
       # Generate .env.<flavor> file as it is gitignored but needed for the build
       - name: Setup Dart Defines
         run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
