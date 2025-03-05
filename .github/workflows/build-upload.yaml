@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -30,9 +30,10 @@ jobs:
         with:
           channel: 'stable'
           flutter-version: '3.29.0'
-          cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+          # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
+          # cache: true
+          # cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
+          # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
      
       # Generate .env.<flavor> file as it is gitignored but needed for the build
       - name: Setup Dart Defines
