@@ -49,6 +49,7 @@ jobs:
         run: |
           mkdir -p lib/
           echo "$FIREBASE_OPTIONS_DART" | base64 --decode > lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
+          mkdir -p android/app/src/${{ env.DEPLOY_ENV }}
           echo "$GOOGLE_SERVICES_JSON" | base64 --decode > android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
           mkdir -p ios/flavors/${{ env.DEPLOY_ENV }}
           echo "$GOOGLE_SERVICES_PLIST" | base64 --decode > ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
