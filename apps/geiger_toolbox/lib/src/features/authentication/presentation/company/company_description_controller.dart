@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/perplexity_repository.dart';
-import 'package:geiger_toolbox/src/mixin/notifier_mounted.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'company_description_controller.g.dart';

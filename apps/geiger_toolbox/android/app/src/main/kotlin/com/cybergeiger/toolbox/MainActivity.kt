@@ -1,4 +1,4 @@
-package com.example.geiger_toolbox
+package com.cybergeiger.toolbox
 
 import io.flutter.embedding.android.FlutterActivity
 
