@@ -69,7 +69,7 @@ jobs:
         env:
           ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/apps/geiger_toolbox/android/upload-keystore.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_KEYSTORE_JKS: ${{ secrets.ANDROID_KEYSTORE_JKS }}
         run: |
@@ -79,7 +79,7 @@ jobs:
           # Use >> here to create or overwrite the file
           echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> apps/geiger_toolbox/android/key.properties
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >> apps/geiger_toolbox/android/key.properties
-          echo "keyAlias=$ANDROID_KEYSTORE_ALIAS" >> apps/geiger_toolbox/android/key.properties
+          echo "keyAlias=$ANDROID_KEY_ALIAS" >> apps/geiger_toolbox/android/key.properties
 
      
       - name: Build Android App
