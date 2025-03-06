@@ -55,7 +55,6 @@ jobs:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
         run: |
-          
           echo "$FIREBASE_OPTIONS_DART" | base64 --decode > apps/geiger_toolbox/lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
           echo "$GOOGLE_SERVICES_JSON" | base64 --decode > apps/geiger_toolbox/android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
           mkdir -p apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}
@@ -76,12 +75,32 @@ jobs:
           # Use > here to create or overwrite the file
           echo "$ANDROID_KEYSTORE_JKS" | base64 --decode > "$ANDROID_KEYSTORE_PATH"
           echo "storeFile=$ANDROID_KEYSTORE_PATH" > apps/geiger_toolbox/android/key.properties
-          # Use >> here to create or overwrite the file
+          # Use >> here to append additional lines
           echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> apps/geiger_toolbox/android/key.properties
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >> apps/geiger_toolbox/android/key.properties
           echo "keyAlias=$ANDROID_KEY_ALIAS" >> apps/geiger_toolbox/android/key.properties
 
-     
       - name: Build Android App
         run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }}
 
+      - name: Prepare for upload
+        run: |
+          PACKAGE_NAME=$(grep -E "namespace\s*=\s*\"[^\"]+\"" apps/geiger_toolbox/android/app/build.gradle | sed -E 's/.*"([^"]+)".*/\1/')
+          if [ "${{ env.DEPLOY_ENV }}" != "prod" ]; then
+            PACKAGE_NAME="${PACKAGE_NAME}.${{ env.DEPLOY_ENV }}"
+          fi
+          echo "PACKAGE_NAME=${PACKAGE_NAME}" >> $GITHUB_ENV
+          echo "AAB_PATH=${{ github.workspace }}/apps/geiger_toolbox/build/app/outputs/bundle/${{ env.DEPLOY_ENV }}Release/app-${{ env.DEPLOY_ENV }}-release.aab" >> $GITHUB_ENV
+      
+      - name: Upload to Google Play
+        uses: r0adkll/upload-to-google-play@v1
+        with:
+          # Note: First version should be updated manually in the Google Play Console
+          # See: https://github.com/r0adkll/upload-google-play
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: ${{ env.PACKAGE_NAME }}
+          releaseFiles: ${{ env.AAB_PATH }}
+          track: 'production'
+          releaseNotes: "Build: ${{ github.run_id }} - ${{ github.run_attempt }}"
+  
+          
