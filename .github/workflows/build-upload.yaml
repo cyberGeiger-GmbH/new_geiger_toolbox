@@ -20,6 +20,9 @@ jobs:
   setup: # Setup the environment
     runs-on: self-hosted
     timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: apps/geiger_toolbox
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
@@ -40,16 +43,13 @@ jobs:
     - name: Run Flutter Doctor
       run: flutter doctor -v
 
-    - name: Clean Flutter dependencies (Project)
-      run: flutter clean
-
-    - name: Install Flutter dependencies (Project)
-      run: flutter pub get
+    - name: Clean  and getFlutter dependencies (Project)
+      run: |
+        flutter clean
+        flutter pub get
 
     - name: Get dependencies using Melos 
-      run: |
-        melos clean
-        melos bs
+      run: melos bootstrap
       
     # Generate .env.<flavor> file as it is gitignored but needed for the build
     - name: Setup Dart Defines
