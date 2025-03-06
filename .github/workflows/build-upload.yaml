@@ -20,9 +20,6 @@ jobs:
   setup: # Setup the environment
     runs-on: self-hosted
     timeout-minutes: 20
-    defaults:
-      run:
-        working-directory: apps/geiger_toolbox
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
@@ -43,7 +40,7 @@ jobs:
     - name: Run Flutter Doctor
       run: flutter doctor -v
 
-    - name: Clean  and getFlutter dependencies (Project)
+    - name: Clean and Get Flutter dependencies (Project)
       run: |
         flutter clean
         flutter pub get
