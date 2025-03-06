@@ -93,7 +93,7 @@ jobs:
           echo "AAB_PATH=${{ github.workspace }}/apps/geiger_toolbox/build/app/outputs/bundle/${{ env.DEPLOY_ENV }}Release/app-${{ env.DEPLOY_ENV }}-release.aab" >> $GITHUB_ENV
       
       - name: Upload to Google Play
-        uses: r0adkll/upload-to-google-play@v1
+        uses: r0adkll/upload-google-play@v1
         with:
           # Note: First version should be updated manually in the Google Play Console
           # See: https://github.com/r0adkll/upload-google-play
