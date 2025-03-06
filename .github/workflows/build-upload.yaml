@@ -14,7 +14,10 @@ on:
           - prod
 
 jobs:
-  build:
+  #######################
+  # Initial Setup
+  ####################### 
+  setup: # Setup the environment
     runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
@@ -22,52 +25,96 @@ jobs:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
+    - name: Clone repository
+      uses: actions/checkout@v4
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          flutter-version: '3.29.0'
-          # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
-          # cache: true
-          # cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
-          # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-      - name: Run Flutter Doctor
-        run: flutter doctor -v
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        flutter-version: '3.29.0'
+        # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
+        # cache: true
+        # cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
+        # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+    - name: Run Flutter Doctor
+      run: flutter doctor -v
 
-      - name: Clean Flutter dependencies (Project)
-        run: flutter clean
+    - name: Clean Flutter dependencies (Project)
+      run: flutter clean
 
-      - name: Install Flutter dependencies (Project)
-        run: flutter pub get
+    - name: Install Flutter dependencies (Project)
+      run: flutter pub get
 
-      - name: Get dependencies using Melos 
-        run: |
-          melos clean
-          melos bs
+    - name: Get dependencies using Melos 
+      run: |
+        melos clean
+        melos bs
       
-      # Generate .env.<flavor> file as it is gitignored but needed for the build
-      - name: Setup Dart Defines
-        run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
+    # Generate .env.<flavor> file as it is gitignored but needed for the build
+    - name: Setup Dart Defines
+      run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
      
       # Write all the gitignored Firebase filtes that are needed for the build
-      - name: Setup Firebase 
-        env:
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
-          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
-        run: |
-          echo "$FIREBASE_OPTIONS_DART" | base64 --decode > apps/geiger_toolbox/lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
-          echo "$GOOGLE_SERVICES_JSON" | base64 --decode > apps/geiger_toolbox/android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
-          mkdir -p apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}
-          echo "$GOOGLE_SERVICES_PLIST" | base64 --decode > apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
-          echo "$FIREBASE_JSON" | base64 --decode > apps/geiger_toolbox/firebase.json
-          # Needed by the "flutterfire bundle-service-file" build phase in Xcode
-          dart pub global activate flutterfire_cli 1.0.1 --overwrite
+    - name: Setup Firebase 
+      env:
+        FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
+        FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
+      run: |
+        echo "$FIREBASE_OPTIONS_DART" | base64 --decode > apps/geiger_toolbox/lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
+        echo "$GOOGLE_SERVICES_JSON" | base64 --decode > apps/geiger_toolbox/android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
+        mkdir -p apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}
+        echo "$GOOGLE_SERVICES_PLIST" | base64 --decode > apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
+        echo "$FIREBASE_JSON" | base64 --decode > apps/geiger_toolbox/firebase.json
+        # Needed by the "flutterfire bundle-service-file" build phase in Xcode
+        dart pub global activate flutterfire_cli 1.0.1 --overwrite
+      
+    - name: Upload build files
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-files
+        path: |
+          .env.${{ env.DEPLOY_ENV }}
+          apps/geiger_toolbox/lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
+          apps/geiger_toolbox/android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
+          apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
+          apps/geiger_toolbox/firebase.json
 
+  #######################
+  # Run tests
+  #######################
+  # run-tests:
+  #   needs:
+  #     - setup
+  #   runs-on: self-hosted
+  #   timeout-minutes: 20
+
+  #   steps:
+  #     - name: Run static analysis
+  #       run: melos run analyze
+  #     - name: Run tests
+  #       run: melos run test
+
+  #######################
+  # Build & Upload Android App
+  #######################
+  build-android:
+    needs:
+      - setup
+      #- run-tests
+    runs-on: self-hosted
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+
+    steps:
+      - name: Download build files
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
       # Generate all the files needed for android code signing
       - name: Setup Android Keystore
         env:
@@ -107,10 +154,36 @@ jobs:
           releaseFiles: ${{ env.AAB_PATH }}
           track: 'production'
           releaseNotes: "Build: ${{ github.run_id }} - ${{ github.run_attempt }}"
-      - name: Upload Debug Symbols to Sentry
-        run: |
-          cd apps/geiger_toolbox
-          dart run sentry_dart_plugin 
+      - name: Upload debug symbols
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-symbols-android
+          path: |
+            apps/geiger_toolbox/build/app.android*.symbols
+
+  #######################
+  # Build and Upload iOS App
+  #######################
+
+  #######################
+  # Upload Debug Symbols to Sentry
+  #######################
+  upload-sentry:
+    needs:
+      - build-android
+    runs-on: self-hosted
+    timeout-minutes: 20
+
+    steps:
+    - name: Download Android Debug Symbols
+      uses: actions/download-artifact@v4
+      with:
+        name: debug-symbols-android
+    
+    - name: Upload Debug Symbols to Sentry
+      run: |
+        cd apps/geiger_toolbox
+        dart run sentry_dart_plugin 
          
   
           
