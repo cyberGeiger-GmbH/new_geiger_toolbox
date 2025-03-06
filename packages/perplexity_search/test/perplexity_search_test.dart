@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:perplexity_search/env/env.dart';
 import 'package:perplexity_search/perplexity_search.dart';
 import 'package:perplexity_search/src/utilities/dio_client.dart';
 import 'package:riverpod/riverpod.dart';
@@ -18,9 +19,12 @@ void main() {
   test('search company details', () async {
     final container = getContainer();
     final repo = container.read(perplexitySearchRepositoryProvider);
-    final testAPi = "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";
 
-    final data = await repo.searchCompanyDescription(companyName: "cyberGeiger", location: "Freiburg", apiKey: testAPi);
+    final data = await repo.searchCompanyDescription(
+      companyName: "cyberGeiger",
+      location: "Freiburg",
+      apiKey: Env.perplexityApiKey,
+    );
 
     print("result => $data");
 
