@@ -36,21 +36,11 @@ jobs:
           # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
       - name: Run Flutter Doctor
         run: flutter doctor -v
-
-      - name: Flutter Clean for the Project
-        run: |
-          flutter clean
-          flutter pub get
       
       - name: Get dependencies using Melos
-        run: melos bs
-      
-      - name: Check Gradle & Java Versions
         run: |
-          cd apps/geiger_toolbox/android
-          ./gradlew --version
-          java -version
-
+          melos clean
+          melos bs
       
         
       # Generate .env.<flavor> file as it is gitignored but needed for the build
@@ -60,10 +50,10 @@ jobs:
       # Write all the gitignored Firebase filtes that are needed for the build
       - name: Setup Firebase 
         env:
-          FIREBASE_JSON: "${{ secrets.FIREBASE_JSON }}"
-          FIREBASE_OPTIONS_DART: "${{ secrets.FIREBASE_OPTIONS_DART }}"
-          GOOGLE_SERVICES_JSON: "${{ secrets.GOOGLE_SERVICES_JSON }}"
-          GOOGLE_SERVICES_PLIST: "${{ secrets.GOOGLE_SERVICES_PLIST }}"
+          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
         run: |
           
           echo "$FIREBASE_OPTIONS_DART" | base64 --decode > apps/geiger_toolbox/lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
@@ -73,6 +63,24 @@ jobs:
           echo "$FIREBASE_JSON" | base64 --decode > apps/geiger_toolbox/firebase.json
           # Needed by the "flutterfire bundle-service-file" build phase in Xcode
           dart pub global activate flutterfire_cli 1.0.1 --overwrite
+
+      # Generate all the files needed for android code signing
+      - name: Setup Android Keystore
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/apps/geiger_toolbox/android/upload-keystore.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEYSTORE_JKS: ${{ secrets.ANDROID_KEYSTORE_JKS }}
+        run: |
+          # Use > here to create or overwrite the file
+          echo "$ANDROID_KEYSTORE_JKS" | base64 --decode > "$ANDROID_KEYSTORE_PATH"
+          echo "storeFile=$ANDROID_KEYSTORE_PATH" > apps/geiger_toolbox/android/key.properties
+          # Use >> here to create or overwrite the file
+          echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> apps/geiger_toolbox/android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> apps/geiger_toolbox/android/key.properties
+          echo "keyAlias=$ANDROID_KEYSTORE_ALIAS" >> apps/geiger_toolbox/android/key.properties
+
      
       - name: Build Android App
         run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }}
