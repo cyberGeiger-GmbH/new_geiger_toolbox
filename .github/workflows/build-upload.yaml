@@ -86,7 +86,7 @@ jobs:
           echo "keyAlias=$ANDROID_KEY_ALIAS" >> apps/geiger_toolbox/android/key.properties
 
       - name: Build Android App
-        run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }}
+        run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=apps/geiger_toolbox/build
 
       - name: Prepare for upload
         run: |
@@ -107,5 +107,10 @@ jobs:
           releaseFiles: ${{ env.AAB_PATH }}
           track: 'production'
           releaseNotes: "Build: ${{ github.run_id }} - ${{ github.run_attempt }}"
+      - name: Upload Debug Symbols to Sentry
+        run: |
+          cd apps/geiger_toolbox
+          dart run sentry_dart_plugin 
+         
   
           

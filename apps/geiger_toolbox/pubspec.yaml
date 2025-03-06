@@ -89,4 +89,3 @@ sentry:
   log_level: error # possible values: trace, debug, info, warn, error
   commits: auto
   ignore_missing: true
-  symbols_path: build
