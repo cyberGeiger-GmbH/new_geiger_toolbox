@@ -36,13 +36,18 @@ jobs:
           # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
       - name: Run Flutter Doctor
         run: flutter doctor -v
-      
-      - name: Get dependencies using Melos
+
+      - name: Clean Flutter dependencies (Project)
+        run: flutter clean
+
+      - name: Install Flutter dependencies (Project)
+        run: flutter pub get
+
+      - name: Get dependencies using Melos 
         run: |
           melos clean
           melos bs
       
-        
       # Generate .env.<flavor> file as it is gitignored but needed for the build
       - name: Setup Dart Defines
         run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
