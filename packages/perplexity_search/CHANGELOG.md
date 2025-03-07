@@ -1,3 +1,7 @@
+## 1.3.1
+
+ - **FIX**(perplexity_search): remove secret key from test.
+
 ## 1.3.0
 
  - **REFACTOR**(geiger_toolbox,core_ui): modify t and c screen  to intro.
