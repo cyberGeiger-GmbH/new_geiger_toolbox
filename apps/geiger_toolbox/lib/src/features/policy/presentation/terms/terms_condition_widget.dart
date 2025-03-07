@@ -8,7 +8,9 @@ import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_cond
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
+import 'package:geiger_toolbox/src/utils/url_launcher_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TermsAndConditionWidget extends ConsumerWidget {
   const TermsAndConditionWidget({super.key});
@@ -68,11 +70,11 @@ class TermsPrivacyRow extends StatelessWidget {
   }
 }
 
-class TermsPrivacySpanText extends StatelessWidget {
+class TermsPrivacySpanText extends ConsumerWidget {
   const TermsPrivacySpanText({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final textSpanStyle = theme.textTheme.bodySmall?.copyWith(
       //fontSize: TypoSize.bodySmall,
@@ -95,7 +97,13 @@ class TermsPrivacySpanText extends StatelessWidget {
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {
-                    // Handle Terms of Service tap
+                    ref
+                        .read(urlLauncherProvider)
+                        .launch(
+                          Uri.parse("https://www.cyber-geiger.com/app/privacy-policy/"),
+                          // * Open app store app directly (or fallback to browser)
+                          mode: LaunchMode.inAppBrowserView,
+                        );
                   },
           ),
           TextSpan(text: ' and '),
@@ -105,7 +113,14 @@ class TermsPrivacySpanText extends StatelessWidget {
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {
-                    // Handle Privacy Policy tap
+                    // Handle  ref
+                    ref
+                        .read(urlLauncherProvider)
+                        .launch(
+                          Uri.parse("https://www.cyber-geiger.com/app/privacy-policy/"),
+                          // * Open app store app directly (or fallback to browser)
+                          mode: LaunchMode.inAppBrowserView,
+                        );
                   },
           ),
         ],

@@ -1,4 +1,3 @@
-// ignore_for_file: avoid-non-null-assertion
 
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/foundation.dart';
