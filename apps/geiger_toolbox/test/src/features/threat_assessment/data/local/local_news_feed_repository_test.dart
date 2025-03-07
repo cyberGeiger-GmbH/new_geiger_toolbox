@@ -11,9 +11,6 @@ import 'package:geiger_toolbox/src/utils/drift_storage/database_table.dart';
 import 'package:flutter_test/flutter_test.dart' as tester;
 
 void main() {
-  late ProviderContainer container;
-  late List<News> sourceData;
-
   DatabaseConnection testDatabaseConnection() {
     return DatabaseConnection(NativeDatabase.memory());
   }
@@ -30,6 +27,9 @@ void main() {
 
     return container;
   }
+
+  late ProviderContainer container;
+  late List<News> sourceData;
 
   tester.setUpAll(() async {
     container = getDataBaseContainer();
@@ -87,17 +87,29 @@ void main() {
     );
 
     tester.test(
-      "Given news data has been stored in the database, when news data is fetched by title  that does  exist, then news data is returned",
+      "Given news data has been stored in the database, when news data is fetched by title  that does  exist, then news data is returned with the correct number of recommendations",
       () async {
         final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
-        final result = await repoNewsFeed.fetchNewsById(newsId: "Defensible-Security-Architecture-and-Engineering");
+        final result = await repoNewsFeed.fetchNewsById(newsId: "Credential_Stuffing_Attacks");
+
+        final recommendations = result.recommendations;
 
         //fetch data
         tester.expect(result, tester.isNot(tester.throwsA(tester.isA<StateError>())));
 
         tester.expect(result, tester.isA<News>());
+
+        tester.expect(recommendations.length, 2);
       },
     );
+
+    tester.test('should return correct number of news items', () async {
+      final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
+      final Stream<List<News>> newsStream = repoNewsFeed.watchNewsList();
+      final List<News> news = await newsStream.first;
+
+      tester.expect(news.length, 3); // Based on sample data having 3 news items
+    });
   });
 }

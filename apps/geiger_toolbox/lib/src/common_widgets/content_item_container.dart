@@ -11,10 +11,7 @@ class ContentItemContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GeigerCard(
-       
-          child: Column(mainAxisSize: MainAxisSize.min, children: items),
-        ),
+        GeigerCard(child: Column(mainAxisSize: MainAxisSize.min, children: items)),
         if (explanation != null) ContentItemContainerWithExplanation(explanation: explanation!),
       ],
     );

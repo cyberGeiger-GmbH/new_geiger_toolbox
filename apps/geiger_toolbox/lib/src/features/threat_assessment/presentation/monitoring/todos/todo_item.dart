@@ -27,7 +27,7 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      padding: EdgeInsets.symmetric(vertical: Spacing.p8),
+      padding: const EdgeInsets.symmetric(vertical: Spacing.p8),
       child: Row(
         children: [
           TodoCheckbox(onChanged: onChanged, status: item.status),
@@ -89,7 +89,7 @@ class ContainerLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p22),
+      padding: const EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p8),
       child: GestureDetector(
         onTap: showAllItems,
         child: Row(

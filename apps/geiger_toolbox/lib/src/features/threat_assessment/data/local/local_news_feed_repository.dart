@@ -206,30 +206,25 @@ class LocalNewsFeedRepository {
 
   Stream<List<News>> watchNewsList({bool sort = true}) {
     _log.i("watching ${sort ? 'Recent' : 'Old'} List<News> ...");
-    //final da = ref.read(previousMonthProvider(month: 1));
-    // final newsWithRecoAndOffering =
-    //     olderNews == null ? _sortNewsInfo() : _olderNewsInfo(older: da);
     final newsWithRecoAndOffering = _sortNewsInfo(sort: sort);
-    //Tranfrom the query inot a list of News with their associated Recommendation and task;
-    final List<News> newsResult = [];
-    final Map<String, List<Recommendation>> recosMap = {};
-    final Map<String, List<Offering>> offerMap = {};
-
+    
     return newsWithRecoAndOffering.map((rows) {
+      final List<News> newsResult = [];
+      final Map<String, Set<Recommendation>> recosMap = {};
+      final Map<String, List<Offering>> offerMap = {};
+
+      // First pass: Process all offerings
       for (final row in rows) {
-        final newsEntry = row.readTable(_db.newsInfo);
-
-        final recommendationEntry = row.readTableOrNull(_db.recommendations);
         final offeringEntry = row.readTableOrNull(_db.recommendationOfferings);
-
-        // Add offerings to the corresponding list in offerMap
         if (offeringEntry != null) {
           final offer = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
-
           offerMap.putIfAbsent(offeringEntry.recommendationId, () => []).add(offer);
         }
+      }
 
-        // Create or update recommendations for the current newsId
+      // Second pass: Create recommendations with complete offering lists
+      for (final row in rows) {
+        final recommendationEntry = row.readTableOrNull(_db.recommendations);
         if (recommendationEntry != null) {
           final reco = Recommendation(
             id: recommendationEntry.id,
@@ -237,17 +232,13 @@ class LocalNewsFeedRepository {
             name: recommendationEntry.name,
             offerings: offerMap[recommendationEntry.id] ?? [],
           );
-
-          // Ensure the recommendation is added only once for a specific newsId
-          if (!recosMap.containsKey(recommendationEntry.newsId)) {
-            recosMap[recommendationEntry.newsId] = [];
-          }
-          // Only add the recommendation if it's not already in the list for the specific newsId
-          if (!recosMap[recommendationEntry.newsId]!.any((rec) => rec.id == reco.id)) {
-            recosMap[recommendationEntry.newsId]!.add(reco);
-          }
+          recosMap.putIfAbsent(recommendationEntry.newsId, () => {}).add(reco);
         }
-        // if the news is not yet in the list add it
+      }
+
+      // Final pass: Create news objects with complete recommendation lists
+      for (final row in rows) {
+        final newsEntry = row.readTable(_db.newsInfo);
         if (!newsResult.any((value) => value.id == newsEntry.id)) {
           final news = News(
             id: newsEntry.id,
@@ -257,9 +248,8 @@ class LocalNewsFeedRepository {
             articleUrl: "",
             imageUrl: newsEntry.imageUrl,
             dateCreated: "${newsEntry.dateCreated}",
-            recommendations: recosMap[newsEntry.id] ?? [],
+            recommendations: (recosMap[newsEntry.id] ?? {}).toList(),
           );
-
           newsResult.add(news);
         }
       }
@@ -278,29 +268,26 @@ class LocalNewsFeedRepository {
           ),
         ])).get();
 
-    //Tranfrom the query inot a list of News with their associated Recommendation and task;
+    //Transform the query into a list of News with their associated Recommendation and task;
     final List<News> newsResult = [];
     final Map<String, Set<Recommendation>> recosMap = {};
     final Map<String, List<Offering>> offerMap = {};
 
+    // First pass: Process all offerings and recommendations
     for (var rows in newsWithRecoAndOffering) {
-      final newsEntry = rows.readTable(_db.newsInfo);
-      //read recommendation
-      final recommendationEntry = rows.readTableOrNull(_db.recommendations);
-
-      // debugPrint("all recommendations table => $recommendationEntry");
-      // read offering
       final offeringEntry = rows.readTableOrNull(_db.recommendationOfferings);
-      // debugPrint("all news => $newsEntry");
-      // debugPrint("all recommendations => $recommendationEntry");
 
-      // add offfer to the corresponding list in offerMap
+      // Add offerings to the corresponding list in offerMap
       if (offeringEntry != null) {
         final offer = Offering(name: offeringEntry.name, summary: offeringEntry.summary);
         offerMap.putIfAbsent(offeringEntry.recommendationId, () => []).add(offer);
       }
+    }
 
-      // Create or update recommendations for the current newsId
+    // Second pass: Create recommendations with complete offering lists
+    for (var rows in newsWithRecoAndOffering) {
+      final recommendationEntry = rows.readTableOrNull(_db.recommendations);
+
       if (recommendationEntry != null) {
         final reco = Recommendation(
           id: recommendationEntry.id,
@@ -309,17 +296,17 @@ class LocalNewsFeedRepository {
           offerings: offerMap[recommendationEntry.id] ?? [],
         );
 
-        // Ensure the recommendation is added only once for a specific newsId
-        if (!recosMap.containsKey(recommendationEntry.newsId)) {
-          recosMap[recommendationEntry.newsId] = {};
-        }
-        // Only add the recommendation if it's not already in the list for the specific newsId
-        if (!recosMap[recommendationEntry.newsId]!.any((rec) => rec.id == reco.id)) {
-          recosMap[recommendationEntry.newsId]!.add(reco);
-        }
+        // Initialize Set if needed
+        recosMap.putIfAbsent(recommendationEntry.newsId, () => {});
+        recosMap[recommendationEntry.newsId]!.add(reco);
       }
+    }
 
-      // if the news is not yet in the list add it
+    // Final pass: Create news objects with complete recommendation lists
+    for (var rows in newsWithRecoAndOffering) {
+      final newsEntry = rows.readTable(_db.newsInfo);
+
+      // Only add news if not already added
       if (!newsResult.any((value) => value.id == newsEntry.id)) {
         final news = News(
           id: newsEntry.id,

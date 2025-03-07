@@ -11,16 +11,20 @@ class RecommendationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return ListTile(
-      onTap: onPressed,
-      contentPadding: EdgeInsets.symmetric(horizontal: Spacing.p8, vertical: Spacing.p8),
-      title: AppText.bodyLarge(
-        text: item.name,
-        context: context,
-        textAlign: TextAlign.start,
-        textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AppText.bodyLarge(
+            text: item.name,
+            context: context,
+            textAlign: TextAlign.start,
+            textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
+          ),
+          IconButton(onPressed: onPressed, icon: Icon(Icons.chevron_right)),
+        ],
       ),
-      trailing: IconButton(onPressed: onPressed, icon: Icon(Icons.chevron_right)),
     );
   }
 }
