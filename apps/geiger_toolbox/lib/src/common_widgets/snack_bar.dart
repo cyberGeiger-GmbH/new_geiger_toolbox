@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 // import 'package:go_router/go_router.dart';
 // import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
-void showSnackBar({required BuildContext context, required String content, Color? backgroundColor, int? duration}) {
-  final appText = AppText.bodySmall(text: content, context: context, textAlign: TextAlign.start);
+void showSnackBar({
+  required BuildContext context,
+  required String content,
+  Color? backgroundColor,
+  int? duration,
+  Color? textColor,
+}) {
+  final appText = AppText.bodyMedium(text: content, context: context, textAlign: TextAlign.start, color: textColor);
   final snackBar = SnackBar(
     content: appText,
     // action: SnackBarAction(

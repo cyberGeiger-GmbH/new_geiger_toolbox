@@ -10,4 +10,9 @@ class TodoOfferingCategory {
   TodoOfferingCategory copyWith({bool? isExpanded}) {
     return TodoOfferingCategory(category: category, offerings: offerings, isExpanded: isExpanded ?? this.isExpanded);
   }
+
+  @override
+  String toString() {
+    return 'TodoOfferingCategory(category: $category, offerings: $offerings, isExpanded: $isExpanded)';
+  }
 }

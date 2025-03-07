@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
+import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/data/local/todo_offering_repository.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
@@ -21,6 +22,11 @@ class TodoListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //show snackbar messsage when user update todo state
+    ref.listen(todoControllerProvider, (_, nextState) {
+      nextState.todoUpdateStatusSnackBar(context: context);
+    });
+
     final todos = ref.watch(watchTodosProvider);
 
     return AsyncValueWidget(
