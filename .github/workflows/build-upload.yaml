@@ -27,16 +27,26 @@ jobs:
     steps:
     - name: Clone repository
       uses: actions/checkout@v4
-
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        channel: 'stable'
-        flutter-version: '3.29.0'
+    
+    # No longer needed as we are using Shorebird
+    # - name: Setup Flutter
+    #   uses: subosito/flutter-action@v2
+    #   with:
+    #     channel: 'stable'
+    #     flutter-version: '3.29.0'
         # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
         # cache: true
         # cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
         # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+  
+    # Shorebird setup
+    - name: Install Shorebird
+      uses: shorebirdtech/setup-shorebird@v1
+      # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
+      # cache: true
+      # cache-key: "shorebird-:os:-:version:-:arch:"
+      # cache-path: "${{ runner.tool_cache }}/shorebird/:version:-:arch:"
+
     - name: Run Flutter Doctor
       run: flutter doctor -v
 
@@ -128,9 +138,21 @@ jobs:
           echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> apps/geiger_toolbox/android/key.properties
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >> apps/geiger_toolbox/android/key.properties
           echo "keyAlias=$ANDROID_KEY_ALIAS" >> apps/geiger_toolbox/android/key.properties
+      # No longer needed as we are using Shorebird
+      # - name: Build Android App
+      #   run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=apps/geiger_toolbox/build
 
-      - name: Build Android App
-        run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=apps/geiger_toolbox/build
+      - name: Shorebird Android Release
+        uses: shorebirdtech/shorebird-release@v0
+        id: shorebird-android-release
+        with:
+          platform: android
+          args:
+            - --flavor ${{ env.DEPLOY_ENV }}
+            - -t lib/main_${{ env.DEPLOY_ENV }}.dart
+            - --dart-define-from-file=.env.${{ env.DEPLOY_ENV }}
+            - --obfuscate
+            - --split-debug-info=apps/geiger_toolbox/build
 
       - name: Prepare for upload
         run: |
