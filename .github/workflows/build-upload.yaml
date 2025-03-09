@@ -40,7 +40,7 @@ jobs:
         # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
   
     # Shorebird setup
-    - name: Install Shorebird
+    - name: Setup Shorebird
       uses: shorebirdtech/setup-shorebird@v1
       # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
       # cache: true
@@ -147,12 +147,7 @@ jobs:
         id: shorebird-android-release
         with:
           platform: android
-          args:
-            - --flavor ${{ env.DEPLOY_ENV }}
-            - -t lib/main_${{ env.DEPLOY_ENV }}.dart
-            - --dart-define-from-file=.env.${{ env.DEPLOY_ENV }}
-            - --obfuscate
-            - --split-debug-info=apps/geiger_toolbox/build
+          args: --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=apps/geiger_toolbox/build
 
       - name: Prepare for upload
         run: |
