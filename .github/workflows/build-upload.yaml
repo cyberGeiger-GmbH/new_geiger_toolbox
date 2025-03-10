@@ -18,7 +18,7 @@ jobs:
   # Initial Setup
   ####################### 
   setup: # Setup the environment
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -111,7 +111,7 @@ jobs:
     needs:
       - setup
       #- run-tests
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -187,7 +187,7 @@ jobs:
   upload-sentry:
     needs:
       - build-android
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
