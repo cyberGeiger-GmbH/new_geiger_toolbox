@@ -3,11 +3,31 @@ import 'package:flutter/material.dart';
 import '../../tokens/spacing.dart';
 import '../texts/app_text.dart';
 
+enum ButtonSize { small, medium, large }
+
 class AppButton extends StatelessWidget {
   const AppButton._({super.key, required this.child, this.onPressed, this.style});
 
   static ColorScheme _appColor(BuildContext context) {
     return Theme.of(context).colorScheme;
+  }
+
+  static EdgeInsets _buttonSize({required ButtonSize size}) {
+    EdgeInsets padding;
+
+    switch (size) {
+      case ButtonSize.small:
+        padding = const EdgeInsets.symmetric(horizontal: Spacing.p8);
+        break;
+      case ButtonSize.medium:
+        padding = const EdgeInsets.symmetric(horizontal: Spacing.p12);
+        break;
+      case ButtonSize.large:
+        padding = const EdgeInsets.symmetric(horizontal: Spacing.p16);
+        break;
+    }
+
+    return padding;
   }
 
   //todo: wrap with Semantics for visual impair user
@@ -31,6 +51,33 @@ class AppButton extends StatelessWidget {
           isLoading
               ? CircularProgressIndicator(color: _appColor(context).onPrimary)
               : AppText.labelLarge(text: label, context: context, color: _appColor(context).onPrimary),
+        ],
+      ),
+    );
+  }
+
+  factory AppButton.primarySmall({
+    Key? key,
+    required String label,
+    VoidCallback? onPressed,
+    required BuildContext context,
+    bool isLoading = false,
+  }) {
+    final padding = _buttonSize(size: ButtonSize.small);
+    return AppButton._(
+      key: key,
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _appColor(context).primary,
+        overlayColor: _appColor(context).onPrimary,
+        padding: padding,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          isLoading
+              ? CircularProgressIndicator(color: _appColor(context).onPrimary)
+              : AppText.labelSmall(text: label, context: context, color: _appColor(context).onPrimary),
         ],
       ),
     );
@@ -113,6 +160,25 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).onError,
       ),
       child: AppText.labelLarge(text: label, context: context, color: _appColor(context).onTertiary),
+    );
+  }
+
+  factory AppButton.deleteSmall({
+    Key? key,
+    required String label,
+    VoidCallback? onPressed,
+    required BuildContext context,
+  }) {
+    final padding = _buttonSize(size: ButtonSize.small);
+    return AppButton._(
+      key: key,
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _appColor(context).error,
+        overlayColor: _appColor(context).onError,
+        padding: padding,
+      ),
+      child: AppText.labelSmall(text: label, context: context, color: _appColor(context).onTertiary),
     );
   }
 
