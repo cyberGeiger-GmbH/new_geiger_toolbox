@@ -38,18 +38,36 @@ jobs:
         cache: true
         cache-key: "flutter-:os:-:channel:-:version:-arch:-:hash:"
         cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-  
-    - name: Run Flutter Doctor
-      run: flutter doctor -v
+  # set up dependencies      
+  setup-dependencies:
+    needs: 
+      - setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+    steps:
+    # - name: Run Flutter Doctor
+    #   run: flutter doctor -v
 
-    - name: Clean and Get Flutter dependencies (Project)
-      run: |
-        flutter clean
-        flutter pub get
+    - name:  Get Flutter dependencies (Project)
+      run: flutter pub get
 
-    - name: Get dependencies using Melos 
-      run: melos bootstrap
-      
+    - name: Get Project Dependencies Using Melos 
+      run: melos bs
+  # setup env for .env files
+  setup-env:
+    needs: 
+      - setup
+      - setup-dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+
+    steps: 
     # Generate .env.<flavor> file as it is gitignored but needed for the build
     - name: Setup Dart Defines
       run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
@@ -102,6 +120,8 @@ jobs:
   build-android:
     needs:
       - setup
+      - setup-dependencies
+      - setup-env
       #- run-tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
