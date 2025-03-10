@@ -6,13 +6,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'company_profile_controller.g.dart';
 
+enum CompanyStatus { updated, created }
+
 @riverpod
 class CompanyProfileController extends _$CompanyProfileController with NotifierMounted {
   @override
-  FutureOr<void> build() {
+  FutureOr<CompanyStatus?> build() {
     ref.onDispose(() {
       setUnmounted();
     });
+    return null;
   }
 
   Future<void> createCompanyProfile({required Company company, required void Function() onSuccess}) async {
@@ -20,9 +23,10 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     final userRepo = ref.read(userProfileRepositoryProvider);
     state = const AsyncLoading<void>();
     final userId = await userRepo.fetchUser();
-    final newState = await AsyncValue.guard(
-      () async => companyRepo.createCompanyProfile(companyInfo: company, userId: userId!.userId),
-    );
+    final newState = await AsyncValue.guard(() async {
+      final result = await companyRepo.createCompanyProfile(companyInfo: company, userId: userId!.userId);
+      return result == 0 ? CompanyStatus.created : null;
+    });
     //for testing purpose
     // final newState = await AsyncValue.guard(() => Future.delayed(const Duration(seconds: 5)));
 
@@ -42,9 +46,10 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     final userId = await userRepo.fetchUser();
     //for testing purpose
     // final newState = await AsyncValue.guard(() => Future.delayed(const Duration(seconds: 5)));
-    final newState = await AsyncValue.guard(
-      () async => await companyRepo.updateCompanyProfile(companyInfo: company, userId: userId!.userId),
-    );
+    final newState = await AsyncValue.guard(() async {
+      final result = await companyRepo.updateCompanyProfile(companyInfo: company, userId: userId!.userId);
+      return result ? CompanyStatus.updated : null;
+    });
     if (mounted) {
       state = newState;
       if (newState.hasError == false) {

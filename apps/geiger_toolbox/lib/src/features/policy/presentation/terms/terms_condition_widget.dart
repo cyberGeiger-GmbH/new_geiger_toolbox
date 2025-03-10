@@ -3,6 +3,7 @@ import 'package:core_ui/molecules/buttons/custom_checkbox.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/features/policy/presentation/terms/get_started_button.dart';
 
 import 'package:geiger_toolbox/src/features/policy/presentation/terms/terms_condition_controller.dart';
 
@@ -44,28 +45,21 @@ class TermsAndConditionWidget extends ConsumerWidget {
   }
 }
 
-class GetStartedButton extends StatelessWidget {
-  const GetStartedButton({super.key, required this.onPressed});
-  final VoidCallback? onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: AppButton.primary(label: "Get Started", context: context, onPressed: onPressed),
-    );
-  }
-}
-
 class TermsPrivacyRow extends StatelessWidget {
   const TermsPrivacyRow({super.key, required this.value, required this.onChanged});
   final bool value;
   final ValueChanged<bool?> onChanged;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [CustomCheckbox(value: value, onChanged: onChanged), Spacing.gapW4, TermsPrivacySpanText()],
+      children: [
+        CustomCheckbox(value: value, onChanged: onChanged, activeColor: theme.colorScheme.tertiary),
+        Spacing.gapW4,
+        TermsPrivacySpanText(),
+      ],
     );
   }
 }

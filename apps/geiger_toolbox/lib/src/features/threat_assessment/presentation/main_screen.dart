@@ -8,11 +8,9 @@ import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
-
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/news/all_news_widget.dart';
-
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/todos/todo_list_widget.dart';
 
@@ -33,8 +31,6 @@ class MainScreen extends ConsumerWidget {
     ref.listen(scanButtonControllerProvider, (_, nextState) {
       return nextState.showAlertDialogOnError(context: context);
     });
-
-   
 
     // final state = ref.watch(homeScreenControllerProvider);
     final ScrollController scrollController = ScrollController();

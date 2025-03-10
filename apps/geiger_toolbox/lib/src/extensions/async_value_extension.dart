@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/env/flavor.dart';
 import 'package:geiger_toolbox/src/common_widgets/snack_bar.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
+import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_profile_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
@@ -24,6 +25,32 @@ extension AsyncValueExtension on AsyncValue {
             title: 'Alert'.hardcoded,
             exception: appException.message,
             onError: onError,
+          );
+        }
+      }
+    }
+  }
+
+  void showSnackBarOnError({required BuildContext context}) {
+    final appColor = Theme.of(context).colorScheme;
+    if (!isLoading && hasError) {
+      //show all error on dev
+      if (getFlavor() == Flavor.dev) {
+        showSnackBar(
+          context: context,
+          content: "$error Contact Support".hardcoded,
+          backgroundColor: appColor.errorContainer,
+          textColor: appColor.onErrorContainer,
+        );
+      } else {
+        //on show app exception error in stg | prod
+        if (error is AppException) {
+          final appException = error as AppException;
+          showSnackBar(
+            context: context,
+            content: "$appException.message  Contact Support".hardcoded,
+            backgroundColor: appColor.errorContainer,
+            textColor: appColor.onErrorContainer,
           );
         }
       }
@@ -79,12 +106,21 @@ extension AsyncValueExtension on AsyncValue {
     final appColor = Theme.of(context).colorScheme;
 
     if (!isLoading && !hasError) {
-      showSnackBar(
-        context: context,
-        content: "User Profile Created!".hardcoded,
-        backgroundColor: appColor.primaryContainer,
-        textColor: appColor.onPrimaryContainer,
-      );
+      if (value == CompanyStatus.created) {
+        showSnackBar(
+          context: context,
+          content: "User Profile Created!".hardcoded,
+          backgroundColor: appColor.primaryContainer,
+          textColor: appColor.onPrimaryContainer,
+        );
+      } else if (value == CompanyStatus.updated) {
+        showSnackBar(
+          context: context,
+          content: "User Profile Updated!".hardcoded,
+          backgroundColor: appColor.primaryContainer,
+          textColor: appColor.onPrimaryContainer,
+        );
+      }
     }
   }
 

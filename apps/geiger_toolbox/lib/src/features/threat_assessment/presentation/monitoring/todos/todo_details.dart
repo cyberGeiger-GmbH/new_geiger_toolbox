@@ -17,14 +17,14 @@ class TodoDetails extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            AppButton.primary(
+            AppButton.primarySmall(
               label: "Mark as done",
               context: context,
               onPressed: () {
                 ref.read(todoControllerProvider.notifier).makeAsDone(item, onSuccess: context.pop);
               },
             ),
-            AppButton.delete(
+            AppButton.deleteSmall(
               label: "Remove",
               context: context,
               onPressed: () {
