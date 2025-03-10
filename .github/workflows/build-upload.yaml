@@ -18,7 +18,7 @@ jobs:
   # Initial Setup
   ####################### 
   setup: # Setup the environment
-    runs-on: self-hosted
+    runs-on: macos-latest
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -34,14 +34,14 @@ jobs:
       with:
         channel: 'stable'
         # #* Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
-        # cache: true
-        # cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:"
-        # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
+        cache: true
+        cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:"
+        cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
   # set up dependencies      
   setup-dependencies:
     needs: 
       - setup
-    runs-on: self-hosted
+    runs-on: macos-latest
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -60,7 +60,7 @@ jobs:
     needs: 
       - setup
       - setup-dependencies
-    runs-on: self-hosted
+    runs-on: macos-latest
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -122,7 +122,7 @@ jobs:
       - setup-dependencies
       - setup-env
       #- run-tests
-    runs-on: self-hosted
+    runs-on: macos-latest
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -190,7 +190,7 @@ jobs:
   upload-sentry:
     needs:
       - build-android
-    runs-on: self-hosted
+    runs-on: macos-latest
     timeout-minutes: 20
 
     steps:
