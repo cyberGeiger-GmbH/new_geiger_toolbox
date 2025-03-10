@@ -18,7 +18,7 @@ class TodoDetails extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             AppButton.primarySmall(
-              label: "Mark as done",
+              label: "Done",
               context: context,
               onPressed: () {
                 ref.read(todoControllerProvider.notifier).makeAsDone(item, onSuccess: context.pop);
