@@ -10,15 +10,9 @@ import 'package:geiger_toolbox/src/features/authentication/presentation/company/
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 class CompanyDescriptionWidget extends ConsumerWidget {
-  const CompanyDescriptionWidget({
-    super.key,
-    required this.controller,
-    required this.onEditingComplete,
-   
-  });
+  const CompanyDescriptionWidget({super.key, required this.controller, required this.onEditingComplete});
   final TextEditingController controller;
   final VoidCallback onEditingComplete;
- 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,24 +47,29 @@ class CompanyDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
-    return Card(
-      elevation: 0,
-      color: appTheme.colorScheme.onInverseSurface,
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: CustomTextFormField(
-        textEditingController: controller,
-        autoComplete: true,
-        hint: "Complete the description of your company or generate one".hardcoded,
-        textInputAction: TextInputAction.done,
-        keyboardType: TextInputType.multiline,
+    return Stack(
+      children: [
+        Card(
+          elevation: 0,
+          color: appTheme.colorScheme.onInverseSurface,
+          margin: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          child: CustomTextFormField(
+            textEditingController: controller,
+            autoComplete: true,
+            hint: "Complete the description of your company or generate one".hardcoded,
+            textInputAction: TextInputAction.done,
+            keyboardType: TextInputType.multiline,
 
-        enabled: true,
-        onEditingComplete: onEditingComplete,
+            enabled: true,
+            onEditingComplete: onEditingComplete,
 
-        validator: (text) => text == null || text.isEmpty ? "Company description is required".hardcoded : null,
-        maxLength: 500,
-      ),
+            validator: (text) => text == null || text.isEmpty ? "Company description is required".hardcoded : null,
+            maxLength: 500,
+          ),
+        ),
+        Positioned(right: 0, child: Icon(Icons.edit)),
+      ],
     );
   }
 }
