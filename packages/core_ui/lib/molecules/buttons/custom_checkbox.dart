@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckbox extends StatelessWidget {
-  const CustomCheckbox({super.key, required this.onChanged, required this.value});
+  const CustomCheckbox({super.key, required this.onChanged, required this.value, this.activeColor});
   final bool value;
   final ValueChanged<bool?> onChanged;
+  final Color? activeColor;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -23,6 +24,9 @@ class CustomCheckbox extends StatelessWidget {
           ),
           onPressed: () => onChanged(!value),
         )
-        : Padding(padding: EdgeInsets.zero, child: Checkbox(onChanged: (value) => onChanged(value), value: value));
+        : Padding(
+          padding: EdgeInsets.zero,
+          child: Checkbox(onChanged: onChanged, value: value, activeColor: activeColor),
+        );
   }
 }
