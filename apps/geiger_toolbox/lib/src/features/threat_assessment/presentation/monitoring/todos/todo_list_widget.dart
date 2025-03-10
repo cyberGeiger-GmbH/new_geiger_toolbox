@@ -26,6 +26,10 @@ class TodoListWidget extends ConsumerWidget {
     ref.listen(todoControllerProvider, (_, nextState) {
       nextState.todoUpdateStatusSnackBar(context: context);
     });
+    //show alert dialog when error is thrown
+    ref.listen(todoControllerProvider, (_, nextState) {
+      nextState.showSnackBarOnError(context: context);
+    });
 
     final todos = ref.watch(watchTodosProvider);
 

@@ -30,6 +30,32 @@ extension AsyncValueExtension on AsyncValue {
     }
   }
 
+  void showSnackBarOnError({required BuildContext context}) {
+    final appColor = Theme.of(context).colorScheme;
+    if (!isLoading && hasError) {
+      //show all error on dev
+      if (getFlavor() == Flavor.dev) {
+        showSnackBar(
+          context: context,
+          content: "$error Contact Support".hardcoded,
+          backgroundColor: appColor.errorContainer,
+          textColor: appColor.onErrorContainer,
+        );
+      } else {
+        //on show app exception error in stg | prod
+        if (error is AppException) {
+          final appException = error as AppException;
+          showSnackBar(
+            context: context,
+            content: "$appException.message  Contact Support".hardcoded,
+            backgroundColor: appColor.errorContainer,
+            textColor: appColor.onErrorContainer,
+          );
+        }
+      }
+    }
+  }
+
   void successAlertSnackBar({required BuildContext context}) {
     final appColor = Theme.of(context).colorScheme;
 
