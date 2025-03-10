@@ -1,4 +1,4 @@
-name: Shorebird Release (Android, iOS)    
+name: Build & Upload (Android, iOS)    
 
 on: 
   workflow_dispatch:
