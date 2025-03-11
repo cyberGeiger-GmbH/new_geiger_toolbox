@@ -1,5 +1,6 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:drift/drift.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/company.dart';
@@ -27,7 +28,10 @@ class CompanyProfileRepository {
         location: Value(companyInfo.location),
         description: Value(companyInfo.description),
       );
-      return await _db.into(_db.companyProfiles).insert(companyProfile);
+      final result = await _db.into(_db.companyProfiles).insert(companyProfile);
+
+      debugPrint("created data => $result");
+      return result;
     } catch (e) {
       rethrow;
     }

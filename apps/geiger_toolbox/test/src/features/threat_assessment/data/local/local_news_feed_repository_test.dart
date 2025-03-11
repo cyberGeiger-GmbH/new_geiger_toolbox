@@ -91,7 +91,7 @@ void main() {
       () async {
         final repoNewsFeed = container.read(localNewsFeedRepositoryProvider);
 
-        final result = await repoNewsFeed.fetchNewsById(newsId: "Credential_Stuffing_Attacks");
+        final result = await repoNewsFeed.fetchNewsById(newsId: "Browser_Syncjacking_Chrome_Extensions");
 
         final recommendations = result.recommendations;
 
@@ -111,5 +111,29 @@ void main() {
 
       tester.expect(news.length, 3); // Based on sample data having 3 news items
     });
+
+    tester.test(
+      "Given news has already been cached, when news is cached again, the length of the news and recommendation from the this news title should be the same as previous state",
+      () async {
+        final json = await File("test/src/features/duplicated_data.json").readAsString();
+        
+        final newsRepo = container.read(localNewsFeedRepositoryProvider);
+        final prevNews = await newsRepo.fetchNewsById(newsId: "browser_syncjacking_chrome_extensions");
+
+        final previousReco = prevNews.recommendations;
+
+        tester.expect(previousReco.length, 2);
+
+        // update storage with duplicate data
+        final data = News.getNews(jsonDecode(json));
+        newsRepo.resolveNewsConflict(data: data);
+
+        final currentNewsData = await newsRepo.fetchNewsById(newsId: "browser_syncjacking_chrome_extensions");
+
+        final currentReco = currentNewsData.recommendations;
+
+        tester.expect(currentReco.length, 2);
+      },
+    );
   });
 }

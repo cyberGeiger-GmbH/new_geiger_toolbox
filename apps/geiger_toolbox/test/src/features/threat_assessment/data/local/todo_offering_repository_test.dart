@@ -55,7 +55,7 @@ void main() {
         await newsRepo.resolveNewsConflict(data: sourceData);
 
         // get recommendation
-        final selectedNews = await newsRepo.fetchNewsById(newsId: "Credential_Stuffing_Attacks");
+        final selectedNews = await newsRepo.fetchNewsById(newsId: "Browser_Syncjacking_Chrome_Extensions");
 
         final recommendations = selectedNews.recommendations;
 
@@ -95,7 +95,7 @@ void main() {
         final todoRepo = container.read(todoOfferingRepoProvider);
         final newsRepo = container.read(localNewsFeedRepositoryProvider);
 
-        final selectedNews = await newsRepo.fetchNewsById(newsId: "Credential_Stuffing_Attacks");
+        final selectedNews = await newsRepo.fetchNewsById(newsId: "Browser_Syncjacking_Chrome_Extensions");
 
         final recommendations = selectedNews.recommendations;
 
@@ -133,4 +133,6 @@ void main() {
       );
     });
   });
+
+  
 }
