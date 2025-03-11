@@ -1,7 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
-import 'package:geiger_toolbox/src/features/authentication/presentation/company/widgets/company_profile_form_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/section_heading.dart';
 
 class ContentItemContainer extends StatelessWidget {
   const ContentItemContainer({super.key, required this.items, this.explanation, this.backgroundColor});
@@ -14,8 +14,8 @@ class ContentItemContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (explanation != null) ContentItemContainerWithExplanation(explanation: explanation!),
-        
-        SectionTitle(label: "Recommended Todos"),
+
+        SectionHeading(label: "Recommended Todos"),
         GeigerCard(child: Column(mainAxisSize: MainAxisSize.min, children: items)),
       ],
     );
