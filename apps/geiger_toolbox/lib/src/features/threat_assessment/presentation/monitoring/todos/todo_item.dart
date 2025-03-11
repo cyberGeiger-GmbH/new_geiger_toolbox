@@ -88,7 +88,7 @@ class ContainerLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p8),
+      padding: const EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p16),
       child: GestureDetector(
         onTap: showAllItems,
         child: Row(
