@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geiger_toolbox/src/common_widgets/item_list_tile.dart';
 
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/list_title.dart';
@@ -25,26 +26,31 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      padding: const EdgeInsets.symmetric(vertical: Spacing.p8),
-      child: Row(
-        children: [
-          TodoCheckbox(onChanged: onChanged, status: item.status),
+    return ItemListTile(
+      title: item.offering.name,
+      subtitle: LastUpdatedWidget(lastUpdated: item.lastUpdated!),
+      leading: TodoCheckbox(onChanged: onChanged, status: item.status),
+      trailing: IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
+      status: item.status,
 
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTitle(title: item.offering.name, crossTitle: item.status == Status.done),
-                Spacing.gapH4,
-                LastUpdatedWidget(lastUpdated: item.lastUpdated!),
-              ],
-            ),
-          ),
-          IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
-        ],
-      ),
+      // using custom ListTile
+      // Row(
+      //   children: [
+      //     TodoCheckbox(onChanged: onChanged, status: item.status),
+
+      //     Expanded(
+      //       child: Column(
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: [
+      //           ListTitle(title: item.offering.name, crossTitle: item.status == Status.done),
+      //           Spacing.gapH4,
+      //           LastUpdatedWidget(lastUpdated: item.lastUpdated!),
+      //         ],
+      //       ),
+      //     ),
+      //     IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
+      //   ],
+      // ),
     );
   }
 }

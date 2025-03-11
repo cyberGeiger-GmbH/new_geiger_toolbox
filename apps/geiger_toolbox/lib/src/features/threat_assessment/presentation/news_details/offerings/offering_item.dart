@@ -15,11 +15,17 @@ class OfferingItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(toggleOfferControllerProvider(offer));
+    final theme = Theme.of(context);
     return ItemListTile(
       key: key,
       status: state.status,
       title: offer.offering.name,
-      subtitle: offer.offering.summary,
+      subtitle: AppText.bodySmall(
+        text: offer.offering.summary,
+        context: context,
+        lintThrough: offer.status == Status.done,
+        color: offer.status == Status.done ? theme.hintColor : null,
+      ),
 
       trailing: CustomCheckbox(
         value: state.status == Status.planned || state.status == Status.done,
@@ -50,5 +56,3 @@ class OfferingItem extends ConsumerWidget {
     );
   }
 }
-
-
