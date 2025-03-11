@@ -14,8 +14,8 @@ class ContentItemContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (explanation != null) ContentItemContainerWithExplanation(explanation: explanation!),
-
-        SectionHeading(label: "Recommended Todos"),
+        if (explanation != null) SectionHeading(label: "Recommended Todos"),
+        if (explanation != null) Spacing.gapH22,
         GeigerCard(child: Column(mainAxisSize: MainAxisSize.min, children: items)),
       ],
     );

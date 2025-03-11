@@ -16,7 +16,7 @@ class RecommendationItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppText.bodyLarge(
+          AppText.bodyMedium(
             text: item.name,
             context: context,
             textAlign: TextAlign.start,

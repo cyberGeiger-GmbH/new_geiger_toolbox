@@ -30,7 +30,7 @@ export './organisms/show_bottom_sheet_modal.dart';
 
 //list widget
 export 'organisms/list/app_assets_icons.dart';
-export 'organisms/list/protection_tile_list_view.dart';
+export 'organisms/list/recommendation_tile_list_view.dart';
 export 'organisms/list/todo_tile_list_view.dart';
 
 //

@@ -28,14 +28,14 @@ class NewsContent extends StatelessWidget {
         Spacing.gapH4,
         AppText.bodyMedium(text: summary, context: context, textAlign: TextAlign.justify),
         Spacing.gapH4,
-        HorizontalTitleContent(key: key, title: lastUpdatedLabel ?? "last updated", source: lastedUpdated),
+        MetaInfoContent(key: key, title: lastUpdatedLabel ?? "last updated", source: lastedUpdated),
       ],
     );
   }
 }
 
-class HorizontalTitleContent extends StatelessWidget {
-  const HorizontalTitleContent({super.key, required this.title, required this.source});
+class MetaInfoContent extends StatelessWidget {
+  const MetaInfoContent({super.key, required this.title, required this.source});
   final String title;
   final String source;
   @override

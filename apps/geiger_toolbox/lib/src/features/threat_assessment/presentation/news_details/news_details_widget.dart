@@ -19,7 +19,7 @@ class NewsDetailsWidget extends StatelessWidget {
           AppCachedNetworkImage.newsImage(imageUrl: newsfeed.imageUrl),
           Spacing.gapH16,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8),
+            padding: const EdgeInsets.symmetric(horizontal: Spacing.p16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

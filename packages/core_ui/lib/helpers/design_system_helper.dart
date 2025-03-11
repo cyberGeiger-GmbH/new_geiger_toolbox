@@ -4,7 +4,7 @@ import 'package:core_ui/golden/golden_test_wrapper.dart';
 import 'package:core_ui/molecules/cards/protection_tile.dart';
 import 'package:core_ui/molecules/cards/todo_tile.dart';
 import 'package:core_ui/organisms/list/app_assets_icons.dart';
-import 'package:core_ui/organisms/list/protection_tile_list_view.dart';
+import 'package:core_ui/organisms/list/recommendation_tile_list_view.dart';
 import 'package:core_ui/organisms/list/todo_tile_list_view.dart';
 import 'package:flutter/material.dart';
 
