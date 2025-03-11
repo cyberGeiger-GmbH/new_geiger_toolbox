@@ -29,7 +29,7 @@ class CompanyDescriptionWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SectionTitle(label: "Company Description".hardcoded),
-            Spacing.gapH4,
+            Spacing.gapH22,
             CompanyDescription(controller: controller, onEditingComplete: onEditingComplete),
           ],
         );
@@ -46,28 +46,22 @@ class CompanyDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = Theme.of(context);
     return Stack(
       children: [
-        Card(
-          elevation: 0,
-          color: appTheme.colorScheme.onInverseSurface,
-          margin: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: CustomTextFormField(
-            textEditingController: controller,
-            autoComplete: true,
-            hint: "Complete the description of your company or generate one".hardcoded,
-            textInputAction: TextInputAction.done,
-            keyboardType: TextInputType.multiline,
+        CustomTextFormField(
+          textEditingController: controller,
+          autoComplete: true,
+          hint: "Complete the description of your company or generate one".hardcoded,
+          textInputAction: TextInputAction.done,
+          keyboardType: TextInputType.multiline,
 
-            enabled: true,
-            onEditingComplete: onEditingComplete,
+          enabled: true,
+          onEditingComplete: onEditingComplete,
 
-            validator: (text) => text == null || text.isEmpty ? "Company description is required".hardcoded : null,
-            maxLength: 500,
-          ),
+          validator: (text) => text == null || text.isEmpty ? "Company description is required".hardcoded : null,
+          maxLength: 500,
         ),
+
         Positioned(right: 0, child: Icon(Icons.edit)),
       ],
     );

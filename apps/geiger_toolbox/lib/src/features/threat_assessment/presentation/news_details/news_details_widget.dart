@@ -17,7 +17,7 @@ class NewsDetailsWidget extends StatelessWidget {
       child: Column(
         children: [
           AppCachedNetworkImage.newsImage(imageUrl: newsfeed.imageUrl),
-          Spacing.gapH4,
+          Spacing.gapH16,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8),
             child: Column(
@@ -35,7 +35,7 @@ class NewsDetailsWidget extends StatelessWidget {
                     );
                   },
                 ),
-                Spacing.gapH8,
+                Spacing.gapH32,
                 RecommendationTitleList(
                   title: "How to Protect me?".hardcoded,
                   recommendations: RecommendationListWidget(recommendations: newsfeed.recommendations),

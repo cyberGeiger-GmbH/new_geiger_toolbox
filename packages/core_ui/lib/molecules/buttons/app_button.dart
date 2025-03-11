@@ -196,7 +196,7 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).tertiary,
       ),
       onPressed: onPressed,
-      child: AppText.titleMedium(
+      child: AppText.bodySmall(
         text: title,
         context: context,
         textAlign: TextAlign.center,
@@ -212,6 +212,7 @@ class AppButton extends StatelessWidget {
     VoidCallback? onPressed,
     required BuildContext context,
   }) {
+    final theme = Theme.of(context);
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
@@ -220,10 +221,11 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).tertiary,
       ),
       onPressed: onPressed,
-      child: AppText.titleMedium(
+      child: AppText.bodyMedium(
         text: title,
         context: context,
         textAlign: TextAlign.center,
+        textStyle: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
 
         textOverflow: TextOverflow.fade,
       ),

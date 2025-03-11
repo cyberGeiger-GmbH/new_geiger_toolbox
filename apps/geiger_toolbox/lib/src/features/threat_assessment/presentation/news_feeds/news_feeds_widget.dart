@@ -82,6 +82,6 @@ class LabelWidget extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return AppText.bodySmall(text: text, context: context);
+    return AppText.labelLarge(text: text, context: context);
   }
 }

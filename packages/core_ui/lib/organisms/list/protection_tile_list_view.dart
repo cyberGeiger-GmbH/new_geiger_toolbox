@@ -44,8 +44,8 @@ class RecommendationTitleList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: appTextStyle.bodySmall!.copyWith(fontWeight: FontWeight.w700)),
-        Spacing.gapH4,
+        Text(title, style: appTextStyle.labelLarge!.copyWith(fontWeight: FontWeight.w700)),
+        Spacing.gapH22,
         recommendations,
       ],
     );

@@ -20,7 +20,7 @@ class RecommendationItem extends StatelessWidget {
             text: item.name,
             context: context,
             textAlign: TextAlign.start,
-            textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
+            textStyle: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
           ),
           IconButton(onPressed: onPressed, icon: Icon(Icons.chevron_right)),
         ],

@@ -46,7 +46,7 @@ class HorizontalTitleContent extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: "$title: ", // Title in bold
-        style: theme.textTheme.bodySmall!.copyWith(color: color, fontWeight: FontWeight.bold),
+        style: theme.textTheme.bodySmall!.copyWith(color: color),
         children: [
           TextSpan(
             text: source,

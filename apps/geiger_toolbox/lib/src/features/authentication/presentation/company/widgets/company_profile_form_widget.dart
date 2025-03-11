@@ -229,7 +229,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
                             ? "Generate Company Description".hardcoded
                             : "Regenerate Company Description".hardcoded,
                   ),
-              Spacing.gapH12,
+              Spacing.gapH32,
 
               CompanyDescriptionWidget(
                 controller: _companyDescriptionController,
@@ -284,7 +284,7 @@ class CompanyProfileForm extends StatelessWidget {
         SectionTitle(
           label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
         ),
-        Spacing.gapH12,
+        Spacing.gapH22,
         CustomTextFormField(
           key: companyKey,
           textEditingController: companyTextController,

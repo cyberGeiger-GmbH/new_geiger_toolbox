@@ -18,7 +18,7 @@ jobs:
   # Initial Setup
   ####################### 
   setup: # Setup the environment
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -28,7 +28,6 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v4
     
-    
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
@@ -37,36 +36,14 @@ jobs:
         cache: true
         cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:"
         cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-  # set up dependencies      
-  setup-dependencies:
-    needs: 
-      - setup
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    environment: ${{ github.event.inputs.environment || 'prod' }}
-    env:
-      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
-    steps:
-    # - name: Run Flutter Doctor
-    #   run: flutter doctor -v
-
+      # this is needed to get project wide dependencies    
     - name:  Get Flutter dependencies (Project)
       run: flutter pub get
 
+    # this is needed to get the dependencies that are in /packages 
     - name: Get Project Dependencies Using Melos 
       run: melos bs
-  # setup env for .env files
-  setup-env:
-    needs: 
-      - setup
-      - setup-dependencies
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    environment: ${{ github.event.inputs.environment || 'prod' }}
-    env:
-      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
-    steps: 
     # Generate .env.<flavor> file as it is gitignored but needed for the build
     - name: Setup Dart Defines
       run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
@@ -119,10 +96,8 @@ jobs:
   build-android:
     needs:
       - setup
-      - setup-dependencies
-      - setup-env
       #- run-tests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
@@ -190,7 +165,7 @@ jobs:
   upload-sentry:
     needs:
       - build-android
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 20
 
     steps:
