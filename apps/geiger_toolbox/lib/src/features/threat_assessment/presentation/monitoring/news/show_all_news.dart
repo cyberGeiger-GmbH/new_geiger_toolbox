@@ -38,5 +38,5 @@ class _ShowAllNewsWidget extends ConsumerWidget {
 }
 
 void showAlllNewsBottomSheet(BuildContext context) {
-  showWoltModalBottomSheet(context, title: "All News".hardcoded, page: const _ShowAllNewsWidget());
+  showWoltModalBottomSheet(context, title: "All News".hardcoded, mainContent: const _ShowAllNewsWidget());
 }

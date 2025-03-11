@@ -283,7 +283,7 @@ class CompanyProfileForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionHeading(
-          label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
+          title: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
         ),
         Spacing.gapH22,
         CustomTextFormField(

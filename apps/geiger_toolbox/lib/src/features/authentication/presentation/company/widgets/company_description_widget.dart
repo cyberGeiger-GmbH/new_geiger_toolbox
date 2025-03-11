@@ -29,7 +29,7 @@ class CompanyDescriptionWidget extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SectionHeading(label: "Company Description".hardcoded),
+            SectionHeading(title: "Company Description".hardcoded),
             Spacing.gapH22,
             CompanyDescription(controller: controller, onEditingComplete: onEditingComplete),
           ],
