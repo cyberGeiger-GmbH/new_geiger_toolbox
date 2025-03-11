@@ -14,15 +14,8 @@ class TodoItem extends StatelessWidget {
   final VoidCallback onChanged;
 
   final VoidCallback showDetails;
-  final bool noTrailWidget;
 
-  const TodoItem({
-    super.key,
-    required this.item,
-    required this.onChanged,
-    required this.showDetails,
-    this.noTrailWidget = false,
-  });
+  const TodoItem({super.key, required this.item, required this.onChanged, required this.showDetails});
 
   @override
   Widget build(BuildContext context) {
