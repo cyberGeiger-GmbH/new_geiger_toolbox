@@ -88,6 +88,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     required BuildContext context,
+    bool isLoading = false,
   }) {
     return AppButton._(
       key: key,
@@ -96,7 +97,14 @@ class AppButton extends StatelessWidget {
         backgroundColor: _appColor(context).secondary,
         overlayColor: _appColor(context).onSecondary,
       ),
-      child: AppText.labelLarge(text: label, context: context, color: _appColor(context).onSecondary),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          isLoading
+              ? const CircularProgressIndicator()
+              : AppText.labelLarge(text: label, context: context, color: _appColor(context).onTertiary),
+        ],
+      ),
     );
   }
 
@@ -188,6 +196,7 @@ class AppButton extends StatelessWidget {
     VoidCallback? onPressed,
     required BuildContext context,
   }) {
+    final theme = Theme.of(context);
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
@@ -196,11 +205,10 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).tertiary,
       ),
       onPressed: onPressed,
-      child: AppText.bodySmall(
+      child: AppText.bodyMedium(
         text: title,
         context: context,
         textAlign: TextAlign.center,
-
         textOverflow: TextOverflow.fade,
       ),
     );

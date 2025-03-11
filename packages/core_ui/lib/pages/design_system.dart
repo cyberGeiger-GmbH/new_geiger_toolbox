@@ -19,8 +19,15 @@ class DesignSystem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(children: [GeigerSvgImages.magnifyingGlass(), GeigerSvgImages.trickGood(), GeigerSvgImages.measure()]),
-            Spacing.gapH8,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GeigerSvgImages.magnifyingGlass(width: 50, height: 50),
+                GeigerSvgImages.trickGood(width: 50, height: 50),
+                GeigerSvgImages.measure(width: 50, height: 50),
+              ],
+            ),
+            Spacing.gapH22,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -46,7 +53,7 @@ class DesignSystem extends StatelessWidget {
                 ),
               ],
             ),
-            Spacing.gapH8,
+            Spacing.gapH22,
             DesignSystemHelper.getColors(),
             Spacing.gapH16,
             DesignSystemHelper.getTexts(),

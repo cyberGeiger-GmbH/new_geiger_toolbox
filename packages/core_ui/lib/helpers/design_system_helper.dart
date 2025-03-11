@@ -22,6 +22,7 @@ class DesignSystemHelper {
         final appColor = Theme.of(context).colorScheme;
 
         return Container(
+          width: double.infinity,
           color: Colors.grey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -58,6 +59,7 @@ class DesignSystemHelper {
     return GoldenTestWrapper(
       getChild: (context) {
         return Container(
+          width: double.infinity,
           color: Colors.grey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -92,26 +94,26 @@ class DesignSystemHelper {
     return GoldenTestWrapper(
       getChild: (context) {
         return Container(
+          width: double.infinity,
           color: Colors.black12,
           child: Wrap(
             spacing: 1,
             //crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runAlignment: WrapAlignment.center,
             children:
                 [
-                  AppTextButton.primary(label: "AppTextprimaryButton", onTap: () {}, context: context),
-                  AppTextButton.secondary(label: "AppTextSecondaryyButton", onTap: () {}, context: context),
-                  AppButton.primary(label: "Primary Button", onPressed: () {}, context: context),
-                  AppButton.secondary(label: "Secondary Button", onPressed: () {}, context: context),
-                  AppButton.tertiary(label: "Tertiary Button", onPressed: () {}, context: context),
+                  AppTextButton.primary(label: "Primary text btn", onTap: () {}, context: context),
+                  AppTextButton.secondary(label: "Secondary text btn", onTap: () {}, context: context),
+                  AppButton.primary(label: " Active Primary btn", onPressed: () {}, context: context),
+                  AppButton.secondary(label: "Active Secondary btn", onPressed: () {}, context: context),
+                  AppButton.tertiary(label: "Active Tertiary btn", onPressed: () {}, context: context),
+                  AppButton.primary(label: " Inactive Primary btn", context: context),
+                  AppButton.secondary(label: "Inactive Secondary btn", context: context),
+                  AppButton.tertiary(label: "Inactive Tertiary btn", context: context),
 
-                  AppButton.newsCard(
-                    onPressed: () {},
-                    title: "Cyberbetrug durch Telefontricks verbreitet, news about threat aowfjoawfjwo",
-                    context: context,
-                  ),
-                  AppButton.newsCard(onPressed: () {}, title: "News 1", context: context),
-                  AppButton.newsCard(onPressed: () {}, title: "News 3", context: context),
-                  AppButton.activeNewsCard(onPressed: () {}, title: "Active News", context: context),
+                  AppButton.newsCard(onPressed: () {}, title: "News Card", context: context),
+                  AppButton.activeNewsCard(onPressed: () {}, title: "Active News Card", context: context),
                   ToolButton.elevated(
                     label: "Elevated Tool Card",
                     context: context,
@@ -191,6 +193,7 @@ class DesignSystemHelper {
     return GoldenTestWrapper(
       getChild: (context) {
         return Column(
+          
           children:
               [
                 TodoTile.plain(

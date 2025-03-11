@@ -34,7 +34,6 @@ export 'organisms/list/protection_tile_list_view.dart';
 export 'organisms/list/todo_tile_list_view.dart';
 
 //
-export './molecules/cards/protection_tile.dart';
 export './molecules/cards/todo_tile.dart';
 
 //extensions

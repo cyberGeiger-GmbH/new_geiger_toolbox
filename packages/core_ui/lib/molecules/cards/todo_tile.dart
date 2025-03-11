@@ -1,5 +1,6 @@
 import 'package:core_ui/molecules/buttons/custom_checkbox.dart';
 import 'package:core_ui/molecules/texts/app_text.dart';
+import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/utils.dart';
@@ -54,7 +55,10 @@ class TodoTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: decoration,
-      child: _ContentWidget(key: key, title: title, summary: summary, done: done, onChange: onChange),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Spacing.p8),
+        child: _ContentWidget(key: key, title: title, summary: summary, done: done, onChange: onChange),
+      ),
     );
   }
 }
@@ -78,6 +82,7 @@ class _ContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.zero,
       title: AppText.titleMedium(text: title, context: context),
       subtitle: AppText.bodySmall(text: summary, context: context),
       trailing: CustomCheckbox(value: done, onChanged: onChange),
