@@ -151,6 +151,7 @@ jobs:
           packageName: ${{ env.PACKAGE_NAME }}
           releaseFiles: ${{ env.AAB_PATH }}
           inAppUpdatePriority: 3
+          status: inProgress #completed
           track: 'qa' #'beta' #'production'
          
       - name: Upload Debug Symbols
