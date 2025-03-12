@@ -47,7 +47,7 @@ jobs:
 
     # Generate .env.<flavor> file as it is gitignored but needed for the build
     - name: Setup Dart Defines
-      run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
+      run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > apps/geiger_toolbox/.env.${{ env.DEPLOY_ENV}}
      
       # Write all the gitignored Firebase filtes that are needed for the build
     - name: Setup Firebase 
