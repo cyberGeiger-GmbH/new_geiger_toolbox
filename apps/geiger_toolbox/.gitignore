@@ -58,3 +58,7 @@ firebase*.json
 
 #Avoid custom_lint log
 custom_lint.log
+
+
+# Ignore test coverage data
+coverage/lcov.info
