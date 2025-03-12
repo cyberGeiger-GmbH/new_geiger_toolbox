@@ -123,11 +123,11 @@ jobs:
         run: |
           # Use > here to create or overwrite the file
           echo "$ANDROID_KEYSTORE_JKS" | base64 --decode > "$ANDROID_KEYSTORE_PATH"
-          echo "storeFile=$ANDROID_KEYSTORE_PATH" > apps/geiger_toolbox/android/key.properties
+          echo "storeFile=$ANDROID_KEYSTORE_PATH" > android/key.properties
           # Use >> here to append additional lines
-          echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> apps/geiger_toolbox/android/key.properties
-          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> apps/geiger_toolbox/android/key.properties
-          echo "keyAlias=$ANDROID_KEY_ALIAS" >> apps/geiger_toolbox/android/key.properties
+          echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
 
       - name: Build Android App
         run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=apps/geiger_toolbox/build
