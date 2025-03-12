@@ -20,9 +20,10 @@ class TodoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ItemListTile(
+      leading: TodoCheckbox(onChanged: onChanged, status: item.status),
       title: item.offering.name,
       subtitle: LastUpdatedWidget(lastUpdated: item.lastUpdated!),
-      leading: TodoCheckbox(onChanged: onChanged, status: item.status),
+
       trailing: IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
       status: item.status,
 
@@ -81,8 +82,8 @@ class TodoCheckbox extends StatelessWidget {
 }
 
 class ContainerLabel extends StatelessWidget {
-  const ContainerLabel({super.key, required this.showAllItems, required this.text});
-  final VoidCallback showAllItems;
+  const ContainerLabel({super.key, this.showAllItems, required this.text});
+  final VoidCallback? showAllItems;
   final String text;
   @override
   Widget build(BuildContext context) {

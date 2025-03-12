@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
@@ -26,6 +27,7 @@ class Avatar extends StatelessWidget {
     final appColor = Theme.of(context).colorScheme;
     return Container(
       decoration: _borderDecoration(),
+      padding: const EdgeInsets.only(right: Spacing.p4),
       child: CircleAvatar(
         radius: radius,
         backgroundColor: appColor.surface,

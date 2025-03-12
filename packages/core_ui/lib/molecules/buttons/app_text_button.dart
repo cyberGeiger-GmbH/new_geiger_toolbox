@@ -8,7 +8,7 @@ class AppTextButton extends StatelessWidget {
     required this.label,
     this.color,
     required this.disabledColor,
-    required this.onTap,
+    this.onTap,
     required this.isEnabled,
   });
 
@@ -16,7 +16,7 @@ class AppTextButton extends StatelessWidget {
     Key? key,
     required String label,
     bool isEnabled = true,
-    required VoidCallback onTap,
+    VoidCallback? onTap,
     required BuildContext context,
   }) => AppTextButton._(
     key: key,
@@ -51,7 +51,7 @@ class AppTextButton extends StatelessWidget {
   }
 
   final String label;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Color disabledColor;
   final Color? color;
   final bool isEnabled;

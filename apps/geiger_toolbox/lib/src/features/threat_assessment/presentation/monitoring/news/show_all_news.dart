@@ -31,7 +31,6 @@ class _ShowAllNewsWidget extends ConsumerWidget {
                               ),
                             )
                             .toList(),
-                    seeAll: () {},
                   ),
     );
   }

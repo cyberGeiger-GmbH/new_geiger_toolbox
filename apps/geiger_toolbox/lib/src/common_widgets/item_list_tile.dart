@@ -4,17 +4,10 @@ import 'package:geiger_toolbox/src/common_widgets/list_title.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
 class ItemListTile extends StatelessWidget {
-  const ItemListTile({
-    super.key,
-    required this.title,
-    this.subtitle,
-    this.status,
-    required this.trailing,
-    this.leading,
-  });
+  const ItemListTile({super.key, required this.title, this.subtitle, this.status, this.trailing, this.leading});
   final String title;
   final Widget? subtitle;
-  final Widget trailing;
+  final Widget? trailing;
   final Widget? leading;
   final Status? status;
   @override
