@@ -133,7 +133,7 @@ jobs:
         run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=build
 
 
-      - name: Prepare for upload
+      - name: Prepare for Upload
         run: |
           PACKAGE_NAME=$(grep -E "namespace\s*=\s*\"[^\"]+\"" android/app/build.gradle | sed -E 's/.*"([^"]+)".*/\1/')
           if [ "${{ env.DEPLOY_ENV }}" != "prod" ]; then
