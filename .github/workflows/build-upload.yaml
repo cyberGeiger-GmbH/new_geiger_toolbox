@@ -151,7 +151,7 @@ jobs:
           packageName: ${{ env.PACKAGE_NAME }}
           releaseFiles: ${{ env.AAB_PATH }}
           track: 'production'
-          releaseNotes: "Build: ${{ github.run_id }} - ${{ github.run_attempt }}"
+         
       - name: Upload debug symbols
         uses: actions/upload-artifact@v4
         with:
