@@ -152,6 +152,7 @@ jobs:
           releaseFiles: ${{ env.AAB_PATH }}
           inAppUpdatePriority: 3
           status: inProgress #completed
+          userFraction: 1.0
           track: 'qa' #'beta' #'production'
          
       - name: Upload Debug Symbols
