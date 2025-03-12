@@ -38,7 +38,7 @@ jobs:
         # cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:"
         # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
       # this is needed to get project wide dependencies    
-    - name:  Get Flutter dependencies (Project)
+    - name:  Get Flutter Dependencies (Project)
       run: flutter pub get
 
     # this is needed to get the dependencies that are in /packages 
@@ -65,7 +65,7 @@ jobs:
         # Needed by the "flutterfire bundle-service-file" build phase in Xcode
         dart pub global activate flutterfire_cli 1.0.1 --overwrite
       
-    - name: Upload build files
+    - name: Upload Build Files
       uses: actions/upload-artifact@v4
       with:
         name: build-files
@@ -108,7 +108,7 @@ jobs:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
     steps:
-      - name: Download build files
+      - name: Download Build Files
         uses: actions/download-artifact@v4
         with:
           name: build-files
@@ -152,7 +152,7 @@ jobs:
           releaseFiles: ${{ env.AAB_PATH }}
           track: 'production'
          
-      - name: Upload debug symbols
+      - name: Upload Debug Symbols
         uses: actions/upload-artifact@v4
         with:
           name: debug-symbols-android
@@ -171,6 +171,9 @@ jobs:
       - build-android
     runs-on: self-hosted
     timeout-minutes: 20
+    defaults:
+     run:
+        working-directory: apps/geiger_toolbox
 
     steps:
     - name: Download Android Debug Symbols
@@ -179,9 +182,7 @@ jobs:
         name: debug-symbols-android
     
     - name: Upload Debug Symbols to Sentry
-      run: |
-        cd apps/geiger_toolbox
-        dart run sentry_dart_plugin 
+      run: dart run sentry_dart_plugin 
          
   
           
