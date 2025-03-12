@@ -153,7 +153,7 @@ jobs:
           inAppUpdatePriority: 3
           status: inProgress #completed
           userFraction: 0.33
-          track: 'qa' #'beta' #'production'
+          track: 'internal' #'beta' #'production'
          
       - name: Upload Debug Symbols
         uses: actions/upload-artifact@v4
