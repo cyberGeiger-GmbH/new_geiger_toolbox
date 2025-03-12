@@ -10,23 +10,28 @@ class TodoDetails extends ConsumerWidget {
   final TodoOffering item;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(todoControllerProvider);
+
     return Column(
       children: [
         AppText.bodySmall(text: item.offering.summary, context: context),
         Spacing.gapH16,
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             AppButton.primarySmall(
               label: "Done",
               context: context,
+              isLoading: state.isLoading,
               onPressed: () {
                 ref.read(todoControllerProvider.notifier).makeAsDone(item, onSuccess: context.pop);
               },
             ),
+            Spacing.gapH12,
             AppButton.deleteSmall(
               label: "Remove",
               context: context,
+              isLoading: state.isLoading,
               onPressed: () {
                 ref.read(todoControllerProvider.notifier).removeTodo(item, onSuccess: context.pop);
               },

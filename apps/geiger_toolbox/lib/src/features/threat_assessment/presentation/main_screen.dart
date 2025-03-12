@@ -9,9 +9,9 @@ import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main/main_screen_layout.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main/other_content.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main/top_content.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/main_screen_layout.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/other_content.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/top_content.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/news/all_news_widget.dart';
 
@@ -20,7 +20,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monit
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/welcome_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/welcome_widget.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 

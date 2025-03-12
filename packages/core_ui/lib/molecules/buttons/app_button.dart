@@ -176,6 +176,7 @@ class AppButton extends StatelessWidget {
     required String label,
     VoidCallback? onPressed,
     required BuildContext context,
+    required final bool isLoading,
   }) {
     final padding = _buttonSize(size: ButtonSize.small);
     return AppButton._(
@@ -186,7 +187,14 @@ class AppButton extends StatelessWidget {
         overlayColor: _appColor(context).onError,
         padding: padding,
       ),
-      child: AppText.labelSmall(text: label, context: context, color: _appColor(context).onTertiary),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          isLoading
+              ? CircularProgressIndicator(color: _appColor(context).onError)
+              : AppText.labelSmall(text: label, context: context, color: _appColor(context).onError),
+        ],
+      ),
     );
   }
 
