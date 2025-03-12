@@ -153,6 +153,7 @@ jobs:
           inAppUpdatePriority: 3
           status: inProgress #completed
           userFraction: 0.33
+          changesNotSentForReview: true
           track: 'internal' #'beta' #'production'
          
       - name: Upload Debug Symbols
