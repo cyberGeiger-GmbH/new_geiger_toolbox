@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/nosakharedanielahanor/Developer/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/nosakharedanielahanor/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/packages/core_ui/example/android/app/.cxx/Debug/n4h6u4vr/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/nosakharedanielahanor/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/nosakharedanielahanor/Developer/cyber-geiger/new_architecture/new_geiger_toolbox/packages/core_ui/example/android/app/.cxx/Debug/n4h6u4vr/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

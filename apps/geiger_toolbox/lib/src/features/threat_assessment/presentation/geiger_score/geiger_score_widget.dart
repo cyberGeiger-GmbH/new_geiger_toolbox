@@ -79,7 +79,7 @@ class GeigerScoreWidget extends ConsumerWidget {
                           );
                         },
                       )
-                      : SizedBox.shrink(),
+                      : const SizedBox.shrink(),
         );
     //: AppText.titleSmall(text: "RecalCulating score", context: context);
   }
@@ -96,7 +96,7 @@ class _ScoreWithInfo extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        _ScoreContent(score: score, color: color, key: key),
+        ScoreContent(score: score, color: color, key: key),
         Positioned(
           top: -10, // Adjust position as needed
           right: -14,
@@ -107,8 +107,8 @@ class _ScoreWithInfo extends StatelessWidget {
   }
 }
 
-class _ScoreContent extends StatelessWidget {
-  const _ScoreContent({super.key, required this.score, this.color});
+class ScoreContent extends StatelessWidget {
+  const ScoreContent({super.key, required this.score, this.color});
   final String score;
   final Color? color;
   @override

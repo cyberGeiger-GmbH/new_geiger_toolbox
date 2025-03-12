@@ -1,6 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
+import 'package:geiger_toolbox/src/common_widgets/section_heading.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering_category.dart';
@@ -19,22 +21,12 @@ class TodoCategory extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TodoCategoryTitle(title: category.category),
-        Spacing.gapH4,
+        SectionHeading(title: category.category),
+        Spacing.gapH22,
         TodoCategoryList(offerings: category.offerings),
-        Spacing.gapH4,
+        Spacing.gapH32,
       ],
     );
-  }
-}
-
-class TodoCategoryTitle extends StatelessWidget {
-  final String title;
-  const TodoCategoryTitle({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppText.bodyMedium(text: title, context: context);
   }
 }
 
@@ -44,32 +36,25 @@ class TodoCategoryList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
-    return Card(
-      elevation: 0,
-      color: theme.colorScheme.onInverseSurface,
-      margin: EdgeInsets.zero,
-      child: Column(
-        children:
-            offerings
-                .map(
-                  (data) => TodoItem(
-                    noTrailWidget: true,
-                    item: data,
-                    onChanged: () {
-                      if (data.status == Status.done) {
-                        final value = data.copyWith(status: Status.planned);
-                        ref.read(todoControllerProvider.notifier).planLater(value);
-                      } else {
-                        final value = data.copyWith(status: Status.done);
-                        ref.read(todoControllerProvider.notifier).makeAsDone(value);
-                      }
-                    },
-                    showDetails: () => showTodoDetails(context, data),
-                  ),
-                )
-                .toList(),
-      ),
+    return GeigerCard(
+      items:
+          offerings
+              .map(
+                (data) => TodoItem(
+                  item: data,
+                  onChanged: () {
+                    if (data.status == Status.done) {
+                      final value = data.copyWith(status: Status.planned);
+                      ref.read(todoControllerProvider.notifier).planLater(value);
+                    } else {
+                      final value = data.copyWith(status: Status.done);
+                      ref.read(todoControllerProvider.notifier).makeAsDone(value);
+                    }
+                  },
+                  showDetails: () => showTodoDetails(context, data),
+                ),
+              )
+              .toList(),
     );
   }
 }

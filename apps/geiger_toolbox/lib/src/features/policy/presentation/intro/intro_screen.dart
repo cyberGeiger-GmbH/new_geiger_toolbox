@@ -14,8 +14,8 @@ typedef PageChanged<T> = Function(int index, T value);
 class IntroScreen extends ConsumerWidget {
   IntroScreen({super.key});
   final items = [
-    IntroImage(svgImage: GeigerSvgImages.magnifyingGlass(), description: 'Access Your Cybersecurity'.hardcoded),
-    IntroImage(svgImage: GeigerSvgImages.measure(), description: 'Know Your Cyberthreat'.hardcoded),
+    IntroImage(svgImage: GeigerSvgImages.magnifyingGlass(), description: 'Accessed Your Cybersecurity'.hardcoded),
+    IntroImage(svgImage: GeigerSvgImages.measure(), description: 'Know Your Cyber Threats'.hardcoded),
     IntroImage(svgImage: GeigerSvgImages.trickGood(), description: 'Improve Your Protection'.hardcoded),
   ];
   @override

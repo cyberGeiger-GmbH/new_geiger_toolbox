@@ -20,7 +20,7 @@ import 'package:geiger_toolbox/src/utils/helpers/carousel_helper.dart';
 import 'package:geiger_toolbox/src/utils/helpers/helpers_functions.dart';
 
 class NewsFeedsWidget extends ConsumerWidget {
-  NewsFeedsWidget({super.key, this.limitNewsFeedDisplay = 5});
+   NewsFeedsWidget({super.key, this.limitNewsFeedDisplay = 5});
   final int limitNewsFeedDisplay;
   final CarouselSliderController _controller = CarouselSliderController();
 
@@ -82,6 +82,6 @@ class LabelWidget extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return AppText.bodySmall(text: text, context: context);
+    return AppText.labelLarge(text: text, context: context);
   }
 }

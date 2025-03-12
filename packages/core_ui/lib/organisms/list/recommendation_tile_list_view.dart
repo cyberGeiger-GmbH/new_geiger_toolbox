@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/molecules/cards/protection_tile.dart';
 
 import 'package:flutter/material.dart';
 
@@ -44,8 +45,8 @@ class RecommendationTitleList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: appTextStyle.bodySmall!.copyWith(fontWeight: FontWeight.w700)),
-        Spacing.gapH4,
+        Text(title, style: appTextStyle.labelLarge!.copyWith(fontWeight: FontWeight.w700)),
+        Spacing.gapH22,
         recommendations,
       ],
     );

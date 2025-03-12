@@ -9,6 +9,9 @@ import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/main_screen_layout.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/other_content.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/top_content.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/news/all_news_widget.dart';
 
@@ -17,7 +20,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monit
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/welcome_widget.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/welcome_widget.dart';
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,45 +44,58 @@ class MainScreen extends ConsumerWidget {
           context.pushNamed(AppRouter.profileRouter.name);
         },
       ),
-      body: ResponsiveCenterScrollableWidget(
-        padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8),
+      body: SingleChildScrollView(
         controller: scrollController,
-        thumbVisibility: false,
-        child: FeatureListView(
-          scrollController: scrollController,
-          onScanPressed: () {
-            ref.read(scanButtonControllerProvider.notifier).scan();
-          },
+        child: MainScreenLayout(
+          topContent:
+              (_, height, newsFeedIsEmpty) => TopContent(isNewsFeedEmpty: newsFeedIsEmpty, heightFraction: height),
+
+          otherContent:
+              (_, height, newsFeedIsEmpty) => OtherContent(heightFraction: height, isNewsFeedEmpty: newsFeedIsEmpty),
         ),
       ),
+
+      //  ResponsiveCenterScrollableWidget(
+      //   padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8),
+      //   controller: scrollController,
+      //   thumbVisibility: false,
+      //   child: FeatureListView(
+      //     scrollController: scrollController,
+      //     onScanPressed: () {
+      //       ref.read(scanButtonControllerProvider.notifier).scan();
+      //     },
+      //   ),
+      // ),
     );
   }
 }
 
-class FeatureListView extends ConsumerWidget {
-  const FeatureListView({super.key, this.scrollController, required this.onScanPressed});
 
-  final ScrollController? scrollController;
-  final VoidCallback onScanPressed;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
+// class FeatureListView extends ConsumerWidget {
+//   const FeatureListView({super.key, this.scrollController, required this.onScanPressed});
 
-    return AsyncValueWidget(
-      value: newsFeedValue,
-      data:
-          (value) =>
-              value.isEmpty
-                  ? WelcomeScanIntroWidget(onScanPressed: onScanPressed)
-                  : SingleChildScrollView(
-                    controller: scrollController,
+//   final ScrollController? scrollController;
+//   final VoidCallback onScanPressed;
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final newsFeedValue = ref.watch(watchRecentNewsFeedsProvider);
 
-                    child: FeatureList(onScanPressed: onScanPressed),
-                  ),
-    );
-  }
-}
+//     return AsyncValueWidget(
+//       value: newsFeedValue,
+//       data:
+//           (value) =>
+//               value.isEmpty
+//                   ? WelcomeScanIntroWidget(onScanPressed: onScanPressed)
+//                   : SingleChildScrollView(
+//                     controller: scrollController,
 
+//                     child: FeatureList(onScanPressed: onScanPressed),
+//                   ),
+//     );
+//   }
+// }
+
+@Deprecated("don't use")
 class FeatureList extends StatelessWidget {
   const FeatureList({super.key, required this.onScanPressed});
 
@@ -92,11 +108,11 @@ class FeatureList extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const GeigerScoreWidget(),
-        Spacing.gapH8,
+        Spacing.gapH12,
         ScanButtonWidget(onScanPressed: onScanPressed),
-        Spacing.gapH8,
+        Spacing.gapH12,
         NewsFeedsWidget(),
-        Spacing.gapH8,
+        Spacing.gapH12,
         //AssetWidget(),
         //**FEEDBACK: don't show the score message widget
         // const ScoreMessageWidget(),
@@ -110,3 +126,7 @@ class FeatureList extends StatelessWidget {
     );
   }
 }
+
+
+
+

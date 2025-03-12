@@ -75,7 +75,7 @@ void showTodoDetails(BuildContext context, TodoOffering item) {
     title: item.offering.name,
     forceMaxHeight: false,
 
-    page: Column(
+    mainContent: Column(
       children: [
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.3, // Use 40% of screen height

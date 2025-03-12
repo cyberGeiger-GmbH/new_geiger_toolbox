@@ -1,3 +1,4 @@
+import 'package:core_ui/organisms/news_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
@@ -8,14 +9,8 @@ class LastUpdatedWidget extends ConsumerWidget {
   final DateTime lastUpdated;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
 
     final formattedDate = ref.watch(timeAgoProvider(timestamp: lastUpdated));
-    return RichText(
-      text: TextSpan(
-        style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor),
-        children: [TextSpan(text: "Updated: ".hardcoded), TextSpan(text: formattedDate)],
-      ),
-    );
+    return  MetaInfoContent(title:"Last Updated".hardcoded, source: formattedDate,);
   }
 }

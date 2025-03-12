@@ -1,134 +1,134 @@
 [
     {
-        "id": "Fake_Recruiters_Distribute_Banking_Trojan",
-        "title": "Fake Recruiters Distribute Banking Trojan",
-        "summary": "A phishing scam uses fake recruiters to distribute a banking trojan via malicious apps. This threat is significant for users who may be lured by job offers, leading to device compromise.",
-        "article_url": "",
-        "image_url": "",
+        "id": "Browser_Syncjacking_Chrome_Extensions",
+        "title": "Browser Syncjacking Chrome Extensions",
+        "summary": "Browser Syncjacking is a method where attackers use Chrome extensions to control devices. This threat is significant for users with little tech knowledge, as it can lead to data theft and system control.",
+        "article_url": "https://thehackernews.com/2025/03/identity-new-cybersecurity-battleground.html",
+        "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDZuJ7ve12xkaoUq65ojRu8rMUq4iDnHKOndWur-or7SjpFOQpfVlH0bi4hSj0gZ1zuJ_YR6ynflPKY8_tBRz80TtO82RoUE-FecNMiSYf_FXArI7s7sqHMz_Zer-GpeeGZaVn1k1cnDMHy1Zk410cwhAE-P_UqPHUBndEyEXaNi7IdospYJDDWEWCxGY/s1600/okta.png",
         "news_category": "cyber threat",
-        "date_created": "2024-12-24T00:00:00Z",
+        "date_created": "2025-03-05T16:30:00Z",
         "recommendations": [
             {
-                "id": "Use_Official_App_Stores",
-                "name": "Use Official App Stores",
-                "rationale": "Downloading apps only from official stores reduces the risk of installing malicious software.",
+                "id": "Install_Trusted_Extensions_Only",
+                "name": "Install Trusted Extensions Only",
+                "rationale": "Using only trusted extensions reduces the risk of malicious software being installed.",
                 "specific_offerings": [
                     {
-                        "name": "Google Play Store",
-                        "summary": "Official app store for Android devices, providing verified apps.",
-                        "offering_image_url": ""
+                        "name": "Google Chrome",
+                        "summary": "Provides a list of verified extensions.",
+                        "offering_image_url": "https://example.com/chrome_verified_extensions.png"
                     },
                     {
-                        "name": "Apple App Store",
-                        "summary": "Official app store for iOS devices, ensuring app safety and security.",
-                        "offering_image_url": ""
+                        "name": "Mozilla Firefox",
+                        "summary": "Offers a secure extension store.",
+                        "offering_image_url": "https://example.com/firefox_secure_store.png"
                     }
                 ]
             },
             {
-                "id": "Enable_App_Permissions_Review",
-                "name": "Enable App Permissions Review",
-                "rationale": "Regularly reviewing app permissions helps identify and remove unnecessary access.",
+                "id": "Enable_Browser_Security_Settings",
+                "name": "Enable Browser Security Settings",
+                "rationale": "Activating security settings can prevent unauthorized access.",
                 "specific_offerings": [
                     {
-                        "name": "Android Settings",
-                        "summary": "Manage app permissions through Android settings to control access.",
-                        "offering_image_url": ""
+                        "name": "Google Chrome",
+                        "summary": "Security settings to block suspicious sites.",
+                        "offering_image_url": "https://example.com/chrome_security_settings.png"
                     },
                     {
-                        "name": "iOS Settings",
-                        "summary": "Use iOS settings to review and adjust app permissions for better security.",
-                        "offering_image_url": ""
+                        "name": "Mozilla Firefox",
+                        "summary": "Enhanced security features for safer browsing.",
+                        "offering_image_url": "https://example.com/firefox_security_features.png"
                     }
                 ]
             }
         ]
     },
     {
-        "id": "Credential_Stuffing_Attacks",
-        "title": "Credential Stuffing Attacks",
-        "summary": "Credential stuffing attacks exploit reused passwords across multiple accounts. Users with weak password practices are at high risk.",
-        "article_url": "",
-        "image_url": "",
-        "news_category": "cyber threat",
-        "date_created": "2025-03-01T00:00:00Z",
-        "recommendations": [
-            {
-                "id": "Use_Password_Manager",
-                "name": "Use Password Manager",
-                "rationale": "A password manager helps create and store strong, unique passwords for each account.",
-                "specific_offerings": [
-                    {
-                        "name": "LastPass",
-                        "summary": "Password manager that securely stores and generates passwords.",
-                        "offering_image_url": ""
-                    },
-                    {
-                        "name": "1Password",
-                        "summary": "Tool for managing and generating strong passwords across devices.",
-                        "offering_image_url": ""
-                    }
-                ]
-            },
-            {
-                "id": "Enable_Multi_Factor_Authentication",
-                "name": "Enable Multi-Factor Authentication",
-                "rationale": "Adding an extra layer of security makes unauthorized access more difficult.",
-                "specific_offerings": [
-                    {
-                        "name": "Google Authenticator",
-                        "summary": "App providing two-factor authentication codes for enhanced security.",
-                        "offering_image_url": ""
-                    },
-                    {
-                        "name": "Authy",
-                        "summary": "Two-factor authentication app that secures accounts with additional verification.",
-                        "offering_image_url": ""
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "id": "Google_Workspace_Security",
-        "title": "Google Workspace Security",
-        "summary": "Google Workspace offers robust tools for productivity but requires user diligence to secure data. Users must manage access and backups.",
-        "article_url": "",
-        "image_url": "",
+        "id": "Identity_First_Security_Strategy",
+        "title": "Identity First Security Strategy",
+        "summary": "Identity-first security focuses on centralizing identity management to enhance protection. This approach is beneficial for companies with limited tech resources.",
+        "article_url": "https://thehackernews.com/2025/03/identity-new-cybersecurity-battleground.html",
+        "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDZuJ7ve12xkaoUq65ojRu8rMUq4iDnHKOndWur-or7SjpFOQpfVlH0bi4hSj0gZ1zuJ_YR6ynflPKY8_tBRz80TtO82RoUE-FecNMiSYf_FXArI7s7sqHMz_Zer-GpeeGZaVn1k1cnDMHy1Zk410cwhAE-P_UqPHUBndEyEXaNi7IdospYJDDWEWCxGY/s1600/okta.png",
         "news_category": "protection capability",
-        "date_created": "2025-01-07T00:00:00Z",
+        "date_created": "2025-03-05T16:30:00Z",
         "recommendations": [
             {
-                "id": "Implement_Multi_Factor_Authentication",
-                "name": "Implement Multi-Factor Authentication",
-                "rationale": "Enhances account security by requiring additional verification.",
+                "id": "Centralize_Identity_Management",
+                "name": "Centralize Identity Management",
+                "rationale": "Centralizing identity management reduces security gaps and enhances protection.",
                 "specific_offerings": [
                     {
-                        "name": "Google Workspace",
-                        "summary": "Provides built-in options for enabling multi-factor authentication.",
-                        "offering_image_url": ""
+                        "name": "Okta",
+                        "summary": "Provides a comprehensive identity management platform.",
+                        "offering_image_url": "https://example.com/okta_identity_management.png"
                     },
                     {
-                        "name": "Duo Security",
-                        "summary": "Offers multi-factor authentication solutions compatible with Google Workspace.",
-                        "offering_image_url": ""
+                        "name": "Microsoft Azure AD",
+                        "summary": "Offers identity and access management solutions.",
+                        "offering_image_url": "https://example.com/azure_ad.png"
                     }
                 ]
             },
             {
-                "id": "Regular_Data_Backups",
-                "name": "Regular Data Backups",
-                "rationale": "Ensures data is recoverable in case of accidental deletion or cyber threats.",
+                "id": "Implement_Identity_Orchestration",
+                "name": "Implement Identity Orchestration",
+                "rationale": "Automating identity processes enhances security and efficiency.",
                 "specific_offerings": [
                     {
-                        "name": "Google Drive",
-                        "summary": "Cloud storage service for backing up and accessing files securely.",
-                        "offering_image_url": ""
+                        "name": "Ping Identity",
+                        "summary": "Provides identity orchestration solutions.",
+                        "offering_image_url": "https://example.com/ping_identity.png"
                     },
                     {
-                        "name": "Backupify",
-                        "summary": "Provides automated backup solutions for Google Workspace data.",
-                        "offering_image_url": ""
+                        "name": "ForgeRock",
+                        "summary": "Offers identity orchestration and management.",
+                        "offering_image_url": "https://example.com/forgerock.png"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "AI_Driven_Cybersecurity_Threats",
+        "title": "AI Driven Cybersecurity Threats",
+        "summary": "AI is used in both offensive and defensive cybersecurity. For users with limited tech knowledge, understanding AI's role in security is crucial.",
+        "article_url": "https://thehackernews.com/2024/12/top-10-cybersecurity-trends-to-expect.html",
+        "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglH_sW5NROSh-Hz-mrMtwMpI0g4Cxu3m_HZYMzBIzIcJGvgq0nObpqrDciS2yENXbnNctwrGrxLDVXABATmQ-6HyAlpO-FwlYu3EGiC2qzVUJYIRqJuX7WwYBiYKRBIQ4tIKp_JGkY_0uKI56vobzp3QQ4jJ1dRXI_dX3OezgJ-2yorRto360Nh3mMWss/s1600/main.jpg",
+        "news_category": "cyber threat",
+        "date_created": "2024-12-23T15:07:00Z",
+        "recommendations": [
+            {
+                "id": "Use_AI_Powered_Security_Tools",
+                "name": "Use AI Powered Security Tools",
+                "rationale": "AI tools can detect threats faster and more accurately.",
+                "specific_offerings": [
+                    {
+                        "name": "CrowdStrike",
+                        "summary": "Offers AI-driven threat detection and response.",
+                        "offering_image_url": "https://example.com/crowdstrike_ai_tools.png"
+                    },
+                    {
+                        "name": "Darktrace",
+                        "summary": "Provides AI-based cybersecurity solutions.",
+                        "offering_image_url": "https://example.com/darktrace_ai.png"
+                    }
+                ]
+            },
+            {
+                "id": "Educate_on_AI_Risks",
+                "name": "Educate on AI Risks",
+                "rationale": "Understanding AI risks helps in mitigating potential threats.",
+                "specific_offerings": [
+                    {
+                        "name": "Coursera",
+                        "summary": "Offers courses on AI and cybersecurity.",
+                        "offering_image_url": "https://example.com/coursera_ai_courses.png"
+                    },
+                    {
+                        "name": "Udemy",
+                        "summary": "Provides training on AI security risks.",
+                        "offering_image_url": "https://example.com/udemy_ai_security.png"
                     }
                 ]
             }

@@ -5,12 +5,12 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monit
 import 'package:geiger_toolbox/src/utils/constants.dart';
 
 class LimitNewsItemList extends StatelessWidget {
-  const LimitNewsItemList({super.key, required this.items, required this.displayLimit, required this.seeAll});
+  const LimitNewsItemList({super.key, required this.items, required this.displayLimit, this.seeAll});
   final List<NewsItem> items;
   //* displayLimit is the number of items to display in the list 
   
   final int displayLimit;
-  final VoidCallback seeAll;
+  final VoidCallback? seeAll;
 
   @override
   Widget build(BuildContext context) {
