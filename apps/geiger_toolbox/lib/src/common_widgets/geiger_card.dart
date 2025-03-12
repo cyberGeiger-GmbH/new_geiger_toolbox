@@ -2,10 +2,11 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 class GeigerCard extends StatelessWidget {
-  const GeigerCard({super.key, this.child, this.items});
+  const GeigerCard({super.key, this.child, this.items, this.backgroundColor});
 
   final Widget? child;
   final List<Widget>? items;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class GeigerCard extends StatelessWidget {
     return items == null
         ? Card(
           elevation: 0,
-          color: appColors.onInverseSurface,
+          color: backgroundColor ?? appColors.onInverseSurface,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
           margin: EdgeInsets.zero,
           child: child,

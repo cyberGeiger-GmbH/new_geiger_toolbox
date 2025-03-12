@@ -1,29 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
-
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
-
-class WelcomeScanIntroWidget extends ConsumerWidget {
-  const WelcomeScanIntroWidget({super.key, required this.onScanPressed});
-  final VoidCallback onScanPressed;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isScanning = ref.watch(scanButtonControllerProvider);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const GeigerScoreWidget(),
-        ScanButtonWidget(onScanPressed: onScanPressed),
-        Spacing.gapH12,
-        WelcomeNoteWidget(isScanning: isScanning.isLoading),
-      ],
-    );
-  }
-}
 
 class WelcomeNoteWidget extends StatelessWidget {
   const WelcomeNoteWidget({super.key, required this.isScanning});
@@ -32,12 +10,12 @@ class WelcomeNoteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    return Card(
-      margin: EdgeInsets.zero,
+    return GeigerCard(
+      //  margin: EdgeInsets.zero,
 
       // color: theme.colorScheme.onInverseSurface,
       child: Padding(
-        padding: EdgeInsets.all(Spacing.p16),
+        padding: EdgeInsets.all(Spacing.p32),
         child: SizedBox(
           width: double.infinity,
           child: RichText(
