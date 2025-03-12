@@ -1,3 +1,14 @@
+## 1.4.1
+
+ - **FIX**(geiger_toolbox): refactor, improve todo details.
+ - **FIX**(geiger_toolbox): layout in new item.
+ - **FIX**(geiger_toolbox,core_ui): make component reusable.
+ - **FIX**(geiger_toolbox,core_ui): news details, recommendation layout fix.
+ - **FIX**(core_ui): clean up.
+ - **FIX**(geiger_toolbox,core_ui): ui layout adjustment.
+ - **FIX**(geiger_toolbox): added button size variant.
+ - **FIX**(geiger_toolbox): change get button color to tertiary.
+
 ## 1.4.0
 
  - **REFACTOR**(geiger_toolbox,core_ui): improve old news listings.

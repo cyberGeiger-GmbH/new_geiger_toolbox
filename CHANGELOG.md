@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-03-12
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`core_ui` - `v1.4.1`](#core_ui---v141)
+
+---
+
+#### `core_ui` - `v1.4.1`
+
+ - **FIX**(geiger_toolbox): refactor, improve todo details.
+ - **FIX**(geiger_toolbox): layout in new item.
+ - **FIX**(geiger_toolbox,core_ui): make component reusable.
+ - **FIX**(geiger_toolbox,core_ui): news details, recommendation layout fix.
+ - **FIX**(core_ui): clean up.
+ - **FIX**(geiger_toolbox,core_ui): ui layout adjustment.
+ - **FIX**(geiger_toolbox): added button size variant.
+ - **FIX**(geiger_toolbox): change get button color to tertiary.
+
+
 ## 2025-03-07
 
 ### Changes
