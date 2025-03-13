@@ -20,7 +20,7 @@ import 'package:geiger_toolbox/src/utils/helpers/carousel_helper.dart';
 import 'package:geiger_toolbox/src/utils/helpers/helpers_functions.dart';
 
 class NewsFeedsWidget extends ConsumerWidget {
-   NewsFeedsWidget({super.key, this.limitNewsFeedDisplay = 5});
+  NewsFeedsWidget({super.key, this.limitNewsFeedDisplay = 5});
   final int limitNewsFeedDisplay;
   final CarouselSliderController _controller = CarouselSliderController();
 
@@ -47,6 +47,7 @@ class NewsFeedsWidget extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               LabelWidget(text: "Your Threats".hardcoded),
+              Spacing.gapH8,
               CarouselSlider(
                 items: limitNews.toWidgetList(
                   context: context,
