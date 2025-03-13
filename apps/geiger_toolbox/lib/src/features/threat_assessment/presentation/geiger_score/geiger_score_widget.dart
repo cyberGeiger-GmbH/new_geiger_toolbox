@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
+import 'package:geiger_toolbox/src/common_widgets/loading_animation_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/snack_bar.dart';
 import 'package:geiger_toolbox/src/extensions/score_color.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
@@ -95,9 +96,7 @@ class ShowScore extends StatelessWidget {
   final WidgetBuilder builder;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final color = theme.colorScheme;
-    return isLoading ? LoadingAnimationWidget.staggeredDotsWave(color: color.primary, size: 57.0) : builder(context);
+    return isLoading ? LoadingAnimation(size: 57.0) : builder(context);
   }
 }
 
