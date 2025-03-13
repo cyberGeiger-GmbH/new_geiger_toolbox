@@ -39,79 +39,90 @@ class LocalNewsFeedRepository {
   }
 
   Future<void> _synFromRemote({required List<News> data}) async {
-  try {
-    final uniqueNews = await _uniqueNews(newObj: data);
+    try {
+      final uniqueNews = await _uniqueNews(newObj: data);
 
-    if (uniqueNews.isEmpty) {
-      _log.w("news feed data already existing");
-      _log.w(NewsFeedAlreadyExistsException());
-      return;
-    }
+      if (uniqueNews.isEmpty) {
+        _log.w("news feed data already existing");
+        _log.w(NewsFeedAlreadyExistsException());
+        return;
+      }
 
-    _log.i("storing new news locally...");
+      _log.i("storing new news locally...");
 
-    // Prepare companions
-    final newsCompanions = <NewsInfoCompanion>[];
-    final recoCompanions = <RecommendationsCompanion>[];
-    final offerCompanions = <RecommendationOfferingsCompanion>[];
+      // Prepare companions
+      final newsCompanions = <NewsInfoCompanion>[];
+      final recoCompanions = <RecommendationsCompanion>[];
+      final offerCompanions = <RecommendationOfferingsCompanion>[];
 
-    for (var newsData in uniqueNews) {
-      final newsId = newsData.id.toLowerCase();
-      final dateCreated = ref.read(stringToDateProvider(inputDate: newsData.dateCreated));
+      for (var newsData in uniqueNews) {
+        final newsId = newsData.id.toLowerCase();
+        final dateCreated = ref.read(
+          stringToDateProvider(
+            inputDate: newsData.dateCreated.isEmpty ? DateTime.now().toString() : newsData.dateCreated,
+          ),
+        );
 
-      newsCompanions.add(NewsInfoCompanion(
-        id: Value(newsId),
-        title: Value(newsData.title),
-        summary: Value(newsData.summary),
-        newsCategory: Value(newsData.newsCategory),
-        imageUrl: Value(newsData.imageUrl),
-        dateCreated: Value(dateCreated),
-      ));
+        newsCompanions.add(
+          NewsInfoCompanion(
+            id: Value(newsId),
+            title: Value(newsData.title),
+            summary: Value(newsData.summary),
+            newsCategory: Value(newsData.newsCategory),
+            imageUrl: Value(newsData.imageUrl),
+            dateCreated: Value(dateCreated),
+          ),
+        );
 
-      for (var recomData in newsData.recommendations) {
-        final recoId = "${recomData.id.toLowerCase()}_$newsId";
+        for (var recomData in newsData.recommendations) {
+          final recoId = "${recomData.id.toLowerCase()}_$newsId";
 
-        recoCompanions.add(RecommendationsCompanion(
-          id: Value(recoId),
-          newsId: Value(newsId),
-          name: Value(recomData.name),
-          rationale: Value(recomData.rationale),
-        ));
+          recoCompanions.add(
+            RecommendationsCompanion(
+              id: Value(recoId),
+              newsId: Value(newsId),
+              name: Value(recomData.name),
+              rationale: Value(recomData.rationale),
+            ),
+          );
 
-        for (var offerData in recomData.offerings) {
-          final id = "${recoId}_${offerData.name.replaceSpacesWithUnderscore}";
+          for (var offerData in recomData.offerings) {
+            final id = "${recoId}_${offerData.name.replaceSpacesWithUnderscore}";
 
-          offerCompanions.add(RecommendationOfferingsCompanion(
-            id: Value(id),
-            recommendationId: Value(recoId),
-            name: Value(offerData.name),
-            summary: Value(offerData.summary),
-          ));
+            offerCompanions.add(
+              RecommendationOfferingsCompanion(
+                id: Value(id),
+                recommendationId: Value(recoId),
+                name: Value(offerData.name),
+                summary: Value(offerData.summary),
+              ),
+            );
+          }
         }
       }
+
+      // Execute inserts in a single transaction
+      await _db.transaction(() async {
+        for (final news in newsCompanions) {
+          await _db.into(_db.newsInfo).insertOnConflictUpdate(news);
+        }
+
+        for (final reco in recoCompanions) {
+          await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
+        }
+
+        for (final offer in offerCompanions) {
+          await _db.into(_db.recommendationOfferings).insertOnConflictUpdate(offer);
+        }
+      });
+
+      _log.i("done storing");
+    } catch (e, s) {
+      _log.e("error:$e, stack:$s");
+      rethrow;
     }
-
-    // Execute inserts in a single transaction
-    await _db.transaction(() async {
-      for (final news in newsCompanions) {
-        await _db.into(_db.newsInfo).insertOnConflictUpdate(news);
-      }
-
-      for (final reco in recoCompanions) {
-        await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
-      }
-
-      for (final offer in offerCompanions) {
-        await _db.into(_db.recommendationOfferings).insertOnConflictUpdate(offer);
-      }
-    });
-
-    _log.i("done storing");
-  } catch (e, s) {
-    _log.e("error:$e, stack:$s");
-    rethrow;
   }
-}
+
   //remove duplicate news by id
   Future<List<News>> _uniqueNews({required List<News> newObj}) async {
     try {
