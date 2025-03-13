@@ -13,20 +13,27 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/app-icon.png
-  AssetGenImage get appIcon => const AssetGenImage('assets/images/app-icon.png');
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app-icon.png');
 
   /// File path: assets/images/circles-bg.png
-  AssetGenImage get circlesBg => const AssetGenImage('assets/images/circles-bg.png');
+  AssetGenImage get circlesBg =>
+      const AssetGenImage('assets/images/circles-bg.png');
+
+  /// File path: assets/images/default_news_image.png
+  AssetGenImage get defaultNewsImage =>
+      const AssetGenImage('assets/images/default_news_image.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon, circlesBg];
+  List<AssetGenImage> get values => [appIcon, circlesBg, defaultNewsImage];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
   /// File path: assets/svg/cG_magnifying_glass.svg
-  String get cGMagnifyingGlass => 'packages/core_ui/assets/svg/cG_magnifying_glass.svg';
+  String get cGMagnifyingGlass =>
+      'packages/core_ui/assets/svg/cG_magnifying_glass.svg';
 
   /// File path: assets/svg/cG_measure.svg
   String get cGMeasure => 'packages/core_ui/assets/svg/cG_measure.svg';
@@ -51,7 +58,11 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
 
@@ -80,7 +91,8 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = true,
     bool isAntiAlias = false,
-    @Deprecated('Do not specify package for a generated library asset') String? package = package,
+    @Deprecated('Do not specify package for a generated library asset')
+    String? package = package,
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -115,9 +127,14 @@ class AssetGenImage {
 
   ImageProvider provider({
     AssetBundle? bundle,
-    @Deprecated('Do not specify package for a generated library asset') String? package = package,
+    @Deprecated('Do not specify package for a generated library asset')
+    String? package = package,
   }) {
-    return AssetImage(_assetName, bundle: bundle, package: package);
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
   }
 
   String get path => _assetName;

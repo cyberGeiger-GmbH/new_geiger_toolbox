@@ -106,25 +106,24 @@ class LocalNewsFeedRepository {
   //remove duplicate news by id
   Future<List<News>> _uniqueNews({required List<News> newObj}) async {
     try {
-      if (newObj.isNotEmpty) {
-        final prev = await fetchNewsList();
+      if (newObj.isEmpty) return [];
 
-        List<News> combinedList = prev + newObj;
+      final prev = await fetchNewsList();
 
-        // Count occurrences using a Map
-        Map<String, int> countMap = {};
+      final combinedList = [...prev, ...newObj];
 
-        for (var news in combinedList) {
-          countMap[news.id.toLowerCase()] = (countMap[news.id.toLowerCase()] ?? 0) + 1;
-        }
+      // Normalize and count by lowercase ID
+      final countMap = <String, int>{};
+      final idCache = <News, String>{};
 
-        // Filter out users that appear more than once
-        List<News> uniqueUsers =
-            combinedList.where((data) => countMap[data.id.toLowerCase()] == 1).toList(); // Keep only unique ones
-
-        return uniqueUsers;
+      for (final news in combinedList) {
+        final id = news.id.toLowerCase();
+        idCache[news] = id;
+        countMap[id] = (countMap[id] ?? 0) + 1;
       }
-      return [];
+
+      // Keep only unique items based on ID
+      return combinedList.where((news) => countMap[idCache[news]] == 1).toList();
     } catch (e, s) {
       _log.e("$e, $s");
       rethrow;
@@ -207,7 +206,7 @@ class LocalNewsFeedRepository {
   Stream<List<News>> watchNewsList({bool sort = true}) {
     _log.i("watching ${sort ? 'Recent' : 'Old'} List<News> ...");
     final newsWithRecoAndOffering = _sortNewsInfo(sort: sort);
-    
+
     return newsWithRecoAndOffering.map((rows) {
       final List<News> newsResult = [];
       final Map<String, Set<Recommendation>> recosMap = {};
