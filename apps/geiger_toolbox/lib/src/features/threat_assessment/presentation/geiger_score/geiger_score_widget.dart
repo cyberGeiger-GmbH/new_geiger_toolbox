@@ -11,6 +11,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/geige
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_controller.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class GeigerScoreWidget extends ConsumerWidget {
   const GeigerScoreWidget({super.key});
@@ -55,38 +56,52 @@ class GeigerScoreWidget extends ConsumerWidget {
             },
           ),
         )
-        : state.isLoading
-        ? AppText.titleMedium(text: "Calculating Score....", context: context)
-        : AsyncValueWidget(
-          value: scoreValue,
-          data:
-              (data) =>
-                  data != null
-                      ? _ScoreWithInfo(
-                        score: "${data.geigerScore}",
-                        key: key,
-                        //Todo: change font color base the score range
-                        showinfo: () {
-                          showWoltAlertDialog(
-                            context,
-                            title: "GEIGER Score",
-                            forceMaxHeight: false,
-                            mainContent: ShowScoreReason(
-                              align: TextAlign.center,
-                              reason: data.reason,
-                              status: data.status.toTitleCase,
-                            ),
-                          );
-                        },
-                      )
-                      : const SizedBox.shrink(),
+        : ShowScore(
+          isLoading: state.isLoading,
+          builder:
+              (_) => AsyncValueWidget(
+                value: scoreValue,
+                data:
+                    (data) =>
+                        data != null
+                            ? _ScoreWithInfo(
+                              score: "${data.geigerScore}",
+                              key: key,
+                              //Todo: change font color base the score range
+                              showinfo: () {
+                                showWoltAlertDialog(
+                                  context,
+                                  title: "GEIGER Score",
+                                  forceMaxHeight: false,
+                                  mainContent: ShowScoreReason(
+                                    align: TextAlign.center,
+                                    reason: data.reason,
+                                    status: data.status.toTitleCase,
+                                  ),
+                                );
+                              },
+                            )
+                            : const SizedBox.shrink(),
+              ),
         );
     //: AppText.titleSmall(text: "RecalCulating score", context: context);
   }
 }
 
+class ShowScore extends StatelessWidget {
+  const ShowScore({super.key, required this.builder, required this.isLoading});
+  final bool isLoading;
+  final WidgetBuilder builder;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final color = theme.colorScheme;
+    return isLoading ? LoadingAnimationWidget.staggeredDotsWave(color: color.primary, size: 57.0) : builder(context);
+  }
+}
+
 class _ScoreWithInfo extends StatelessWidget {
-  const _ScoreWithInfo({super.key, required this.score, required this.showinfo, });
+  const _ScoreWithInfo({super.key, required this.score, required this.showinfo});
   final String score;
 
   final VoidCallback showinfo;

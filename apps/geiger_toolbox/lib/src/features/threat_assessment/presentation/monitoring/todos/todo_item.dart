@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:geiger_toolbox/src/common_widgets/item_list_tile.dart';
 
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
-import 'package:geiger_toolbox/src/common_widgets/list_title.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 
 class TodoItem extends StatelessWidget {

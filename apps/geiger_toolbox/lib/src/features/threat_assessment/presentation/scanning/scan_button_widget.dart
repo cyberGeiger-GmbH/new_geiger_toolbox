@@ -101,7 +101,7 @@ class ScanningText extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         //child:
-        AppText.labelLarge(text: state, context: context, color: color.onPrimary, fontWeight: FontWeight.bold),
+        AppText.labelLarge(text: state, context: context, color: color.onPrimary),
         LoadingAnimationWidget.threeArchedCircle(color: color.onPrimary, size: size * 0.9),
         // ),
       ],

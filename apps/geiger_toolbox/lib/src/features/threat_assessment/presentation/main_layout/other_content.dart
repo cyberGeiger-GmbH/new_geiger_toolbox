@@ -22,7 +22,9 @@ class OtherContent extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Spacing.gapH12,
           isNewsFeedEmpty ? WelcomeNoteWidget(isScanning: isScanning.isLoading) : const SizedBox.shrink(),
+
           NewsFeedsWidget(),
           Spacing.gapH12,
           const TodoListWidget(),
