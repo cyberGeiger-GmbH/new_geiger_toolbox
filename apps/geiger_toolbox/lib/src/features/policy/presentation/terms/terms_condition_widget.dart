@@ -94,7 +94,7 @@ class TermsPrivacySpanText extends ConsumerWidget {
                     ref
                         .read(urlLauncherProvider)
                         .launch(
-                          Uri.parse("https://www.cyber-geiger.com/app/privacy-policy/"),
+                          Uri.parse("https://www.cyber-geiger.com/app/terms-of-service/"),
                           // * Open app store app directly (or fallback to browser)
                           mode: LaunchMode.inAppBrowserView,
                         );
