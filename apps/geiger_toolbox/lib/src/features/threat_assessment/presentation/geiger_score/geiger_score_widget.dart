@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/organisms/news_content.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,8 +64,9 @@ class GeigerScoreWidget extends ConsumerWidget {
                 value: scoreValue,
                 data:
                     (data) =>
-                        data != null
-                            ? _ScoreWithInfo(
+                        data == null
+                            ? const SizedBox.shrink()
+                            : _ScoreWithInfo(
                               score: "${data.geigerScore}",
                               key: key,
                               //Todo: change font color base the score range
@@ -80,8 +82,7 @@ class GeigerScoreWidget extends ConsumerWidget {
                                   ),
                                 );
                               },
-                            )
-                            : const SizedBox.shrink(),
+                            ),
               ),
         );
     //: AppText.titleSmall(text: "RecalCulating score", context: context);
@@ -159,6 +160,25 @@ class ShowScoreReason extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ScoreStatusWidget extends ConsumerWidget {
+  const ScoreStatusWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scoreValue = ref.watch(watchGeigerScoreProvider);
+    final theme = Theme.of(context);
+
+    return AsyncValueWidget(
+      value: scoreValue,
+      data:
+          (data) =>
+              data == null
+                  ? const SizedBox.shrink()
+                  : TitleContent(title: data.status, color: theme.getScoreColor(data.geigerScore)),
     );
   }
 }

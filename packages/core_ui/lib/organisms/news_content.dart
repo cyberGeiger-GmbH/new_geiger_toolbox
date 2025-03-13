@@ -16,15 +16,10 @@ class NewsContent extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText.bodyLarge(
-          text: title,
-          context: context,
-          textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
-        ),
+        TitleContent(title: title),
         Spacing.gapH4,
         AppText.bodyMedium(text: summary, context: context, textAlign: TextAlign.justify),
         Spacing.gapH4,
@@ -55,6 +50,23 @@ class MetaInfoContent extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class TitleContent extends StatelessWidget {
+  const TitleContent({super.key, required this.title, this.color});
+
+  final String title;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AppText.bodyLarge(
+      text: title,
+      context: context,
+      textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700, color: color),
     );
   }
 }
