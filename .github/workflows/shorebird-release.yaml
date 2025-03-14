@@ -77,9 +77,9 @@ jobs:
 
 
   #######################
-  # Build & Upload Android App
+  # set up android keystore
   #######################
-  build-android:
+  setup-android:
     needs:
       - setup
       #- run-tests
@@ -114,16 +114,28 @@ jobs:
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
           echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
 
+  #######################
+  # set build and release android 
+  ####################### 
+  build-android:
+    needs:
+      - setup-android
+    runs-on: self-hosted
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+    steps
       - name: Shorebird Android Release
         uses: shorebirdtech/shorebird-release@v0
         id: shorebird-android-release
         with:
           platform: android
-          args: --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=build
+          args: --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=apps/geiger_toolbox/build
 
       - name: Prepare for Upload
         run: |
-          PACKAGE_NAME=$(grep -E "namespace\s*=\s*\"[^\"]+\"" android/app/build.gradle | sed -E 's/.*"([^"]+)".*/\1/')
+          PACKAGE_NAME=$(grep -E "namespace\s*=\s*\"[^\"]+\"" apps/geiger_toolbox/android/app/build.gradle | sed -E 's/.*"([^"]+)".*/\1/')
           if [ "${{ env.DEPLOY_ENV }}" != "prod" ]; then
             PACKAGE_NAME="${PACKAGE_NAME}.${{ env.DEPLOY_ENV }}"
           fi
@@ -143,7 +155,7 @@ jobs:
           userFraction: 0.33
           changesNotSentForReview: true
           track: 'internal' 
-
+          
       - name: Upload debug symbols
         uses: actions/upload-artifact@v4
         with:
