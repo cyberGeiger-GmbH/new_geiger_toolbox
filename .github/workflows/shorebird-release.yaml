@@ -33,6 +33,9 @@ jobs:
       uses: shorebirdtech/setup-shorebird@v1
       # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
       # cache: true
+    #this line ensures the shorebird command is available in the PATH in all subsequent steps.
+    - name: Export Shorebird to PATH
+      run: echo "$HOME/.shorebird/bin" >> $GITHUB_PATH
 
     - name: Clean and Get Flutter dependencies (Project)
       run: |
@@ -113,7 +116,10 @@ jobs:
           echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> android/key.properties
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
           echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
-
+      #for debugging purpose
+      - name: Check Shorebird version
+        run: which shorebird && shorebird --version
+        
       - name: Shorebird Android Release
         uses: shorebirdtech/shorebird-release@v0
         id: shorebird-android-release
