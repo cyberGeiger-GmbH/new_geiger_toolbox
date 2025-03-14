@@ -20,7 +20,7 @@ class TopContent extends ConsumerWidget {
         children: [
           //* if news feed is not empty show geiger Score widget
           !isNewsFeedEmpty ? const GeigerScoreWidget() : const SizedBox.shrink(),
-
+          Spacing.gapH12,
           Align(
             alignment: Alignment.bottomCenter,
             child: ScanButtonWidget(
@@ -29,7 +29,6 @@ class TopContent extends ConsumerWidget {
               },
             ),
           ),
-          Spacing.gapH12,
         ],
       ),
     );

@@ -12,9 +12,11 @@ class AppAssetImageData with _$AppAssetImageData {
   factory AppAssetImageData({required Image image}) = _AppAssetImageData;
 
   factory AppAssetImageData.geigerLogo({double? size}) =>
-      AppAssetImageData(image: Assets.images.appIcon.image(height: size , width: size));
+      AppAssetImageData(image: Assets.images.appIcon.image(height: size, width: size));
 
   factory AppAssetImageData.logoIcon() => AppAssetImageData(image: Assets.images.appIcon.image(height: 40, width: 40));
 
   factory AppAssetImageData.backgroundImage() => AppAssetImageData(image: Assets.images.circlesBg.image());
+
+ 
 }

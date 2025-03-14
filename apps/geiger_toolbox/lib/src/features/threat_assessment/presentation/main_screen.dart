@@ -20,7 +20,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monit
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/welcome_widget.dart';
+
 import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,8 +50,7 @@ class MainScreen extends ConsumerWidget {
           topContent:
               (_, height, newsFeedIsEmpty) => TopContent(isNewsFeedEmpty: newsFeedIsEmpty, heightFraction: height),
 
-          otherContent:
-              (_, height, newsFeedIsEmpty) => OtherContent(heightFraction: height, isNewsFeedEmpty: newsFeedIsEmpty),
+          otherContent: (_, _, newsFeedIsEmpty) => OtherContent(isNewsFeedEmpty: newsFeedIsEmpty),
         ),
       ),
 
@@ -69,7 +68,6 @@ class MainScreen extends ConsumerWidget {
     );
   }
 }
-
 
 // class FeatureListView extends ConsumerWidget {
 //   const FeatureListView({super.key, this.scrollController, required this.onScanPressed});
@@ -126,7 +124,3 @@ class FeatureList extends StatelessWidget {
     );
   }
 }
-
-
-
-

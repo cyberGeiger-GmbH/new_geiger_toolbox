@@ -204,7 +204,6 @@ class AppButton extends StatelessWidget {
     VoidCallback? onPressed,
     required BuildContext context,
   }) {
-    final theme = Theme.of(context);
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
@@ -235,6 +234,7 @@ class AppButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
         backgroundColor: _appColor(context).onInverseSurface,
         overlayColor: _appColor(context).tertiary,
+        padding: EdgeInsets.zero,
       ),
       onPressed: onPressed,
       child: AppText.bodyMedium(

@@ -39,63 +39,83 @@ class LocalNewsFeedRepository {
   }
 
   Future<void> _synFromRemote({required List<News> data}) async {
-    // debugPrint("news feed=> $data");
-
     try {
       final uniqueNews = await _uniqueNews(newObj: data);
+
       if (uniqueNews.isEmpty) {
         _log.w("news feed data already existing");
-
-        // don't throw an exception
         _log.w(NewsFeedAlreadyExistsException());
-      } else {
-        _log.i("storing new news locally...");
-        await _db.transaction(() async {
-          for (var newsData in uniqueNews) {
-            //insert news
-            final dateCreated = ref.read(stringToDateProvider(inputDate: newsData.dateCreated));
-            final newsId = newsData.id.toLowerCase();
-
-            final newsCompanion = NewsInfoCompanion(
-              id: Value(newsId),
-              title: Value(newsData.title),
-              summary: Value(newsData.summary),
-              newsCategory: Value(newsData.newsCategory),
-              imageUrl: Value(newsData.imageUrl),
-              dateCreated: Value(dateCreated),
-            );
-            await _db.into(_db.newsInfo).insertOnConflictUpdate(newsCompanion);
-
-            //insert recommendations for each news
-            for (var recomData in newsData.recommendations) {
-              //combine recommendation id and news id to avoid conflict
-              final recoId = "${recomData.id.toLowerCase()}_$newsId";
-
-              final reco = RecommendationsCompanion(
-                id: Value(recoId),
-                newsId: Value(newsId),
-                name: Value(recomData.name),
-                rationale: Value(recomData.rationale),
-              );
-              await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
-
-              // insert offering for each recommendation
-              for (var offerData in recomData.offerings) {
-                //id is the combination of recommendation id and offering name
-                final id = "${recoId}_${offerData.name.replaceSpacesWithUnderscore}";
-
-                final offer = RecommendationOfferingsCompanion(
-                  id: Value(id),
-                  recommendationId: Value(recoId),
-                  name: Value(offerData.name),
-                  summary: Value(offerData.summary),
-                );
-                await _db.into(_db.recommendationOfferings).insertOnConflictUpdate(offer);
-              }
-            }
-          }
-        });
+        return;
       }
+
+      _log.i("storing new news locally...");
+
+      // Prepare companions
+      final newsCompanions = <NewsInfoCompanion>[];
+      final recoCompanions = <RecommendationsCompanion>[];
+      final offerCompanions = <RecommendationOfferingsCompanion>[];
+
+      for (var newsData in uniqueNews) {
+        final newsId = newsData.id.toLowerCase();
+        final dateCreated = ref.read(
+          stringToDateProvider(
+            inputDate: newsData.dateCreated.isEmpty ? DateTime.now().toString() : newsData.dateCreated,
+          ),
+        );
+
+        newsCompanions.add(
+          NewsInfoCompanion(
+            id: Value(newsId),
+            title: Value(newsData.title),
+            summary: Value(newsData.summary),
+            newsCategory: Value(newsData.newsCategory),
+            imageUrl: Value(newsData.imageUrl),
+            dateCreated: Value(dateCreated),
+          ),
+        );
+
+        for (var recomData in newsData.recommendations) {
+          final recoId = "${recomData.id.toLowerCase()}_$newsId";
+
+          recoCompanions.add(
+            RecommendationsCompanion(
+              id: Value(recoId),
+              newsId: Value(newsId),
+              name: Value(recomData.name),
+              rationale: Value(recomData.rationale),
+            ),
+          );
+
+          for (var offerData in recomData.offerings) {
+            final id = "${recoId}_${offerData.name.replaceSpacesWithUnderscore}";
+
+            offerCompanions.add(
+              RecommendationOfferingsCompanion(
+                id: Value(id),
+                recommendationId: Value(recoId),
+                name: Value(offerData.name),
+                summary: Value(offerData.summary),
+              ),
+            );
+          }
+        }
+      }
+
+      // Execute inserts in a single transaction
+      await _db.transaction(() async {
+        for (final news in newsCompanions) {
+          await _db.into(_db.newsInfo).insertOnConflictUpdate(news);
+        }
+
+        for (final reco in recoCompanions) {
+          await _db.into(_db.recommendations).insertOnConflictUpdate(reco);
+        }
+
+        for (final offer in offerCompanions) {
+          await _db.into(_db.recommendationOfferings).insertOnConflictUpdate(offer);
+        }
+      });
+
       _log.i("done storing");
     } catch (e, s) {
       _log.e("error:$e, stack:$s");
@@ -106,25 +126,24 @@ class LocalNewsFeedRepository {
   //remove duplicate news by id
   Future<List<News>> _uniqueNews({required List<News> newObj}) async {
     try {
-      if (newObj.isNotEmpty) {
-        final prev = await fetchNewsList();
+      if (newObj.isEmpty) return [];
 
-        List<News> combinedList = prev + newObj;
+      final prev = await fetchNewsList();
 
-        // Count occurrences using a Map
-        Map<String, int> countMap = {};
+      final combinedList = [...prev, ...newObj];
 
-        for (var news in combinedList) {
-          countMap[news.id.toLowerCase()] = (countMap[news.id.toLowerCase()] ?? 0) + 1;
-        }
+      // Normalize and count by lowercase ID
+      final countMap = <String, int>{};
+      final idCache = <News, String>{};
 
-        // Filter out users that appear more than once
-        List<News> uniqueUsers =
-            combinedList.where((data) => countMap[data.id.toLowerCase()] == 1).toList(); // Keep only unique ones
-
-        return uniqueUsers;
+      for (final news in combinedList) {
+        final id = news.id.toLowerCase();
+        idCache[news] = id;
+        countMap[id] = (countMap[id] ?? 0) + 1;
       }
-      return [];
+
+      // Keep only unique items based on ID
+      return combinedList.where((news) => countMap[idCache[news]] == 1).toList();
     } catch (e, s) {
       _log.e("$e, $s");
       rethrow;
@@ -207,7 +226,7 @@ class LocalNewsFeedRepository {
   Stream<List<News>> watchNewsList({bool sort = true}) {
     _log.i("watching ${sort ? 'Recent' : 'Old'} List<News> ...");
     final newsWithRecoAndOffering = _sortNewsInfo(sort: sort);
-    
+
     return newsWithRecoAndOffering.map((rows) {
       final List<News> newsResult = [];
       final Map<String, Set<Recommendation>> recosMap = {};

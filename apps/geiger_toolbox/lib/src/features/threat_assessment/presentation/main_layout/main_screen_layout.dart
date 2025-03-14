@@ -24,7 +24,11 @@ class MainScreenLayout extends ConsumerWidget {
         data:
             (data) => Column(
               children: [
+                //for testing
+                // Container(color: Colors.green, child: topContent(context, oneThirdHeight, data.isEmpty)),
                 topContent(context, oneThirdHeight, data.isEmpty),
+                // //for testing
+                // Container(color: Colors.amber, child: otherContent(context, twoThirdHeight, data.isEmpty)),
                 otherContent(context, twoThirdHeight, data.isEmpty),
               ],
             ),

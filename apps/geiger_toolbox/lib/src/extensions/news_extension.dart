@@ -21,11 +21,11 @@ extension NewsExtension on List<News> {
           (value) =>
               value.key == currentIndex
                   ? Padding(
-                    padding: EdgeInsets.symmetric(vertical: Spacing.p4),
+                    padding: EdgeInsets.only(bottom: Spacing.p4),
                     child: AppButton.activeNewsCard(context: context, title: value.value.title, onPressed: onPressed),
                   )
                   : Padding(
-                    padding: EdgeInsets.symmetric(vertical: Spacing.p4),
+                    padding: EdgeInsets.only(bottom: Spacing.p4),
                     child: AppButton.newsCard(
                       context: context,
                       title: value.value.title,

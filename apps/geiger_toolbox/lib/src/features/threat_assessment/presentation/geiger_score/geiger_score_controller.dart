@@ -46,3 +46,5 @@ class ScoreError extends _$ScoreError {
     _setError(calculateState.hasError && !calculateState.isLoading);
   }
 }
+
+

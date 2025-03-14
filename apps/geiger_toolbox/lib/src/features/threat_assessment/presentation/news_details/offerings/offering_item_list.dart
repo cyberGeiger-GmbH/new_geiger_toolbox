@@ -17,7 +17,7 @@ class OfferingItemList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
 
       children: [
-        AppText.bodyMedium(text: explanation, context: context, textAlign: TextAlign.start),
+        AppText.bodyMedium(text: explanation, context: context, textAlign: TextAlign.justify),
         Spacing.gapH32,
         SectionHeading(title: "Recommended Todos"),
         Spacing.gapH22,
