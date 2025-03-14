@@ -87,7 +87,7 @@ jobs:
     timeout-minutes: 20
     defaults:
       run:
-        working-directory: app/geiger_toolbox
+        working-directory: apps/geiger_toolbox
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
