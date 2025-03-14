@@ -119,13 +119,15 @@ jobs:
   ####################### 
   build-android:
     needs:
+      - setup
       - setup-android
     runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
-    steps
+
+    steps:
       - name: Shorebird Android Release
         uses: shorebirdtech/shorebird-release@v0
         id: shorebird-android-release
@@ -155,7 +157,7 @@ jobs:
           userFraction: 0.33
           changesNotSentForReview: true
           track: 'internal' 
-          
+
       - name: Upload debug symbols
         uses: actions/upload-artifact@v4
         with:
