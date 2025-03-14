@@ -41,6 +41,11 @@ jobs:
       run: |
         flutter clean
         flutter pub get
+    #for debugging purpose
+    - name: Check Shorebird CLI
+      run: |
+        which shorebird
+        shorebird --version
 
     - name: Get dependencies using Melos 
       run: melos bootstrap
