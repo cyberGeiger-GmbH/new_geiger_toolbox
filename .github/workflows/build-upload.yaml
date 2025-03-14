@@ -77,21 +77,6 @@ jobs:
           apps/geiger_toolbox/firebase.json
 
   #######################
-  # Run tests
-  #######################
-  # run-tests:
-  #   needs:
-  #     - setup
-  #   runs-on: self-hosted
-  #   timeout-minutes: 20
-
-  #   steps:
-  #     - name: Run static analysis
-  #       run: melos run analyze
-  #     - name: Run tests
-  #       run: melos run test
-
-  #######################
   # Build & Upload Android App
   #######################
   build-android:
