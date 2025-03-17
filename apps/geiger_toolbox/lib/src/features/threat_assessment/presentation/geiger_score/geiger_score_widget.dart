@@ -13,7 +13,6 @@ import 'package:geiger_toolbox/src/features/threat_assessment/applications/geige
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_controller.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class GeigerScoreWidget extends ConsumerWidget {
   const GeigerScoreWidget({super.key});

@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/organisms/item_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:geiger_toolbox/src/common_widgets/item_list_tile.dart';
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
 
 class NewsItem extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/organisms/item_list_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geiger_toolbox/src/common_widgets/item_list_tile.dart';
+
 
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
@@ -25,7 +25,7 @@ class TodoItem extends StatelessWidget {
       subtitle: LastUpdatedWidget(lastUpdated: item.lastUpdated!),
 
       trailing: IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
-      status: item.status,
+      status: item.status == Status.done,
 
       // using custom ListTile
       // Row(

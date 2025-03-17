@@ -1,3 +1,4 @@
+import 'package:core_ui/organisms/item_list_tile.dart';
 import 'package:flutter/material.dart';
 
 import '../molecules/texts/app_text.dart';
@@ -13,15 +14,9 @@ class ErrorMessage extends StatelessWidget {
     final theme = Theme.of(context);
     final appColor = theme.colorScheme;
 
-    return ListTile(
+    return ItemListTile(
       leading: Icon(Icons.warning_amber_rounded, color: appColor.error),
-      title: AppText.bodySmall(
-        text: message,
-        context: context,
-        textAlign: TextAlign.start,
-        textStyle: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700, color: appColor.error),
-        
-      ),
+      title: message,
       trailing:
           onRetry != null
               ? InkWell(
