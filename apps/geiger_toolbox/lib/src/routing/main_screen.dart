@@ -4,14 +4,13 @@ import 'package:core_ui/core_ui.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geiger_score/geiger_score_widget.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/main_screen_layout.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/other_content.dart';
-import 'package:geiger_toolbox/src/features/threat_assessment/presentation/main_layout/top_content.dart';
+import 'package:geiger_toolbox/src/routing/layout/main_layout.dart';
+import 'package:geiger_toolbox/src/routing/layout/news_layout.dart';
+import 'package:geiger_toolbox/src/routing/layout/todo_layout.dart';
+import 'package:geiger_toolbox/src/routing/layout/top_layout.dart';
 
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monitoring/news/all_news_widget.dart';
 
@@ -46,11 +45,14 @@ class MainScreen extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         controller: scrollController,
-        child: MainScreenLayout(
-          topContent:
+        child: MainLayout(
+          topLayout:
               (_, height, newsFeedIsEmpty) => TopContent(isNewsFeedEmpty: newsFeedIsEmpty, heightFraction: height),
 
-          otherContent: (_, _, newsFeedIsEmpty) => OtherContent(isNewsFeedEmpty: newsFeedIsEmpty),
+          newsLayout:
+              (_, height, newsFeedIsEmpty) => NewsLayout(isNewsFeedEmpty: newsFeedIsEmpty, heightFraction: height),
+
+          todoLayout: (_, _, newsFeedIsEmpty) => TodoLayout(isNewsFeedEmpty: newsFeedIsEmpty),
         ),
       ),
 

@@ -19,7 +19,6 @@ import 'package:go_router/go_router.dart';
 
 class TodoListWidget extends ConsumerWidget {
   const TodoListWidget({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //show snackbar messsage when user update todo state
@@ -38,7 +37,7 @@ class TodoListWidget extends ConsumerWidget {
       data:
           (data) =>
               data.isEmpty
-                  ? const SizedBox.shrink()
+                  ? const NoTodoWidget()
                   : TodoContainer(
                     showAllTodos: () {
                       context.goNamed(AppRouter.todoRouter.name);
@@ -69,6 +68,7 @@ class TodoListWidget extends ConsumerWidget {
   }
 }
 
+//show Bottom sheet
 void showTodoDetails(BuildContext context, TodoOffering item) {
   showWoltModalBottomSheet(
     context,
@@ -95,13 +95,36 @@ class TodoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ContainerLabel(text: "Todos".hardcoded, showAllItems: showAllTodos),
+        Spacing.gapH8,
+        GeigerCard(child: LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos)),
+      ],
+    );
+  }
+}
+
+class NoTodoWidget extends StatelessWidget {
+  const NoTodoWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return GeigerCard(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ContainerLabel(text: "Todos".hardcoded, showAllItems: showAllTodos),
-          LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos),
-        ],
+      child: Padding(
+        padding: EdgeInsets.all(Spacing.p32),
+        child: SizedBox(
+          width: double.infinity,
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: textTheme.bodyMedium,
+              children: [TextSpan(text: "No Todo Added yet.\n Please Plan Your Todo. ".hardcoded)],
+            ),
+          ),
+        ),
       ),
     );
   }

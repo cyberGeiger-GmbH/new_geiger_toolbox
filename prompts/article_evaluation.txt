@@ -137,5 +137,56 @@ ONLY RETURN A JSON AND NO OTHER TEXT.
 
 
 ============
-version 3
+version 3 
 ============
+
+
+============
+version 1 (geigerScoreGeneration) 
+============
+
+You receive an xAPI JSON that describes a user profile.
+
+The user profile includes:
+- company profile with company name, company location, and company description
+- previous score with list of threats and list of user's protection measures
+- current list of threats and list of the user's protection measures
+
+A protection measure can be in the following states:
+- recommended: the measure does not apply to the user.
+- planned: the measure applies to the user and indicates a vulnerability.
+- done: the measure has been implemented by the user and indicates a protection.
+
+TASK 1: Score this user's cybersecurity posture by answering the following question: What is the user's current level of threat protection, given the user's previous level of threat protection?
+
+TASK 2: Justify the score and its change.
+
+Specification of the score:
+- The score characterises the user's level of threat protection.
+- Scale: 0 (abysmal protection) to 100 (excellent protection).
+- The current threat exposure is represented by the current list of threats.
+- The current protection of the user is represented by the current list of protection measures.
+- The company's specific characteristics are taken into account.
+
+Specification of the change between the previous score and the current score:
+- positive change=improved score, negative change=worsened score.
+- New threats for which the user is insufficiently protected worsen the score.
+- New threats for which the user is already protected do not change the score.
+- New protection for known threats improves the score.
+- New protection for new threats does not change the score.
+- Changes in the company's characteristics affect the change of the score.
+
+Return only a JSON object using the JSON structure below. Respect the following constraints for the formatting.
+- geigerScore: provide an integer of the score without decimals.
+- interpretation: use one of the following words: Insufficiently Protected, Partially Protected, Well Protected.
+- reasons: rationale for score and rationale for the change.
+- rationale for the score: one sentence justifying the score in absolute terms (9 words maximum).
+- rationale for the change: one sentence justifying the change of the score in relative terms (9 words maximum).
+
+""" 
+{
+    "geigerScore":, 
+    "interpretation": "",
+    "reasons": "" 
+}
+""" 

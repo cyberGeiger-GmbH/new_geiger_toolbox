@@ -6,6 +6,7 @@ import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 class WelcomeNoteWidget extends StatelessWidget {
   const WelcomeNoteWidget({super.key, required this.isScanning});
   final bool isScanning;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

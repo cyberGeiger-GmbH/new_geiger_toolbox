@@ -22,7 +22,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import '../features/threat_assessment/presentation/main_screen.dart';
+import 'main_screen.dart';
 import '../features/threat_assessment/presentation/news_details/news_details_screen.dart';
 
 part 'app_routing.g.dart';

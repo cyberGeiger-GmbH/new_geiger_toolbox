@@ -29,7 +29,7 @@ class AppCachedNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      height: imageHeight,
+      //height: imageHeight,
       fit: boxfit,
       width: imageWidth,
       imageUrl: imageUrl,

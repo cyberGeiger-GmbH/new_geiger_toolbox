@@ -7,6 +7,7 @@ import 'package:geiger_toolbox/src/common_widgets/item_list_tile.dart';
 
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 
 class TodoItem extends StatelessWidget {
   final TodoOffering item;
@@ -86,18 +87,9 @@ class ContainerLabel extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p16),
-      child: GestureDetector(
-        onTap: showAllItems,
-        child: Row(
-          children: [
-            AppText.bodySmall(text: text, context: context, color: theme.hintColor),
-            Icon(Icons.chevron_right, color: theme.hintColor),
-          ],
-        ),
-      ),
+    return GestureDetector(
+      onTap: showAllItems,
+      child: Row(children: [LabelWidget(text: text), Icon(Icons.chevron_right)]),
     );
   }
 }
