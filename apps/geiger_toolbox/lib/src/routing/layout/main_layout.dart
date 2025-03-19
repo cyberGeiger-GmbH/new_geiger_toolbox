@@ -1,3 +1,4 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/tokens/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,8 +21,7 @@ class MainLayout extends ConsumerWidget {
     final oneThirdHeight = constraint.height * (1 / 3);
     final oneFunfHeight = constraint.height * (1 / 3.6);
     double remainingHeight = constraint.height;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8),
+    return GradientContainer(
       child: AsyncValueWidget(
         value: newsFeedValue,
         data: (data) {

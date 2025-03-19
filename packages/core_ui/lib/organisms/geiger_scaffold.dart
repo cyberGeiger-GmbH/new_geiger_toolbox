@@ -30,12 +30,19 @@ class GeigerScaffold extends StatelessWidget {
                   child: body,
                 ),
               )
-              : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8),
-                child: body,
-              ),
+              : PaddedContainer(child: body),
       floatingActionButton: floatingActionButton,
     );
+  }
+}
+
+class PaddedContainer extends StatelessWidget {
+  const PaddedContainer({super.key, required this.child});
+
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(padding: const EdgeInsets.symmetric(horizontal: Spacing.p16, vertical: Spacing.p8), child: child);
   }
 }
 
@@ -45,19 +52,23 @@ class GradientContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
-    final Color primary = appTheme.colorScheme.primary;
+    //final Color primary = appTheme.colorScheme.primary;
     final Color onPrimary = appTheme.colorScheme.onPrimary;
 
     return Container(
       decoration: BoxDecoration(
-        gradient: RadialGradient(
-          center: const Alignment(0.0, -0.5), // Adjust as needed
-          radius: 1.0,
-          colors: [primary, onPrimary],
-          stops: const [0.0, 1.0],
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            appTheme.colorScheme.primaryContainer,
+            // const Color(0xFFBAE8BF), // light green
+            onPrimary, // white at the bottom
+          ],
+          stops: const [0.0, 1.0], // adjust for smoother fade
         ),
       ),
-      child: child,
+      child: PaddedContainer(child: child),
     );
   }
 }

@@ -39,6 +39,7 @@ class MainScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: GeigerAppBar(
+        mainScreen: true,
         userProfile: () {
           context.pushNamed(AppRouter.profileRouter.name);
         },
