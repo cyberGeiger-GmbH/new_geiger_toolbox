@@ -35,17 +35,12 @@ jobs:
       # cache: true
     #this line ensures the shorebird command is available in the PATH in all subsequent steps.
     - name: Export Shorebird to PATH
-      run: echo "$HOME/.shorebird/bin" >> $GITHUB_PATH
+      run: echo "$HOME/.shorebird/bin" >> "$GITHUB_PATH"
 
     - name: Clean and Get Flutter dependencies (Project)
       run: |
         flutter clean
         flutter pub get
-    #for debugging purpose
-    - name: Check Shorebird CLI
-      run: |
-        which shorebird
-        shorebird --version
 
     - name: Get dependencies using Melos 
       run: melos bootstrap
@@ -124,6 +119,8 @@ jobs:
       #for debugging purpose
       - name: Check Shorebird CLI
         run: |
+          echo "Github PATH: $GITHUB_PATH"
+          echo "PATH: $PATH"
           which shorebird
           shorebird --version
 
