@@ -1,3 +1,19 @@
+## 1.4.2
+
+ - **FIX**(core_ui): remove unused asset, add icons.
+ - **FIX**(geiger_toolbox): add next button.
+ - **FIX**(geiger_toolbox,core_ui): apply optional background to component on mainscreen.
+ - **FIX**(geiger_toolbox,core_ui): add gradient to main screen.
+ - **FIX**(geiger_toolbox): add vertical spacing.
+ - **FIX**(geiger_toolbox): fix state in todos.
+ - **FIX**(geiger_toolbox): show error on stg env, share widget across package.
+ - **FIX**(geiger_toolbox): fix/refactor spacing issue on main screen.
+ - **FIX**(geiger_toolbox): show score reason, fix otherContent scrolling issue.
+ - **FIX**(geiger_toolbox): layouting.
+ - **FIX**(geiger_toolbox): improve _synFromRemote method, update default image.
+ - **FIX**(core_ui,geiger_toolbox): add fallback image news.
+ - **FIX**(core_ui): remove padding in user icon.
+
 ## 1.4.1
 
  - **FIX**(geiger_toolbox): refactor, improve todo details.
