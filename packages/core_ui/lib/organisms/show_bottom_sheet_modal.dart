@@ -90,7 +90,7 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
       return [
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: Spacing.p8, horizontal: horizontalPadding),
+            padding: EdgeInsets.symmetric(vertical: Spacing.p12, horizontal: horizontalPadding),
             child: mainContent,
           ),
         ),

@@ -4,20 +4,20 @@ import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 class WelcomeNoteWidget extends StatelessWidget {
-  const WelcomeNoteWidget({super.key, required this.isScanning});
+  const WelcomeNoteWidget({super.key, required this.isScanning, this.backgroundColor});
   final bool isScanning;
+  final Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     return GeigerCard(
-      //  margin: EdgeInsets.zero,
-
-      // color: theme.colorScheme.onInverseSurface,
+      backgroundColor: backgroundColor,
       child: Padding(
         padding: EdgeInsets.all(Spacing.p32),
         child: SizedBox(
           width: double.infinity,
+
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(

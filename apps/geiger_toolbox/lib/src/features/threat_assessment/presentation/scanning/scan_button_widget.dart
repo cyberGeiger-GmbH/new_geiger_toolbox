@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'package:geiger_toolbox/src/features/threat_assessment/applications/news_feed_service.dart';
+
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 
 class ScanButtonWidget extends ConsumerWidget {
@@ -14,7 +14,6 @@ class ScanButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(scanButtonControllerProvider);
-    final newsFeedState = ref.watch(watchRecentNewsFeedsProvider);
 
     // return AppButton.scan(
     //   label: state.isLoading || newsFeedState.isLoading ? "scanning..." : 'Scan',

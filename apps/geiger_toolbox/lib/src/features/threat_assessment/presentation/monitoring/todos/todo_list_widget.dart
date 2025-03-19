@@ -18,8 +18,8 @@ import 'package:geiger_toolbox/src/routing/app_routing.dart';
 import 'package:go_router/go_router.dart';
 
 class TodoListWidget extends ConsumerWidget {
-  const TodoListWidget({super.key});
-
+  const TodoListWidget({super.key, this.backgroundColor});
+  final Color? backgroundColor;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //show snackbar messsage when user update todo state
@@ -38,8 +38,9 @@ class TodoListWidget extends ConsumerWidget {
       data:
           (data) =>
               data.isEmpty
-                  ? const SizedBox.shrink()
+                  ? NoTodoWidget(backgroundColor: backgroundColor)
                   : TodoContainer(
+                    backgroundColor: backgroundColor,
                     showAllTodos: () {
                       context.goNamed(AppRouter.todoRouter.name);
                     },
@@ -51,11 +52,11 @@ class TodoListWidget extends ConsumerWidget {
                                   item: todo,
                                   onChanged: () {
                                     if (todo.status == Status.done) {
-                                      final value = todo.copyWith(status: Status.planned);
-                                      ref.read(todoControllerProvider.notifier).planLater(value);
+                                      ref.read(todoControllerProvider.notifier).planLater(id: todo.id);
                                     } else {
-                                      final value = todo.copyWith(status: Status.done);
-                                      ref.read(todoControllerProvider.notifier).makeAsDone(value);
+                                      ref
+                                          .read(todoControllerProvider.notifier)
+                                          .makeAsDone(id: todo.id, status: Status.done);
                                     }
                                   },
                                   showDetails: () => showTodoDetails(context, todo),
@@ -69,6 +70,7 @@ class TodoListWidget extends ConsumerWidget {
   }
 }
 
+//show Bottom sheet
 void showTodoDetails(BuildContext context, TodoOffering item) {
   showWoltModalBottomSheet(
     context,
@@ -78,30 +80,65 @@ void showTodoDetails(BuildContext context, TodoOffering item) {
     mainContent: Column(
       children: [
         SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.3, // Use 40% of screen height
+          height: MediaQuery.sizeOf(context).height * 0.4, // Use 40% of screen height
           child: TodoDetails(item: item),
         ),
       ],
     ),
+    stickyActionBar: TodoActionBar(item: item),
   );
 }
 
 class TodoContainer extends StatelessWidget {
-  const TodoContainer({super.key, required this.items, required this.displayLimit, required this.showAllTodos});
+  const TodoContainer({
+    super.key,
+    required this.items,
+    required this.displayLimit,
+    required this.showAllTodos,
+    this.backgroundColor,
+  });
   final List<TodoItem> items;
   final int displayLimit;
+  final Color? backgroundColor;
 
   final VoidCallback showAllTodos;
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ContainerLabel(text: "Todos".hardcoded, showAllItems: showAllTodos),
+        Spacing.gapH8,
+        GeigerCard(
+          backgroundColor: backgroundColor,
+          child: LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos),
+        ),
+      ],
+    );
+  }
+}
+
+class NoTodoWidget extends StatelessWidget {
+  const NoTodoWidget({super.key, this.backgroundColor});
+  final Color? backgroundColor;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return GeigerCard(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ContainerLabel(text: "Todos".hardcoded, showAllItems: showAllTodos),
-          LimitTodoList(items: items, displayLimit: displayLimit, showAllTodos: showAllTodos),
-        ],
+      backgroundColor: backgroundColor,
+      child: Padding(
+        padding: EdgeInsets.all(Spacing.p32),
+        child: SizedBox(
+          width: double.infinity,
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: textTheme.bodyMedium,
+              children: [TextSpan(text: "No Todo Added yet.\n Please Plan Your Todo. ".hardcoded)],
+            ),
+          ),
+        ),
       ),
     );
   }

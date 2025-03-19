@@ -1,6 +1,6 @@
 import 'package:conversational_agent_client/conversational_agent_client.dart';
+import 'package:core_ui/organisms/item_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:geiger_toolbox/src/common_widgets/item_list_tile.dart';
 
 class RecommendationItem extends StatelessWidget {
   final Recommendation item;

@@ -6,12 +6,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const GeigerAppBar({super.key, this.height = kToolbarHeight, this.title, this.userProfile, this.closeDefaultProfile});
+  const GeigerAppBar({
+    super.key,
+    this.height = kToolbarHeight,
+    this.title,
+    this.userProfile,
+    this.closeDefaultProfile,
+    this.mainScreen = false,
+    this.skip,
+  });
 
   final double height;
   final String? title;
   final VoidCallback? userProfile;
   final VoidCallback? closeDefaultProfile;
+  final bool mainScreen;
+  final Widget? skip;
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).colorScheme;
@@ -26,10 +36,10 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
               )
               : closeDefaultProfile != null
               ? IconButton(onPressed: closeDefaultProfile, icon: const Icon(Icons.close))
-              : null,
+              : skip,
 
-      actions: [IconButton(icon: const Icon(Icons.person), onPressed: userProfile)],
-      backgroundColor: appColor.onPrimary,
+      actions: [if (userProfile != null) IconButton(icon: const Icon(Icons.person), onPressed: userProfile)],
+      backgroundColor: mainScreen ? appColor.primaryContainer : appColor.onPrimary,
       //surfaceTintColor: appColor.error,
     );
   }

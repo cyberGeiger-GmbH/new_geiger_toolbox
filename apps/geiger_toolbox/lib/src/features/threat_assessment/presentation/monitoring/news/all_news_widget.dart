@@ -55,14 +55,11 @@ class NewsContainer extends StatelessWidget {
   final VoidCallback? seeAll;
   @override
   Widget build(BuildContext context) {
-    return GeigerCard(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          seeAll != null ? ContainerLabel(showAllItems: seeAll, text: "Other News".hardcoded) : const SizedBox.shrink(),
-          LimitNewsItemList(displayLimit: limit, items: items, seeAll: seeAll),
-        ],
-      ),
+    return Column(
+      children: [
+        seeAll != null ? ContainerLabel(showAllItems: seeAll, text: "Other News".hardcoded) : const SizedBox.shrink(),
+        GeigerCard(child: LimitNewsItemList(displayLimit: limit, items: items, seeAll: seeAll)),
+      ],
     );
   }
 }

@@ -1,9 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/buttons/custom_checkbox.dart';
+import 'package:core_ui/organisms/item_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/common_widgets/item_list_tile.dart';
-import 'package:geiger_toolbox/src/common_widgets/list_title.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 
@@ -18,7 +17,7 @@ class OfferingItem extends ConsumerWidget {
     final theme = Theme.of(context);
     return ItemListTile(
       key: key,
-      status: state.status,
+      status: state.status == Status.done,
       title: offer.offering.name,
       subtitle: AppText.bodySmall(
         text: offer.offering.summary,

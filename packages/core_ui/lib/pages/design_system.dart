@@ -31,6 +31,16 @@ class DesignSystem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                GeigerSvgImages.assessIcon(width: 50, height: 50),
+                GeigerSvgImages.improveIcon(width: 50, height: 50),
+                GeigerSvgImages.indicatorIcon(width: 50, height: 50),
+              ],
+            ),
+            Spacing.gapH22,
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 // Theme.of(context).iconTheme.appIcons.appImages.imagesData.image,
                 AppButton.primary(
                   label: "News Screen",

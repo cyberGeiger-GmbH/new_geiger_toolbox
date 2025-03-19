@@ -14,10 +14,10 @@ extension AsyncValueExtension on AsyncValue {
   void showAlertDialogOnError({required BuildContext context, void Function()? onError}) {
     if (!isLoading && hasError) {
       //show all error on dev
-      if (getFlavor() == Flavor.dev) {
+      if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
         showExceptionAlertDialog(context: context, title: 'Error'.hardcoded, exception: error, onError: onError);
       } else {
-        //on show app exception error in stg | prod
+        //on show app exception error in  prod
         if (error is AppException) {
           final appException = error as AppException;
           showExceptionAlertDialog(
@@ -35,7 +35,7 @@ extension AsyncValueExtension on AsyncValue {
     final appColor = Theme.of(context).colorScheme;
     if (!isLoading && hasError) {
       //show all error on dev
-      if (getFlavor() == Flavor.dev) {
+      if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
         showSnackBar(
           context: context,
           content: "$error Contact Support".hardcoded,
@@ -43,7 +43,7 @@ extension AsyncValueExtension on AsyncValue {
           textColor: appColor.onErrorContainer,
         );
       } else {
-        //on show app exception error in stg | prod
+        //on show app exception error in  prod
         if (error is AppException) {
           final appException = error as AppException;
           showSnackBar(

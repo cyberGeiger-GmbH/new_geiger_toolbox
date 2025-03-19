@@ -2,6 +2,7 @@ import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
 import 'package:geiger_toolbox/src/common_widgets/slide_indicator.dart';
 
 import 'package:geiger_toolbox/src/features/policy/presentation/intro/intro_controller.dart';
@@ -14,49 +15,103 @@ typedef PageChanged<T> = Function(int index, T value);
 class IntroScreen extends ConsumerWidget {
   IntroScreen({super.key});
   final items = [
-    IntroImage(svgImage: GeigerSvgImages.magnifyingGlass(), description: 'Accessed Your Cybersecurity'.hardcoded),
-    IntroImage(svgImage: GeigerSvgImages.measure(), description: 'Know Your Cyber Threats'.hardcoded),
-    IntroImage(svgImage: GeigerSvgImages.trickGood(), description: 'Improve Your Protection'.hardcoded),
+    IntroContent(
+      svgImage: GeigerSvgImages.indicatorIcon(),
+      description: 'Througt the GEIGER score,\n you can know if your device is sufficiently protected'.hardcoded,
+    ),
+    IntroContent(
+      svgImage: GeigerSvgImages.improveIcon(),
+      description:
+          'Know your Cyberthreats and get the revelevant news that can help you to protect your device'.hardcoded,
+    ),
+    IntroContent(
+      svgImage: GeigerSvgImages.assessIcon(),
+      description:
+          'Plan your Cybersecurity strategies by completing your ToDo list, generated based on your score'.hardcoded,
+    ),
   ];
+  final CarouselSliderController controller = CarouselSliderController();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(introControllerProvider);
+    final isLastSlide = index >= items.length - 1;
 
-    return GeigerScaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: CarouselWidget(
-              slidingSpeed: 6,
-              isAutoPlay: false,
-              items: items,
-              onPageChanged: (index, value) => ref.read(introControllerProvider.notifier).update(index),
+    return Scaffold(
+      appBar: GeigerAppBar(
+        skip: AppTextButton.primary(
+          label: isLastSlide ? "Back" : "Skip",
+          context: context,
+          onTap: () => _onSkipOrBack(slideLength: items.length, ref: ref),
+        ),
+        mainScreen: true,
+      ),
+      body: GradientContainer(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: CarouselWidget(
+                controller: controller,
+                slidingSpeed: 6,
+                isAutoPlay: false,
+                items: items,
+                onPageChanged: (index, _) => ref.read(introControllerProvider.notifier).update(index),
+              ),
             ),
-          ),
-          Spacing.gapH8,
-          SlideIndicator(data: items, current: index),
-          Spacing.gapH8,
-          TermsAndConditionWidget(),
-          Spacing.gapH8,
-        ],
+            Spacing.gapH8,
+            SlideIndicator(data: items, current: index),
+            Spacing.gapH8,
+
+            if (!isLastSlide)
+              AppButton.tertiary(
+                label: "Next".hardcoded,
+                context: context,
+                onPressed: () => _onNext(ref: ref, slideLength: items.length),
+              ),
+            if (isLastSlide) TermsAndConditionWidget(),
+          ],
+        ),
       ),
     );
+  }
+
+  void _onNext({required int slideLength, required WidgetRef ref}) {
+    final nextSlide = ref.read(introControllerProvider.notifier).nextSlide(slideLength: slideLength);
+    if (nextSlide) {
+      controller.nextPage();
+    } else {
+      //widget.onDone();
+    }
+  }
+
+  void _onSkipOrBack({required int slideLength, required WidgetRef ref}) {
+    final instance = ref.read(introControllerProvider.notifier);
+    final isLastSlide = instance.isLastSlide(slideLength: slideLength);
+    if (isLastSlide) {
+      // If at last slide, go back to the first slide
+      controller.animateToPage(0);
+    } else {
+      // Else, skip to last slide
+      final lastSlide = instance.lastSlide(slideLength: slideLength);
+      controller.animateToPage(lastSlide);
+    }
   }
 }
 
 class CarouselWidget extends StatelessWidget {
-  CarouselWidget({
+  const CarouselWidget({
     super.key,
     required this.items,
     required this.onPageChanged,
     this.slidingSpeed,
+    required this.controller,
     this.isAutoPlay = true,
   });
 
-  final List<IntroImage> items;
-  final CarouselSliderController controller = CarouselSliderController();
+  final List<IntroContent> items;
+  final CarouselSliderController controller;
   final bool isAutoPlay;
 
   /// Sliding speed in seconds
@@ -79,37 +134,50 @@ class CarouselWidget extends StatelessWidget {
   }
 }
 
-class IntroImage extends StatelessWidget {
-  const IntroImage({super.key, required this.svgImage, required this.description});
+class IntroContent extends StatelessWidget {
+  const IntroContent({super.key, required this.svgImage, required this.description});
   final GeigerSvgImages svgImage;
   final String description;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center, //
       children: [
-        svgImage,
-        Spacing.gapH8,
-        // Wrap with Flexible
-        IntroContent(description: description),
+        IntroImage(svgImage: svgImage),
+        // Spacing.gapH32,
+        //SizedBox(height: 100),
+        Spacer(),
+        IntroText(description: description),
       ],
     );
   }
 }
 
-class IntroContent extends StatelessWidget {
-  const IntroContent({super.key, required this.description});
+class IntroImage extends StatelessWidget {
+  const IntroImage({super.key, required this.svgImage});
+  final GeigerSvgImages svgImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return svgImage;
+  }
+}
+
+class IntroText extends StatelessWidget {
+  const IntroText({super.key, required this.description});
   final String description;
 
   @override
   Widget build(BuildContext context) {
-    return AppText.displayMedium(
-      text: description,
-      context: context,
-      fontWeight: FontWeight.bold,
-      textAlign: TextAlign.center,
-      color: Colors.black,
+    final theme = Theme.of(context);
+    return GeigerCard(
+      backgroundColor: theme.colorScheme.surface.withAlpha(102),
+      child: Padding(
+        padding: EdgeInsets.all(Spacing.p32),
+        child: AppText.titleMedium(text: description, context: context, textAlign: TextAlign.center),
+      ),
     );
   }
 }

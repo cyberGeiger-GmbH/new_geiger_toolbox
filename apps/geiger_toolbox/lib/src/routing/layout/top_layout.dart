@@ -15,20 +15,27 @@ class TopContent extends ConsumerWidget {
     return SizedBox(
       height: heightFraction,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           //* if news feed is not empty show geiger Score widget
           !isNewsFeedEmpty ? const GeigerScoreWidget() : const SizedBox.shrink(),
-          Spacing.gapH12,
+          Spacing.gapH8,
           Align(
             alignment: Alignment.bottomCenter,
-            child: ScanButtonWidget(
-              onScanPressed: () {
-                ref.read(scanButtonControllerProvider.notifier).scan();
-              },
+            child: Padding(
+              padding: EdgeInsets.only(bottom: Spacing.p12),
+              child: ScanButtonWidget(
+                onScanPressed: () {
+                  ref.read(scanButtonControllerProvider.notifier).scan();
+                },
+              ),
             ),
           ),
+          // ScanButtonWidget(
+          //   onScanPressed: () {
+          //     ref.read(scanButtonControllerProvider.notifier).scan();
+          //   },
+          // ),
         ],
       ),
     );
