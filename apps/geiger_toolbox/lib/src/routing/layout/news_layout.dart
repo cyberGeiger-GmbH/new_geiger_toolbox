@@ -5,11 +5,10 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/geige
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 
 class NewsLayout extends ConsumerWidget {
-  const NewsLayout({super.key, required this.isNewsFeedEmpty, required this.heightFraction});
+  const NewsLayout({super.key, required this.isNewsFeedEmpty});
 
   final bool isNewsFeedEmpty;
-  @Deprecated("Don't use for now")
-  final double heightFraction;
+ // final double heightFraction;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);

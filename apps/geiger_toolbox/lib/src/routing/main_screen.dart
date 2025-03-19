@@ -51,7 +51,7 @@ class MainScreen extends ConsumerWidget {
               (_, height, newsFeedIsEmpty) => TopContent(isNewsFeedEmpty: newsFeedIsEmpty, heightFraction: height),
 
           newsLayout:
-              (_, height, newsFeedIsEmpty) => NewsLayout(isNewsFeedEmpty: newsFeedIsEmpty, heightFraction: height),
+              (_, _, newsFeedIsEmpty) => NewsLayout(isNewsFeedEmpty: newsFeedIsEmpty),
 
           todoLayout: (_, _, newsFeedIsEmpty) => TodoLayout(isNewsFeedEmpty: newsFeedIsEmpty),
         ),
