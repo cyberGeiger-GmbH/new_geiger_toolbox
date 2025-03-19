@@ -9,6 +9,8 @@ class CarouselHelper {
   }) {
     return CarouselOptions(
       autoPlay: autoPlay,
+      //disables looping
+      enableInfiniteScroll: false,
       enlargeCenterPage: true,
       // ignore: no-magic-number
       enlargeFactor: 0.3,
