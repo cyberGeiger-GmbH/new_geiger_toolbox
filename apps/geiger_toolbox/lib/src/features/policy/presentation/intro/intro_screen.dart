@@ -17,7 +17,7 @@ class IntroScreen extends ConsumerWidget {
   final items = [
     IntroContent(
       svgImage: GeigerSvgImages.indicatorIcon(),
-      description: 'Througt the GEIGER score, you can know if your device is sufficiently protected'.hardcoded,
+      description: 'Througt the GEIGER score,\n you can know if your device is sufficiently protected'.hardcoded,
     ),
     IntroContent(
       svgImage: GeigerSvgImages.improveIcon(),
@@ -66,7 +66,7 @@ class IntroScreen extends ConsumerWidget {
 
             if (!isLastSlide)
               AppButton.tertiary(
-                label: "next".hardcoded,
+                label: "Next".hardcoded,
                 context: context,
                 onPressed: () => _onNext(ref: ref, slideLength: items.length),
               ),
