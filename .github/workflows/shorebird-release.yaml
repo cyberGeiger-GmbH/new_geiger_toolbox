@@ -116,7 +116,7 @@ jobs:
       #for debugging purpose
       - name: Check Shorebird CLI
         run: |
-          echo "PATH: $PATH"
+          ls
           which shorebird
           shorebird --version
 
