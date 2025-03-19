@@ -116,7 +116,6 @@ jobs:
       #for debugging purpose
       - name: Check Shorebird CLI
         run: |
-          ls
           which shorebird
           shorebird --version
 
@@ -125,6 +124,7 @@ jobs:
         id: shorebird-android-release
         with:
           platform: android
+          working-directory: ./apps/geiger_toolbox
           args: --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
 
       - name: Prepare for Upload
