@@ -44,11 +44,9 @@ class TodoCategoryList extends ConsumerWidget {
                   item: data,
                   onChanged: () {
                     if (data.status == Status.done) {
-                      final value = data.copyWith(status: Status.planned);
-                      ref.read(todoControllerProvider.notifier).planLater(value);
+                      ref.read(todoControllerProvider.notifier).planLater(id: data.id);
                     } else {
-                      final value = data.copyWith(status: Status.done);
-                      ref.read(todoControllerProvider.notifier).makeAsDone(value);
+                      ref.read(todoControllerProvider.notifier).makeAsDone(id: data.id, status: Status.done);
                     }
                   },
                   showDetails: () => showTodoDetails(context, data),

@@ -62,13 +62,14 @@ class AppButton extends StatelessWidget {
     VoidCallback? onPressed,
     required BuildContext context,
     bool isLoading = false,
+    Color? color,
   }) {
     final padding = _buttonSize(size: ButtonSize.small);
     return AppButton._(
       key: key,
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: _appColor(context).primary,
+        backgroundColor: color ?? _appColor(context).primary,
         overlayColor: _appColor(context).onPrimary,
         padding: padding,
       ),

@@ -50,11 +50,11 @@ class TodoListWidget extends ConsumerWidget {
                                   item: todo,
                                   onChanged: () {
                                     if (todo.status == Status.done) {
-                                      final value = todo.copyWith(status: Status.planned);
-                                      ref.read(todoControllerProvider.notifier).planLater(value);
+                                      
+                                      ref.read(todoControllerProvider.notifier).planLater(id:todo.id);
                                     } else {
-                                      final value = todo.copyWith(status: Status.done);
-                                      ref.read(todoControllerProvider.notifier).makeAsDone(value);
+                                      
+                                      ref.read(todoControllerProvider.notifier).makeAsDone(id: todo.id, status: Status.done);
                                     }
                                   },
                                   showDetails: () => showTodoDetails(context, todo),

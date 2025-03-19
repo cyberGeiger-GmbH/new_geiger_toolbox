@@ -11,7 +11,8 @@ class TodoDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(todoControllerProvider);
-
+    final theme = Theme.of(context);
+    final done = item.status == Status.done;
     return Column(
       children: [
         AppText.bodySmall(text: item.offering.summary, context: context),
@@ -20,11 +21,12 @@ class TodoDetails extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             AppButton.primarySmall(
-              label: "Done",
+              label: done ? "Undo" : "Done",
               context: context,
+              color: done ? theme.colorScheme.tertiary : null,
               isLoading: state.isLoading,
               onPressed: () {
-                ref.read(todoControllerProvider.notifier).makeAsDone(item, onSuccess: context.pop);
+                ref.read(todoControllerProvider.notifier).makeAsDone(id: item.id, status: done?Status.planned:Status.done, onSuccess: context.pop);
               },
             ),
             Spacing.gapH12,

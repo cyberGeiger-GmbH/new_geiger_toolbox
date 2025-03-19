@@ -12,16 +12,16 @@ class TodoController extends _$TodoController {
     return null;
   }
 
-  Future<void> makeAsDone(TodoOffering todo, {void Function()? onSuccess}) async {
+  Future<void> makeAsDone({ required String id, required Status status, void Function()? onSuccess}) async {
     final todoRepository = ref.read(todoOfferingRepoProvider);
     state = const AsyncValue.loading();
 
     final newState = await AsyncValue.guard(() async {
       final result = await todoRepository.updateTodoStatus(
-        id: todo.id,
-        status: todo.copyWith(status: Status.done).status,
+        id: id,
+        status: status,
       );
-      return result != 0 ? Status.done : null;
+      return result != 0 ? status : null;
     });
     if (state.hasError == false) {
       state = newState;
@@ -29,14 +29,14 @@ class TodoController extends _$TodoController {
     }
   }
 
-  Future<void> planLater(TodoOffering todo) async {
+  Future<void> planLater({required String id}) async {
     final todoRepository = ref.read(todoOfferingRepoProvider);
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {
       final result = await todoRepository.updateTodoStatus(
-        id: todo.id,
-        status: todo.copyWith(status: Status.planned).status,
+        id: id,
+        status: Status.planned
       );
       return result != 0 ? Status.planned : null;
     });
