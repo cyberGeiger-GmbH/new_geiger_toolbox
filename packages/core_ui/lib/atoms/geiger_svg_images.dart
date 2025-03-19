@@ -20,6 +20,13 @@ class GeigerSvgImages extends StatelessWidget {
   factory GeigerSvgImages.trickGood({Key? key, double? width, double? height}) =>
       GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.cGTick);
 
+  factory GeigerSvgImages.indicatorIcon({Key? key, double? width, double? height}) =>
+      GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.indicatorIcon);
+  factory GeigerSvgImages.improveIcon({Key? key, double? width, double? height}) =>
+      GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.improveIcon);
+  factory GeigerSvgImages.assessIcon({Key? key, double? width, double? height}) =>
+      GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.assessIcon);
+
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
