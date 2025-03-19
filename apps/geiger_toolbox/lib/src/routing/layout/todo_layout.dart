@@ -15,11 +15,14 @@ class TodoLayout extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isScanning = ref.watch(scanButtonControllerProvider);
-
+    final theme = Theme.of(context);
+    final backgroundColor = theme.colorScheme.surface;
     return Column(
       children: [
         Spacing.gapH12,
-        isNewsFeedEmpty ? WelcomeNoteWidget(isScanning: isScanning.isLoading) : TodoListWidget(),
+        isNewsFeedEmpty
+            ? WelcomeNoteWidget(isScanning: isScanning.isLoading, backgroundColor: backgroundColor)
+            : TodoListWidget(backgroundColor: backgroundColor),
         Spacing.gapH12,
         const AllNewsWidget(),
         Spacing.gapH12,

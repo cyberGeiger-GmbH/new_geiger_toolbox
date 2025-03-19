@@ -12,6 +12,7 @@ class NewsLayout extends ConsumerWidget {
   final double heightFraction;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     return SizedBox(
       height: isNewsFeedEmpty ? 100 : null,
       child: Column(
@@ -19,7 +20,11 @@ class NewsLayout extends ConsumerWidget {
 
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.end,
-        children: [const ScoreStatusWidget(), Spacing.gapH12, NewsFeedsWidget()],
+        children: [
+          const ScoreStatusWidget(),
+          Spacing.gapH12,
+          NewsFeedsWidget(backgroundColor: theme.colorScheme.surface),
+        ],
       ),
     );
   }

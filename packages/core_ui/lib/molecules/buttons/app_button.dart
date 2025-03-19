@@ -204,11 +204,12 @@ class AppButton extends StatelessWidget {
     required String title,
     VoidCallback? onPressed,
     required BuildContext context,
+    Color? background
   }) {
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
-        backgroundColor: _appColor(context).onInverseSurface,
+        backgroundColor:background?? _appColor(context).onInverseSurface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
         overlayColor: _appColor(context).tertiary,
       ),
@@ -227,13 +228,14 @@ class AppButton extends StatelessWidget {
     required String title,
     VoidCallback? onPressed,
     required BuildContext context,
+    Color? backgroundColor,
   }) {
     final theme = Theme.of(context);
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Spacing.p16)),
-        backgroundColor: _appColor(context).onInverseSurface,
+        backgroundColor: backgroundColor?? _appColor(context).onInverseSurface,
         overlayColor: _appColor(context).tertiary,
         padding: EdgeInsets.zero,
       ),
