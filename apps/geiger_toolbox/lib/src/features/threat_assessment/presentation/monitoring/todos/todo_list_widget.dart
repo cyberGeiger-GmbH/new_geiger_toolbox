@@ -50,11 +50,11 @@ class TodoListWidget extends ConsumerWidget {
                                   item: todo,
                                   onChanged: () {
                                     if (todo.status == Status.done) {
-                                      
-                                      ref.read(todoControllerProvider.notifier).planLater(id:todo.id);
+                                      ref.read(todoControllerProvider.notifier).planLater(id: todo.id);
                                     } else {
-                                      
-                                      ref.read(todoControllerProvider.notifier).makeAsDone(id: todo.id, status: Status.done);
+                                      ref
+                                          .read(todoControllerProvider.notifier)
+                                          .makeAsDone(id: todo.id, status: Status.done);
                                     }
                                   },
                                   showDetails: () => showTodoDetails(context, todo),
@@ -78,11 +78,12 @@ void showTodoDetails(BuildContext context, TodoOffering item) {
     mainContent: Column(
       children: [
         SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.3, // Use 40% of screen height
+          height: MediaQuery.sizeOf(context).height * 0.4, // Use 40% of screen height
           child: TodoDetails(item: item),
         ),
       ],
     ),
+    stickyActionBar: TodoActionBar(item: item),
   );
 }
 
