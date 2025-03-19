@@ -1,4 +1,3 @@
-import 'package:flutter/rendering.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'intro_controller.g.dart';
