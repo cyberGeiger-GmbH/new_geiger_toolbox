@@ -13,6 +13,7 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.userProfile,
     this.closeDefaultProfile,
     this.mainScreen = false,
+    this.skip,
   });
 
   final double height;
@@ -20,6 +21,7 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? userProfile;
   final VoidCallback? closeDefaultProfile;
   final bool mainScreen;
+  final Widget? skip;
   @override
   Widget build(BuildContext context) {
     final appColor = Theme.of(context).colorScheme;
@@ -34,9 +36,9 @@ class GeigerAppBar extends StatelessWidget implements PreferredSizeWidget {
               )
               : closeDefaultProfile != null
               ? IconButton(onPressed: closeDefaultProfile, icon: const Icon(Icons.close))
-              : null,
+              : skip,
 
-      actions: [IconButton(icon: const Icon(Icons.person), onPressed: userProfile)],
+      actions: [if (userProfile != null) IconButton(icon: const Icon(Icons.person), onPressed: userProfile)],
       backgroundColor: mainScreen ? appColor.primaryContainer : appColor.onPrimary,
       //surfaceTintColor: appColor.error,
     );
