@@ -1,0 +1,127 @@
+name: Shorebird Patch (Android, iOS)    
+
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'prod'
+        type: choice
+        options:
+          - dev
+          - stg
+          - prod
+
+jobs:
+  #######################
+  # Initial Setup
+  ####################### 
+  setup: # Setup the environment
+    runs-on: self-hosted
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+
+    steps:
+    - name: Clone repository
+      uses: actions/checkout@v4
+
+    # Shorebird setup
+    - name: Setup Shorebird
+      uses: shorebirdtech/setup-shorebird@v1
+      # * Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
+      # cache: true
+   
+    - name: Clean and Get Flutter dependencies (Project)
+      run: |
+        flutter clean
+        flutter pub get
+
+    - name: Get dependencies using Melos 
+      run: melos bootstrap
+      
+    # Generate .env.<flavor> file as it is gitignored but needed for the build
+    - name: Setup Dart Defines
+      run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > apps/geiger_toolbox/.env.${{ env.DEPLOY_ENV}}
+     
+    # Write all the gitignored Firebase filtes that are needed for the build
+    # You can remove this steip if you've added them to Git
+    - name: Setup Firebase 
+      env:
+        FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
+        FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
+      run: |
+        echo "$FIREBASE_OPTIONS_DART" | base64 --decode > apps/geiger_toolbox/lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
+        echo "$GOOGLE_SERVICES_JSON" | base64 --decode > apps/geiger_toolbox/android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
+        mkdir -p apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}
+        echo "$GOOGLE_SERVICES_PLIST" | base64 --decode > apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
+        echo "$FIREBASE_JSON" | base64 --decode > apps/geiger_toolbox/firebase.json
+        # Needed by the "flutterfire bundle-service-file" build phase in Xcode
+        dart pub global activate flutterfire_cli 1.0.1 --overwrite
+
+    # Generate all the files needed for Android code signing  
+    - name: Upload build files
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-files
+        path: |
+          .env.${{ env.DEPLOY_ENV }}
+          apps/geiger_toolbox/lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
+          apps/geiger_toolbox/android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
+          apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
+          apps/geiger_toolbox/firebase.json
+
+
+  #######################
+  # Build & Upload Android App
+  #######################
+  build-android:
+    needs:
+      - setup
+      #- run-tests
+    runs-on: self-hosted
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: apps/geiger_toolbox
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+
+    steps:
+      - name: Download build files
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+      # Generate all the files needed for android code signing
+      - name: Setup Android Keystore
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/apps/geiger_toolbox/android/upload-keystore.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEYSTORE_JKS: ${{ secrets.ANDROID_KEYSTORE_JKS }}
+        run: |
+          # Use > here to create or overwrite the file
+          echo "$ANDROID_KEYSTORE_JKS" | base64 --decode > "$ANDROID_KEYSTORE_PATH"
+          echo "storeFile=$ANDROID_KEYSTORE_PATH" > android/key.properties
+          # Use >> here to append additional lines
+          echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
+
+      - name: Shorebird Android Patch
+        uses: shorebirdtech/shorebird-patch@v0
+        id: shorebird-android-patch
+        with:
+          platform: android
+          working-directory: ./apps/geiger_toolbox
+          args: --track=staging --release-version=latest --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
+
+    
+  
+          
