@@ -49,20 +49,17 @@ class AllNewsWidget extends ConsumerWidget {
 }
 
 class NewsContainer extends StatelessWidget {
-  const NewsContainer({super.key, required this.limit, required this.items, required this.seeAll});
+  const NewsContainer({super.key, required this.limit, required this.items, this.seeAll});
   final int limit;
   final List<NewsItem> items;
-  final VoidCallback seeAll;
+  final VoidCallback? seeAll;
   @override
   Widget build(BuildContext context) {
-    return GeigerCard(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ContainerLabel(showAllItems: seeAll, text: "Other News".hardcoded),
-          LimitNewsItemList(displayLimit: limit, items: items, seeAll: seeAll),
-        ],
-      ),
+    return Column(
+      children: [
+        seeAll != null ? ContainerLabel(showAllItems: seeAll, text: "Other News".hardcoded) : const SizedBox.shrink(),
+        GeigerCard(child: LimitNewsItemList(displayLimit: limit, items: items, seeAll: seeAll)),
+      ],
     );
   }
 }

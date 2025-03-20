@@ -25,7 +25,7 @@ class CompanyProfileController extends _$CompanyProfileController with NotifierM
     final userId = await userRepo.fetchUser();
     final newState = await AsyncValue.guard(() async {
       final result = await companyRepo.createCompanyProfile(companyInfo: company, userId: userId!.userId);
-      return result == 0 ? CompanyStatus.created : null;
+      return result != 0 ? CompanyStatus.created : null;
     });
     //for testing purpose
     // final newState = await AsyncValue.guard(() => Future.delayed(const Duration(seconds: 5)));

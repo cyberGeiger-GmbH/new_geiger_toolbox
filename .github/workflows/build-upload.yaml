@@ -28,48 +28,26 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v4
     
-    
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
         # #* Reminder: enable caching on GitHub-hosted runners, disable on self-hosted runners
+        # Syntax reference: https://github.com/subosito/flutter-action?tab=readme-ov-file#caching
         # cache: true
         # cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:"
         # cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:"
-  # set up dependencies      
-  setup-dependencies:
-    needs: 
-      - setup
-    runs-on: self-hosted
-    timeout-minutes: 20
-    environment: ${{ github.event.inputs.environment || 'prod' }}
-    env:
-      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
-    steps:
-    # - name: Run Flutter Doctor
-    #   run: flutter doctor -v
-
-    - name:  Get Flutter dependencies (Project)
+      # this is needed to get project wide dependencies    
+    - name:  Get Flutter Dependencies (Project)
       run: flutter pub get
 
+    # this is needed to get the dependencies that are in /packages 
     - name: Get Project Dependencies Using Melos 
       run: melos bs
-  # setup env for .env files
-  setup-env:
-    needs: 
-      - setup
-      - setup-dependencies
-    runs-on: self-hosted
-    timeout-minutes: 20
-    environment: ${{ github.event.inputs.environment || 'prod' }}
-    env:
-      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
-    steps: 
     # Generate .env.<flavor> file as it is gitignored but needed for the build
     - name: Setup Dart Defines
-      run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > .env.${{ env.DEPLOY_ENV}}
+      run: echo "${{ secrets.DART_DEFINES }}" | base64 --decode > apps/geiger_toolbox/.env.${{ env.DEPLOY_ENV}}
      
       # Write all the gitignored Firebase filtes that are needed for the build
     - name: Setup Firebase 
@@ -87,7 +65,7 @@ jobs:
         # Needed by the "flutterfire bundle-service-file" build phase in Xcode
         dart pub global activate flutterfire_cli 1.0.1 --overwrite
       
-    - name: Upload build files
+    - name: Upload Build Files
       uses: actions/upload-artifact@v4
       with:
         name: build-files
@@ -99,37 +77,23 @@ jobs:
           apps/geiger_toolbox/firebase.json
 
   #######################
-  # Run tests
-  #######################
-  # run-tests:
-  #   needs:
-  #     - setup
-  #   runs-on: self-hosted
-  #   timeout-minutes: 20
-
-  #   steps:
-  #     - name: Run static analysis
-  #       run: melos run analyze
-  #     - name: Run tests
-  #       run: melos run test
-
-  #######################
   # Build & Upload Android App
   #######################
   build-android:
     needs:
       - setup
-      - setup-dependencies
-      - setup-env
       #- run-tests
     runs-on: self-hosted
     timeout-minutes: 20
+    defaults:
+     run:
+        working-directory: apps/geiger_toolbox
     environment: ${{ github.event.inputs.environment || 'prod' }}
     env:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
     steps:
-      - name: Download build files
+      - name: Download Build Files
         uses: actions/download-artifact@v4
         with:
           name: build-files
@@ -144,23 +108,23 @@ jobs:
         run: |
           # Use > here to create or overwrite the file
           echo "$ANDROID_KEYSTORE_JKS" | base64 --decode > "$ANDROID_KEYSTORE_PATH"
-          echo "storeFile=$ANDROID_KEYSTORE_PATH" > apps/geiger_toolbox/android/key.properties
+          echo "storeFile=$ANDROID_KEYSTORE_PATH" > android/key.properties
           # Use >> here to append additional lines
-          echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> apps/geiger_toolbox/android/key.properties
-          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> apps/geiger_toolbox/android/key.properties
-          echo "keyAlias=$ANDROID_KEY_ALIAS" >> apps/geiger_toolbox/android/key.properties
+          echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" >> android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
 
       - name: Build Android App
-        run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t apps/geiger_toolbox/lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=apps/geiger_toolbox/build
+        run: flutter build appbundle --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=build
 
 
-      - name: Prepare for upload
+      - name: Prepare for Upload
         run: |
-          PACKAGE_NAME=$(grep -E "namespace\s*=\s*\"[^\"]+\"" apps/geiger_toolbox/android/app/build.gradle | sed -E 's/.*"([^"]+)".*/\1/')
+          PACKAGE_NAME=$(grep -E "namespace\s*=\s*\"[^\"]+\"" android/app/build.gradle | sed -E 's/.*"([^"]+)".*/\1/')
           if [ "${{ env.DEPLOY_ENV }}" != "prod" ]; then
             PACKAGE_NAME="${PACKAGE_NAME}.${{ env.DEPLOY_ENV }}"
           fi
-          echo "PACKAGE_NAME=${PACKAGE_NAME}" >> $GITHUB_ENV
+          echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_ENV
           echo "AAB_PATH=${{ github.workspace }}/apps/geiger_toolbox/build/app/outputs/bundle/${{ env.DEPLOY_ENV }}Release/app-${{ env.DEPLOY_ENV }}-release.aab" >> $GITHUB_ENV
       
       - name: Upload to Google Play
@@ -171,9 +135,13 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: ${{ env.PACKAGE_NAME }}
           releaseFiles: ${{ env.AAB_PATH }}
-          track: 'production'
-          releaseNotes: "Build: ${{ github.run_id }} - ${{ github.run_attempt }}"
-      - name: Upload debug symbols
+          inAppUpdatePriority: 3
+          status: inProgress #completed
+          userFraction: 0.33
+          changesNotSentForReview: true
+          track: 'internal' #'beta' #'production'
+         
+      - name: Upload Debug Symbols
         uses: actions/upload-artifact@v4
         with:
           name: debug-symbols-android
@@ -192,6 +160,9 @@ jobs:
       - build-android
     runs-on: self-hosted
     timeout-minutes: 20
+    defaults:
+     run:
+        working-directory: apps/geiger_toolbox
 
     steps:
     - name: Download Android Debug Symbols
@@ -200,9 +171,7 @@ jobs:
         name: debug-symbols-android
     
     - name: Upload Debug Symbols to Sentry
-      run: |
-        cd apps/geiger_toolbox
-        dart run sentry_dart_plugin 
+      run: dart run sentry_dart_plugin 
          
   
           

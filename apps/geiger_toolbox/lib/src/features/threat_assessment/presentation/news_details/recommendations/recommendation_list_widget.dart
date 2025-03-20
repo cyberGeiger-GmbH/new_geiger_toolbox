@@ -2,7 +2,8 @@ import 'package:conversational_agent_client/conversational_agent_client.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geiger_toolbox/src/common_widgets/content_item_container.dart';
+
+import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/add_offering_todo_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/offerings/offering_widget.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_details/recommendations/recommenation_item.dart';
@@ -16,7 +17,7 @@ class RecommendationListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ContentItemContainer(
+    return GeigerCard(
       items:
           recommendations.map((reco) {
             return RecommendationItem(
@@ -25,7 +26,7 @@ class RecommendationListWidget extends StatelessWidget {
                 showWoltModalBottomSheet(
                   context,
                   title: reco.name,
-                  page: OfferingWidget(id: reco.id, rationale: reco.rationale),
+                  mainContent: OfferingWidget(id: reco.id, rationale: reco.rationale),
                   stickyActionBar: AddAllTodoWidget(),
                 );
               },

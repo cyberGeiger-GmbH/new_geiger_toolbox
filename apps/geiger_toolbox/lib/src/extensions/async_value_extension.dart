@@ -14,10 +14,10 @@ extension AsyncValueExtension on AsyncValue {
   void showAlertDialogOnError({required BuildContext context, void Function()? onError}) {
     if (!isLoading && hasError) {
       //show all error on dev
-      if (getFlavor() == Flavor.dev) {
+      if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
         showExceptionAlertDialog(context: context, title: 'Error'.hardcoded, exception: error, onError: onError);
       } else {
-        //on show app exception error in stg | prod
+        //on show app exception error in  prod
         if (error is AppException) {
           final appException = error as AppException;
           showExceptionAlertDialog(
@@ -35,7 +35,7 @@ extension AsyncValueExtension on AsyncValue {
     final appColor = Theme.of(context).colorScheme;
     if (!isLoading && hasError) {
       //show all error on dev
-      if (getFlavor() == Flavor.dev) {
+      if (getFlavor() == Flavor.dev || getFlavor() == Flavor.stg) {
         showSnackBar(
           context: context,
           content: "$error Contact Support".hardcoded,
@@ -43,7 +43,7 @@ extension AsyncValueExtension on AsyncValue {
           textColor: appColor.onErrorContainer,
         );
       } else {
-        //on show app exception error in stg | prod
+        //on show app exception error in  prod
         if (error is AppException) {
           final appException = error as AppException;
           showSnackBar(
@@ -64,8 +64,8 @@ extension AsyncValueExtension on AsyncValue {
       showSnackBar(
         context: context,
         content: "Todos updated".hardcoded,
-        backgroundColor: appColor.primaryContainer,
-        textColor: appColor.onPrimaryContainer,
+        backgroundColor: appColor.primary,
+        textColor: appColor.onPrimary,
       );
     }
   }
@@ -78,17 +78,17 @@ extension AsyncValueExtension on AsyncValue {
         showSnackBar(
           context: context,
           content: "Todo Completed".hardcoded,
-          backgroundColor: appColor.primaryContainer,
+          backgroundColor: appColor.primary,
           duration: 2,
-          textColor: appColor.onPrimaryContainer,
+          textColor: appColor.onPrimary,
         );
       } else if (value == Status.planned) {
         showSnackBar(
           context: context,
           content: "Todo Not Completed".hardcoded,
-          backgroundColor: appColor.secondaryContainer,
+          backgroundColor: appColor.secondary,
           duration: 2,
-          textColor: appColor.onSecondaryContainer,
+          textColor: appColor.onSecondary,
         );
       } else if (value == Status.recommended) {
         showSnackBar(
@@ -110,15 +110,15 @@ extension AsyncValueExtension on AsyncValue {
         showSnackBar(
           context: context,
           content: "User Profile Created!".hardcoded,
-          backgroundColor: appColor.primaryContainer,
-          textColor: appColor.onPrimaryContainer,
+          backgroundColor: appColor.primary,
+          textColor: appColor.onPrimary,
         );
       } else if (value == CompanyStatus.updated) {
         showSnackBar(
           context: context,
           content: "User Profile Updated!".hardcoded,
-          backgroundColor: appColor.primaryContainer,
-          textColor: appColor.onPrimaryContainer,
+          backgroundColor: appColor.primary,
+          textColor: appColor.onPrimary,
         );
       }
     }

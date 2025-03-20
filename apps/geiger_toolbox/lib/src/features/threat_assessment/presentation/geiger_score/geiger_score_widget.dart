@@ -1,9 +1,11 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/organisms/news_content.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/geiger_card.dart';
+import 'package:geiger_toolbox/src/common_widgets/loading_animation_widget.dart';
 import 'package:geiger_toolbox/src/common_widgets/snack_bar.dart';
 import 'package:geiger_toolbox/src/extensions/score_color.dart';
 import 'package:geiger_toolbox/src/extensions/string_extension.dart';
@@ -55,38 +57,50 @@ class GeigerScoreWidget extends ConsumerWidget {
             },
           ),
         )
-        : state.isLoading
-        ? AppText.titleMedium(text: "Calculating Score....", context: context)
-        : AsyncValueWidget(
-          value: scoreValue,
-          data:
-              (data) =>
-                  data != null
-                      ? _ScoreWithInfo(
-                        score: "${data.geigerScore}",
-                        key: key,
-                        //Todo: change font color base the score range
-                        showinfo: () {
-                          showWoltAlertDialog(
-                            context,
-                            title: "GEIGER Score",
-                            forceMaxHeight: false,
-                            mainContent: ShowScoreReason(
-                              align: TextAlign.center,
-                              reason: data.reason,
-                              status: data.status.toTitleCase,
+        : ShowScore(
+          isLoading: state.isLoading,
+          builder:
+              (_) => AsyncValueWidget(
+                value: scoreValue,
+                data:
+                    (data) =>
+                        data == null
+                            ? const SizedBox.shrink()
+                            : _ScoreWithInfo(
+                              score: "${data.geigerScore}",
+                              key: key,
+                              //Todo: change font color base the score range
+                              showinfo: () {
+                                showWoltAlertDialog(
+                                  context,
+                                  title: "GEIGER Score",
+                                  forceMaxHeight: false,
+                                  mainContent: ShowScoreReason(
+                                    align: TextAlign.center,
+                                    reason: data.reason,
+                                    status: data.status.toTitleCase,
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      )
-                      : SizedBox.shrink(),
+              ),
         );
     //: AppText.titleSmall(text: "RecalCulating score", context: context);
   }
 }
 
+class ShowScore extends StatelessWidget {
+  const ShowScore({super.key, required this.builder, required this.isLoading});
+  final bool isLoading;
+  final WidgetBuilder builder;
+  @override
+  Widget build(BuildContext context) {
+    return isLoading ? LoadingAnimation(size: 57.0) : builder(context);
+  }
+}
+
 class _ScoreWithInfo extends StatelessWidget {
-  const _ScoreWithInfo({super.key, required this.score, required this.showinfo, });
+  const _ScoreWithInfo({super.key, required this.score, required this.showinfo});
   final String score;
 
   final VoidCallback showinfo;
@@ -96,7 +110,7 @@ class _ScoreWithInfo extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        _ScoreContent(score: score, color: color, key: key),
+        ScoreContent(score: score, color: color, key: key),
         Positioned(
           top: -10, // Adjust position as needed
           right: -14,
@@ -107,8 +121,8 @@ class _ScoreWithInfo extends StatelessWidget {
   }
 }
 
-class _ScoreContent extends StatelessWidget {
-  const _ScoreContent({super.key, required this.score, this.color});
+class ScoreContent extends StatelessWidget {
+  const ScoreContent({super.key, required this.score, this.color});
   final String score;
   final Color? color;
   @override
@@ -144,6 +158,25 @@ class ShowScoreReason extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ScoreStatusWidget extends ConsumerWidget {
+  const ScoreStatusWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scoreValue = ref.watch(watchGeigerScoreProvider);
+    final theme = Theme.of(context);
+
+    return AsyncValueWidget(
+      value: scoreValue,
+      data:
+          (data) =>
+              data == null
+                  ? const SizedBox.shrink()
+                  : TitleContent(title: data.status, color: theme.getScoreColor(data.geigerScore)),
     );
   }
 }

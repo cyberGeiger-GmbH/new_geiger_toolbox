@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../helpers/design_system_helper.dart';
 import '../molecules/cards/protection_tile.dart';
 import '../molecules/cards/todo_tile.dart';
-import '../organisms/list/protection_tile_list_view.dart';
+import '../organisms/list/recommendation_tile_list_view.dart';
 import '../organisms/list/todo_tile_list_view.dart';
 import '../organisms/show_bottom_sheet_modal.dart';
 import '../tokens/spacing.dart';
@@ -29,7 +29,7 @@ class NewsScreen extends StatelessWidget {
                   context: context,
                   title: value,
                   onPressed: () {
-                    showWoltModalBottomSheet(context, title: value, page: _getTodoCheckList());
+                    showWoltModalBottomSheet(context, title: value, mainContent: _getTodoCheckList());
                   },
                 ),
               )
@@ -88,7 +88,7 @@ class NewsScreen extends StatelessWidget {
             lastedUpdated: "2024-12-12",
           ),
           Spacing.gapH16,
-          RecommendationTitleList(title: "How to protect me?",recommendations: _getProtectionTileList(context)),
+          RecommendationTitleList(title: "How to protect me?", recommendations: _getProtectionTileList(context)),
         ],
       ),
     );

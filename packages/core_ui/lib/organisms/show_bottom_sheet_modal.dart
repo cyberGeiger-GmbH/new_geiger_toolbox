@@ -7,7 +7,7 @@ import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 void showWoltModalBottomSheet(
   BuildContext context, {
   required String title,
-  required Widget page,
+  required Widget mainContent,
   Widget? stickyActionBar,
   double horizontalPadding = Spacing.p16,
   bool forceMaxHeight = true,
@@ -23,7 +23,7 @@ void showWoltModalBottomSheet(
         _takeActionSliverWolModalSheetPage(
           context,
           title: title,
-          mainContent: page,
+          mainContent: mainContent,
           stickyActionBar: stickyActionBar,
           forceMaxHeight: forceMaxHeight,
           horizontalPadding: horizontalPadding,
@@ -76,16 +76,11 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
     enableDrag: false,
 
     backgroundColor: backgroundColor ?? appColors.onInverseSurface,
-    topBarTitle: AppText.titleMedium(
-      text: title,
-      context: modalSheetContext,
-      textAlign: TextAlign.center,
-      color: Colors.black,
-    ),
+    topBarTitle: AppText.titleMedium(text: title, context: modalSheetContext, textAlign: TextAlign.center),
     isTopBarLayerAlwaysVisible: true,
 
-    trailingNavBarWidget: AppIconButton.filledTonal(
-      backgroudColor: appColors.surface,
+    trailingNavBarWidget: AppIconButton.defaultStyle(
+      //  backgroudColor: appColors.surface,
       iconData: Icons.close,
       context: modalSheetContext,
       onPressed: Navigator.of(modalSheetContext).pop,
@@ -95,7 +90,7 @@ SliverWoltModalSheetPage _takeActionSliverWolModalSheetPage(
       return [
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: Spacing.p8, horizontal: horizontalPadding),
+            padding: EdgeInsets.symmetric(vertical: Spacing.p12, horizontal: horizontalPadding),
             child: mainContent,
           ),
         ),

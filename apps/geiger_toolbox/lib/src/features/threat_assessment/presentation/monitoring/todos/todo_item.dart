@@ -1,50 +1,50 @@
 import 'dart:io';
 
-import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/organisms/item_list_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 import 'package:geiger_toolbox/src/common_widgets/last_updated_widget.dart';
-import 'package:geiger_toolbox/src/common_widgets/list_title.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/news_feeds/news_feeds_widget.dart';
 
 class TodoItem extends StatelessWidget {
   final TodoOffering item;
   final VoidCallback onChanged;
 
   final VoidCallback showDetails;
-  final bool noTrailWidget;
 
-  const TodoItem({
-    super.key,
-    required this.item,
-    required this.onChanged,
-    required this.showDetails,
-    this.noTrailWidget = false,
-  });
+  const TodoItem({super.key, required this.item, required this.onChanged, required this.showDetails});
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      padding: const EdgeInsets.symmetric(vertical: Spacing.p8),
-      child: Row(
-        children: [
-          TodoCheckbox(onChanged: onChanged, status: item.status),
+    return ItemListTile(
+      leading: TodoCheckbox(onChanged: onChanged, status: item.status),
+      title: item.offering.name,
+      subtitle: LastUpdatedWidget(lastUpdated: item.lastUpdated!),
 
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTitle(title: item.offering.name, crossTitle: item.status == Status.done),
-                Spacing.gapH4,
-                LastUpdatedWidget(lastUpdated: item.lastUpdated!),
-              ],
-            ),
-          ),
-          IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
-        ],
-      ),
+      trailing: IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
+      status: item.status == Status.done,
+
+      // using custom ListTile
+      // Row(
+      //   children: [
+      //     TodoCheckbox(onChanged: onChanged, status: item.status),
+
+      //     Expanded(
+      //       child: Column(
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: [
+      //           ListTitle(title: item.offering.name, crossTitle: item.status == Status.done),
+      //           Spacing.gapH4,
+      //           LastUpdatedWidget(lastUpdated: item.lastUpdated!),
+      //         ],
+      //       ),
+      //     ),
+      //     IconButton(onPressed: showDetails, icon: const Icon(Icons.chevron_right)),
+      //   ],
+      // ),
     );
   }
 }
@@ -82,23 +82,14 @@ class TodoCheckbox extends StatelessWidget {
 }
 
 class ContainerLabel extends StatelessWidget {
-  const ContainerLabel({super.key, required this.showAllItems, required this.text});
-  final VoidCallback showAllItems;
+  const ContainerLabel({super.key, this.showAllItems, required this.text});
+  final VoidCallback? showAllItems;
   final String text;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Spacing.p4, horizontal: Spacing.p8),
-      child: GestureDetector(
-        onTap: showAllItems,
-        child: Row(
-          children: [
-            AppText.bodySmall(text: text, context: context, color: theme.hintColor),
-            Icon(Icons.chevron_right, color: theme.hintColor),
-          ],
-        ),
-      ),
+    return GestureDetector(
+      onTap: showAllItems,
+      child: Row(children: [LabelWidget(text: text), Icon(Icons.chevron_right)]),
     );
   }
 }

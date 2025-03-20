@@ -2,6 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geiger_toolbox/src/common_widgets/section_heading.dart';
 import 'package:geiger_toolbox/src/extensions/async_value_extension.dart';
 import 'package:geiger_toolbox/src/features/authentication/data/company_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/company.dart';
@@ -229,7 +230,7 @@ class _UserProfileScreenState extends ConsumerState<CompanyProfileFormWidget> wi
                             ? "Generate Company Description".hardcoded
                             : "Regenerate Company Description".hardcoded,
                   ),
-              Spacing.gapH12,
+              Spacing.gapH32,
 
               CompanyDescriptionWidget(
                 controller: _companyDescriptionController,
@@ -281,10 +282,10 @@ class CompanyProfileForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionTitle(
-          label: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
+        SectionHeading(
+          title: companyData == null ? "Create your company profile".hardcoded : "Edit your profile".hardcoded,
         ),
-        Spacing.gapH12,
+        Spacing.gapH22,
         CustomTextFormField(
           key: companyKey,
           textEditingController: companyTextController,
@@ -315,16 +316,5 @@ class CompanyProfileForm extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-class SectionTitle extends StatelessWidget {
-  const SectionTitle({super.key, required this.label});
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return AppText.labelLarge(text: label, context: context, color: theme.colorScheme.onSurface);
   }
 }

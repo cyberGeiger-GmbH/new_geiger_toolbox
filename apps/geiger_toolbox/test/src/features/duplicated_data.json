@@ -1,0 +1,31 @@
+[
+
+    {
+        "id": "browser_syncjacking_chrome_extensions",
+        "title": "Browser Syncjacking Chrome Extensions",
+        "summary": "Browser Syncjacking is a method where attackers use Chrome extensions to control devices. This threat is significant for users with little tech knowledge, as it can lead to data theft and system control.",
+        "article_url": "",
+        "image_url": "",
+        "news_category": "cyber threat",
+        "date_created": "2025-01-27T22:10:34Z",
+        "recommendations": [
+            {
+                "id": "audit_browser_extensions",
+                "name": "Audit Browser Extensions",
+                "rationale": "Auditing browser extensions helps identify and remove potentially harmful extensions, reducing the risk of data theft.",
+                "specific_offerings": [
+                    {
+                        "name": "Google Chrome",
+                        "summary": "Security settings to block suspicious sites.",
+                        "offering_image_url": ""
+                    },
+                    {
+                        "name": "Mozilla Firefox",
+                        "summary": "Enhanced security features for safer browsing.",
+                        "offering_image_url": ""
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,17 +1,22 @@
-import 'package:core_ui/molecules/texts/app_text.dart';
+import 'package:core_ui/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AppCachedNetworkImage extends StatelessWidget {
-  const AppCachedNetworkImage({super.key, required this.imageUrl, this.imageWidth, this.imageHeight, this.boxfit});
+  const AppCachedNetworkImage({
+    super.key,
+    required this.imageUrl,
+    this.imageWidth = double.infinity,
+    this.imageHeight,
+    this.boxfit,
+  });
 
   factory AppCachedNetworkImage.newsImage({required String imageUrl}) {
     return AppCachedNetworkImage(
       imageUrl: imageUrl,
-      imageWidth: double.infinity,
       // ignore: no-magic-number
-      imageHeight: 153.73,
+      imageHeight: 192,
       boxfit: BoxFit.fill,
     );
   }
@@ -24,9 +29,11 @@ class AppCachedNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
+      //height: imageHeight,
       fit: boxfit,
-      width: double.infinity,
+      width: imageWidth,
       imageUrl: imageUrl,
+
       placeholder: (context, _) {
         return Shimmer.fromColors(
           baseColor: Colors.black26,
@@ -35,24 +42,24 @@ class AppCachedNetworkImage extends StatelessWidget {
         );
       },
       errorWidget:
-          (context, url, error) => _PlaceholderWidget(key: key, imageWidth: imageWidth, imageHeight: imageHeight),
+          (context, url, error) =>
+              _PlaceholderWidget(key: key, imageWidth: imageWidth, imageHeight: imageHeight, boxfit: boxfit),
     );
   }
 }
 
 class _PlaceholderWidget extends StatelessWidget {
-  const _PlaceholderWidget({super.key, required this.imageWidth, required this.imageHeight});
+  const _PlaceholderWidget({super.key, required this.imageWidth, required this.imageHeight, this.boxfit});
 
   final double? imageWidth;
   final double? imageHeight;
-
+  final BoxFit? boxfit;
   @override
   Widget build(BuildContext context) {
-    final hintColor = Theme.of(context).hintColor;
-    return SizedBox(
+    return Container(
       width: imageWidth,
       height: imageHeight,
-      child: Center(child: AppText.displaySmall(text: "Invald Image URL", context: context, color: hintColor)),
+      decoration: BoxDecoration(image: DecorationImage(image: Assets.images.defaultNewsImage.provider(), fit: boxfit)),
     );
   }
 }

@@ -70,14 +70,14 @@ class AppIconButton extends StatelessWidget {
     Color? backgroundColor,
     Color? iconColor,
   }) {
-    final appColor = Theme.of(context).colorScheme;
+   // final appColor = Theme.of(context).colorScheme;
 
     return AppIconButton(
       key: key,
       variant: IconButton(
         onPressed: onPressed,
         icon: Icon(iconData, color: iconColor),
-        color: backgroundColor ?? appColor.primary,
+        //color: backgroundColor ?? appColor.primary,
       ),
     );
   }

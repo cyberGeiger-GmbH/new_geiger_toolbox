@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:geiger_toolbox/src/common_widgets/async_value_widget.dart';
+import 'package:geiger_toolbox/src/common_widgets/loading_animation_widget.dart';
 
 import 'package:geiger_toolbox/src/features/authentication/data/user_profile_repository.dart';
 import 'package:geiger_toolbox/src/features/authentication/domain/user.dart';
@@ -105,7 +106,7 @@ class AppStartUpLoadingWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(child: ResponsiveCenterWidget(child: AppAssetImageData.geigerLogo(size: imageSize).image)),
-          const CircularProgressIndicator.adaptive(),
+          const LoadingAnimation(),
           const OwnershipTextWidget(),
         ],
       ),

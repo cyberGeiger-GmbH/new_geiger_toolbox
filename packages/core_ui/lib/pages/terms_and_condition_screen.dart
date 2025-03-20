@@ -26,50 +26,47 @@ class TermsAndConditionScreen extends StatelessWidget {
   final bool value;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Padding(
-        padding: EdgeInsets.all(allSizePadding ?? Spacing.p8),
-        child: BackgroundWithImage(
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AppAssetImageData.geigerLogo().image,
-                    AppText.headlineLarge(text: title ?? "Welcome to the GEIGER Toolbox", context: context),
-                    Spacing.gapH12,
-                    AppText.bodyMedium(
-                      text:
-                          subtitle ??
-                          "An AI power cyber risks assesement, guidance and awareness application for  improving your company's cybersecurity.",
-                      context: context,
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                ),
+    return GeigerScaffold(
+      appBar: GeigerAppBar(title: title),
+      body: BackgroundWithImage(
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AppAssetImageData.geigerLogo().image,
+                  AppText.headlineLarge(text: title ?? "Welcome to the GEIGER Toolbox", context: context),
+                  Spacing.gapH12,
+                  AppText.bodyMedium(
+                    text:
+                        subtitle ??
+                        "An AI power cyber risks assesement, guidance and awareness application for  improving your company's cybersecurity.",
+                    context: context,
+                    textAlign: TextAlign.justify,
+                  ),
+                ],
               ),
-              ListTile(
-                contentPadding: const EdgeInsets.all(Spacing.p0),
-                leading: Checkbox(value: value, onChanged: acceptCondition),
-                trailing: AutoSizeText(
-                  policyStatement ?? "Privacy policy for the handling of data",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
+            ),
+            ListTile(
+              contentPadding: const EdgeInsets.all(Spacing.p0),
+              leading: Checkbox(value: value, onChanged: acceptCondition),
+              trailing: AutoSizeText(
+                policyStatement ?? "Privacy policy for the handling of data",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: AppButton.tertiary(
-                  label: getStartedLabel ?? "Get Started",
-                  context: context,
-                  onPressed: getStarted,
-                ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: AppButton.tertiary(
+                label: getStartedLabel ?? "Get Started",
+                context: context,
+                onPressed: getStarted,
               ),
-              Spacing.gapH12,
-            ],
-          ),
+            ),
+            Spacing.gapH12,
+          ],
         ),
       ),
     );
