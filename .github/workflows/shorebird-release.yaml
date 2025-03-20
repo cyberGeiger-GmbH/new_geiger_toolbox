@@ -124,7 +124,7 @@ jobs:
   #######################
   # Upload Android Artifacts to Google play
   #######################
-  upload-android:
+  upload-android-playstore:
     if: github.event.inputs.environment == 'prod'
     needs:
       - build-android
