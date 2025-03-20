@@ -19,6 +19,7 @@ rules:
       - revert
       - style
       - test
+      - patch
   scope-enum:
     - 2
     - always
