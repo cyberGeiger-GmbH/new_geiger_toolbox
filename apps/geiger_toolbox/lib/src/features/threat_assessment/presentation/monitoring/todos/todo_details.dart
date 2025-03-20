@@ -22,11 +22,13 @@ class TodoDetails extends ConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          AppText.bodyMedium(text: item.offering.summary, context: context),
+          Spacing.gapH22,
           RichText(
             text: TextSpan(
-              text: item.offering.summary,
+              text: "\nUse our cyberCoach on " ,
               children: [
-                TextSpan(text: "\nUse our cyberCoach on  "),
+               
                 TextSpan(
                   text: "Telegram ",
                   style: textSpanStyle,
@@ -48,7 +50,7 @@ class TodoDetails extends ConsumerWidget {
         .launch(
           Uri.parse("https://t.me/TestCyberSecChatBot"),
           // * Open app store app directly (or fallback to browser)
-          mode: LaunchMode.inAppBrowserView
+          mode: LaunchMode.inAppBrowserView,
         );
   }
 }
