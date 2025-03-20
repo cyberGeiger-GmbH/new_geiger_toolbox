@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-03-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`core_ui` - `v1.4.3`](#core_ui---v143)
+
+---
+
+#### `core_ui` - `v1.4.3`
+
+ - **FIX**(geiger_toolbox): replace default image.
+
+
 ## 2025-03-19
 
 ### Changes

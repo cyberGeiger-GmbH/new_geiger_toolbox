@@ -1,3 +1,7 @@
+## 1.4.3
+
+ - **FIX**(geiger_toolbox): replace default image.
+
 ## 1.4.2
 
  - **FIX**(core_ui): remove unused asset, add icons.
