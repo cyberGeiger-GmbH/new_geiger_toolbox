@@ -79,13 +79,29 @@ jobs:
           apps/geiger_toolbox/ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
           apps/geiger_toolbox/firebase.json
 
-
+  #######################
+  # analyze and test
+  ######################
+  run-test
+    needs:
+      - setup
+    runs-on: self-hosted
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: apps/geiger_toolbox
+    steps:
+      - name: Run Flutter Analyze
+        run: flutter analyze
+      - name: Run Flutter Test
+        run: flutter test
   #######################
   # Build & Upload Android App
   #######################
   build-android:
     needs:
       - setup
+      - run-test
       #- run-tests
     runs-on: self-hosted
     timeout-minutes: 20
