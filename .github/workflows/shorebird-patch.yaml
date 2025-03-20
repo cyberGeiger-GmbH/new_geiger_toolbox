@@ -12,12 +12,16 @@ on:
           - dev
           - stg
           - prod
-
+  # trigger base on event
+  pull_request:
+    branches:
+      - main
 jobs:
   #######################
   # Initial Setup
   ####################### 
   setup: # Setup the environment
+    if: contains(github.event.head_commit.message, 'patch') || github.event.inputs.environment == 'dev' || github.event.inputs.environment == 'stg'
     runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
