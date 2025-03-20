@@ -210,7 +210,8 @@ class LocalNewsFeedRepository {
   }
 
   //get older news
-  Stream<List<TypedResult>> _olderNewsInfo({required DateTime older}) {
+  @Deprecated("don;t use yet")
+  Stream<List<TypedResult>> olderNewsInfo({required DateTime older}) {
     return (_db.select(_db.newsInfo).join([
             leftOuterJoin(_db.recommendations, _db.recommendations.newsId.equalsExp(_db.newsInfo.id)),
             leftOuterJoin(

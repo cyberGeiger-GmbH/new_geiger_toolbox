@@ -64,6 +64,7 @@ void main() {
         //fetch all recommendationOffer
         final offering = await todoRepo.fetchFilteredOfferingStatus(recommendationId: firstRecommendation.id);
 
+        // ignore: avoid_print
         print("offering => $offering");
 
         //show all todos

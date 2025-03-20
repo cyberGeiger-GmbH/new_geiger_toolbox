@@ -8,7 +8,7 @@ import 'package:geiger_toolbox/src/features/threat_assessment/presentation/monit
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
 class _ShowAllNewsWidget extends ConsumerWidget {
-  const _ShowAllNewsWidget({super.key});
+  const _ShowAllNewsWidget();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
