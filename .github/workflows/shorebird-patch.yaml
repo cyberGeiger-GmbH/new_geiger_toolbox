@@ -120,7 +120,7 @@ jobs:
         with:
           platform: android
           working-directory: ./apps/geiger_toolbox
-          args: --track=staging --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
+          args: --track=staging --release-version=latest --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
 
     
   
