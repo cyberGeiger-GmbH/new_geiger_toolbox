@@ -82,7 +82,7 @@ jobs:
   #######################
   # analyze and test
   ######################
-  run-test
+  run-test:
     needs:
       - setup
     runs-on: self-hosted
