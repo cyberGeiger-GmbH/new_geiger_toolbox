@@ -174,7 +174,7 @@ jobs:
   #######################
   upload-sentry:
     needs:
-      - upload-android
+      - upload-android-playstore
     runs-on: self-hosted
     timeout-minutes: 20
     defaults:
