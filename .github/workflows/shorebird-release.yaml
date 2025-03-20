@@ -24,7 +24,7 @@ jobs:
   # Initial Setup
   #######################
   setup: 
-    if: contains(github.event.head_commit.message, 'fix') || contains(github.event.head_commit.message, 'refactor') || contains(github.event.head_commit.message, 'feat') ||  github.event.inputs.environment == 'dev' || github.event.inputs.environment == 'stg'
+    if: contains(github.event.head_commit.message, 'fix') || contains(github.event.head_commit.message, 'refactor') || contains(github.event.head_commit.message, 'feat') || (github.event_name == 'workflow_dispatch' && (github.event.inputs.environment == 'dev' || github.event.inputs.environment == 'stg'))
     runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}
@@ -179,7 +179,7 @@ jobs:
   # Upload Debug Symbols to Sentry
   #######################
   upload-sentry:
-      if: github.event.inputs.environment == 'prod' || github.event.inputs.environment == 'stg'
+    if: github.event.inputs.environment == 'prod' || github.event.inputs.environment == 'stg'
     needs:
       - build-android
     runs-on: self-hosted
