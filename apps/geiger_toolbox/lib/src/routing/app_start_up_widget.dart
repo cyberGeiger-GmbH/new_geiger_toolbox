@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'package:conversational_agent_client/conversational_agent_client.dart';
-import 'package:core_ui/atoms/app_asset_image_data.dart';
+import 'package:core_ui/atoms/geiger_images.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -105,7 +105,7 @@ class AppStartUpLoadingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(child: ResponsiveCenterWidget(child: AppAssetImageData.geigerLogo(size: imageSize).image)),
+          Expanded(child: ResponsiveCenterWidget(child: GeigerImages.appIcon(size: imageSize).image)),
           const LoadingAnimation(),
           const OwnershipTextWidget(),
         ],

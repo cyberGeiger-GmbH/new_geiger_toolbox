@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:core_ui/atoms/app_asset_image_data.dart';
+import 'package:core_ui/atoms/geiger_images.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/molecules/background_with_image.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ class TermsAndConditionScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  AppAssetImageData.geigerLogo().image,
+                  GeigerImages.appIcon().image,
                   AppText.headlineLarge(text: title ?? "Welcome to the GEIGER Toolbox", context: context),
                   Spacing.gapH12,
                   AppText.bodyMedium(

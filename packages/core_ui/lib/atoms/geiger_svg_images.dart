@@ -27,6 +27,8 @@ class GeigerSvgImages extends StatelessWidget {
   factory GeigerSvgImages.assessIcon({Key? key, double? width, double? height}) =>
       GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.assessIcon);
 
+      
+
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(

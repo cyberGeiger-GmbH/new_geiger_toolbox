@@ -24,8 +24,13 @@ class $AssetsImagesGen {
   AssetGenImage get defaultNewsImage =>
       const AssetGenImage('assets/images/default_news_image.png');
 
+  /// File path: assets/images/geiger_logo.png
+  AssetGenImage get geigerLogo =>
+      const AssetGenImage('assets/images/geiger_logo.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon, circlesBg, defaultNewsImage];
+  List<AssetGenImage> get values =>
+      [appIcon, circlesBg, defaultNewsImage, geigerLogo];
 }
 
 class $AssetsSvgGen {

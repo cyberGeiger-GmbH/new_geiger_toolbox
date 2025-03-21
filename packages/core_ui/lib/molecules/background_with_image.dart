@@ -1,4 +1,4 @@
-import 'package:core_ui/atoms/app_asset_image_data.dart';
+import 'package:core_ui/atoms/geiger_images.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundWithImage extends StatelessWidget {
@@ -8,7 +8,7 @@ class BackgroundWithImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AppAssetImageData.backgroundImage().image.image, fit: BoxFit.cover),
+        image: DecorationImage(image: GeigerImages.backgroundImage().image.image, fit: BoxFit.cover),
       ),
       child: child,
     );
