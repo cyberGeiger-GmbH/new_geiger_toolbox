@@ -22,13 +22,12 @@ class TodoDetails extends ConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AppText.bodyMedium(text: item.offering.summary, context: context),
-          Spacing.gapH22,
+          AppText.bodyMedium(text: item.offering.summary, context: context, textAlign: TextAlign.left),
+          Spacing.gapH16,
           RichText(
             text: TextSpan(
-              text: "\nUse our cyberCoach on " ,
+              text: "\nUse our cyberCoach on ",
               children: [
-               
                 TextSpan(
                   text: "Telegram ",
                   style: textSpanStyle,
