@@ -76,6 +76,21 @@ extension CustomThemeData on ThemeData {
     // An updated theme with bigger text sizes
     return copyWith(
       textTheme: TextTheme(
+        displayLarge: textTheme.displayLarge?.copyWith(
+          fontSize: TypoSize.displayLarge,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        displayMedium: textTheme.displayLarge?.copyWith(
+          fontSize: TypoSize.displayMedium,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        displaySmall: textTheme.displayLarge?.copyWith(
+          fontSize: TypoSize.displaySmall,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
         headlineLarge: textTheme.headlineLarge?.copyWith(
           fontSize: TypoSize.headlineLarge,
           fontFamily: FontFamily.ttNorms,
