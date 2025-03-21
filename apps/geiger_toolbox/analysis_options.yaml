@@ -15,6 +15,7 @@ analyzer:
   # exclude warnings in .g.dart
     - "test/generated/**"
     - "**/*.g.dart"
+    - lib/main_*.dart
 
   plugins: 
     # enable riverpod_lint
