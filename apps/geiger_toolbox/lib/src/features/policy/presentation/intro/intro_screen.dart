@@ -175,7 +175,7 @@ class IntroText extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GeigerCard(
-      backgroundColor: theme.colorScheme.surface.withAlpha(102),
+      backgroundColor: theme.colorScheme.surface.withAlpha(OpacitySize.opacity60),
       child: Padding(
         padding: EdgeInsets.all(Spacing.p32),
         child: AppText.titleMedium(text: description, context: context, textAlign: TextAlign.center),

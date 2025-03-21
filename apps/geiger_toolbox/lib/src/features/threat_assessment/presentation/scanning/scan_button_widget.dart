@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-
 import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 
 class ScanButtonWidget extends ConsumerWidget {
@@ -14,14 +13,16 @@ class ScanButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(scanButtonControllerProvider);
-
-
+    final theme = Theme.of(context);
+    final color = theme.colorScheme;
+    final double size = 120;
     return CircularScanningButton(
       onPressed: onScanPressed,
-      size: 120.0,
+      size: size,
       initStatelabel: 'Scan'.hardcoded,
       loadingStateLabel: 'Scanning'.hardcoded,
       isLoading: state.isLoading,
+      rotatingCircle: LoadingAnimationWidget.threeArchedCircle(color: color.onPrimary, size: size * 0.9),
     );
   }
 }
@@ -33,11 +34,14 @@ class CircularScanningButton extends StatelessWidget {
   final String loadingStateLabel;
   final String initStatelabel;
   final bool isLoading;
+  final Widget? rotatingCircle;
+
   const CircularScanningButton({
     super.key,
     required this.onPressed,
     this.loadingStateLabel = 'Scanning',
     this.size = 0.0,
+    this.rotatingCircle,
 
     this.initStatelabel = 'Scan',
     this.isLoading = false,
@@ -60,7 +64,7 @@ class CircularScanningButton extends StatelessWidget {
               height: size + 20,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: color.primary.withAlpha(128), width: 5.0),
+                border: Border.all(color: color.primary.withAlpha(OpacitySize.opacity60), width: 5.0),
               ),
             ),
 
@@ -71,7 +75,7 @@ class CircularScanningButton extends StatelessWidget {
               child: Center(
                 child:
                     isLoading
-                        ? ScanningText(size: size, state: loadingStateLabel)
+                        ? ScanningText(size: size, state: loadingStateLabel, rotatingCircle: rotatingCircle)
                         : AppText.labelLarge(text: initStatelabel, color: color.onPrimary, context: context),
               ),
             ),
@@ -83,9 +87,10 @@ class CircularScanningButton extends StatelessWidget {
 }
 
 class ScanningText extends StatelessWidget {
-  const ScanningText({super.key, required this.size, required this.state});
+  const ScanningText({super.key, required this.size, required this.state, this.rotatingCircle});
   final double size;
   final String state;
+  final Widget? rotatingCircle;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +101,7 @@ class ScanningText extends StatelessWidget {
       children: [
         //child:
         AppText.labelLarge(text: state, context: context, color: color.onPrimary),
-        LoadingAnimationWidget.threeArchedCircle(color: color.onPrimary, size: size * 0.9),
+        rotatingCircle ?? const SizedBox.shrink(),
         // ),
       ],
     );

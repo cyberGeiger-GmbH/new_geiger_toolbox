@@ -3,6 +3,7 @@ library core_ui;
 //token
 
 export './tokens/spacing.dart';
+export './tokens/opacity_size.dart';
 
 export './foundation/themes/app_theme_data.dart';
 
