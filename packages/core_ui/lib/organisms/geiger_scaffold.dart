@@ -62,10 +62,11 @@ class GradientContainer extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             appTheme.colorScheme.primaryContainer,
+
             // const Color(0xFFBAE8BF), // light green
             onPrimary, // white at the bottom
           ],
-          stops: const [0.0, 1.0], // adjust for smoother fade
+          stops: const [0.7, 1.0], // adjust for smoother fade
         ),
       ),
       child: PaddedContainer(child: child),
