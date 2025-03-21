@@ -127,11 +127,11 @@ class ScoreContent extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textStyle = theme.textTheme.displayLarge!.copyWith(fontWeight: FontWeight.bold, color: color ?? Colors.black);
+   
+
     return Padding(
       padding: const EdgeInsets.only(top: 15, right: 10, left: 10),
-      child: Text(score, style: textStyle, textAlign: TextAlign.center),
+      child: AppText.displayLarge(text: score, textAlign: TextAlign.center, context: context, color: color??Colors.black, fontWeight: FontWeight.bold),
     );
   }
 }

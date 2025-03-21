@@ -1,7 +1,8 @@
+
 import 'package:core_ui/organisms/item_list_tile.dart';
 import 'package:flutter/material.dart';
 
-import '../molecules/texts/app_text.dart';
+
 
 /// Widget for showing error messages
 class ErrorMessage extends StatelessWidget {
@@ -21,12 +22,12 @@ class ErrorMessage extends StatelessWidget {
           onRetry != null
               ? InkWell(
                 onTap: onRetry,
-                child: AppText.bodyMedium(
-                  text: retryLabel ?? "Retry",
-                  context: context,
-                  textStyle: theme.textTheme.labelLarge?.copyWith(
+                child: Text(
+                  retryLabel ?? "Retry",
+                  
+                  style: theme.textTheme.labelLarge?.copyWith(
                     color: appColor.primary,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline,
                   ),
                 ),

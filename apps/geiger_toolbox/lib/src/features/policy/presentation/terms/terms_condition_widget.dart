@@ -72,7 +72,7 @@ class TermsPrivacySpanText extends ConsumerWidget {
     final theme = Theme.of(context);
     final textSpanStyle = theme.textTheme.bodySmall?.copyWith(
       //fontSize: TypoSize.bodySmall,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.bold,
       color: Colors.blue,
     );
     return RichText(

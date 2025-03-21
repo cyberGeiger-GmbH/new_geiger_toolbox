@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/gen/fonts.gen.dart';
 import 'package:core_ui/tokens/core_color.dart';
 import 'package:core_ui/tokens/typography.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -75,23 +76,76 @@ extension CustomThemeData on ThemeData {
     // An updated theme with bigger text sizes
     return copyWith(
       textTheme: TextTheme(
-        headlineLarge: textTheme.headlineLarge?.copyWith(fontSize: TypoSize.headlineLarge),
-        headlineMedium: textTheme.headlineMedium?.copyWith(fontSize: TypoSize.headlineMedium),
-        headlineSmall: textTheme.headlineSmall?.copyWith(fontSize: TypoSize.headlineSmall),
-        titleLarge: textTheme.titleLarge?.copyWith(fontSize: TypoSize.titleLarge),
-        titleMedium: textTheme.titleMedium?.copyWith(fontSize: TypoSize.titleMedium),
-        titleSmall: textTheme.titleSmall?.copyWith(fontSize: TypoSize.titleSmall),
-        bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: TypoSize.bodyLarge),
-        bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: TypoSize.bodyMedium),
-        bodySmall: textTheme.bodySmall?.copyWith(fontSize: TypoSize.bodySmall),
-        labelLarge: textTheme.labelLarge?.copyWith(fontSize: TypoSize.labelLarge),
-        labelMedium: textTheme.labelMedium?.copyWith(fontSize: TypoSize.labelMedium),
-        labelSmall: textTheme.labelSmall?.copyWith(fontSize: TypoSize.labelSmall),
+        headlineLarge: textTheme.headlineLarge?.copyWith(
+          fontSize: TypoSize.headlineLarge,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        headlineMedium: textTheme.headlineMedium?.copyWith(
+          fontSize: TypoSize.headlineMedium,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        headlineSmall: textTheme.headlineSmall?.copyWith(
+          fontSize: TypoSize.headlineSmall,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        titleLarge: textTheme.titleLarge?.copyWith(
+          fontSize: TypoSize.titleLarge,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        titleMedium: textTheme.titleMedium?.copyWith(
+          fontSize: TypoSize.titleMedium,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        titleSmall: textTheme.titleSmall?.copyWith(
+          fontSize: TypoSize.titleSmall,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        bodyLarge: textTheme.bodyLarge?.copyWith(
+          fontSize: TypoSize.bodyLarge,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        bodyMedium: textTheme.bodyMedium?.copyWith(
+          fontSize: TypoSize.bodyMedium,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        bodySmall: textTheme.bodySmall?.copyWith(
+          fontSize: TypoSize.bodySmall,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        labelLarge: textTheme.labelLarge?.copyWith(
+          fontSize: TypoSize.labelLarge,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        labelMedium: textTheme.labelMedium?.copyWith(
+          fontSize: TypoSize.labelMedium,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
+        labelSmall: textTheme.labelSmall?.copyWith(
+          fontSize: TypoSize.labelSmall,
+          fontFamily: FontFamily.ttNorms,
+          package: 'core_ui',
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(Spacing.p16),
-          textStyle: const TextStyle(fontSize: TypoSize.labelLarge, fontWeight: FontWeight.w500),
+          textStyle: const TextStyle(
+            fontSize: TypoSize.labelLarge,
+            fontWeight: FontWeight.w500,
+            fontFamily: FontFamily.ttNorms,
+            package: 'core_ui',
+          ),
         ),
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(

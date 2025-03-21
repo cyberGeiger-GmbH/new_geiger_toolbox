@@ -230,7 +230,6 @@ class AppButton extends StatelessWidget {
     required BuildContext context,
     Color? backgroundColor,
   }) {
-    final theme = Theme.of(context);
     return AppButton._(
       key: key,
       style: ElevatedButton.styleFrom(
@@ -244,7 +243,7 @@ class AppButton extends StatelessWidget {
         text: title,
         context: context,
         textAlign: TextAlign.center,
-        textStyle: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+        fontWeight: FontWeight.bold,
 
         textOverflow: TextOverflow.fade,
       ),

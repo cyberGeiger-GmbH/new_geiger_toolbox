@@ -1,4 +1,3 @@
-import 'package:core_ui/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -18,11 +17,11 @@ class AppText extends StatelessWidget {
     TextAlign? textAlign,
     Color? color,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
+    FontWeight? fontWeight,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).displayLarge!.copyWith(color: color),
+    textStyle: _appTextStyles(context).displayLarge!.copyWith(color: color, fontWeight: fontWeight),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -35,11 +34,10 @@ class AppText extends StatelessWidget {
     TextAlign? textAlign,
     FontWeight? fontWeight,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).displayMedium!.copyWith(color: color, fontWeight: fontWeight),
+    textStyle: _appTextStyles(context).displayMedium!.copyWith(color: color, fontWeight: fontWeight),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -51,11 +49,10 @@ class AppText extends StatelessWidget {
     Color? color,
     TextAlign? textAlign,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).displaySmall!.copyWith(color: color),
+    textStyle: _appTextStyles(context).displaySmall!.copyWith(color: color),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -67,12 +64,12 @@ class AppText extends StatelessWidget {
     Color? color,
     TextAlign? textAlign,
     FontWeight? fontWeight,
-    TextStyle? textStyle,
+
     TextOverflow? textOverflow,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).headlineLarge!.copyWith(color: color, fontWeight: fontWeight),
+    textStyle: _appTextStyles(context).headlineLarge!.copyWith(color: color, fontWeight: fontWeight),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -82,13 +79,13 @@ class AppText extends StatelessWidget {
     required String text,
     required BuildContext context,
     TextAlign? textAlign,
-    TextStyle? textStyle,
+
     Color? color,
     TextOverflow? textOverflow,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).headlineMedium!.copyWith(color: color),
+    textStyle: _appTextStyles(context).headlineMedium!.copyWith(color: color),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -100,11 +97,10 @@ class AppText extends StatelessWidget {
     TextAlign? textAlign,
     Color? color,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).headlineSmall!.copyWith(color: color),
+    textStyle: _appTextStyles(context).headlineSmall!.copyWith(color: color),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -116,11 +112,10 @@ class AppText extends StatelessWidget {
     TextAlign? textAlign,
     Color? color,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).titleLarge!.copyWith(color: color),
+    textStyle: _appTextStyles(context).titleLarge!.copyWith(color: color),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -132,16 +127,14 @@ class AppText extends StatelessWidget {
     TextAlign? textAlign,
     Color? color,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
+
     bool textRemoved = false,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle:
-        textStyle ??
-        _appTextStyles(
-          context,
-        ).titleMedium!.copyWith(color: color, decoration: textRemoved ? TextDecoration.lineThrough : null),
+    textStyle: _appTextStyles(
+      context,
+    ).titleMedium!.copyWith(color: color, decoration: textRemoved ? TextDecoration.lineThrough : null),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -152,12 +145,12 @@ class AppText extends StatelessWidget {
     required BuildContext context,
     TextAlign? textAlign,
     Color? color,
-    TextStyle? textStyle,
+
     TextOverflow? textOverflow,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).titleSmall!.copyWith(color: color),
+    textStyle: _appTextStyles(context).titleSmall!.copyWith(color: color),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -169,19 +162,17 @@ class AppText extends StatelessWidget {
     Color? color,
     TextAlign? textAlign,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
+
     FontWeight? fontWeight,
     bool textDeleted = false,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle:
-        textStyle ??
-        _appTextStyles(context).labelLarge!.copyWith(
-          color: color,
-          decoration: textDeleted ? TextDecoration.lineThrough : null,
-          fontWeight: fontWeight,
-        ),
+    textStyle: _appTextStyles(context).labelLarge!.copyWith(
+      color: color,
+      decoration: textDeleted ? TextDecoration.lineThrough : null,
+      fontWeight: fontWeight,
+    ),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -223,11 +214,11 @@ class AppText extends StatelessWidget {
     Color? color,
     TextAlign? textAlign,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
+    FontWeight? fontWeight,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle: textStyle ?? _appTextStyles(context).bodyLarge!.copyWith(color: color),
+    textStyle: _appTextStyles(context).bodyLarge!.copyWith(color: color, fontWeight: fontWeight),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -238,17 +229,18 @@ class AppText extends StatelessWidget {
     required BuildContext context,
     Color? color,
     TextAlign? textAlign,
+    FontWeight? fontWeight,
     TextOverflow? textOverflow,
-    TextStyle? textStyle,
+
     bool textRemoved = false,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle:
-        textStyle ??
-        _appTextStyles(
-          context,
-        ).bodyMedium!.copyWith(color: color, decoration: textRemoved ? TextDecoration.lineThrough : null),
+    textStyle: _appTextStyles(context).bodyMedium!.copyWith(
+      color: color,
+      decoration: textRemoved ? TextDecoration.lineThrough : null,
+      fontWeight: fontWeight,
+    ),
     textAlign: textAlign ?? TextAlign.center,
     textOverflow: textOverflow,
   );
@@ -261,15 +253,12 @@ class AppText extends StatelessWidget {
     Color? color,
     TextOverflow? textOverflow,
     bool lintThrough = false,
-    TextStyle? textStyle,
   }) => AppText._(
     key: key,
     text: text,
-    textStyle:
-        textStyle ??
-        _appTextStyles(
-          context,
-        ).bodySmall!.copyWith(color: color, decoration: lintThrough ? TextDecoration.lineThrough : null),
+    textStyle: _appTextStyles(
+      context,
+    ).bodySmall!.copyWith(color: color, decoration: lintThrough ? TextDecoration.lineThrough : null),
     textAlign: textAlign ?? TextAlign.start,
     textOverflow: textOverflow,
   );
@@ -288,7 +277,7 @@ class AppText extends StatelessWidget {
       text,
       textAlign: textAlign,
       overflow: textOverflow,
-      style: textStyle.copyWith(fontFamily: FontFamily.ttNorms, package: 'core_ui'),
+      style: textStyle
     );
   }
 }

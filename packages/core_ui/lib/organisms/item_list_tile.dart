@@ -23,8 +23,6 @@ class ItemListTile extends StatelessWidget {
   }
 }
 
-
-
 class ListTitle extends StatelessWidget {
   const ListTitle({super.key, required this.title, required this.crossTitle});
   final String title;
@@ -35,16 +33,11 @@ class ListTitle extends StatelessWidget {
     final appColorScheme = theme.colorScheme;
     return AppText.bodyMedium(
       text: title,
-
       context: context,
       textAlign: TextAlign.start,
-
-      textStyle: theme.textTheme.bodyMedium?.copyWith(
-        color: crossTitle ? theme.hintColor : appColorScheme.onSurface,
-        decoration: crossTitle ? TextDecoration.lineThrough : TextDecoration.none,
-        fontWeight: FontWeight.w700,
-      ),
+      color: crossTitle ? theme.hintColor : appColorScheme.onSurface,
+      textRemoved: crossTitle,
+      fontWeight: FontWeight.bold,
     );
   }
 }
-

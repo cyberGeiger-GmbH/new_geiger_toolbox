@@ -62,11 +62,12 @@ class TitleContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return AppText.bodyLarge(
       text: title,
       context: context,
-      textStyle: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700, color: color),
+      fontWeight:  FontWeight.bold,
+      color: color,
+      
     );
   }
 }
