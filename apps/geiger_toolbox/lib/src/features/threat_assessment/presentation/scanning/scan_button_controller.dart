@@ -9,13 +9,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../applications/news_feed_service.dart';
 part 'scan_button_controller.g.dart';
 
+enum ScanStatus { scanning, completed }
+
 @riverpod
 class ScanButtonController extends _$ScanButtonController {
   Logger get _log => ref.read(logHandlerProvider("ScanButtonController"));
 
   @override
-  FutureOr<void> build() async {
-    return;
+  FutureOr<ScanStatus?> build() async {
+    return null;
     //nothing to do
   }
 
@@ -26,8 +28,13 @@ class ScanButtonController extends _$ScanButtonController {
 
     state = const AsyncLoading();
 
-    state = await AsyncValue.guard(() => ref.read(newsFeedServiceProvider).cacheNews());
+    // state = await AsyncValue.guard(() => ref.read(newsFeedServiceProvider).cacheNews());
 
+    final newState = await AsyncValue.guard(() async {
+      await ref.read(newsFeedServiceProvider).cacheNews();
+      return ScanStatus.completed;
+    });
+    state = newState;
     //for testing purpose
     // state = await AsyncValue.guard(() => Future.delayed(const Duration(seconds: 3)));
 

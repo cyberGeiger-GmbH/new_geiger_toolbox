@@ -15,11 +15,6 @@ class ScanButtonWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(scanButtonControllerProvider);
 
-    // return AppButton.scan(
-    //   label: state.isLoading || newsFeedState.isLoading ? "scanning..." : 'Scan',
-    //   context: context,
-    //   onPressed: state.isLoading ? null : onScanPressed,
-    // );
 
     return CircularScanningButton(
       onPressed: onScanPressed,

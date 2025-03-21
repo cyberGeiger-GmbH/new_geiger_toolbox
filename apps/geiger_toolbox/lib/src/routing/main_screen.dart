@@ -34,6 +34,11 @@ class MainScreen extends ConsumerWidget {
       return nextState.showAlertDialogOnError(context: context);
     });
 
+  //show snackbar on scan complete
+   ref.listen(scanButtonControllerProvider, (_, nextState) {
+      return nextState.scanCompleteSuccessAlertSnackBar(context: context);
+    });
+
     // final state = ref.watch(homeScreenControllerProvider);
     final ScrollController scrollController = ScrollController();
 

@@ -5,6 +5,7 @@ import 'package:geiger_toolbox/src/common_widgets/snack_bar.dart';
 import 'package:geiger_toolbox/src/exceptions/app_exception.dart';
 import 'package:geiger_toolbox/src/features/authentication/presentation/company/company_profile_controller.dart';
 import 'package:geiger_toolbox/src/features/threat_assessment/domain/todo_offering.dart';
+import 'package:geiger_toolbox/src/features/threat_assessment/presentation/scanning/scan_button_controller.dart';
 
 import 'package:geiger_toolbox/src/localization/string_hardcoded.dart';
 
@@ -57,7 +58,22 @@ extension AsyncValueExtension on AsyncValue {
     }
   }
 
-  void successAlertSnackBar({required BuildContext context}) {
+  void scanCompleteSuccessAlertSnackBar({required BuildContext context}) {
+    final appColor = Theme.of(context).colorScheme;
+
+    if (!isLoading && !hasError && value != null) {
+      if (value == ScanStatus.completed) {
+        showSnackBar(
+          context: context,
+          content: "Scanning Completed... Now Recalculating your GEIGER Score".hardcoded,
+          backgroundColor: appColor.primary,
+          textColor: appColor.onPrimary,
+        );
+      }
+    }
+  }
+
+  void todoSuccessAlertSnackBar({required BuildContext context}) {
     final appColor = Theme.of(context).colorScheme;
 
     if (!isLoading && !hasError) {

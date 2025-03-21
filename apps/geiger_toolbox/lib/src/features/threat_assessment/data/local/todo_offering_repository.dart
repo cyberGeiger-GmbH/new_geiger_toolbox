@@ -47,6 +47,7 @@ class TodoOfferingRepository {
 
   Future<int> updateTodoStatus({required OfferingId id, required Status status}) async {
     try {
+     
       final todoOffer = TodoOfferingsCompanion(
         offeringId: Value(id),
         offeringStatus: Value(todoToOfferingStatus(status)),

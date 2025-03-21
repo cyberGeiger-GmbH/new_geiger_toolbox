@@ -28,7 +28,7 @@ class NewsDetailsScreen extends StatelessWidget {
         builder: (context, ref, _) {
           //show success snackBar alert when adding offering to todos
           ref.listen(addOfferingTodoControllerProvider, (_, nxtValue) {
-            nxtValue.successAlertSnackBar(context: context);
+            nxtValue.todoSuccessAlertSnackBar(context: context);
           });
 
           //listen to errors

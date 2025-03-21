@@ -23,6 +23,7 @@ class NewsFeedService {
   Future<void> cacheNews() async {
     _log.i("calls to cache news from server");
     try {
+     
       final remoteRepo = ref.read(newsFeedRemoteRepositoryProvider);
 
       final userProfileModel = ref.read(userProfileModelSerivceProvider);
