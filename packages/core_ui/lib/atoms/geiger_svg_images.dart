@@ -11,14 +11,8 @@ class GeigerSvgImages extends StatelessWidget {
   final double? height;
   final String name;
 
-  factory GeigerSvgImages.magnifyingGlass({Key? key, double? width, double? height}) =>
-      GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.cGMagnifyingGlass);
 
-  factory GeigerSvgImages.measure({Key? key, double? width, double? height}) =>
-      GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.cGMeasure);
 
-  factory GeigerSvgImages.trickGood({Key? key, double? width, double? height}) =>
-      GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.cGTick);
 
   factory GeigerSvgImages.indicatorIcon({Key? key, double? width, double? height}) =>
       GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.indicatorIcon);
@@ -26,6 +20,9 @@ class GeigerSvgImages extends StatelessWidget {
       GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.improveIcon);
   factory GeigerSvgImages.assessIcon({Key? key, double? width, double? height}) =>
       GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.assessIcon);
+
+       factory GeigerSvgImages.introTodo({Key? key, double? width, double? height}) =>
+      GeigerSvgImages._(key: key, width: width, height: height, name: Assets.svg.introTodo);
 
       
 

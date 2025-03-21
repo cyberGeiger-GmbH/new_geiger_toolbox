@@ -22,15 +22,6 @@ class DesignSystem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GeigerSvgImages.magnifyingGlass(width: 50, height: 50),
-                GeigerSvgImages.trickGood(width: 50, height: 50),
-                GeigerSvgImages.measure(width: 50, height: 50),
-              ],
-            ),
-            Spacing.gapH22,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
                 GeigerSvgImages.assessIcon(width: 50, height: 50),
                 GeigerSvgImages.improveIcon(width: 50, height: 50),
                 GeigerSvgImages.indicatorIcon(width: 50, height: 50),

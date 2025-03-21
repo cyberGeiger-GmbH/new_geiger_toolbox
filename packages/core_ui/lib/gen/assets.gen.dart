@@ -42,32 +42,15 @@ class $AssetsSvgGen {
   /// File path: assets/svg/assess_icon.svg
   String get assessIcon => 'packages/core_ui/assets/svg/assess_icon.svg';
 
-  /// File path: assets/svg/cG_magnifying_glass.svg
-  String get cGMagnifyingGlass =>
-      'packages/core_ui/assets/svg/cG_magnifying_glass.svg';
-
-  /// File path: assets/svg/cG_measure.svg
-  String get cGMeasure => 'packages/core_ui/assets/svg/cG_measure.svg';
-
-  /// File path: assets/svg/cG_tick.svg
-  String get cGTick => 'packages/core_ui/assets/svg/cG_tick.svg';
-
-  /// File path: assets/svg/cG_trophy.svg
-  String get cGTrophy => 'packages/core_ui/assets/svg/cG_trophy.svg';
-
   /// File path: assets/svg/indicator_icon.svg
   String get indicatorIcon => 'packages/core_ui/assets/svg/indicator_icon.svg';
 
+  /// File path: assets/svg/intro_todo.svg
+  String get introTodo => 'packages/core_ui/assets/svg/intro_todo.svg';
+
   /// List of all assets
-  List<String> get values => [
-        improveIcon,
-        assessIcon,
-        cGMagnifyingGlass,
-        cGMeasure,
-        cGTick,
-        cGTrophy,
-        indicatorIcon
-      ];
+  List<String> get values =>
+      [improveIcon, assessIcon, indicatorIcon, introTodo];
 }
 
 class Assets {

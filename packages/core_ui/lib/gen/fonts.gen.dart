@@ -14,7 +14,4 @@ class FontFamily {
 
   /// Font family: Roboto
   static const String roboto = 'packages/$package/Roboto';
-
-  /// Font family: ttNorms
-  static const String ttNorms = 'packages/$package/ttNorms';
 }
